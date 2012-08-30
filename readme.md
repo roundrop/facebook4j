@@ -4,6 +4,10 @@ Facebook4J is a Facebook Graph API binding library for the Java language license
 ## System Requirements
 Java 1.5 or later
 
+## How To Install
+Download jar file from [here](http://facebook4j.org/download/facebook4j-core-0.1.0.jar).  
+Maven Integration is preparing...
+
 ## How To Use
 1. Add facebook4j-core-x.x.x.jar to your application classpath.
 2. Create facebook4j.properties in the classpath.
