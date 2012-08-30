@@ -1,0 +1,6 @@
+.DS_Store
+.classpath
+.project
+.settings
+target
+src/test/resources/test.properties

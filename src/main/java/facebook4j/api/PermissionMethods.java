@@ -1,0 +1,64 @@
+/*
+ * Copyright 2012 Ryuji Yamashita
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package facebook4j.api;
+
+import java.util.List;
+
+import facebook4j.FacebookException;
+
+/**
+ * @author Ryuji Yamashita - roundrop at gmail.com
+ */
+public interface PermissionMethods {
+    /**
+     * Returns the permissions granted the current user to the current application.
+     * @return permission names
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
+     */
+    List<String> getPermissionNames() throws FacebookException;
+
+    /**
+     * Returns the permissions granted a user to the current application.
+     * @param userId the ID of a user
+     * @return permission names
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
+     */
+    List<String> getPermissionNames(String userId) throws FacebookException;
+
+
+    /**
+     * Revokes a specific permission from the current application.
+     * @param permissionName permission name
+     * @return true if revoke is succressful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
+     */
+    boolean revokePermission(String permissionName) throws FacebookException;
+
+    /**
+     * Revokes a specific permission from the current application.
+     * @param userId the ID of a user
+     * @param permissionName permission name
+     * @return true if revoke is succressful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
+     */
+    boolean revokePermission(String userId, String permissionName) throws FacebookException;
+    
+}

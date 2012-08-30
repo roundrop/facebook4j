@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Bundle-Vendor: Ryuji Yamashita
+Main-Class: facebook4j.Version
