@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>facebook4j</groupId>
   <artifactId>facebook4j-core</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>facebook4j-core</name>
+  <description>A Java library for the Facebook Graph API</description>
   <url>http://maven.apache.org</url>
   <licenses>
     <license>
@@ -20,6 +20,20 @@
     <connection>scm:git:git://github.com/roundrop/facebook4j.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/roundrop/facebook4j.git</developerConnection>
   </scm>
+  <developers>
+    <developer>
+      <id>roundrop</id>
+      <name>Ryuji</name>
+      <email>roundrop@gmail.com</email>
+      <url>http://blog.roundrop.jp/</url>
+      <roles>
+        <role>lead</role>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>-9</timezone>
+    </developer>
+  </developers>
   <distributionManagement>
     <repository>
       <id>sonatype-nexus-staging</id>
