@@ -2,16 +2,27 @@
 Facebook4J is a Facebook Graph API binding library for the Java language licensed under Apache License 2.0.
 
 ## System Requirements
-Java 1.5 or later
+Java 5 or later
 
 ## How To Install
+### Maven Integration
+    <dependency>
+      <groupId>org.facebook4j</groupId>
+      <artifactId>facebook4j-core</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+### Download
 Download jar file from [here](http://facebook4j.org/download/facebook4j-core-0.1.0.jar).  
-Maven Integration is preparing...
 
 ## How To Use
-1. Add facebook4j-core-x.x.x.jar to your application classpath.
-2. Create facebook4j.properties in the classpath.
-3. If you are familiar with Java language, looking into the [JavaDoc](http://facebook4j.org/en/javadoc/index.html "JavaDoc") should be the shortest way for you to get started.
+Create a standard properties file named "facebook4j.properties". Place it to either the current directory, root of the classpath directory. 
+
+    facebook4j.debug=true
+    facebook4j.oauth.appId=****************
+    facebook4j.oauth.appSecret=********************************
+    facebook4j.oauth.permissions=email,publish_stream
+
+If you are familiar with Java language, looking into the [JavaDoc](http://facebook4j.org/en/javadoc/index.html "JavaDoc") should be the shortest way for you to get started.
 [facebook4j.Facebook](http://facebook4j.org/en/javadoc/facebook4j/Facebook.html "facebook4j.Facebook") interface is the one you may want to look at first.
 
 ### Facebook Graph API Documentation
@@ -55,8 +66,6 @@ Maven Integration is preparing...
 Facebook4J is released under Apache License 2.0.
 
 Facebook4J includes software from Twitter4J to handle HTTP request/response and greatly internal logic. You can see the license term at [http://twitter4j.org/en/index.html#license](http://twitter4j.org/en/index.html#license)
-
-Facebook4J includes software from JSON.org to parse JSON response from the Facebook Graph API. You can see the license term at [http://www.JSON.org/license.html](http://www.JSON.org/license.html)
 
 \--------  
 Twitter4J's readme.txt
