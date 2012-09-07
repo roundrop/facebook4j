@@ -82,7 +82,7 @@ import facebook4j.internal.org.json.JSONObject;
             description = getRawString("description", json);
             privacy = getRawString("privacy", json);
             icon = getURL("icon", json);
-            updatedTime = getFacebookDatetime("updated_time", json);
+            updatedTime = getISO8601Datetime("updated_time", json);
             email = getRawString("email", json);
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);

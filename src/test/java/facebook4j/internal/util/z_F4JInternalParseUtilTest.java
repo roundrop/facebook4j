@@ -77,9 +77,9 @@ public class z_F4JInternalParseUtilTest {
     }
     
     @Test
-    public void getFacebookDatetime() throws Exception {
-        JSONObject json = new JSONObject("{\"datetime\": \"2012-08-01T05:49:44+0000\"}");
-        Date actual = z_F4JInternalParseUtil.getFacebookDatetime("datetime", json);
+    public void getISO8601Datetime() throws Exception {
+        JSONObject json = new JSONObject("{\"datetime\": \"2012-08-01T05:49:44+0900\"}");
+        Date actual = z_F4JInternalParseUtil.getISO8601Datetime("datetime", json);
         assertThat(actual, is(notNullValue()));
         assertThat(actual, instanceOf(java.util.Date.class));
         assertThat(actual, is(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2012-08-01 05:49:44")));

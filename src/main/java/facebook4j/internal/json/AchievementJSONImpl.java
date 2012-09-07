@@ -73,9 +73,9 @@ import facebook4j.internal.org.json.JSONObject;
                 JSONObject fromJSONObject = json.getJSONObject("from");
                 from = new IdNameEntityJSONImpl(fromJSONObject);
             }
-            startTime = getFacebookDatetime("start_time", json);
-            endTime = getFacebookDatetime("end_time", json);
-            publishTime = getFacebookDatetime("publish_time", json);
+            startTime = getISO8601Datetime("start_time", json);
+            endTime = getISO8601Datetime("end_time", json);
+            publishTime = getISO8601Datetime("publish_time", json);
             if (!json.isNull("application")) {
                 JSONObject applicationJSONObject = json.getJSONObject("application");
                 application = new ApplicationJSONImpl(applicationJSONObject);

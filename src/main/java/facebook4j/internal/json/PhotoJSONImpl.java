@@ -116,8 +116,8 @@ import facebook4j.internal.org.json.JSONObject;
                 JSONObject placeJSONObject = json.getJSONObject("place");
                 place = new PlaceJSONImpl(placeJSONObject);
             }
-            createdTime = getFacebookDatetime("created_time", json);
-            updatedTime = getFacebookDatetime("updated_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
+            updatedTime = getISO8601Datetime("updated_time", json);
             if (!json.isNull("position")) {
                 position = getPrimitiveInt("position", json);
             }

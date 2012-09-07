@@ -81,8 +81,8 @@ import facebook4j.internal.org.json.JSONObject;
                     comments.add(comment);
                 }
             }
-            createdTime = getFacebookDatetime("created_time", json);
-            updatedTime = getFacebookDatetime("updated_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
+            updatedTime = getISO8601Datetime("updated_time", json);
             icon = getURL("icon", json);
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);

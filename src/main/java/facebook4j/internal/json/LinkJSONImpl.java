@@ -88,7 +88,7 @@ import facebook4j.internal.org.json.JSONObject;
             icon = getRawString("icon", json);
             picture = getRawString("picture", json);
             message = getRawString("message", json);
-            createdTime = getFacebookDatetime("created_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
             type = getRawString("type", json);
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
