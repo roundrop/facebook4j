@@ -216,8 +216,8 @@ final class PostJSONImpl implements Post, java.io.Serializable {
                 JSONObject applicationJSONObject = json.getJSONObject("application");
                 application = new ApplicationJSONImpl(applicationJSONObject);
             }
-            createdTime = getFacebookDatetime("created_time", json);
-            updatedTime = getFacebookDatetime("updated_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
+            updatedTime = getISO8601Datetime("updated_time", json);
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }

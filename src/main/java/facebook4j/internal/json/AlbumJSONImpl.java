@@ -83,8 +83,8 @@ import facebook4j.internal.org.json.JSONObject;
             privacy = getRawString("privacy", json);
             count = getPrimitiveInt("count", json);
             type = getRawString("type", json);
-            createdTime = getFacebookDatetime("created_time", json);
-            updatedTime = getFacebookDatetime("updated_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
+            updatedTime = getISO8601Datetime("updated_time", json);
             canUpload = getBoolean("can_upload", json);
             
             if (!json.isNull("likes")) {

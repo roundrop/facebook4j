@@ -69,7 +69,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             subject = getRawString("subject", json);
             icon = getURL("icon", json);
-            updatedTime = getFacebookDatetime("updated_time", json);
+            updatedTime = getISO8601Datetime("updated_time", json);
             revision = getLong("revision", json);
             canEdit = getBoolean("can_edit", json);
             canDelete = getBoolean("can_delete", json);

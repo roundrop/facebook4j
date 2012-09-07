@@ -70,7 +70,7 @@ import facebook4j.internal.org.json.JSONObject;
             } else {
                 to = null;
             }
-            createdTime = getFacebookDatetime("created_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
             message = getRawString("message", json);
             unread = getBoolean("unread", json);
         } catch (JSONException jsone) {

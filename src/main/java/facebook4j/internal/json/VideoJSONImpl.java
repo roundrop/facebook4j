@@ -86,8 +86,8 @@ import facebook4j.internal.org.json.JSONObject;
             embedHtml = getRawString("embed_html", json);
             icon = getURL("icon", json);
             source = getURL("source", json);
-            createdTime = getFacebookDatetime("created_time", json);
-            updatedTime = getFacebookDatetime("updated_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
+            updatedTime = getISO8601Datetime("updated_time", json);
             if (!json.isNull("comments")) {
                 JSONArray commentJSONArray = json.getJSONObject("comments").getJSONArray("data");
                 int size = commentJSONArray.length();

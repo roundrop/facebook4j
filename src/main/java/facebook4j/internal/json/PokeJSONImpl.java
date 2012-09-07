@@ -65,7 +65,7 @@ import facebook4j.internal.org.json.JSONObject;
                 JSONObject toJSONObject = json.getJSONObject("to");
                 to = new IdNameEntityJSONImpl(toJSONObject);
             }
-            createdTime = getFacebookDatetime("created_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
