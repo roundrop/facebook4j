@@ -57,9 +57,9 @@ public class EventUpdate implements java.io.Serializable {
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         params.add(new HttpParameter("name", name));
-        params.add(new HttpParameter("start_time", z_F4JInternalStringUtil.formatFacebookDatetime(startTime)));
+        params.add(new HttpParameter("start_time", z_F4JInternalStringUtil.formatEventDatetime(startTime)));
         if (endTime != null) {
-            params.add(new HttpParameter("end_time", z_F4JInternalStringUtil.formatFacebookDatetime(endTime)));
+            params.add(new HttpParameter("end_time", z_F4JInternalStringUtil.formatEventDatetime(endTime)));
         }
         if (description != null) {
             params.add(new HttpParameter("description", description));
