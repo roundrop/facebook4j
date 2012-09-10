@@ -9,7 +9,7 @@ Java 5 or later
     <dependency>
       <groupId>org.facebook4j</groupId>
       <artifactId>facebook4j-core</artifactId>
-      <version>0.1.0</version>
+      <version>0.1.1</version>
     </dependency>
 ### Download
 Download jar file from [here](http://facebook4j.org/download/facebook4j-core-0.1.0.jar).  
