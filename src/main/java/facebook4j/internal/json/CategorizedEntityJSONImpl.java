@@ -54,7 +54,7 @@ import facebook4j.internal.org.json.JSONObject;
         id = getRawString("id", json);
         name = getRawString("name", json);
         category = getRawString("category", json);
-        createdTime = getFacebookDatetime("created_time", json);
+        createdTime = getISO8601Datetime("created_time", json);
     }
 
     public String getId() {

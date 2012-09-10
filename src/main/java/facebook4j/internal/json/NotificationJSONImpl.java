@@ -73,8 +73,8 @@ import facebook4j.internal.org.json.JSONObject;
                 JSONObject toJSONObject = json.getJSONObject("to");
                 to = new IdNameEntityJSONImpl(toJSONObject);
             }
-            createdTime = getFacebookDatetime("created_time", json);
-            updatedTime = getFacebookDatetime("updated_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
+            updatedTime = getISO8601Datetime("updated_time", json);
             title = getRawString("title", json);
             link = getURL("link", json);
             unread = getBoolean("unread", json);

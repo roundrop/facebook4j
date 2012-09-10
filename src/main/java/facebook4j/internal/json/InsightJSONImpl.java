@@ -131,7 +131,7 @@ import facebook4j.internal.org.json.JSONObject;
 
         /*package*/ValueJSONImpl(JSONObject json) throws FacebookException {
             value = getLong("value", json);
-            endTime = getFacebookDatetime("end_time", json);
+            endTime = getISO8601Datetime("end_time", json);
         }
 
         public Long getValue() {

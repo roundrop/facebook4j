@@ -71,7 +71,7 @@ import facebook4j.internal.org.json.JSONObject;
                     to.add(new IdNameEntityJSONImpl(toJSONArray.getJSONObject(i)));
                 }
             }
-            updatedTime = getFacebookDatetime("updated_time", json);
+            updatedTime = getISO8601Datetime("updated_time", json);
             if (!json.isNull("unread")) {
                 unread = getPrimitiveInt("unread", json);
             }

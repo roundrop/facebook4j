@@ -84,7 +84,7 @@ import facebook4j.internal.org.json.JSONObject;
         } else {
             y = null;
         }
-        createdTime = getFacebookDatetime("created_time", json);
+        createdTime = getISO8601Datetime("created_time", json);
     }
     
     public String getId() {

@@ -75,7 +75,7 @@ public class InboxResponseListImpl<T> extends ResponseListImpl<T> implements Inb
             if (!json.isNull("unread_count")) {
                 unreadCount = getPrimitiveInt("unread_count", json);
             }
-            updatedTime = getFacebookDatetime("updated_time", json);
+            updatedTime = getISO8601Datetime("updated_time", json);
         }
 
         public Integer getUnseenCount() {
