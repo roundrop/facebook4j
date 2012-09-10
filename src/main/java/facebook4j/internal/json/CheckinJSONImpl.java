@@ -90,7 +90,7 @@ import facebook4j.internal.org.json.JSONObject;
                 JSONObject applicationJSONObject = json.getJSONObject("application");
                 application = new ApplicationJSONImpl(applicationJSONObject);
             }
-            createdTime = getFacebookDatetime("created_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
             if (!json.isNull("likes")) {
                 JSONObject likesJSONObject = json.getJSONObject("likes");
                 JSONArray list = likesJSONObject.getJSONArray("data");

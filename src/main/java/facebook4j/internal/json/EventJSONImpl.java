@@ -81,7 +81,7 @@ import facebook4j.internal.org.json.JSONObject;
                 venue = new VenueJSONImpl(venueJSONObject);
             }
             privacy = getRawString("privacy", json);
-            updatedTime = getFacebookDatetime("updated_time" ,json);
+            updatedTime = getISO8601Datetime("updated_time" ,json);
             rsvpStatus = getRawString("rsvp_status", json);
         } catch (JSONException jsone) {
             throw new FacebookException(jsone);

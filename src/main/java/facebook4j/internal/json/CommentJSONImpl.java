@@ -69,7 +69,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             message = getRawString("message", json);
             canRemove = getBoolean("can_remove", json);
-            createdTime = getFacebookDatetime("created_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
             likeCount = getPrimitiveInt("like_count", json);
             isUserLinks = getBoolean("user_likes", json);
         } catch (JSONException jsone) {

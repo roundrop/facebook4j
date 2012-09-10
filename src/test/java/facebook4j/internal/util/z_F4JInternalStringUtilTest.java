@@ -52,9 +52,9 @@ public class z_F4JInternalStringUtilTest {
     }
 
     @Test
-    public void formatFacebookDatetime() {
-        String actual = z_F4JInternalStringUtil.formatFacebookDatetime(new Date());
-        assertThat(actual.length(), is(24));
+    public void formatEventDatetime() {
+        String actual = z_F4JInternalStringUtil.formatEventDatetime(new Date());
+        assertThat(actual.length(), is(19));
     }
 
 }

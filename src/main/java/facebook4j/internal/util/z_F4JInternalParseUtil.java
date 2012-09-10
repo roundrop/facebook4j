@@ -56,6 +56,10 @@ import facebook4j.internal.org.json.JSONObject;
  * </ul>
  */
 public final class z_F4JInternalParseUtil {
+
+    private static final String ISO8601_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
+    private static final String ISO8601_DATE_FORMAT_WITHOUT_TZ = "yyyy-MM-dd'T'HH:mm:ss";
+
     private z_F4JInternalParseUtil() {
         // should never be instantiated
         throw new AssertionError();
@@ -197,18 +201,23 @@ public final class z_F4JInternalParseUtil {
         return flag == 1;
     }
 
-    public static Date getFacebookDatetime(String name, JSONObject json) throws FacebookException {
-        String fbDateString = getRawString(name, json);
-        if (fbDateString == null) {
+    public static Date getISO8601Datetime(String name, JSONObject json) throws FacebookException {
+        String dateString = getRawString(name, json);
+        if (dateString == null) {
             return null;
         }
+        return parseISO8601Date(dateString);
+    }
+
+    private static Date parseISO8601Date(String dateString) {
         try {
-            long timeInMillis = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+SSSS")
-                                    .parse(fbDateString)
-                                    .getTime();
-            return new Date(timeInMillis);
-        } catch (ParseException pe) {
-            throw new FacebookException(pe.getMessage(), pe);
+            return new SimpleDateFormat(ISO8601_DATE_FORMAT).parse(dateString);
+        } catch (ParseException e1) {
+            try {
+                return new SimpleDateFormat(ISO8601_DATE_FORMAT_WITHOUT_TZ).parse(dateString);
+            } catch (ParseException e2) {
+                return null;
+            }
         }
     }
 

@@ -78,8 +78,8 @@ import facebook4j.internal.org.json.JSONObject;
                 }
             }
             message = getRawString("message", json);
-            createdTime = getFacebookDatetime("created_time", json);
-            updatedTime = getFacebookDatetime("updated_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
+            updatedTime = getISO8601Datetime("updated_time", json);
             if (!json.isNull("comments")) {
                 JSONObject commentsJSONObject = json.getJSONObject("comments");
                 JSONArray list = commentsJSONObject.getJSONArray("data");

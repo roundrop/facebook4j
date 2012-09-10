@@ -66,8 +66,8 @@ import facebook4j.internal.org.json.JSONObject;
                 from = new IdNameEntityJSONImpl(fromJSONObject);
             }
             question = getRawString("question", json);
-            createdTime = getFacebookDatetime("created_time", json);
-            updatedTime = getFacebookDatetime("updated_time", json);
+            createdTime = getISO8601Datetime("created_time", json);
+            updatedTime = getISO8601Datetime("updated_time", json);
             if (!json.isNull("options")) {
                 JSONObject optionsJSONObject = json.getJSONObject("options");
                 options = createOptionList(optionsJSONObject);
@@ -153,7 +153,7 @@ import facebook4j.internal.org.json.JSONObject;
                 }
                 name = getRawString("name", json);
                 voteCount = getPrimitiveInt("vote_count", json);
-                createdTime = getFacebookDatetime("created_time", json);
+                createdTime = getISO8601Datetime("created_time", json);
                 votes = getPrimitiveInt("votes", json);
             } catch (JSONException jsone) {
                 throw new FacebookException(jsone.getMessage(), jsone);

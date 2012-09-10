@@ -87,8 +87,8 @@ public class z_F4JInternalStringUtil {
         return buf.toString();
     }
     
-    public static String formatFacebookDatetime(Date date) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+SSSS");
+    public static String formatEventDatetime(Date date) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return df.format(date);
     }
 }
