@@ -214,9 +214,6 @@ public class ConfigurationBase implements Configuration, Serializable {
 
     private void initRequestHeaders() {
         requestHeaders = new HashMap<String, String>();
-        requestHeaders.put("X-Facebook-Client-Version", getClientVersion());
-        requestHeaders.put("X-Facebook-Client-URL", getClientURL());
-        requestHeaders.put("X-Facebook-Client", "Facebook4J");
 
         requestHeaders.put("User-Agent", getUserAgent());
         if (gzipEnabled) {

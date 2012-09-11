@@ -86,7 +86,7 @@ public class OAuthTest extends FacebookTestBase {
         String resStr;
         String authorizeURL;
         HttpParameter[] params;
-        HttpClientImpl http = new HttpClientImpl(conf1);
+        HttpClientImpl http = new HttpClientImpl(conf);
 
         // unauthenticated
         unauthenticated.setOAuthAppId(appId, appSecret);
@@ -101,7 +101,7 @@ public class OAuthTest extends FacebookTestBase {
         // authorization
         TestUser testUser = null;
         try {
-            testUser = createTestUser(facebook1, getAppAccessToken(facebook1));
+            testUser = createTestUser(facebook1);
 
             // dialog
             String callbackURL = p.getProperty("app.callbackURL");

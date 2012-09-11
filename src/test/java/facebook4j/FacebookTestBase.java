@@ -19,6 +19,7 @@ package facebook4j;
 import static org.junit.Assert.*;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -32,10 +33,11 @@ import facebook4j.conf.PropertyConfiguration;
 
 public class FacebookTestBase {
 
-    protected Facebook facebook, facebook1, facebook2, facebook3, facebook4, unauthenticated;
+    protected Facebook real, facebook1, facebook2, facebook3, facebook4, unauthenticated;
     protected Properties p = new Properties();
 
-    protected Configuration conf1, conf2, conf3, conf4;
+    protected TestUser id1, id2, id3, id4;
+    protected Configuration conf;
 
     protected String appId;
     protected String appSecret;
@@ -46,50 +48,54 @@ public class FacebookTestBase {
         p.load(is);
         is.close();
         
-        System.setProperty("facebook4j.debug", p.getProperty("facebook4j.debug"));
-        System.setProperty("facebook4j.http.prettyDebug", p.getProperty("facebook4j.http.prettyDebug"));
-        System.setProperty("facebook4j.loggerFactory", p.getProperty("facebook4j.loggerFactory"));
-        System.setProperty("facebook4j.http.userAgent", p.getProperty("facebook4j.http.userAgent"));
-        System.setProperty("facebook4j.jsonStoreEnabled", p.getProperty("facebook4j.jsonStoreEnabled"));
+        System.setProperty("facebook4j.debug", p.getProperty("debug"));
+        System.setProperty("facebook4j.loggerFactory", p.getProperty("loggerFactory"));
 
         appId = p.getProperty("app.oauth.appId");
         appSecret = p.getProperty("app.oauth.appSecret");
 
-        conf1 = new PropertyConfiguration(p, "/id1");
-        facebook = new FacebookFactory(conf1).getInstance();
-
-        ConfigurationBuilder build1 = new ConfigurationBuilder();
-        build1.setDebugEnabled(true);
-        build1.setPrettyDebugEnabled(true);
-        build1.setOAuthAppId(appId);
-        build1.setOAuthAppSecret(appSecret);
-        OAuthAuthorization auth1 = new OAuthAuthorization(build1.build());
-        facebook1 = new FacebookFactory().getInstance(auth1);
-
-        ConfigurationBuilder build2 = new ConfigurationBuilder();
-        build2.setDebugEnabled(true);
-        build2.setPrettyDebugEnabled(true);
-        build2.setOAuthAppId(appId);
-        build2.setOAuthAppSecret(appSecret);
-        OAuthAuthorization auth2 = new OAuthAuthorization(build2.build());
-        facebook2 = new FacebookFactory().getInstance(auth2);
-
+        // setup test users
+        ConfigurationBuilder build = new ConfigurationBuilder();
+        build.setOAuthAppId(appId);
+        build.setOAuthAppSecret(appSecret);
+        facebook1 = new FacebookFactory().getInstance(new OAuthAuthorization(build.build()));
+        facebook1.getOAuthAppAccessToken();
+        List<TestUser> testUsers = facebook1.getTestUsers(appId);
+        for (TestUser testUser : testUsers) {
+            if (testUser.getId().equals(p.getProperty("id1.id"))) {
+                id1 = testUser;
+            } else
+            if (testUser.getId().equals(p.getProperty("id2.id"))) {
+                id2 = testUser;
+//            } else
+//            if (testUser.getId().equals(p.getProperty("id3.id"))) {
+//                id3 = testUser;
+//            } else
+//            if (testUser.getId().equals(p.getProperty("id4.id"))) {
+//                id4 = testUser;
+            }
+        }
+        facebook1.setOAuthAccessToken(new AccessToken(id1.getAccessToken(), null));
+        facebook2 = new FacebookFactory().getInstance(new OAuthAuthorization(new ConfigurationBuilder().setOAuthAppId(appId).setOAuthAppSecret(appSecret).build()));
+        facebook2.setOAuthAccessToken(new AccessToken(id2.getAccessToken(), null));
+//        facebook3 = new FacebookFactory().getInstance(new OAuthAuthorization(new ConfigurationBuilder().setOAuthAppId(appId).setOAuthAppSecret(appSecret).build()));
+//        facebook3.setOAuthAccessToken(new AccessToken(id3.getAccessToken(), null));
+//        facebook4 = new FacebookFactory().getInstance(new OAuthAuthorization(new ConfigurationBuilder().setOAuthAppId(appId).setOAuthAppSecret(appSecret).build()));
+//        facebook4.setOAuthAccessToken(new AccessToken(id4.getAccessToken(), null));
+        
+        // setup unauthenticated
         unauthenticated = new FacebookFactory(new ConfigurationBuilder().build()).getInstance();
 
+        // setup real user
+        conf = new PropertyConfiguration(p, "/real");
+        real = new FacebookFactory(conf).getInstance();
+
     }
 
-    protected AccessToken getAppAccessToken(Facebook _facebook) {
-        try {
-            return _facebook.getOAuthAppAccessToken();
-        } catch (FacebookException e) {
-            fail();
-        }
-        return null;
-    }
     
-    protected TestUser createTestUser(Facebook _facebook, AccessToken accessToken) {
+    protected TestUser createTestUser(Facebook facebook) {
         try {
-            return _facebook.createTestUser(appId, "test", Locale.getDefault().toString(),
+            return facebook.createTestUser(appId, "test", Locale.getDefault().toString(),
                         "email" +
                         ",publish_actions" +
                         ",user_about_me" +
@@ -171,9 +177,9 @@ public class FacebookTestBase {
         return null;
     }
     
-    protected boolean deleteTestUser(Facebook _facebook, TestUser testUser) {
+    protected boolean deleteTestUser(Facebook facebook, TestUser testUser) {
         try {
-            return _facebook.deleteTestUser(testUser.getId());
+            return facebook.deleteTestUser(testUser.getId());
         } catch (FacebookException e) {
             fail();
         }

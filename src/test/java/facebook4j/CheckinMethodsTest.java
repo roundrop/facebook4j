@@ -27,7 +27,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CheckinMethodsTest extends GraphAPITestBase {
+public class CheckinMethodsTest extends FacebookTestBase {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -74,7 +74,7 @@ public class CheckinMethodsTest extends GraphAPITestBase {
         String place = "100404700021921";
         GeoLocation coordinates = new GeoLocation(35.675272122419, 139.69321689514);
         CheckinCreate checkin = new CheckinCreate(place, coordinates);
-        facebook2.checkin(testUser1.getId(), checkin);
+        facebook2.checkin(id1.getId(), checkin);
     }
     
     @Test
@@ -105,7 +105,7 @@ public class CheckinMethodsTest extends GraphAPITestBase {
         assertThat(checkins.size(), is(1));
 
         //read by other user
-        assertThat(facebook2.getCheckins(testUser1.getId()).size(), is(1));
+        assertThat(facebook2.getCheckins(id1.getId()).size(), is(1));
     }
 
     @Test
