@@ -488,7 +488,7 @@ import facebook4j.internal.org.json.JSONObject;
         if (this == obj) {
             return true;
         }
-        return obj instanceof User && ((User) obj).getId() == this.id;
+        return obj instanceof User && ((User) obj).getId().equals(this.id);
     }
 
     @Override
