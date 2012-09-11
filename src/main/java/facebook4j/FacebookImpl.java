@@ -435,7 +435,11 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
     public Event getEvent(String eventId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createEvent(get(buildURL(eventId, reading)));
+        HttpResponse res = get(buildURL(eventId, reading));
+        if (!Boolean.valueOf(res.asString().trim())) {
+            return null;
+        }
+        return factory.createEvent(res);
     }
 
     public boolean editEvent(String eventId, EventUpdate eventUpdate) throws FacebookException {
