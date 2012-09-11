@@ -50,6 +50,7 @@ import facebook4j.Movie;
 import facebook4j.Music;
 import facebook4j.Note;
 import facebook4j.Notification;
+import facebook4j.Permission;
 import facebook4j.Photo;
 import facebook4j.Place;
 import facebook4j.Poke;
@@ -146,7 +147,7 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     Message createMessage(HttpResponse res) throws FacebookException;
     ResponseList<Message> createMessageList(HttpResponse res) throws FacebookException;
     
-    List<String> createPermissionNames(HttpResponse res) throws FacebookException;
+    List<Permission> createPermissions(HttpResponse res) throws FacebookException;
 
     ResponseList<Place> createPlaceList(HttpResponse res) throws FacebookException;
     

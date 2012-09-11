@@ -1358,13 +1358,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Permission Methods */
-    
-    public List<String> getPermissionNames() throws FacebookException {
-        return getPermissionNames("me");
+
+    public List<Permission> getPermissions() throws FacebookException {
+        return getPermissions("me");
     }
-    public List<String> getPermissionNames(String userId) throws FacebookException {
+    public List<Permission> getPermissions(String userId) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createPermissionNames(get(buildURL(userId, "permissions")));
+        return factory.createPermissions(get(buildURL(userId, "permissions")));
     }
 
     public boolean revokePermission(String permissionName) throws FacebookException {

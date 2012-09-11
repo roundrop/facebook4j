@@ -64,12 +64,12 @@ final class PostJSONImpl implements Post, java.io.Serializable {
     private List<Post.Action> actions;
     private Privacy privacy;
     private String type;
-    private PagableList<IdNameEntity> likes;   //TODO pagingなしかも
+    private PagableList<IdNameEntity> likes;
     private Place place;
     private String story;
     private Map<String, Tag[]> storyTags;
     private List<IdNameEntity> withTags;
-    private PagableList<Comment> comments;  //TODO pagingなしかも
+    private PagableList<Comment> comments;
     private Long objectId;
     private Application application;
     private Date createdTime;
