@@ -25,7 +25,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CommentMethodsTest extends GraphAPITestBase {
+public class CommentMethodsTest extends FacebookTestBase {
     
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {

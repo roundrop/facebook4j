@@ -45,19 +45,19 @@ public class AccountMethodsTest extends FacebookTestBase {
     
     @Test
     public void get() throws Exception {
-        ResponseList<Account> accounts = facebook.getAccounts();
+        ResponseList<Account> accounts = real.getAccounts();
 //        System.out.println(accounts);
         assertThat(accounts.size() > 0, is(true));
         
         //use fields parameter
-        ResponseList<Account> accountsWithFields = facebook.getAccounts(new Reading().fields("name"));
+        ResponseList<Account> accountsWithFields = real.getAccounts(new Reading().fields("name"));
         for (Account account : accountsWithFields) {
             assertThat(account.getCategory(), is(nullValue()));
             assertThat(account.getName(), is(notNullValue()));
         }
         
         //id
-        ResponseList<Account> accountsById = facebook.getAccounts(facebook.getId());
+        ResponseList<Account> accountsById = real.getAccounts(real.getId());
         assertThat(accountsById, is(accounts));
     }
 

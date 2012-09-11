@@ -28,7 +28,7 @@ import org.junit.Test;
  * @author Ryuji Yamashita - roundrop at gmail.com
  * @see <a href="https://developers.facebook.com/docs/reference/api/domain/">Domain - Facebook Developers</a>
  */
-public class DomainMethodsTest extends GraphAPITestBase {
+public class DomainMethodsTest extends FacebookTestBase {
 
     @Test
     public void getById() throws Exception {

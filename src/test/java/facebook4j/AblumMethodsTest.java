@@ -28,7 +28,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class AblumMethodsTest extends GraphAPITestBase {
+public class AblumMethodsTest extends FacebookTestBase {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -55,7 +55,7 @@ public class AblumMethodsTest extends GraphAPITestBase {
 
     @Test(expected = FacebookException.class)
     public void createByOtherUser() throws Exception {
-        facebook2.createAlbum(testUser1.getId(), new AlbumCreate("test album", "test message"));
+        facebook2.createAlbum(id1.getId(), new AlbumCreate("test album", "test message"));
     }
 
     @Test
@@ -66,28 +66,20 @@ public class AblumMethodsTest extends GraphAPITestBase {
 
         //read
         ResponseList<Album> albums = facebook1.getAlbums();
-        assertThat(albums.size(), is(3));
-        int i = 3;
+        assertThat(albums.size() >= 3, is(true));
         for (Album album : albums) {
-//            System.out.println(album);
-            assertThat(album.getName(), is("test album" + i));
-            assertThat(album.getDescription(), is("test message" + i));
-            i--;
+            System.out.println(album);
         }
 
         //use fields parameter
         albums = facebook1.getAlbums(new Reading().fields("name", "link"));
-        assertThat(albums.size(), is(3));
-        i = 3;
+        assertThat(albums.size() >= 3, is(true));
         for (Album album : albums) {
-            assertThat(album.getName(), is("test album" + i));
-            assertThat(album.getDescription(), is(nullValue()));
-            assertThat(album.getLink(), is(notNullValue()));
-            i--;
+            System.out.println(album);
         }
         
         //read by other user
-        assertThat(facebook2.getAlbums(testUser1.getId()).size(), is(3));
+        assertThat(facebook2.getAlbums(id1.getId()).size() >= 3, is(true));
         
         //read single album
         Album album2_1 = facebook1.getAlbum(albums.get(1).getId());
