@@ -16,8 +16,6 @@
 
 package facebook4j.internal.json;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import facebook4j.Account;
@@ -52,6 +50,7 @@ import facebook4j.Movie;
 import facebook4j.Music;
 import facebook4j.Note;
 import facebook4j.Notification;
+import facebook4j.Permission;
 import facebook4j.Photo;
 import facebook4j.Place;
 import facebook4j.Poke;
@@ -69,8 +68,6 @@ import facebook4j.User;
 import facebook4j.Video;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
-import facebook4j.internal.org.json.JSONArray;
-import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
 /**
@@ -263,22 +260,8 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return new NoteJSONImpl(res, conf);
     }
 
-    //TODO 専用クラスにすべきか。ここでやるとJSONをstoreできない。
-    public List<String> createPermissionNames(HttpResponse res) throws FacebookException {
-        List<String> result = new ArrayList<String>();
-        try {
-            JSONObject json = res.asJSONObject();
-            JSONArray data = json.getJSONArray("data");
-            for (int i = 0; i < data.length(); i++) {
-                Iterator<String> permissionNames = data.getJSONObject(i).keys();
-                while (permissionNames.hasNext()) {
-                    result.add(permissionNames.next());
-                }
-            }
-        } catch (JSONException jsone) {
-            throw new FacebookException(jsone.getMessage(), jsone);
-        }
-        return result;
+    public List<Permission> createPermissions(HttpResponse res) throws FacebookException {
+        return PermissionJSONImpl.createPermissionArray(res, conf);
     }
 
     public ResponseList<Place> createPlaceList(HttpResponse res) throws FacebookException {

@@ -19,6 +19,7 @@ package facebook4j.api;
 import java.util.List;
 
 import facebook4j.FacebookException;
+import facebook4j.Permission;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -30,7 +31,7 @@ public interface PermissionMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
      */
-    List<String> getPermissionNames() throws FacebookException;
+    List<Permission> getPermissions() throws FacebookException;
 
     /**
      * Returns the permissions granted a user to the current application.
@@ -39,7 +40,7 @@ public interface PermissionMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
      */
-    List<String> getPermissionNames(String userId) throws FacebookException;
+    List<Permission> getPermissions(String userId) throws FacebookException;
 
 
     /**

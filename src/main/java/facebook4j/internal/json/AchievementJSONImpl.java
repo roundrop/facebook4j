@@ -86,7 +86,7 @@ import facebook4j.internal.org.json.JSONObject;
             achievement = new AchievementJSONImpl.AchievedObjectJSONImpl(json.getJSONObject("achievement"));
             if (!json.isNull("likes")) {
                 JSONObject likesJSONObject = json.getJSONObject("likes");
-                if (!likesJSONObject.isNull("data")) {  //TODO unknown
+                if (!likesJSONObject.isNull("data")) {
                     JSONArray list = likesJSONObject.getJSONArray("data");
                     int size = list.length();
                     likes = new PagableListImpl<Like>(size, likesJSONObject);
@@ -98,7 +98,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             if (!json.isNull("comments")) {
                 JSONObject commentsJSONObject = json.getJSONObject("comments");
-                if (!commentsJSONObject.isNull("data")) {  //TODO unknown
+                if (!commentsJSONObject.isNull("data")) {
                     JSONArray list = commentsJSONObject.getJSONArray("data");
                     int size = list.length();
                     comments = new PagableListImpl<Comment>(size, commentsJSONObject);
