@@ -35,7 +35,7 @@ public class DomainMethodsTest extends FacebookTestBase {
         String id = "369296215699";
         Domain domain = unauthenticated.getDomain(id);
         assertThat(domain.getId(), is(id));
-        assertThat(domain.getName(), is("Facebook.com"));
+        assertThat(domain.getName().toLowerCase(), is("facebook.com"));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class DomainMethodsTest extends FacebookTestBase {
         String name = "www.facebook.com";
         Domain domain = unauthenticated.getDomainByName(name);
         assertThat(domain.getId(), is("369296215699"));
-        assertThat(domain.getName(), is("Facebook.com"));
+        assertThat(domain.getName().toLowerCase(), is("facebook.com"));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class DomainMethodsTest extends FacebookTestBase {
         List<Domain> domains = unauthenticated.getDomainsByName(name1, name2);
         assertThat(domains.size(), is(2));
         assertThat(domains.get(0).getId(), is("369296215699"));
-        assertThat(domains.get(0).getName(), is("Facebook.com"));
+        assertThat(domains.get(0).getName().toLowerCase(), is("facebook.com"));
         assertThat(domains.get(1).getId(), is("345629607804"));
         assertThat(domains.get(1).getName(), is("example.com"));
     }
