@@ -16,31 +16,27 @@
 
 package facebook4j;
 
-import java.util.Date;
-
 /**
+ * An enum represents the visibility of a event
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @see <a href="https://developers.facebook.com/docs/reference/api/event/">Event - Facebook Developers</a>
  */
-public interface Event {
-    String getId();
-    IdNameEntity getOwner();
-    String getName();
-    String getDescription();
-    Date getStartTime();
-    Date getEndTime();
-    String getLocation();
-    Event.Venue getVenue();
-    EventPrivacyType getPrivacy();
-    Date getUpdatedTime();
-    String getRsvpStatus();
-
-    interface Venue {
-        String getId();
-        String getStreet();
-        String getCity();
-        String getState();
-        String getCountry();
-        Double getLatitude();
-        Double getLongitude();
+public enum EventPrivacyType {
+    OPEN,
+    SECRET,
+    FRIENDS,
+    CLOSED,
+    ;
+    
+    public static EventPrivacyType getInstance(String eventPrivacyTypeString) {
+        if (eventPrivacyTypeString == null) {
+            return null;
+        }
+        for (EventPrivacyType eventPrivacyType : EventPrivacyType.values()) {
+            if (eventPrivacyType.toString().equals(eventPrivacyTypeString)) {
+                return eventPrivacyType;
+            }
+        }
+        return null;
     }
 }

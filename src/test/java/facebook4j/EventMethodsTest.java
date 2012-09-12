@@ -73,7 +73,7 @@ public class EventMethodsTest extends FacebookTestBase {
         assertThat(eventId1, is(notNullValue()));
         
         EventUpdate eventUpdate2 = new EventUpdate("test event2", new Date(), tomorrow(new Date()),
-                "description", "Gran Tokyo South Tower", "154470644580235", "SECRET");
+                "description", "Gran Tokyo South Tower", "154470644580235", EventPrivacyType.SECRET);
         String eventId2 = facebook1.createEvent(id1.getId(), eventUpdate2);
         assertThat(eventId2, is(notNullValue()));
 
