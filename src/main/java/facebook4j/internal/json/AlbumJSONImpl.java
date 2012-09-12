@@ -26,6 +26,7 @@ import facebook4j.Album;
 import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
 import facebook4j.Like;
+import facebook4j.PrivacyType;
 import facebook4j.ResponseList;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
@@ -46,7 +47,7 @@ import facebook4j.internal.org.json.JSONObject;
     private String location;
     private URL link;
     private String coverPhoto;
-    private String privacy;
+    private PrivacyType privacy;
     private Integer count;
     private String type;
     private Date createdTime;
@@ -80,7 +81,7 @@ import facebook4j.internal.org.json.JSONObject;
             description = getRawString("description", json);
             link = getURL("link", json);
             coverPhoto = getRawString("cover_photo", json);
-            privacy = getRawString("privacy", json);
+            privacy = PrivacyType.getInstance(getRawString("privacy", json));
             count = getPrimitiveInt("count", json);
             type = getRawString("type", json);
             createdTime = getISO8601Datetime("created_time", json);
@@ -130,7 +131,7 @@ import facebook4j.internal.org.json.JSONObject;
         return coverPhoto;
     }
 
-    public String getPrivacy() {
+    public PrivacyType getPrivacy() {
         return privacy;
     }
 

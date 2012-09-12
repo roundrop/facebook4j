@@ -17,8 +17,13 @@
 package facebook4j.internal.json;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import facebook4j.FacebookException;
 import facebook4j.Privacy;
+import facebook4j.PrivacyType;
 import facebook4j.internal.org.json.JSONObject;
 
 /**
@@ -27,43 +32,67 @@ import facebook4j.internal.org.json.JSONObject;
 /*package*/ final class PrivacyJSONImpl implements Privacy, java.io.Serializable {
     private static final long serialVersionUID = -3272219269372534734L;
     
-    private final String value;
-    private final String friends;
-    private final String networks;
-    private final String allow;
-    private final String deny;
-    private final String description;
+    private PrivacyType value;
+    private PrivacyType friends;
+    private List<String> networks;
+    private List<String> allow;
+    private List<String> deny;
+    private List<String> description;
     
     /*package*/public PrivacyJSONImpl(JSONObject json) throws FacebookException {
-        value = getRawString("value", json);
-        friends = getRawString("friends", json);
-        networks = getRawString("networks", json);
-        allow = getRawString("allow", json);
-        deny = getRawString("deny", json);
-        description = getRawString("description", json);
+        value = PrivacyType.getInstance(getRawString("value", json));
+        friends = PrivacyType.getInstance(getRawString("friends", json));
+        if (!json.isNull("networks")) {
+            String[] networksArray = getRawString("networks", json).split(",");
+            networks = new ArrayList<String>(networksArray.length);
+            for (String network : networksArray) {
+                networks.add(network);
+            }
+        }
+        if (!json.isNull("allow")) {
+            String[] allowArray = getRawString("allow", json).split(",");
+            allow = new ArrayList<String>(allowArray.length);
+            for (String _allow : allowArray) {
+                allow.add(_allow);
+            }
+        }
+        if (!json.isNull("deny")) {
+            String[] denyArray = getRawString("deny", json).split(",");
+            deny = new ArrayList<String>(denyArray.length);
+            for (String _deny : denyArray) {
+                deny.add(_deny);
+            }
+        }
+        if (!json.isNull("description")) {
+            String[] descriptionArray = getRawString("description", json).split(",");
+            description = new ArrayList<String>(descriptionArray.length);
+            for (String _description : descriptionArray) {
+                description.add(_description);
+            }
+        }
     }
 
-    public String getValue() {
+    public PrivacyType getValue() {
         return value;
     }
 
-    public String getFriends() {
+    public PrivacyType getFriends() {
         return friends;
     }
 
-    public String getNetworks() {
+    public List<String> getNetworks() {
         return networks;
     }
 
-    public String getAllow() {
+    public List<String> getAllow() {
         return allow;
     }
 
-    public String getDeny() {
+    public List<String> getDeny() {
         return deny;
     }
 
-    public String getDescription() {
+    public List<String> getDescription() {
         return description;
     }
 
