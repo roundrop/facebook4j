@@ -16,24 +16,26 @@
 
 package facebook4j;
 
-import java.net.URL;
-import java.util.Date;
-
 /**
+ * An enum represents the privacy setting of a group
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @see <a href="https://developers.facebook.com/docs/reference/api/group/">Group - Facebook Developers</a>
  */
-public interface Group {
-    Integer getVersion();
-    String getName();
-    String getId();
-    Boolean isAdministrator();
-    Integer getBookmarkOrder();
+public enum GroupPrivacyType {
+    OPEN,
+    SECRET,
+    CLOSED,
+    ;
     
-    IdNameEntity getOwner();
-    String getDescription();
-    GroupPrivacyType getPrivacy();
-    URL getIcon();
-    Date getUpdatedTime();
-    String getEmail();
-    
+    public static GroupPrivacyType getInstance(String groupPrivacyTypeString) {
+        if (groupPrivacyTypeString == null) {
+            return null;
+        }
+        for (GroupPrivacyType groupPrivacyType : GroupPrivacyType.values()) {
+            if (groupPrivacyType.toString().equals(groupPrivacyTypeString)) {
+                return groupPrivacyType;
+            }
+        }
+        return null;
+    }
 }
