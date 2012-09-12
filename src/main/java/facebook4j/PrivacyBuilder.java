@@ -16,6 +16,10 @@
 
 package facebook4j;
 
+import java.util.List;
+
+import facebook4j.internal.util.z_F4JInternalStringUtil;
+
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -23,29 +27,78 @@ package facebook4j;
 public final class PrivacyBuilder {
     private PrivacyBean privacyBean = new PrivacyBean();
     
-    public PrivacyBuilder setValue(String value) {
+    public PrivacyBuilder setValue(PrivacyType value) {
         checkNotBuilt();
-        privacyBean.setValue(value);
+        privacyBean.setValue(value.toString());
         return this;
     }
-    public PrivacyBuilder setFriends(String friends) {
+
+    public PrivacyBuilder setFriends(PrivacyType friends) {
         checkNotBuilt();
-        privacyBean.setFriends(friends);
+        privacyBean.setFriends(friends.toString());
         return this;
     }
+
     public PrivacyBuilder setNetworks(String networks) {
         checkNotBuilt();
         privacyBean.setNetworks(networks);
         return this;
     }
+    public PrivacyBuilder setNetworks(List<String> networks) {
+        checkNotBuilt();
+        privacyBean.setNetworks(z_F4JInternalStringUtil.join((String[]) networks.toArray(new String[networks.size()])));
+        return this;
+    }
+    public PrivacyBuilder addNetwork(String network) {
+        checkNotBuilt();
+        String networks = privacyBean.getNetworks();
+        if (networks == null) {
+            privacyBean.setNetworks(network);
+        } else {
+            privacyBean.setNetworks(networks + "," + network);
+        }
+        return this;
+    }
+
     public PrivacyBuilder setAllow(String allow) {
         checkNotBuilt();
         privacyBean.setAllow(allow);
         return this;
     }
+    public PrivacyBuilder setAllow(List<String> allow) {
+        checkNotBuilt();
+        privacyBean.setAllow(z_F4JInternalStringUtil.join((String[]) allow.toArray(new String[allow.size()])));
+        return this;
+    }
+    public PrivacyBuilder addAllow(String allow) {
+        checkNotBuilt();
+        String allows = privacyBean.getAllow();
+        if (allows == null) {
+            privacyBean.setAllow(allow);
+        } else {
+            privacyBean.setAllow(allows + "," + allow);
+        }
+        return this;
+    }
+
     public PrivacyBuilder setDeny(String deny) {
         checkNotBuilt();
         privacyBean.setDeny(deny);
+        return this;
+    }
+    public PrivacyBuilder setDeny(List<String> deny) {
+        checkNotBuilt();
+        privacyBean.setDeny(z_F4JInternalStringUtil.join((String[]) deny.toArray(new String[deny.size()])));
+        return this;
+    }
+    public PrivacyBuilder addDeny(String deny) {
+        checkNotBuilt();
+        String denys = privacyBean.getDeny();
+        if (denys == null) {
+            privacyBean.setDeny(deny);
+        } else {
+            privacyBean.setDeny(denys + "," + deny);
+        }
         return this;
     }
 

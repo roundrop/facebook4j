@@ -48,7 +48,7 @@ public class AblumMethodsTest extends FacebookTestBase {
     
     @Test
     public void create() throws Exception {
-        PrivacyBean privacy = new PrivacyBuilder().setValue("EVERYONE").build();
+        PrivacyBean privacy = new PrivacyBuilder().setValue(PrivacyType.EVERYONE).build();
         String albumId = facebook1.createAlbum(new AlbumCreate("test album1", "test message1", privacy));
         assertThat(albumId, is(notNullValue()));
     }

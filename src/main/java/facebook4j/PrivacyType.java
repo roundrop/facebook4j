@@ -16,28 +16,30 @@
 
 package facebook4j;
 
-import java.net.URL;
-import java.util.Date;
-import java.util.List;
-
 /**
+ * An enum represents the privacy settings.
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Album {
-    String getId();
-    IdNameEntity getFrom();
-    String getName();
-    String getDescription();
-    String getLocation();
-    URL getLink();
-    String getCoverPhoto();
-    PrivacyType getPrivacy();
-    Integer getCount();
-    String getType();
-    Date getCreatedTime();
-    Date getUpdatedTime();
-    Boolean canUpload();
+public enum PrivacyType {
+    EVERYONE,
+    ALL_FRIENDS,
+    NETWORKS_FRIENDS,
+    FRIENDS_OF_FRIENDS,
+    SOME_FRIENDS,
+    NO_FRIENDS,
+    SELF,
+    CUSTOM,
+    ;
     
-    List<Like> getLikes();
-    
+    public static PrivacyType getInstance(String privacyTypeString) {
+        if (privacyTypeString == null) {
+            return null;
+        }
+        for (PrivacyType eventPrivacyType : PrivacyType.values()) {
+            if (eventPrivacyType.toString().equals(privacyTypeString)) {
+                return eventPrivacyType;
+            }
+        }
+        return null;
+    }
 }

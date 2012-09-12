@@ -22,7 +22,7 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public class PrivacyBean implements Privacy, java.io.Serializable {
+public class PrivacyBean implements java.io.Serializable {
     private static final long serialVersionUID = 3427495429925711593L;
 
     private String value;
