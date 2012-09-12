@@ -23,6 +23,7 @@ import java.util.Date;
 
 import facebook4j.FacebookException;
 import facebook4j.Group;
+import facebook4j.GroupPrivacyType;
 import facebook4j.IdNameEntity;
 import facebook4j.ResponseList;
 import facebook4j.conf.Configuration;
@@ -45,7 +46,7 @@ import facebook4j.internal.org.json.JSONObject;
     
     private IdNameEntity owner;
     private String description;
-    private String privacy;
+    private GroupPrivacyType privacy;
     private URL icon;
     private Date updatedTime;
     private String email;
@@ -80,7 +81,7 @@ import facebook4j.internal.org.json.JSONObject;
                 owner = new IdNameEntityJSONImpl(ownerJSONObject);
             }
             description = getRawString("description", json);
-            privacy = getRawString("privacy", json);
+            privacy = GroupPrivacyType.getInstance(getRawString("privacy", json));
             icon = getURL("icon", json);
             updatedTime = getISO8601Datetime("updated_time", json);
             email = getRawString("email", json);
@@ -115,7 +116,7 @@ import facebook4j.internal.org.json.JSONObject;
     public String getDescription() {
         return description;
     }
-    public String getPrivacy() {
+    public GroupPrivacyType getPrivacy() {
         return privacy;
     }
     public URL getIcon() {
