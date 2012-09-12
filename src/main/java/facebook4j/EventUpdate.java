@@ -35,7 +35,7 @@ public class EventUpdate implements java.io.Serializable {
     private String description;
     private String location;
     private String locationId;
-    private String privacyType;
+    private EventPrivacyType privacyType;
 
     public EventUpdate(String name, Date startTime) {
         this.name = name;
@@ -44,7 +44,7 @@ public class EventUpdate implements java.io.Serializable {
 
     public EventUpdate(String name, Date startTime, Date endTime,
             String description, String location, String locationId,
-            String privacyType) {
+            EventPrivacyType privacyType) {
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -71,7 +71,7 @@ public class EventUpdate implements java.io.Serializable {
             params.add(new HttpParameter("location_id", locationId));
         }
         if (privacyType != null) {
-            params.add(new HttpParameter("privacy_type", privacyType));
+            params.add(new HttpParameter("privacy_type", privacyType.toString()));
         }
         return params.toArray(new HttpParameter[params.size()]);
     }

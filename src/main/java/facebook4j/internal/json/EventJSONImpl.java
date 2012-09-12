@@ -24,6 +24,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 import java.util.Date;
 
 import facebook4j.Event;
+import facebook4j.EventPrivacyType;
 import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
 import facebook4j.ResponseList;
@@ -47,7 +48,7 @@ import facebook4j.internal.org.json.JSONObject;
     private Date endTime;
     private String location;
     private Event.Venue venue;
-    private String privacy;
+    private EventPrivacyType privacy;
     private Date updatedTime;
     private String rsvpStatus;
     
@@ -80,7 +81,7 @@ import facebook4j.internal.org.json.JSONObject;
                 JSONObject venueJSONObject = json.getJSONObject("venue");
                 venue = new VenueJSONImpl(venueJSONObject);
             }
-            privacy = getRawString("privacy", json);
+            privacy = EventPrivacyType.getInstance(getRawString("privacy", json));
             updatedTime = getISO8601Datetime("updated_time" ,json);
             rsvpStatus = getRawString("rsvp_status", json);
         } catch (JSONException jsone) {
@@ -120,7 +121,7 @@ import facebook4j.internal.org.json.JSONObject;
         return venue;
     }
 
-    public String getPrivacy() {
+    public EventPrivacyType getPrivacy() {
         return privacy;
     }
 
