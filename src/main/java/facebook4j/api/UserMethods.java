@@ -26,7 +26,7 @@ import facebook4j.User;
 
 
 /**
- * @author roundrop
+ * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public interface UserMethods {
     /**
