@@ -9,10 +9,10 @@ Java 5 or later
     <dependency>
       <groupId>org.facebook4j</groupId>
       <artifactId>facebook4j-core</artifactId>
-      <version>0.1.1</version>
+      <version>[0.1,)</version>
     </dependency>
 ### Download
-Download jar file from [here](http://facebook4j.org/download/facebook4j-core-0.1.0.jar).  
+Download jar file from [here](http://facebook4j.org/download/facebook4j-core-0.1.2.jar).  
 
 ## How To Use
 Create a standard properties file named "facebook4j.properties". Place it to either the current directory, root of the classpath directory. 
@@ -25,10 +25,8 @@ Create a standard properties file named "facebook4j.properties". Place it to eit
 If you are familiar with Java language, looking into the [JavaDoc](http://facebook4j.org/en/javadoc/index.html "JavaDoc") should be the shortest way for you to get started.
 [facebook4j.Facebook](http://facebook4j.org/en/javadoc/facebook4j/Facebook.html "facebook4j.Facebook") interface is the one you may want to look at first.
 
-### Facebook Graph API Documentation
-* [Graph API](https://developers.facebook.com/docs/reference/api "Graph API")
-* [FQL](https://developers.facebook.com/docs/reference/fql "FQL")
-* [Authentication](https://developers.facebook.com/docs/authentication/ "Authentication")
+### Code Examples
+Code examples of Server-Side Authentication and post status message implementation is available at [https://github.com/roundrop/sign-in-with-facebook](https://github.com/roundrop/sign-in-with-facebook)
 
 ## Supported
 * [Server-Side Authentication](https://developers.facebook.com/docs/authentication/server-side/ "Server-Side Authentication")
