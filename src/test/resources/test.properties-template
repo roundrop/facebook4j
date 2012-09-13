@@ -1,0 +1,21 @@
+debug=true
+loggerFactory=facebook4j.internal.logging.StdOutLoggerFactory
+http.prettyDebug=true
+http.userAgent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:12.0) Gecko/20100101 Firefox/12.0
+jsonStoreEnabled=true
+
+app.oauth.appId=****************
+app.oauth.appSecret=********************************
+app.callbackURL=http://www.example.com
+
+# a test user (full permissions)
+id1.id=****************
+
+# a test user (full permissions)
+id2.id=****************
+
+
+# real user
+real.oauth.appId=****************
+real.oauth.appSecret=********************************
+real.oauth.accessToken=************************************************
