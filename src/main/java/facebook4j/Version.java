@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Yusuke Yamamoto
+ * Copyright 2012 Ryuji Yamashita
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,10 @@
 package facebook4j;
 
 /**
- * @author Yusuke Yamamoto - yusuke at mac.com
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public final class Version {
-    private static final String VERSION = "0.1.0";
+    private static final String VERSION = "0.1.2";
     private static final String TITLE = "Facebook4J";
 
     private Version() {
