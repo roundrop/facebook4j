@@ -42,7 +42,7 @@ public interface User {
     Date getUpdatedTime();
     Boolean isVerified();
     String getBio();
-    String getBirthday();
+    Date getBirthday();
     Cover getCover();
     List<User.Education> getEducation();
     String getEmail();
@@ -52,7 +52,7 @@ public interface User {
     String getPolitical();
     List<IdNameEntity> getFavoriteAthletes();
     List<IdNameEntity> getFavoriteTeams();
-    String getPicture();
+    Picture getPicture();
     String getQuotes();
     String getRelationshipStatus();
     String getReligion();
@@ -60,11 +60,6 @@ public interface User {
     User.VideoUploadLimits getVideoUploadLimits();
     URL getWebsite();
     List<User.Work> getWork();
-
-    void setName(String name);
-    void setFirstName(String firstName);
-    void setMiddleName(String middleName);
-    void setLastName(String lastName);
 
     interface Education {
         IdNameEntity getYear();

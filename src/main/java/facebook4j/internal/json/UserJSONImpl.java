@@ -26,9 +26,9 @@ import java.util.List;
 import java.util.Locale;
 
 import facebook4j.Cover;
-import facebook4j.Domain;
 import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
+import facebook4j.Picture;
 import facebook4j.ResponseList;
 import facebook4j.User;
 import facebook4j.conf.Configuration;
@@ -61,7 +61,7 @@ import facebook4j.internal.org.json.JSONObject;
     private Date updatedTime;
     private Boolean verified;
     private String bio;
-    private String birthday;
+    private Date birthday;
     private Cover cover;
     private List<User.Education> education = new ArrayList<User.Education>();
     private String email;
@@ -71,7 +71,7 @@ import facebook4j.internal.org.json.JSONObject;
     private String political;
     private List<IdNameEntity> favoriteAthletes = new ArrayList<IdNameEntity>();
     private List<IdNameEntity> favoriteTeams = new ArrayList<IdNameEntity>();
-    private String picture;
+    private Picture picture;
     private String quotes;
     private String relationshipStatus;
     private String religion;
@@ -121,7 +121,7 @@ import facebook4j.internal.org.json.JSONObject;
             updatedTime = getISO8601Datetime("updated_time", json);
             verified = getBoolean("verified", json);
             bio = getRawString("bio", json);
-            birthday = getRawString("birthday", json);
+            birthday = getDate("birthday", json, "MM/dd/yyyy");
             if (!json.isNull("cover")) {
                 JSONObject coverJSON = json.getJSONObject("cover");
                 cover = new CoverJSONImpl(coverJSON);
@@ -160,7 +160,15 @@ import facebook4j.internal.org.json.JSONObject;
                     favoriteTeams.add(new IdNameEntityJSONImpl(favoriteTeamsJSONArray.getJSONObject(i)));
                 }
             }
-            picture = getRawString("picture", json);
+            if (!json.isNull("picture")) {
+                String pictureRawString = getRawString("picture", json);
+                if (pictureRawString.startsWith("{")) {
+                    JSONObject pictureJSONObject = json.getJSONObject("picture");
+                    picture = new PictureJSONImpl(pictureJSONObject);
+                } else {
+                    picture = new PictureJSONImpl(getURL("picture", json));
+                }
+            }
             quotes = getRawString("quotes", json);
             relationshipStatus = getRawString("relationship_status", json);
             religion = getRawString("religion", json);
@@ -184,246 +192,140 @@ import facebook4j.internal.org.json.JSONObject;
         }
     }
 
-    public int compareTo(User that) {
-        return this.id.compareTo(that.getId());
-    }
-
     public String getId() {
         return id;
-    }
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getFirstName() {
         return firstName;
-    }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getMiddleName() {
         return middleName;
     }
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
 
     public String getLastName() {
         return lastName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getGender() {
         return gender;
     }
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
 
     public Locale getLocale() {
         return locale;
-    }
-    public void setLocale(Locale locale) {
-        this.locale = locale;
     }
 
     public List<IdNameEntity> getLanguages() {
         return languages;
     }
-    public void setLanguages(List<IdNameEntity> languages) {
-        this.languages = languages;
-    }
 
     public URL getLink() {
         return link;
-    }
-    public void setLink(URL link) {
-        this.link = link;
     }
 
     public String getUsername() {
         return username;
     }
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getThirdPartyId() {
         return thirdPartyId;
     }
-    public void setThirdPartyId(String thirdPartyId) {
-        this.thirdPartyId = thirdPartyId;
-    }
-    
+
     public Boolean isInstalled() {
         return installed;
-    }
-    public void setInstalled(Boolean installed) {
-        this.installed = installed;
     }
 
     public Double getTimezone() {
         return timezone;
     }
-    public void setTimezone(Double timezone) {
-        this.timezone = timezone;
-    }
 
     public Date getUpdatedTime() {
         return updatedTime;
-    }
-    public void setUpdatedTime(Date updatedTime) {
-        this.updatedTime = updatedTime;
     }
 
     public Boolean isVerified() {
         return verified;
     }
-    public void setVerified(Boolean verified) {
-        this.verified = verified;
-    }
 
     public String getBio() {
         return bio;
     }
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
-    }
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
     }
 
     public Cover getCover() {
         return cover;
     }
-    public void setCover(Cover cover) {
-        this.cover = cover;
-    }
-    
+
     public List<Education> getEducation() {
         return education;
-    }
-    public void setEducation(List<Education> education) {
-        this.education = education;
     }
 
     public String getEmail() {
         return email;
     }
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public IdNameEntity getHometown() {
         return hometown;
-    }
-    public void setHometown(IdNameEntity hometown) {
-        this.hometown = hometown;
     }
 
     public List<String> getInterestedIn() {
         return interestedIn;
     }
-    public void setInterestedIn(List<String> interestedIn) {
-        this.interestedIn = interestedIn;
-    }
 
     public IdNameEntity getLocation() {
         return location;
-    }
-    public void setLocation(IdNameEntity location) {
-        this.location = location;
     }
 
     public String getPolitical() {
         return political;
     }
-    public void setPolitical(String political) {
-        this.political = political;
-    }
 
     public List<IdNameEntity> getFavoriteAthletes() {
         return favoriteAthletes;
-    }
-    public void setFavoriteAthletes(List<IdNameEntity> favoriteAthletes) {
-        this.favoriteAthletes = favoriteAthletes;
     }
 
     public List<IdNameEntity> getFavoriteTeams() {
         return favoriteTeams;
     }
-    public void setFavoriteTeams(List<IdNameEntity> favoriteTeams) {
-        this.favoriteTeams = favoriteTeams;
-    }
 
-    public String getPicture() {
+    public Picture getPicture() {
         return picture;
-    }
-    public void setPicture(String picture) {
-        this.picture = picture;
     }
 
     public String getQuotes() {
         return quotes;
     }
-    public void setQuotes(String quotes) {
-        this.quotes = quotes;
-    }
 
     public String getRelationshipStatus() {
         return relationshipStatus;
-    }
-    public void setRelationshipStatus(String relationshipStatus) {
-        this.relationshipStatus = relationshipStatus;
     }
 
     public String getReligion() {
         return religion;
     }
-    public void setReligion(String religion) {
-        this.religion = religion;
-    }
 
     public IdNameEntity getSignificantOther() {
         return significantOther;
-    }
-    public void setSignificantOther(IdNameEntity significantOther) {
-        this.significantOther = significantOther;
     }
 
     public User.VideoUploadLimits getVideoUploadLimits() {
         return videoUploadLimits;
     }
-    public void setVideoUploadLimits(User.VideoUploadLimits videoUploadLimits) {
-        this.videoUploadLimits = videoUploadLimits;
-    }
 
     public URL getWebsite() {
         return website;
     }
-    public void setWebsite(URL website) {
-        this.website = website;
-    }
 
     public List<Work> getWork() {
         return work;
-    }
-    public void setWork(List<Work> work) {
-        this.work = work;
     }
 
     /*package*/
@@ -471,7 +373,11 @@ import facebook4j.internal.org.json.JSONObject;
             throw new FacebookException(jsone);
         }
     }
-    
+
+    public int compareTo(User that) {
+        return this.id.compareTo(that.getId());
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

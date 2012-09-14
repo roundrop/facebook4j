@@ -64,6 +64,12 @@ public class UserMethodsTest extends FacebookTestBase {
         User user = facebook1.getUser(id1.getId(), new Reading().fields("email"));
         assertThat(user.getEmail(), is(notNullValue()));
         assertThat(user.getName(), is(nullValue()));
+        
+        user = facebook1.getMe(new Reading().fields("birthday").fields("picture"));
+        assertThat(user.getBirthday(), is(notNullValue()));
+        System.out.println(user.getBirthday());
+        assertThat(user.getPicture().getURL(), is(notNullValue()));
+        assertThat(user.getPicture().isSilhouette(), is(true));
     }
     
     @Test
