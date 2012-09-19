@@ -89,6 +89,7 @@ public class Reading implements java.io.Serializable {
         return this;
     }
 
+    //http://php.net/manual/en/function.strtotime.php
     public Reading until(Date datetime) {
         if (datetime == null) {
             throw new NullPointerException("datetime is null");
@@ -100,6 +101,7 @@ public class Reading implements java.io.Serializable {
         return this;
     }
 
+    //http://php.net/manual/en/function.strtotime.php
     public Reading since(String phpDateTimeFormats) {
         if (phpDateTimeFormats == null) {
             throw new NullPointerException("phpDateTimeFormats is null");
@@ -111,6 +113,7 @@ public class Reading implements java.io.Serializable {
         return this;
     }
 
+    //http://php.net/manual/en/function.strtotime.php
     public Reading since(Date datetime) {
         if (datetime == null) {
             throw new NullPointerException("datetime is null");
@@ -119,18 +122,6 @@ public class Reading implements java.io.Serializable {
             throw new IllegalStateException("'since' already sets");
         }
         parameterMap.put("since", new SimpleDateFormat(FACEBOOK_DATE_FORMAT).format(datetime));
-        return this;
-    }
-
-    //http://php.net/manual/en/function.date.php
-    public Reading dateFormat(String phpDateFormat) {
-        if (phpDateFormat == null) {
-            throw new NullPointerException("phpDateFormat is null");
-        }
-        if (parameterMap.containsKey("date_format")) {
-            throw new IllegalStateException("'date_format' already sets");
-        }
-        parameterMap.put("date_format", phpDateFormat);
         return this;
     }
 
