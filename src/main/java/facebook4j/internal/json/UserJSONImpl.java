@@ -61,7 +61,7 @@ import facebook4j.internal.org.json.JSONObject;
     private Date updatedTime;
     private Boolean verified;
     private String bio;
-    private Date birthday;
+    private String birthday;
     private Cover cover;
     private List<User.Education> education = new ArrayList<User.Education>();
     private String email;
@@ -121,7 +121,7 @@ import facebook4j.internal.org.json.JSONObject;
             updatedTime = getISO8601Datetime("updated_time", json);
             verified = getBoolean("verified", json);
             bio = getRawString("bio", json);
-            birthday = getDate("birthday", json, "MM/dd/yyyy");
+            birthday = getRawString("birthday", json);
             if (!json.isNull("cover")) {
                 JSONObject coverJSON = json.getJSONObject("cover");
                 cover = new CoverJSONImpl(coverJSON);
@@ -256,7 +256,7 @@ import facebook4j.internal.org.json.JSONObject;
         return bio;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
