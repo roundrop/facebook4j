@@ -42,7 +42,7 @@ public interface User {
     Date getUpdatedTime();
     Boolean isVerified();
     String getBio();
-    Date getBirthday();
+    String getBirthday();
     Cover getCover();
     List<User.Education> getEducation();
     String getEmail();
@@ -89,4 +89,8 @@ public interface User {
         String getEndDate();
 
     }
+
+
+    String BIRTHDAY_DATE_FORMAT = "MM/dd/yyyy";
+
 }
