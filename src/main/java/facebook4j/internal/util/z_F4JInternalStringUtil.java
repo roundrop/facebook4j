@@ -17,6 +17,7 @@ package facebook4j.internal.util;
  */
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -87,8 +88,9 @@ public class z_F4JInternalStringUtil {
         return buf.toString();
     }
     
-    public static String formatEventDatetime(Date date) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return df.format(date);
+    public static String formatISO8601Datetime(Calendar cal) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        df.setTimeZone(cal.getTimeZone());
+        return df.format(cal.getTime());
     }
 }

@@ -20,7 +20,6 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -48,31 +47,23 @@ public class EventMethodsTest extends FacebookTestBase {
     
     @Test
     public void get() throws Exception {
-        EventUpdate eventUpdate1 = new EventUpdate("test event1", new Date());
-        String eventId1 = facebook1.createEvent(eventUpdate1);
-        Event event1 = facebook1.getEvent(eventId1);
-        assertThat(event1, is(notNullValue()));
-        assertThat(event1.getId(), is(eventId1));
-        assertThat(event1.getName(), is("test event1"));
-
-        EventUpdate eventUpdate2 = new EventUpdate("test event2", new Date());
-        String eventId2 = facebook1.createEvent(eventUpdate2);
-        Event event2 = facebook1.getEvent(eventId2);
-        assertThat(event2, is(notNullValue()));
-        assertThat(event2.getId(), is(eventId2));
-        assertThat(event2.getName(), is("test event2"));
+        Event event = facebook1.getEvent("359439267470540");
+        assertThat(event, is(notNullValue()));
+        assertThat(event.getId(), is("359439267470540"));
+        assertThat(event.getName(), is("test event2"));
 
         ResponseList<Event> events = facebook1.getEvents();
-        assertThat(events.size() >= 2, is(true));
+        assertThat(events.size() > 0, is(true));
     }
     
     @Test
     public void create_edit_delete() throws Exception {
-        EventUpdate eventUpdate1 = new EventUpdate("test event1", new Date());
+        Calendar start = Calendar.getInstance();
+        EventUpdate eventUpdate1 = new EventUpdate("test event1", start);
         String eventId1 = facebook1.createEvent(eventUpdate1);
         assertThat(eventId1, is(notNullValue()));
         
-        EventUpdate eventUpdate2 = new EventUpdate("test event2", new Date(), tomorrow(new Date()),
+        EventUpdate eventUpdate2 = new EventUpdate("test event2", start, tomorrow(start),
                 "description", "Gran Tokyo South Tower", "154470644580235", EventPrivacyType.SECRET);
         String eventId2 = facebook1.createEvent(id1.getId(), eventUpdate2);
         assertThat(eventId2, is(notNullValue()));
@@ -84,8 +75,11 @@ public class EventMethodsTest extends FacebookTestBase {
         
         boolean deleteResult = facebook1.deleteEvent(eventId1);
         assertThat(deleteResult, is(true));
-        Event event = facebook1.getEvent(eventId1);
-        assertThat(event, is(nullValue()));
+    }
+    
+    @Test(expected = FacebookException.class)
+    public void eventNotFound() throws FacebookException {
+        facebook1.getEvent("189792514488723");
     }
 
     @Test
@@ -97,10 +91,10 @@ public class EventMethodsTest extends FacebookTestBase {
         }
     }
 
-    private Date tomorrow(Date date) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.add(Calendar.DAY_OF_MONTH, 1);
-        return cal.getTime();
+    private Calendar tomorrow(Calendar cal) {
+        Calendar tomorrow = Calendar.getInstance();
+        tomorrow.setTime(cal.getTime());
+        tomorrow.add(Calendar.DAY_OF_MONTH, 1);
+        return tomorrow;
     }
 }

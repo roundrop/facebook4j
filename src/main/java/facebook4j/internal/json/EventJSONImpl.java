@@ -60,6 +60,7 @@ import facebook4j.internal.org.json.JSONObject;
             DataObjectFactoryUtil.registerJSONObject(this, json);
         }
     }
+
     /*package*/EventJSONImpl(JSONObject json) throws FacebookException {
         super();
         init(json);
@@ -74,8 +75,8 @@ import facebook4j.internal.org.json.JSONObject;
             }
             name = getRawString("name", json);
             description = getRawString("description", json);
-            startTime = getDate("start_time", json, "yyyy-MM-dd'T'HH:mm:ss");
-            endTime = getDate("end_time", json, "yyyy-MM-dd'T'HH:mm:ss");
+            startTime = getISO8601Datetime("start_time", json);
+            endTime = getISO8601Datetime("end_time", json);
             location = getRawString("location", json);
             if (!json.isNull("venue")) {
                 JSONObject venueJSONObject = json.getJSONObject("venue");

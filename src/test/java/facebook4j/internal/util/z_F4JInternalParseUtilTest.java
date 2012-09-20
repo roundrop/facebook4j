@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -82,7 +83,17 @@ public class z_F4JInternalParseUtilTest {
         Date actual = z_F4JInternalParseUtil.getISO8601Datetime("datetime", json);
         assertThat(actual, is(notNullValue()));
         assertThat(actual, instanceOf(java.util.Date.class));
-        assertThat(actual, is(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2012-08-01 05:49:44")));
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+        assertThat(actual, is(df.parse("2012-07-31 20:49:44")));
+
+        json = new JSONObject("{\"datetime\": \"2012-07-31T20:49:44+0000\"}");
+        actual = z_F4JInternalParseUtil.getISO8601Datetime("datetime", json);
+        assertThat(actual, is(notNullValue()));
+        assertThat(actual, instanceOf(java.util.Date.class));
+        df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        df.setTimeZone(TimeZone.getTimeZone("JST"));
+        assertThat(actual, is(df.parse("2012-08-01 05:49:44")));
     }
     
     @Test

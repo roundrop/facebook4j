@@ -17,7 +17,7 @@
 package facebook4j;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import facebook4j.internal.http.HttpParameter;
@@ -30,19 +30,19 @@ public class EventUpdate implements java.io.Serializable {
     private static final long serialVersionUID = 375802784481895434L;
 
     private final String name;
-    private final Date startTime;
-    private Date endTime;
+    private final Calendar startTime;
+    private Calendar endTime;
     private String description;
     private String location;
     private String locationId;
     private EventPrivacyType privacyType;
 
-    public EventUpdate(String name, Date startTime) {
+    public EventUpdate(String name, Calendar startTime) {
         this.name = name;
         this.startTime = startTime;
     }
 
-    public EventUpdate(String name, Date startTime, Date endTime,
+    public EventUpdate(String name, Calendar startTime, Calendar endTime,
             String description, String location, String locationId,
             EventPrivacyType privacyType) {
         this.name = name;
@@ -57,9 +57,9 @@ public class EventUpdate implements java.io.Serializable {
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         params.add(new HttpParameter("name", name));
-        params.add(new HttpParameter("start_time", z_F4JInternalStringUtil.formatEventDatetime(startTime)));
+        params.add(new HttpParameter("start_time", z_F4JInternalStringUtil.formatISO8601Datetime(startTime)));
         if (endTime != null) {
-            params.add(new HttpParameter("end_time", z_F4JInternalStringUtil.formatEventDatetime(endTime)));
+            params.add(new HttpParameter("end_time", z_F4JInternalStringUtil.formatISO8601Datetime(endTime)));
         }
         if (description != null) {
             params.add(new HttpParameter("description", description));
