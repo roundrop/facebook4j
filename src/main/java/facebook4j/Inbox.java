@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Inbox {
+public interface Inbox extends FacebookResponse {
     String getId();
     List<IdNameEntity> getTo();
     Date getUpdatedTime();

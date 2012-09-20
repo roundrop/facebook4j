@@ -20,7 +20,7 @@ package facebook4j;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Place {
+public interface Place extends FacebookResponse {
     String getId();
     String getName();
     Place.Location getLocation();

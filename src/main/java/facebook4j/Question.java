@@ -21,7 +21,7 @@ import java.util.Date;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Question {
+public interface Question extends FacebookResponse {
     String getId();
     IdNameEntity getFrom();
     String getQuestion();

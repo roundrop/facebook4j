@@ -19,6 +19,6 @@ package facebook4j;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Music extends CategorizedEntity {
+public interface Music extends Category {
 
 }

@@ -19,7 +19,7 @@ package facebook4j;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface RSVPStatus {
+public interface RSVPStatus extends FacebookResponse {
     String getId();
     String getName();
     String getRsvpStatus();

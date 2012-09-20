@@ -19,6 +19,6 @@ package facebook4j;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Domain extends IdNameEntity {
+public interface Domain extends IdName {
 
 }

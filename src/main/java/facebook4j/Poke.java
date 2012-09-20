@@ -18,7 +18,7 @@ package facebook4j;
 
 import java.util.Date;
 
-public interface Poke {
+public interface Poke extends FacebookResponse {
     IdNameEntity getTo();
     IdNameEntity getFrom();
     Date getCreatedTime();

@@ -21,7 +21,7 @@ import java.util.Date;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Location {
+public interface Location extends FacebookResponse {
     String getId();
     IdNameEntity getFrom();
     PagableList<IdNameEntity> getTags();

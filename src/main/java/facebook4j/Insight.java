@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Insight {
+public interface Insight extends FacebookResponse {
     String getId();
     String getName();
     String getPeriod();

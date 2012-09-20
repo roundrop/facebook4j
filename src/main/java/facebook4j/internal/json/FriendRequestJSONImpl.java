@@ -33,7 +33,7 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class FriendRequestJSONImpl implements FriendRequest, java.io.Serializable {
+/*package*/ final class FriendRequestJSONImpl extends FacebookResponseImpl implements FriendRequest, java.io.Serializable {
     private static final long serialVersionUID = 6531121120616740631L;
     
     private IdNameEntity from;
@@ -43,6 +43,7 @@ import facebook4j.internal.org.json.JSONObject;
     private Boolean unread;
 
     /*package*/FriendRequestJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+        super(res);
         JSONObject json = res.asJSONObject();
         init(json);
         if (conf.isJSONStoreEnabled()) {
@@ -119,6 +120,50 @@ import facebook4j.internal.org.json.JSONObject;
         } catch (JSONException jsone) {
             throw new FacebookException(jsone);
         }
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((createdTime == null) ? 0 : createdTime.hashCode());
+        result = prime * result + ((from == null) ? 0 : from.hashCode());
+        result = prime * result + ((message == null) ? 0 : message.hashCode());
+        result = prime * result + ((to == null) ? 0 : to.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        FriendRequestJSONImpl other = (FriendRequestJSONImpl) obj;
+        if (createdTime == null) {
+            if (other.createdTime != null)
+                return false;
+        } else if (!createdTime.equals(other.createdTime))
+            return false;
+        if (from == null) {
+            if (other.from != null)
+                return false;
+        } else if (!from.equals(other.from))
+            return false;
+        if (message == null) {
+            if (other.message != null)
+                return false;
+        } else if (!message.equals(other.message))
+            return false;
+        if (to == null) {
+            if (other.to != null)
+                return false;
+        } else if (!to.equals(other.to))
+            return false;
+        return true;
     }
 
     @Override

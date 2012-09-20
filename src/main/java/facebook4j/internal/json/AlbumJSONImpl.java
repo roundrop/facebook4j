@@ -37,7 +37,7 @@ import facebook4j.internal.org.json.JSONObject;
  /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class AlbumJSONImpl implements Album, java.io.Serializable {
+/*package*/ final class AlbumJSONImpl extends FacebookResponseImpl implements Album, java.io.Serializable {
     private static final long serialVersionUID = 4708626697445405636L;
 
     private String id;
@@ -57,6 +57,7 @@ import facebook4j.internal.org.json.JSONObject;
     private List<Like> likes;
 
     /*package*/AlbumJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+        super(res);
         JSONObject json = res.asJSONObject();
         init(json);
         if (conf.isJSONStoreEnabled()) {

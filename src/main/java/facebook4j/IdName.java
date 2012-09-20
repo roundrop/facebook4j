@@ -16,21 +16,10 @@
 
 package facebook4j;
 
-import java.util.Date;
-
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Link extends FacebookResponse {
+public interface IdName extends FacebookResponse {
     String getId();
-    IdNameEntity getFrom();
-    String getLink();
     String getName();
-    PagableList<Comment> getComments();
-    String getDescription();
-    String getIcon();
-    String getPicture();
-    String getMessage();
-    Date getCreatedTime();
-    String getType();
 }

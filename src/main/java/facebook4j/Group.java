@@ -22,7 +22,7 @@ import java.util.Date;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Group {
+public interface Group extends FacebookResponse {
     Integer getVersion();
     String getName();
     String getId();
