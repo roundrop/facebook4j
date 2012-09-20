@@ -28,7 +28,7 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class MovieJSONImpl extends CategorizedEntityJSONImpl implements Movie, java.io.Serializable {
+/*package*/ final class MovieJSONImpl extends CategoryJSONImpl implements Movie, java.io.Serializable {
     private static final long serialVersionUID = -2806942430895417046L;
 
     /*package*/MovieJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {

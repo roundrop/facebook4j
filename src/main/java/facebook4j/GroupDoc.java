@@ -22,7 +22,7 @@ import java.util.Date;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface GroupDoc {
+public interface GroupDoc extends FacebookResponse {
     String getId();
     IdNameEntity getFrom();
     String getSubject();

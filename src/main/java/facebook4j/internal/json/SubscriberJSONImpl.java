@@ -28,7 +28,7 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class SubscriberJSONImpl extends IdNameEntityJSONImpl implements Subscriber, java.io.Serializable {
+/*package*/ final class SubscriberJSONImpl extends IdNameJSONImpl implements Subscriber, java.io.Serializable {
     private static final long serialVersionUID = 1783577084248460418L;
 
     /*package*/SubscriberJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {

@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Post {
+public interface Post extends FacebookResponse {
     String getId();
     IdNameEntity getFrom();
     List<IdNameEntity> getTo();

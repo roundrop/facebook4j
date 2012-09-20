@@ -19,6 +19,6 @@ package facebook4j;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Subscriber extends IdNameEntity {
+public interface Subscriber extends IdName {
 
 }

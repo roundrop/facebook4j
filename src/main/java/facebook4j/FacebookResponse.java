@@ -17,27 +17,30 @@
 package facebook4j;
 
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 
 /**
+ * Super interface of Facebook Response data interfaces
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Album extends FacebookResponse {
-    String getId();
-    IdNameEntity getFrom();
-    String getName();
-    String getDescription();
-    String getLocation();
-    URL getLink();
-    String getCoverPhoto();
-    PrivacyType getPrivacy();
-    Integer getCount();
-    String getType();
-    Date getCreatedTime();
-    Date getUpdatedTime();
-    Boolean canUpload();
+public interface FacebookResponse {
+    /**
+     * Returns the introspection of the object if available.
+     * @return introspection of the object
+     */
+    Metadata getMetadata();
     
-    List<Like> getLikes();
-    
+    /**
+     * An interface represents introspection of objects.
+     * @author Ryuji Yamashita - roundrop at gmail.com
+     * @see <a href="https://developers.facebook.com/docs/reference/api/#Introspection">Graph API#Introspection - Facebook Developers</a>
+     */
+    interface Metadata {
+        Metadata.Connections getConnections();
+        
+        interface Connections {
+            URL getURL(String connectionName);
+            List<String> getConnectionNames();
+        }
+    }
 }

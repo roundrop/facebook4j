@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Photo {
+public interface Photo extends FacebookResponse {
     String getId();
     IdNameEntity getFrom();
     List<Tag> getTags();

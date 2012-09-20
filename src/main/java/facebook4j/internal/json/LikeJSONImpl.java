@@ -28,7 +28,7 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class LikeJSONImpl extends CategorizedEntityJSONImpl implements Like, java.io.Serializable {
+/*package*/ final class LikeJSONImpl extends CategoryJSONImpl implements Like, java.io.Serializable {
     private static final long serialVersionUID = 408717416922539206L;
 
     /*package*/LikeJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {

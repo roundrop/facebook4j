@@ -29,7 +29,7 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class AccountJSONImpl implements Account, java.io.Serializable {
+/*package*/ final class AccountJSONImpl extends FacebookResponseImpl implements Account, java.io.Serializable {
     private static final long serialVersionUID = 1311323662169212743L;
 
     private String name;
@@ -38,6 +38,7 @@ import facebook4j.internal.org.json.JSONObject;
     private String id;
 
     /*package*/AccountJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+        super(res);
         JSONObject json = res.asJSONObject();
         init(json);
         if (conf.isJSONStoreEnabled()) {

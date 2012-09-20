@@ -20,5 +20,5 @@ package facebook4j;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Movie extends CategorizedEntity {
+public interface Movie extends Category {
 }

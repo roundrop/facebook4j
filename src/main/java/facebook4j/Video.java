@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Video {
+public interface Video extends FacebookResponse {
     String getId();
     IdNameEntity getFrom();
     List<IdNameEntity> getTags();

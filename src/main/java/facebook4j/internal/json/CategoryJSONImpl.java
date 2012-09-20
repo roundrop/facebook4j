@@ -20,7 +20,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 import java.util.Date;
 
-import facebook4j.CategorizedEntity;
+import facebook4j.Category;
 import facebook4j.FacebookException;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
@@ -29,14 +29,16 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ class CategorizedEntityJSONImpl implements CategorizedEntity {
+/*package*/ class CategoryJSONImpl extends FacebookResponseImpl implements Category {
+    private static final long serialVersionUID = 8273954429202255868L;
 
     protected String id;
     protected String name;
     protected String category;
     protected Date createdTime;
 
-    /*package*/CategorizedEntityJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+    /*package*/CategoryJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+        super(res);
         JSONObject json = res.asJSONObject();
         init(json);
         if (conf.isJSONStoreEnabled()) {
@@ -45,7 +47,7 @@ import facebook4j.internal.org.json.JSONObject;
         }
     }
 
-    /*package*/CategorizedEntityJSONImpl(JSONObject json) throws FacebookException {
+    /*package*/CategoryJSONImpl(JSONObject json) throws FacebookException {
         super();
         init(json);
     }
@@ -70,6 +72,31 @@ import facebook4j.internal.org.json.JSONObject;
 
     public Date getCreatedTime() {
         return createdTime;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CategoryJSONImpl other = (CategoryJSONImpl) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
     }
 
     @Override

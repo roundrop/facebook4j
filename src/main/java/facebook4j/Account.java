@@ -19,7 +19,7 @@ package facebook4j;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Account {
+public interface Account extends FacebookResponse {
     String getName();
     String getAccessToken();
     String getCategory();

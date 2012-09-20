@@ -19,7 +19,7 @@ package facebook4j;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Score {
+public interface Score extends FacebookResponse {
     IdNameEntity getUser();
     Integer getScore();
     Application getApplication();
