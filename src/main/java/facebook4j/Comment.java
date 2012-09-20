@@ -21,7 +21,7 @@ import java.util.Date;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Comment {
+public interface Comment extends FacebookResponse {
     String getId();
     IdNameEntity getFrom();
     String getMessage();

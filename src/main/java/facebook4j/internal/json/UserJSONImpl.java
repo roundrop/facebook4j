@@ -602,6 +602,51 @@ import facebook4j.internal.org.json.JSONObject;
             return description;
         }
 
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + getOuterType().hashCode();
+            result = prime * result
+                    + ((description == null) ? 0 : description.hashCode());
+            result = prime * result + ((with == null) ? 0 : with.hashCode());
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            EducationClassJSONImpl other = (EducationClassJSONImpl) obj;
+            if (!getOuterType().equals(other.getOuterType()))
+                return false;
+            if (description == null) {
+                if (other.description != null)
+                    return false;
+            } else if (!description.equals(other.description))
+                return false;
+            if (with == null) {
+                if (other.with != null)
+                    return false;
+            } else if (!with.equals(other.with))
+                return false;
+            return true;
+        }
+
+        @Override
+        public String toString() {
+            return "EducationClassJSONImpl [with=" + with + ", description="
+                    + description + "]";
+        }
+
+        private UserJSONImpl getOuterType() {
+            return UserJSONImpl.this;
+        }
+
     }
 
     private final class VideoUploadLimitsJSONImpl implements User.VideoUploadLimits, java.io.Serializable {

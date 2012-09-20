@@ -20,5 +20,5 @@ package facebook4j;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Like extends CategorizedEntity {
+public interface Like extends Category {
 }

@@ -31,7 +31,7 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class ScoreJSONImpl implements Score, java.io.Serializable {
+/*package*/ final class ScoreJSONImpl extends FacebookResponseImpl implements Score, java.io.Serializable {
     private static final long serialVersionUID = 4667076189606464769L;
 
     private IdNameEntity user;
@@ -40,6 +40,7 @@ import facebook4j.internal.org.json.JSONObject;
     private String type;
 
     /*package*/ScoreJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+        super(res);
         JSONObject json = res.asJSONObject();
         init(json);
         if (conf.isJSONStoreEnabled()) {
@@ -101,6 +102,50 @@ import facebook4j.internal.org.json.JSONObject;
         } catch (JSONException jsone) {
             throw new FacebookException(jsone);
         }
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((application == null) ? 0 : application.hashCode());
+        result = prime * result + ((score == null) ? 0 : score.hashCode());
+        result = prime * result + ((type == null) ? 0 : type.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ScoreJSONImpl other = (ScoreJSONImpl) obj;
+        if (application == null) {
+            if (other.application != null)
+                return false;
+        } else if (!application.equals(other.application))
+            return false;
+        if (score == null) {
+            if (other.score != null)
+                return false;
+        } else if (!score.equals(other.score))
+            return false;
+        if (type == null) {
+            if (other.type != null)
+                return false;
+        } else if (!type.equals(other.type))
+            return false;
+        if (user == null) {
+            if (other.user != null)
+                return false;
+        } else if (!user.equals(other.user))
+            return false;
+        return true;
     }
 
     @Override

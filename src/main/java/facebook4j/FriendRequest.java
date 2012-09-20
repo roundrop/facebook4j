@@ -18,7 +18,7 @@ package facebook4j;
 
 import java.util.Date;
 
-public interface FriendRequest {
+public interface FriendRequest extends FacebookResponse {
     IdNameEntity getFrom();
     IdNameEntity getTo();
     Date getCreatedTime();

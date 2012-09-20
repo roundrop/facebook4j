@@ -19,14 +19,16 @@ package facebook4j;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import facebook4j.internal.org.json.JSONObject;
-import facebook4j.json.DataObjectFactory;
+import facebook4j.FacebookResponse.Metadata;
+import facebook4j.FacebookResponse.Metadata.Connections;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -82,12 +84,18 @@ public class ReadingTest extends FacebookTestBase {
     @Test
     public void metadata() throws Exception {
         Event event = facebook1.getEvent("331218348435");
-        JSONObject json = new JSONObject(DataObjectFactory.getRawJSON(event));
-        assertThat(json.isNull("metadata"), is(true));
+        assertThat(event.getMetadata(), is(nullValue()));
 
         event = facebook1.getEvent("331218348435", new Reading().metadata());
-        json = new JSONObject(DataObjectFactory.getRawJSON(event));
-        assertThat(json.isNull("metadata"), is(false));
+        Metadata metadata = event.getMetadata();
+        assertThat(metadata, is(notNullValue()));
+        Connections connections = metadata.getConnections();
+        List<String> connectionNames = connections.getConnectionNames();
+        assertThat(connectionNames.size(), is(8));
+        for (String connectionName : connectionNames) {
+            String url = connections.getURL(connectionName).toString();
+            assertThat(url.substring(url.lastIndexOf("/")+1, url.indexOf("?")), is(connectionName));
+        }
     }
     
     @Test

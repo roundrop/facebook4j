@@ -21,7 +21,7 @@ import java.util.Date;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface CategorizedEntity {
+public interface Category extends FacebookResponse {
     String getId();
     String getName();
     String getCategory();

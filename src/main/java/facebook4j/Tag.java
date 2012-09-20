@@ -21,7 +21,7 @@ import java.util.Date;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Tag {
+public interface Tag extends FacebookResponse {
     String getId();
     String getName();
     Integer getOffset();

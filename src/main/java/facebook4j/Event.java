@@ -21,7 +21,7 @@ import java.util.Date;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Event {
+public interface Event extends FacebookResponse {
     String getId();
     IdNameEntity getOwner();
     String getName();
