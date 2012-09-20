@@ -19,13 +19,17 @@ package facebook4j.internal.util;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import facebook4j.internal.org.json.JSONObject;
 
 public class z_F4JInternalStringUtilTest {
 
@@ -52,9 +56,23 @@ public class z_F4JInternalStringUtilTest {
     }
 
     @Test
-    public void formatEventDatetime() {
-        String actual = z_F4JInternalStringUtil.formatEventDatetime(new Date());
-        assertThat(actual.length(), is(19));
+    public void formatISO8601Datetime() throws Exception {
+        Calendar cal = Calendar.getInstance();
+
+        cal.setTimeZone(TimeZone.getTimeZone("JST"));
+        String actual1 = z_F4JInternalStringUtil.formatISO8601Datetime(cal);
+        System.out.println(actual1);
+        assertThat(actual1.length(), is(24));
+
+        cal.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String actual2 = z_F4JInternalStringUtil.formatISO8601Datetime(cal);
+        System.out.println(actual2);
+        assertThat(actual2.length(), is(24));
+        
+        JSONObject json = new JSONObject("{\"datetime1\": \"" + actual1 + "\", \"datetime2\": \"" + actual2 + "\"}");
+        Date d1 = z_F4JInternalParseUtil.getISO8601Datetime("datetime1", json);
+        Date d2 = z_F4JInternalParseUtil.getISO8601Datetime("datetime2", json);
+        assertThat(d1, is(d2));
     }
 
 }

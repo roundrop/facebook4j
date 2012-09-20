@@ -30,7 +30,7 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class DomainJSONImpl extends IdNameEntityJSONImpl implements Domain, java.io.Serializable {
+/*package*/ final class DomainJSONImpl extends IdNameJSONImpl implements Domain, java.io.Serializable {
     private static final long serialVersionUID = 3035743532170128485L;
 
     /*package*/DomainJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
@@ -61,6 +61,11 @@ import facebook4j.internal.org.json.JSONObject;
         } catch (JSONException jsone) {
             throw new FacebookException(jsone);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "DomainJSONImpl [id=" + id + ", name=" + name + "]";
     }
 
 }

@@ -28,40 +28,15 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class FriendJSONImpl implements Friend, java.io.Serializable {
+/*package*/ final class FriendJSONImpl extends IdNameJSONImpl implements Friend, java.io.Serializable {
     private static final long serialVersionUID = 8598755893215970713L;
 
-    private String name;
-    private String id;
-    
     /*package*/FriendJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
-        JSONObject json = res.asJSONObject();
-        init(json);
-        if (conf.isJSONStoreEnabled()) {
-            DataObjectFactoryUtil.clearThreadLocalMap();
-            DataObjectFactoryUtil.registerJSONObject(this, json);
-        }
+        super(res, conf);
     }
 
     /*package*/FriendJSONImpl(JSONObject json) throws FacebookException {
-        super();
-        init(json);
-    }
-
-    private void init(JSONObject json) throws FacebookException {
-        try {
-            name = json.getString("name");
-            id = json.getString("id");
-        } catch (JSONException jsone) {
-            throw new FacebookException(jsone);
-        }
-    }
-
-    public String getName() {
-        return name;
-    }
-    public String getId() {
-        return id;
+        super(json);
     }
 
     /*package*/
@@ -85,37 +60,6 @@ import facebook4j.internal.org.json.JSONObject;
         } catch (JSONException jsone) {
             throw new FacebookException(jsone);
         }
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        FriendJSONImpl other = (FriendJSONImpl) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        return true;
     }
 
     @Override

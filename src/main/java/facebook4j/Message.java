@@ -19,7 +19,7 @@ package facebook4j;
 import java.util.Date;
 import java.util.List;
 
-public interface Message {
+public interface Message extends FacebookResponse {
     String getId();
     IdNameEntity getFrom();
     List<IdNameEntity> getTo();

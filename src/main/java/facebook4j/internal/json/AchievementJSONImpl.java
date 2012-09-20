@@ -38,7 +38,7 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class AchievementJSONImpl implements Achievement, java.io.Serializable {
+/*package*/ final class AchievementJSONImpl extends FacebookResponseImpl implements Achievement, java.io.Serializable {
     private static final long serialVersionUID = -4720957321727049130L;
     
     private String id;
@@ -53,6 +53,7 @@ import facebook4j.internal.org.json.JSONObject;
     private PagableList<Comment> comments;
 
     /*package*/AchievementJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+        super(res);
         JSONObject json = res.asJSONObject();
         init(json);
         if (conf.isJSONStoreEnabled()) {
@@ -177,6 +178,31 @@ import facebook4j.internal.org.json.JSONObject;
     }
 
     @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AchievementJSONImpl other = (AchievementJSONImpl) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "AchievementJSONImpl [id=" + id + ", from=" + from
                 + ", startTime=" + startTime + ", endTime=" + endTime
@@ -220,9 +246,41 @@ import facebook4j.internal.org.json.JSONObject;
         }
 
         @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + getOuterType().hashCode();
+            result = prime * result + ((id == null) ? 0 : id.hashCode());
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            AchievedObjectJSONImpl other = (AchievedObjectJSONImpl) obj;
+            if (!getOuterType().equals(other.getOuterType()))
+                return false;
+            if (id == null) {
+                if (other.id != null)
+                    return false;
+            } else if (!id.equals(other.id))
+                return false;
+            return true;
+        }
+
+        @Override
         public String toString() {
             return "AchievedObjectJSONImpl [id=" + id + ", url=" + url
                     + ", type=" + type + ", title=" + title + "]";
+        }
+
+        private AchievementJSONImpl getOuterType() {
+            return AchievementJSONImpl.this;
         }
     }
 }

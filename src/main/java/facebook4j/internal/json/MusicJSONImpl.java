@@ -29,7 +29,7 @@ import facebook4j.internal.org.json.JSONObject;
  * @author Ryuji Yamashita - roundrop at gmail.com
  *
  */
-/*package*/ final class MusicJSONImpl extends CategorizedEntityJSONImpl implements Music, java.io.Serializable {
+/*package*/ final class MusicJSONImpl extends CategoryJSONImpl implements Music, java.io.Serializable {
     private static final long serialVersionUID = -4989145210934063277L;
 
     /*package*/ MusicJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {

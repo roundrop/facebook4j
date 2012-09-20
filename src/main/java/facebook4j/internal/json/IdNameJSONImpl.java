@@ -17,7 +17,7 @@
 package facebook4j.internal.json;
 
 import facebook4j.FacebookException;
-import facebook4j.IdNameEntity;
+import facebook4j.IdName;
 import facebook4j.ResponseList;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
@@ -28,13 +28,14 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ class IdNameEntityJSONImpl implements IdNameEntity, java.io.Serializable {
-    private static final long serialVersionUID = -9152205822176968747L;
+/*package*/ class IdNameJSONImpl extends FacebookResponseImpl implements IdName, java.io.Serializable {
+    private static final long serialVersionUID = -1724969319460349501L;
 
     protected String id;
     protected String name;
     
-    /*package*/IdNameEntityJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+    /*package*/IdNameJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+        super(res);
         JSONObject json = res.asJSONObject();
         init(json);
         if (conf.isJSONStoreEnabled()) {
@@ -43,7 +44,7 @@ import facebook4j.internal.org.json.JSONObject;
         }
     }
     
-    /*package*/IdNameEntityJSONImpl(JSONObject json) throws FacebookException {
+    /*package*/IdNameJSONImpl(JSONObject json) throws FacebookException {
         super();
         init(json);
     }
@@ -65,7 +66,7 @@ import facebook4j.internal.org.json.JSONObject;
     }
 
     /*package*/
-    static ResponseList<IdNameEntity> createIdNameEntityList(HttpResponse res, Configuration conf) throws FacebookException {
+    static ResponseList<IdName> createIdNameList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 DataObjectFactoryUtil.clearThreadLocalMap();
@@ -73,15 +74,15 @@ import facebook4j.internal.org.json.JSONObject;
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
             int size = list.length();
-            ResponseList<IdNameEntity> entities = new ResponseListImpl<IdNameEntity>(size, json);
+            ResponseList<IdName> idNames = new ResponseListImpl<IdName>(size, json);
             for (int i = 0; i < size; i++) {
-                IdNameEntity entity = new IdNameEntityJSONImpl(list.getJSONObject(i));
-                entities.add(entity);
+                IdName entity = new IdNameJSONImpl(list.getJSONObject(i));
+                idNames.add(entity);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(entities, json);
+                DataObjectFactoryUtil.registerJSONObject(idNames, json);
             }
-            return entities;
+            return idNames;
         } catch (JSONException jsone) {
             throw new FacebookException(jsone);
         }
@@ -103,7 +104,7 @@ import facebook4j.internal.org.json.JSONObject;
             return false;
         if (getClass() != obj.getClass())
             return false;
-        IdNameEntityJSONImpl other = (IdNameEntityJSONImpl) obj;
+        IdNameJSONImpl other = (IdNameJSONImpl) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -114,7 +115,7 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "IdNameEntityJSONImpl [name=" + name + ", id=" + id + "]";
+        return "IdNameJSONImpl [name=" + name + ", id=" + id + "]";
     }
 
 }

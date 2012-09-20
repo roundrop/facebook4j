@@ -21,7 +21,7 @@ import java.util.Date;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Checkin {
+public interface Checkin extends FacebookResponse {
     String getId();
     IdNameEntity getFrom();
     PagableList<IdNameEntity> getTags();
