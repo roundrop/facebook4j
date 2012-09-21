@@ -36,10 +36,15 @@ public class AccessToken implements java.io.Serializable {
     }
 
     public AccessToken(String string) {
-        this.responseStr = string.split("&");
-        this.token = getParameter("access_token");
-        if (this.responseStr.length > 1) {
-            this.expires = Long.valueOf(getParameter("expires"));
+        if (string.contains("access_token=")) {
+            this.responseStr = string.split("&");
+            this.token = getParameter("access_token");
+            if (this.responseStr.length > 1) {
+                this.expires = Long.valueOf(getParameter("expires"));
+            }
+        } else {
+            this.token = string;
+            this.expires = null;
         }
     }
 
