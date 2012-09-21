@@ -30,8 +30,10 @@ import facebook4j.Facebook;
 import facebook4j.FacebookFactory;
 import facebook4j.FacebookTestBase;
 import facebook4j.TestUser;
+import facebook4j.conf.Configuration;
 import facebook4j.conf.ConfigurationBuilder;
 import facebook4j.internal.http.HttpClientImpl;
+import facebook4j.internal.http.HttpClientWrapper;
 import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.http.HttpRequest;
 import facebook4j.internal.http.HttpResponse;
@@ -53,31 +55,27 @@ public class OAuthTest extends FacebookTestBase {
         Facebook1.setOAuthAppId(appId, appSecret);
         Facebook Facebook2 = new FacebookFactory().getInstance();
         Facebook2.setOAuthAppId(appId, appSecret);
-        assertTrue(Facebook1.equals(Facebook2));
-        assertEquals(Facebook1, Facebook2);
+        assertThat(Facebook1, is(Facebook2));
     }
 
     @Test
     public void OAuth() throws Exception {
         ConfigurationBuilder build = new ConfigurationBuilder();
-        String oAuthAccessToken = p.getProperty("testuser1.oauth.accessToken");
-        String oAuthConsumerKey = p.getProperty("oauth.appId");
-        String oAuthConsumerSecret = p.getProperty("oauth.appSecret");
+        String oAuthAccessToken = p.getProperty("real.oauth.accessToken");
+        String oAuthAppId = p.getProperty("real.oauth.appId");
+        String oAuthAppSecret = p.getProperty("real.oauth.appSecret");
         build.setOAuthAccessToken(oAuthAccessToken);
-        build.setOAuthAppId(oAuthConsumerKey);
-        build.setOAuthAppSecret(oAuthConsumerSecret);
+        build.setOAuthAppId(oAuthAppId);
+        build.setOAuthAppSecret(oAuthAppSecret);
         OAuthAuthorization auth = new OAuthAuthorization(build.build());
         Facebook fb = new FacebookFactory().getInstance(auth);
         fb.getId();
     }
 
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void illegalStatus() throws Exception {
-        try {
-            new FacebookFactory().getInstance().getOAuthAccessToken();
-            fail("should throw IllegalStateException since AppID hasn't been acquired.");
-        } catch (IllegalStateException ignore) {
-        }
+        new FacebookFactory().getInstance().getOAuthAccessToken();
+        fail("should throw IllegalStateException since AppID hasn't been acquired.");
     }
 
     @Test
@@ -183,28 +181,49 @@ public class OAuthTest extends FacebookTestBase {
     }
 
     @Test
-    public void accessToken() {
-        AccessToken at = new AccessToken("access_token=6377362-kW0YV1ymaqEUCSHP29ux169mDeA4kQfhEuqkdvHk&expires=123456789012345");
-        assertEquals("6377362-kW0YV1ymaqEUCSHP29ux169mDeA4kQfhEuqkdvHk", at.getToken());
-        assertEquals(Long.valueOf(123456789012345L), at.getExpires());
+    public void accessToken() throws Exception {
+        ConfigurationBuilder build = new ConfigurationBuilder();
+        build.setOAuthAppId(appId);
+        build.setOAuthAppSecret(appSecret);
+        Configuration configuration = build.build();
+        HttpClientWrapper http = new HttpClientWrapper(configuration);
+        HttpResponse res = http.get(configuration.getOAuthAccessTokenURL() +
+                                    "?client_id=" + appId +
+                                    "&client_secret=" + appSecret +
+                                    "&grant_type=client_credentials");
+        AccessToken at = new AccessToken(res);
+        assertThat(at.getToken(), is(notNullValue()));
+        assertThat(at.getExpires(), is(nullValue()));
+
+        at = new AccessToken("6377362-kW0YV1ymaqEUCSHP29ux169mDeA4kQfhEuqkdvHk", 123456789012345L);
+        assertThat(at.getToken(), is("6377362-kW0YV1ymaqEUCSHP29ux169mDeA4kQfhEuqkdvHk"));
+        assertThat(at.getExpires(), is(123456789012345L));
+
+        at = new AccessToken("6377362-kW0YV1ymaqEUCSHP29ux169mDeA4kQfhEuqkdvHk");
+        assertThat(at.getToken(), is("6377362-kW0YV1ymaqEUCSHP29ux169mDeA4kQfhEuqkdvHk"));
+        assertThat(at.getExpires(), is(nullValue()));
+
+        at = new AccessToken("access_token=6377362-kW0YV1ymaqEUCSHP29ux169mDeA4kQfhEuqkdvHk&expires=123456789012345");
+        assertThat(at.getToken(), is("6377362-kW0YV1ymaqEUCSHP29ux169mDeA4kQfhEuqkdvHk"));
+        assertThat(at.getExpires(), is(123456789012345L));
     }
 
     @Test
     public void encodeParameter() throws Exception {
         //http://wiki.oauth.net/TestCases
-        assertEquals("abcABC123", HttpParameter.encode("abcABC123"));
-        assertEquals("-._~", HttpParameter.encode("-._~"));
-        assertEquals("%25", HttpParameter.encode("%"));
-        assertEquals("%2B", HttpParameter.encode("+"));
-        assertEquals("%26%3D%2A", HttpParameter.encode("&=*"));
-        assertEquals("%0A", HttpParameter.encode("\n"));
-        assertEquals("%20", HttpParameter.encode("\u0020"));
-        assertEquals("%7F", HttpParameter.encode("\u007F"));
-        assertEquals("%C2%80", HttpParameter.encode("\u0080"));
-        assertEquals("%E3%80%81", HttpParameter.encode("\u3001"));
+        assertThat(HttpParameter.encode("abcABC123"), is("abcABC123"));
+        assertThat(HttpParameter.encode("-._~"), is("-._~"));
+        assertThat(HttpParameter.encode("%"), is("%25"));
+        assertThat(HttpParameter.encode("+"), is("%2B"));
+        assertThat(HttpParameter.encode("&=*"), is("%26%3D%2A"));
+        assertThat(HttpParameter.encode("\n"), is("%0A"));
+        assertThat(HttpParameter.encode("\u0020"), is("%20"));
+        assertThat(HttpParameter.encode("\u007F"), is("%7F"));
+        assertThat(HttpParameter.encode("\u0080"), is("%C2%80"));
+        assertThat(HttpParameter.encode("\u3001"), is("%E3%80%81"));
 
         String unreserved = "abcdefghijklmnopqrstuvwzyxABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~";
-        assertEquals(unreserved, HttpParameter.encode(unreserved));
+        assertThat(HttpParameter.encode(unreserved), is(unreserved));
     }
 
 }
