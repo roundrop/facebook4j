@@ -42,7 +42,15 @@ public class PostUpdate implements java.io.Serializable {
     private String tags;
     private PrivacyBean privacy;
     private String objectAttachment;
+    
+    public PostUpdate(String message) {
+        this.message = message;
+    }
 
+    public PostUpdate(URL link) {
+        this.link = link;
+    }
+    
     // for post group feed
     public PostUpdate(String message, URL link, URL picture, String name,
             String caption, String description, List<Action> actions) {
@@ -70,6 +78,149 @@ public class PostUpdate implements java.io.Serializable {
         this.tags = tags;
         this.privacy = privacy;
         this.objectAttachment = objectAttachment;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
+    public PostUpdate message(String message) {
+        setMessage(message);
+        return this;
+    }
+
+    public URL getLink() {
+        return link;
+    }
+
+    public void setLink(URL link) {
+        this.link = link;
+    }
+    
+    public PostUpdate link(URL link) {
+        setLink(link);
+        return this;
+    }
+
+    public URL getPicture() {
+        return picture;
+    }
+
+    public void setPicture(URL picture) {
+        this.picture = picture;
+    }
+    
+    public PostUpdate picture(URL picture) {
+        setPicture(picture);
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public PostUpdate name(String name) {
+        setName(name);
+        return this;
+    }
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+    
+    public PostUpdate caption(String caption) {
+        setCaption(caption);
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public PostUpdate description(String description) {
+        setDescription(description);
+        return this;
+    }
+
+    public List<Post.Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(List<Post.Action> actions) {
+        this.actions = actions;
+    }
+    
+    public PostUpdate actions(List<Post.Action> actions) {
+        setActions(actions);
+        return this;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+    
+    public PostUpdate place(String place) {
+        setPlace(place);
+        return this;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+    
+    public PostUpdate tags(String tags) {
+        setTags(tags);
+        return this;
+    }
+
+    public PrivacyBean getPrivacy() {
+        return privacy;
+    }
+
+    public void setPrivacy(PrivacyBean privacy) {
+        this.privacy = privacy;
+    }
+    
+    public PostUpdate privacy(PrivacyBean privacy) {
+        setPrivacy(privacy);
+        return this;
+    }
+
+    public String getObjectAttachment() {
+        return objectAttachment;
+    }
+
+    public void setObjectAttachment(String objectAttachment) {
+        this.objectAttachment = objectAttachment;
+    }
+    
+    public PostUpdate objectAttachment(String objectAttachment) {
+        setObjectAttachment(objectAttachment);
+        return this;
     }
 
     /*package*/ HttpParameter[] asHttpParameterArray() {
@@ -109,6 +260,104 @@ public class PostUpdate implements java.io.Serializable {
             params.add(new HttpParameter("object_attachment", objectAttachment));
         }
         return params.toArray(new HttpParameter[params.size()]);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((actions == null) ? 0 : actions.hashCode());
+        result = prime * result + ((caption == null) ? 0 : caption.hashCode());
+        result = prime * result
+                + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + ((link == null) ? 0 : link.hashCode());
+        result = prime * result + ((message == null) ? 0 : message.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime
+                * result
+                + ((objectAttachment == null) ? 0 : objectAttachment.hashCode());
+        result = prime * result + ((picture == null) ? 0 : picture.hashCode());
+        result = prime * result + ((place == null) ? 0 : place.hashCode());
+        result = prime * result + ((privacy == null) ? 0 : privacy.hashCode());
+        result = prime * result + ((tags == null) ? 0 : tags.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PostUpdate other = (PostUpdate) obj;
+        if (actions == null) {
+            if (other.actions != null)
+                return false;
+        } else if (!actions.equals(other.actions))
+            return false;
+        if (caption == null) {
+            if (other.caption != null)
+                return false;
+        } else if (!caption.equals(other.caption))
+            return false;
+        if (description == null) {
+            if (other.description != null)
+                return false;
+        } else if (!description.equals(other.description))
+            return false;
+        if (link == null) {
+            if (other.link != null)
+                return false;
+        } else if (!link.equals(other.link))
+            return false;
+        if (message == null) {
+            if (other.message != null)
+                return false;
+        } else if (!message.equals(other.message))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (objectAttachment == null) {
+            if (other.objectAttachment != null)
+                return false;
+        } else if (!objectAttachment.equals(other.objectAttachment))
+            return false;
+        if (picture == null) {
+            if (other.picture != null)
+                return false;
+        } else if (!picture.equals(other.picture))
+            return false;
+        if (place == null) {
+            if (other.place != null)
+                return false;
+        } else if (!place.equals(other.place))
+            return false;
+        if (privacy == null) {
+            if (other.privacy != null)
+                return false;
+        } else if (!privacy.equals(other.privacy))
+            return false;
+        if (tags == null) {
+            if (other.tags != null)
+                return false;
+        } else if (!tags.equals(other.tags))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "PostUpdate [message=" + message + ", link=" + link
+                + ", picture=" + picture + ", name=" + name + ", caption="
+                + caption + ", description=" + description + ", actions="
+                + actions + ", place=" + place + ", tags=" + tags
+                + ", privacy=" + privacy + ", objectAttachment="
+                + objectAttachment + "]";
     }
 
 }
