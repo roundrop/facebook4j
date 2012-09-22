@@ -47,7 +47,33 @@ public class PostMethodsTest extends FacebookTestBase {
     @After
     public void tearDown() throws Exception {
     }
-
+    
+    @Test
+    public void postStatusMessage() throws Exception {
+        String message = "postStatusMessage() test";
+        String postId = facebook1.postStatusMessage(message);
+        assertThat(postId, is(notNullValue()));
+        
+        boolean deleteResult = facebook1.deletePost(postId);
+        assertThat(deleteResult, is(true));
+    }
+    
+    @Test
+    public void postLink() throws Exception {
+        URL link = new URL("http://facebook4j.org");
+        String postId = facebook1.postLink(link);
+        assertThat(postId, is(notNullValue()));
+        
+        boolean deleteResult = facebook1.deletePost(postId);
+        assertThat(deleteResult, is(true));
+        
+        postId = facebook1.postLink(link, "A Java library for the Facebook Graph API");
+        assertThat(postId, is(notNullValue()));
+        
+        deleteResult = facebook1.deletePost(postId);
+        assertThat(deleteResult, is(true));
+    }
+    
     @Test
     public void postFeed_byConstructor() throws Exception {
         String message = "test message";
@@ -68,6 +94,9 @@ public class PostMethodsTest extends FacebookTestBase {
         Post post = facebook1.getPost(postId);
         assertThat(post, is(notNullValue()));
         System.out.println(post);
+
+        boolean deleteResult = facebook1.deletePost(postId);
+        assertThat(deleteResult, is(true));
     }
 
     @Test
@@ -79,6 +108,9 @@ public class PostMethodsTest extends FacebookTestBase {
                             .description("Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library.");
         String postId = facebook1.postFeed(post);
         assertThat(postId, is(notNullValue()));
+        
+        boolean deleteResult = facebook1.deletePost(postId);
+        assertThat(deleteResult, is(true));
     }
     
 }
