@@ -47,6 +47,66 @@ public final class CheckinCreate implements java.io.Serializable {
         this.picture = picture;
     }
 
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+    
+    public CheckinCreate tags(String tags) {
+        setTags(tags);
+        return this;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
+    public CheckinCreate message(String message) {
+        setMessage(message);
+        return this;
+    }
+
+    public URL getLink() {
+        return link;
+    }
+
+    public void setLink(URL link) {
+        this.link = link;
+    }
+    
+    public CheckinCreate link(URL link) {
+        setLink(link);
+        return this;
+    }
+
+    public URL getPicture() {
+        return picture;
+    }
+
+    public void setPicture(URL picture) {
+        this.picture = picture;
+    }
+    
+    public CheckinCreate picture(URL picture) {
+        setPicture(picture);
+        return this;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public GeoLocation getCoordinates() {
+        return coordinates;
+    }
+
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         params.add(new HttpParameter("place", place));
@@ -64,6 +124,69 @@ public final class CheckinCreate implements java.io.Serializable {
             params.add(new HttpParameter("picture", picture.toString()));
         }
         return params.toArray(new HttpParameter[params.size()]);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((coordinates == null) ? 0 : coordinates.hashCode());
+        result = prime * result + ((link == null) ? 0 : link.hashCode());
+        result = prime * result + ((message == null) ? 0 : message.hashCode());
+        result = prime * result + ((picture == null) ? 0 : picture.hashCode());
+        result = prime * result + ((place == null) ? 0 : place.hashCode());
+        result = prime * result + ((tags == null) ? 0 : tags.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CheckinCreate other = (CheckinCreate) obj;
+        if (coordinates == null) {
+            if (other.coordinates != null)
+                return false;
+        } else if (!coordinates.equals(other.coordinates))
+            return false;
+        if (link == null) {
+            if (other.link != null)
+                return false;
+        } else if (!link.equals(other.link))
+            return false;
+        if (message == null) {
+            if (other.message != null)
+                return false;
+        } else if (!message.equals(other.message))
+            return false;
+        if (picture == null) {
+            if (other.picture != null)
+                return false;
+        } else if (!picture.equals(other.picture))
+            return false;
+        if (place == null) {
+            if (other.place != null)
+                return false;
+        } else if (!place.equals(other.place))
+            return false;
+        if (tags == null) {
+            if (other.tags != null)
+                return false;
+        } else if (!tags.equals(other.tags))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "CheckinCreate [place=" + place + ", coordinates=" + coordinates
+                + ", tags=" + tags + ", message=" + message + ", link=" + link
+                + ", picture=" + picture + "]";
     }
 
 }

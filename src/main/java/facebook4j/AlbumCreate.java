@@ -51,6 +51,36 @@ public final class AlbumCreate implements java.io.Serializable {
         this.privacy = privacy;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
+    public AlbumCreate message(String message) {
+        setMessage(message);
+        return this;
+    }
+
+    public PrivacyBean getPrivacy() {
+        return privacy;
+    }
+
+    public void setPrivacy(PrivacyBean privacy) {
+        this.privacy = privacy;
+    }
+    
+    public AlbumCreate privacy(PrivacyBean privacy) {
+        setPrivacy(privacy);
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         params.add(new HttpParameter("name", name));
@@ -61,6 +91,49 @@ public final class AlbumCreate implements java.io.Serializable {
             params.add(new HttpParameter("privacy", privacy.asJSONString()));
         }
         return params.toArray(new HttpParameter[params.size()]);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((message == null) ? 0 : message.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((privacy == null) ? 0 : privacy.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AlbumCreate other = (AlbumCreate) obj;
+        if (message == null) {
+            if (other.message != null)
+                return false;
+        } else if (!message.equals(other.message))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (privacy == null) {
+            if (other.privacy != null)
+                return false;
+        } else if (!privacy.equals(other.privacy))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "AlbumCreate [name=" + name + ", message=" + message
+                + ", privacy=" + privacy + "]";
     }
 
 }
