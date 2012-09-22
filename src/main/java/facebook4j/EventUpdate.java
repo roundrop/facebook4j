@@ -54,6 +54,79 @@ public class EventUpdate implements java.io.Serializable {
         this.privacyType = privacyType;
     }
     
+    public Calendar getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Calendar endTime) {
+        this.endTime = endTime;
+    }
+    
+    public EventUpdate endTime(Calendar endTime) {
+        setEndTime(endTime);
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public EventUpdate description(String description) {
+        setDescription(description);
+        return this;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+    
+    public EventUpdate location(String location) {
+        setLocation(location);
+        return this;
+    }
+
+    public String getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(String locationId) {
+        this.locationId = locationId;
+    }
+    
+    public EventUpdate locationId(String locationId) {
+        setLocationId(locationId);
+        return this;
+    }
+
+    public EventPrivacyType getPrivacyType() {
+        return privacyType;
+    }
+
+    public void setPrivacyType(EventPrivacyType privacyType) {
+        this.privacyType = privacyType;
+    }
+    
+    public EventUpdate privacyType(EventPrivacyType privacyType) {
+        setPrivacyType(privacyType);
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Calendar getStartTime() {
+        return startTime;
+    }
+
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         params.add(new HttpParameter("name", name));
@@ -74,6 +147,77 @@ public class EventUpdate implements java.io.Serializable {
             params.add(new HttpParameter("privacy_type", privacyType.toString()));
         }
         return params.toArray(new HttpParameter[params.size()]);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
+        result = prime * result
+                + ((location == null) ? 0 : location.hashCode());
+        result = prime * result
+                + ((locationId == null) ? 0 : locationId.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result
+                + ((privacyType == null) ? 0 : privacyType.hashCode());
+        result = prime * result
+                + ((startTime == null) ? 0 : startTime.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        EventUpdate other = (EventUpdate) obj;
+        if (description == null) {
+            if (other.description != null)
+                return false;
+        } else if (!description.equals(other.description))
+            return false;
+        if (endTime == null) {
+            if (other.endTime != null)
+                return false;
+        } else if (!endTime.equals(other.endTime))
+            return false;
+        if (location == null) {
+            if (other.location != null)
+                return false;
+        } else if (!location.equals(other.location))
+            return false;
+        if (locationId == null) {
+            if (other.locationId != null)
+                return false;
+        } else if (!locationId.equals(other.locationId))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (privacyType != other.privacyType)
+            return false;
+        if (startTime == null) {
+            if (other.startTime != null)
+                return false;
+        } else if (!startTime.equals(other.startTime))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "EventUpdate [name=" + name + ", startTime=" + startTime
+                + ", endTime=" + endTime + ", description=" + description
+                + ", location=" + location + ", locationId=" + locationId
+                + ", privacyType=" + privacyType + "]";
     }
 
 }
