@@ -12,7 +12,7 @@ Java 5 or later
       <version>[0.1,)</version>
     </dependency>
 ### Download
-Download jar file from [here](http://facebook4j.org/download/facebook4j-core-0.1.3.jar).  
+Download jar file from [here](http://facebook4j.org/download/facebook4j-core-latest-jar.php).  
 
 ## How To Use
 Create a standard properties file named "facebook4j.properties". Place it to either the current directory, root of the classpath directory. 
@@ -49,6 +49,7 @@ Code examples of Server-Side Authentication and post status message implementati
 * [Status message](https://developers.facebook.com/docs/reference/api/status/ "Status message")
 * [Video](https://developers.facebook.com/docs/reference/api/video/ "Video")
 * [Search](https://developers.facebook.com/docs/reference/api/#searching)
+* [FQL](https://developers.facebook.com/docs/reference/fql/)
 
 ## NOT Supported yet
 * [Application](https://developers.facebook.com/docs/reference/api/application/ "Application")
