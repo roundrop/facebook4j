@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import facebook4j.internal.org.json.JSONObject;
+
 public class SearchMethodsTest extends FacebookTestBase {
 
     @BeforeClass
@@ -98,6 +100,21 @@ public class SearchMethodsTest extends FacebookTestBase {
         ResponseList<Location> locations = real.searchLocations(placeId);
         for (Location location : locations) {
             System.out.println(location);
+        }
+    }
+    
+    @Test
+    public void search() throws Exception {
+        ResponseList<JSONObject> results = facebook1.search("orange");
+        System.out.println(results);
+        for (JSONObject result : results) {
+            System.out.println(result);
+        }
+        
+        results = facebook1.search("orange", new Reading().until("yesterday"));
+        System.out.println(results);
+        for (JSONObject result : results) {
+            System.out.println(result);
         }
     }
 

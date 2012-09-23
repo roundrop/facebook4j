@@ -27,6 +27,7 @@ import facebook4j.Post;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
 import facebook4j.User;
+import facebook4j.internal.org.json.JSONObject;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -211,5 +212,22 @@ public interface SearchMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/#searching">Graph API#searching - Facebook Developers</a>
      */
     ResponseList<Location> searchLocations(String placeId, Reading reading) throws FacebookException;
+
+    /**
+     * Searches every type all public objects.
+     * @param query the search condition
+     * @return objects
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    ResponseList<JSONObject> search(String query) throws FacebookException;
+
+    /**
+     * Searches every type all public objects.
+     * @param query the search condition
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return objects
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    ResponseList<JSONObject> search(String query, Reading reading) throws FacebookException;
 
 }
