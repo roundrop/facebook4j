@@ -1,3 +1,19 @@
+/*
+ * Copyright 2012 Ryuji Yamashita
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package facebook4j.json;
 
 import java.lang.reflect.Constructor;
@@ -130,7 +146,6 @@ public final class DataObjectFactory {
      *
      * @param obj
      * @return raw JSON
-     * @since facebook4J 2.1.7
      */
     public static String getRawJSON(Object obj) {
         Object json = rawJsonMap.get().get(obj);
@@ -543,8 +558,6 @@ public final class DataObjectFactory {
     /**
      * clear raw JSON forms associated with the current thread.<br>
      * Currently this method is called indirectly by facebook4j.internal.util.DataObjectFactoryUtil, and should be called directly once *JSONImpl classes are migrated to facebook4j.json.* package.
-     *
-     * @since facebook4J 2.1.7
      */
     static void clearThreadLocalMap() {
         rawJsonMap.get().clear();
@@ -553,8 +566,6 @@ public final class DataObjectFactory {
     /**
      * associate a raw JSON form to the current thread<br>
      * Currently this method is called indirectly by facebook4j.internal.util.DataObjectFactoryUtil, and should be called directly once *JSONImpl classes are migrated to facebook4j.json.* package.
-     *
-     * @since facebook4J 2.1.7
      */
     static <T> T registerJSONObject(T key, Object json) {
         rawJsonMap.get().put(key, json);
