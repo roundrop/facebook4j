@@ -80,6 +80,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return url.toString();
     }
 
+    private String buildSearchURL(String query, String objectType, Reading reading) {
+        StringBuilder url = new StringBuilder()
+                            .append(buildURL("search"))
+                            .append(objectType == null ? "" : "?type=" + objectType)
+                            .append(query == null ? "" : objectType == null ? "?q=" + query : "&q=" + query)
+                            .append(reading == null ? "" : "&" + reading.getQuery());
+        return url.toString();
+    }
+
     /* User Methods */
     
     public User getMe() throws FacebookException {
@@ -1758,15 +1767,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     /* Search Methods */
     
-    private String buildSearchURL(String query, String objectType, Reading reading) {
-        StringBuilder url = new StringBuilder();
-        url.append(buildURL("search"))
-           .append("?type=" + objectType)
-           .append(query == null ? "" : "&q=" + query)
-           .append(reading == null ? "" : "&" + reading.getQuery());
-        return url.toString();
-    }
-
     public ResponseList<Post> searchPosts(String query) throws FacebookException {
         return searchPosts(query, null);
     }
@@ -1845,6 +1845,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         String url = buildSearchURL(null, "location", reading)
                         + "&place=" + placeId;
         return factory.createLocationList(get(url));
+    }
+
+    public ResponseList<JSONObject> search(String query) throws FacebookException {
+        return search(query, null);
+    }
+
+    public ResponseList<JSONObject> search(String query, Reading reading) throws FacebookException {
+        String url = buildSearchURL(query, null, reading);
+        return factory.createJSONObjectList(get(url));
     }
 
     /* FQL Methods */

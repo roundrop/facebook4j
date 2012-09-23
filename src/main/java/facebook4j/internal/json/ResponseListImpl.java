@@ -18,6 +18,10 @@ package facebook4j.internal.json;
 
 import facebook4j.FacebookException;
 import facebook4j.ResponseList;
+import facebook4j.conf.Configuration;
+import facebook4j.internal.http.HttpResponse;
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
 /**
@@ -32,6 +36,28 @@ import facebook4j.internal.org.json.JSONObject;
 
     /*package*/ResponseListImpl(int size, JSONObject json) throws FacebookException {
         super(size, json);
+    }
+
+    /*package*/
+    static ResponseList<JSONObject> createJSONObjectList(HttpResponse res, Configuration conf) throws FacebookException {
+        try {
+            if (conf.isJSONStoreEnabled()) {
+                DataObjectFactoryUtil.clearThreadLocalMap();
+            }
+            JSONObject json = res.asJSONObject();
+            JSONArray jsonArray = json.getJSONArray("data");
+            int size = jsonArray.length();
+            ResponseList<JSONObject> results = new ResponseListImpl<JSONObject>(size, json);
+            for (int i = 0; i < size; i++) {
+                results.add(jsonArray.getJSONObject(i));
+            }
+            if (conf.isJSONStoreEnabled()) {
+                DataObjectFactoryUtil.registerJSONObject(results, jsonArray);
+            }
+            return results;
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone);
+        }
     }
 
 }
