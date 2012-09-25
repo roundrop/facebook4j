@@ -1458,24 +1458,30 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createTagList(get(buildURL(photoId, reading)));
     }
 
-    public boolean addTagToPhoto(String photoId, TagUpdate tagUpdate, String toUserId) throws FacebookException {
+    public boolean addTagToPhoto(String photoId, String toUserId) throws FacebookException {
         ensureAuthorizationEnabled();
-        HttpResponse res = post(buildURL(photoId, "tags"), HttpParameter.merge(
-                            new HttpParameter[]{new HttpParameter("to", toUserId)},
-                            tagUpdate.asHttpParameterArray()));
+        HttpResponse res = post(buildURL(photoId, "tags"), new HttpParameter[]{new HttpParameter("to", toUserId)});
+        return Boolean.valueOf(res.asString().trim());
+    }
+    
+    public boolean addTagToPhoto(String photoId, TagUpdate tagUpdate) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = post(buildURL(photoId, "tags"), tagUpdate.asHttpParameterArray());
         return Boolean.valueOf(res.asString().trim());
    }
 
-    public boolean addTagToPhoto(String photoId, TagUpdate tagUpdate, List<String> toUserIds) throws FacebookException {
+    public boolean addTagToPhoto(String photoId, List<String> toUserIds) throws FacebookException {
         ensureAuthorizationEnabled();
-        HttpResponse res = post(buildURL(photoId, "tags"), HttpParameter.merge(
-                            new HttpParameter[]{new HttpParameter("to", new JSONArray(toUserIds).toString())},
-                            tagUpdate.asHttpParameterArray()));
+        HttpResponse res = post(buildURL(photoId, "tags"), new HttpParameter[]{new HttpParameter("tags", new JSONArray(toUserIds).toString())});
         return Boolean.valueOf(res.asString().trim());
     }
 
-    public boolean updateTagOnPhoto(String photoId, TagUpdate tagUpdate, String toUserId) throws FacebookException {
-        return addTagToPhoto(photoId, tagUpdate, toUserId);
+    public boolean updateTagOnPhoto(String photoId, String toUserId) throws FacebookException {
+        return addTagToPhoto(photoId, toUserId);
+    }
+    
+    public boolean updateTagOnPhoto(String photoId, TagUpdate tagUpdate) throws FacebookException {
+        return addTagToPhoto(photoId, tagUpdate);
     }
 
     public String postPhoto(Media source) throws FacebookException {
@@ -1917,9 +1923,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         if (locale != null) _locale = locale;
         return factory.createTestUser(post(conf.getRestBaseURL() + appId + "/accounts/test-users" + 
                     "?installed=true" +
-                    "&name=" + name +
-                    "&locale=" + _locale +
-                    "&permissions=" + permissions));
+                    "&name=" + HttpParameter.encode(name) +
+                    "&locale=" + HttpParameter.encode(_locale) +
+                    "&permissions=" + HttpParameter.encode(permissions)));
     }
     
     public List<TestUser> getTestUsers(String appId) throws FacebookException {
@@ -1943,6 +1949,18 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return Boolean.valueOf(res.asString().trim());
     }
 
+    public boolean makeFriendTestUser(TestUser testUser1, TestUser testUser2) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = post(buildURL(testUser1.getId(), "friends/" + testUser2.getId()),
+                                new HttpParameter[]{new HttpParameter("access_token", testUser1.getAccessToken())});
+        if (!Boolean.valueOf(res.asString().trim())) {
+            return false;
+        }
+        res = post(buildURL(testUser2.getId(), "friends/" + testUser1.getId()),
+                                new HttpParameter[]{new HttpParameter("access_token", testUser2.getAccessToken())});
+        return Boolean.valueOf(res.asString().trim());
+    }
+    
 
     private ResponseList<Comment> _getComments(String objectId, Reading reading) throws FacebookException {
         return factory.createCommentList(get(buildURL(objectId, "comments", reading)));
@@ -2048,13 +2066,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     private HttpResponse get(String url, HttpParameter[] parameters) throws FacebookException {
         if (!conf.isMBeanEnabled()) {
-            return http.get(url, parameters, auth);
+            return http.get(url, parameters, (containsAccessToken(parameters) ? null : auth));
         } else {
             // intercept HTTP call for monitoring purposes
             HttpResponse response = null;
             long start = System.currentTimeMillis();
             try {
-                response = http.get(url, parameters, auth);
+                response = http.get(url, parameters, (containsAccessToken(parameters) ? null : auth));
             } finally {
                 long elapsedTime = System.currentTimeMillis() - start;
                 FacebookAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
@@ -2082,13 +2100,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     private HttpResponse post(String url, HttpParameter[] parameters) throws FacebookException {
         if (!conf.isMBeanEnabled()) {
-            return http.post(url, parameters, auth);
+            return http.post(url, parameters, (containsAccessToken(parameters) ? null : auth));
         } else {
             // intercept HTTP call for monitoring purposes
             HttpResponse response = null;
             long start = System.currentTimeMillis();
             try {
-                response = http.post(url, parameters, auth);
+                response = http.post(url, parameters, (containsAccessToken(parameters) ? null : auth));
             } finally {
                 long elapsedTime = System.currentTimeMillis() - start;
                 FacebookAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
@@ -2116,13 +2134,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     private HttpResponse delete(String url, HttpParameter[] parameters) throws FacebookException {
         if (!conf.isMBeanEnabled()) {
-            return http.delete(url, auth);
+            return http.delete(url, (containsAccessToken(parameters) ? null : auth));
         } else {
             // intercept HTTP call for monitoring purposes
             HttpResponse response = null;
             long start = System.currentTimeMillis();
             try {
-                response = http.delete(url, parameters, auth);
+                response = http.delete(url, parameters, (containsAccessToken(parameters) ? null : auth));
             } finally {
                 long elapsedTime = System.currentTimeMillis() - start;
                 FacebookAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
@@ -2134,6 +2152,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     private boolean isOk(HttpResponse response) {
         return response != null && response.getStatusCode() < 300;
+    }
+    
+    private boolean containsAccessToken(HttpParameter[] parameters) throws FacebookException {
+        for (int i = 0; i < parameters.length; i++) {
+            if (parameters[i].getName().equals("access_token")) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2012 Ryuji Yamashita
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package facebook4j;
 
 import org.junit.After;
@@ -8,6 +24,9 @@ import org.junit.Test;
 
 import facebook4j.internal.org.json.JSONObject;
 
+/**
+ * @author Ryuji Yamashita - roundrop at gmail.com
+ */
 public class SearchMethodsTest extends FacebookTestBase {
 
     @BeforeClass
@@ -36,7 +55,8 @@ public class SearchMethodsTest extends FacebookTestBase {
 
     @Test
     public void searchUsers() throws Exception {
-        ResponseList<User> users = real.searchUsers("roundrop"/*, new Reading().fields("name", "gender")*/);
+        //TODO
+        ResponseList<User> users = facebook1.searchUsers("roundrop"/*, new Reading().fields("name", "gender")*/);
         for (User user : users) {
             System.out.println(user);
         }
@@ -78,7 +98,7 @@ public class SearchMethodsTest extends FacebookTestBase {
     
     @Test
     public void searchCheckins() throws Exception {
-        ResponseList<Checkin> checkins = real.searchCheckins();
+        ResponseList<Checkin> checkins = facebook1.searchCheckins();
         for (Checkin checkin : checkins) {
             System.out.println(checkin);
         }
@@ -86,9 +106,9 @@ public class SearchMethodsTest extends FacebookTestBase {
     
     @Test
     public void searchLocationsByGeo() throws Exception {
-        GeoLocation center = new GeoLocation(35.466188, 139.622715);
+        GeoLocation center = new GeoLocation(35.661725, 139.707105);
         int distance = 1000;
-        ResponseList<Location> locations = real.searchLocations(center, distance);
+        ResponseList<Location> locations = facebookBestFriend1.searchLocations(center, distance);
         for (Location location : locations) {
             System.out.println(location);
         }
@@ -96,8 +116,8 @@ public class SearchMethodsTest extends FacebookTestBase {
     
     @Test
     public void searchLocationsByPlace() throws Exception {
-        String placeId = "166793820034304";
-        ResponseList<Location> locations = real.searchLocations(placeId);
+        String placeId = "116972348358579";
+        ResponseList<Location> locations = facebookBestFriend1.searchLocations(placeId);
         for (Location location : locations) {
             System.out.println(location);
         }

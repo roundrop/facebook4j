@@ -16,6 +16,9 @@
 
 package facebook4j;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,10 +56,10 @@ public class FQLMethodsTest extends FacebookTestBase {
     @Test
     public void executeFQL() throws Exception {
         String query = "SELECT uid2 FROM friend WHERE uid1=me()";
-        JSONArray jsonArray = real.executeFQL(query);
+        JSONArray jsonArray = facebookBestFriend1.executeFQL(query);
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            System.out.println(jsonObject.get("uid2"));
+            assertThat((String) jsonObject.get("uid2"), is(bestFriend2.getId()));
         }
     }
 
@@ -65,14 +68,14 @@ public class FQLMethodsTest extends FacebookTestBase {
         Map<String, String> queries = new HashMap<String, String>();
         queries.put("all friends", "SELECT uid2 FROM friend WHERE uid1=me()");
         queries.put("my name", "SELECT name FROM user WHERE uid=me()");
-        Map<String, JSONArray> result = real.executeMultiFQL(queries);
+        Map<String, JSONArray> result = facebookBestFriend1.executeMultiFQL(queries);
         JSONArray allFriendsJSONArray = result.get("all friends");
         for (int i = 0; i < allFriendsJSONArray.length(); i++) {
             JSONObject jsonObject = allFriendsJSONArray.getJSONObject(i);
-            System.out.println(jsonObject.get("uid2"));
+            assertThat((String) jsonObject.get("uid2"), is(bestFriend2.getId()));
         }
         JSONArray myNameJSONArray = result.get("my name");
-        System.out.println(myNameJSONArray.getJSONObject(0).get("name"));
+        assertThat((String) myNameJSONArray.getJSONObject(0).get("name"), is("bestfriend one"));
     }
 
 }

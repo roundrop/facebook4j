@@ -235,34 +235,51 @@ public interface PhotoMethods {
     /**
      * Adds the tag to a photo.
      * @param photoId the ID of a photo
-     * @param tagUpdate tag information
      * @param toUserId the ID of the user to tag
      * @return true if add is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#tags">Photo#tags - Facebook Developers</a> - Connections - tags
      */
-    boolean addTagToPhoto(String photoId, TagUpdate tagUpdate, String toUserId) throws FacebookException;
-
+    boolean addTagToPhoto(String photoId, String toUserId) throws FacebookException;
+    
     /**
      * Adds the tag to a photo.
      * @param photoId the ID of a photo
-     * @param tagUpdate tag information
      * @param toUserIds the IDs of the users to tag
      * @return true if add is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#tags">Photo#tags - Facebook Developers</a> - Connections - tags
      */
-    boolean addTagToPhoto(String photoId, TagUpdate tagUpdate, List<String> toUserIds) throws FacebookException;
+    boolean addTagToPhoto(String photoId, List<String> toUserIds) throws FacebookException;
+
+    /**
+     * Adds the tag to a photo.
+     * @param photoId the ID of a photo
+     * @param tagUpdate tag information
+     * @return true if add is successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#tags">Photo#tags - Facebook Developers</a> - Connections - tags
+     */
+    boolean addTagToPhoto(String photoId, TagUpdate tagUpdate) throws FacebookException;
 
     /**
      * Updates the position of the tag on a photo.
      * @param photoId the ID of a photo
-     * @param tagUpdate tag information, supports 'to', 'x', 'y'
      * @param toUserId the ID of the user to tag
      * @return true if add is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#tags">Photo#tags - Facebook Developers</a> - Connections - tags
      */
-    boolean updateTagOnPhoto(String photoId, TagUpdate tagUpdate, String toUserId) throws FacebookException;
+    boolean updateTagOnPhoto(String photoId, String toUserId) throws FacebookException;
+    
+    /**
+     * Updates the position of the tag on a photo.
+     * @param photoId the ID of a photo
+     * @param tagUpdate tag information, supports 'to', 'x', 'y'
+     * @return true if add is successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#tags">Photo#tags - Facebook Developers</a> - Connections - tags
+     */
+    boolean updateTagOnPhoto(String photoId, TagUpdate tagUpdate) throws FacebookException;
 
 }

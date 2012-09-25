@@ -54,7 +54,7 @@ public class ReadingTest extends FacebookTestBase {
 
     @Test
     public void fields() throws Exception {
-        User user = real.getUser("bgolub", new Reading().fields("id", "name", "picture"));
+        User user = facebook1.getUser(id2.getId(), new Reading().fields("id", "name", "picture"));
         assertThat(user.getId(), is(notNullValue()));
         assertThat(user.getName(), is(notNullValue()));
         assertThat(user.getPicture(), is(notNullValue()));
@@ -63,7 +63,7 @@ public class ReadingTest extends FacebookTestBase {
     
     @Test
     public void withLocation() throws Exception {
-        ResponseList<Post> posts = real.getHome(new Reading().withLocation());
+        ResponseList<Post> posts = facebook1.getHome(new Reading().withLocation());
         for (Post post : posts) {
             assertThat(post.getPlace(), is(notNullValue()));
         }
@@ -100,7 +100,7 @@ public class ReadingTest extends FacebookTestBase {
     
     @Test
     public void filter() throws Exception {
-        ResponseList<Post> posts = real.getHome(new Reading().filter("app_2305272732"));    //to retrive your News Feed filtered by photos
+        ResponseList<Post> posts = facebookBestFriend1.getHome(new Reading().filter("app_2305272732"));    //to retrive your News Feed filtered by photos
         for (Post post : posts) {
             assertThat(post.getPicture(), is(notNullValue()));
         }

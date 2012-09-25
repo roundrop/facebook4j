@@ -62,8 +62,8 @@ public class AuthorizationTest extends FacebookTestBase {
     public void OAuthInstance() throws Exception {
         String appSecret;
         String appId;
-        appSecret = p.getProperty("app.oauth.appSecret");
-        appId = p.getProperty("app.oauth.appSecret");
+        appSecret = p.getProperty("oauth.appSecret");
+        appId = p.getProperty("oauth.appSecret");
 
         Facebook facebook = new FacebookFactory().getInstance();
         facebook.setOAuthAppId(appId, appSecret);

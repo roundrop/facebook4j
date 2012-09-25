@@ -84,6 +84,7 @@ public class EventMethodsTest extends FacebookTestBase {
 
     @Test
     public void noreply() throws Exception {
+        //TODO
         String eventId = "331218348435";
         ResponseList<RSVPStatus> noreply = real.getRSVPStatusAsNoreply(eventId);
         for (RSVPStatus rsvpStatus : noreply) {

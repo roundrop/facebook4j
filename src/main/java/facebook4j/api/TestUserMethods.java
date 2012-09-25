@@ -66,4 +66,14 @@ public interface TestUserMethods {
      */
     boolean deleteTestUser(String testUserId) throws FacebookException;
 
+    /**
+     * Makes friends connections for a test user with other test users.
+     * @param testUser1 test user
+     * @param testUser2 test user
+     * @return true on success, false otherwise
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/test_users/">Test Users - Facebook Developers</a>
+     */
+    boolean makeFriendTestUser(TestUser testUser1, TestUser testUser2) throws FacebookException;
+
 }
