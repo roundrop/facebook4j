@@ -51,7 +51,7 @@ public class UserMethodsTest extends FacebookTestBase {
 
     @Test
     public void me() throws Exception {
-        User me = facebook1.getMe(new Reading().locale(new Locale("ja_JP")));
+        User me = facebook1.getMe(new Reading().locale(Locale.getDefault()));
         assertThat(me.getId(), is(id1.getId()));
         assertThat(me.getEmail(), is(notNullValue()));
         assertThat(me.getBirthday(), is(notNullValue()));

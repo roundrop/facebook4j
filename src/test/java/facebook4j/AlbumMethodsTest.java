@@ -28,7 +28,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class AblumMethodsTest extends FacebookTestBase {
+public class AlbumMethodsTest extends FacebookTestBase {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -49,7 +49,7 @@ public class AblumMethodsTest extends FacebookTestBase {
     @Test
     public void create() throws Exception {
         PrivacyBean privacy = new PrivacyBuilder().setValue(PrivacyType.EVERYONE).build();
-        String albumId = facebook1.createAlbum(new AlbumCreate("test album1", "test message1", privacy));
+        String albumId = facebook1.createAlbum(new AlbumCreate("create() test album", "create() test message", privacy));
         assertThat(albumId, is(notNullValue()));
     }
 
@@ -60,10 +60,6 @@ public class AblumMethodsTest extends FacebookTestBase {
 
     @Test
     public void get() throws Exception {
-        facebook1.createAlbum(new AlbumCreate("test album1", "test message1"));
-        facebook1.createAlbum(new AlbumCreate("test album2", "test message2"));
-        facebook1.createAlbum(new AlbumCreate("test album3", "test message3"));
-
         //read
         ResponseList<Album> albums = facebook1.getAlbums();
         assertThat(albums.size() >= 3, is(true));
@@ -93,8 +89,9 @@ public class AblumMethodsTest extends FacebookTestBase {
     
     @Test
     public void photo() throws Exception {
-        String albumId = facebook1.createAlbum(new AlbumCreate("test album1", "test message1"));
-        
+        ResponseList<Album> albums = facebook1.getAlbums();
+        String albumId = albums.get(0).getId();
+
         //add a photo
         File file = new File("src/test/resources/test_image.png");
         Media source = new Media(file);
@@ -106,14 +103,21 @@ public class AblumMethodsTest extends FacebookTestBase {
         //read photos from album
         ResponseList<Photo> albumPhotos = facebook1.getAlbumPhotos(albumId);
 //        System.out.println(albumPhotos);
-        assertThat(albumPhotos.size(), is(2));
-        assertThat(facebook1.getAlbumPhotos(albumId, new Reading().fields("name")).get(1).getName(), is("photo no2"));
+        assertThat(albumPhotos.size() >= 2, is(true));
+        albumPhotos = facebook1.getAlbumPhotos(albumId, new Reading().fields("name"));
+        for (Photo photo : albumPhotos) {
+            if (photo.getId().equals(photoId2)) {
+                assertThat(photo.getName(), is("photo no2"));
+            }
+        }
+        
     }
     
     @Test
     public void comment() throws Exception {
-        String albumId = facebook1.createAlbum(new AlbumCreate("test album1", "test message1"));
-        
+        ResponseList<Album> albums = facebook1.getAlbums();
+        String albumId = albums.get(0).getId();
+
         //comment
         //TODO cannot comment by other test-user, why?
         //album:aid=100004272091863_1826/object_id=100651570087246/owner=100004272091863
@@ -132,13 +136,14 @@ public class AblumMethodsTest extends FacebookTestBase {
         
         //read comments
         ResponseList<Comment> comments = facebook1.getAlbumComments(albumId);
-        assertThat(comments.size(), is(3));
+        assertThat(comments.size() >= 3, is(true));
     }
     
     @Test
     public void like() throws Exception {
-        String albumId = facebook1.createAlbum(new AlbumCreate("test album1", "test message1"));
-        
+        ResponseList<Album> albums = facebook1.getAlbums();
+        String albumId = albums.get(0).getId();
+
         //like
         //TODO cannot read by other test-user, why?
 //        boolean likeId = facebook2.likeAlbum(albumId);
@@ -158,11 +163,8 @@ public class AblumMethodsTest extends FacebookTestBase {
     
     @Test
     public void picture() throws Exception {
-        String albumId = facebook1.createAlbum(new AlbumCreate("test album1", "test message1"));
-        File file = new File("src/test/resources/test_image.png");
-        Media source = new Media(file);
-        facebook1.addAlbumPhoto(albumId, source);
-        facebook1.addAlbumPhoto(albumId, source, "photo no2");
+        ResponseList<Album> albums = facebook1.getAlbums();
+        String albumId = albums.get(0).getId();
 
         URL url = facebook1.getAlbumCoverPhoto(albumId);
         assertThat(url, is(notNullValue()));

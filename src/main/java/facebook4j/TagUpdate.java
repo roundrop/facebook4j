@@ -25,8 +25,9 @@ import facebook4j.internal.http.HttpParameter;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public class TagUpdate implements java.io.Serializable {
-    private static final long serialVersionUID = -8565099471826935282L;
+    private static final long serialVersionUID = -8148787857258621802L;
 
+    private String to;
     private String tagText;
     private Integer x;
     private Integer y;
@@ -34,14 +35,24 @@ public class TagUpdate implements java.io.Serializable {
     public TagUpdate() {
     }
 
-    public TagUpdate(String tagText) {
-        this.tagText = tagText;
-    }
-
-    public TagUpdate(String tagText, Integer x, Integer y) {
+    public TagUpdate(String to, String tagText, Integer x, Integer y) {
+        this.to = to;
         this.tagText = tagText;
         this.x = x;
         this.y = y;
+    }
+    
+    public String getTo() {
+        return to;
+    }
+    
+    public void setTo(String to) {
+        this.to = to;
+    }
+    
+    public TagUpdate to(String to) {
+        setTo(to);
+        return this;
     }
 
     public String getTagText() {
@@ -85,6 +96,9 @@ public class TagUpdate implements java.io.Serializable {
 
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
+        if (to != null) {
+            params.add(new HttpParameter("to", to));
+        }
         if (tagText != null) {
             params.add(new HttpParameter("tag_text", tagText));
         }
@@ -102,6 +116,7 @@ public class TagUpdate implements java.io.Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((tagText == null) ? 0 : tagText.hashCode());
+        result = prime * result + ((to == null) ? 0 : to.hashCode());
         result = prime * result + ((x == null) ? 0 : x.hashCode());
         result = prime * result + ((y == null) ? 0 : y.hashCode());
         return result;
@@ -121,6 +136,11 @@ public class TagUpdate implements java.io.Serializable {
                 return false;
         } else if (!tagText.equals(other.tagText))
             return false;
+        if (to == null) {
+            if (other.to != null)
+                return false;
+        } else if (!to.equals(other.to))
+            return false;
         if (x == null) {
             if (other.x != null)
                 return false;
@@ -136,7 +156,8 @@ public class TagUpdate implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "TagUpdate [tagText=" + tagText + ", x=" + x + ", y=" + y + "]";
+        return "TagUpdate [to=" + to + ", tagText=" + tagText + ", x=" + x
+                + ", y=" + y + "]";
     }
 
 }

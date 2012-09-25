@@ -45,18 +45,20 @@ public class CommentMethodsTest extends FacebookTestBase {
 
     @Test
     public void get() throws Exception {
-        AlbumCreate album = new AlbumCreate("test album", "test message");
-        String albumId = facebook1.createAlbum(album);
-        String commentId = facebook1.commentAlbum(albumId, "Comment on an Album");
+        ResponseList<Album> albums = facebook1.getAlbums();
+        ResponseList<Comment> albumComments = facebook1.getAlbumComments(albums.get(0).getId());
         
-        Comment comment = facebook1.getComment(commentId);
-        assertThat(comment.getMessage(), is("Comment on an Album"));
+        for (Comment comment : albumComments) {
+            Comment actual = facebook1.getComment(comment.getId());
+            assertThat(actual.getMessage(), is(comment.getMessage()));
+        }
+        
     }
 
     @Test
     public void delete() throws Exception {
-        AlbumCreate album = new AlbumCreate("test album", "test message");
-        String albumId = facebook1.createAlbum(album);
+        ResponseList<Album> albums = facebook1.getAlbums();
+        String albumId = albums.get(0).getId();
         String commentId = facebook1.commentAlbum(albumId, "Comment on an Album");
         
         boolean deleteResult = facebook1.deleteComment(commentId);
@@ -65,8 +67,8 @@ public class CommentMethodsTest extends FacebookTestBase {
 
     @Test
     public void like() throws Exception {
-        AlbumCreate album = new AlbumCreate("test album", "test message");
-        String albumId = facebook1.createAlbum(album);
+        ResponseList<Album> albums = facebook1.getAlbums();
+        String albumId = albums.get(0).getId();
         String commentId = facebook1.commentAlbum(albumId, "Comment on an Album");
         
         boolean likeResult = facebook1.likeComment(commentId);
@@ -80,6 +82,8 @@ public class CommentMethodsTest extends FacebookTestBase {
         
         commentLikes = facebook1.getCommentLikes(commentId);
         assertThat(commentLikes.size(), is(0));
+
+        facebook1.deleteComment(commentId);
     }
     
 

@@ -33,11 +33,13 @@ import facebook4j.conf.PropertyConfiguration;
 
 public class FacebookTestBase {
 
-    protected Facebook real, facebook1, facebook2, facebook3, facebook4, unauthenticated;
+    protected Facebook facebookApp;
+    protected Facebook facebook1, facebook2,
+                       unauthenticated, facebookBestFriend1, facebookBestFriend2,
+                       real;
     protected Properties p = new Properties();
 
-    protected TestUser id1, id2, id3, id4;
-    protected Configuration conf;
+    protected TestUser id1, id2, bestFriend1, bestFriend2;
 
     protected String appId;
     protected String appSecret;
@@ -51,141 +53,149 @@ public class FacebookTestBase {
         System.setProperty("facebook4j.debug", p.getProperty("debug"));
         System.setProperty("facebook4j.loggerFactory", p.getProperty("loggerFactory"));
         System.setProperty("facebook4j.http.prettyDebug", p.getProperty("http.prettyDebug"));
-        System.setProperty("facebook4j.http.userAgent", p.getProperty("http.userAgent"));
         System.setProperty("facebook4j.jsonStoreEnabled", p.getProperty("jsonStoreEnabled"));
 
-        appId = p.getProperty("app.oauth.appId");
-        appSecret = p.getProperty("app.oauth.appSecret");
+        // setup App access token
+        appId = p.getProperty("oauth.appId");
+        appSecret = p.getProperty("oauth.appSecret");
 
-        // setup test users
         ConfigurationBuilder build = new ConfigurationBuilder();
         build.setOAuthAppId(appId);
         build.setOAuthAppSecret(appSecret);
-        facebook1 = new FacebookFactory().getInstance(new OAuthAuthorization(build.build()));
-        facebook1.getOAuthAppAccessToken();
-        List<TestUser> testUsers = facebook1.getTestUsers(appId);
+        facebookApp = new FacebookFactory().getInstance(new OAuthAuthorization(build.build()));
+        facebookApp.getOAuthAppAccessToken();
+
+        // setup test users
+        facebookApp.getOAuthAppAccessToken();
+        List<TestUser> testUsers = facebookApp.getTestUsers(appId);
         for (TestUser testUser : testUsers) {
             if (testUser.getId().equals(p.getProperty("id1.id"))) {
                 id1 = testUser;
             } else
             if (testUser.getId().equals(p.getProperty("id2.id"))) {
                 id2 = testUser;
-//            } else
-//            if (testUser.getId().equals(p.getProperty("id3.id"))) {
-//                id3 = testUser;
-//            } else
-//            if (testUser.getId().equals(p.getProperty("id4.id"))) {
-//                id4 = testUser;
+            } else
+            if (testUser.getId().equals(p.getProperty("bestFriend1.id"))) {
+                bestFriend1 = testUser;
+            } else
+            if (testUser.getId().equals(p.getProperty("bestFriend2.id"))) {
+                bestFriend2 = testUser;
             }
         }
+
+        facebook1 = new FacebookFactory().getInstance(new OAuthAuthorization(new ConfigurationBuilder().setOAuthAppId(appId).setOAuthAppSecret(appSecret).build()));
         facebook1.setOAuthAccessToken(new AccessToken(id1.getAccessToken(), null));
         facebook2 = new FacebookFactory().getInstance(new OAuthAuthorization(new ConfigurationBuilder().setOAuthAppId(appId).setOAuthAppSecret(appSecret).build()));
         facebook2.setOAuthAccessToken(new AccessToken(id2.getAccessToken(), null));
-//        facebook3 = new FacebookFactory().getInstance(new OAuthAuthorization(new ConfigurationBuilder().setOAuthAppId(appId).setOAuthAppSecret(appSecret).build()));
-//        facebook3.setOAuthAccessToken(new AccessToken(id3.getAccessToken(), null));
-//        facebook4 = new FacebookFactory().getInstance(new OAuthAuthorization(new ConfigurationBuilder().setOAuthAppId(appId).setOAuthAppSecret(appSecret).build()));
-//        facebook4.setOAuthAccessToken(new AccessToken(id4.getAccessToken(), null));
+        facebookBestFriend1 = new FacebookFactory().getInstance(new OAuthAuthorization(new ConfigurationBuilder().setOAuthAppId(appId).setOAuthAppSecret(appSecret).build()));
+        facebookBestFriend1.setOAuthAccessToken(new AccessToken(bestFriend1.getAccessToken(), null));
+        facebookBestFriend2 = new FacebookFactory().getInstance(new OAuthAuthorization(new ConfigurationBuilder().setOAuthAppId(appId).setOAuthAppSecret(appSecret).build()));
+        facebookBestFriend2.setOAuthAccessToken(new AccessToken(bestFriend2.getAccessToken(), null));
         
         // setup unauthenticated
         unauthenticated = new FacebookFactory(new ConfigurationBuilder().build()).getInstance();
 
         // setup real user
-        conf = new PropertyConfiguration(p, "/real");
+        Configuration conf = new PropertyConfiguration(p, "/real");
         real = new FacebookFactory(conf).getInstance();
 
     }
 
-    
-    protected TestUser createTestUser(Facebook facebook) {
-        try {
-            return facebook.createTestUser(appId, "test", Locale.getDefault().toString(),
-                        "email" +
-                        ",publish_actions" +
-                        ",user_about_me" +
-                        ",user_activities" +
-                        ",user_birthday" +
-                        ",user_checkins" +
-                        ",user_education_history" +
-                        ",user_events" +
-                        ",user_games_activity" +
-                        ",user_groups" +
-                        ",user_hometown" +
-                        ",user_interests" +
-                        ",user_likes" +
-                        ",user_location" +
-                        ",user_notes" +
-                        ",user_photos" +
-                        ",user_questions" +
-                        ",user_relationship_details" +
-                        ",user_relationships" +
-                        ",user_religion_politics" +
-                        ",user_status" +
-                        ",user_subscriptions" +
-                        ",user_videos" +
-                        ",user_website" +
-                        ",user_work_history" +
-                        ",friends_about_me" +
-                        ",friends_activities" +
-                        ",friends_birthday" +
-                        ",friends_checkins" +
-                        ",friends_education_history" +
-                        ",friends_events" +
-                        ",friends_games_activity" +
-                        ",friends_groups" +
-                        ",friends_hometown" +
-                        ",friends_interests" +
-                        ",friends_likes" +
-                        ",friends_location" +
-                        ",friends_notes" +
-                        ",friends_photos" +
-                        ",friends_questions" +
-                        ",friends_relationship_details" +
-                        ",friends_relationships" +
-                        ",friends_religion_politics" +
-                        ",friends_status" +
-                        ",friends_subscriptions" +
-                        ",friends_videos" +
-                        ",friends_website" +
-                        ",friends_work_history" +
-                        ",ads_management" +
-                        ",create_event" +
-                        ",create_note" +
-                        ",export_stream" +
-                        ",friends_online_presence" +
-                        ",manage_friendlists" +
-                        ",manage_notifications" +
-                        ",manage_pages" +
-                        ",offline_access" +
-                        ",photo_upload" +
-                        ",publish_checkins" +
-                        ",publish_stream" +
-                        ",read_friendlists" +
-                        ",read_insights" +
-                        ",read_mailbox" +
-                        ",read_page_mailboxes" +
-                        ",read_requests" +
-                        ",read_stream" +
-                        ",rsvp_event" +
-                        ",share_item" +
-                        ",sms" +
-                        ",status_update" +
-                        ",user_online_presence" +
-                        ",video_upload" +
-                        ",xmpp_login"
-                   );
-
-        } catch (FacebookException e) {
-            fail();
-        }
-        return null;
+    protected TestUser createTestUser() throws Exception {
+        return facebookApp.createTestUser(appId, "test", Locale.getDefault().toString(),
+            "email" +
+            ",publish_actions" +
+            ",user_about_me" +
+            ",user_activities" +
+            ",user_birthday" +
+            ",user_checkins" +
+            ",user_education_history" +
+            ",user_events" +
+            ",user_games_activity" +
+            ",user_groups" +
+            ",user_hometown" +
+            ",user_interests" +
+            ",user_likes" +
+            ",user_location" +
+            ",user_notes" +
+            ",user_photos" +
+            ",user_questions" +
+            ",user_relationship_details" +
+            ",user_relationships" +
+            ",user_religion_politics" +
+            ",user_status" +
+            ",user_subscriptions" +
+            ",user_videos" +
+            ",user_website" +
+            ",user_work_history" +
+            ",friends_about_me" +
+            ",friends_activities" +
+            ",friends_birthday" +
+            ",friends_checkins" +
+            ",friends_education_history" +
+            ",friends_events" +
+            ",friends_games_activity" +
+            ",friends_groups" +
+            ",friends_hometown" +
+            ",friends_interests" +
+            ",friends_likes" +
+            ",friends_location" +
+            ",friends_notes" +
+            ",friends_photos" +
+            ",friends_questions" +
+            ",friends_relationship_details" +
+            ",friends_relationships" +
+            ",friends_religion_politics" +
+            ",friends_status" +
+            ",friends_subscriptions" +
+            ",friends_videos" +
+            ",friends_website" +
+            ",friends_work_history" +
+            ",ads_management" +
+            ",create_event" +
+            ",create_note" +
+            ",export_stream" +
+            ",friends_online_presence" +
+            ",manage_friendlists" +
+            ",manage_notifications" +
+            ",manage_pages" +
+            ",photo_upload" +
+            ",publish_checkins" +
+            ",publish_stream" +
+            ",read_friendlists" +
+            ",read_insights" +
+            ",read_mailbox" +
+            ",read_page_mailboxes" +
+            ",read_requests" +
+            ",read_stream" +
+            ",rsvp_event" +
+            ",share_item" +
+            ",sms" +
+            ",status_update" +
+            ",user_online_presence" +
+            ",video_upload" +
+            ",xmpp_login"
+        );
     }
     
-    protected boolean deleteTestUser(Facebook facebook, TestUser testUser) {
+    protected boolean deleteTestUser(TestUser testUser) {
         try {
-            return facebook.deleteTestUser(testUser.getId());
+            return facebookApp.deleteTestUser(testUser.getId());
         } catch (FacebookException e) {
             fail();
         }
         return false;
     }
+    
+    protected void deleteAllTestUsers() throws Exception {
+        List<TestUser> testUsers = facebookApp.getTestUsers(appId);
+        for (TestUser testUser : testUsers) {
+            facebookApp.deleteTestUser(testUser.getId());
+        }
+    }
+    
+    protected boolean makeFriend(TestUser testUser1, TestUser testUser2) throws Exception {
+        return facebookApp.makeFriendTestUser(testUser1, testUser2);
+    }
+
 }
