@@ -26,7 +26,14 @@ If you are familiar with Java language, looking into the [JavaDoc](http://facebo
 [facebook4j.Facebook](http://facebook4j.org/en/javadoc/facebook4j/Facebook.html "facebook4j.Facebook") interface is the one you may want to look at first.
 
 ### Code Examples
-Code examples of Server-Side Authentication and post status message implementation is available at [https://github.com/roundrop/sign-in-with-facebook](https://github.com/roundrop/sign-in-with-facebook)
+
+#### Server-Side Authentication
+
+Code examples of Server-Side Authentication and post status message implementation is available at [https://github.com/roundrop/facebook4j-oauth-example](https://github.com/roundrop/facebook4j-oauth-example)
+
+#### Android
+
+An example of using Facebook4J in an Android app is available at [https://github.com/roundrop/facebook4j-android-example](https://github.com/roundrop/facebook4j-android-example)
 
 ## Supported
 * [Server-Side Authentication](https://developers.facebook.com/docs/authentication/server-side/ "Server-Side Authentication")
