@@ -49,6 +49,57 @@ public class PostMethodsTest extends FacebookTestBase {
     }
     
     @Test
+    public void getFeed() throws Exception {
+        ResponseList<Post> feed = facebook1.getFeed();
+        assertThat(feed, is(notNullValue()));
+        for (Post post : feed) {
+            System.out.println(post);
+        }
+    }
+    
+    @Test
+    public void getFeed_withReading() throws Exception {
+        ResponseList<Post> feed = facebook1.getFeed(new Reading().fields("from"));
+        assertThat(feed, is(notNullValue()));
+        for (Post post : feed) {
+            assertThat(post.getFrom(), is(notNullValue()));
+            assertThat(post.getFrom().getName(), is(notNullValue()));
+            assertThat(post.getMessage(), is(nullValue()));
+        }
+    }
+    
+    @Test
+    public void getFeed_byUserid() throws Exception {
+        ResponseList<Post> feed = facebook2.getFeed(id1.getId());
+        assertThat(feed, is(notNullValue()));
+        for (Post post : feed) {
+            System.out.println(post);
+        }
+    }
+    
+    @Test
+    public void getHome() throws Exception {
+        ResponseList<Post> feed = facebookBestFriend2.getHome();
+        assertThat(feed, is(notNullValue()));
+        boolean friendsIncluded = false;
+        for (Post post : feed) {
+            if (post.getFrom().getId().equals(bestFriend1.getId())) {
+                friendsIncluded = true;
+            }
+        }
+        assertThat(friendsIncluded, is(true));
+    }
+    
+    @Test
+    public void getHome_withReading() throws Exception {
+        ResponseList<Post> feed = facebook1.getHome(new Reading().fields("name"));
+        assertThat(feed, is(notNullValue()));
+        for (Post post : feed) {
+            assertThat(post.getMessage(), is(nullValue()));
+        }
+    }
+
+    @Test
     public void postStatusMessage() throws Exception {
         String message = "postStatusMessage() test";
         String postId = facebook1.postStatusMessage(message);
@@ -56,6 +107,24 @@ public class PostMethodsTest extends FacebookTestBase {
         
         boolean deleteResult = facebook1.deletePost(postId);
         assertThat(deleteResult, is(true));
+    }
+    
+    @Test
+    public void getLinks() throws Exception {
+        ResponseList<Link> links = facebook1.getLinks();
+        for (Link link : links) {
+            System.out.println(link);
+        }
+    }
+    
+    @Test
+    public void getLinks_withReading() throws Exception {
+        ResponseList<Link> links = facebook1.getLinks(new Reading().fields("link"));
+        for (Link link : links) {
+            assertThat(link, is(notNullValue()));
+            assertThat(link.getLink(), is(notNullValue()));
+            assertThat(link.getFrom(), is(nullValue()));
+        }
     }
     
     @Test
@@ -111,6 +180,78 @@ public class PostMethodsTest extends FacebookTestBase {
         
         boolean deleteResult = facebook1.deletePost(postId);
         assertThat(deleteResult, is(true));
+    }
+    
+    @Test
+    public void getPosts() throws Exception {
+        ResponseList<Post> posts = facebook1.getPosts();
+        for (Post post : posts) {
+            assertThat(post.getFrom().getId(), is(id1.getId()));
+        }
+    }
+
+    @Test
+    public void getStatuses() throws Exception {
+        ResponseList<Post> posts = facebook1.getStatuses();
+        for (Post post : posts) {
+            assertThat(post.getFrom().getId(), is(id1.getId()));
+            assertThat(post.getMessage(), is(notNullValue()));
+        }
+    }
+    
+    @Test
+    public void getTagged() throws Exception {
+        ResponseList<Post> posts = facebookBestFriend1.getTagged();
+        for (Post post : posts) {
+            assertThat(post.getFrom().getId(),is(bestFriend2.getId()));
+        }
+    }
+    
+    @Test
+    public void getPost() throws Exception {
+        ResponseList<Post> posts = facebook1.getPosts();
+        Post latestPost = posts.get(0);
+        Post post = facebook1.getPost(latestPost.getId());
+        assertThat(post, is(latestPost));
+    }
+    
+    @Test
+    public void getPostComments() throws Exception {
+        ResponseList<Post> posts = facebookBestFriend1.getFeed();
+        for (Post post : posts) {
+            ResponseList<Comment> comments = facebookBestFriend1.getPostComments(post.getId());
+            System.out.println(comments);
+        }
+    }
+
+    @Test
+    public void commentPost() throws Exception {
+        ResponseList<Post> posts = facebookBestFriend2.getHome();
+        for (Post post : posts) {
+            if (post.getFrom().getId().equals(bestFriend1.getId())) {
+                String postId = post.getId();
+                String commentId = facebookBestFriend2.commentPost(postId, "comment from bestFriend2 via test");
+                assertThat(commentId, is(notNullValue()));
+                
+                Post p = facebookBestFriend2.getPost(postId);
+                assertThat(p.getComments().size() > 0, is(true));
+            }
+        }
+    }
+    
+    @Test
+    public void likeAndUnlikePost() throws Exception {
+        ResponseList<Post> posts = facebookBestFriend2.getHome();
+        for (Post post : posts) {
+            if (post.getFrom().getId().equals(bestFriend1.getId())) {
+                String postId = post.getId();
+                boolean likeResult = facebookBestFriend2.likePost(postId);
+                assertThat(likeResult, is(true));
+                
+                boolean unlikeResult = facebookBestFriend2.unlikePost(postId);
+                assertThat(unlikeResult, is(true));
+            }
+        }
     }
     
 }

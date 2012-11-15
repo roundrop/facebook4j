@@ -20,6 +20,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.Locale;
 
 import facebook4j.auth.AccessToken;
@@ -58,7 +59,7 @@ public class TestSetup {
         TestUser id1 = setupId1();
         TestUser id2 = setupId2();
         TestUser bestFriend1 = setupBestFriend1();
-        TestUser bestFriend2 = setupBestFriend2();
+        TestUser bestFriend2 = setupBestFriend2(bestFriend1);
         makeFriendConnectionAndTags(bestFriend1, bestFriend2);
 
         PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(prop)));
@@ -119,6 +120,8 @@ public class TestSetup {
         GeoLocation coordinates = new GeoLocation(35.659283081996, 139.70090532034);
         CheckinCreate checkin = new CheckinCreate(place, coordinates);
         f.checkin(checkin);
+        //link
+        f.postLink(new URL("http://facebook4j.org"));
 
         return id1;
     }
@@ -130,11 +133,27 @@ public class TestSetup {
     
     private static TestUser setupBestFriend1() throws Exception {
         TestUser bestFriend1 = createTestUser("bestfriend one");
+        Facebook f = new FacebookFactory().getInstance(new OAuthAuthorization(new ConfigurationBuilder().setOAuthAppId(APP_ID).setOAuthAppSecret(APP_SECRET).build()));
+        f.setOAuthAccessToken(new AccessToken(bestFriend1.getAccessToken(), null));
+        //post
+        f.postStatusMessage("message from bestFriend1");
         return bestFriend1;
     }
 
-    private static TestUser setupBestFriend2() throws Exception {
+    private static TestUser setupBestFriend2(TestUser bestFriend1) throws Exception {
         TestUser bestFriend2 = createTestUser("bestfriend two");
+        Facebook f = new FacebookFactory().getInstance(new OAuthAuthorization(new ConfigurationBuilder().setOAuthAppId(APP_ID).setOAuthAppSecret(APP_SECRET).build()));
+        f.setOAuthAccessToken(new AccessToken(bestFriend2.getAccessToken(), null));
+        //post
+        f.postStatusMessage("message from bestFriend2");
+        //comment
+        ResponseList<Post> feed = f.getHome();
+        for (Post post : feed) {
+            if (post.getFrom().getId().equals(bestFriend1.getId())) {
+                f.commentPost(post.getId(), "comment from bestFriend2");
+                break;
+            }
+        }
         return bestFriend2;
     }
     
