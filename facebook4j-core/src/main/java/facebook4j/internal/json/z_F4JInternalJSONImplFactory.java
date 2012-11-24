@@ -56,6 +56,7 @@ import facebook4j.Place;
 import facebook4j.Poke;
 import facebook4j.Post;
 import facebook4j.Question;
+import facebook4j.QuestionVotes;
 import facebook4j.RSVPStatus;
 import facebook4j.ResponseList;
 import facebook4j.Score;
@@ -289,6 +290,11 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     public ResponseList<Question.Option> createQuestionOptionList(HttpResponse res) throws FacebookException {
         return QuestionJSONImpl.createOptionList(res, conf);
     }
+    
+    public ResponseList<QuestionVotes> createQuestionVotesList(HttpResponse res) throws FacebookException {
+        return QuestionVotesJSONImpl.createQuestionVotesList(res, conf);
+    }
+
 
     public ResponseList<Score> createScoreList(HttpResponse res) throws FacebookException {
         return ScoreJSONImpl.createScoreList(res, conf);

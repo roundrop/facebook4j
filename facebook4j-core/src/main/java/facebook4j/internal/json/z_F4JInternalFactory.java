@@ -56,6 +56,7 @@ import facebook4j.Place;
 import facebook4j.Poke;
 import facebook4j.Post;
 import facebook4j.Question;
+import facebook4j.QuestionVotes;
 import facebook4j.RSVPStatus;
 import facebook4j.ResponseList;
 import facebook4j.Score;
@@ -159,6 +160,7 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     Question createQuestion(HttpResponse res) throws FacebookException;
     ResponseList<Question> createQuestionList(HttpResponse res) throws FacebookException;
     ResponseList<Question.Option> createQuestionOptionList(HttpResponse res) throws FacebookException;
+    ResponseList<QuestionVotes> createQuestionVotesList(HttpResponse res) throws FacebookException;
     
     ResponseList<Score> createScoreList(HttpResponse res) throws FacebookException;
     

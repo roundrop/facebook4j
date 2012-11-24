@@ -1606,9 +1606,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         }
    }
 
-    public ResponseList<Question.Option> getQuestionOptionVotes(String questionId) throws FacebookException {
+    public ResponseList<QuestionVotes> getQuestionOptionVotes(String questionId) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createQuestionOptionList(get(buildURL(questionId, "options/votes")));
+        Reading reading = new Reading().fields("votes");
+        return factory.createQuestionVotesList(get(buildURL(questionId, "options", reading)));
     }
 
     /* Game Methods */
