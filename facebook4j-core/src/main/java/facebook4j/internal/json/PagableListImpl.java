@@ -58,7 +58,7 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "PagableListImpl [paging=" + paging + "]";
+        return "PagableListImpl [" + super.toString() + ", paging=" + paging + "]";
     }
 
 }

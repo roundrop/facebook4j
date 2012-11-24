@@ -20,6 +20,7 @@ import java.util.List;
 
 import facebook4j.FacebookException;
 import facebook4j.Question;
+import facebook4j.QuestionVotes;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
 
@@ -173,6 +174,6 @@ public interface QuestionMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/question_option/">QuestionOption - Facebook Developers</a>
      */
-    ResponseList<Question.Option> getQuestionOptionVotes(String questionId) throws FacebookException;
+    ResponseList<QuestionVotes> getQuestionOptionVotes(String questionId) throws FacebookException;
 
 }
