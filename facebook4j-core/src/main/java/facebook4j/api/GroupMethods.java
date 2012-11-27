@@ -21,7 +21,7 @@ import java.net.URL;
 import facebook4j.FacebookException;
 import facebook4j.Group;
 import facebook4j.GroupDoc;
-import facebook4j.MemberEntity;
+import facebook4j.GroupMember;
 import facebook4j.Post;
 import facebook4j.PostUpdate;
 import facebook4j.Reading;
@@ -156,7 +156,7 @@ public interface GroupMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/group/">Group - Facebook Developers</a> - Connections - members
      */
-    ResponseList<MemberEntity> getGroupMembers(String groupId) throws FacebookException;
+    ResponseList<GroupMember> getGroupMembers(String groupId) throws FacebookException;
 
     /**
      * Returns all of the users who are members of a group.
@@ -166,7 +166,7 @@ public interface GroupMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/group/">Group - Facebook Developers</a> - Connections - members
      */
-    ResponseList<MemberEntity> getGroupMembers(String groupId, Reading reading) throws FacebookException;
+    ResponseList<GroupMember> getGroupMembers(String groupId, Reading reading) throws FacebookException;
 
 
     /**

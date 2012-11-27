@@ -1006,12 +1006,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createPostList(get(buildURL(groupId, "feed", reading)));
     }
 
-    public ResponseList<MemberEntity> getGroupMembers(String groupId) throws FacebookException {
+    public ResponseList<GroupMember> getGroupMembers(String groupId) throws FacebookException {
         return getGroupMembers(groupId, null);
     }
-    public ResponseList<MemberEntity> getGroupMembers(String groupId, Reading reading) throws FacebookException {
+    public ResponseList<GroupMember> getGroupMembers(String groupId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createMemberEntityList(get(buildURL(groupId, "members", reading)));
+        return factory.createGroupMemberList(get(buildURL(groupId, "members", reading)));
     }
 
     public URL getGroupPictureURL(String groupId) throws FacebookException {

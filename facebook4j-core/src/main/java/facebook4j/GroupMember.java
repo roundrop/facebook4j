@@ -19,7 +19,7 @@ package facebook4j;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface MemberEntity {
+public interface GroupMember {
     String getId();
     String getName();
     Boolean isAdministrator();

@@ -18,7 +18,7 @@ package facebook4j.internal.json;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 import facebook4j.FacebookException;
-import facebook4j.MemberEntity;
+import facebook4j.GroupMember;
 import facebook4j.ResponseList;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
@@ -26,18 +26,18 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
-/*package*/ final class MemberEntityJSONImpl implements MemberEntity, java.io.Serializable {
+/*package*/ final class GroupMemberJSONImpl implements GroupMember, java.io.Serializable {
     private static final long serialVersionUID = 8912198140971501463L;
 
     private String id;
     private String name;
     private Boolean isAdministrator;
 
-    /*package*/MemberEntityJSONImpl(HttpResponse res) throws FacebookException {
+    /*package*/GroupMemberJSONImpl(HttpResponse res) throws FacebookException {
         JSONObject json = res.asJSONObject();
         init(json);
     }
-    /*package*/MemberEntityJSONImpl(JSONObject json) throws FacebookException {
+    /*package*/GroupMemberJSONImpl(JSONObject json) throws FacebookException {
         super();
         init(json);
     }
@@ -59,7 +59,7 @@ import facebook4j.internal.org.json.JSONObject;
     }
 
     /*package*/
-    static ResponseList<MemberEntity> createMemberEntityList(HttpResponse res, Configuration conf) throws FacebookException {
+    static ResponseList<GroupMember> createGroupMemberList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 DataObjectFactoryUtil.clearThreadLocalMap();
@@ -67,9 +67,9 @@ import facebook4j.internal.org.json.JSONObject;
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
             int size = list.length();
-            ResponseList<MemberEntity> members = new ResponseListImpl<MemberEntity>(size, json);
+            ResponseList<GroupMember> members = new ResponseListImpl<GroupMember>(size, json);
             for (int i = 0; i < size; i++) {
-                MemberEntity member = new MemberEntityJSONImpl(list.getJSONObject(i));
+                GroupMember member = new GroupMemberJSONImpl(list.getJSONObject(i));
                 members.add(member);
             }
             if (conf.isJSONStoreEnabled()) {
@@ -96,7 +96,7 @@ import facebook4j.internal.org.json.JSONObject;
             return false;
         if (getClass() != obj.getClass())
             return false;
-        MemberEntityJSONImpl other = (MemberEntityJSONImpl) obj;
+        GroupMemberJSONImpl other = (GroupMemberJSONImpl) obj;
         if (id == null) {
             if (other.id != null)
                 return false;

@@ -44,7 +44,7 @@ import facebook4j.Interest;
 import facebook4j.Like;
 import facebook4j.Link;
 import facebook4j.Location;
-import facebook4j.MemberEntity;
+import facebook4j.GroupMember;
 import facebook4j.Message;
 import facebook4j.Movie;
 import facebook4j.Music;
@@ -324,8 +324,8 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return VideoJSONImpl.createVideoList(res, conf);
     }
 
-    public ResponseList<MemberEntity> createMemberEntityList(HttpResponse res) throws FacebookException {
-        return MemberEntityJSONImpl.createMemberEntityList(res, conf);
+    public ResponseList<GroupMember> createGroupMemberList(HttpResponse res) throws FacebookException {
+        return GroupMemberJSONImpl.createGroupMemberList(res, conf);
     }
 
     public ResponseList<Insight> createInsightList(HttpResponse res) throws FacebookException {
