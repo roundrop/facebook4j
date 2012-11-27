@@ -18,10 +18,8 @@ package facebook4j.internal.json;
 
 import facebook4j.FacebookException;
 import facebook4j.IdName;
-import facebook4j.ResponseList;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
-import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
@@ -29,7 +27,7 @@ import facebook4j.internal.org.json.JSONObject;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 /*package*/ class IdNameJSONImpl extends FacebookResponseImpl implements IdName, java.io.Serializable {
-    private static final long serialVersionUID = -1724969319460349501L;
+    private static final long serialVersionUID = 3690969204489575083L;
 
     protected String id;
     protected String name;
@@ -65,29 +63,6 @@ import facebook4j.internal.org.json.JSONObject;
         return name;
     }
 
-    /*package*/
-    static ResponseList<IdName> createIdNameList(HttpResponse res, Configuration conf) throws FacebookException {
-        try {
-            if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.clearThreadLocalMap();
-            }
-            JSONObject json = res.asJSONObject();
-            JSONArray list = json.getJSONArray("data");
-            int size = list.length();
-            ResponseList<IdName> idNames = new ResponseListImpl<IdName>(size, json);
-            for (int i = 0; i < size; i++) {
-                IdName entity = new IdNameJSONImpl(list.getJSONObject(i));
-                idNames.add(entity);
-            }
-            if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(idNames, json);
-            }
-            return idNames;
-        } catch (JSONException jsone) {
-            throw new FacebookException(jsone);
-        }
-    }
-    
     @Override
     public int hashCode() {
         final int prime = 31;
