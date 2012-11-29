@@ -253,5 +253,19 @@ public class PostMethodsTest extends FacebookTestBase {
             }
         }
     }
+
+    @Test
+    public void paging() throws Exception {
+        ResponseList<Post> feed = facebook1.getFeed(new Reading().limit(1));
+        Post post1 = feed.get(0);
+        Paging<Post> paging = feed.getPaging();
+        ResponseList<Post> nextPage = facebook1.fetchNext(paging);
+        Post post2 = nextPage.get(0);
+        assertThat(post1, is(not(post2)));
+        Paging<Post> paging2 = nextPage.getPaging();
+        ResponseList<Post> previousPage = facebook1.fetchPrevious(paging2);
+        Post post3 = previousPage.get(0);
+        assertThat(post1, is(post3));
+    }
     
 }

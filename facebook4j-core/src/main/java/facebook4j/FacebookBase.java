@@ -73,6 +73,24 @@ public interface FacebookBase {
     Configuration getConfiguration();
 
     /**
+     * Fetches the data of the next page.
+     * 
+     * @param paging paging information of Graph API result
+     * @return the data of the next page
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    <T> ResponseList<T> fetchNext(Paging<T> paging) throws FacebookException;
+
+    /**
+     * Fetches the data of the previous page.
+     * 
+     * @param paging paging information of Graph API result
+     * @return the data of the previous page
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    <T> ResponseList<T> fetchPrevious(Paging<T> paging) throws FacebookException;
+
+    /**
      * Shuts down this instance and releases allocated resources.
      */
     void shutdown();

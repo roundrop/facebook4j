@@ -30,12 +30,12 @@ import facebook4j.internal.org.json.JSONObject;
 /*package*/ class ResponseListImpl<T> extends PagableListImpl<T> implements ResponseList<T> {
     private static final long serialVersionUID = 1252744169603170859L;
 
-    /*package*/ResponseListImpl(JSONObject json) throws FacebookException {
-        super(json);
+    /*package*/ResponseListImpl(JSONObject json, T... t) throws FacebookException {
+        super(json, t);
     }
 
-    /*package*/ResponseListImpl(int size, JSONObject json) throws FacebookException {
-        super(size, json);
+    /*package*/ResponseListImpl(int size, JSONObject json, T... t) throws FacebookException {
+        super(size, json, t);
     }
 
     /*package*/

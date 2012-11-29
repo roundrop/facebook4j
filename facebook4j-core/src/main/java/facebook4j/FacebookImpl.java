@@ -1962,7 +1962,37 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return Boolean.valueOf(res.asString().trim());
     }
     
+    /* Paging */
 
+    @SuppressWarnings("unchecked")
+    public <T> ResponseList<T> fetchNext(Paging<T> paging) throws FacebookException {
+        ensureAuthorizationEnabled();
+        URL url = paging.getNext();
+        if (url == null) {
+            return null;
+        }
+        return (ResponseList<T>) fetchPaging(url, paging.getJSONObjectType());
+    }
+    
+    @SuppressWarnings("unchecked")
+    public <T> ResponseList<T> fetchPrevious(Paging<T> paging) throws FacebookException {
+        ensureAuthorizationEnabled();
+        URL url = paging.getPrevious();
+        if (url == null) {
+            return null;
+        }
+        return (ResponseList<T>) fetchPaging(url, paging.getJSONObjectType());
+    }
+
+    private <T> ResponseList<T> fetchPaging(URL url, Class<T> jsonObjectType) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = getRaw(url.toString());
+        return (ResponseList<T>) factory.createResponseList(res, jsonObjectType);
+    }
+
+
+    /* common methods */
+    
     private ResponseList<Comment> _getComments(String objectId, Reading reading) throws FacebookException {
         return factory.createCommentList(get(buildURL(objectId, "comments", reading)));
     }
@@ -2048,6 +2078,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         }
     }
 
+    
+    /* http methods */
+    
     private HttpResponse get(String url) throws FacebookException {
         if (!conf.isMBeanEnabled()) {
             return http.get(url, auth);
@@ -2074,6 +2107,23 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
             long start = System.currentTimeMillis();
             try {
                 response = http.get(url, parameters, (containsAccessToken(parameters) ? null : auth));
+            } finally {
+                long elapsedTime = System.currentTimeMillis() - start;
+                FacebookAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
+            }
+            return response;
+        }
+    }
+
+    private HttpResponse getRaw(String url) throws FacebookException {
+        if (!conf.isMBeanEnabled()) {
+            return http.get(url);
+        } else {
+            // intercept HTTP call for monitoring purposes
+            HttpResponse response = null;
+            long start = System.currentTimeMillis();
+            try {
+                response = http.get(url);
             } finally {
                 long elapsedTime = System.currentTimeMillis() - start;
                 FacebookAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));

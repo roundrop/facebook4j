@@ -30,29 +30,33 @@ import facebook4j.internal.org.json.JSONObject;
 /*package*/ class PagableListImpl<T> extends ArrayList<T> implements PagableList<T> {
     private static final long serialVersionUID = 3562128202194010360L;
 
-    private Paging paging;
+    private Paging<T> paging;
 
-    /*package*/PagableListImpl(JSONObject json) throws FacebookException {
+    /*package*/PagableListImpl(JSONObject json, T... t) throws FacebookException {
         super();
-        init(json);
+        init(json, t);
     }
 
-    /*package*/PagableListImpl(int size, JSONObject json) throws FacebookException {
+    /*package*/PagableListImpl(int size, JSONObject json, T... t) throws FacebookException {
         super(size);
-        init(json);
+        init(json, t);
     }
-    private void init(JSONObject json) throws FacebookException {
+
+    private void init(JSONObject json, T... t) throws FacebookException {
+        @SuppressWarnings("unchecked")
+        Class<T> jsonObjectType = (Class<T>) t.getClass().getComponentType();
+
         try {
             if (!json.isNull("paging")) {
                 JSONObject pagingJSONObject = json.getJSONObject("paging");
-                paging = new PagingJSONImpl(pagingJSONObject);
+                paging = new PagingJSONImpl<T>(pagingJSONObject, jsonObjectType);
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
     }
-
-    public Paging getPaging() {
+    
+    public Paging<T> getPaging() {
         return paging;
     }
 

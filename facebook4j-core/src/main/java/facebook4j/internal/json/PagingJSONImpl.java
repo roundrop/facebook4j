@@ -17,6 +17,9 @@
 package facebook4j.internal.json;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+
+import java.net.URL;
+
 import facebook4j.FacebookException;
 import facebook4j.Paging;
 import facebook4j.internal.org.json.JSONObject;
@@ -24,28 +27,35 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class PagingJSONImpl implements Paging, java.io.Serializable {
-    private static final long serialVersionUID = -5139851986761334875L;
+/*package*/ final class PagingJSONImpl<T> implements Paging<T>, java.io.Serializable {
+    private static final long serialVersionUID = 4741821984775700187L;
 
-    private final String previous;
-    private final String next;
+    private final URL previous;
+    private final URL next;
+    private final Class<?> jsonObjectType;
     
-    /*pakcage*/PagingJSONImpl(JSONObject json) throws FacebookException {
-        previous = getRawString("previous", json);
-        next = getRawString("next", json);
+    /*pakcage*/PagingJSONImpl(JSONObject json, Class<?> type) throws FacebookException {
+        previous = getURL("previous", json);
+        next = getURL("next", json);
+        this.jsonObjectType = type;
     }
 
-    public String getPrevious() {
+    public URL getPrevious() {
         return previous;
     }
     
-    public String getNext() {
+    public URL getNext() {
         return next;
+    }
+    
+    public Class<?> getJSONObjectType() {
+        return jsonObjectType;
     }
 
     @Override
     public String toString() {
-        return "PagingJSONImpl [previous=" + previous + ", next=" + next + "]";
+        return "PagingJSONImpl [previous=" + previous + ", next=" + next
+                + ", jsonObjectType=" + jsonObjectType + "]";
     }
 
 }

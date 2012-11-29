@@ -16,10 +16,13 @@
 
 package facebook4j;
 
+import java.net.URL;
+
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Paging {
-    String getPrevious();
-    String getNext();
+public interface Paging<T> {
+    URL getPrevious();
+    URL getNext();
+    Class<?> getJSONObjectType();
 }

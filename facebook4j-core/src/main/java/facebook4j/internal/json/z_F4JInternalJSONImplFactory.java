@@ -373,4 +373,138 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
                 '}';
     }
 
+    @SuppressWarnings("unchecked")
+    public <T> ResponseList<T> createResponseList(HttpResponse res, Class<T> jsonObjectType) throws FacebookException {
+        if (jsonObjectType == Account.class) {
+            return (ResponseList<T>) createAccountList(res);
+        }
+        if (jsonObjectType == Activity.class) {
+            return (ResponseList<T>) createActivityList(res);
+        }
+        if (jsonObjectType == Album.class) {
+            return (ResponseList<T>) createAlbumList(res);
+        }
+        if (jsonObjectType == Photo.class) {
+            return (ResponseList<T>) createPhotoList(res);
+        }
+        if (jsonObjectType == Comment.class) {
+            return (ResponseList<T>) createCommentList(res);
+        }
+        if (jsonObjectType == Like.class) {
+            return (ResponseList<T>) createLikeList(res);
+        }
+        if (jsonObjectType == Checkin.class) {
+            return (ResponseList<T>) createCheckinList(res);
+        }
+        if (jsonObjectType == Event.class) {
+            return (ResponseList<T>) createEventList(res);
+        }
+        if (jsonObjectType == Post.class) {
+            return (ResponseList<T>) createPostList(res);
+        }
+        if (jsonObjectType == RSVPStatus.class) {
+            return (ResponseList<T>) createRSVPStatusList(res);
+        }
+        if (jsonObjectType == Video.class) {
+            return (ResponseList<T>) createVideoList(res);
+        }
+        if (jsonObjectType == Family.class) {
+            return (ResponseList<T>) createFamilyList(res);
+        }
+        if (jsonObjectType == Book.class) {
+            return (ResponseList<T>) createBookList(res);
+        }
+        if (jsonObjectType == Game.class) {
+            return (ResponseList<T>) createGameList(res);
+        }
+        if (jsonObjectType == Movie.class) {
+            return (ResponseList<T>) createMovieList(res);
+        }
+        if (jsonObjectType == Music.class) {
+            return (ResponseList<T>) createMusicList(res);
+        }
+        if (jsonObjectType == Television.class) {
+            return (ResponseList<T>) createTelevisionList(res);
+        }
+        if (jsonObjectType == Interest.class) {
+            return (ResponseList<T>) createInterestList(res);
+        }
+        if (jsonObjectType == Friend.class) {
+            return (ResponseList<T>) createFriendList(res);
+        }
+        if (jsonObjectType == Friendlist.class) {
+            return (ResponseList<T>) createFriendlistList(res);
+        }
+        if (jsonObjectType == FriendRequest.class) {
+            return (ResponseList<T>) createFriendRequestList(res);
+        }
+        if (jsonObjectType == Achievement.class) {
+            return (ResponseList<T>) createAchievementList(res);
+        }
+        if (jsonObjectType == Score.class) {
+            return (ResponseList<T>) createScoreList(res);
+        }
+        if (jsonObjectType == Group.class) {
+            return (ResponseList<T>) createGroupList(res);
+        }
+        if (jsonObjectType == GroupMember.class) {
+            return (ResponseList<T>) createGroupMemberList(res);
+        }
+        if (jsonObjectType == GroupDoc.class) {
+            return (ResponseList<T>) createGroupDocList(res);
+        }
+        if (jsonObjectType == Insight.class) {
+            return (ResponseList<T>) createInsightList(res);
+        }
+        if (jsonObjectType == Location.class) {
+            return (ResponseList<T>) createLocationList(res);
+        }
+        if (jsonObjectType == Inbox.class) {
+            return (ResponseList<T>) createInboxList(res);
+        }
+        if (jsonObjectType == Message.class) {
+            return (ResponseList<T>) createMessageList(res);
+        }
+        if (jsonObjectType == Note.class) {
+            return (ResponseList<T>) createNoteList(res);
+        }
+        if (jsonObjectType == Notification.class) {
+            return (ResponseList<T>) createNotificationList(res);
+        }
+        if (jsonObjectType == Tag.class) {
+            return (ResponseList<T>) createTagList(res);
+        }
+        if (jsonObjectType == Poke.class) {
+            return (ResponseList<T>) createPokeList(res);
+        }
+        if (jsonObjectType == Link.class) {
+            return (ResponseList<T>) createLinkList(res);
+        }
+        if (jsonObjectType == Question.class) {
+            return (ResponseList<T>) createQuestionList(res);
+        }
+        if (jsonObjectType == Question.Option.class) {
+            return (ResponseList<T>) createQuestionOptionList(res);
+        }
+        if (jsonObjectType == QuestionVotes.class) {
+            return (ResponseList<T>) createQuestionVotesList(res);
+        }
+        if (jsonObjectType == User.class) {
+            return (ResponseList<T>) createUserList(res);
+        }
+        if (jsonObjectType == Place.class) {
+            return (ResponseList<T>) createPlaceList(res);
+        }
+        if (jsonObjectType == Subscribedto.class) {
+            return (ResponseList<T>) createSubscribedtoList(res);
+        }
+        if (jsonObjectType == Subscriber.class) {
+            return (ResponseList<T>) createSubscriberList(res);
+        }
+        if (jsonObjectType == JSONObject.class) {
+            return (ResponseList<T>) createJSONObjectList(res);
+        }
+        throw new FacebookException("The json object type: '" + jsonObjectType + "' is unrecognized.");
+    }
+
 }
