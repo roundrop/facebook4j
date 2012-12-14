@@ -50,6 +50,7 @@ import facebook4j.Movie;
 import facebook4j.Music;
 import facebook4j.Note;
 import facebook4j.Notification;
+import facebook4j.Page;
 import facebook4j.Permission;
 import facebook4j.Photo;
 import facebook4j.Place;
@@ -259,6 +260,10 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
 
     public Note createNote(HttpResponse res) throws FacebookException {
         return new NoteJSONImpl(res, conf);
+    }
+
+    public ResponseList<Page> createPageList(HttpResponse res) throws FacebookException {
+        return PageJSONImpl.createPageList(res, conf);
     }
 
     public List<Permission> createPermissions(HttpResponse res) throws FacebookException {
