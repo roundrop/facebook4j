@@ -51,6 +51,10 @@ public class SearchMethodsTest extends FacebookTestBase {
         for (Post post : posts) {
             System.out.println(post);
         }
+        posts = facebook1.searchPosts("テスト");
+        for (Post post : posts) {
+            System.out.println(post);
+        }
     }
 
     @Test
@@ -65,6 +69,10 @@ public class SearchMethodsTest extends FacebookTestBase {
     @Test
     public void searchEvents() throws Exception {
         ResponseList<Event> events = facebook1.searchEvents("conference");
+        for (Event event : events) {
+            System.out.println(event);
+        }
+        events = facebook1.searchEvents("セミナー");
         for (Event event : events) {
             System.out.println(event);
         }

@@ -81,10 +81,14 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     private String buildSearchURL(String query, String objectType, Reading reading) {
+        String q = null;
+        if (query != null) {
+            q = HttpParameter.encode(query);
+        }
         StringBuilder url = new StringBuilder()
                             .append(buildURL("search"))
                             .append(objectType == null ? "" : "?type=" + objectType)
-                            .append(query == null ? "" : objectType == null ? "?q=" + query : "&q=" + query)
+                            .append(q == null ? "" : objectType == null ? "?q=" + q : "&q=" + q)
                             .append(reading == null ? "" : "&" + reading.getQuery());
         return url.toString();
     }
