@@ -539,9 +539,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createRSVPStatusList(get(buildURL(eventId, "attending/" + userId)));
     }
 
-    public boolean rsvpEventAsAttending(String eventId, String userId) throws FacebookException {
+    public boolean rsvpEventAsAttending(String eventId) throws FacebookException {
         ensureAuthorizationEnabled();
-        HttpResponse res = post(buildURL(eventId, "attending/" + userId));
+        HttpResponse res = post(buildURL(eventId, "attending"));
         return Boolean.valueOf(res.asString().trim());
     }
 
@@ -554,9 +554,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createRSVPStatusList(get(buildURL(eventId, "maybe/" + userId)));
     }
 
-    public boolean rsvpEventAsMaybe(String eventId, String userId) throws FacebookException {
+    public boolean rsvpEventAsMaybe(String eventId) throws FacebookException {
         ensureAuthorizationEnabled();
-        HttpResponse res = post(buildURL(eventId, "maybe/" + userId));
+        HttpResponse res = post(buildURL(eventId, "maybe"));
         return Boolean.valueOf(res.asString().trim());
     }
 
@@ -569,9 +569,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createRSVPStatusList(get(buildURL(eventId, "declined/" + userId)));
     }
 
-    public boolean rsvpEventAsDeclined(String eventId, String userId) throws FacebookException {
+    public boolean rsvpEventAsDeclined(String eventId) throws FacebookException {
         ensureAuthorizationEnabled();
-        HttpResponse res = post(buildURL(eventId, "declined/" + userId));
+        HttpResponse res = post(buildURL(eventId, "declined"));
         return Boolean.valueOf(res.asString().trim());
     }
 

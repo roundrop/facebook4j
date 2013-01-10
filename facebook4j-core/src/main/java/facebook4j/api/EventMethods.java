@@ -284,14 +284,13 @@ public interface EventMethods {
     ResponseList<RSVPStatus> getRSVPStatusInAttending(String eventId, String userId) throws FacebookException;
     
     /**
-     * RSVPs the user as 'attending' the event.
+     * RSVPs the current user as 'attending' the event.
      * @param eventId the ID of a event
-     * @param userId the ID of the user
      * @return true if the RSVP is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/event/#attending">Event#attending - Facebook Developers</a>
      */
-    boolean rsvpEventAsAttending(String eventId, String userId) throws FacebookException;
+    boolean rsvpEventAsAttending(String eventId) throws FacebookException;
 
 
     /**
@@ -314,14 +313,13 @@ public interface EventMethods {
     ResponseList<RSVPStatus> getRSVPStatusInMaybe(String eventId, String userId) throws FacebookException;
 
     /**
-     * RSVPs the user as 'maybe' the event.
+     * RSVPs the current user as 'maybe' the event.
      * @param eventId the ID of a event
-     * @param userId the ID of the user
      * @return true if the RSVP is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/event/#maybe">Event#maybe - Facebook Developers</a>
      */
-    boolean rsvpEventAsMaybe(String eventId, String userId) throws FacebookException;
+    boolean rsvpEventAsMaybe(String eventId) throws FacebookException;
 
 
     /**
@@ -344,14 +342,13 @@ public interface EventMethods {
     ResponseList<RSVPStatus> getRSVPStatusInDeclined(String eventId, String userId) throws FacebookException;
 
     /**
-     * RSVPs the user as 'declined' the event.
+     * RSVPs the current user as 'declined' the event.
      * @param eventId the ID of a event
-     * @param userId the ID of the user
      * @return true if the RSVP is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/event/#declined">Event#declined - Facebook Developers</a>
      */
-    boolean rsvpEventAsDeclined(String eventId, String userId) throws FacebookException;
+    boolean rsvpEventAsDeclined(String eventId) throws FacebookException;
 
 
     /**

@@ -103,24 +103,33 @@ public class EventMethodsTest extends FacebookTestBase {
     @Test
     public void attending() throws Exception {
         String eventId = createTmpEvent();
-        boolean result = facebookBestFriend2.rsvpEventAsAttending(eventId, bestFriend2.getId());
+        boolean result = facebookBestFriend2.rsvpEventAsAttending(eventId);
         assertThat(result, is(true));
+        ResponseList<RSVPStatus> status = facebookBestFriend1.getRSVPStatusInAttending(eventId, bestFriend2.getId());
+        assertThat(status.size(), is(1));
+        assertThat(status.get(0).getRsvpStatus(), is("attending"));
         deleteTmpEvent(eventId);
     }
 
     @Test
     public void maybe() throws Exception {
         String eventId = createTmpEvent();
-        boolean result = facebookBestFriend2.rsvpEventAsMaybe(eventId, "");
+        boolean result = facebookBestFriend2.rsvpEventAsMaybe(eventId);
         assertThat(result, is(true));
+        ResponseList<RSVPStatus> status = facebookBestFriend1.getRSVPStatusInMaybe(eventId, bestFriend2.getId());
+        assertThat(status.size(), is(1));
+        assertThat(status.get(0).getRsvpStatus(), is("unsure"));
         deleteTmpEvent(eventId);
     }
 
     @Test
     public void declined() throws Exception {
         String eventId = createTmpEvent();
-        boolean result = facebookBestFriend2.rsvpEventAsDeclined(eventId, "");
+        boolean result = facebookBestFriend2.rsvpEventAsDeclined(eventId);
         assertThat(result, is(true));
+        ResponseList<RSVPStatus> status = facebookBestFriend1.getRSVPStatusInDeclined(eventId, bestFriend2.getId());
+        assertThat(status.size(), is(1));
+        assertThat(status.get(0).getRsvpStatus(), is("declined"));
         deleteTmpEvent(eventId);
     }
     
