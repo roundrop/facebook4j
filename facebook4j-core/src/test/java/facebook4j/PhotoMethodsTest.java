@@ -20,17 +20,12 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.net.URL;
-import java.util.List;
-import java.util.Locale;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import facebook4j.json.DataObjectFactory;
 
 public class PhotoMethodsTest extends FacebookTestBase {
 
@@ -51,16 +46,14 @@ public class PhotoMethodsTest extends FacebookTestBase {
     }
 
     @Test
-    public void postPhoto() throws Exception {
+    public void post_delete() throws Exception {
         File file = new File("src/test/resources/test_image.png");
         Media source = new Media(file);
         String photoId = facebook1.postPhoto(source, "test message", null, false);
         assertThat(photoId, is(notNullValue()));
-        
-//        ResponseList<Post> home = facebook1.getHome();
-//        for (Post post : home) {
-//            System.out.println(post);
-//        }
+
+        boolean deleteResult = facebook1.deletePhoto(photoId);
+        assertThat(deleteResult, is(true));
     }
 
 }

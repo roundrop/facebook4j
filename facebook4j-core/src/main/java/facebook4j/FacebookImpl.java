@@ -1516,6 +1516,11 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return getRawString("id", json);
     }
 
+    public boolean deletePhoto(String photoId) throws FacebookException {
+        HttpResponse res = delete(buildURL(photoId));
+        return Boolean.valueOf(res.asString().trim());
+    }
+
     /* Poke Methods */
     
     public ResponseList<Poke> getPokes() throws FacebookException {

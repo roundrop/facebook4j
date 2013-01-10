@@ -116,6 +116,15 @@ public interface PhotoMethods {
 
 
     /**
+     * Deletes the photo.
+     * @param photoId the ID of the photo
+     * @return true if delete is successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    boolean deletePhoto(String photoId) throws FacebookException;
+
+
+    /**
      * Returns a single photo.
      * @param photoId the ID of the photo
      * @return photo
