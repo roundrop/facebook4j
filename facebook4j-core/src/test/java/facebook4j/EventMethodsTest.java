@@ -92,10 +92,55 @@ public class EventMethodsTest extends FacebookTestBase {
         }
     }
 
+    @Test
+    public void invite() throws Exception {
+        String eventId = createTmpEvent();
+        boolean result = facebookBestFriend1.inviteToEvent(eventId, bestFriend2.getId());
+        assertThat(result, is(true));
+        deleteTmpEvent(eventId);
+    }
+
+    @Test
+    public void attending() throws Exception {
+        String eventId = createTmpEvent();
+        boolean result = facebookBestFriend2.rsvpEventAsAttending(eventId, bestFriend2.getId());
+        assertThat(result, is(true));
+        deleteTmpEvent(eventId);
+    }
+
+    @Test
+    public void maybe() throws Exception {
+        String eventId = createTmpEvent();
+        boolean result = facebookBestFriend2.rsvpEventAsMaybe(eventId, "");
+        assertThat(result, is(true));
+        deleteTmpEvent(eventId);
+    }
+
+    @Test
+    public void declined() throws Exception {
+        String eventId = createTmpEvent();
+        boolean result = facebookBestFriend2.rsvpEventAsDeclined(eventId, "");
+        assertThat(result, is(true));
+        deleteTmpEvent(eventId);
+    }
+    
     private Calendar tomorrow(Calendar cal) {
         Calendar tomorrow = Calendar.getInstance();
         tomorrow.setTime(cal.getTime());
         tomorrow.add(Calendar.DAY_OF_MONTH, 1);
         return tomorrow;
+    }
+
+    private String createTmpEvent() throws FacebookException {
+        Calendar start = Calendar.getInstance();
+        EventUpdate eventUpdate = new EventUpdate("tmp event", start);
+        String eventId = facebookBestFriend1.createEvent(eventUpdate);
+        assertThat(eventId, is(notNullValue()));
+        return eventId;
+    }
+
+    private void deleteTmpEvent(String eventId) throws FacebookException {
+        boolean result = facebookBestFriend1.deleteEvent(eventId);
+        assertThat(result, is(true));
     }
 }
