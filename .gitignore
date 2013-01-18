@@ -3,4 +3,8 @@
 .project
 .settings/
 target/
+.idea/
+*.iml
+*.ipr
+*.iws
 test.properties
