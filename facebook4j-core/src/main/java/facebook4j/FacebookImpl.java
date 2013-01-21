@@ -1890,6 +1890,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createJSONObjectList(get(url));
     }
 
+    public ResponseList<Page> searchPages(String query) throws FacebookException {
+        return searchPages(query, null);
+    }
+
+    public ResponseList<Page> searchPages(String query, Reading reading) throws FacebookException {
+        String url = buildSearchURL(query, "page", reading);
+        return factory.createPageList(get(url));
+    }
+
     /* FQL Methods */
     
     public JSONArray executeFQL(String query) throws FacebookException {
