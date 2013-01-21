@@ -1373,6 +1373,14 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     /* Page Methods */
 
+    public Page getPage(String pageId) throws FacebookException {
+        return getPage(pageId, null);
+    }
+    public Page getPage(String pageId, Reading reading) throws FacebookException {
+        HttpResponse res = get(buildURL(pageId, reading));
+        return factory.createPage(res);
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }

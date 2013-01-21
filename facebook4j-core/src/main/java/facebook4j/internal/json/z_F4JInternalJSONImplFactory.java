@@ -262,6 +262,10 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return new NoteJSONImpl(res, conf);
     }
 
+    public Page createPage(HttpResponse res) throws FacebookException {
+        return new PageJSONImpl(res, conf);
+    }
+
     public ResponseList<Page> createPageList(HttpResponse res) throws FacebookException {
         return PageJSONImpl.createPageList(res, conf);
     }

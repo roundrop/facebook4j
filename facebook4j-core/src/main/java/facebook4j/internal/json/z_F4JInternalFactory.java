@@ -146,6 +146,7 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     
     ResponseList<Notification> createNotificationList(HttpResponse res) throws FacebookException;
 
+    Page createPage(HttpResponse res) throws FacebookException;
     ResponseList<Page> createPageList(HttpResponse res) throws FacebookException;
 
     Message createMessage(HttpResponse res) throws FacebookException;
