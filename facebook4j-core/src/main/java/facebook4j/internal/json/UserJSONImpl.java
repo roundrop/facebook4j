@@ -728,7 +728,9 @@ import facebook4j.internal.org.json.JSONObject;
                     JSONObject positionJSONObject = json.getJSONObject("position");
                     position = new IdNameEntityJSONImpl(positionJSONObject);
                 }
-                startDate = json.getString("start_date");
+                if (!json.isNull("start_date")) {
+                    startDate = json.getString("start_date");
+                }
                 if (!json.isNull("end_date")) {
                     endDate = json.getString("end_date");
                 }
