@@ -65,7 +65,7 @@ public class SearchMethodsTest extends FacebookTestBase {
             System.out.println(user);
         }
     }
-    
+
     @Test
     public void searchEvents() throws Exception {
         ResponseList<Event> events = facebook1.searchEvents("conference");
@@ -77,7 +77,7 @@ public class SearchMethodsTest extends FacebookTestBase {
             System.out.println(event);
         }
     }
-    
+
     @Test
     public void searchGroups() throws Exception {
         ResponseList<Group> groups = facebook1.searchGroups("programming");
@@ -85,7 +85,7 @@ public class SearchMethodsTest extends FacebookTestBase {
             System.out.println(group);
         }
     }
-    
+
     @Test
     public void searchPlaces() throws Exception {
         ResponseList<Place> places = facebook1.searchPlaces("coffee");
@@ -93,7 +93,7 @@ public class SearchMethodsTest extends FacebookTestBase {
             System.out.println(place);
         }
     }
-    
+
     @Test
     public void searchPlacesWithGeoLocation() throws Exception {
         GeoLocation center = new GeoLocation(37.76, -122.427);
@@ -103,7 +103,7 @@ public class SearchMethodsTest extends FacebookTestBase {
             System.out.println(place);
         }
     }
-    
+
     @Test
     public void searchCheckins() throws Exception {
         ResponseList<Checkin> checkins = facebook1.searchCheckins();
@@ -111,7 +111,7 @@ public class SearchMethodsTest extends FacebookTestBase {
             System.out.println(checkin);
         }
     }
-    
+
     @Test
     public void searchLocationsByGeo() throws Exception {
         GeoLocation center = new GeoLocation(35.661725, 139.707105);
@@ -121,7 +121,7 @@ public class SearchMethodsTest extends FacebookTestBase {
             System.out.println(location);
         }
     }
-    
+
     @Test
     public void searchLocationsByPlace() throws Exception {
         String placeId = "116972348358579";
@@ -130,7 +130,15 @@ public class SearchMethodsTest extends FacebookTestBase {
             System.out.println(location);
         }
     }
-    
+
+    @Test
+    public void searchPages() throws Exception {
+        ResponseList<Page> pages = facebook1.searchPages("platform", new Reading().limit(5));
+        for (Page page: pages) {
+            System.out.println(page);
+        }
+    }
+
     @Test
     public void search() throws Exception {
         ResponseList<JSONObject> results = facebook1.search("orange");
@@ -138,12 +146,11 @@ public class SearchMethodsTest extends FacebookTestBase {
         for (JSONObject result : results) {
             System.out.println(result);
         }
-        
+
         results = facebook1.search("orange", new Reading().until("yesterday"));
         System.out.println(results);
         for (JSONObject result : results) {
             System.out.println(result);
         }
     }
-
 }
