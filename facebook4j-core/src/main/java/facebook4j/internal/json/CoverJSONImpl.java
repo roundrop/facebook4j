@@ -33,7 +33,11 @@ import facebook4j.internal.org.json.JSONObject;
 
     /*package*/CoverJSONImpl(JSONObject json) throws FacebookException {
         try {
-            id = json.getString("id");
+            if (!json.isNull("id")) {
+                id = json.getString("id");
+            } else {
+                id = json.getString("cover_id");
+            }
             source = json.getString("source");
             offsetY = json.getLong("offset_y");
         } catch (JSONException jsone) {

@@ -18,6 +18,7 @@ package facebook4j.api;
 
 import facebook4j.FacebookException;
 import facebook4j.Page;
+import facebook4j.PageUpdate;
 import facebook4j.Reading;
 
 /**
@@ -25,6 +26,34 @@ import facebook4j.Reading;
  * @since Facebook4J 1.2.0
  */
 public interface PageMethods {
+    /**
+     * Returns the page.
+     * @param pageId the ID of the page
+     * @return page
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    Page getPage(String pageId) throws FacebookException;
+
+    /**
+     * Returns the page.
+     * @param pageId the ID of the page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return page
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    Page getPage(String pageId, Reading reading) throws FacebookException;
+
+    /**
+     * Updates a Page's basic attributes.
+     * @param pageId the ID of the page
+     * @param pageUpdate the page to be updated
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a>
+     */
+    void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException;
+
     /**
      * Returns a specific page that the current user has liked.
      * @param pageId the ID of a page
