@@ -45,6 +45,7 @@ public interface PageMethods {
     Page getPage(String pageId, Reading reading) throws FacebookException;
 
     /**
+<<<<<<< HEAD
      * Returns the url of a page's profile picture.
      * This method requires page access_token.
      * @return url
@@ -121,6 +122,8 @@ public interface PageMethods {
     ResponseList<Post> getPromotablePosts(String pageId, Reading reading) throws FacebookException;
 
     /**
+=======
+>>>>>>> Re-Normalize line endings
      * Updates a Page's basic attributes.
      * @param pageId the ID of the page
      * @param pageUpdate the page to be updated
@@ -130,6 +133,7 @@ public interface PageMethods {
     void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException;
 
     /**
+<<<<<<< HEAD
      * Updates the profile photo for a Page.
      * @param pageId the ID of the page
      * @param picture A URL to the photo
@@ -177,6 +181,8 @@ public interface PageMethods {
     String postPagePhoto(String pageId, PagePhotoUpdate pagePhotoUpdate) throws FacebookException;
 
     /**
+=======
+>>>>>>> Re-Normalize line endings
      * Returns a specific page that the current user has liked.
      * @param pageId the ID of a page
      * @return page
