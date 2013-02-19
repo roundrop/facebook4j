@@ -673,7 +673,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
     public ResponseList<Post> getFeed(String userId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createPostList(get(buildURL(userId, "feed", reading)));
+        return _getFeed(userId, reading);
     }
 
     public ResponseList<Post> getHome() throws FacebookException {
@@ -1381,6 +1381,14 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createPage(res);
     }
 
+    public ResponseList<Post> getPageFeed(String pageId) throws FacebookException {
+        return getPageFeed(pageId, null);
+    }
+    public ResponseList<Post> getPageFeed(String pageId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return _getFeed(pageId, reading);
+    }
+
     public void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         post(buildURL(pageId), pageUpdate.asHttpParameterArray());
@@ -2063,6 +2071,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         } catch (MalformedURLException urle) {
             throw new FacebookException(urle.getMessage(), urle);
         }
+    }
+
+    private ResponseList<Post> _getFeed(String objectId, Reading reading) throws FacebookException {
+        return factory.createPostList(get(buildURL(objectId, "feed", reading)));
     }
 
     private String _comment(String objectId, String message) throws FacebookException {

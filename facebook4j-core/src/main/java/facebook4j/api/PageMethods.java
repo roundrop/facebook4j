@@ -19,7 +19,9 @@ package facebook4j.api;
 import facebook4j.FacebookException;
 import facebook4j.Page;
 import facebook4j.PageUpdate;
+import facebook4j.Post;
 import facebook4j.Reading;
+import facebook4j.ResponseList;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -45,6 +47,25 @@ public interface PageMethods {
      */
     Page getPage(String pageId, Reading reading) throws FacebookException;
 
+    /**
+     * Returns the Page's wall.
+     * @param pageId the ID of the page
+     * @return posts
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<Post> getPageFeed(String pageId) throws FacebookException;
+
+    /**
+     * Returns the Page's wall.
+     * @param pageId the ID of the page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return posts
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<Post> getPageFeed(String pageId, Reading reading) throws FacebookException;
+    
     /**
      * Updates a Page's basic attributes.
      * @param pageId the ID of the page
