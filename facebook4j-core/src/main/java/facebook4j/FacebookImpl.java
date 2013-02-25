@@ -125,18 +125,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return getPictureURL(userId, null);
     }
     public URL getPictureURL(String userId, PictureSize size) throws FacebookException {
-        String url = buildURL(userId, "picture");
-        HttpResponse res;
-        if (size != null) {
-            res = get(url, new HttpParameter[]{new HttpParameter("type", size.toString())});
-        } else {
-            res = get(url);
-        }
-        try {
-            return new URL(res.getResponseHeader("Location"));
-        } catch (MalformedURLException urle) {
-            throw new FacebookException(urle.getMessage(), urle);
-        }
+        return _getPictureURL(userId, size);
     }
     
     public List<User> getUsers(String... ids) throws FacebookException {
@@ -580,7 +569,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
     public URL getEventPictureURL(String eventId, PictureSize size) throws FacebookException {
         ensureAuthorizationEnabled();
-        return _getPictureURL(eventId, "picture", size);
+        return _getPictureURL(eventId, size);
     }
 
     public boolean updateEventPicture(String eventId, Media source) throws FacebookException {
@@ -1381,6 +1370,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createPage(res);
     }
 
+    public URL getPagePictureURL(String pageId) throws FacebookException {
+        return getPagePictureURL(pageId, null);
+    }
+    public URL getPagePictureURL(String pageId, PictureSize size) throws FacebookException {
+        return _getPictureURL(pageId, size);
+    }
+
     public ResponseList<Post> getPageFeed(String pageId) throws FacebookException {
         return getPageFeed(pageId, null);
     }
@@ -1806,7 +1802,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     public URL getVideoCover(String videoId) throws FacebookException {
         ensureAuthorizationEnabled();
-        return _getPictureURL(videoId, "picture", null);
+        return _getPictureURL(videoId, null);
     }
     
     /* Insight Methods */
@@ -2057,9 +2053,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     private ResponseList<Like> _getLikes(String objectId, Reading reading) throws FacebookException {
         return factory.createLikeList(get(buildURL(objectId, "likes", reading)));
     }
-    
-    private URL _getPictureURL(String objectId, String connection, PictureSize size) throws FacebookException {
-        String url = buildURL(objectId, connection);
+
+    private URL _getPictureURL(String objectId, PictureSize size) throws FacebookException {
+        String url = buildURL(objectId, "picture");
         HttpResponse res;
         if (size != null) {
             res = get(url, new HttpParameter[]{new HttpParameter("type", size.toString())});

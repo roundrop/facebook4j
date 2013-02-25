@@ -25,6 +25,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.net.URL;
+
 public class PageMethodsTest extends FacebookTestBase {
 
     @BeforeClass
@@ -100,6 +102,17 @@ public class PageMethodsTest extends FacebookTestBase {
                                 .website("http://facebook4j.org")
                                 .phone("045-1111-2222");
         real.updatePageBasicAttributes(pageId, pageUpdate);
+    }
+
+    @Test
+    public void getPictureURL() throws Exception {
+        String pageId = "19292868552"; //The Page for Facebook Platform
+        URL pictureURL = facebook1.getPagePictureURL(pageId);
+        assertThat(pictureURL, is(notNullValue()));
+
+        pageId = "19292868552"; //The Page for Facebook Platform
+        pictureURL = facebook1.getPagePictureURL(pageId, PictureSize.large);
+        assertThat(pictureURL, is(notNullValue()));
     }
 
 }

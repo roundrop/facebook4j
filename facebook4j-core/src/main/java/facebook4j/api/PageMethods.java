@@ -16,12 +16,9 @@
 
 package facebook4j.api;
 
-import facebook4j.FacebookException;
-import facebook4j.Page;
-import facebook4j.PageUpdate;
-import facebook4j.Post;
-import facebook4j.Reading;
-import facebook4j.ResponseList;
+import facebook4j.*;
+
+import java.net.URL;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -46,6 +43,25 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
      */
     Page getPage(String pageId, Reading reading) throws FacebookException;
+
+    /**
+     * Returns the url of a page's profile picture.
+     * @param pageId the ID of a page
+     * @return url
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Connections - picture
+     */
+    URL getPagePictureURL(String pageId) throws FacebookException;
+
+    /**
+     * Returns the url of a page's profile picture.
+     * @param pageId the ID of a page
+     * @param size {@link facebook4j.PictureSize picture size}
+     * @return url
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Connections - picture
+     */
+    URL getPagePictureURL(String pageId, PictureSize size) throws FacebookException;
 
     /**
      * Returns the Page's wall.
