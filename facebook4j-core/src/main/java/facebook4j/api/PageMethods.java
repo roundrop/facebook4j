@@ -16,7 +16,14 @@
 
 package facebook4j.api;
 
-import facebook4j.*;
+import facebook4j.FacebookException;
+import facebook4j.Media;
+import facebook4j.Page;
+import facebook4j.PageUpdate;
+import facebook4j.PictureSize;
+import facebook4j.Post;
+import facebook4j.Reading;
+import facebook4j.ResponseList;
 
 import java.net.URL;
 
@@ -90,6 +97,24 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a>
      */
     void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException;
+
+    /**
+     * Updates the profile photo for a Page.
+     * @param pageId the ID of the page
+     * @param picture A URL to the photo
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
+     */
+    void updatePageProfilePhoto(String pageId, URL picture) throws FacebookException;
+
+    /**
+     * Updates the profile photo for a Page.
+     * @param pageId the ID of the page
+     * @param source Photo content
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
+     */
+    void updatePageProfilePhoto(String pageId, Media source) throws FacebookException;
 
     /**
      * Returns a specific page that the current user has liked.

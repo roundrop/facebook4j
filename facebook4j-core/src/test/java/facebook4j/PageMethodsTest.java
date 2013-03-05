@@ -16,16 +16,17 @@
 
 package facebook4j;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.File;
 import java.net.URL;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class PageMethodsTest extends FacebookTestBase {
 
@@ -102,6 +103,24 @@ public class PageMethodsTest extends FacebookTestBase {
                                 .website("http://facebook4j.org")
                                 .phone("045-1111-2222");
         real.updatePageBasicAttributes(pageId, pageUpdate);
+    }
+
+    @Test
+    public void updatePageProfilePhoto_URL() throws Exception {
+        // require page access token
+        // replace to your page id
+        String pageId = "137246726435626";
+        real.updatePageProfilePhoto(pageId, new URL("https://secure.gravatar.com/avatar/3e40bc0f7067d4b83e2b1d6316338bfb?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"));
+    }
+
+    @Test
+    public void updatePageProfilePhoto_Media() throws Exception {
+        // require page access token
+        // replace to your page id
+        String pageId = "137246726435626";
+        File file = new File("src/test/resources/500x500.png");
+        Media media = new Media(file);
+        real.updatePageProfilePhoto(pageId, media);
     }
 
     @Test

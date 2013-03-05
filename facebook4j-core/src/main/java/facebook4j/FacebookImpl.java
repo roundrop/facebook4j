@@ -16,7 +16,15 @@
 
 package facebook4j;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+import facebook4j.Question.Option;
+import facebook4j.auth.Authorization;
+import facebook4j.conf.Configuration;
+import facebook4j.internal.http.HttpParameter;
+import facebook4j.internal.http.HttpResponse;
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
+import facebook4j.internal.util.z_F4JInternalStringUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -27,15 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import facebook4j.Question.Option;
-import facebook4j.auth.Authorization;
-import facebook4j.conf.Configuration;
-import facebook4j.internal.http.HttpParameter;
-import facebook4j.internal.http.HttpResponse;
-import facebook4j.internal.org.json.JSONArray;
-import facebook4j.internal.org.json.JSONException;
-import facebook4j.internal.org.json.JSONObject;
-import facebook4j.internal.util.z_F4JInternalStringUtil;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * A java representation of the <a href="https://developers.facebook.com/docs/reference/api/">Facebook Graph API</a><br>
@@ -1387,7 +1387,19 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     public void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
-        post(buildURL(pageId), pageUpdate.asHttpParameterArray());
+        post(buildURL(pageId, "picture"), pageUpdate.asHttpParameterArray());
+    }
+
+    public void updatePageProfilePhoto(String pageId, URL picture) throws FacebookException {
+        ensureAuthorizationEnabled();
+        post(buildURL(pageId, "picture"), new HttpParameter[] {new HttpParameter("picture", picture.toString())});
+    }
+
+    public void updatePageProfilePhoto(String pageId, Media source) throws FacebookException {
+        ensureAuthorizationEnabled();
+        List<HttpParameter> httpParams = new ArrayList<HttpParameter>();
+        httpParams.add(source.asHttpParameter("source"));
+        post(buildURL(pageId, "picture"), httpParams.toArray(new HttpParameter[httpParams.size()]));
     }
 
     public Page getLikedPage(String pageId) throws FacebookException {
