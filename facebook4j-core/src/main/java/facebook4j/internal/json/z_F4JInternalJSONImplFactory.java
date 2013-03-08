@@ -36,6 +36,7 @@ import facebook4j.Friendlist;
 import facebook4j.Game;
 import facebook4j.Group;
 import facebook4j.GroupDoc;
+import facebook4j.GroupMember;
 import facebook4j.IdNameEntity;
 import facebook4j.Inbox;
 import facebook4j.InboxResponseList;
@@ -44,13 +45,13 @@ import facebook4j.Interest;
 import facebook4j.Like;
 import facebook4j.Link;
 import facebook4j.Location;
-import facebook4j.GroupMember;
 import facebook4j.Message;
 import facebook4j.Movie;
 import facebook4j.Music;
 import facebook4j.Note;
 import facebook4j.Notification;
 import facebook4j.Page;
+import facebook4j.PageSetting;
 import facebook4j.Permission;
 import facebook4j.Photo;
 import facebook4j.Place;
@@ -268,6 +269,10 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
 
     public ResponseList<Page> createPageList(HttpResponse res) throws FacebookException {
         return PageJSONImpl.createPageList(res, conf);
+    }
+
+    public ResponseList<PageSetting> createPageSettingList(HttpResponse res) throws FacebookException {
+        return PageSettingJSONImpl.createLikeList(res, conf);
     }
 
     public List<Permission> createPermissions(HttpResponse res) throws FacebookException {

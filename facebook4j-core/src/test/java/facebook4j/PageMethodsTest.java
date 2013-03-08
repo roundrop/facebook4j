@@ -134,4 +134,15 @@ public class PageMethodsTest extends FacebookTestBase {
         assertThat(pictureURL, is(notNullValue()));
     }
 
+    @Test
+    public void getPageSettings() throws Exception {
+        // require page access token
+        // replace to your page id
+        String pageId = "137246726435626";
+        ResponseList<PageSetting> settings = real.getPageSettings(pageId);
+        for (PageSetting setting : settings) {
+            System.out.println(setting);
+        }
+    }
+
 }
