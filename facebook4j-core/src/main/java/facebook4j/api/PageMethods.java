@@ -20,6 +20,7 @@ import facebook4j.FacebookException;
 import facebook4j.Media;
 import facebook4j.Page;
 import facebook4j.PageSetting;
+import facebook4j.PageSettingUpdate;
 import facebook4j.PageUpdate;
 import facebook4j.PictureSize;
 import facebook4j.Post;
@@ -122,9 +123,19 @@ public interface PageMethods {
      * @param pageId the ID of the page
      * @return settings
      * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
      */
     ResponseList<PageSetting> getPageSettings(String pageId) throws FacebookException;
+
+    /**
+     * Updates the setting for the page.
+     * @param pageId the ID of the page
+     * @param pageSettingUpdate setting
+     * @return true if the setting was successfully set or changed
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#settings">Page#settings - Facebook Developers</a>
+     */
+    boolean updatePageSetting(String pageId, PageSettingUpdate pageSettingUpdate) throws FacebookException;
 
     /**
      * Returns a specific page that the current user has liked.

@@ -145,4 +145,31 @@ public class PageMethodsTest extends FacebookTestBase {
         }
     }
 
+    @Test
+    public void updatePageSetting() throws Exception {
+        // require page access token
+        // require manage_pages permission
+        // replace to your page id
+        String pageId = "137246726435626";
+        PageSettingUpdate pageSettingUpdate = new PageSettingUpdate("USERS_CAN_POST", false);
+        boolean result = real.updatePageSetting(pageId, pageSettingUpdate);
+        assertThat(result, is(true));
+        ResponseList<PageSetting> settings = real.getPageSettings(pageId);
+        for (PageSetting setting : settings) {
+            if (setting.getSetting().equals("USERS_CAN_POST")) {
+                assertThat(setting.getValue(), is(false));
+            }
+        }
+
+        pageSettingUpdate = new PageSettingUpdate("USERS_CAN_POST", true);
+        result = real.updatePageSetting(pageId, pageSettingUpdate);
+        assertThat(result, is(true));
+        settings = real.getPageSettings(pageId);
+        for (PageSetting setting : settings) {
+            if (setting.getSetting().equals("USERS_CAN_POST")) {
+                assertThat(setting.getValue(), is(true));
+            }
+        }
+    }
+
 }
