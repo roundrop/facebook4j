@@ -20,11 +20,7 @@ package facebook4j;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public final class Version {
-<<<<<<< HEAD
-    private static final String VERSION = "1.1.2";
-=======
     private static final String VERSION = "1.2.0";
->>>>>>> cf2ce31... preparing 1.2.0
     private static final String TITLE = "Facebook4J";
 
     private Version() {
