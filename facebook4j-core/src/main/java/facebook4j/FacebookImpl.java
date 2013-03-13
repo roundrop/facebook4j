@@ -684,7 +684,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
     public ResponseList<Post> getPosts(String userId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createPostList(get(buildURL(userId, "posts", reading)));
+        return _getPosts(userId, reading);
     }
 
     public ResponseList<Post> getStatuses() throws FacebookException {
@@ -1383,6 +1383,14 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Post> getPageFeed(String pageId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
         return _getFeed(pageId, reading);
+    }
+
+    public ResponseList<Post> getPagePosts(String pageId) throws FacebookException {
+        return getPagePosts(pageId, null);
+    }
+    public ResponseList<Post> getPagePosts(String pageId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return _getPosts(pageId, reading);
     }
 
     public void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException {
@@ -2095,6 +2103,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     private ResponseList<Post> _getFeed(String objectId, Reading reading) throws FacebookException {
         return factory.createPostList(get(buildURL(objectId, "feed", reading)));
+    }
+
+    private ResponseList<Post> _getPosts(String objectId, Reading reading) throws FacebookException {
+        return factory.createPostList(get(buildURL(objectId, "posts", reading)));
     }
 
     private String _comment(String objectId, String message) throws FacebookException {
