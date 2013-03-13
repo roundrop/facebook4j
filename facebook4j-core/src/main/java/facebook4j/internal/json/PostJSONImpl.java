@@ -433,12 +433,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         private final String link;
 
         /*package*/ActionJSONImpl(JSONObject json) throws FacebookException {
-            try {
-                name = json.getString("name");
-                link = json.getString("link");
-            } catch (JSONException jsone) {
-                throw new FacebookException(jsone);
-            }
+            name = getRawString("name", json);
+            link = getRawString("link", json);
         }
 
         public String getName() {

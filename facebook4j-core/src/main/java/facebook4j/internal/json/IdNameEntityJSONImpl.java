@@ -25,6 +25,8 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
@@ -49,12 +51,8 @@ import facebook4j.internal.org.json.JSONObject;
     }
 
     private void init(JSONObject json) throws FacebookException {
-        try {
-            id = json.getString("id");
-            name = json.getString("name");
-        } catch (JSONException jsone) {
-            throw new FacebookException(jsone);
-        }
+        id = getRawString("id", json);
+        name = getRawString("name", json);
     }
     
     public String getId() {

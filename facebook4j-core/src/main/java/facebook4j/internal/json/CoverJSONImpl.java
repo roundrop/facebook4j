@@ -18,8 +18,9 @@ package facebook4j.internal.json;
 
 import facebook4j.Cover;
 import facebook4j.FacebookException;
-import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -32,17 +33,9 @@ import facebook4j.internal.org.json.JSONObject;
     private final long offsetY;
 
     /*package*/CoverJSONImpl(JSONObject json) throws FacebookException {
-        try {
-            if (!json.isNull("id")) {
-                id = json.getString("id");
-            } else {
-                id = json.getString("cover_id");
-            }
-            source = json.getString("source");
-            offsetY = json.getLong("offset_y");
-        } catch (JSONException jsone) {
-            throw new FacebookException(jsone);
-        }
+        id = getRawString("id", json);
+        source = getRawString("source", json);
+        offsetY = getLong("offset_y", json);
     }
 
     public String getId() {

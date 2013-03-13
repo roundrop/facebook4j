@@ -437,7 +437,7 @@ import facebook4j.internal.org.json.JSONObject;
                     JSONObject yearJSON = json.getJSONObject("year");
                     year = new IdNameEntityJSONImpl(yearJSON);
                 }
-                type = json.getString("type");
+                type = getRawString("type", json);
                 if (!json.isNull("school")) {
                     JSONObject schoolJSON = json.getJSONObject("school");
                     school = new IdNameEntityJSONImpl(schoolJSON);
@@ -588,7 +588,7 @@ import facebook4j.internal.org.json.JSONObject;
                         with.add(new IdNameEntityJSONImpl(withJSONArray.getJSONObject(i)));
                     }
                 }
-                description = json.getString("description");
+                description = getRawString("description", json);
             } catch (JSONException jsone) {
                 throw new FacebookException(jsone.getMessage() + ":" + json.toString(), jsone);
             }
@@ -656,12 +656,8 @@ import facebook4j.internal.org.json.JSONObject;
         private final long size;
 
         VideoUploadLimitsJSONImpl(JSONObject json) throws FacebookException {
-            try {
-                length = json.getLong("length");
-                size = json.getLong("size");
-            } catch (JSONException jsone) {
-                throw new FacebookException(jsone);
-            }
+            length = getLong("length", json);
+            size = getLong("size", json);
         }
 
         public long getLength() {
@@ -728,12 +724,8 @@ import facebook4j.internal.org.json.JSONObject;
                     JSONObject positionJSONObject = json.getJSONObject("position");
                     position = new IdNameEntityJSONImpl(positionJSONObject);
                 }
-                if (!json.isNull("start_date")) {
-                    startDate = json.getString("start_date");
-                }
-                if (!json.isNull("end_date")) {
-                    endDate = json.getString("end_date");
-                }
+                startDate = getRawString("start_date", json);
+                endDate = getRawString("end_date", json);
             } catch (JSONException jsone) {
                 throw new FacebookException(jsone);
             }
