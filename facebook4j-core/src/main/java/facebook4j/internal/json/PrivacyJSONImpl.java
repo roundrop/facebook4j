@@ -46,28 +46,28 @@ import facebook4j.internal.org.json.JSONObject;
             String[] networksArray = getRawString("networks", json).split(",");
             networks = new ArrayList<String>(networksArray.length);
             for (String network : networksArray) {
-                networks.add(network);
+                networks.add(network.trim());
             }
         }
         if (!json.isNull("allow")) {
             String[] allowArray = getRawString("allow", json).split(",");
             allow = new ArrayList<String>(allowArray.length);
             for (String _allow : allowArray) {
-                allow.add(_allow);
+                allow.add(_allow.trim());
             }
         }
         if (!json.isNull("deny")) {
             String[] denyArray = getRawString("deny", json).split(",");
             deny = new ArrayList<String>(denyArray.length);
             for (String _deny : denyArray) {
-                deny.add(_deny);
+                deny.add(_deny.trim());
             }
         }
         if (!json.isNull("description")) {
             String[] descriptionArray = getRawString("description", json).split(",");
             description = new ArrayList<String>(descriptionArray.length);
             for (String _description : descriptionArray) {
-                description.add(_description);
+                description.add(_description.trim());
             }
         }
     }
