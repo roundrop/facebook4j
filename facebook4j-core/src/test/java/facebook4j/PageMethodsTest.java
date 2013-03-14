@@ -101,6 +101,25 @@ public class PageMethodsTest extends FacebookTestBase {
     }
 
     @Test
+    public void postPageFeed() throws Exception {
+        // require manage_pages permission
+        // replace to your page id
+        String pageId = "137246726435626";
+        PostUpdate postUpdate = new PostUpdate("Testing. Succeeded?")
+                .link(new URL("http://facebook4j.org"))
+                .picture(new URL("http://facebook4j.org/images/hero.png"))
+                .name("Facebook4J - A Java library for the Facebook Graph API")
+                .caption("facebook4j.org")
+                .description("Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library.")
+                .targeting(new Targeting().country("US").country("GB"));
+        String postId = real.postPageFeed(pageId, postUpdate);
+        assertThat(postId, is(notNullValue()));
+        Post post = real.getPost(postId);
+        assertThat(post.getPrivacy().getDescription().get(0), is("United States"));
+        assertThat(post.getPrivacy().getDescription().get(1), is("United Kingdom"));
+    }
+
+    @Test
     public void updatePageBasicAttributes() throws Exception {
         // require page access token
         // replace to your page id

@@ -24,6 +24,7 @@ import facebook4j.PageSettingUpdate;
 import facebook4j.PageUpdate;
 import facebook4j.PictureSize;
 import facebook4j.Post;
+import facebook4j.PostUpdate;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
 
@@ -109,6 +110,16 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
      */
     ResponseList<Post> getPagePosts(String pageId, Reading reading) throws FacebookException;
+
+    /**
+     * Creates the post on the page.
+     * @param pageId the ID of a page
+     * @param postUpdate the post to be created
+     * @return The new post ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#posts">Page#posts - Facebook Developers</a>
+     */
+    String postPageFeed(String pageId, PostUpdate postUpdate) throws FacebookException;
 
     /**
      * Updates a Page's basic attributes.

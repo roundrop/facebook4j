@@ -144,32 +144,7 @@ public class PostMethodsTest extends FacebookTestBase {
     }
     
     @Test
-    public void postFeed_byConstructor() throws Exception {
-        String message = "test message";
-        URL link = null;
-        URL picture = null;
-        String name = null;
-        String caption = null;
-        String description = null;
-        List<Action> actions = null;
-        String place = "100404700021921";
-        String tags = null;
-        PrivacyBean privacy = new PrivacyBuilder().setValue(PrivacyType.ALL_FRIENDS).build();
-        String objectAttachment = null;
-        PostUpdate postUpdate = new PostUpdate(message, link, picture,
-                name, caption, description, actions, place, tags, privacy,
-                objectAttachment);
-        String postId = facebook1.postFeed(postUpdate);
-        Post post = facebook1.getPost(postId);
-        assertThat(post, is(notNullValue()));
-        System.out.println(post);
-
-        boolean deleteResult = facebook1.deletePost(postId);
-        assertThat(deleteResult, is(true));
-    }
-
-    @Test
-    public void postFeed_byBuilder() throws Exception {
+    public void postFeed() throws Exception {
         PostUpdate post = new PostUpdate(new URL("http://facebook4j.org"))
                             .picture(new URL("http://facebook4j.org/images/hero.png"))
                             .name("Facebook4J - A Java library for the Facebook Graph API")
