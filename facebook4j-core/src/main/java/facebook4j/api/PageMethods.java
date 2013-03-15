@@ -129,7 +129,6 @@ public interface PageMethods {
      */
     ResponseList<Post> getPromotablePosts(String pageId, Reading reading) throws FacebookException;
 
-
     /**
      * Updates a Page's basic attributes.
      * @param pageId the ID of the page
