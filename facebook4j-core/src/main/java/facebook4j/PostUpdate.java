@@ -18,6 +18,7 @@ package facebook4j;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import facebook4j.Post.Action;
@@ -44,6 +45,9 @@ public class PostUpdate implements java.io.Serializable {
     private String objectAttachment;
 
     private Targeting targeting;
+
+    private Boolean published;
+    private Integer scheduledPublishTime;
 
     public PostUpdate(String message) {
         this.message = message;
@@ -209,6 +213,42 @@ public class PostUpdate implements java.io.Serializable {
         return this;
     }
 
+    public Boolean getPublished() {
+        return published;
+    }
+
+    public void setPublished(Boolean published) {
+        this.published = published;
+    }
+
+    public PostUpdate published(Boolean published) {
+        setPublished(published);
+        return this;
+    }
+
+    public Integer getScheduledPublishTime() {
+        return scheduledPublishTime;
+    }
+
+    public void setScheduledPublishTime(Integer scheduledPublishTime) {
+        this.scheduledPublishTime = scheduledPublishTime;
+    }
+
+    public void setScheduledPublishTime(Date scheduledPublishTime) {
+        long time = scheduledPublishTime.getTime() / 1000L;
+        setScheduledPublishTime(Long.valueOf(time).intValue());
+    }
+
+    public PostUpdate scheduledPublishTime(Integer scheduledPublishTime) {
+        setScheduledPublishTime(scheduledPublishTime);
+        return this;
+    }
+
+    public PostUpdate scheduledPublishTime(Date scheduledPublishTime) {
+        long time = scheduledPublishTime.getTime() / 1000L;
+        return scheduledPublishTime(Long.valueOf(time).intValue());
+    }
+
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         if (message != null) {
@@ -248,6 +288,12 @@ public class PostUpdate implements java.io.Serializable {
         if (targeting != null) {
             params.add(new HttpParameter("targeting", targeting.asJSONString()));
         }
+        if (published != null) {
+            params.add(new HttpParameter("published", published));
+        }
+        if (scheduledPublishTime != null) {
+            params.add(new HttpParameter("scheduled_publish_time", scheduledPublishTime));
+        }
         return params.toArray(new HttpParameter[params.size()]);
     }
 
@@ -271,6 +317,9 @@ public class PostUpdate implements java.io.Serializable {
         if (privacy != null ? !privacy.equals(that.privacy) : that.privacy != null) return false;
         if (tags != null ? !tags.equals(that.tags) : that.tags != null) return false;
         if (targeting != null ? !targeting.equals(that.targeting) : that.targeting != null) return false;
+        if (published != null ? !published.equals(that.published) : that.published != null) return false;
+        if (scheduledPublishTime != null ? !scheduledPublishTime.equals(that.scheduledPublishTime) : that.scheduledPublishTime != null)
+            return false;
 
         return true;
     }
@@ -289,6 +338,8 @@ public class PostUpdate implements java.io.Serializable {
         result = 31 * result + (privacy != null ? privacy.hashCode() : 0);
         result = 31 * result + (objectAttachment != null ? objectAttachment.hashCode() : 0);
         result = 31 * result + (targeting != null ? targeting.hashCode() : 0);
+        result = 31 * result + (published != null ? published.hashCode() : 0);
+        result = 31 * result + (scheduledPublishTime != null ? scheduledPublishTime.hashCode() : 0);
         return result;
     }
 
@@ -307,6 +358,8 @@ public class PostUpdate implements java.io.Serializable {
                 ", privacy=" + privacy +
                 ", objectAttachment='" + objectAttachment + '\'' +
                 ", targeting=" + targeting +
+                ", published=" + published +
+                ", scheduledPublishTime=" + scheduledPublishTime +
                 '}';
     }
 }
