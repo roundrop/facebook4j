@@ -112,6 +112,25 @@ public interface PageMethods {
     ResponseList<Post> getPagePosts(String pageId, Reading reading) throws FacebookException;
 
     /**
+     * Returns the Page's own posts, including unpublished and scheduled posts.
+     * @param pageId the ID of the page
+     * @return posts
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<Post> getPagePromotablePosts(String pageId) throws FacebookException;
+
+    /**
+     * Returns the Page's own posts, including unpublished and scheduled posts.
+     * @param pageId the ID of the page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return posts
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<Post> getPagePromotablePosts(String pageId, Reading reading) throws FacebookException;
+
+    /**
      * Creates the post on the page.
      * @param pageId the ID of a page
      * @param postUpdate the post to be created

@@ -46,7 +46,7 @@ import facebook4j.internal.org.json.JSONObject;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.Serializable {
-    private static final long serialVersionUID = 1303895381110118187L;
+    private static final long serialVersionUID = 5829948216755728751L;
 
     private String id;
     private IdNameEntity from;
@@ -74,6 +74,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private Application application;
     private Date createdTime;
     private Date updatedTime;
+    private Boolean isPublished;
+    private Integer scheduledPublishTime;
 
     /*package*/PostJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -219,6 +221,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             }
             createdTime = getISO8601Datetime("created_time", json);
             updatedTime = getISO8601Datetime("updated_time", json);
+            if (!json.isNull("is_published")) {
+                isPublished = getBoolean("is_published", json);
+            }
+            scheduledPublishTime = getInt("scheduled_publish_time", json);
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -328,6 +334,14 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return updatedTime;
     }
 
+    public Boolean isPublished() {
+        return isPublished;
+    }
+
+    public Date getScheduledPublishTime() {
+        return new Date(scheduledPublishTime * 1000);
+    }
+
     /*package*/
     static ResponseList<Post> createPostList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -378,20 +392,37 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
 
     @Override
     public String toString() {
-        return "PostJSONImpl [id=" + id + ", from=" + from + ", to=" + to
-                + ", message=" + message + ", messageTags=" + messageTags
-                + ", picture=" + picture + ", link=" + link + ", name=" + name
-                + ", caption=" + caption + ", description=" + description
-                + ", source=" + source + ", properties=" + properties
-                + ", icon=" + icon + ", actions=" + actions + ", privacy="
-                + privacy + ", type=" + type + ", likes=" + likes + ", place="
-                + place + ", story=" + story + ", storyTags=" + storyTags
-                + ", withTags=" + withTags + ", comments=" + comments
-                + ", objectId=" + objectId + ", application=" + application
-                + ", createdTime=" + createdTime + ", updatedTime="
-                + updatedTime + "]";
+        return "PostJSONImpl{" +
+                "id='" + id + '\'' +
+                ", from=" + from +
+                ", to=" + to +
+                ", message='" + message + '\'' +
+                ", messageTags=" + messageTags +
+                ", picture=" + picture +
+                ", link=" + link +
+                ", name='" + name + '\'' +
+                ", caption='" + caption + '\'' +
+                ", description='" + description + '\'' +
+                ", source=" + source +
+                ", properties=" + properties +
+                ", icon='" + icon + '\'' +
+                ", actions=" + actions +
+                ", privacy=" + privacy +
+                ", type='" + type + '\'' +
+                ", likes=" + likes +
+                ", place=" + place +
+                ", story='" + story + '\'' +
+                ", storyTags=" + storyTags +
+                ", withTags=" + withTags +
+                ", comments=" + comments +
+                ", objectId=" + objectId +
+                ", application=" + application +
+                ", createdTime=" + createdTime +
+                ", updatedTime=" + updatedTime +
+                ", isPublished=" + isPublished +
+                ", scheduledPublishTime=" + scheduledPublishTime +
+                '}';
     }
-
 
     private class PropertyJSONImpl implements Post.Property, java.io.Serializable {
         private static final long serialVersionUID = -2917519371927503549L;

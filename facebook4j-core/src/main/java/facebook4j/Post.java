@@ -51,6 +51,8 @@ public interface Post extends FacebookResponse {
     Application getApplication();
     Date getCreatedTime();
     Date getUpdatedTime();
+    Boolean isPublished();
+    Date getScheduledPublishTime();
     
     interface Action {
         String getName();
