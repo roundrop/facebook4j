@@ -1396,15 +1396,33 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Post> getPagePromotablePosts(String pageId) throws FacebookException {
         return getPagePromotablePosts(pageId, null);
     }
-
     public ResponseList<Post> getPagePromotablePosts(String pageId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
         return factory.createPostList(get(buildURL(pageId, "promotable_posts", reading)));
     }
 
+    public ResponseList<Question> getPageQuestions(String pageId) throws FacebookException {
+        return getPageQuestions(pageId, null);
+    }
+    public ResponseList<Question> getPageQuestions(String pageId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return _getQuestions(pageId, reading);
+    }
+
     public String postPageFeed(String pageId, PostUpdate postUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         return _postFeed(pageId, postUpdate);
+    }
+
+    public String createPageQuestion(String pageId, QuestionUpdate questionUpdate) throws FacebookException {
+        ensureAuthorizationEnabled();
+        JSONObject json = post(buildURL(pageId, "questions"),
+                               questionUpdate.asHttpParameterArray()).asJSONObject();
+        try {
+            return json.getString("id");
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone.getMessage(), jsone);
+        }
     }
 
     public void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException {
@@ -1416,7 +1434,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         post(buildURL(pageId, "picture"), new HttpParameter[] {new HttpParameter("picture", picture.toString())});
     }
-
     public void updatePageProfilePhoto(String pageId, Media source) throws FacebookException {
         ensureAuthorizationEnabled();
         List<HttpParameter> httpParams = new ArrayList<HttpParameter>();
@@ -1631,7 +1648,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
     public ResponseList<Question> getQuestions(String userId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createQuestionList(get(buildURL(userId, "questions", reading)));
+        return _getQuestions(userId, reading);
     }
 
     public Question getQuestion(String questionId) throws FacebookException {
@@ -2121,6 +2138,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     private ResponseList<Post> _getPosts(String objectId, Reading reading) throws FacebookException {
         return factory.createPostList(get(buildURL(objectId, "posts", reading)));
+    }
+
+    private ResponseList<Question> _getQuestions(String objectId, Reading reading) throws FacebookException {
+        return factory.createQuestionList(get(buildURL(objectId, "questions", reading)));
     }
 
     private String _comment(String objectId, String message) throws FacebookException {

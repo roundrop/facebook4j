@@ -25,6 +25,8 @@ import facebook4j.PageUpdate;
 import facebook4j.PictureSize;
 import facebook4j.Post;
 import facebook4j.PostUpdate;
+import facebook4j.Question;
+import facebook4j.QuestionUpdate;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
 
@@ -131,6 +133,25 @@ public interface PageMethods {
     ResponseList<Post> getPagePromotablePosts(String pageId, Reading reading) throws FacebookException;
 
     /**
+     * Returns a page's questions.
+     * @param pageId the ID of a page
+     * @return questions
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<Question> getPageQuestions(String pageId) throws FacebookException;
+
+    /**
+     * Returns a page's questions.
+     * @param pageId the ID of a page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return questions
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<Question> getPageQuestions(String pageId, Reading reading) throws FacebookException;
+
+    /**
      * Creates the post on the page.
      * @param pageId the ID of a page
      * @param postUpdate the post to be created
@@ -139,6 +160,16 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#posts">Page#posts - Facebook Developers</a>
      */
     String postPageFeed(String pageId, PostUpdate postUpdate) throws FacebookException;
+
+    /**
+     * Creates the question.
+     * @param pageId the ID of a page
+     * @param questionUpdate the question to be created
+     * @return The new question ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#questions">Page#questions - Facebook Developers</a>
+     */
+    String createPageQuestion(String pageId, QuestionUpdate questionUpdate) throws FacebookException;
 
     /**
      * Updates a Page's basic attributes.
