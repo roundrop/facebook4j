@@ -457,14 +457,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return Boolean.valueOf(res.asString().trim());
     }
 
-    public ResponseList<Post> getEventFeed(String eventId) throws FacebookException {
-        return getEventFeed(eventId, null);
-    }
-    public ResponseList<Post> getEventFeed(String eventId, Reading reading) throws FacebookException {
-        ensureAuthorizationEnabled();
-        return factory.createPostList(get(buildURL(eventId, reading)));
-    }
-
     public String postEventLink(String eventId, URL link) throws FacebookException {
         return postEventLink(eventId, link, null);
     }

@@ -32,7 +32,7 @@ import facebook4j.ResponseList;
  */
 public interface PostMethods {
     /**
-     * Returns the current user's/page's wall.
+     * Returns the current user's/page's/event's wall.
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#feed">User#feed - Facebook Developers</a>
@@ -40,7 +40,7 @@ public interface PostMethods {
     ResponseList<Post> getFeed() throws FacebookException;
 
     /**
-     * Returns the current user's/page's wall.
+     * Returns the current user's/page's/event's wall.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
@@ -49,8 +49,8 @@ public interface PostMethods {
     ResponseList<Post> getFeed(Reading reading) throws FacebookException;
 
     /**
-     * Returns a user's/page's wall.
-     * @param id the ID of a user/page
+     * Returns a user's/page's/event's wall.
+     * @param id the ID of a user/page/event
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#feed">User#feed - Facebook Developers</a>
@@ -58,8 +58,8 @@ public interface PostMethods {
     ResponseList<Post> getFeed(String id) throws FacebookException;
 
     /**
-     * Returns a user's/page's wall.
-     * @param id the ID of a user/page
+     * Returns a user's/page's/event's wall.
+     * @param id the ID of a user/page/event
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable

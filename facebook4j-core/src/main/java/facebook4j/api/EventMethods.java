@@ -132,26 +132,6 @@ public interface EventMethods {
 
 
     /**
-     * Returns the event's wall.
-     * @param eventId the ID of a event
-     * @return event's feed
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/event/#feed">Event#feed - Facebook Developers</a>
-     */
-    ResponseList<Post> getEventFeed(String eventId) throws FacebookException;
-
-    /**
-     * Returns the event's wall.
-     * @param eventId the ID of a event
-     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
-     * @return event's feed
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/event/#feed">Event#feed - Facebook Developers</a>
-     */
-    ResponseList<Post> getEventFeed(String eventId, Reading reading) throws FacebookException;
-
-
-    /**
      * Posts the link on a event's wall.
      * @param eventId the ID of a event
      * @param link link URL
