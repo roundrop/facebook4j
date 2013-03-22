@@ -84,15 +84,6 @@ public class PageMethodsTest extends FacebookTestBase {
     }
 
     @Test
-    public void getPageFeed() throws Exception {
-        String pageId = "19292868552"; //The Page for Facebook Platform
-        ResponseList<Post> feed = facebook1.getPageFeed(pageId);
-        for (Post post : feed) {
-            System.out.println(post);
-        }
-    }
-
-    @Test
     public void getPagePosts() throws Exception {
         String pageId = "19292868552"; //The Page for Facebook Platform
         ResponseList<Post> posts = facebook1.getPagePosts(pageId);

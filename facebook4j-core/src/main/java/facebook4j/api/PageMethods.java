@@ -76,25 +76,6 @@ public interface PageMethods {
     URL getPagePictureURL(String pageId, PictureSize size) throws FacebookException;
 
     /**
-     * Returns the Page's wall.
-     * @param pageId the ID of the page
-     * @return posts
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
-     */
-    ResponseList<Post> getPageFeed(String pageId) throws FacebookException;
-
-    /**
-     * Returns the Page's wall.
-     * @param pageId the ID of the page
-     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
-     * @return posts
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
-     */
-    ResponseList<Post> getPageFeed(String pageId, Reading reading) throws FacebookException;
-
-    /**
      * Returns the Page's own posts.
      * @param pageId the ID of the page
      * @return posts

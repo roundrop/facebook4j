@@ -32,7 +32,7 @@ import facebook4j.ResponseList;
  */
 public interface PostMethods {
     /**
-     * Returns the current user's wall.
+     * Returns the current user's/page's wall.
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#feed">User#feed - Facebook Developers</a>
@@ -40,7 +40,7 @@ public interface PostMethods {
     ResponseList<Post> getFeed() throws FacebookException;
 
     /**
-     * Returns the current user's wall.
+     * Returns the current user's/page's wall.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
@@ -49,23 +49,23 @@ public interface PostMethods {
     ResponseList<Post> getFeed(Reading reading) throws FacebookException;
 
     /**
-     * Returns a user's wall.
-     * @param userId the ID of a user
+     * Returns a user's/page's wall.
+     * @param id the ID of a user/page
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#feed">User#feed - Facebook Developers</a>
      */
-    ResponseList<Post> getFeed(String userId) throws FacebookException;
+    ResponseList<Post> getFeed(String id) throws FacebookException;
 
     /**
-     * Returns a user's wall.
-     * @param userId the ID of a user
+     * Returns a user's/page's wall.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#feed">User#feed - Facebook Developers</a>
      */
-    ResponseList<Post> getFeed(String userId, Reading reading) throws FacebookException;
+    ResponseList<Post> getFeed(String id, Reading reading) throws FacebookException;
 
 
     /**

@@ -67,7 +67,27 @@ public class PostMethodsTest extends FacebookTestBase {
             assertThat(post.getMessage(), is(nullValue()));
         }
     }
-    
+
+    @Test
+    public void getFeed_page() throws Exception {
+        String pageId = "19292868552"; //The Page for Facebook Platform
+        ResponseList<Post> feed = facebook1.getFeed(pageId);
+        for (Post post : feed) {
+            System.out.println(post);
+        }
+    }
+
+    @Test
+    public void getFeed_page_access_token() throws Exception {
+        // require manage_pages permission
+        // replace to your page id
+        String pageId = "137246726435626";
+        ResponseList<Post> feed = real.getFeed();
+        for (Post post : feed) {
+            System.out.println(post);
+        }
+    }
+
     @Test
     public void getFeed_byUserid() throws Exception {
         ResponseList<Post> feed = facebook2.getFeed(id1.getId());

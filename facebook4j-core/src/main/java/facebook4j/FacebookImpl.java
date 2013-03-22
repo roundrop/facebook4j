@@ -657,12 +657,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Post> getFeed(Reading reading) throws FacebookException {
         return getFeed("me", reading);
     }
-    public ResponseList<Post> getFeed(String userId) throws FacebookException {
-        return getFeed(userId, null);
+    public ResponseList<Post> getFeed(String id) throws FacebookException {
+        return getFeed(id, null);
     }
-    public ResponseList<Post> getFeed(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Post> getFeed(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return _getFeed(userId, reading);
+        return factory.createPostList(get(buildURL(id, "feed", reading)));
     }
 
     public ResponseList<Post> getHome() throws FacebookException {
@@ -1375,14 +1375,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
     public URL getPagePictureURL(String pageId, PictureSize size) throws FacebookException {
         return _getPictureURL(pageId, size);
-    }
-
-    public ResponseList<Post> getPageFeed(String pageId) throws FacebookException {
-        return getPageFeed(pageId, null);
-    }
-    public ResponseList<Post> getPageFeed(String pageId, Reading reading) throws FacebookException {
-        ensureAuthorizationEnabled();
-        return _getFeed(pageId, reading);
     }
 
     public ResponseList<Post> getPagePosts(String pageId) throws FacebookException {
@@ -2130,10 +2122,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         } catch (MalformedURLException urle) {
             throw new FacebookException(urle.getMessage(), urle);
         }
-    }
-
-    private ResponseList<Post> _getFeed(String objectId, Reading reading) throws FacebookException {
-        return factory.createPostList(get(buildURL(objectId, "feed", reading)));
     }
 
     private ResponseList<Post> _getPosts(String objectId, Reading reading) throws FacebookException {
