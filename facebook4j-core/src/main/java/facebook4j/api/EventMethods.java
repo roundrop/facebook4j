@@ -152,17 +152,6 @@ public interface EventMethods {
 
 
     /**
-     * Creates the post on a event's wall.
-     * @param eventId the ID of a event
-     * @param postUpdate the post to be created
-     * @return The new post ID
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/event/#posts">Event#posts - Facebook Developers</a>
-     */
-    String postEventFeed(String eventId, PostUpdate postUpdate) throws FacebookException;
-    
-
-    /**
      * Posts the link on a event's wall.
      * @param eventId the ID of a event
      * @param link link URL

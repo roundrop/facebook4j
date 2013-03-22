@@ -332,13 +332,13 @@ public interface PostMethods {
 
     /**
      * Creates the post.
-     * @param userId the ID of a user
+     * @param id the ID of a user/page/event
      * @param postUpdate the post to be created
      * @return The new post ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#posts">User#posts - Facebook Developers</a>
      */
-    String postFeed(String userId, PostUpdate postUpdate) throws FacebookException;
+    String postFeed(String id, PostUpdate postUpdate) throws FacebookException;
 
 
     /**

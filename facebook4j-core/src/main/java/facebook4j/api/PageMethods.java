@@ -134,16 +134,6 @@ public interface PageMethods {
 
 
     /**
-     * Creates the post on the page.
-     * @param pageId the ID of a page
-     * @param postUpdate the post to be created
-     * @return The new post ID
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#posts">Page#posts - Facebook Developers</a>
-     */
-    String postPageFeed(String pageId, PostUpdate postUpdate) throws FacebookException;
-
-    /**
      * Updates a Page's basic attributes.
      * @param pageId the ID of the page
      * @param pageUpdate the page to be updated

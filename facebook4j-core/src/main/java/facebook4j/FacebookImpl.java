@@ -465,11 +465,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createPostList(get(buildURL(eventId, reading)));
     }
 
-    public String postEventFeed(String eventId, PostUpdate postUpdate) throws FacebookException {
-        ensureAuthorizationEnabled();
-        return _postFeed(eventId, postUpdate);
-    }
-
     public String postEventLink(String eventId, URL link) throws FacebookException {
         return postEventLink(eventId, link, null);
     }
@@ -753,9 +748,11 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public String postFeed(PostUpdate postUpdate) throws FacebookException {
         return postFeed("me", postUpdate);
     }
-    public String postFeed(String userId, PostUpdate postUpdate) throws FacebookException {
+    public String postFeed(String id, PostUpdate postUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
-        return _postFeed(userId, postUpdate);
+        JSONObject json = post(buildURL(id, "feed"), postUpdate.asHttpParameterArray())
+                          .asJSONObject();
+        return getRawString("id", json);
     }
 
     public String postStatusMessage(String message) throws FacebookException {
@@ -1395,11 +1392,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Post> getPromotablePosts(String pageId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
         return factory.createPostList(get(buildURL(pageId, "promotable_posts", reading)));
-    }
-
-    public String postPageFeed(String pageId, PostUpdate postUpdate) throws FacebookException {
-        ensureAuthorizationEnabled();
-        return _postFeed(pageId, postUpdate);
     }
 
     public void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException {
@@ -2117,15 +2109,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildURL(objectId, "likes"));
         return Boolean.valueOf(res.asString().trim());
-    }
-
-    private String _postFeed(String objectId, PostUpdate postUpdate)
-            throws FacebookException {
-        ensureAuthorizationEnabled();
-        JSONObject json = post(buildURL(objectId, "feed"),
-                            postUpdate.asHttpParameterArray()
-                          ).asJSONObject();
-        return getRawString("id", json);
     }
 
     private String _postLink(String objectId, URL link, String message)
