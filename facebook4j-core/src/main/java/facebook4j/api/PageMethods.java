@@ -76,13 +76,32 @@ public interface PageMethods {
     URL getPagePictureURL(String pageId, PictureSize size) throws FacebookException;
 
     /**
+     * Returns the current Page's own posts, including unpublished and scheduled posts.
+     * Page access_token required.
+     * @return posts
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<Post> getPromotablePosts() throws FacebookException;
+
+    /**
+     * Returns the current Page's own posts, including unpublished and scheduled posts.
+     * Page access_token required.
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return posts
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<Post> getPromotablePosts(Reading reading) throws FacebookException;
+
+    /**
      * Returns the Page's own posts, including unpublished and scheduled posts.
      * @param pageId the ID of the page
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
      */
-    ResponseList<Post> getPagePromotablePosts(String pageId) throws FacebookException;
+    ResponseList<Post> getPromotablePosts(String pageId) throws FacebookException;
 
     /**
      * Returns the Page's own posts, including unpublished and scheduled posts.
@@ -92,7 +111,7 @@ public interface PageMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
      */
-    ResponseList<Post> getPagePromotablePosts(String pageId, Reading reading) throws FacebookException;
+    ResponseList<Post> getPromotablePosts(String pageId, Reading reading) throws FacebookException;
 
     /**
      * Returns a page's questions.

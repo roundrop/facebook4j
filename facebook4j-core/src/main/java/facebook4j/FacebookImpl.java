@@ -1377,10 +1377,16 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return _getPictureURL(pageId, size);
     }
 
-    public ResponseList<Post> getPagePromotablePosts(String pageId) throws FacebookException {
-        return getPagePromotablePosts(pageId, null);
+    public ResponseList<Post> getPromotablePosts() throws FacebookException {
+        return getPromotablePosts("me", null);
     }
-    public ResponseList<Post> getPagePromotablePosts(String pageId, Reading reading) throws FacebookException {
+    public ResponseList<Post> getPromotablePosts(Reading reading) throws FacebookException {
+        return getPromotablePosts("me", reading);
+    }
+    public ResponseList<Post> getPromotablePosts(String pageId) throws FacebookException {
+        return getPromotablePosts(pageId, null);
+    }
+    public ResponseList<Post> getPromotablePosts(String pageId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
         return factory.createPostList(get(buildURL(pageId, "promotable_posts", reading)));
     }

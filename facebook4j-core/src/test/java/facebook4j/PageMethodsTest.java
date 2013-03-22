@@ -84,11 +84,22 @@ public class PageMethodsTest extends FacebookTestBase {
     }
 
     @Test
-    public void getPagePromotablePosts() throws Exception {
+    public void getPromotablePosts() throws Exception {
         String pageId = "19292868552"; //The Page for Facebook Platform
-        ResponseList<Post> promotablePosts = facebook1.getPagePromotablePosts(pageId);
+        ResponseList<Post> promotablePosts = facebook1.getPromotablePosts(pageId);
         for (Post post : promotablePosts) {
             assertThat(post.getFrom().getId(), is("19292868552"));
+            System.out.println(post);
+        }
+    }
+
+    @Test
+    public void getPromotablePosts_me() throws Exception {
+        // require page access_token
+        // replace to your page id
+        String pageId = "137246726435626";
+        ResponseList<Post> promotablePosts = real.getPromotablePosts();
+        for (Post post : promotablePosts) {
             System.out.println(post);
         }
     }
