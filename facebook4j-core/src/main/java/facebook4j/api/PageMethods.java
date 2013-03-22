@@ -132,24 +132,6 @@ public interface PageMethods {
      */
     ResponseList<Post> getPromotablePosts(String pageId, Reading reading) throws FacebookException;
 
-    /**
-     * Returns a page's questions.
-     * @param pageId the ID of a page
-     * @return questions
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
-     */
-    ResponseList<Question> getPageQuestions(String pageId) throws FacebookException;
-
-    /**
-     * Returns a page's questions.
-     * @param pageId the ID of a page
-     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
-     * @return questions
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
-     */
-    ResponseList<Question> getPageQuestions(String pageId, Reading reading) throws FacebookException;
 
     /**
      * Creates the post on the page.

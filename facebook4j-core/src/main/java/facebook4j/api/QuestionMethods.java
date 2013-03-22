@@ -29,7 +29,7 @@ import facebook4j.ResponseList;
  */
 public interface QuestionMethods {
     /**
-     * Returns the current user's questions.
+     * Returns the current user's/page's questions.
      * @return questions
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#questions">User#questions - Facebook Developers</a>
@@ -37,7 +37,7 @@ public interface QuestionMethods {
     ResponseList<Question> getQuestions() throws FacebookException;
 
     /**
-     * Returns the current user's questions.
+     * Returns the current user's/page's questions.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return questions
      * @throws FacebookException when Facebook service or network is unavailable
@@ -46,23 +46,23 @@ public interface QuestionMethods {
     ResponseList<Question> getQuestions(Reading reading) throws FacebookException;
 
     /**
-     * Returns a user's questions.
-     * @param userId the ID of a user
+     * Returns a user's/page's questions.
+     * @param id the ID of a user/page
      * @return questions
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#questions">User#questions - Facebook Developers</a>
      */
-    ResponseList<Question> getQuestions(String userId) throws FacebookException;
+    ResponseList<Question> getQuestions(String id) throws FacebookException;
 
     /**
-     * Returns a user's questions.
-     * @param userId the ID of a user
+     * Returns a user's/page's questions.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return questions
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#questions">User#questions - Facebook Developers</a>
      */
-    ResponseList<Question> getQuestions(String userId, Reading reading) throws FacebookException;
+    ResponseList<Question> getQuestions(String id, Reading reading) throws FacebookException;
 
 
     /**

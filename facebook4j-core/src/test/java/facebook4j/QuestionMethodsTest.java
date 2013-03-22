@@ -28,7 +28,25 @@ public class QuestionMethodsTest extends FacebookTestBase {
     @After
     public void tearDown() throws Exception {
     }
-    
+
+    @Test
+    public void getQuestions_me() throws Exception {
+        // require page access token
+        ResponseList<Question> questions = real.getQuestions();
+        for (Question question : questions) {
+            System.out.println(question);
+        }
+    }
+
+    @Test
+    public void getQuestions_id() throws Exception {
+        String pageId = "137246726435626";
+        ResponseList<Question> questions = real.getQuestions(pageId);
+        for (Question question : questions) {
+            System.out.println(question);
+        }
+    }
+
     @Test
     public void getQuestionOption() throws Exception {
         ResponseList<Option> page1 = real.getQuestionOptions("381779171905254", new Reading().limit(1));

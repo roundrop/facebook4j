@@ -1397,14 +1397,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createPostList(get(buildURL(pageId, "promotable_posts", reading)));
     }
 
-    public ResponseList<Question> getPageQuestions(String pageId) throws FacebookException {
-        return getPageQuestions(pageId, null);
-    }
-    public ResponseList<Question> getPageQuestions(String pageId, Reading reading) throws FacebookException {
-        ensureAuthorizationEnabled();
-        return _getQuestions(pageId, reading);
-    }
-
     public String postPageFeed(String pageId, PostUpdate postUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         return _postFeed(pageId, postUpdate);
@@ -1639,12 +1631,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Question> getQuestions(Reading reading) throws FacebookException {
         return getQuestions("me", reading);
     }
-    public ResponseList<Question> getQuestions(String userId) throws FacebookException {
-        return getQuestions(userId, null);
+    public ResponseList<Question> getQuestions(String id) throws FacebookException {
+        return getQuestions(id, null);
     }
-    public ResponseList<Question> getQuestions(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Question> getQuestions(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return _getQuestions(userId, reading);
+        return factory.createQuestionList(get(buildURL(id, "questions", reading)));
     }
 
     public Question getQuestion(String questionId) throws FacebookException {
@@ -2126,10 +2118,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         } catch (MalformedURLException urle) {
             throw new FacebookException(urle.getMessage(), urle);
         }
-    }
-
-    private ResponseList<Question> _getQuestions(String objectId, Reading reading) throws FacebookException {
-        return factory.createQuestionList(get(buildURL(objectId, "questions", reading)));
     }
 
     private String _comment(String objectId, String message) throws FacebookException {

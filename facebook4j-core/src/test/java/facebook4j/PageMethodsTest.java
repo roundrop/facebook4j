@@ -158,15 +158,6 @@ public class PageMethodsTest extends FacebookTestBase {
     }
 
     @Test
-    public void getPageQuestions() throws Exception {
-        String pageId = "137246726435626";
-        ResponseList<Question> questions = real.getPageQuestions(pageId);
-        for (Question question : questions) {
-            System.out.println(question);
-        }
-    }
-
-    @Test
     public void updatePageBasicAttributes() throws Exception {
         // require page access token
         // replace to your page id
