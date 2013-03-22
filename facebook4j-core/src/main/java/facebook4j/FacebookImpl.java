@@ -679,12 +679,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Post> getPosts(Reading reading) throws FacebookException {
         return getPosts("me", reading);
     }
-    public ResponseList<Post> getPosts(String userId) throws FacebookException {
-        return getPosts(userId, null);
+    public ResponseList<Post> getPosts(String id) throws FacebookException {
+        return getPosts(id, null);
     }
-    public ResponseList<Post> getPosts(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Post> getPosts(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return _getPosts(userId, reading);
+        return factory.createPostList(get(buildURL(id, "posts", reading)));
     }
 
     public ResponseList<Post> getStatuses() throws FacebookException {
@@ -1375,14 +1375,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
     public URL getPagePictureURL(String pageId, PictureSize size) throws FacebookException {
         return _getPictureURL(pageId, size);
-    }
-
-    public ResponseList<Post> getPagePosts(String pageId) throws FacebookException {
-        return getPagePosts(pageId, null);
-    }
-    public ResponseList<Post> getPagePosts(String pageId, Reading reading) throws FacebookException {
-        ensureAuthorizationEnabled();
-        return _getPosts(pageId, reading);
     }
 
     public ResponseList<Post> getPagePromotablePosts(String pageId) throws FacebookException {
@@ -2122,10 +2114,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         } catch (MalformedURLException urle) {
             throw new FacebookException(urle.getMessage(), urle);
         }
-    }
-
-    private ResponseList<Post> _getPosts(String objectId, Reading reading) throws FacebookException {
-        return factory.createPostList(get(buildURL(objectId, "posts", reading)));
     }
 
     private ResponseList<Question> _getQuestions(String objectId, Reading reading) throws FacebookException {

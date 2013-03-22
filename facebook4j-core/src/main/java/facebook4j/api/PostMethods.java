@@ -124,7 +124,7 @@ public interface PostMethods {
 
 
     /**
-     * Returns the current user's own posts.
+     * Returns the current user's/page's own posts.
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#posts">User#posts - Facebook Developers</a>
@@ -132,7 +132,7 @@ public interface PostMethods {
     ResponseList<Post> getPosts() throws FacebookException;
 
     /**
-     * Returns the current user's own posts.
+     * Returns the current user's/page's own posts.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
@@ -141,23 +141,23 @@ public interface PostMethods {
     ResponseList<Post> getPosts(Reading reading) throws FacebookException;
 
     /**
-     * Returns the user's own posts.
-     * @param userId the ID of a user
+     * Returns the user's/page's own posts.
+     * @param id the ID of a user/page
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#posts">User#posts - Facebook Developers</a>
      */
-    ResponseList<Post> getPosts(String userId) throws FacebookException;
+    ResponseList<Post> getPosts(String id) throws FacebookException;
 
     /**
-     * Returns the user's own posts.
-     * @param userId the ID of a user
+     * Returns the user's/page's own posts.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#posts">User#posts - Facebook Developers</a>
      */
-    ResponseList<Post> getPosts(String userId, Reading reading) throws FacebookException;
+    ResponseList<Post> getPosts(String id, Reading reading) throws FacebookException;
 
 
     /**

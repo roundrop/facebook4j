@@ -186,6 +186,26 @@ public class PostMethodsTest extends FacebookTestBase {
     }
 
     @Test
+    public void getPosts_Page() throws Exception {
+        String pageId = "19292868552"; //The Page for Facebook Platform
+        ResponseList<Post> posts = facebook1.getPosts(pageId);
+        for (Post post : posts) {
+            assertThat(post.getFrom().getId(), is("19292868552"));
+        }
+    }
+
+    @Test
+    public void getPosts_page_access_token() throws Exception {
+        // require manage_pages permission
+        // replace to your page id
+        String pageId = "137246726435626";
+        ResponseList<Post> posts = real.getPosts();
+        for (Post post : posts) {
+            System.out.println(post);
+        }
+    }
+
+    @Test
     public void getStatuses() throws Exception {
         ResponseList<Post> posts = facebook1.getStatuses();
         for (Post post : posts) {

@@ -84,15 +84,6 @@ public class PageMethodsTest extends FacebookTestBase {
     }
 
     @Test
-    public void getPagePosts() throws Exception {
-        String pageId = "19292868552"; //The Page for Facebook Platform
-        ResponseList<Post> posts = facebook1.getPagePosts(pageId);
-        for (Post post : posts) {
-            assertThat(post.getFrom().getId(), is("19292868552"));
-        }
-    }
-
-    @Test
     public void getPagePromotablePosts() throws Exception {
         String pageId = "19292868552"; //The Page for Facebook Platform
         ResponseList<Post> promotablePosts = facebook1.getPagePromotablePosts(pageId);
