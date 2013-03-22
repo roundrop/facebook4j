@@ -1159,12 +1159,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Link> getLinks(Reading reading) throws FacebookException {
         return getLinks("me", reading);
     }
-    public ResponseList<Link> getLinks(String userId) throws FacebookException {
-        return getLinks(userId, null);
+    public ResponseList<Link> getLinks(String id) throws FacebookException {
+        return getLinks(id, null);
     }
-    public ResponseList<Link> getLinks(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Link> getLinks(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createLinkList(get(buildURL(userId, "links", reading)));
+        return factory.createLinkList(get(buildURL(id, "links", reading)));
     }
 
     public Link getLink(String linkId) throws FacebookException {

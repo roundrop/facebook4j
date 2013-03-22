@@ -25,6 +25,43 @@ import facebook4j.ResponseList;
 
 public interface LinkMethods {
     /**
+     * Returns the current user's/page's/event's posted links.
+     * @return links
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#links">User#links - Facebook Developers</a>
+     */
+    ResponseList<Link> getLinks() throws FacebookException;
+
+    /**
+     * Returns the current user's/page's/event's posted links.
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return links
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#links">User#links - Facebook Developers</a>
+     */
+    ResponseList<Link> getLinks(Reading reading) throws FacebookException;
+
+    /**
+     * Returns a user's/page's/event's posted links.
+     * @param id the ID of a user/page/event
+     * @return links
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#links">User#links - Facebook Developers</a>
+     */
+    ResponseList<Link> getLinks(String id) throws FacebookException;
+
+    /**
+     * Returns a user's/page's/event's posted links.
+     * @param id the ID of a user/page/event
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return links
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#links">User#links - Facebook Developers</a>
+     */
+    ResponseList<Link> getLinks(String id, Reading reading) throws FacebookException;
+
+
+    /**
      * Returns the link shared on a user's wall.
      * @param linkId the ID of the link
      * @return link

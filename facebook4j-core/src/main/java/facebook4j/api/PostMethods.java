@@ -87,43 +87,6 @@ public interface PostMethods {
 
 
     /**
-     * Returns the current user's posted links.
-     * @return links
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#links">User#links - Facebook Developers</a>
-     */
-    ResponseList<Link> getLinks() throws FacebookException;
-
-    /**
-     * Returns the current user's posted links.
-     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
-     * @return links
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#links">User#links - Facebook Developers</a>
-     */
-    ResponseList<Link> getLinks(Reading reading) throws FacebookException;
-
-    /**
-     * Returns a user's posted links.
-     * @param userId the ID of a user
-     * @return links
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#links">User#links - Facebook Developers</a>
-     */
-    ResponseList<Link> getLinks(String userId) throws FacebookException;
-
-    /**
-     * Returns a user's posted links.
-     * @param userId the ID of a user
-     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
-     * @return links
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#links">User#links - Facebook Developers</a>
-     */
-    ResponseList<Link> getLinks(String userId, Reading reading) throws FacebookException;
-
-
-    /**
      * Returns the current user's/page's own posts.
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
