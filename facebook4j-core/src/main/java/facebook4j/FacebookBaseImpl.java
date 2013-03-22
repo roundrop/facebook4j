@@ -29,6 +29,8 @@ import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpClientWrapper;
 import facebook4j.internal.json.z_F4JInternalFactory;
 import facebook4j.internal.json.z_F4JInternalJSONImplFactory;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
 
 /**
  * Base class of Facebook supports OAuth.
@@ -46,7 +48,6 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
     
     protected transient String id;
     protected transient String name;
-    protected transient String email;
 
     /*package*/ FacebookBaseImpl(Configuration conf, Authorization auth) {
         this.conf = conf;
@@ -88,11 +89,11 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
                     "Neither user ID/password combination nor OAuth app ID/secret combination supplied");
         }
         if (id == null) {
-            fillInIDAndNameAndEmail();
+            fillInIDAndName();
         }
         return id;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -102,31 +103,20 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
                     "Neither user ID/password combination nor OAuth app ID/secret combination supplied");
         }
         if (name == null) {
-            fillInIDAndNameAndEmail();
+            fillInIDAndName();
         }
         return name;
     }
-    
-    /**
-     * {@inheritDoc}
-     */
-    public String getEmail() throws FacebookException, IllegalStateException {
-        if (!auth.isEnabled()) {
-            throw new IllegalStateException(
-                    "Neither user ID/password combination nor OAuth app ID/secret combination supplied");
-        }
-        if (email == null) {
-            fillInIDAndNameAndEmail();
-        }
-        return email;
-    }
 
-    protected void fillInIDAndNameAndEmail() throws FacebookException {
+    protected void fillInIDAndName() throws FacebookException {
         ensureAuthorizationEnabled();
-        User me = factory.createUser(http.get(conf.getRestBaseURL() + "me", auth));
-        this.id = me.getId();
-        this.name = me.getName();
-        this.email = me.getEmail();
+        JSONObject json = http.get(conf.getRestBaseURL() + "me?fields=id,name", auth).asJSONObject();
+        try {
+            this.id = json.getString("id");
+            this.name = json.getString("name");
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone);
+        }
     }
 
     /**

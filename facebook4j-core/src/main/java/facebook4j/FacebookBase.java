@@ -25,37 +25,26 @@ import facebook4j.conf.Configuration;
  */
 public interface FacebookBase {
     /**
-     * Returns the ID of authenticating user.<br>
+     * Returns the ID of authenticating user/page.<br>
      * This method may internally call '/me' on the first invocation if<br>
      * - this instance is authenticated by OAuth.<br>
      *
-     * @return the ID of authenticating user
+     * @return the ID of authenticating user/page
      * @throws FacebookException     when '/me' threw an exception.
      * @throws IllegalStateException if no credentials are supplied. i.e.) this is an anonymous Facebook instance
      */
     String getId() throws FacebookException, IllegalStateException;
 
     /**
-     * Returns authenticating user's name.<br>
+     * Returns authenticating user's/page's name.<br>
      * This method may internally call '/me' on the first invocation if<br>
      * - this instance is authenticated by OAuth.<br>
      *
-     * @return the authenticating user's name
+     * @return the authenticating user's/page's name
      * @throws FacebookException     when '/me' threw an exception.
      * @throws IllegalStateException if no credentials are supplied. i.e.) this is an anonymous Facebook instance
      */
     String getName() throws FacebookException, IllegalStateException;
-    
-    /**
-     * Returns authenticating user's email address.<br>
-     * This method may internally call '/me' on the first invocation if<br>
-     * - this instance is authenticated by OAuth.<br>
-     *
-     * @return the authenticating user's email address
-     * @throws FacebookException     when '/me' threw an exception.
-     * @throws IllegalStateException if no credentials are supplied. i.e.) this is an anonymous Facebook instance
-     */
-    String getEmail() throws FacebookException, IllegalStateException;
     
     /**
      * Returns the authorization scheme for this instance.<br>
