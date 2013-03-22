@@ -116,7 +116,7 @@ public class PageMethodsTest extends FacebookTestBase {
                 .caption("facebook4j.org")
                 .description("Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library.")
                 .targeting(new Targeting().country("US").country("GB"));
-        String postId = real.postPageFeed(pageId, postUpdate);
+        String postId = real.postFeed(pageId, postUpdate);
         assertThat(postId, is(notNullValue()));
         Post post = real.getPost(postId);
         assertThat(post.getPrivacy().getDescription().get(0), is("United States"));
@@ -136,7 +136,7 @@ public class PageMethodsTest extends FacebookTestBase {
                 .description("Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library.")
                 .published(false)
                 .scheduledPublishTime(new Date(new Date().getTime() + 1000 * 60 * 15));
-        String postId = real.postPageFeed(pageId, postUpdate);
+        String postId = real.postFeed(pageId, postUpdate);
         assertThat(postId, is(notNullValue()));
         Post post = real.getPost(postId);
         System.out.println(post);
