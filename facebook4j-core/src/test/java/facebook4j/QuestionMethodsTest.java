@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import facebook4j.Question.Option;
 
+import java.util.Date;
+
 public class QuestionMethodsTest extends FacebookTestBase {
 
     @BeforeClass
@@ -72,6 +74,36 @@ public class QuestionMethodsTest extends FacebookTestBase {
         for (QuestionVotes questionVotes : questionVotesList) {
             System.out.println(questionVotes);
         }
+    }
+
+    @Test
+    public void createQuestion() throws Exception {
+        // require manage_pages permission
+        // replace to your page id
+        String pageId = "137246726435626";
+        QuestionUpdate questionUpdate = new QuestionUpdate("What is your favorite programming language?")
+                .option("Java").option("PHP").option("Ruby").option("C#")
+                .allowNewOptions(true)
+                .published(false)
+                .scheduledPublishTime(new Date(new Date().getTime() + 1000 * 60 * 15));
+        String questionId = real.createQuestion(pageId, questionUpdate);
+        assertThat(questionId, is(notNullValue()));
+        Question question = real.getQuestion(questionId);
+        assertThat(question.getId(), is(questionId));
+        assertThat(question.getOptions().size(), is(4));
+    }
+
+    @Test
+    public void createQuestion_me() throws Exception {
+        // require page access_token
+        QuestionUpdate questionUpdate = new QuestionUpdate("What is your favorite programming language?")
+                .option("Java").option("PHP").option("Ruby").option("C#")
+                .allowNewOptions(true);
+        String questionId = real.createQuestion(questionUpdate);
+        assertThat(questionId, is(notNullValue()));
+        Question question = real.getQuestion(questionId);
+        assertThat(question.getId(), is(questionId));
+        assertThat(question.getOptions().size(), is(4));
     }
 
 }

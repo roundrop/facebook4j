@@ -1402,17 +1402,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return _postFeed(pageId, postUpdate);
     }
 
-    public String createPageQuestion(String pageId, QuestionUpdate questionUpdate) throws FacebookException {
-        ensureAuthorizationEnabled();
-        JSONObject json = post(buildURL(pageId, "questions"),
-                               questionUpdate.asHttpParameterArray()).asJSONObject();
-        try {
-            return json.getString("id");
-        } catch (JSONException jsone) {
-            throw new FacebookException(jsone.getMessage(), jsone);
-        }
-    }
-
     public void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         post(buildURL(pageId, "picture"), pageUpdate.asHttpParameterArray());
@@ -1647,27 +1636,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createQuestion(get(buildURL(questionId, reading)));
     }
 
-    public String createQuestion(String question) throws FacebookException {
-        return createQuestion(question, null, false);
+    public String createQuestion(QuestionUpdate questionUpdate) throws FacebookException {
+        return createQuestion("me", questionUpdate);
     }
-    public String createQuestion(String userId, String question) throws FacebookException {
-        return createQuestion(userId, question, null, false);
-    }
-    public String createQuestion(String question, List<String> options, boolean allowNewOptions) throws FacebookException {
-        return createQuestion("me", question, options, allowNewOptions);
-    }
-    public String createQuestion(String userId, String question, List<String> options, boolean allowNewOptions) throws FacebookException {
+    public String createQuestion(String id, QuestionUpdate questionUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
-        HttpParameter[] httpParameters = new HttpParameter[]{
-                                            new HttpParameter("question", question),
-                                            new HttpParameter("allow_new_options", allowNewOptions)
-                                         };
-        if (options != null && options.size() != 0) {
-            httpParameters = HttpParameter.merge(httpParameters, new HttpParameter[]{
-                    new HttpParameter("options", new JSONArray(options).toString())
-            });
-        }
-        JSONObject json = post(buildURL(userId, "questions"), httpParameters).asJSONObject();
+        JSONObject json = post(buildURL(id, "questions"), questionUpdate.asHttpParameterArray())
+                          .asJSONObject();
         try {
             return json.getString("id");
         } catch (JSONException jsone) {

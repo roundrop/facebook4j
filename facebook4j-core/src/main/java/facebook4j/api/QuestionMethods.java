@@ -20,6 +20,7 @@ import java.util.List;
 
 import facebook4j.FacebookException;
 import facebook4j.Question;
+import facebook4j.QuestionUpdate;
 import facebook4j.QuestionVotes;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
@@ -66,47 +67,24 @@ public interface QuestionMethods {
 
 
     /**
-     * Creates the question.
-     * @param question the text of the question
+     * Creates a question.
+     * @param questionUpdate the question to be created
      * @return The new question ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#questions">User#questions - Facebook Developers</a>
      */
-    String createQuestion(String question) throws FacebookException;
+    String createQuestion(QuestionUpdate questionUpdate) throws FacebookException;
 
     /**
      * Creates the question.
-     * @param question the text of the question
-     * @param options answer options
-     * @param allowNewOptions true if allows other users to add new options
+     * @param id the ID of a user/page
+     * @param questionUpdate the question to be created
      * @return The new question ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#questions">User#questions - Facebook Developers</a>
      */
-    String createQuestion(String question, List<String> options, boolean allowNewOptions) throws FacebookException;
+    String createQuestion(String id, QuestionUpdate questionUpdate) throws FacebookException;
 
-    /**
-     * Creates the question.
-     * @param userId the ID of a user
-     * @param question the text of the question
-     * @return The new question ID
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#questions">User#questions - Facebook Developers</a>
-     */
-    String createQuestion(String userId, String question) throws FacebookException;
-
-    /**
-     * Creates the question.
-     * @param userId the ID of a user
-     * @param question the text of the question
-     * @param options answer options
-     * @param allowNewOptions true if allows other users to add new options
-     * @return The new question ID
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#questions">User#questions - Facebook Developers</a>
-     */
-    String createQuestion(String userId, String question, List<String> options, boolean allowNewOptions) throws FacebookException;
-    
     /**
      * Returns a single question.
      * @param questionId the ID of the question

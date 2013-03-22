@@ -144,16 +144,6 @@ public interface PageMethods {
     String postPageFeed(String pageId, PostUpdate postUpdate) throws FacebookException;
 
     /**
-     * Creates the question.
-     * @param pageId the ID of a page
-     * @param questionUpdate the question to be created
-     * @return The new question ID
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#questions">Page#questions - Facebook Developers</a>
-     */
-    String createPageQuestion(String pageId, QuestionUpdate questionUpdate) throws FacebookException;
-
-    /**
      * Updates a Page's basic attributes.
      * @param pageId the ID of the page
      * @param pageUpdate the page to be updated
