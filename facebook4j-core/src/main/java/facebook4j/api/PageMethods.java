@@ -58,6 +58,25 @@ public interface PageMethods {
 
     /**
      * Returns the url of a page's profile picture.
+     * This method requires page access_token.
+     * @return url
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Connections - picture
+     */
+    URL getPagePictureURL() throws FacebookException;
+
+    /**
+     * Returns the url of a page's profile picture.
+     * This method requires page access_token.
+     * @param size {@link facebook4j.PictureSize picture size}
+     * @return url
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Connections - picture
+     */
+    URL getPagePictureURL(PictureSize size) throws FacebookException;
+
+    /**
+     * Returns the url of a page's profile picture.
      * @param pageId the ID of a page
      * @return url
      * @throws FacebookException when Facebook service or network is unavailable
@@ -77,7 +96,7 @@ public interface PageMethods {
 
     /**
      * Returns the current Page's own posts, including unpublished and scheduled posts.
-     * Page access_token required.
+     * This method requires page access_token.
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
@@ -86,7 +105,7 @@ public interface PageMethods {
 
     /**
      * Returns the current Page's own posts, including unpublished and scheduled posts.
-     * Page access_token required.
+     * This method requires page access_token.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable

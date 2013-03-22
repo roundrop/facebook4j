@@ -210,6 +210,18 @@ public class PageMethodsTest extends FacebookTestBase {
     }
 
     @Test
+    public void getPictureURL_page_access_token() throws Exception {
+        // require page access token
+        // replace to your page id
+        String pageId = "137246726435626";
+        URL pictureURL = real.getPagePictureURL();
+        assertThat(pictureURL, is(notNullValue()));
+
+        pictureURL = real.getPagePictureURL(PictureSize.large);
+        assertThat(pictureURL, is(notNullValue()));
+    }
+
+    @Test
     public void getPageSettings() throws Exception {
         // require page access token
         // replace to your page id

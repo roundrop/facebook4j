@@ -1370,6 +1370,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createPage(res);
     }
 
+    public URL getPagePictureURL() throws FacebookException {
+        return getPagePictureURL("me", null);
+    }
+    public URL getPagePictureURL(PictureSize size) throws FacebookException {
+        return getPagePictureURL("me", size);
+    }
     public URL getPagePictureURL(String pageId) throws FacebookException {
         return getPagePictureURL(pageId, null);
     }
