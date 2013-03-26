@@ -16,19 +16,19 @@
 
 package facebook4j;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import java.util.List;
-
+import facebook4j.FacebookResponse.Metadata;
+import facebook4j.FacebookResponse.Metadata.Connections;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import facebook4j.FacebookResponse.Metadata;
-import facebook4j.FacebookResponse.Metadata.Connections;
+import java.util.Date;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -104,7 +104,14 @@ public class ReadingTest extends FacebookTestBase {
         for (Post post : posts) {
             assertThat(post.getPicture(), is(notNullValue()));
         }
-        
     }
-    
+
+    @Test
+    public void since() throws Exception {
+        Date since = new Date(new Date().getTime() - (1000*60*60*24*3));
+        ResponseList<Post> feed = facebook1.getFeed(new Reading().since(since));
+        for (Post post : feed) {
+            System.out.println(post);
+        }
+    }
 }
