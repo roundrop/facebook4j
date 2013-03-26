@@ -16,13 +16,14 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.HttpParameter;
+import facebook4j.internal.util.z_F4JInternalStringUtil;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import facebook4j.internal.util.z_F4JInternalStringUtil;
 
 /**
  * A builder that can construct a Graph API's reading options (selection, paging, dates, introspection).
@@ -41,7 +42,7 @@ public class Reading implements java.io.Serializable {
         String[] array = new String[parameterMap.size()];
         int i = 0;
         for (String key : parameterMap.keySet()) {
-            array[i] = key + "=" + parameterMap.get(key);
+            array[i] = key + "=" + HttpParameter.encode(parameterMap.get(key));
             i++;
         }
         return z_F4JInternalStringUtil.join(array, "&");
