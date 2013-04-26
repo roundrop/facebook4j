@@ -43,11 +43,13 @@ public interface Post extends FacebookResponse {
     String getType();
     Integer getSharesCount();
     PagableList<IdNameEntity> getLikes();
+    Integer getLikesCount();
     Place getPlace();
     String getStory();
     Map<String, Tag[]> getStoryTags();
     List<IdNameEntity> getWithTags();
     PagableList<Comment> getComments();
+    Integer getCommentsCount();
     Long getObjectId();
     Application getApplication();
     Date getCreatedTime();
