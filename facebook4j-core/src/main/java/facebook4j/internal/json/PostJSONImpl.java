@@ -64,12 +64,15 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private List<Post.Action> actions;
     private Privacy privacy;
     private String type;
+    private Integer sharesCount;
     private PagableList<IdNameEntity> likes;
+    private int likesCount;
     private Place place;
     private String story;
     private Map<String, Tag[]> storyTags;
     private List<IdNameEntity> withTags;
     private PagableList<Comment> comments;
+    private Integer commentsCount;
     private Long objectId;
     private Application application;
     private Date createdTime;
@@ -157,6 +160,12 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 privacy = new PrivacyJSONImpl(privacyJSONObject);
             }
             type = getRawString("type", json);
+            if (!json.isNull("shares")){
+                JSONObject sharesJSONObject = json.getJSONObject("shares");
+                if (!sharesJSONObject.isNull("count")){
+                    sharesCount = sharesJSONObject.getInt("count");
+                }
+            }
             if (!json.isNull("likes")) {
                 JSONObject likesJSONObject = json.getJSONObject("likes");
                 if (!likesJSONObject.isNull("data")) {
@@ -167,6 +176,9 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                         IdNameEntityJSONImpl like = new IdNameEntityJSONImpl(list.getJSONObject(i));
                         likes.add(like);
                     }
+                }
+                if (!likesJSONObject.isNull("count")){
+                    likesCount = likesJSONObject.getInt("count");
                 }
             }
             if (!json.isNull("place")) {
@@ -208,6 +220,9 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                         CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
                         comments.add(comment);
                     }
+                }
+                if (!commentsJSONObject.isNull("count")){
+                    commentsCount = commentsJSONObject.getInt("count");
                 }
             }
             if (!json.isNull("object_id")) {
@@ -288,8 +303,16 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return type;
     }
 
+    public Integer getSharesCount() {
+        return sharesCount;
+    }
+
     public PagableList<IdNameEntity> getLikes() {
         return likes;
+    }
+
+    public Integer getLikesCount() {
+        return likesCount;
     }
 
     public Place getPlace() {
@@ -310,6 +333,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
 
     public PagableList<Comment> getComments() {
         return comments;
+    }
+
+    public Integer getCommentsCount() {
+        return commentsCount;
     }
 
     public Long getObjectId() {
@@ -384,7 +411,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 + ", caption=" + caption + ", description=" + description
                 + ", source=" + source + ", properties=" + properties
                 + ", icon=" + icon + ", actions=" + actions + ", privacy="
-                + privacy + ", type=" + type + ", likes=" + likes + ", place="
+                + privacy + ", type=" + type + ", likes=" + likes + ", likesCount=" + likesCount + ", place="
                 + place + ", story=" + story + ", storyTags=" + storyTags
                 + ", withTags=" + withTags + ", comments=" + comments
                 + ", objectId=" + objectId + ", application=" + application
