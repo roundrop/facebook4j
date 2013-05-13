@@ -29,13 +29,13 @@ public class InboxResponseListImpl<T> extends ResponseListImpl<T> implements Inb
     
     private InboxResponseList.Summary summary;
 
-    /*package*/InboxResponseListImpl(JSONObject json) throws FacebookException {
-        super(json);
+    /*package*/InboxResponseListImpl(JSONObject json, T... t) throws FacebookException {
+        super(json, t);
         init(json);
     }
 
-    /*package*/InboxResponseListImpl(int size, JSONObject json) throws FacebookException {
-        super(size, json);
+    /*package*/InboxResponseListImpl(int size, JSONObject json, T... t) throws FacebookException {
+        super(size, json, t);
         init(json);
     }
 
