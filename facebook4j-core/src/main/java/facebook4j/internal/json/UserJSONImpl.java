@@ -42,7 +42,7 @@ import facebook4j.internal.org.json.JSONObject;
  *
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class UserJSONImpl implements User, Comparable<User>, java.io.Serializable {
+/*package*/ class UserJSONImpl implements User, Comparable<User>, java.io.Serializable {
     private static final long serialVersionUID = 3839339196757459703L;
 
     private String id;
