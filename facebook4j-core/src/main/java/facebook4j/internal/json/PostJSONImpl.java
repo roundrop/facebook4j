@@ -66,13 +66,11 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private String type;
     private Integer sharesCount;
     private PagableList<IdNameEntity> likes;
-    private int likesCount;
     private Place place;
     private String story;
     private Map<String, Tag[]> storyTags;
     private List<IdNameEntity> withTags;
     private PagableList<Comment> comments;
-    private Integer commentsCount;
     private Long objectId;
     private Application application;
     private Date createdTime;
@@ -181,9 +179,6 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 } else {
                     likes = new PagableListImpl<IdNameEntity>(1, likesJSONObject);
                 }
-                if (!likesJSONObject.isNull("count")){
-                    likesCount = likesJSONObject.getInt("count");
-                }
             }
             if (!json.isNull("place")) {
                 JSONObject placeJSONObject = json.getJSONObject("place");
@@ -226,9 +221,6 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                     }
                 } else {
                     comments = new PagableListImpl<Comment>(1, commentsJSONObject);
-                }
-                if (!commentsJSONObject.isNull("count")){
-                    commentsCount = commentsJSONObject.getInt("count");
                 }
             }
             if (!json.isNull("object_id")) {
@@ -321,10 +313,6 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return likes;
     }
 
-    public Integer getLikesCount() {
-        return likesCount;
-    }
-
     public Place getPlace() {
         return place;
     }
@@ -343,10 +331,6 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
 
     public PagableList<Comment> getComments() {
         return comments;
-    }
-
-    public Integer getCommentsCount() {
-        return commentsCount;
     }
 
     public Long getObjectId() {
