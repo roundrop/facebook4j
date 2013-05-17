@@ -22,11 +22,8 @@ import static org.junit.Assert.*;
 import java.net.URL;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.hamcrest.CoreMatchers;
+import org.junit.*;
 
 import facebook4j.Post.Action;
 
@@ -282,5 +279,29 @@ public class PostMethodsTest extends FacebookTestBase {
         Post post3 = previousPage.get(0);
         assertThat(post1, is(post3));
     }
-    
+
+    @Test
+    public void likesCount() throws Exception {
+        ResponseList<Post> posts = facebook1.getPosts("BillGates", new Reading().fields("likes"));
+        for (Post post : posts) {
+            assertThat(post.getLikes().getCount() > 0, is(true));
+        }
+    }
+
+    @Test
+    public void commentsCount() throws Exception {
+        ResponseList<Post> posts = facebook1.getPosts("BillGates", new Reading().fields("comments"));
+        for (Post post : posts) {
+            assertThat(post.getComments().getCount() > 0, is(true));
+        }
+    }
+
+    @Test
+    public void sharesCount() throws Exception {
+        ResponseList<Post> posts = facebook1.getPosts("BillGates", new Reading().fields("shares"));
+        for (Post post : posts) {
+            assertThat(post.getSharesCount() > 0, is(true));
+        }
+    }
+
 }
