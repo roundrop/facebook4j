@@ -16,6 +16,8 @@
 
 package facebook4j.internal.json;
 
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+
 import java.util.ArrayList;
 
 import facebook4j.FacebookException;
@@ -28,8 +30,9 @@ import facebook4j.internal.org.json.JSONObject;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 /*package*/ class PagableListImpl<T> extends ArrayList<T> implements PagableList<T> {
-    private static final long serialVersionUID = 3562128202194010360L;
+    private static final long serialVersionUID = 3378755563757846762L;
 
+    private Integer count;
     private Paging<T> paging;
 
     /*package*/PagableListImpl(JSONObject json, T... t) throws FacebookException {
@@ -46,6 +49,9 @@ import facebook4j.internal.org.json.JSONObject;
         @SuppressWarnings("unchecked")
         Class<T> jsonObjectType = (Class<T>) t.getClass().getComponentType();
 
+        if (!json.isNull("count")) {
+            count = getInt("count", json);
+        }
         try {
             if (!json.isNull("paging")) {
                 JSONObject pagingJSONObject = json.getJSONObject("paging");
@@ -55,14 +61,20 @@ import facebook4j.internal.org.json.JSONObject;
             throw new FacebookException(jsone.getMessage(), jsone);
         }
     }
-    
+
+    public Integer getCount() {
+        return count;
+    }
+
     public Paging<T> getPaging() {
         return paging;
     }
 
     @Override
     public String toString() {
-        return "PagableListImpl [" + super.toString() + ", paging=" + paging + "]";
+        return "PagableListImpl{" +
+                "count=" + count +
+                ", paging=" + paging +
+                '}';
     }
-
 }

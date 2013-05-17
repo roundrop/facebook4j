@@ -22,5 +22,6 @@ import java.util.List;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public interface PagableList<T> extends List<T> {
+    Integer getCount();
     Paging<T> getPaging();
 }
