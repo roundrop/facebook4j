@@ -41,6 +41,7 @@ public interface Post extends FacebookResponse {
     List<Post.Action> getActions();
     Privacy getPrivacy();
     String getType();
+    Integer getSharesCount();
     PagableList<IdNameEntity> getLikes();
     Place getPlace();
     String getStory();

@@ -64,6 +64,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private List<Post.Action> actions;
     private Privacy privacy;
     private String type;
+    private Integer sharesCount;
     private PagableList<IdNameEntity> likes;
     private Place place;
     private String story;
@@ -157,6 +158,12 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 privacy = new PrivacyJSONImpl(privacyJSONObject);
             }
             type = getRawString("type", json);
+            if (!json.isNull("shares")){
+                JSONObject sharesJSONObject = json.getJSONObject("shares");
+                if (!sharesJSONObject.isNull("count")){
+                    sharesCount = getInt("count", sharesJSONObject);
+                }
+            }
             if (!json.isNull("likes")) {
                 JSONObject likesJSONObject = json.getJSONObject("likes");
                 if (!likesJSONObject.isNull("data")) {
@@ -167,6 +174,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                         IdNameEntityJSONImpl like = new IdNameEntityJSONImpl(list.getJSONObject(i));
                         likes.add(like);
                     }
+                } else {
+                    likes = new PagableListImpl<IdNameEntity>(1, likesJSONObject);
                 }
             }
             if (!json.isNull("place")) {
@@ -208,6 +217,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                         CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
                         comments.add(comment);
                     }
+                } else {
+                    comments = new PagableListImpl<Comment>(1, commentsJSONObject);
                 }
             }
             if (!json.isNull("object_id")) {
@@ -286,6 +297,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
 
     public String getType() {
         return type;
+    }
+
+    public Integer getSharesCount() {
+        return sharesCount;
     }
 
     public PagableList<IdNameEntity> getLikes() {
@@ -378,20 +393,36 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
 
     @Override
     public String toString() {
-        return "PostJSONImpl [id=" + id + ", from=" + from + ", to=" + to
-                + ", message=" + message + ", messageTags=" + messageTags
-                + ", picture=" + picture + ", link=" + link + ", name=" + name
-                + ", caption=" + caption + ", description=" + description
-                + ", source=" + source + ", properties=" + properties
-                + ", icon=" + icon + ", actions=" + actions + ", privacy="
-                + privacy + ", type=" + type + ", likes=" + likes + ", place="
-                + place + ", story=" + story + ", storyTags=" + storyTags
-                + ", withTags=" + withTags + ", comments=" + comments
-                + ", objectId=" + objectId + ", application=" + application
-                + ", createdTime=" + createdTime + ", updatedTime="
-                + updatedTime + "]";
+        return "PostJSONImpl{" +
+                "id='" + id + '\'' +
+                ", from=" + from +
+                ", to=" + to +
+                ", message='" + message + '\'' +
+                ", messageTags=" + messageTags +
+                ", picture=" + picture +
+                ", link=" + link +
+                ", name='" + name + '\'' +
+                ", caption='" + caption + '\'' +
+                ", description='" + description + '\'' +
+                ", source=" + source +
+                ", properties=" + properties +
+                ", icon='" + icon + '\'' +
+                ", actions=" + actions +
+                ", privacy=" + privacy +
+                ", type='" + type + '\'' +
+                ", sharesCount=" + sharesCount +
+                ", likes=" + likes +
+                ", place=" + place +
+                ", story='" + story + '\'' +
+                ", storyTags=" + storyTags +
+                ", withTags=" + withTags +
+                ", comments=" + comments +
+                ", objectId=" + objectId +
+                ", application=" + application +
+                ", createdTime=" + createdTime +
+                ", updatedTime=" + updatedTime +
+                '}';
     }
-
 
     private class PropertyJSONImpl implements Post.Property, java.io.Serializable {
         private static final long serialVersionUID = -2917519371927503549L;
