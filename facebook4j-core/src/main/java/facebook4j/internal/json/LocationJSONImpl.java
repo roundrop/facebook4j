@@ -49,11 +49,50 @@ import facebook4j.internal.org.json.JSONObject;
 
     /*package*/LocationJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
-        JSONObject json = res.asJSONObject();        init(json);        if (conf.isJSONStoreEnabled()) {
+        JSONObject json = res.asJSONObject();
+        init(json);
+        if (conf.isJSONStoreEnabled()) {
             DataObjectFactoryUtil.clearThreadLocalMap();
             DataObjectFactoryUtil.registerJSONObject(this, json);
         }
-    }    /*package*/LocationJSONImpl(JSONObject json) throws FacebookException {        super();        init(json);    }    private void init(JSONObject json) throws FacebookException {        try {            id = getRawString("id", json);            if (!json.isNull("from")) {                JSONObject fromJSONObject = json.getJSONObject("from");                from = new IdNameEntityJSONImpl(fromJSONObject);            }            if (!json.isNull("tags")) {                JSONObject tagsJSONObject = json.getJSONObject("tags");                JSONArray list = tagsJSONObject.getJSONArray("data");                int size = list.length();                tags = new PagableListImpl<IdNameEntity>(size, tagsJSONObject);                for (int i = 0; i < size; i++) {                    IdNameEntityJSONImpl tag = new IdNameEntityJSONImpl(list.getJSONObject(i));                    tags.add(tag);                }            }            if (!json.isNull("place")) {                JSONObject placeJSONObject = json.getJSONObject("place");                place = new PlaceJSONImpl(placeJSONObject);            }            if (!json.isNull("application")) {                JSONObject applicationJSONObject = json.getJSONObject("application");                application = new ApplicationJSONImpl(applicationJSONObject);            }            createdTime = getISO8601Datetime("created_time", json);            type = getRawString("type", json);        } catch (JSONException jsone) {            throw new FacebookException(jsone.getMessage(), jsone);        }    }
+    }
+
+    /*package*/LocationJSONImpl(JSONObject json) throws FacebookException {
+        super();
+        init(json);
+    }
+
+    private void init(JSONObject json) throws FacebookException {
+        try {
+            id = getRawString("id", json);
+            if (!json.isNull("from")) {
+                JSONObject fromJSONObject = json.getJSONObject("from");
+                from = new IdNameEntityJSONImpl(fromJSONObject);
+            }
+            if (!json.isNull("tags")) {
+                JSONObject tagsJSONObject = json.getJSONObject("tags");
+                JSONArray list = tagsJSONObject.getJSONArray("data");
+                int size = list.length();
+                tags = new PagableListImpl<IdNameEntity>(size, tagsJSONObject);
+                for (int i = 0; i < size; i++) {
+                    IdNameEntityJSONImpl tag = new IdNameEntityJSONImpl(list.getJSONObject(i));
+                    tags.add(tag);
+                }
+            }
+            if (!json.isNull("place")) {
+                JSONObject placeJSONObject = json.getJSONObject("place");
+                place = new PlaceJSONImpl(placeJSONObject);
+            }
+            if (!json.isNull("application")) {
+                JSONObject applicationJSONObject = json.getJSONObject("application");
+                application = new ApplicationJSONImpl(applicationJSONObject);
+            }
+            createdTime = getISO8601Datetime("created_time", json);
+            type = getRawString("type", json);
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone.getMessage(), jsone);
+        }
+    }
 
     public String getId() {
         return id;
@@ -81,7 +120,8 @@ import facebook4j.internal.org.json.JSONObject;
 
     public String getType() {
         return type;
-    }
+    }
+
     /*package*/
     static ResponseList<Location> createLocationList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -93,11 +133,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Location> locations = new ResponseListImpl<Location>(size, json);
             for (int i = 0; i < size; i++) {
-                Location location = new LocationJSONImpl(list.getJSONObject(i));
+                JSONObject locationJSONObject = list.getJSONObject(i);
+                Location location = new LocationJSONImpl(locationJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(location, locationJSONObject);
+                }
                 locations.add(location);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(locations, json);
+                DataObjectFactoryUtil.registerJSONObject(locations, list);
             }
             return locations;
         } catch (JSONException jsone) {

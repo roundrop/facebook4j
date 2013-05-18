@@ -165,11 +165,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Achievement> achievements = new ResponseListImpl<Achievement>(size, json);
             for (int i = 0; i < size; i++) {
-                Achievement achievement = new AchievementJSONImpl(list.getJSONObject(i));
+                JSONObject achievementJSONObject = list.getJSONObject(i);
+                Achievement achievement = new AchievementJSONImpl(achievementJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(achievement, achievementJSONObject);
+                }
                 achievements.add(achievement);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(achievements, json);
+                DataObjectFactoryUtil.registerJSONObject(achievements, list);
             }
             return achievements;
         } catch (JSONException jsone) {

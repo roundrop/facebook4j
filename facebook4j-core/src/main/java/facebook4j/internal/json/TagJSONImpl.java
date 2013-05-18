@@ -131,11 +131,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Tag> tags = new ResponseListImpl<Tag>(size, json);
             for (int i = 0; i < size; i++) {
-                Tag tag = new TagJSONImpl(list.getJSONObject(i));
+                JSONObject tagJSONObject = list.getJSONObject(i);
+                Tag tag = new TagJSONImpl(tagJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(tag, tagJSONObject);
+                }
                 tags.add(tag);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(tags, json);
+                DataObjectFactoryUtil.registerJSONObject(tags, list);
             }
             return tags;
         } catch (JSONException jsone) {

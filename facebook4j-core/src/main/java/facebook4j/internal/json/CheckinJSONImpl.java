@@ -170,11 +170,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Checkin> checkins = new ResponseListImpl<Checkin>(size, json);
             for (int i = 0; i < size; i++) {
-                Checkin checkin = new CheckinJSONImpl(list.getJSONObject(i));
+                JSONObject checkinJSONObject = list.getJSONObject(i);
+                Checkin checkin = new CheckinJSONImpl(checkinJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(checkin, checkinJSONObject);
+                }
                 checkins.add(checkin);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(checkins, json);
+                DataObjectFactoryUtil.registerJSONObject(checkins, list);
             }
             return checkins;
         } catch (JSONException jsone) {

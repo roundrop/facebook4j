@@ -566,10 +566,13 @@ public class ConfigurationBase implements Configuration, Serializable {
                 ", defaultMaxPerRoute=" + defaultMaxPerRoute +
                 ", oAuthAppId='" + oAuthAppId + '\'' +
                 ", oAuthAppSecret='" + oAuthAppSecret + '\'' +
+                ", oAuthPermissions='" + oAuthPermissions + '\'' +
                 ", oAuthAccessToken='" + oAuthAccessToken + '\'' +
                 ", oAuthAuthorizationURL='" + oAuthAuthorizationURL + '\'' +
                 ", oAuthAccessTokenURL='" + oAuthAccessTokenURL + '\'' +
                 ", restBaseURL='" + restBaseURL + '\'' +
+                ", videoBaseURL='" + videoBaseURL + '\'' +
+                ", jsonStoreEnabled=" + jsonStoreEnabled +
                 ", mbeanEnabled=" + mbeanEnabled +
                 ", clientVersion='" + clientVersion + '\'' +
                 ", clientURL='" + clientURL + '\'' +

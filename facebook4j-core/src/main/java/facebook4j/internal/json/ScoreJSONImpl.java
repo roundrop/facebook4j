@@ -92,11 +92,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Score> scores = new ResponseListImpl<Score>(size, json);
             for (int i = 0; i < size; i++) {
-                Score score = new ScoreJSONImpl(list.getJSONObject(i));
+                JSONObject scoreJSONObject = list.getJSONObject(i);
+                Score score = new ScoreJSONImpl(scoreJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(score, scoreJSONObject);
+                }
                 scores.add(score);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(scores, json);
+                DataObjectFactoryUtil.registerJSONObject(scores, list);
             }
             return scores;
         } catch (JSONException jsone) {

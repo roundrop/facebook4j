@@ -110,11 +110,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<FriendRequest> friendRequests = new ResponseListImpl<FriendRequest>(size, json);
             for (int i = 0; i < size; i++) {
-                FriendRequest friendRequest = new FriendRequestJSONImpl(list.getJSONObject(i));
+                JSONObject friendRequestJSONObject = list.getJSONObject(i);
+                FriendRequest friendRequest = new FriendRequestJSONImpl(friendRequestJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(friendRequest, friendRequestJSONObject);
+                }
                 friendRequests.add(friendRequest);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(friendRequests, json);
+                DataObjectFactoryUtil.registerJSONObject(friendRequests, list);
             }
             return friendRequests;
         } catch (JSONException jsone) {

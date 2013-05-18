@@ -117,11 +117,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Comment> comments = new ResponseListImpl<Comment>(size, json);
             for (int i = 0; i < size; i++) {
-                Comment comment = new CommentJSONImpl(list.getJSONObject(i));
+                JSONObject commentJSONObject = list.getJSONObject(i);
+                Comment comment = new CommentJSONImpl(commentJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(comment, commentJSONObject);
+                }
                 comments.add(comment);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(comments, json);
+                DataObjectFactoryUtil.registerJSONObject(comments, list);
             }
             return comments;
         } catch (JSONException jsone) {

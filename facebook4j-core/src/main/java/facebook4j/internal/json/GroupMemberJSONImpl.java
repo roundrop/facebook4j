@@ -69,11 +69,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<GroupMember> members = new ResponseListImpl<GroupMember>(size, json);
             for (int i = 0; i < size; i++) {
-                GroupMember member = new GroupMemberJSONImpl(list.getJSONObject(i));
+                JSONObject groupMemberJSONObject = list.getJSONObject(i);
+                GroupMember member = new GroupMemberJSONImpl(groupMemberJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(member, groupMemberJSONObject);
+                }
                 members.add(member);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(members, json);
+                DataObjectFactoryUtil.registerJSONObject(members, list);
             }
             return members;
         } catch (JSONException jsone) {

@@ -85,11 +85,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Place> places = new ResponseListImpl<Place>(size, json);
             for (int i = 0; i < size; i++) {
-                Place place = new PlaceJSONImpl(list.getJSONObject(i));
+                JSONObject placeJSONObject = list.getJSONObject(i);
+                Place place = new PlaceJSONImpl(placeJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(place, placeJSONObject);
+                }
                 places.add(place);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(places, json);
+                DataObjectFactoryUtil.registerJSONObject(places, list);
             }
             return places;
         } catch (JSONException jsone) {

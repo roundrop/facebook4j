@@ -51,7 +51,11 @@ import facebook4j.internal.org.json.JSONObject;
             Iterator ids = json.keys();
             while (ids.hasNext()) {
                 String id = (String) ids.next();
-                Domain domain = new DomainJSONImpl((JSONObject) json.get(id));
+                JSONObject domainJSONObject = (JSONObject) json.get(id);
+                Domain domain = new DomainJSONImpl(domainJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(domain, domainJSONObject);
+                }
                 domains.add(domain);
             }
             if (conf.isJSONStoreEnabled()) {

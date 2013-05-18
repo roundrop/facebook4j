@@ -93,11 +93,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Poke> pokes = new ResponseListImpl<Poke>(size, json);
             for (int i = 0; i < size; i++) {
-                Poke poke = new PokeJSONImpl(list.getJSONObject(i));
+                JSONObject pokeJSONObject = list.getJSONObject(i);
+                Poke poke = new PokeJSONImpl(pokeJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(poke, pokeJSONObject);
+                }
                 pokes.add(poke);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(pokes, json);
+                DataObjectFactoryUtil.registerJSONObject(pokes, list);
             }
             return pokes;
         } catch (JSONException jsone) {

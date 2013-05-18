@@ -103,11 +103,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Insight> insights = new ResponseListImpl<Insight>(size, json);
             for (int i = 0; i < size; i++) {
-                Insight insight = new InsightJSONImpl(list.getJSONObject(i));
+                JSONObject insightJSONObject = list.getJSONObject(i);
+                Insight insight = new InsightJSONImpl(insightJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(insight, insightJSONObject);
+                }
                 insights.add(insight);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(insights, json);
+                DataObjectFactoryUtil.registerJSONObject(insights, list);
             }
             return insights;
         } catch (JSONException jsone) {

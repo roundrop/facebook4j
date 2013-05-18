@@ -354,11 +354,15 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             int size = list.length();
             ResponseList<Post> posts = new ResponseListImpl<Post>(size, json);
             for (int i = 0; i < size; i++) {
-                Post post = new PostJSONImpl(list.getJSONObject(i));
+                JSONObject postJSONObject = list.getJSONObject(i);
+                Post post = new PostJSONImpl(postJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(post, postJSONObject);
+                }
                 posts.add(post);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(posts, json);
+                DataObjectFactoryUtil.registerJSONObject(posts, list);
             }
             return posts;
         } catch (JSONException jsone) {

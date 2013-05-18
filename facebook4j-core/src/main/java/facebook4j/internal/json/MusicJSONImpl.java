@@ -51,11 +51,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Music> musics = new ResponseListImpl<Music>(size, json);
             for (int i = 0; i < size; i++) {
-                Music music = new MusicJSONImpl(list.getJSONObject(i));
+                JSONObject musicJSONObject = list.getJSONObject(i);
+                Music music = new MusicJSONImpl(musicJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(music, musicJSONObject);
+                }
                 musics.add(music);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(musics, json);
+                DataObjectFactoryUtil.registerJSONObject(musics, list);
             }
             return musics;
         } catch (JSONException jsone) {

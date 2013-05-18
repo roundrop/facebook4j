@@ -167,11 +167,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Notification> notifications = new ResponseListImpl<Notification>(size, json);
             for (int i = 0; i < size; i++) {
-                Notification notification = new NotificationJSONImpl(list.getJSONObject(i));
+                JSONObject notificationJSONObject = list.getJSONObject(i);
+                Notification notification = new NotificationJSONImpl(notificationJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(notification, notificationJSONObject);
+                }
                 notifications.add(notification);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(notifications, json);
+                DataObjectFactoryUtil.registerJSONObject(notifications, list);
             }
             return notifications;
         } catch (JSONException jsone) {

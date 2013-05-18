@@ -49,7 +49,11 @@ import facebook4j.internal.org.json.JSONObject;
             int size = jsonArray.length();
             ResponseList<JSONObject> results = new ResponseListImpl<JSONObject>(size, json);
             for (int i = 0; i < size; i++) {
-                results.add(jsonArray.getJSONObject(i));
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(jsonObject, jsonObject);
+                }
+                results.add(jsonObject);
             }
             if (conf.isJSONStoreEnabled()) {
                 DataObjectFactoryUtil.registerJSONObject(results, jsonArray);

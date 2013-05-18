@@ -50,11 +50,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Subscribedto> subscribedtos = new ResponseListImpl<Subscribedto>(size, json);
             for (int i = 0; i < size; i++) {
-                Subscribedto subscribedto = new SubscribedtoJSONImpl(list.getJSONObject(i));
+                JSONObject subscribedtoJSONObject = list.getJSONObject(i);
+                Subscribedto subscribedto = new SubscribedtoJSONImpl(subscribedtoJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(subscribedto, subscribedtoJSONObject);
+                }
                 subscribedtos.add(subscribedto);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(subscribedtos, json);
+                DataObjectFactoryUtil.registerJSONObject(subscribedtos, list);
             }
             return subscribedtos;
         } catch (JSONException jsone) {
