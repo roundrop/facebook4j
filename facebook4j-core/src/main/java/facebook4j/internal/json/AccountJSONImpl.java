@@ -88,11 +88,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Account> accounts = new ResponseListImpl<Account>(size, json);
             for (int i = 0; i < size; i++) {
-                Account account = new AccountJSONImpl(list.getJSONObject(i));
+                JSONObject accountJSONObject = list.getJSONObject(i);
+                Account account = new AccountJSONImpl(accountJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(account, accountJSONObject);
+                }
                 accounts.add(account);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(accounts, json);
+                DataObjectFactoryUtil.registerJSONObject(accounts, list);
             }
             return accounts;
         } catch (JSONException jsone) {

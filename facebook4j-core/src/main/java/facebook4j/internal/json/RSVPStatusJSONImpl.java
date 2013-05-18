@@ -80,11 +80,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<RSVPStatus> rsvpStatuses = new ResponseListImpl<RSVPStatus>(size, json);
             for (int i = 0; i < size; i++) {
-                RSVPStatus rsvpStatus = new RSVPStatusJSONImpl(list.getJSONObject(i));
+                JSONObject rsvpStatusJSONObject = list.getJSONObject(i);
+                RSVPStatus rsvpStatus = new RSVPStatusJSONImpl(rsvpStatusJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(rsvpStatus, rsvpStatusJSONObject);
+                }
                 rsvpStatuses.add(rsvpStatus);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(rsvpStatuses, json);
+                DataObjectFactoryUtil.registerJSONObject(rsvpStatuses, list);
             }
             return rsvpStatuses;
         } catch (JSONException jsone) {

@@ -73,11 +73,15 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             int size = list.length();
             ResponseList<IdNameEntity> entities = new ResponseListImpl<IdNameEntity>(size, json);
             for (int i = 0; i < size; i++) {
-                IdNameEntity entity = new IdNameEntityJSONImpl(list.getJSONObject(i));
+                JSONObject entityJSONObject = list.getJSONObject(i);
+                IdNameEntity entity = new IdNameEntityJSONImpl(entityJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(entity, entityJSONObject);
+                }
                 entities.add(entity);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(entities, json);
+                DataObjectFactoryUtil.registerJSONObject(entities, list);
             }
             return entities;
         } catch (JSONException jsone) {

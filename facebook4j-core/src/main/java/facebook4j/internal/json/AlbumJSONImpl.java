@@ -171,11 +171,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Album> albums = new ResponseListImpl<Album>(size, json);
             for (int i = 0; i < size; i++) {
-                Album album = new AlbumJSONImpl(list.getJSONObject(i));
+                JSONObject albumJSONObject = list.getJSONObject(i);
+                Album album = new AlbumJSONImpl(albumJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(album, albumJSONObject);
+                }
                 albums.add(album);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(albums, json);
+                DataObjectFactoryUtil.registerJSONObject(albums, list);
             }
             return albums;
         } catch (JSONException jsone) {

@@ -226,11 +226,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Photo> photos = new ResponseListImpl<Photo>(size, json);
             for (int i = 0; i < size; i++) {
-                Photo photo = new PhotoJSONImpl(list.getJSONObject(i));
+                JSONObject photoJSONObject = list.getJSONObject(i);
+                Photo photo = new PhotoJSONImpl(photoJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(photo, photoJSONObject);
+                }
                 photos.add(photo);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(photos, json);
+                DataObjectFactoryUtil.registerJSONObject(photos, list);
             }
             return photos;
         } catch (JSONException jsone) {

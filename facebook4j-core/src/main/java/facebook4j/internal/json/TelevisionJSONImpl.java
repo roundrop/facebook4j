@@ -49,11 +49,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Television> televisions = new ResponseListImpl<Television>(size, json);
             for (int i = 0; i < size; i++) {
-                Television television = new TelevisionJSONImpl(list.getJSONObject(i));
+                JSONObject televisionJSONObject = list.getJSONObject(i);
+                Television television = new TelevisionJSONImpl(televisionJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(television, televisionJSONObject);
+                }
                 televisions.add(television);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(televisions, json);
+                DataObjectFactoryUtil.registerJSONObject(televisions, list);
             }
             return televisions;
         } catch (JSONException jsone) {

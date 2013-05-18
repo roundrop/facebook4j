@@ -162,11 +162,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Video> videos = new ResponseListImpl<Video>(size, json);
             for (int i = 0; i < size; i++) {
-                Video video = new VideoJSONImpl(list.getJSONObject(i));
+                JSONObject videoJSONObject = list.getJSONObject(i);
+                Video video = new VideoJSONImpl(videoJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(video, videoJSONObject);
+                }
                 videos.add(video);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(videos, json);
+                DataObjectFactoryUtil.registerJSONObject(videos, list);
             }
             return videos;
         } catch (JSONException jsone) {

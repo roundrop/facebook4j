@@ -141,11 +141,15 @@ import facebook4j.internal.org.json.JSONObject;
             int size = list.length();
             ResponseList<Group> groups = new ResponseListImpl<Group>(size, json);
             for (int i = 0; i < size; i++) {
-                Group group = new GroupJSONImpl(list.getJSONObject(i));
+                JSONObject groupJSONObject = list.getJSONObject(i);
+                Group group = new GroupJSONImpl(groupJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(group, groupJSONObject);
+                }
                 groups.add(group);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(groups, json);
+                DataObjectFactoryUtil.registerJSONObject(groups, list);
             }
             return groups;
         } catch (JSONException jsone) {

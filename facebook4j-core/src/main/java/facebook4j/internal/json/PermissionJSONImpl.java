@@ -60,9 +60,9 @@ import facebook4j.internal.org.json.JSONObject;
         List<Permission> permissions = new ArrayList<Permission>();
         JSONObject json = res.asJSONObject();
         try {
-            JSONArray data = json.getJSONArray("data");
-            for (int i = 0; i < data.length(); i++) {
-                JSONObject permissionJSONObject = data.getJSONObject(i);
+            JSONArray list = json.getJSONArray("data");
+            for (int i = 0; i < list.length(); i++) {
+                JSONObject permissionJSONObject = list.getJSONObject(i);
                 Iterator<String> permissionNames = permissionJSONObject.keys();
                 while (permissionNames.hasNext()) {
                     String permissionName = permissionNames.next();
@@ -70,13 +70,13 @@ import facebook4j.internal.org.json.JSONObject;
                     permissions.add(new PermissionJSONImpl(permissionName, isGranted));
                 }
             }
+            if (conf.isJSONStoreEnabled()) {
+                DataObjectFactoryUtil.registerJSONObject(permissions, list);
+            }
+            return permissions;
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
-        if (conf.isJSONStoreEnabled()) {
-            DataObjectFactoryUtil.registerJSONObject(permissions, json);
-        }
-        return permissions;
     }
 
     @Override

@@ -81,11 +81,15 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             int size = list.length();
             ResponseList<Family> familys = new ResponseListImpl<Family>(size, json);
             for (int i = 0; i < size; i++) {
-                Family family = new FamilyJSONImpl(list.getJSONObject(i));
+                JSONObject familyJSONObject = list.getJSONObject(i);
+                Family family = new FamilyJSONImpl(familyJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(family, familyJSONObject);
+                }
                 familys.add(family);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(familys, json);
+                DataObjectFactoryUtil.registerJSONObject(familys, list);
             }
             return familys;
         } catch (JSONException jsone) {
