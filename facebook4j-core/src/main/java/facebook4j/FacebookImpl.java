@@ -1381,21 +1381,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Post> getPromotablePosts(String pageId) throws FacebookException {
         return getPromotablePosts(pageId, null);
     }
-<<<<<<< HEAD
     public ResponseList<Post> getPromotablePosts(String pageId, Reading reading) throws FacebookException {
-=======
-
-    public ResponseList<Post> getPagePromotablePosts(String pageId) throws FacebookException {
-        return getPagePromotablePosts(pageId, null);
-    }
-
-    public ResponseList<Post> getPagePromotablePosts(String pageId, Reading reading) throws FacebookException {
-        ensureAuthorizationEnabled();
-        return factory.createPostList(get(buildURL(pageId, "promotable_posts", reading)));
-    }
-
-    public String postPageFeed(String pageId, PostUpdate postUpdate) throws FacebookException {
->>>>>>> Add getPagePromotablePosts() #24
         ensureAuthorizationEnabled();
         return factory.createPostList(get(buildURL(pageId, "promotable_posts", reading)));
     }
