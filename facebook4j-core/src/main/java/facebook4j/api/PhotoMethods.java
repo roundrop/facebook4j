@@ -34,40 +34,46 @@ import facebook4j.TagUpdate;
  */
 public interface PhotoMethods {
     /**
-     * Returns the photos the current user is tagged in.
+     * Returns the photos the current user/page is tagged in.
      * @return photos
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#photos">User#photos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#photos">Page#photos - Facebook Developers</a>
      */
     ResponseList<Photo> getPhotos() throws FacebookException;
 
     /**
-     * Returns the photos the current user is tagged in.
+     * Returns the photos the current user/page is tagged in.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return photos
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#photos">User#photos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#photos">Page#photos - Facebook Developers</a>
      */
     ResponseList<Photo> getPhotos(Reading reading) throws FacebookException;
 
     /**
-     * Returns the photos a user is tagged in.
-     * @param userId the ID of a user
+     * Returns the photos a user is tagged in / uploaded to a page / published to an event.
+     * @param id the ID of a user/page/event
      * @return photos
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#photos">User#photos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#photos">Page#photos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/event/#photos">Event#photos - Facebook Developers</a>
      */
-    ResponseList<Photo> getPhotos(String userId) throws FacebookException;
+    ResponseList<Photo> getPhotos(String id) throws FacebookException;
 
     /**
-     * Returns the photos a user is tagged in.
-     * @param userId the ID of a user
+     * Returns the photos a user is tagged in / uploaded to a page / published to an event.
+     * @param id the ID of a user/page/event
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return photos
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#photos">User#photos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#photos">Page#photos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/event/#photos">Event#photos - Facebook Developers</a>
      */
-    ResponseList<Photo> getPhotos(String userId, Reading reading) throws FacebookException;
+    ResponseList<Photo> getPhotos(String id, Reading reading) throws FacebookException;
 
 
     /**
@@ -83,7 +89,7 @@ public interface PhotoMethods {
      * Posts a photo to the current user's wall.
      * @param source photo content
      * @param message photo description
-     * @param Facebook ID of the place associated with the Photo
+     * @param place ID of the place associated with the Photo
      * @param noStory If set to true, optionally suppresses the feed story that is automatically generated on a user’s profile when they upload a photo using your application.
      * @return The new photo ID
      * @throws FacebookException when Facebook service or network is unavailable

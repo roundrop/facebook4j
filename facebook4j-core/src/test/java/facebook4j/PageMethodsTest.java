@@ -25,6 +25,8 @@ import org.junit.Test;
 import java.io.File;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -107,7 +109,7 @@ public class PageMethodsTest extends FacebookTestBase {
     @Test
     public void getPagePromotablePosts() throws Exception {
         String pageId = "19292868552"; //The Page for Facebook Platform
-        ResponseList<Post> promotablePosts = facebook1.getPagePromotablePosts(pageId);
+        ResponseList<Post> promotablePosts = facebook1.getPromotablePosts(pageId);
         for (Post post : promotablePosts) {
             assertThat(post.getFrom().getId(), is("19292868552"));
             System.out.println(post);
@@ -243,6 +245,25 @@ public class PageMethodsTest extends FacebookTestBase {
                 assertThat(setting.getValue(), is(true));
             }
         }
+    }
+
+    @Test
+    public void postPagePhoto() throws Exception {
+        String pageId = "137246726435626";
+        File file = new File("src/test/resources/test_image.png");
+        Media source = new Media(file);
+        PagePhotoUpdate pagePhotoUpdate = new PagePhotoUpdate(source).message("test message");
+        Set<String> countries = new HashSet<String>();
+        countries.add("US");
+        countries.add("GB");
+        Targeting targeting = new Targeting().countries(countries);
+        pagePhotoUpdate.setTargeting(targeting);
+        FeedTargeting feedTargeting = new FeedTargeting().genders(FeedTargeting.Gender.Male);
+        feedTargeting.setAgeMin(20);
+        feedTargeting.setAgeMax(40);
+        pagePhotoUpdate.setFeedTargeting(feedTargeting);
+        String photoId = real.postPagePhoto(pageId, pagePhotoUpdate);
+        System.out.println(photoId);
     }
 
 }

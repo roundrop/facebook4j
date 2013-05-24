@@ -1414,6 +1414,16 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return Boolean.valueOf(res.asString().trim());
     }
 
+    public String postPagePhoto(String pageId, PagePhotoUpdate pagePhotoUpdate) throws FacebookException {
+        ensureAuthorizationEnabled();
+        JSONObject json = post(buildURL(pageId, "photos"), pagePhotoUpdate.asHttpParameterArray()).asJSONObject();
+        try {
+            return json.getString("id");
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone.getMessage(), jsone);
+        }
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }
@@ -1457,12 +1467,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Photo> getPhotos(Reading reading) throws FacebookException {
         return getPhotos("me", reading);
     }
-    public ResponseList<Photo> getPhotos(String userId) throws FacebookException {
-        return getPhotos(userId, null);
+    public ResponseList<Photo> getPhotos(String id) throws FacebookException {
+        return getPhotos(id, null);
     }
-    public ResponseList<Photo> getPhotos(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Photo> getPhotos(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createPhotoList(get(buildURL(userId, "photos", reading)));
+        return factory.createPhotoList(get(buildURL(id, "photos", reading)));
     }
 
     public Photo getPhoto(String photoId) throws FacebookException {
