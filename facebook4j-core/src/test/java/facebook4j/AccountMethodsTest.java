@@ -16,49 +16,27 @@
 
 package facebook4j;
 
+import org.junit.Test;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+public class AccountMethodsTest extends MockFacebookTestBase {
 
-public class AccountMethodsTest extends FacebookTestBase {
-
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-    
     @Test
-    public void get() throws Exception {
-        ResponseList<Account> accounts = real.getAccounts();
-//        System.out.println(accounts);
-        assertThat(accounts.size() > 0, is(true));
-        
-        //use fields parameter
-        ResponseList<Account> accountsWithFields = real.getAccounts(new Reading().fields("name"));
-        for (Account account : accountsWithFields) {
-            assertThat(account.getCategory(), is(nullValue()));
-            assertThat(account.getName(), is(notNullValue()));
-        }
-        
-        //id
-        ResponseList<Account> accountsById = real.getAccounts(real.getId());
-        assertThat(accountsById, is(accounts));
+    public void me_accounts() throws Exception {
+        facebook.setMockJSON("mock_json/accounts/single.json");
+        ResponseList<Account> accounts = facebook.getAccounts();
+
+        assertThat(accounts.size(), is(1));
+        assertThat(accounts.getPaging().getNext().toString(), is("https://graph.facebook.com/100001568838021/accounts?access_token=access_token&limit=5000&offset=5000&__after_id=137246726435626"));
+        assertThat(accounts.getPaging().getPrevious(), is(nullValue()));
+        Account account = accounts.get(0);
+        assertThat(account.getAccessToken(), is("access_token"));
+        assertThat(account.getCategory(), is("Software"));
+        assertThat(account.getId(), is("137246726435626"));
+        assertThat(account.getName(), is("F4J"));
+        //TODO perms
     }
 
 }

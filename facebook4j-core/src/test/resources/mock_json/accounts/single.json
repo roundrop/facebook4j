@@ -1,0 +1,17 @@
+{
+    "data": [{
+        "access_token": "access_token",
+        "category": "Software",
+        "id": "137246726435626",
+        "name": "F4J",
+        "perms": [
+            "ADMINISTER",
+            "EDIT_PROFILE",
+            "CREATE_CONTENT",
+            "MODERATE_CONTENT",
+            "CREATE_ADS",
+            "BASIC_ADMIN"
+        ]
+    }],
+    "paging": {"next": "https://graph.facebook.com/100001568838021/accounts?access_token=access_token&limit=5000&offset=5000&__after_id=137246726435626"}
+}

@@ -72,8 +72,12 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
                 this.auth = NullAuthorization.getInstance();
             }
         }
-        http = new HttpClientWrapper(conf);
+        setHttp();
         setFactory();
+    }
+
+    protected void setHttp() {
+        http = new HttpClientWrapper(conf);
     }
 
     protected void setFactory() {
