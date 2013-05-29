@@ -17,6 +17,7 @@
 package facebook4j.internal.http;
 
 import facebook4j.FacebookException;
+import facebook4j.internal.logging.Logger;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
@@ -29,6 +30,8 @@ import java.io.*;
  */
 public final class MockHttpClientWrapper extends HttpClientWrapper {
     private static final long serialVersionUID = 6371174139273022969L;
+
+    private static final Logger logger = Logger.getLogger(MockHttpClientWrapper.class);
 
     private String mockJSONResourceName;
 
@@ -49,6 +52,9 @@ public final class MockHttpClientWrapper extends HttpClientWrapper {
 
     @Override
     protected HttpResponse request(HttpRequest req) throws FacebookException {
+        String url = req.getURL();
+        logger.info(url);
+
         String json = readMockJSON();
         if (json == null) {
             HttpResponse res = super.request(req);
@@ -62,7 +68,7 @@ public final class MockHttpClientWrapper extends HttpClientWrapper {
                 throw new FacebookException(e);
             }
         }
-        return new HttpResponseImpl(json);
+        return new MockHttpResponseImpl(json);
     }
 
     private String readMockJSON() throws FacebookException {
