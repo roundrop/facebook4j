@@ -27,7 +27,7 @@ import java.io.*;
  * If pre-registered JSON file not found, it uses real HTTP request
  * and register JSON response to src/test/resources/mock_json directory.
  */
-public class MockHttpClientWrapper extends HttpClientWrapper {
+public final class MockHttpClientWrapper extends HttpClientWrapper {
     private static final long serialVersionUID = 6371174139273022969L;
 
     private String mockJSONResourceName;
@@ -84,6 +84,7 @@ public class MockHttpClientWrapper extends HttpClientWrapper {
     private void registerMockJSON(String json) throws IOException {
         File file = new File(System.getProperty("user.dir")
                     + "/facebook4j-core/src/test/resources/" + mockJSONResourceName);
+        new File(file.getParent()).mkdirs();
         FileWriter writer = new FileWriter(file);
         writer.write(json);
         writer.close();
