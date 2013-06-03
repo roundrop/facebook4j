@@ -74,7 +74,7 @@ public class Reading implements java.io.Serializable {
         if (parameterMap.containsKey("offset")) {
             throw new IllegalStateException("'offset' already sets");
         }
-        parameterMap.put("limit", String.valueOf(offset));
+        parameterMap.put("offset", String.valueOf(offset));
         return this;
     }
 
