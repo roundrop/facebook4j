@@ -53,6 +53,7 @@ import facebook4j.internal.org.json.JSONObject;
  * <li>Added getStringMap() method</li>
  * <li>Added getBooleanMap() method</li>
  * <li>Added getStringList() method</li>
+ * <li>Deleted getDate() methods</li>
  * </ul>
  */
 public final class z_F4JInternalParseUtil {
@@ -97,33 +98,6 @@ public final class z_F4JInternalParseUtil {
             }
         }
         return returnValue;
-    }
-
-    public static Date getDate(String name, JSONObject json) throws FacebookException {
-        return getDate(name, json, "EEE MMM d HH:mm:ss z yyyy");
-    }
-
-    public static Date getDate(String name, JSONObject json, String format) throws FacebookException {
-        String dateStr = getUnescapedString(name, json);
-        if ("null".equals(dateStr) || null == dateStr) {
-            return null;
-        } else {
-            return getDate(dateStr, format);
-        }
-    }
-
-    public static Date getDate(String name, String format) throws FacebookException {
-        SimpleDateFormat sdf = formatMap.get().get(format);
-        if (null == sdf) {
-            sdf = new SimpleDateFormat(format, Locale.ENGLISH);
-            sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-            formatMap.get().put(format, sdf);
-        }
-        try {
-            return sdf.parse(name);
-        } catch (ParseException pe) {
-            throw new FacebookException("Unexpected date format(" + name + ") returned from facebook.com", pe);
-        }
     }
 
     public static int getPrimitiveInt(String name, JSONObject json) {
