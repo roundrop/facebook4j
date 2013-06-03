@@ -76,6 +76,12 @@ public class ReadingTest extends FacebookTestBase {
     }
     
     @Test
+    public void offset() throws Exception {
+        ResponseList<Like> likes = facebook1.getUserLikes("216311481960", new Reading().limit(3).offset(1));
+        assertThat(likes.size(), is(3));
+    }
+
+    @Test
     public void until() throws Exception {
         ResponseList<Post> posts = facebook1.searchPosts("orange", new Reading().until("yesterday"));
         assertThat(posts.size() > 0, is(true));
