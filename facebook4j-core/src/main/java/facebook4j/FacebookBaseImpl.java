@@ -157,12 +157,19 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        // http://docs.oracle.com/javase/6/docs/platform/serialization/spec/output.html#861
+        out.putFields();
+        out.writeFields();
+
         out.writeObject(conf);
         out.writeObject(auth);
     }
 
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
+        // http://docs.oracle.com/javase/6/docs/platform/serialization/spec/input.html#2971
+        stream.readFields();
+
         conf = (Configuration) stream.readObject();
         auth = (Authorization) stream.readObject();
         http = new HttpClientWrapper(conf);
