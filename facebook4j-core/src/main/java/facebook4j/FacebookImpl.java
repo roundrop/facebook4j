@@ -215,12 +215,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Album> getAlbums(Reading reading) throws FacebookException {
         return getAlbums("me", reading);
     }
-    public ResponseList<Album> getAlbums(String userId) throws FacebookException {
-        return getAlbums(userId, null);
+    public ResponseList<Album> getAlbums(String id) throws FacebookException {
+        return getAlbums(id, null);
     }
-    public ResponseList<Album> getAlbums(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Album> getAlbums(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createAlbumList(get(buildURL(userId, "albums", reading)));
+        return factory.createAlbumList(get(buildURL(id, "albums", reading)));
     }
 
     public Album getAlbum(String albumId) throws FacebookException {

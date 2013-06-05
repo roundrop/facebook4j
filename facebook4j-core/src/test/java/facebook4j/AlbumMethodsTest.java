@@ -16,36 +16,83 @@
 
 package facebook4j;
 
+import org.junit.Test;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import java.io.File;
-import java.net.URL;
+public class AlbumMethodsTest extends MockFacebookTestBase {
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+    @Test
+    public void albums_page() throws Exception {
+        facebook.setMockJSON("mock_json/album/page.json");
+        String pageId = "19292868552";  //Facebook Developers Page
+        ResponseList<Album> albums = facebook.getAlbums(pageId);
 
-public class AlbumMethodsTest extends FacebookTestBase {
+        assertThat(albums.size(), is(25));
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+        Album wall = albums.get(0);
+        assertThat(wall.canUpload(), is(false));
+        assertThat(wall.getCount(), is(83));
+        assertThat(wall.getCoverPhoto(), is("10151473999083553"));
+        assertThat(wall.getFrom().getCategory(), is("Product/service"));
+        assertThat(wall.getFrom().getId(), is("19292868552"));
+        assertThat(wall.getFrom().getName(), is("Facebook Developers"));
+        assertThat(wall.getId(), is("441861428552"));
+        assertThat(wall.getLikes().size(), is(25));
+        assertThat(wall.getLikes().get(0).getId(), is("100000083608879"));
+        assertThat(wall.getLikes().get(0).getName(), is("Abhishek Singh"));
+        assertThat(wall.getLikes().get(1).getId(), is("100003468963517"));
+        assertThat(wall.getLikes().get(1).getName(), is("Miloud Miloudi"));
+        assertThat(wall.getLikes().get(24).getId(), is("100003405404963"));
+        assertThat(wall.getLikes().get(24).getName(), is("Luisa Fedorova"));
+        assertThat(wall.getLikes().getPaging().getNext().toString(), is("https://graph.facebook.com/441861428552/likes?access_token=access_token&limit=25&after=MTAwMDAzNDA1NDA0OTYz"));
+        assertThat(wall.getLink().toString(), is("http://www.facebook.com/album.php?fbid=441861428552&id=19292868552&aid=204523"));
+        assertThat(wall.getName(), is("Timeline Photos"));
+        assertThat(wall.getType(), is("wall"));
+        assertThat(wall.getComments().size(), is(0));
+        assertThat(wall.getLocation(), is(nullValue()));
+
+        Album normal = albums.get(1);
+        assertThat(normal.canUpload(), is(false));
+        assertThat(normal.getComments().size(), is(12));
+        assertThat(normal.getComments().get(0).canRemove(), is(false));
+        assertThat(normal.getComments().get(0).getFrom().getId(), is("100002271628908"));
+        assertThat(normal.getComments().get(0).getFrom().getName(), is("Luciene Silva Silvino Silvino"));
+        assertThat(normal.getComments().get(0).getId(), is("10150835335273553_22232799"));
+        assertThat(normal.getComments().get(0).getLikeCount(), is(0));
+        assertThat(normal.getComments().get(0).getMessage(), is("que diferente isso;;;;"));
+        assertThat(normal.getComments().get(0).isUserLikes(), is(false));
+        assertThat(normal.getComments().get(1).canRemove(), is(false));
+        assertThat(normal.getComments().get(1).getFrom().getId(), is("100003832809175"));
+        assertThat(normal.getComments().get(1).getFrom().getName(), is("Ha Lee"));
+        assertThat(normal.getComments().get(1).getId(), is("10150835335273553_22256630"));
+        assertThat(normal.getComments().get(1).getLikeCount(), is(1));
+        assertThat(normal.getComments().get(1).getMessage(), is("tot"));
+        assertThat(normal.getComments().get(11).canRemove(), is(false));
+        assertThat(normal.getComments().get(11).getFrom().getId(), is("100000145824884"));
+        assertThat(normal.getComments().get(11).getFrom().getName(), is("ĤeşĦàm Shëhàb"));
+        assertThat(normal.getComments().get(11).getId(), is("10150835335273553_25654551"));
+        assertThat(normal.getComments().get(11).getLikeCount(), is(1));
+        assertThat(normal.getComments().get(11).getMessage(), is("butiful designes \\"));
+        assertThat(normal.getCount(), is(10));
+        assertThat(normal.getCoverPhoto(), is("10151411510568553"));
+        assertThat(normal.getFrom().getCategory(), is("Product/service"));
+        assertThat(normal.getFrom().getId(), is("19292868552"));
+        assertThat(normal.getFrom().getName(), is("Facebook Developers"));
+        assertThat(normal.getId(), is("10150835335273553"));
+        assertThat(normal.getLikes().size(), is(25));
+        assertThat(normal.getLink().toString(), is("http://www.facebook.com/album.php?fbid=10150835335273553&id=19292868552&aid=405490"));
+        assertThat(normal.getName(), is("Cover Photos"));
+        assertThat(normal.getType(), is("normal"));
+        assertThat(wall.getLocation(), is(nullValue()));
+
+        Album withLocation = albums.get(23);
+        assertThat(withLocation.getLocation(), is("Paris, France"));
+
     }
 
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-    
+/*
     @Test
     public void create() throws Exception {
         PrivacyBean privacy = new PrivacyBuilder().setValue(PrivacyType.EVERYONE).build();
@@ -73,20 +120,20 @@ public class AlbumMethodsTest extends FacebookTestBase {
         for (Album album : albums) {
             System.out.println(album);
         }
-        
+
         //read by other user
         assertThat(facebook2.getAlbums(id1.getId()).size() >= 3, is(true));
-        
+
         //read single album
         Album album2_1 = facebook1.getAlbum(albums.get(1).getId());
         assertThat(album2_1, is(notNullValue()));
         assertThat(album2_1.getName(), is("test album2"));
-        
+
         Album album2_2 = facebook2.getAlbum(albums.get(1).getId(), new Reading().fields("id", "name", "description"));
         assertThat(album2_1, is(album2_2));
-        
+
     }
-    
+
     @Test
     public void photo() throws Exception {
         ResponseList<Album> albums = facebook1.getAlbums();
@@ -99,7 +146,7 @@ public class AlbumMethodsTest extends FacebookTestBase {
         assertThat(photoId1, is(notNullValue()));
         String photoId2 = facebook1.addAlbumPhoto(albumId, source, "photo no2");
         assertThat(photoId2, is(notNullValue()));
-        
+
         //read photos from album
         ResponseList<Photo> albumPhotos = facebook1.getAlbumPhotos(albumId);
 //        System.out.println(albumPhotos);
@@ -110,9 +157,9 @@ public class AlbumMethodsTest extends FacebookTestBase {
                 assertThat(photo.getName(), is("photo no2"));
             }
         }
-        
+
     }
-    
+
     @Test
     public void comment() throws Exception {
         ResponseList<Album> albums = facebook1.getAlbums();
@@ -133,12 +180,12 @@ public class AlbumMethodsTest extends FacebookTestBase {
         assertThat(commentId2, is(notNullValue()));
         String commentId3 = facebook1.commentAlbum(albumId, "comment3");
         assertThat(commentId3, is(notNullValue()));
-        
+
         //read comments
         ResponseList<Comment> comments = facebook1.getAlbumComments(albumId);
         assertThat(comments.size() >= 3, is(true));
     }
-    
+
     @Test
     public void like() throws Exception {
         ResponseList<Album> albums = facebook1.getAlbums();
@@ -150,17 +197,17 @@ public class AlbumMethodsTest extends FacebookTestBase {
 //        assertThat(likeId, is(notNullValue()));
         boolean likeResult = facebook1.likeAlbum(albumId);
         assertThat(likeResult, is(true));
-        
+
         //read like
         ResponseList<Like> likes = facebook1.getAlbumLikes(albumId);
         assertThat(likes.size(), is(1));
-        
+
         //unlike
         boolean unlikeResult = facebook1.unlikeAlbum(albumId);
         assertThat(unlikeResult, is(true));
         assertThat(facebook1.getAlbumLikes(albumId).size(), is(0));
     }
-    
+
     @Test
     public void picture() throws Exception {
         ResponseList<Album> albums = facebook1.getAlbums();
@@ -169,5 +216,5 @@ public class AlbumMethodsTest extends FacebookTestBase {
         URL url = facebook1.getAlbumCoverPhoto(albumId);
         assertThat(url, is(notNullValue()));
     }
-
+*/
 }

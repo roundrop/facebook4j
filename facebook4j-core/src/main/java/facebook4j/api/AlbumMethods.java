@@ -33,7 +33,7 @@ import facebook4j.ResponseList;
  */
 public interface AlbumMethods {
     /**
-     * Returns the photo albums the current user has created.
+     * Returns the photo albums the current user/page has created.
      * @return albums
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - albums
@@ -41,7 +41,7 @@ public interface AlbumMethods {
     ResponseList<Album> getAlbums() throws FacebookException;
 
     /**
-     * Returns the photo albums the current user has created.
+     * Returns the photo albums the current user/page has created.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return albums
      * @throws FacebookException when Facebook service or network is unavailable
@@ -50,23 +50,23 @@ public interface AlbumMethods {
     ResponseList<Album> getAlbums(Reading reading) throws FacebookException;
 
     /**
-     * Returns the photo albums a user has created.
-     * @param userId the ID of a user
+     * Returns the photo albums a user/page has created.
+     * @param id the ID of a user/page
      * @return albums
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#albums">User#albums - Facebook Developers</a>
      */
-    ResponseList<Album> getAlbums(String userId) throws FacebookException;
+    ResponseList<Album> getAlbums(String id) throws FacebookException;
 
     /**
-     * Returns the photo albums a user has created.
-     * @param userId the ID of a user
+     * Returns the photo albums a user/page has created.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return albums
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#albums">User#albums - Facebook Developers</a>
      */
-    ResponseList<Album> getAlbums(String userId, Reading reading) throws FacebookException;
+    ResponseList<Album> getAlbums(String id, Reading reading) throws FacebookException;
 
 
     /**
