@@ -35,6 +35,10 @@ import facebook4j.internal.org.json.JSONObject;
     private Integer count;
     private Paging<T> paging;
 
+    /*package*/PagableListImpl() {
+        super();
+    }
+
     /*package*/PagableListImpl(JSONObject json, T... t) throws FacebookException {
         super();
         init(json, t);
@@ -75,6 +79,7 @@ import facebook4j.internal.org.json.JSONObject;
         return "PagableListImpl{" +
                 "count=" + count +
                 ", paging=" + paging +
+                ", " + super.toString() +
                 '}';
     }
 }
