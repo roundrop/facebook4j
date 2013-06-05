@@ -42,7 +42,7 @@ import facebook4j.internal.org.json.JSONObject;
     private Boolean canRemove;
     private Date createdTime;
     private int likeCount;
-    private Boolean isUserLinks;
+    private Boolean isUserLikes;
     
     /*package*/CommentJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -72,7 +72,7 @@ import facebook4j.internal.org.json.JSONObject;
             canRemove = getBoolean("can_remove", json);
             createdTime = getISO8601Datetime("created_time", json);
             likeCount = getPrimitiveInt("like_count", json);
-            isUserLinks = getBoolean("user_likes", json);
+            isUserLikes = getBoolean("user_likes", json);
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -102,8 +102,8 @@ import facebook4j.internal.org.json.JSONObject;
         return likeCount;
     }
 
-    public Boolean isUserLinks() {
-        return isUserLinks;
+    public Boolean isUserLikes() {
+        return isUserLikes;
     }
 
     /*package*/
@@ -163,7 +163,7 @@ import facebook4j.internal.org.json.JSONObject;
         return "CommentJSONImpl [id=" + id + ", from=" + from + ", message="
                 + message + ", canRemove=" + canRemove + ", createdTime="
                 + createdTime + ", likeCount=" + likeCount + ", isUserLinks="
-                + isUserLinks + "]";
+                + isUserLikes + "]";
     }
 
 }

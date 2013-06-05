@@ -28,5 +28,5 @@ public interface Comment extends FacebookResponse {
     Boolean canRemove();
     Date getCreatedTime();
     int getLikeCount();
-    Boolean isUserLinks();
+    Boolean isUserLikes();
 }
