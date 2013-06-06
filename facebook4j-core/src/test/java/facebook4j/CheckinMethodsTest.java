@@ -27,24 +27,48 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CheckinMethodsTest extends FacebookTestBase {
+public class CheckinMethodsTest extends MockFacebookTestBase {
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+    @Test
+    public void checkins_page() throws Exception {
+        facebook.setMockJSON("mock_json/checkins/page.json");
+        String pageId = "149655571740038";
+        ResponseList<Checkin> checkins = facebook.getCheckins(pageId);
+
+        assertThat(checkins.size(), is(2));
+
+        Checkin checkin1 = checkins.get(0);
+        assertThat(checkin1.getApplication().getId(), is("6628568379"));
+        assertThat(checkin1.getApplication().getName(), is("Facebook for iPhone"));
+        assertThat(checkin1.getApplication().getNamespace(), is("fbiphone"));
+        assertThat(checkin1.getFrom().getId(), is("1111"));
+        assertThat(checkin1.getFrom().getName(), is("From Name1"));
+        assertThat(checkin1.getId(), is("2222"));
+        assertThat(checkin1.getLikes().size(), is(3));
+        assertThat(checkin1.getLikes().get(0).getId(), is("3331"));
+        assertThat(checkin1.getLikes().get(0).getName(), is("Like Name1"));
+        assertThat(checkin1.getLikes().get(1).getId(), is("3332"));
+        assertThat(checkin1.getLikes().get(1).getName(), is("Like Name2"));
+        assertThat(checkin1.getLikes().get(2).getId(), is("3333"));
+        assertThat(checkin1.getLikes().get(2).getName(), is("Like Name3"));
+        assertThat(checkin1.getMessage(), is("Message"));
+        assertThat(checkin1.getPlace().getId(), is("149655571740038"));
+        assertThat(checkin1.getPlace().getLocation().getCity(), is("Sumida-ku"));
+        assertThat(checkin1.getPlace().getLocation().getCountry(), is("Japan"));
+        assertThat(checkin1.getPlace().getLocation().getLatitude(), is(35.710235962898));
+        assertThat(checkin1.getPlace().getLocation().getLongitude(), is(139.81112668973));
+        assertThat(checkin1.getPlace().getLocation().getState(), is("Tokyo"));
+        assertThat(checkin1.getPlace().getLocation().getStreet(), is("押上1-1-13"));
+        assertThat(checkin1.getPlace().getLocation().getZip(), is("131-0045"));
+        assertThat(checkin1.getPlace().getName(), is("東京スカイツリー (Tokyo Sky Tree)"));
+
+        assertThat(checkins.get(1).getId(), is("5555"));
+
+        assertThat(checkins.getPaging().getNext().toString(), is("https://graph.facebook.com/149655571740038/checkins?access_token=access_token&limit=25&until=1111111111&__paging_token=179367212156708"));
+        assertThat(checkins.getPaging().getPrevious().toString(), is("https://graph.facebook.com/149655571740038/checkins?access_token=access_token&limit=25&since=2222222222&__paging_token=395794067108539&__previous=1"));
     }
 
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-    
+/*
     private String checkin1() throws Exception {
         String place = "100404700021921";
         GeoLocation coordinates = new GeoLocation(35.675272122419, 139.69321689514);
@@ -142,5 +166,5 @@ public class CheckinMethodsTest extends FacebookTestBase {
 
         assertThat(facebook1.getCheckinLikes(checkinId).size(), is(0));
     }
-    
+*/
 }

@@ -29,40 +29,48 @@ import facebook4j.ResponseList;
  */
 public interface CheckinMethods {
     /**
-     * Returns the places that the current user has checked-into.
+     * Returns the places that the current user has checked-into
+     * or made to the Place Page by the current user or friends of the current user.
      * @return checkins
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#checkins">User#checkins - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
      */
     ResponseList<Checkin> getCheckins() throws FacebookException;
 
     /**
-     * Returns the places that the current user has checked-into.
+     * Returns the places that the current user has checked-into
+     * or made to the Place Page by the current user or friends of the current user.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return checkins
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#checkins">User#checkins - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
      */
     ResponseList<Checkin> getCheckins(Reading reading) throws FacebookException;
 
     /**
-     * Returns the places that a user has checked-into.
-     * @param userId the ID of a user
+     * Returns the places that a user has checked-into
+     * or made to the Place Page by the user or friends of the user.
+     * @param id the ID of a user/page
      * @return checkins
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#checkins">User#checkins - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
      */
-    ResponseList<Checkin> getCheckins(String userId) throws FacebookException;
+    ResponseList<Checkin> getCheckins(String id) throws FacebookException;
 
     /**
-     * Returns the places that a user has checked-into.
-     * @param userId the ID of a user
+     * Returns the places that a user has checked-into
+     * or made to the Place Page by the user or friends of the user.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return checkins
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#checkins">User#checkins - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
      */
-    ResponseList<Checkin> getCheckins(String userId, Reading reading) throws FacebookException;
+    ResponseList<Checkin> getCheckins(String id, Reading reading) throws FacebookException;
 
     /**
      * Checkins the place as the current user.

@@ -337,12 +337,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Checkin> getCheckins(Reading reading) throws FacebookException {
         return getCheckins("me", reading);
     }
-    public ResponseList<Checkin> getCheckins(String userId) throws FacebookException {
-        return getCheckins(userId, null);
+    public ResponseList<Checkin> getCheckins(String id) throws FacebookException {
+        return getCheckins(id, null);
     }
-    public ResponseList<Checkin> getCheckins(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Checkin> getCheckins(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createCheckinList(get(buildURL(userId, "checkins", reading)));
+        return factory.createCheckinList(get(buildURL(id, "checkins", reading)));
     }
 
     public String checkin(CheckinCreate checkinCreate) throws FacebookException {
