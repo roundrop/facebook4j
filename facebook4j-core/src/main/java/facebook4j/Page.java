@@ -36,7 +36,7 @@ public interface Page {
     Integer getCheckins();
     URL getPicture();
     Cover getCover();
-    URL getWebsite();
+    String getWebsite();
     Integer getTalkingAboutCount();
     String getAccessToken();
     Boolean isCommunityPage();

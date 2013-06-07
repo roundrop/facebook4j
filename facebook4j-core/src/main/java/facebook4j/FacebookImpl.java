@@ -1424,6 +1424,14 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         }
     }
 
+    public ResponseList<Page> getGlobalBrandChildren(String pageId) throws FacebookException {
+        return getGlobalBrandChildren(pageId, null);
+    }
+    public ResponseList<Page> getGlobalBrandChildren(String pageId, Reading reading) throws FacebookException {
+        HttpResponse res = get(buildURL(pageId, "global_brand_children", reading));
+        return factory.createPageList(res);
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }

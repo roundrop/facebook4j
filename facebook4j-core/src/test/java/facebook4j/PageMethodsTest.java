@@ -16,39 +16,61 @@
 
 package facebook4j;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.io.File;
-import java.net.URL;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-public class PageMethodsTest extends FacebookTestBase {
+public class PageMethodsTest extends MockFacebookTestBase {
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+    @Test
+    public void getGlobalBrandChildren() throws Exception {
+        facebook.setMockJSON("mock_json/page/global_brand_children.json");
+        ResponseList<Page> globalBrandChildren = facebook.getGlobalBrandChildren("74100576336");
+
+        assertThat(globalBrandChildren.size(), is(17));
+
+        Page child1 = globalBrandChildren.get(0);
+        assertThat(child1.getCategory(), is("Consulting/business services"));
+        assertThat(child1.getId(), is("128848373859074"));
+        assertThat(child1.getName(), is("Facebook Marketing"));
+
+        Page child11 = globalBrandChildren.get(10);
+        assertThat(child11.getCategory(), is("Product/service"));
+        assertThat(child11.getId(), is("242158515871607"));
+        assertThat(child11.getName(), is("Facebookマーケティング"));
+
+        Page child17 = globalBrandChildren.get(16);
+        assertThat(child17.getCategory(), is("Consulting/business services"));
+        assertThat(child17.getId(), is("504114196284326"));
+        assertThat(child17.getName(), is("Facebook Marketing"));
+
+        Paging<Page> paging = globalBrandChildren.getPaging();
+        assertThat(paging.getNext().toString(), is("https://graph.facebook.com/74100576336/global_brand_children?access_token=access_token&limit=25&offset=25&__after_id=504114196284326"));
+        assertThat(paging.getPrevious(), is(nullValue()));
     }
 
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
+    @Test
+    public void getGlobalBrandChildren_Reading() throws Exception {
+        facebook.setMockJSON("mock_json/page/global_brand_children_reading.json");
+        ResponseList<Page> globalBrandChildren = facebook.getGlobalBrandChildren("74100576336",
+                                                            new Reading().fields("website").limit(4));
+
+        assertThat(globalBrandChildren.size(), is(4));
+        Page child1 = globalBrandChildren.get(0);
+        assertThat(child1.getId(), is("128848373859074"));
+        assertThat(child1.getWebsite(), is("http://www.facebook.com/advertising http://www.facebook.com/ads/manage http://www.facebook.com/adsmarketing http://www.facebook.com/adshelp"));
+
+        Page child4 = globalBrandChildren.get(3);
+        assertThat(child4.getId(), is("175095239211182"));
+        assertThat(child4.getWebsite(), is("www.facebook.com/FacebookMarketingkonzepte"));
+
+        Paging<Page> paging = globalBrandChildren.getPaging();
+        assertThat(paging.getNext().toString(), is("https://graph.facebook.com/74100576336/global_brand_children?fields=website,products&limit=5&access_token=access_token&offset=5&__after_id=175095239211182"));
+        assertThat(paging.getPrevious(), is(nullValue()));
     }
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
+/*
     @Test
     public void getLikedPage() throws Exception {
         Page page = real.getLikedPage("259655700571");    //Eclipse Facebook Page
@@ -255,5 +277,5 @@ public class PageMethodsTest extends FacebookTestBase {
         String photoId = real.postPagePhoto(pageId, pagePhotoUpdate);
         System.out.println(photoId);
     }
-
+*/
 }
