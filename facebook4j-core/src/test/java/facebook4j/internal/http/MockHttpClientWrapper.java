@@ -88,8 +88,11 @@ public final class MockHttpClientWrapper extends HttpClientWrapper {
     }
 
     private void registerMockJSON(String json) throws IOException {
-        File file = new File(System.getProperty("user.dir")
-                    + "/facebook4j-core/src/test/resources/" + mockJSONResourceName);
+        String baseDir = System.getProperty("user.dir");
+        if (!baseDir.endsWith("/facebook4j-core")) {
+            baseDir += "/facebook4j-core";
+        }
+        File file = new File(baseDir + "/src/test/resources/" + mockJSONResourceName);
         new File(file.getParent()).mkdirs();
         FileWriter writer = new FileWriter(file);
         writer.write(json);
