@@ -1,0 +1,71 @@
+{
+    "data": [
+        {
+            "id": "2439131959/insights/application_active_users/day",
+            "name": "application_active_users",
+            "period": "day",
+            "values": [
+                {
+                    "value": 2982,
+                    "end_time": "2013-06-05T07:00:00+0000"
+                },
+                {
+                    "value": 3506,
+                    "end_time": "2013-06-06T07:00:00+0000"
+                },
+                {
+                    "value": 3359,
+                    "end_time": "2013-06-07T07:00:00+0000"
+                }
+            ],
+            "title": "Daily Active Users",
+            "description": "Daily 1 day, 7 day, and 30 day counts of users who have engaged with your app or viewed your app (Unique Users)"
+        },
+        {
+            "id": "2439131959/insights/application_active_users/week",
+            "name": "application_active_users",
+            "period": "week",
+            "values": [
+                {
+                    "value": 12916,
+                    "end_time": "2013-06-05T07:00:00+0000"
+                },
+                {
+                    "value": 13099,
+                    "end_time": "2013-06-06T07:00:00+0000"
+                },
+                {
+                    "value": 12823,
+                    "end_time": "2013-06-07T07:00:00+0000"
+                }
+            ],
+            "title": "Weekly Active Users",
+            "description": "Weekly 1 day, 7 day, and 30 day counts of users who have engaged with your app or viewed your app (Unique Users)"
+        },
+        {
+            "id": "2439131959/insights/application_active_users/month",
+            "name": "application_active_users",
+            "period": "month",
+            "values": [
+                {
+                    "value": 42374,
+                    "end_time": "2013-06-05T07:00:00+0000"
+                },
+                {
+                    "value": 42541,
+                    "end_time": "2013-06-06T07:00:00+0000"
+                },
+                {
+                    "value": 42590,
+                    "end_time": "2013-06-07T07:00:00+0000"
+                }
+            ],
+            "title": "Monthly Active Users",
+            "description": "Monthly 1 day, 7 day, and 30 day counts of users who have engaged with your app or viewed your app (Unique Users)"
+        }
+    ],
+    "paging": {
+        "previous": "https://graph.facebook.com/2439131959/insights/application_active_users?since=1370152138&until=1370411338",
+        "next": "https://graph.facebook.com/2439131959/insights/application_active_users?since=1370670538&until=1370929738"
+    }
+}

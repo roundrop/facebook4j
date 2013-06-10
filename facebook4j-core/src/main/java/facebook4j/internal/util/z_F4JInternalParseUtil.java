@@ -16,26 +16,19 @@
 
 package facebook4j.internal.util;
 
+import facebook4j.FacebookException;
+import facebook4j.internal.http.HTMLEntity;
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
-
-import facebook4j.FacebookException;
-import facebook4j.internal.http.HTMLEntity;
-import facebook4j.internal.org.json.JSONArray;
-import facebook4j.internal.org.json.JSONException;
-import facebook4j.internal.org.json.JSONObject;
+import java.util.*;
 
 /**
  * A tiny parse utility class.
@@ -218,6 +211,25 @@ public final class z_F4JInternalParseUtil {
             while (keys.hasNext()) {
                 String key = (String) keys.next();
                 result.put(key, jsonObject.getString(key));
+            }
+            return result;
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone.getMessage(), jsone);
+        }
+    }
+
+    public static Map<String, Long> getLongMap(String name, JSONObject json) throws FacebookException {
+        if (json.isNull(name)) {
+            return null;
+        }
+        try {
+            JSONObject jsonObject = json.getJSONObject(name);
+            HashMap<String, Long> result = new HashMap<String, Long>();
+            @SuppressWarnings("unchecked")
+            Iterator<String> keys = jsonObject.keys();
+            while (keys.hasNext()) {
+                String key = (String) keys.next();
+                result.put(key, jsonObject.getLong(key));
             }
             return result;
         } catch (JSONException jsone) {

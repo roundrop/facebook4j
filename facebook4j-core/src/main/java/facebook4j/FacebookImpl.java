@@ -1432,6 +1432,14 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createPageList(res);
     }
 
+    public ResponseList<Insight> getPageInsights(String pageId) throws FacebookException {
+        return getPageInsights(pageId, null);
+    }
+    public ResponseList<Insight> getPageInsights(String pageId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createInsightList(get(buildURL(pageId, "insights", reading)));
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }
@@ -1838,7 +1846,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Insight> getInsights(String objectId, String metric) throws FacebookException {
         return getInsights(objectId, metric, null);
     }
-
     public ResponseList<Insight> getInsights(String objectId, String metric, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
         return factory.createInsightList(get(buildURL(objectId, "insights/" + metric, reading)));

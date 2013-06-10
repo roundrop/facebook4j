@@ -70,6 +70,91 @@ public class PageMethodsTest extends MockFacebookTestBase {
         assertThat(paging.getPrevious(), is(nullValue()));
     }
 
+    @Test
+    public void getPageInsights() throws Exception {
+        facebook.setMockJSON("mock_json/page/insights.json");
+        ResponseList<Insight> insights = facebook.getPageInsights("74100576336");
+
+        assertThat(insights.size(), is(4));
+
+        Insight insight1 = insights.get(0);
+        assertThat(insight1.getId(), is("74100576336/insights/page_fans_country/lifetime"));
+        assertThat(insight1.getName(), is("page_fans_country"));
+        assertThat(insight1.getPeriod(), is("lifetime"));
+        assertThat(insight1.getValues().size(), is(3));
+        assertThat(insight1.getValues().get(0).getValue().size(), is(45));
+//        Iterator<String> keys = insight1.getValues().get(0).getValue().keys();
+//        while (keys.hasNext()) {
+//            String key = keys.next();
+//            System.out.println(key + " => " + insight1.getValues().get(0).getValue().get(key));
+//        }
+        assertThat(insight1.getValues().get(0).getValue().get("US"), is(650484L));
+        assertThat(insight1.getValues().get(0).getValue().get("JP"), is(24157L));
+        assertThat(insight1.getValues().get(0).getValue().get("BO"), is(8635L));
+        assertThat(insight1.getValues().get(1).getValue().size(), is(45));
+        assertThat(insight1.getValues().get(1).getValue().get("US").toString(), is("650594"));
+        assertThat(insight1.getValues().get(2).getValue().size(), is(45));
+        assertThat(insight1.getValues().get(2).getValue().get("BO").toString(), is("8644"));
+        assertThat(insight1.getTitle(), is("Lifetime Likes by Country"));
+        assertThat(insight1.getDescription(), is("Lifetime Aggregated Facebook location data, sorted by country, about the people who like your Page. (Unique Users)"));
+
+        Insight insight2 = insights.get(1);
+        assertThat(insight2.getId(), is("74100576336/insights/page_storytellers_by_country/day"));
+        assertThat(insight2.getName(), is("page_storytellers_by_country"));
+        assertThat(insight2.getPeriod(), is("day"));
+        assertThat(insight2.getValues().size(), is(3));
+        assertThat(insight2.getValues().get(0).getValue().size(), is(45));
+        assertThat(insight2.getValues().get(0).getValue().size(), is(45));
+        assertThat(insight2.getValues().get(0).getValue().get("TR").toString(), is("595"));
+        assertThat(insight2.getValues().get(0).getValue().get("JP").toString(), is("153"));
+        assertThat(insight2.getValues().get(0).getValue().get("NG").toString(), is("12"));
+        assertThat(insight2.getValues().get(1).getValue().size(), is(45));
+        assertThat(insight2.getValues().get(1).getValue().get("TR").toString(), is("1002"));
+        assertThat(insight2.getValues().get(2).getValue().size(), is(45));
+        assertThat(insight2.getValues().get(2).getValue().get("PL").toString(), is("9"));
+        assertThat(insight2.getTitle(), is("Daily Country: People Talking About This"));
+        assertThat(insight2.getDescription(), is("Daily The number of People Talking About the Page by user country (Unique Users)"));
+
+        Insight insight3 = insights.get(2);
+        assertThat(insight3.getId(), is("74100576336/insights/page_storytellers_by_country/week"));
+        assertThat(insight3.getName(), is("page_storytellers_by_country"));
+        assertThat(insight3.getPeriod(), is("week"));
+        assertThat(insight3.getValues().size(), is(3));
+        assertThat(insight3.getValues().get(0).getValue().size(), is(45));
+        assertThat(insight3.getValues().get(0).getValue().size(), is(45));
+        assertThat(insight3.getValues().get(0).getValue().get("IN").toString(), is("3922"));
+        assertThat(insight3.getValues().get(0).getValue().get("JP").toString(), is("1053"));
+        assertThat(insight3.getValues().get(0).getValue().get("PL").toString(), is("66"));
+        assertThat(insight3.getValues().get(1).getValue().size(), is(45));
+        assertThat(insight3.getValues().get(1).getValue().get("TR").toString(), is("4512"));
+        assertThat(insight3.getValues().get(2).getValue().size(), is(45));
+        assertThat(insight3.getValues().get(2).getValue().get("HK").toString(), is("71"));
+        assertThat(insight3.getTitle(), is("Weekly Country: People Talking About This"));
+        assertThat(insight3.getDescription(), is("Weekly The number of People Talking About the Page by user country (Unique Users)"));
+
+        Insight insight4 = insights.get(3);
+        assertThat(insight4.getId(), is("74100576336/insights/page_storytellers_by_country/days_28"));
+        assertThat(insight4.getName(), is("page_storytellers_by_country"));
+        assertThat(insight4.getPeriod(), is("days_28"));
+        assertThat(insight4.getValues().size(), is(3));
+        assertThat(insight4.getValues().get(0).getValue().size(), is(45));
+        assertThat(insight4.getValues().get(0).getValue().size(), is(45));
+        assertThat(insight4.getValues().get(0).getValue().get("IN").toString(), is("16044"));
+        assertThat(insight4.getValues().get(0).getValue().get("JP").toString(), is("5140"));
+        assertThat(insight4.getValues().get(0).getValue().get("BE").toString(), is("327"));
+        assertThat(insight4.getValues().get(1).getValue().size(), is(45));
+        assertThat(insight4.getValues().get(1).getValue().get("IN").toString(), is("15614"));
+        assertThat(insight4.getValues().get(2).getValue().size(), is(45));
+        assertThat(insight4.getValues().get(2).getValue().get("BE").toString(), is("307"));
+        assertThat(insight4.getTitle(), is("28 Days Country: People Talking About This"));
+        assertThat(insight4.getDescription(), is("28 Days The number of People Talking About the Page by user country (Unique Users)"));
+
+        Paging<Insight> paging = insights.getPaging();
+        assertThat(paging.getPrevious().toString(), is("https://graph.facebook.com/74100576336/insights?since=1370145751&until=1370404951"));
+        assertThat(paging.getNext().toString(), is("https://graph.facebook.com/74100576336/insights?since=1370664151&until=1370923351"));
+
+    }
+
 /*
     @Test
     public void getLikedPage() throws Exception {
