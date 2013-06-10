@@ -67,6 +67,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private Integer sharesCount;
     private PagableList<IdNameEntity> likes;
     private Place place;
+    private String statusType;
     private String story;
     private Map<String, Tag[]> storyTags;
     private List<IdNameEntity> withTags;
@@ -182,6 +183,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 JSONObject placeJSONObject = json.getJSONObject("place");
                 place = new PlaceJSONImpl(placeJSONObject);
             }
+            statusType = getRawString("status_type", json);
             story = getRawString("story", json);
             if (!json.isNull("story_tags")) {
                 JSONObject storyTagsJSONObject = json.getJSONObject("story_tags");
@@ -311,6 +313,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return place;
     }
 
+    public String getStatusType() {
+        return statusType;
+    }
+
     public String getStory() {
         return story;
     }
@@ -417,6 +423,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 ", sharesCount=" + sharesCount +
                 ", likes=" + likes +
                 ", place=" + place +
+                ", statusType=" + statusType +
                 ", story='" + story + '\'' +
                 ", storyTags=" + storyTags +
                 ", withTags=" + withTags +

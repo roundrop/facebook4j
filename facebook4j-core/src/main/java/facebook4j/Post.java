@@ -44,6 +44,7 @@ public interface Post extends FacebookResponse {
     Integer getSharesCount();
     PagableList<IdNameEntity> getLikes();
     Place getPlace();
+    String getStatusType();
     String getStory();
     Map<String, Tag[]> getStoryTags();
     List<IdNameEntity> getWithTags();
