@@ -1,0 +1,44 @@
+{
+    "created_time": "2013-06-06T06:35:18+0000",
+    "from": {
+        "id": "1111",
+        "name": "From Name"
+    },
+    "id": "1111_2222",
+    "privacy": {
+        "value": ""
+    },
+    "status_type": "approved_friend",
+    "story": "Story.",
+    "story_tags": {
+        "0": [
+            {
+                "id": "3333",
+                "length": 11,
+                "name": "Name1",
+                "offset": 0,
+                "type": "user"
+            }
+        ],
+        "32": [
+            {
+                "id": "4444",
+                "length": 12,
+                "name": "Name2",
+                "offset": 32,
+                "type": "user"
+            }
+        ],
+        "49": [
+            {
+                "id": "5555",
+                "length": 13,
+                "name": "Name3",
+                "offset": 49,
+                "type": "user"
+            }
+        ]
+    },
+    "type": "status",
+    "updated_time": "2013-06-06T06:35:18+0000"
+}

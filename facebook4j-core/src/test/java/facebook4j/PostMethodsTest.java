@@ -27,24 +27,16 @@ import org.junit.*;
 
 import facebook4j.Post.Action;
 
-public class PostMethodsTest extends FacebookTestBase {
+public class PostMethodsTest extends MockFacebookTestBase {
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+    @Test
+    public void getStatus_statusType() throws Exception {
+        facebook.setMockJSON("mock_json/post/with_status_type.json");
+        Post post = facebook.getPost("1111_2222");
+        assertThat(post.getStatusType(), is("approved_friend"));
     }
 
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-    
+/*
     @Test
     public void getFeed() throws Exception {
         ResponseList<Post> feed = facebook1.getFeed();
@@ -303,5 +295,5 @@ public class PostMethodsTest extends FacebookTestBase {
             assertThat(post.getSharesCount() > 0, is(true));
         }
     }
-
+*/
 }
