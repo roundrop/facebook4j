@@ -18,6 +18,9 @@ package facebook4j;
 
 import org.junit.Test;
 
+import java.net.URL;
+
+import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -55,6 +58,10 @@ public class PageMethodsTest extends MockFacebookTestBase {
         facebook.setMockJSON("mock_json/page/global_brand_children_reading.json");
         ResponseList<Page> globalBrandChildren = facebook.getGlobalBrandChildren("74100576336",
                                                             new Reading().fields("website").limit(4));
+        URL endpointURL = facebook.getEndpointURL();
+        assertThat(endpointURL, is(pathOf("/74100576336/global_brand_children")));
+        assertThat(endpointURL, hasParameter("fields", "website"));
+        assertThat(endpointURL, hasParameter("limit", "4"));
 
         assertThat(globalBrandChildren.size(), is(4));
         Page child1 = globalBrandChildren.get(0);

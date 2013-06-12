@@ -16,10 +16,13 @@
 
 package facebook4j;
 
+import java.net.URL;
+
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public interface MockFacebook extends Facebook {
     void setOAuthAppId(String appId, String appSecret);
     void setMockJSON(String resourceName);
+    URL getEndpointURL();
 }

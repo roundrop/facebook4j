@@ -22,6 +22,8 @@ import facebook4j.auth.OAuthAuthorization;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.MockHttpClientWrapper;
 
+import java.net.URL;
+
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
@@ -49,6 +51,10 @@ class MockFacebookImpl extends FacebookImpl implements MockFacebook {
 
     public void setMockJSON(String resourceName) {
         ((MockHttpClientWrapper) http).setMockJSON(resourceName);
+    }
+
+    public URL getEndpointURL() {
+        return ((MockHttpClientWrapper) http).getMockResponse().getEndpointURL();
     }
 
 }

@@ -34,6 +34,7 @@ public final class MockHttpClientWrapper extends HttpClientWrapper {
     private static final Logger logger = Logger.getLogger(MockHttpClientWrapper.class);
 
     private String mockJSONResourceName;
+    private MockHttpResponseImpl response;
 
     public MockHttpClientWrapper(HttpClientWrapperConfiguration wrapperConf) {
         super(wrapperConf);
@@ -48,6 +49,10 @@ public final class MockHttpClientWrapper extends HttpClientWrapper {
      */
     public void setMockJSON(String resourceName) {
         mockJSONResourceName = resourceName;
+    }
+
+    public MockHttpResponseImpl getMockResponse() {
+        return response;
     }
 
     @Override
@@ -68,7 +73,7 @@ public final class MockHttpClientWrapper extends HttpClientWrapper {
                 throw new FacebookException(e);
             }
         }
-        return new MockHttpResponseImpl(json);
+        return response = new MockHttpResponseImpl(url, json);
     }
 
     private String readMockJSON() throws FacebookException {
