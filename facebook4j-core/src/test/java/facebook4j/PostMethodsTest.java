@@ -27,24 +27,70 @@ import org.junit.*;
 
 import facebook4j.Post.Action;
 
-public class PostMethodsTest extends FacebookTestBase {
+public class PostMethodsTest extends MockFacebookTestBase {
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+    @Test
+    public void getStatuses_page() throws Exception {
+        facebook.setMockJSON("mock_json/status/page.json");
+        String pageId = "19292868552";
+        ResponseList<Post> statuses = facebook.getStatuses(pageId);
+
+        assertThat(statuses.size(), is(25));
+
+        Post status = statuses.get(0);
+        PagableList<Comment> comments = status.getComments();
+        assertThat(comments.size(), is(25));
+        assertThat(comments.get(0).canRemove(), is(false));
+        assertThat(comments.get(0).getFrom().getId(), is("625087546"));
+        assertThat(comments.get(0).getFrom().getName(), is("Kevin Cooke"));
+        assertThat(comments.get(0).getId(), is("10150293984393553_18352943"));
+        assertThat(comments.get(0).getLikeCount(), is(0));
+        assertThat(comments.get(0).getMessage(), is("mogotix is non-responsive.  gateway time out error..."));
+        assertThat(comments.get(0).isUserLikes(), is(false));
+        assertThat(comments.get(7).canRemove(), is(false));
+        assertThat(comments.get(7).getFrom().getId(), is("100000095949504"));
+        assertThat(comments.get(7).getFrom().getName(), is("زياد بن علي الرويشان"));
+        assertThat(comments.get(7).getId(), is("10150293984393553_18353012"));
+        assertThat(comments.get(7).getLikeCount(), is(1));
+        assertThat(comments.get(7).getMessage(), is("جميل"));
+        assertThat(comments.get(7).isUserLikes(), is(false));
+        assertThat(comments.get(24).canRemove(), is(false));
+        assertThat(comments.get(24).getFrom().getId(), is("100001590657464"));
+        assertThat(comments.get(24).getFrom().getName(), is("Karan Kantaria"));
+        assertThat(comments.get(24).getId(), is("10150293984393553_18353134"));
+        assertThat(comments.get(24).getLikeCount(), is(0));
+        assertThat(comments.get(24).getMessage(), is("aa su chhee."));
+        assertThat(comments.get(24).isUserLikes(), is(false));
+        assertThat(comments.getPaging().getNext().toString(), is("https://graph.facebook.com/10150293984393553/comments?access_token=access_token&limit=25&after=MzI%3D"));
+        assertThat(comments.getPaging().getPrevious(), is(nullValue()));
+        assertThat(status.getFrom().getId(), is("19292868552"));
+        assertThat(status.getFrom().getName(), is("Facebook Developers"));
+//        assertThat(status.getFrom().getCategory(), is("Product/service"));  //TODO
+        assertThat(status.getId(), is("10150293984393553"));
+        PagableList<IdNameEntity> likes = status.getLikes();
+        assertThat(likes.size(), is(25));
+        assertThat(likes.get(0).getId(), is("100002589774742"));
+        assertThat(likes.get(0).getName(), is("Katsumi Ohmuro"));
+        assertThat(likes.get(23).getId(), is("100002947834268"));
+        assertThat(likes.get(23).getName(), is("منى الفهد"));
+        assertThat(likes.get(24).getId(), is("100002011318315"));
+        assertThat(likes.get(24).getName(), is("Ḿǿẩid Cǿǿl"));
+        assertThat(likes.getPaging().getNext().toString(), is("https://graph.facebook.com/10150293984393553/likes?access_token=access_token&limit=25&after=MTAwMDAyMDExMzE4MzE1"));
+        assertThat(likes.getPaging().getPrevious(), is(nullValue()));
+        assertThat(status.getMessage(), is("The 2nd wave of registration is now open for f8, our developer conference on Sept. 22 in San Francisco. We expect them to sell out quickly, so be sure to buy yours now at f8.facebook.com. Also, don't forget to like the f8 Page for the latest updates on the event."));
+
+        assertThat(statuses.getPaging().getNext().toString(), is("https://graph.facebook.com/19292868552/statuses?access_token=access_token&limit=25&until=1251825600&__paging_token=124014878930"));
+        assertThat(statuses.getPaging().getPrevious().toString(), is("https://graph.facebook.com/19292868552/statuses?access_token=access_token&limit=25&since=1314979729&__paging_token=10150293984393553&__previous=1"));
     }
 
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
+    @Test
+    public void postStatusMessage_page() throws Exception {
+        facebook.setMockJSON("mock_json/id.json");
+        String postId = facebook.postStatusMessage("137246726435626", "page's status update");
+        assertThat(postId, is("137246726435626_185932178233747"));
     }
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-    
+/*
     @Test
     public void getFeed() throws Exception {
         ResponseList<Post> feed = facebook1.getFeed();
@@ -303,5 +349,5 @@ public class PostMethodsTest extends FacebookTestBase {
             assertThat(post.getSharesCount() > 0, is(true));
         }
     }
-
+*/
 }

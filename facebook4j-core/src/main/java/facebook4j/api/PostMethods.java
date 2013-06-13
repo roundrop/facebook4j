@@ -141,23 +141,23 @@ public interface PostMethods {
     ResponseList<Post> getStatuses(Reading reading) throws FacebookException;
 
     /**
-     * Returns the user's status updates.
-     * @param userId the ID of a user
+     * Returns the user's/page's status updates.
+     * @param id the ID of a user/page
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#statuses">User#statuses - Facebook Developers</a>
      */
-    ResponseList<Post> getStatuses(String userId) throws FacebookException;
+    ResponseList<Post> getStatuses(String id) throws FacebookException;
 
     /**
-     * Returns the user's status updates.
-     * @param userId the ID of a user
+     * Returns the user's/page's status updates.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#statuses">User#statuses - Facebook Developers</a>
      */
-    ResponseList<Post> getStatuses(String userId, Reading reading) throws FacebookException;
+    ResponseList<Post> getStatuses(String id, Reading reading) throws FacebookException;
 
 
     /**
@@ -351,18 +351,20 @@ public interface PostMethods {
      * @return The new status message ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#statuses">User#statuses - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#statuses">Page#statuses - Facebook Developers</a>
      */
     String postStatusMessage(String message) throws FacebookException;
 
     /**
      * Creates the status message.
-     * @param userId the ID of a user
+     * @param id the ID of a user/page
      * @param message link message
      * @return The new status message ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#statuses">User#statuses - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#statuses">Page#statuses - Facebook Developers</a>
      */
-    String postStatusMessage(String userId, String message) throws FacebookException;
+    String postStatusMessage(String id, String message) throws FacebookException;
 
 
     /**

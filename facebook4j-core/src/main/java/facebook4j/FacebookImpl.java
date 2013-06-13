@@ -680,12 +680,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Post> getStatuses(Reading reading) throws FacebookException {
         return getStatuses("me", reading);
     }
-    public ResponseList<Post> getStatuses(String userId) throws FacebookException {
-        return getStatuses(userId, null);
+    public ResponseList<Post> getStatuses(String id) throws FacebookException {
+        return getStatuses(id, null);
     }
-    public ResponseList<Post> getStatuses(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Post> getStatuses(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createPostList(get(buildURL(userId, "statuses", reading)));
+        return factory.createPostList(get(buildURL(id, "statuses", reading)));
     }
 
     public Post getPost(String postId) throws FacebookException {
@@ -750,9 +750,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public String postStatusMessage(String message) throws FacebookException {
         return postStatusMessage("me", message);
     }
-    public String postStatusMessage(String userId, String message) throws FacebookException {
+    public String postStatusMessage(String id, String message) throws FacebookException {
         ensureAuthorizationEnabled();
-        return _postStatusMessage(userId, message);
+        return _postStatusMessage(id, message);
     }
 
     /* Friend Methods */
