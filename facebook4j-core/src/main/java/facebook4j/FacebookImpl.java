@@ -337,12 +337,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Checkin> getCheckins(Reading reading) throws FacebookException {
         return getCheckins("me", reading);
     }
-    public ResponseList<Checkin> getCheckins(String userId) throws FacebookException {
-        return getCheckins(userId, null);
+    public ResponseList<Checkin> getCheckins(String id) throws FacebookException {
+        return getCheckins(id, null);
     }
-    public ResponseList<Checkin> getCheckins(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Checkin> getCheckins(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createCheckinList(get(buildURL(userId, "checkins", reading)));
+        return factory.createCheckinList(get(buildURL(id, "checkins", reading)));
     }
 
     public String checkin(CheckinCreate checkinCreate) throws FacebookException {
@@ -1424,6 +1424,22 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         }
     }
 
+    public ResponseList<Page> getGlobalBrandChildren(String pageId) throws FacebookException {
+        return getGlobalBrandChildren(pageId, null);
+    }
+    public ResponseList<Page> getGlobalBrandChildren(String pageId, Reading reading) throws FacebookException {
+        HttpResponse res = get(buildURL(pageId, "global_brand_children", reading));
+        return factory.createPageList(res);
+    }
+
+    public ResponseList<Insight> getPageInsights(String pageId) throws FacebookException {
+        return getPageInsights(pageId, null);
+    }
+    public ResponseList<Insight> getPageInsights(String pageId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createInsightList(get(buildURL(pageId, "insights", reading)));
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }
@@ -1830,7 +1846,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Insight> getInsights(String objectId, String metric) throws FacebookException {
         return getInsights(objectId, metric, null);
     }
-
     public ResponseList<Insight> getInsights(String objectId, String metric, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
         return factory.createInsightList(get(buildURL(objectId, "insights/" + metric, reading)));

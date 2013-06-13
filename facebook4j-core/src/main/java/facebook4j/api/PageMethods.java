@@ -45,7 +45,6 @@ public interface PageMethods {
     Page getPage(String pageId, Reading reading) throws FacebookException;
 
     /**
-<<<<<<< HEAD
      * Returns the url of a page's profile picture.
      * This method requires page access_token.
      * @return url
@@ -176,6 +175,40 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#photos">Page#photos - Facebook Developers</a>
      */
     String postPagePhoto(String pageId, PagePhotoUpdate pagePhotoUpdate) throws FacebookException;
+
+    /**
+     * Returns all children pages of a specific page.
+     * @param pageId the ID of the page
+     * @return pages
+     * @throws FacebookException
+     */
+    ResponseList<Page> getGlobalBrandChildren(String pageId) throws FacebookException;
+
+    /**
+     * Returns all children pages of a specific page.
+     * @param pageId the ID of the page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return pages
+     * @throws FacebookException
+     */
+    ResponseList<Page> getGlobalBrandChildren(String pageId, Reading reading) throws FacebookException;
+
+    /**
+     * Returns the page's insights data.
+     * @param pageId the ID of the page
+     * @return insights
+     * @throws FacebookException
+     */
+    ResponseList<Insight> getPageInsights(String pageId) throws FacebookException;
+
+    /**
+     * Returns the page's insights data.
+     * @param pageId the ID of the page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return pages
+     * @throws FacebookException
+     */
+    ResponseList<Insight> getPageInsights(String pageId, Reading reading) throws FacebookException;
 
     /**
      * Returns a specific page that the current user has liked.

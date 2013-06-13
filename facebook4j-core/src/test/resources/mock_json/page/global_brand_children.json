@@ -1,0 +1,90 @@
+{
+    "data": [
+        {
+            "category": "Consulting/business services",
+            "id": "128848373859074",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Product/service",
+            "id": "161511753923050",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Product/service",
+            "id": "173438009377975",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Website",
+            "id": "175095239211182",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Consulting/business services",
+            "id": "185130644919625",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Product/service",
+            "id": "194871740526441",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Product/service",
+            "id": "198865673554280",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Product/service",
+            "id": "208832209150038",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Consulting/business services",
+            "id": "212297575455676",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Product/service",
+            "id": "239850676108302",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Product/service",
+            "id": "242158515871607",
+            "name": "Facebookマーケティング"
+        },
+        {
+            "category": "Product/service",
+            "id": "272094462852870",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Product/service",
+            "id": "296456077105483",
+            "name": "Facebook 行銷策略"
+        },
+        {
+            "category": "Product/service",
+            "id": "303143329739691",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Product/service",
+            "id": "349211235171565",
+            "name": "Facebook Marketing"
+        },
+        {
+            "category": "Product/service",
+            "id": "403149416370918",
+            "name": "Facebook 마케팅"
+        },
+        {
+            "category": "Consulting/business services",
+            "id": "504114196284326",
+            "name": "Facebook Marketing"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/74100576336/global_brand_children?access_token=access_token&limit=25&offset=25&__after_id=504114196284326"}
+}

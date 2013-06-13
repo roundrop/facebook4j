@@ -53,7 +53,7 @@ import facebook4j.internal.org.json.JSONObject;
     private Integer checkins;
     private URL picture;
     private Cover cover;
-    private URL website;
+    private String website;
     private Integer talkingAboutCount;
     private String accessToken;
     private Boolean isCommunityPage;
@@ -95,7 +95,7 @@ import facebook4j.internal.org.json.JSONObject;
                 JSONObject coverJSONObject = json.getJSONObject("cover");
                 cover = new CoverJSONImpl(coverJSONObject);
             }
-            website = getURL("website", json);
+            website = getRawString("website", json);
             talkingAboutCount = getInt("talking_about_count", json);
             accessToken = getRawString("access_token", json);
             isCommunityPage = getBoolean("is_community_page", json);
@@ -158,7 +158,7 @@ import facebook4j.internal.org.json.JSONObject;
         return cover;
     }
 
-    public URL getWebsite() {
+    public String getWebsite() {
         return website;
     }
 

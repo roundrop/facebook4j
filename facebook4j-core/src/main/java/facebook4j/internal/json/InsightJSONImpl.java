@@ -18,9 +18,8 @@ package facebook4j.internal.json;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.io.Serializable;
+import java.util.*;
 
 import facebook4j.FacebookException;
 import facebook4j.Insight;
@@ -154,17 +153,17 @@ import facebook4j.internal.org.json.JSONObject;
 
 
     private final class ValueJSONImpl implements Insight.Value, java.io.Serializable {
-        private static final long serialVersionUID = 8459191446733110167L;
-        
-        private Long value;
+        private static final long serialVersionUID = 764579592511865193L;
+
+        private Value.Entry value;
         private Date endTime;
 
-        /*package*/ValueJSONImpl(JSONObject json) throws FacebookException {
-            value = getLong("value", json);
+        ValueJSONImpl(JSONObject json) throws FacebookException {
+            value = new ValueEntryJSONImpl(json);
             endTime = getISO8601Datetime("end_time", json);
         }
 
-        public Long getValue() {
+        public Value.Entry getValue() {
             return value;
         }
 
@@ -175,6 +174,36 @@ import facebook4j.internal.org.json.JSONObject;
         @Override
         public String toString() {
             return "ValueJSONImpl [value=" + value + ", endTime=" + endTime + "]";
+        }
+
+        private final class ValueEntryJSONImpl implements Value.Entry, java.io.Serializable {
+            private Map<String, Long> value;
+
+            ValueEntryJSONImpl(JSONObject json) throws FacebookException {
+                String valueRawString = getRawString("value", json);
+                if (valueRawString.startsWith("{")) {
+                    value = getLongMap("value", json);
+                } else {
+                    value = new HashMap<String, Long>();
+                    value.put("", getLong("value", json));
+                }
+            }
+
+            public Long get() {
+                return value.values().iterator().next();
+            }
+
+            public Long get(String key) {
+                return value.get(key);
+            }
+
+            public Iterator<String> keys() {
+                return value.keySet().iterator();
+            }
+
+            public int size() {
+                return value.size();
+            }
         }
     }
 

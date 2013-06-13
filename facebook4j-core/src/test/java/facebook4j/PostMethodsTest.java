@@ -90,6 +90,13 @@ public class PostMethodsTest extends MockFacebookTestBase {
         assertThat(postId, is("137246726435626_185932178233747"));
     }
 
+    @Test
+    public void getStatus_statusType() throws Exception {
+        facebook.setMockJSON("mock_json/post/with_status_type.json");
+        Post post = facebook.getPost("1111_2222");
+        assertThat(post.getStatusType(), is("approved_friend"));
+    }
+
 /*
     @Test
     public void getFeed() throws Exception {

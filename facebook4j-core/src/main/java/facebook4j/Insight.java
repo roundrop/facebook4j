@@ -17,6 +17,7 @@
 package facebook4j;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -31,7 +32,14 @@ public interface Insight extends FacebookResponse {
     String getDescription();
     
     interface Value {
-        Long getValue();
+        Value.Entry getValue();
         Date getEndTime();
+
+        interface Entry {
+            Long get();
+            Long get(String key);
+            Iterator<String> keys();
+            int size();
+        }
     }
 }

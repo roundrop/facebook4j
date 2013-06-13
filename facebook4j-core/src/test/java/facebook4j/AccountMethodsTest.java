@@ -18,6 +18,7 @@ package facebook4j;
 
 import org.junit.Test;
 
+import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -27,6 +28,7 @@ public class AccountMethodsTest extends MockFacebookTestBase {
     public void me_accounts() throws Exception {
         facebook.setMockJSON("mock_json/accounts/single.json");
         ResponseList<Account> accounts = facebook.getAccounts();
+        assertThat(facebook.getEndpointURL(), is(pathOf("/me/accounts")));
 
         assertThat(accounts.size(), is(1));
         assertThat(accounts.getPaging().getNext().toString(), is("https://graph.facebook.com/100001568838021/accounts?access_token=access_token&limit=5000&offset=5000&__after_id=137246726435626"));

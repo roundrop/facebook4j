@@ -16,22 +16,14 @@
 
 package facebook4j;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Locale;
 
-import facebook4j.conf.Configuration;
-import facebook4j.conf.ConfigurationBuilder;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import facebook4j.json.DataObjectFactory;
+import static facebook4j.junit.ISO8601DateMatchers.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class UserMethodsTest extends MockFacebookTestBase {
 
@@ -66,6 +58,7 @@ public class UserMethodsTest extends MockFacebookTestBase {
         assertThat(me.getLocation().getName(), is("Location Name"));
         assertThat(me.getName(), is("Firstname Lastname"));
         assertThat(me.getTimezone().intValue(), is(9));
+        assertThat(me.getUpdatedTime(), is(iso8601DateOf("2013-05-11T16:08:47+0000")));
         assertThat(me.getUsername(), is("roundrop"));
         assertThat(me.isVerified(), is(true));
         assertThat(me.getWork().size(), is(2));
