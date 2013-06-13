@@ -40,6 +40,7 @@ public final class URLMatchers {
             public boolean matchesSafely(URL actual) {
                 this.actual = actual;
 
+                if (path == null) return false;
                 if (!path.equals(actual.getPath())) return false;
                 return true;
             }
