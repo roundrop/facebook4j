@@ -64,7 +64,7 @@ import facebook4j.internal.org.json.JSONObject;
         id = getRawString("id", json);
         name = getRawString("name", json);
         if (!json.isNull("offset")) {
-            offset = getPrimitiveInt("offset");
+            offset = getPrimitiveInt("offset", json);
         } else {
             offset = null;
         }
