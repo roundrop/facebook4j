@@ -1449,6 +1449,19 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createTaggedList(get(buildURL(pageId, "tagged", reading)));
     }
 
+    public ResponseList<Milestone> getMilestones() throws FacebookException {
+        return getMilestones("me", null);
+    }
+    public ResponseList<Milestone> getMilestones(Reading reading) throws FacebookException {
+        return getMilestones("me", reading);
+    }
+    public ResponseList<Milestone> getMilestones(String pageId) throws FacebookException {
+        return getMilestones(pageId, null);
+    }
+    public ResponseList<Milestone> getMilestones(String pageId, Reading reading) throws FacebookException {
+        return factory.createMilestoneList(get(buildURL(pageId, "milestones", reading)));
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }

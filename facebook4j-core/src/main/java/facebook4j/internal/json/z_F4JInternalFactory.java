@@ -138,6 +138,8 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
 
     ResponseList<Tagged> createTaggedList(HttpResponse res) throws FacebookException;
 
+    ResponseList<Milestone> createMilestoneList(HttpResponse res) throws FacebookException;
+
     Application createApplication(HttpResponse res) throws FacebookException;
     
     

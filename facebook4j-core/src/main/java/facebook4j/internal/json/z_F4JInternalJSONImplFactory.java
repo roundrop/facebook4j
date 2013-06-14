@@ -300,6 +300,10 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return TaggedJSONImpl.createTaggedList(res, conf);
     }
 
+    public ResponseList<Milestone> createMilestoneList(HttpResponse res) throws FacebookException {
+        return MilestoneJSONImpl.createMilestoneList(res, conf);
+    }
+
     public Application createApplication(HttpResponse res) throws FacebookException {
         return new ApplicationJSONImpl(res, conf);
     }

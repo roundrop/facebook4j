@@ -228,6 +228,41 @@ public interface PageMethods {
     ResponseList<Tagged> getPageTagged(String pageId, Reading reading) throws FacebookException;
 
     /**
+     * Returns a list of the Page's milestones.
+     * Note that this method requires 'page' access_token.
+     * @return milestones
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    ResponseList<Milestone> getMilestones() throws FacebookException;
+
+    /**
+    /**
+     * Returns a list of the Page's milestones.
+     * Note that this method requires 'page' access_token.
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return milestones
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    ResponseList<Milestone> getMilestones(Reading reading) throws FacebookException;
+
+    /**
+     * Returns a list of the Page's milestones.
+     * @param pageId the ID of the page
+     * @return milestones
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    ResponseList<Milestone> getMilestones(String pageId) throws FacebookException;
+
+    /**
+     * Returns a list of the Page's milestones.
+     * @param pageId the ID of the page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return milestones
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    ResponseList<Milestone> getMilestones(String pageId, Reading reading) throws FacebookException;
+
+    /**
      * Returns a specific page that the current user has liked.
      * @param pageId the ID of a page
      * @return page

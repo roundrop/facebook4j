@@ -255,6 +255,128 @@ public class PageMethodsTest extends MockFacebookTestBase {
         assertThat(tagged9.getUpdatedTime(), is(iso8601DateOf("2013-05-30T18:30:57+0000")));
     }
 
+    @Test
+    public void getMilestones() throws Exception {
+        facebook.setMockJSON("mock_json/page/milestones.json");
+        ResponseList<Milestone> milestones = facebook.getMilestones();
+        assertThat(facebook.getEndpointURL(), is(pathOf("/me/milestones")));
+
+        assertThat(milestones.size(), is(3));
+
+        Milestone milestone1 = milestones.get(0);
+        assertThat(milestone1.getId(), is("186353804858251"));
+        assertThat(milestone1.getTitle(), is("30 stars!!!"));
+        assertThat(milestone1.getDescription(), is("https://github.com/roundrop/facebook4j"));
+        assertThat(milestone1.getFrom().getCategory(), is("Software"));
+        assertThat(milestone1.getFrom().getId(), is("137246726435626"));
+        assertThat(milestone1.getFrom().getName(), is("F4J"));
+        assertThat(milestone1.getStartTime(), is(iso8601DateOf("2013-04-24T19:01:00+0000")));
+        assertThat(milestone1.getEndTime(), is(iso8601DateOf("2013-04-24T19:02:00+0000")));
+        assertThat(milestone1.getCreatedTime(), is(iso8601DateOf("2013-06-14T10:37:32+0000")));
+        assertThat(milestone1.getUpdatedTime(), is(iso8601DateOf("2013-06-14T10:37:33+0000")));
+
+        Milestone milestone3 = milestones.get(2);
+        assertThat(milestone3.getId(), is("186353611524937"));
+        assertThat(milestone3.getTitle(), is("10 stars!"));
+        assertThat(milestone3.getDescription(), is("https://github.com/roundrop/facebook4j"));
+        assertThat(milestone3.getFrom().getCategory(), is("Software"));
+        assertThat(milestone3.getFrom().getId(), is("137246726435626"));
+        assertThat(milestone3.getFrom().getName(), is("F4J"));
+        assertThat(milestone3.getStartTime(), is(iso8601DateOf("2012-12-02T20:0:01+0000")));
+        assertThat(milestone3.getEndTime(), is(iso8601DateOf("2012-12-02T20:0:02+0000")));
+        assertThat(milestone3.getCreatedTime(), is(iso8601DateOf("2013-06-14T10:36:08+0000")));
+        assertThat(milestone3.getUpdatedTime(), is(iso8601DateOf("2013-06-14T10:36:09+0000")));
+
+        assertThat(milestones.getPaging().getNext().toString(), is("https://graph.facebook.com/137246726435626/milestones?access_token=access_token&limit=5000&offset=5000&__after_id=186353611524937"));
+        assertThat(milestones.getPaging().getPrevious(), is(nullValue()));
+    }
+
+    @Test
+    public void getMilestones_limit1() throws Exception {
+        facebook.setMockJSON("mock_json/page/milestones_limit1.json");
+        ResponseList<Milestone> milestones = facebook.getMilestones(new Reading().limit(1));
+        assertThat(facebook.getEndpointURL(), is(pathOf("/me/milestones")));
+        assertThat(facebook.getEndpointURL(), hasParameter("limit", "1"));
+
+        assertThat(milestones.size(), is(1));
+
+        Milestone milestone1 = milestones.get(0);
+        assertThat(milestone1.getId(), is("186353804858251"));
+        assertThat(milestone1.getTitle(), is("30 stars!!!"));
+        assertThat(milestone1.getDescription(), is("https://github.com/roundrop/facebook4j"));
+        assertThat(milestone1.getFrom().getCategory(), is("Software"));
+        assertThat(milestone1.getFrom().getId(), is("137246726435626"));
+        assertThat(milestone1.getFrom().getName(), is("F4J"));
+        assertThat(milestone1.getStartTime(), is(iso8601DateOf("2013-04-24T19:01:00+0000")));
+        assertThat(milestone1.getEndTime(), is(iso8601DateOf("2013-04-24T19:02:00+0000")));
+        assertThat(milestone1.getCreatedTime(), is(iso8601DateOf("2013-06-14T10:37:32+0000")));
+        assertThat(milestone1.getUpdatedTime(), is(iso8601DateOf("2013-06-14T10:37:33+0000")));
+
+        assertThat(milestones.getPaging().getNext().toString(), is("https://graph.facebook.com/137246726435626/milestones?access_token=access_token&limit=5000&offset=5000&__after_id=186353611524937"));
+        assertThat(milestones.getPaging().getPrevious(), is(nullValue()));
+    }
+
+    @Test
+    public void getMilestones_id() throws Exception {
+        facebook.setMockJSON("mock_json/page/milestones.json");
+        ResponseList<Milestone> milestones = facebook.getMilestones("137246726435626");
+        assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/milestones")));
+
+        assertThat(milestones.size(), is(3));
+
+        Milestone milestone1 = milestones.get(0);
+        assertThat(milestone1.getId(), is("186353804858251"));
+        assertThat(milestone1.getTitle(), is("30 stars!!!"));
+        assertThat(milestone1.getDescription(), is("https://github.com/roundrop/facebook4j"));
+        assertThat(milestone1.getFrom().getCategory(), is("Software"));
+        assertThat(milestone1.getFrom().getId(), is("137246726435626"));
+        assertThat(milestone1.getFrom().getName(), is("F4J"));
+        assertThat(milestone1.getStartTime(), is(iso8601DateOf("2013-04-24T19:01:00+0000")));
+        assertThat(milestone1.getEndTime(), is(iso8601DateOf("2013-04-24T19:02:00+0000")));
+        assertThat(milestone1.getCreatedTime(), is(iso8601DateOf("2013-06-14T10:37:32+0000")));
+        assertThat(milestone1.getUpdatedTime(), is(iso8601DateOf("2013-06-14T10:37:33+0000")));
+
+        Milestone milestone3 = milestones.get(2);
+        assertThat(milestone3.getId(), is("186353611524937"));
+        assertThat(milestone3.getTitle(), is("10 stars!"));
+        assertThat(milestone3.getDescription(), is("https://github.com/roundrop/facebook4j"));
+        assertThat(milestone3.getFrom().getCategory(), is("Software"));
+        assertThat(milestone3.getFrom().getId(), is("137246726435626"));
+        assertThat(milestone3.getFrom().getName(), is("F4J"));
+        assertThat(milestone3.getStartTime(), is(iso8601DateOf("2012-12-02T20:0:01+0000")));
+        assertThat(milestone3.getEndTime(), is(iso8601DateOf("2012-12-02T20:0:02+0000")));
+        assertThat(milestone3.getCreatedTime(), is(iso8601DateOf("2013-06-14T10:36:08+0000")));
+        assertThat(milestone3.getUpdatedTime(), is(iso8601DateOf("2013-06-14T10:36:09+0000")));
+
+        assertThat(milestones.getPaging().getNext().toString(), is("https://graph.facebook.com/137246726435626/milestones?access_token=access_token&limit=5000&offset=5000&__after_id=186353611524937"));
+        assertThat(milestones.getPaging().getPrevious(), is(nullValue()));
+    }
+
+    @Test
+    public void getMilestones_id_limit1() throws Exception {
+        facebook.setMockJSON("mock_json/page/milestones_limit1.json");
+        ResponseList<Milestone> milestones = facebook.getMilestones("137246726435626", new Reading().limit(1));
+        assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/milestones")));
+        assertThat(facebook.getEndpointURL(), hasParameter("limit", "1"));
+
+        assertThat(milestones.size(), is(1));
+
+        Milestone milestone1 = milestones.get(0);
+        assertThat(milestone1.getId(), is("186353804858251"));
+        assertThat(milestone1.getTitle(), is("30 stars!!!"));
+        assertThat(milestone1.getDescription(), is("https://github.com/roundrop/facebook4j"));
+        assertThat(milestone1.getFrom().getCategory(), is("Software"));
+        assertThat(milestone1.getFrom().getId(), is("137246726435626"));
+        assertThat(milestone1.getFrom().getName(), is("F4J"));
+        assertThat(milestone1.getStartTime(), is(iso8601DateOf("2013-04-24T19:01:00+0000")));
+        assertThat(milestone1.getEndTime(), is(iso8601DateOf("2013-04-24T19:02:00+0000")));
+        assertThat(milestone1.getCreatedTime(), is(iso8601DateOf("2013-06-14T10:37:32+0000")));
+        assertThat(milestone1.getUpdatedTime(), is(iso8601DateOf("2013-06-14T10:37:33+0000")));
+
+        assertThat(milestones.getPaging().getNext().toString(), is("https://graph.facebook.com/137246726435626/milestones?access_token=access_token&limit=5000&offset=5000&__after_id=186353611524937"));
+        assertThat(milestones.getPaging().getPrevious(), is(nullValue()));
+    }
+
 /*
     @Test
     public void getLikedPage() throws Exception {
