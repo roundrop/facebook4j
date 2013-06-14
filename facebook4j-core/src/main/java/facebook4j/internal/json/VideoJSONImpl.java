@@ -52,6 +52,7 @@ import facebook4j.internal.org.json.JSONObject;
     private Date createdTime;
     private Date updatedTime;
     private PagableList<Comment> comments;
+    private URL link;
 
     /*package*/VideoJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -98,6 +99,7 @@ import facebook4j.internal.org.json.JSONObject;
                     comments.add(comment);
                 }
             }
+            link = getURL("link", json);
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -149,6 +151,10 @@ import facebook4j.internal.org.json.JSONObject;
 
     public PagableList<Comment> getComments() {
         return comments;
+    }
+
+    public URL getLink() {
+        return link;
     }
 
     /*package*/
@@ -205,12 +211,20 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "VideoJSONImpl [id=" + id + ", from=" + from + ", tags=" + tags
-                + ", name=" + name + ", description=" + description
-                + ", picture=" + picture + ", embedHtml=" + embedHtml
-                + ", icon=" + icon + ", source=" + source + ", createdTime="
-                + createdTime + ", updatedTime=" + updatedTime + ", comments="
-                + comments + "]";
+        return "VideoJSONImpl{" +
+                "id='" + id + '\'' +
+                ", from=" + from +
+                ", tags=" + tags +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", picture=" + picture +
+                ", embedHtml='" + embedHtml + '\'' +
+                ", icon=" + icon +
+                ", source=" + source +
+                ", createdTime=" + createdTime +
+                ", updatedTime=" + updatedTime +
+                ", comments=" + comments +
+                ", link=" + link +
+                '}';
     }
-
 }

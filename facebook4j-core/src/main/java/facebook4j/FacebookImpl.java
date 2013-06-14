@@ -755,8 +755,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return _postStatusMessage(id, message);
     }
 
-    /* Friend Methods */
-    
     public ResponseList<Post> getTagged() throws FacebookException {
         return getTagged("me", null);
     }
@@ -770,6 +768,8 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createPostList(get(buildURL(userId, "tagged", reading)));
     }
+
+    /* Friend Methods */
 
     public ResponseList<Friendlist> getFriendlists() throws FacebookException {
         return getFriendlists("me", null);
@@ -1438,6 +1438,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Insight> getPageInsights(String pageId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
         return factory.createInsightList(get(buildURL(pageId, "insights", reading)));
+    }
+
+    public ResponseList<Tagged> getPageTagged(String pageId) throws FacebookException {
+        return getPageTagged(pageId, null);
+    }
+
+    public ResponseList<Tagged> getPageTagged(String pageId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createTaggedList(get(buildURL(pageId, "tagged", reading)));
     }
 
     public Page getLikedPage(String pageId) throws FacebookException {

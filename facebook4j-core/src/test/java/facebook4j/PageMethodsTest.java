@@ -21,6 +21,7 @@ import org.junit.Test;
 import java.net.URL;
 
 import static facebook4j.junit.URLMatchers.*;
+import static facebook4j.junit.ISO8601DateMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -160,6 +161,98 @@ public class PageMethodsTest extends MockFacebookTestBase {
         assertThat(paging.getPrevious().toString(), is("https://graph.facebook.com/74100576336/insights?since=1370145751&until=1370404951"));
         assertThat(paging.getNext().toString(), is("https://graph.facebook.com/74100576336/insights?since=1370664151&until=1370923351"));
 
+    }
+
+    @Test
+    public void getPageTagged() throws Exception {
+        facebook.setMockJSON("mock_json/page/tagged.json");
+        ResponseList<Tagged> taggeds = facebook.getPageTagged("65341080064");
+
+        assertThat(taggeds.size(), is(25));
+
+        Tagged tagged1 = taggeds.get(0);
+        assertThat(tagged1.getId(), is("65341080064_203494769804107"));
+        assertThat(tagged1.getType(), is("photo"));
+        assertThat(tagged1.getPost(), is(nullValue()));
+        assertThat(tagged1.getVideo(), is(nullValue()));
+        Photo photo = tagged1.getPhoto();
+        assertThat(photo, is(not(nullValue())));
+        assertThat(photo.getCreatedTime(), is(iso8601DateOf("2013-06-10T15:06:07+0000")));
+        assertThat(photo.getFrom().getId(), is("100004307554645"));
+        assertThat(photo.getFrom().getName(), is("Mein Herr Schmidt"));
+        assertThat(photo.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yz/r/StEh3RhPvjk.gif"));
+        assertThat(photo.getLikes().getCount(), is(1));
+        assertThat(photo.getLikes().size(), is(1));
+        assertThat(photo.getLikes().get(0).getId(), is("1143846376"));
+        assertThat(photo.getLikes().get(0).getName(), is("Lisa McGee"));
+        assertThat(photo.getLink().toString(), is("http://www.facebook.com/photo.php?fbid=203494769804107&set=o.65341080064&type=1"));
+        assertThat(photo.getPicture().toString(), is("https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-frc1/q75/s480x480/1001458_203494769804107_274974554_n.jpg"));
+        assertThat(tagged1.getMessage(), is("Wow!"));
+        assertThat(tagged1.getMessageTags(), is(nullValue()));
+        assertThat(tagged1.getObjectId(), is("203494769804107"));
+        assertThat(tagged1.getPrivacy().getValue(), is(PrivacyType.EMPTY));
+        assertThat(tagged1.getTo().size(), is(1));
+        assertThat(tagged1.getTo().get(0).getCategory(), is("Travel/leisure"));
+        assertThat(tagged1.getTo().get(0).getId(), is("65341080064"));
+        assertThat(tagged1.getTo().get(0).getName(), is("Grand Canyon"));
+        assertThat(tagged1.getUpdatedTime(), is(iso8601DateOf("2013-06-10T15:06:07+0000")));
+
+        Tagged tagged4 = taggeds.get(3);
+        assertThat(tagged4.getId(), is("65341080064_10152888395585065"));
+        assertThat(tagged4.getType(), is("link"));
+        assertThat(tagged4.getPhoto(), is(nullValue()));
+        assertThat(tagged4.getVideo(), is(nullValue()));
+        Post post = tagged4.getPost();
+        assertThat(post, is(not(nullValue())));
+        assertThat(post.getCaption(), is("www.runningtowardshome.com"));
+        assertThat(post.getCreatedTime(), is(iso8601DateOf("2013-06-06T14:16:16+0000")));
+        assertThat(post.getFrom().getId(), is("1558890061"));
+        assertThat(post.getFrom().getName(), is("Joshua Snow Hansén"));
+        assertThat(post.getIcon(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/aS8ecmYRys0.gif"));
+        assertThat(post.getLink().toString(), is("http://www.runningtowardshome.com/2013/06/grand-canyon-r2r2r.html"));
+        assertThat(post.getName(), is("Running Towards Home | ©: My Quest to Run the Grand Canyon R2R2R"));
+        assertThat(post.getPicture().toString(), is("https://fbexternal-a.akamaihd.net/safe_image.php?d=AQCk6K-KS0vS1qlM&w=154&h=154&url=http%3A%2F%2F3.bp.blogspot.com%2F-rbFFZFuvNiQ%2FUX33eAIvYjI%2FAAAAAAAAN2g%2FmJUZSlj7B1M%2Fs240%2FBeforeAfter2.png"));
+        assertThat(tagged4.getMessage(), is("I've gotten the bug. My new addition to my bucket list? Run the Grand Canyon Rim to Rim to Rim. This needs to happen. 2014 anyone?"));
+        assertThat(tagged4.getMessageTags().size(), is(1));
+        assertThat(tagged4.getMessageTags().get("64").length, is(1));
+        assertThat(tagged4.getMessageTags().get("64")[0].getId(), is("65341080064"));
+        assertThat(tagged4.getMessageTags().get("64")[0].getLength(), is(12));
+        assertThat(tagged4.getMessageTags().get("64")[0].getName(), is("Grand Canyon"));
+        assertThat(tagged4.getMessageTags().get("64")[0].getOffset(), is(64));
+        assertThat(tagged4.getMessageTags().get("64")[0].getType(), is("page"));
+        assertThat(tagged4.getObjectId(), is(nullValue()));
+        assertThat(tagged4.getPrivacy().getValue(), is(PrivacyType.EMPTY));
+        assertThat(tagged4.getTo().size(), is(1));
+        assertThat(tagged4.getTo().get(0).getCategory(), is("Travel/leisure"));
+        assertThat(tagged4.getTo().get(0).getId(), is("65341080064"));
+        assertThat(tagged4.getTo().get(0).getName(), is("Grand Canyon"));
+        assertThat(tagged4.getUpdatedTime(), is(iso8601DateOf("2013-06-06T14:16:16+0000")));
+
+        Tagged tagged9 = taggeds.get(8);
+        assertThat(tagged9.getId(), is("65341080064_10151515892704401"));
+        assertThat(tagged9.getType(), is("video"));
+        assertThat(tagged9.getPhoto(), is(nullValue()));
+        assertThat(tagged9.getPost(), is(nullValue()));
+        Video video = tagged9.getVideo();
+        assertThat(video, is(not(nullValue())));
+        assertThat(video.getDescription(), is("Sunset at Grand Canyon National Park from Desert View Point."));
+        assertThat(video.getCreatedTime(), is(iso8601DateOf("2013-05-30T18:30:57+0000")));
+        assertThat(video.getFrom().getId(), is("691374400"));
+        assertThat(video.getFrom().getName(), is("John DeLanghe"));
+        assertThat(video.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yj/r/v2OnaTyTQZE.gif"));
+        assertThat(video.getLink().toString(), is("https://www.youtube.com/watch?v=8P-VE8K1O6U"));
+        assertThat(video.getName(), is("Welcome to: Grand Canyon National Park at sunset - Arizona, United States"));
+        assertThat(video.getPicture().toString(), is("https://fbexternal-a.akamaihd.net/safe_image.php?d=AQDEyOas7zVTfgSY&w=130&h=130&url=http%3A%2F%2Fi1.ytimg.com%2Fvi%2F8P-VE8K1O6U%2Fmaxresdefault.jpg%3Ffeature%3Dog"));
+        assertThat(video.getSource().toString(), is("http://www.youtube.com/v/8P-VE8K1O6U?version=3&autohide=1&autoplay=1"));
+        assertThat(tagged9.getMessage(), is("WOW! Beautiful!"));
+        assertThat(tagged9.getMessageTags(), is(nullValue()));
+        assertThat(tagged9.getObjectId(), is(nullValue()));
+        assertThat(tagged9.getPrivacy().getValue(), is(PrivacyType.EMPTY));
+        assertThat(tagged9.getTo().size(), is(1));
+        assertThat(tagged9.getTo().get(0).getCategory(), is("Travel/leisure"));
+        assertThat(tagged9.getTo().get(0).getId(), is("65341080064"));
+        assertThat(tagged9.getTo().get(0).getName(), is("Grand Canyon"));
+        assertThat(tagged9.getUpdatedTime(), is(iso8601DateOf("2013-05-30T18:30:57+0000")));
     }
 
 /*

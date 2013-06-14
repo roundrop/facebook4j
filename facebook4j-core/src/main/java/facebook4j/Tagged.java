@@ -16,25 +16,25 @@
 
 package facebook4j;
 
-import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Video extends FacebookResponse {
+public interface Tagged {
     String getId();
-    IdNameEntity getFrom();
-    List<IdNameEntity> getTags();
-    String getName();
-    String getDescription();
-    URL getPicture();
-    String getEmbedHtml();
-    URL getIcon();
-    URL getSource();
-    Date getCreatedTime();
+    String getType();
+
+    Post getPost();
+    Photo getPhoto();
+    Video getVideo();
+
+    String getMessage();
+    Map<String, Tag[]> getMessageTags();
+    String getObjectId();
+    Privacy getPrivacy();
+    List<Category> getTo();
     Date getUpdatedTime();
-    PagableList<Comment> getComments();
-    URL getLink();
 }

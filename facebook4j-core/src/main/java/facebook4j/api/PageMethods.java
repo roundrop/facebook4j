@@ -211,6 +211,23 @@ public interface PageMethods {
     ResponseList<Insight> getPageInsights(String pageId, Reading reading) throws FacebookException;
 
     /**
+     * Returns the photos, videos, and posts in which the Page has been tagged.
+     * @param pageId the ID of the page
+     * @return pages
+     * @throws FacebookException
+     */
+    ResponseList<Tagged> getPageTagged(String pageId) throws FacebookException;
+
+    /**
+     * Returns the photos, videos, and posts in which the Page has been tagged.
+     * @param pageId the ID of the page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return pages
+     * @throws FacebookException
+     */
+    ResponseList<Tagged> getPageTagged(String pageId, Reading reading) throws FacebookException;
+
+    /**
      * Returns a specific page that the current user has liked.
      * @param pageId the ID of a page
      * @return page
