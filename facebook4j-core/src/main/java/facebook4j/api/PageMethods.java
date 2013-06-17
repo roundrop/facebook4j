@@ -263,6 +263,37 @@ public interface PageMethods {
     ResponseList<Milestone> getMilestones(String pageId, Reading reading) throws FacebookException;
 
     /**
+     * Creates the milestone for the current page.
+     * Note that this method requires 'page' access_token.
+     * @param milestoneUpdate a milestone to be created
+     * @return The new milestone ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#milestones">Page#milestones - Facebook Developers</a>
+     */
+    String createMilestone(MilestoneUpdate milestoneUpdate) throws FacebookException;
+
+    /**
+     * Creates the milestone for the page.
+     * Note that this method requires 'page' access_token.
+     * @param pageId the ID of the page
+     * @param milestoneUpdate a milestone to be created
+     * @return The new milestone ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#milestones">Page#milestones - Facebook Developers</a>
+     */
+    String createMilestone(String pageId, MilestoneUpdate milestoneUpdate) throws FacebookException;
+
+    /**
+     * Deletes the milestone.
+     * Note that this method requires 'page' access_token.
+     * @param milestoneId the ID of a milestone
+     * @return true if delete is successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#milestones">Page#milestones - Facebook Developers</a>
+     */
+    boolean deleteMilestone(String milestoneId) throws FacebookException;
+
+    /**
      * Returns a specific page that the current user has liked.
      * @param pageId the ID of a page
      * @return page

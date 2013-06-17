@@ -16,12 +16,16 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.RequestMethod;
 import org.junit.Test;
 
 import java.net.URL;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import static facebook4j.junit.URLMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
+import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -375,6 +379,31 @@ public class PageMethodsTest extends MockFacebookTestBase {
 
         assertThat(milestones.getPaging().getNext().toString(), is("https://graph.facebook.com/137246726435626/milestones?access_token=access_token&limit=5000&offset=5000&__after_id=186353611524937"));
         assertThat(milestones.getPaging().getPrevious(), is(nullValue()));
+    }
+
+    @Test
+    public void createMilestone() throws FacebookException {
+        facebook.setMockJSON("mock_json/id.json");
+        Calendar startTime = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        startTime.set(2013, 4, 25, 0, 0, 0);
+        String milestoneId = facebook.createMilestone(new MilestoneUpdate("test", "description", startTime));
+        assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+        assertThat(facebook.getEndpointURL(), is(pathOf("/me/milestones")));
+        assertThat(facebook.getHttpParameters(), hasPostParameter("title", "test"));
+        assertThat(facebook.getHttpParameters(), hasPostParameter("description", "description"));
+        assertThat(facebook.getHttpParameters(), hasPostParameter("start_time", "2013-05-25T00:00:00+0000"));
+
+        assertThat(milestoneId, is(notNullValue()));
+    }
+
+    @Test
+    public void deleteMilestone() throws FacebookException {
+        facebook.setMockJSON("mock_json/empty.json");
+        boolean result = facebook.deleteMilestone("187182304775401");
+        assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+        assertThat(facebook.getEndpointURL(), is(pathOf("/187182304775401")));
+
+        assertThat(result, is(true));
     }
 
 /*

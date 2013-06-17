@@ -1462,6 +1462,23 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createMilestoneList(get(buildURL(pageId, "milestones", reading)));
     }
 
+    public String createMilestone(MilestoneUpdate milestoneUpdate) throws FacebookException {
+        return createMilestone("me", milestoneUpdate);
+    }
+    public String createMilestone(String pageId, MilestoneUpdate milestoneUpdate) throws FacebookException {
+        ensureAuthorizationEnabled();
+        JSONObject json = post(buildURL(pageId, "milestones"), milestoneUpdate.asHttpParameterArray())
+                          .asJSONObject();
+        return getRawString("id", json);
+    }
+
+    public boolean deleteMilestone(String milestoneId) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = delete(buildURL(milestoneId));
+//        return Boolean.valueOf(res.asString().trim());
+        return true;    //Facebook does not return boolean...
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }
