@@ -20,8 +20,11 @@ import facebook4j.auth.Authorization;
 import facebook4j.auth.MockAuthorization;
 import facebook4j.auth.OAuthAuthorization;
 import facebook4j.conf.Configuration;
+import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.http.MockHttpClientWrapper;
+import facebook4j.internal.http.RequestMethod;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -53,8 +56,20 @@ class MockFacebookImpl extends FacebookImpl implements MockFacebook {
         ((MockHttpClientWrapper) http).setMockJSON(resourceName);
     }
 
+    public RequestMethod getHttpMethod() {
+        return ((MockHttpClientWrapper) http).getRequest().getMethod();
+    }
+
     public URL getEndpointURL() {
-        return ((MockHttpClientWrapper) http).getMockResponse().getEndpointURL();
+        try {
+            return new URL(((MockHttpClientWrapper) http).getRequest().getURL());
+        } catch (MalformedURLException e) {
+            throw new AssertionError();
+        }
+    }
+
+    public HttpParameter[] getHttpParameters() {
+        return ((MockHttpClientWrapper) http).getRequest().getParameters();
     }
 
 }
