@@ -28,40 +28,44 @@ import facebook4j.ResponseList;
  */
 public interface NoteMethods {
     /**
-     * Returns the current user's notes.
+     * Returns the current user's/page's notes.
      * @return notes
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#notes">User#notes - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#notes">Page#notes - Facebook Developers</a>
      */
     ResponseList<Note> getNotes() throws FacebookException;
 
     /**
-     * Returns the current user's notes.
+     * Returns the current user's/page's notes.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return notes
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#notes">User#notes - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#notes">Page#notes - Facebook Developers</a>
      */
     ResponseList<Note> getNotes(Reading reading) throws FacebookException;
 
     /**
-     * Returns a user's notes.
-     * @param userId the ID of a user
+     * Returns a user's/page's notes.
+     * @param id the ID of a user/page
      * @return notes
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#notes">User#notes - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#notes">Page#notes - Facebook Developers</a>
      */
-    ResponseList<Note> getNotes(String userId) throws FacebookException;
+    ResponseList<Note> getNotes(String id) throws FacebookException;
 
     /**
-     * Returns a user's notes.
-     * @param userId the ID of a user
+     * Returns a user's/page's notes.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return notes
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#notes">User#notes - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#notes">Page#notes - Facebook Developers</a>
      */
-    ResponseList<Note> getNotes(String userId, Reading reading) throws FacebookException;
+    ResponseList<Note> getNotes(String id, Reading reading) throws FacebookException;
 
 
     /**

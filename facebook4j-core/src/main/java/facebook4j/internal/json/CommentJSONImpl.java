@@ -20,10 +20,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 import java.util.Date;
 
-import facebook4j.Comment;
-import facebook4j.FacebookException;
-import facebook4j.IdNameEntity;
-import facebook4j.ResponseList;
+import facebook4j.*;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
@@ -37,7 +34,7 @@ import facebook4j.internal.org.json.JSONObject;
     private static final long serialVersionUID = 4049049358890693823L;
 
     private String id;
-    private IdNameEntity from;
+    private Category from;
     private String message;
     private Boolean canRemove;
     private Date createdTime;
@@ -64,7 +61,7 @@ import facebook4j.internal.org.json.JSONObject;
             id = getRawString("id", json);
             if (!json.isNull("from")) {
                 JSONObject fromJSONObject = json.getJSONObject("from");
-                from = new IdNameEntityJSONImpl(fromJSONObject);
+                from = new CategoryJSONImpl(fromJSONObject);
             } else {
                 from = null;
             }
@@ -82,7 +79,7 @@ import facebook4j.internal.org.json.JSONObject;
         return id;
     }
 
-    public IdNameEntity getFrom() {
+    public Category getFrom() {
         return from;
     }
 

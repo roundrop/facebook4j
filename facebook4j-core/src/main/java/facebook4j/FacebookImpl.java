@@ -1246,12 +1246,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Note> getNotes(Reading reading) throws FacebookException {
         return getNotes("me", reading);
     }
-    public ResponseList<Note> getNotes(String userId) throws FacebookException {
-        return getNotes(userId, null);
+    public ResponseList<Note> getNotes(String id) throws FacebookException {
+        return getNotes(id, null);
     }
-    public ResponseList<Note> getNotes(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Note> getNotes(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createNoteList(get(buildURL(userId, "notes", reading)));
+        return factory.createNoteList(get(buildURL(id, "notes", reading)));
     }
 
     public String createNote(String subject, String message) throws FacebookException {
