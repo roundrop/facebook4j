@@ -1765,12 +1765,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Video> getVideos(Reading reading) throws FacebookException {
         return getVideos("me", reading);
     }
-    public ResponseList<Video> getVideos(String userId) throws FacebookException {
-        return getVideos(userId, null);
+    public ResponseList<Video> getVideos(String id) throws FacebookException {
+        return getVideos(id, null);
     }
-    public ResponseList<Video> getVideos(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Video> getVideos(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createVideoList(get(buildURL(userId, "videos", reading)));
+        return factory.createVideoList(get(buildURL(id, "videos", reading)));
     }
 
     public String postVideo(Media source) throws FacebookException {
