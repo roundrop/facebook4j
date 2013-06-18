@@ -16,6 +16,9 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.HttpParameter;
+import facebook4j.internal.http.RequestMethod;
+
 import java.net.URL;
 
 /**
@@ -24,5 +27,7 @@ import java.net.URL;
 public interface MockFacebook extends Facebook {
     void setOAuthAppId(String appId, String appSecret);
     void setMockJSON(String resourceName);
+    RequestMethod getHttpMethod();
     URL getEndpointURL();
+    HttpParameter[] getHttpParameters();
 }

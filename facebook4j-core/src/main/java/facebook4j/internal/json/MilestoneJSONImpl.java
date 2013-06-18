@@ -14,38 +14,37 @@
  * limitations under the License.
  */
 
+/**
+ * 
+ */
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.util.Date;
-
-import facebook4j.FacebookException;
-import facebook4j.ResponseList;
-import facebook4j.Tag;
+import facebook4j.*;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class TagJSONImpl extends FacebookResponseImpl implements Tag, java.io.Serializable {
-    private static final long serialVersionUID = -947248601368391860L;
-    
-    private String id;
-    private String name;
-    private Integer offset;
-    private Integer length;
-    private String type;
-    
-    private Integer x;
-    private Integer y;
-    private Date createdTime;
+/*package*/ final class MilestoneJSONImpl extends FacebookResponseImpl implements Milestone, java.io.Serializable {
 
-    /*package*/TagJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+    private String id;
+    private String title;
+    private String description;
+    private Category from;
+    private Date startTime;
+    private Date endTime;
+    private Date createdTime;
+    private Date updatedTime;
+
+    /*package*/MilestoneJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
         JSONObject json = res.asJSONObject();
         init(json);
@@ -55,73 +54,60 @@ import facebook4j.internal.org.json.JSONObject;
         }
     }
 
-    /*package*/TagJSONImpl(JSONObject json) throws FacebookException {
+    /*package*/MilestoneJSONImpl(JSONObject json) throws FacebookException {
         super();
         init(json);
     }
 
     private void init(JSONObject json) throws FacebookException {
-        id = getRawString("id", json);
-        name = getRawString("name", json);
-        if (!json.isNull("offset")) {
-            offset = getPrimitiveInt("offset", json);
-        } else {
-            offset = null;
+        try {
+            id = getRawString("id", json);
+            title = getRawString("title", json);
+            description = getRawString("description", json);
+            from = new CategoryJSONImpl(json.getJSONObject("from"));
+            startTime = getISO8601Datetime("start_time", json);
+            endTime = getISO8601Datetime("end_time", json);
+            createdTime = getISO8601Datetime("created_time" ,json);
+            updatedTime = getISO8601Datetime("updated_time", json);
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone);
         }
-        if (!json.isNull("length")) {
-            length = getPrimitiveInt("length", json);
-        } else {
-            length = null;
-        }
-        type = getRawString("type", json);
-        
-        if (!json.isNull("x")) {
-            x = getPrimitiveInt("x", json);
-        } else {
-            x = null;
-        }
-        if (!json.isNull("y")) {
-            y = getPrimitiveInt("y", json);
-        } else {
-            y = null;
-        }
-        createdTime = getISO8601Datetime("created_time", json);
     }
-    
+
     public String getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public Integer getOffset() {
-        return offset;
+    public String getDescription() {
+        return description;
     }
 
-    public Integer getLength() {
-        return length;
+    public Category getFrom() {
+        return from;
     }
 
-    public String getType() {
-        return type;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public Integer getX() {
-        return x;
-    }
-
-    public Integer getY() {
-        return y;
+    public Date getEndTime() {
+        return endTime;
     }
 
     public Date getCreatedTime() {
         return createdTime;
     }
 
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
+
     /*package*/
-    static ResponseList<Tag> createTagList(HttpResponse res, Configuration conf) throws FacebookException {
+    static ResponseList<Milestone> createMilestoneList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 DataObjectFactoryUtil.clearThreadLocalMap();
@@ -129,24 +115,24 @@ import facebook4j.internal.org.json.JSONObject;
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
             int size = list.length();
-            ResponseList<Tag> tags = new ResponseListImpl<Tag>(size, json);
+            ResponseList<Milestone> milestones = new ResponseListImpl<Milestone>(size, json);
             for (int i = 0; i < size; i++) {
-                JSONObject tagJSONObject = list.getJSONObject(i);
-                Tag tag = new TagJSONImpl(tagJSONObject);
+                JSONObject eventJSONObject = list.getJSONObject(i);
+                Milestone milestone = new MilestoneJSONImpl(eventJSONObject);
                 if (conf.isJSONStoreEnabled()) {
-                    DataObjectFactoryUtil.registerJSONObject(tag, tagJSONObject);
+                    DataObjectFactoryUtil.registerJSONObject(milestone, eventJSONObject);
                 }
-                tags.add(tag);
+                milestones.add(milestone);
             }
             if (conf.isJSONStoreEnabled()) {
-                DataObjectFactoryUtil.registerJSONObject(tags, list);
+                DataObjectFactoryUtil.registerJSONObject(milestones, list);
             }
-            return tags;
+            return milestones;
         } catch (JSONException jsone) {
             throw new FacebookException(jsone);
         }
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -163,7 +149,7 @@ import facebook4j.internal.org.json.JSONObject;
             return false;
         if (getClass() != obj.getClass())
             return false;
-        TagJSONImpl other = (TagJSONImpl) obj;
+        MilestoneJSONImpl other = (MilestoneJSONImpl) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -174,8 +160,15 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "TagJSONImpl [id=" + id + ", name=" + name + ", offset="
-                + offset + ", length=" + length + ", type=" + type + "]";
+        return "MilestoneJSONImpl{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", from=" + from +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", createdTime=" + createdTime +
+                ", updatedTime=" + updatedTime +
+                '}';
     }
-
 }

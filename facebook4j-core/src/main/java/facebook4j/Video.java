@@ -37,6 +37,7 @@ public interface Video extends FacebookResponse {
     Date getCreatedTime();
     Date getUpdatedTime();
     PagableList<Comment> getComments();
+    URL getLink();
 
     interface Format {
         String getEmbedHtml();
@@ -45,5 +46,4 @@ public interface Video extends FacebookResponse {
         Integer getWidth();
         URL getPicture();
     }
-
 }

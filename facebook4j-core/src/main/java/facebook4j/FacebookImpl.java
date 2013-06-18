@@ -755,8 +755,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return _postStatusMessage(id, message);
     }
 
-    /* Friend Methods */
-    
     public ResponseList<Post> getTagged() throws FacebookException {
         return getTagged("me", null);
     }
@@ -770,6 +768,8 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createPostList(get(buildURL(userId, "tagged", reading)));
     }
+
+    /* Friend Methods */
 
     public ResponseList<Friendlist> getFriendlists() throws FacebookException {
         return getFriendlists("me", null);
@@ -1246,12 +1246,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Note> getNotes(Reading reading) throws FacebookException {
         return getNotes("me", reading);
     }
-    public ResponseList<Note> getNotes(String userId) throws FacebookException {
-        return getNotes(userId, null);
+    public ResponseList<Note> getNotes(String id) throws FacebookException {
+        return getNotes(id, null);
     }
-    public ResponseList<Note> getNotes(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Note> getNotes(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createNoteList(get(buildURL(userId, "notes", reading)));
+        return factory.createNoteList(get(buildURL(id, "notes", reading)));
     }
 
     public String createNote(String subject, String message) throws FacebookException {
@@ -1438,6 +1438,45 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Insight> getPageInsights(String pageId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
         return factory.createInsightList(get(buildURL(pageId, "insights", reading)));
+    }
+
+    public ResponseList<Tagged> getPageTagged(String pageId) throws FacebookException {
+        return getPageTagged(pageId, null);
+    }
+
+    public ResponseList<Tagged> getPageTagged(String pageId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createTaggedList(get(buildURL(pageId, "tagged", reading)));
+    }
+
+    public ResponseList<Milestone> getMilestones() throws FacebookException {
+        return getMilestones("me", null);
+    }
+    public ResponseList<Milestone> getMilestones(Reading reading) throws FacebookException {
+        return getMilestones("me", reading);
+    }
+    public ResponseList<Milestone> getMilestones(String pageId) throws FacebookException {
+        return getMilestones(pageId, null);
+    }
+    public ResponseList<Milestone> getMilestones(String pageId, Reading reading) throws FacebookException {
+        return factory.createMilestoneList(get(buildURL(pageId, "milestones", reading)));
+    }
+
+    public String createMilestone(MilestoneUpdate milestoneUpdate) throws FacebookException {
+        return createMilestone("me", milestoneUpdate);
+    }
+    public String createMilestone(String pageId, MilestoneUpdate milestoneUpdate) throws FacebookException {
+        ensureAuthorizationEnabled();
+        JSONObject json = post(buildURL(pageId, "milestones"), milestoneUpdate.asHttpParameterArray())
+                          .asJSONObject();
+        return getRawString("id", json);
+    }
+
+    public boolean deleteMilestone(String milestoneId) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = delete(buildURL(milestoneId));
+//        return Boolean.valueOf(res.asString().trim());
+        return true;    //Facebook does not return boolean...
     }
 
     public Page getLikedPage(String pageId) throws FacebookException {

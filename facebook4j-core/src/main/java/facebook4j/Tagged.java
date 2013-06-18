@@ -16,34 +16,25 @@
 
 package facebook4j;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 /**
- * An enum represents the privacy settings.
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public enum PrivacyType {
-    EVERYONE,
-    ALL_FRIENDS,
-    NETWORKS_FRIENDS,
-    FRIENDS_OF_FRIENDS,
-    SOME_FRIENDS,
-    NO_FRIENDS,
-    SELF,
-    CUSTOM,
-    EMPTY,
-    ;
-    
-    public static PrivacyType getInstance(String privacyTypeString) {
-        if (privacyTypeString == null) {
-            return null;
-        }
-        if (privacyTypeString.equals("")) {
-            return PrivacyType.EMPTY;
-        }
-        for (PrivacyType privacyType : PrivacyType.values()) {
-            if (privacyType.toString().equals(privacyTypeString)) {
-                return privacyType;
-            }
-        }
-        return null;
-    }
+public interface Tagged {
+    String getId();
+    String getType();
+
+    Post getPost();
+    Photo getPhoto();
+    Video getVideo();
+
+    String getMessage();
+    Map<String, Tag[]> getMessageTags();
+    String getObjectId();
+    Privacy getPrivacy();
+    List<Category> getTo();
+    Date getUpdatedTime();
 }
