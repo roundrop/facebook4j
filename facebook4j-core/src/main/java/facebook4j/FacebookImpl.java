@@ -1826,28 +1826,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createVideoList(get(buildURL(id, "videos", reading)));
     }
 
-    public String postVideo(Media source) throws FacebookException {
-        return postVideo("me", source);
+    public String postVideo(VideoUpdate videoUpdate) throws FacebookException {
+        return postVideo("me", videoUpdate);
     }
-    public String postVideo(Media source, String title, String description) throws FacebookException {
-        return postVideo("me", source, title, description);
-    }
-    public String postVideo(String userId, Media source) throws FacebookException {
-        return postVideo(userId, source, null, null);
-    }
-    public String postVideo(String userId, Media source, String title, String description) throws FacebookException {
+    public String postVideo(String id, VideoUpdate videoUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
-        List<HttpParameter> params = new ArrayList<HttpParameter>();
-        params.add(source.asHttpParameter("source"));
-        if (title != null) {
-            params.add(new HttpParameter("title", title));
-        }
-        if (description != null) {
-            params.add(new HttpParameter("description", description));
-        }
-        HttpParameter[] httpParameters = (HttpParameter[]) params.toArray(new HttpParameter[params.size()]);
-
-        JSONObject json = post(buildVideoURL(userId, "videos"), httpParameters).asJSONObject();
+        JSONObject json = post(buildVideoURL(id, "videos"), videoUpdate.asHttpParameterArray()).asJSONObject();
         return getRawString("id", json);
     }
 

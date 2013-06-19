@@ -16,7 +16,10 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.RequestMethod;
 import org.junit.Test;
+
+import java.io.File;
 
 import static facebook4j.junit.URLMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
@@ -68,6 +71,22 @@ public class VideoMethodsTest extends MockFacebookTestBase {
         assertThat(video1.getPicture().toString(), is("https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-prn1/632744_10100562885080583_10100562878508753_42200_702_t.jpg"));
         assertThat(video1.getSource().toString(), is("https://fbcdn-video-a.akamaihd.net/hvideo-ak-prn1/v/746464_10100562884965813_2113083078_n.mp4?oh=82c819e5b30e1a4d107b3436395ab73d&oe=51C17992&__gda__=1371638871_837a2907288a38125ae0c8828cdf68ef"));
         assertThat(video1.getUpdatedTime(), is(iso8601DateOf("2013-03-27T01:53:04+0000")));
+    }
+
+    @Test
+    public void postVideo_page() throws Exception {
+        facebook.setMockJSON("mock_json/id.json");
+        String pageId = "137246726435626";
+        String videoPath = "src/test/resources/test.mov";
+        if (!System.getProperty("user.dir").endsWith("/facebook4j-core")) {
+            videoPath = "facebook4j-core/" + videoPath;
+        }
+        File videoFile = new File(videoPath);
+        String videoId = facebook.postVideo(pageId, new VideoUpdate(new Media(videoFile)));
+        assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+        assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/videos")));
+
+        assertThat(videoId, is("1234567890123456"));
     }
 
 }
