@@ -1257,9 +1257,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public String createNote(String subject, String message) throws FacebookException {
         return createNote("me", subject, message);
     }
-    public String createNote(String userId, String subject, String message) throws FacebookException {
+    public String createNote(String id, String subject, String message) throws FacebookException {
         ensureAuthorizationEnabled();
-        JSONObject json = post(buildURL(userId, "notes"), new HttpParameter[] {
+        JSONObject json = post(buildURL(id, "notes"), new HttpParameter[] {
                             new HttpParameter("subject", subject),
                             new HttpParameter("message", message)
                           }).asJSONObject();

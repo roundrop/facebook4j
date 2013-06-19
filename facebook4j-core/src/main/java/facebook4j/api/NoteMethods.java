@@ -69,25 +69,27 @@ public interface NoteMethods {
 
 
     /**
-     * Creates the current user's note.
+     * Creates the current user's/page's note.
      * @param subject the subject of the note
      * @param message note content
      * @return The new note ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#notes">User#notes - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#notes">Page#notes - Facebook Developers</a>
      */
     String createNote(String subject, String message) throws FacebookException;
 
     /**
-     * Creates the note on behalf of a user.
-     * @param userId the ID of a user
+     * Creates the note on behalf of a user/page.
+     * @param id the ID of a user/page
      * @param subject the subject of the note
      * @param message note content
      * @return The new note ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#notes">User#notes - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#notes">Page#notes - Facebook Developers</a>
      */
-    String createNote(String userId, String subject, String message) throws FacebookException;
+    String createNote(String id, String subject, String message) throws FacebookException;
 
 
     /**

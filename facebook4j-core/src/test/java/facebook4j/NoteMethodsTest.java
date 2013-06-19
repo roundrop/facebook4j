@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import static facebook4j.junit.URLMatchers.pathOf;
 import static facebook4j.junit.ISO8601DateMatchers.*;
+import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -89,6 +90,18 @@ public class NoteMethodsTest extends MockFacebookTestBase {
 
         assertThat(notes.getPaging().getNext().toString(), is("https://graph.facebook.com/74100576336/notes?access_token=access_token&limit=25&after=NzU0NDY1MjcyMTY%3D"));
         assertThat(notes.getPaging().getPrevious(), is(nullValue()));
+    }
+
+    @Test
+    public void createNote() throws Exception {
+        facebook.setMockJSON("mock_json/id.json");
+        String noteId = facebook.createNote("137246726435626", "Note Test", "Note Message for Page");
+        assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+        assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/notes")));
+        assertThat(facebook.getHttpParameters(), hasPostParameter("subject", "Note Test"));
+        assertThat(facebook.getHttpParameters(), hasPostParameter("message", "Note Message for Page"));
+
+        assertThat(noteId, is("1234567890123456"));
     }
 
 }
