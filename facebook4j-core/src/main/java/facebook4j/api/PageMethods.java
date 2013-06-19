@@ -294,6 +294,46 @@ public interface PageMethods {
     boolean deleteMilestone(String milestoneId) throws FacebookException;
 
     /**
+     * Returns a list of the Page's Admins.
+     * Note that this method requires 'page' access_token.
+     * @return admins
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<Admin> getPageAdmins() throws FacebookException;
+
+    /**
+     * Returns a list of the Page's Admins.
+     * Note that this method requires 'page' access_token.
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return admins
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<Admin> getPageAdmins(Reading reading) throws FacebookException;
+
+    /**
+     * Returns a list of the Page's Admins.
+     * Note that this method requires 'page' access_token.
+     * @param pageId the ID of the page
+     * @return admins
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<Admin> getPageAdmins(String pageId) throws FacebookException;
+
+    /**
+     * Returns a list of the Page's Admins.
+     * Note that this method requires 'page' access_token.
+     * @param pageId the ID of the page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return admins
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<Admin> getPageAdmins(String pageId, Reading reading) throws FacebookException;
+
+    /**
      * Returns a specific page that the current user has liked.
      * @param pageId the ID of a page
      * @return page

@@ -304,6 +304,10 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return MilestoneJSONImpl.createMilestoneList(res, conf);
     }
 
+    public ResponseList<Admin> createAdminList(HttpResponse res) throws FacebookException {
+        return AdminJSONImpl.createAdminList(res, conf);
+    }
+
     public Application createApplication(HttpResponse res) throws FacebookException {
         return new ApplicationJSONImpl(res, conf);
     }

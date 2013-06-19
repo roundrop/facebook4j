@@ -1479,6 +1479,20 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return true;    //Facebook does not return boolean...
     }
 
+    public ResponseList<Admin> getPageAdmins() throws FacebookException {
+        return getPageAdmins("me", null);
+    }
+    public ResponseList<Admin> getPageAdmins(Reading reading) throws FacebookException {
+        return getPageAdmins("me", reading);
+    }
+    public ResponseList<Admin> getPageAdmins(String pageId) throws FacebookException {
+        return getPageAdmins(pageId, null);
+    }
+    public ResponseList<Admin> getPageAdmins(String pageId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createAdminList(get(buildURL(pageId, "admins", reading)));
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }

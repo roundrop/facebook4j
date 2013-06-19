@@ -406,6 +406,51 @@ public class PageMethodsTest extends MockFacebookTestBase {
         assertThat(result, is(true));
     }
 
+    @Test
+    public void getPageAdmins() throws Exception {
+        facebook.setMockJSON("mock_json/page/admins.json");
+        ResponseList<Admin> admins = facebook.getPageAdmins();
+        assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+        assertThat(facebook.getEndpointURL(), is(pathOf("/me/admins")));
+
+        assertThat(admins.size(), is(1));
+        assertThat(admins.get(0).getId(), is("100001568838021"));
+        assertThat(admins.get(0).getName(), is("Ryuji Yamashita"));
+        assertThat(admins.get(0).getPerms().size(), is(6));
+        assertThat(admins.get(0).getPerms().get(0), is("ADMINISTER"));
+        assertThat(admins.get(0).getPerms().get(1), is("EDIT_PROFILE"));
+        assertThat(admins.get(0).getPerms().get(2), is("CREATE_CONTENT"));
+        assertThat(admins.get(0).getPerms().get(3), is("MODERATE_CONTENT"));
+        assertThat(admins.get(0).getPerms().get(4), is("CREATE_ADS"));
+        assertThat(admins.get(0).getPerms().get(5), is("BASIC_ADMIN"));
+        assertThat(admins.get(0).getRole(), is("MANAGER"));
+
+        assertThat(admins.getPaging().getNext().toString(), is("https://graph.facebook.com/137246726435626/admins?access_token=access_token&limit=5000&offset=5000&__after_id=100001568838021"));
+        assertThat(admins.getPaging().getPrevious(), is(nullValue()));
+    }
+    @Test
+    public void getPageAdmins_id() throws Exception {
+        facebook.setMockJSON("mock_json/page/admins.json");
+        ResponseList<Admin> admins = facebook.getPageAdmins("137246726435626");
+        assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+        assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/admins")));
+
+        assertThat(admins.size(), is(1));
+        assertThat(admins.get(0).getId(), is("100001568838021"));
+        assertThat(admins.get(0).getName(), is("Ryuji Yamashita"));
+        assertThat(admins.get(0).getPerms().size(), is(6));
+        assertThat(admins.get(0).getPerms().get(0), is("ADMINISTER"));
+        assertThat(admins.get(0).getPerms().get(1), is("EDIT_PROFILE"));
+        assertThat(admins.get(0).getPerms().get(2), is("CREATE_CONTENT"));
+        assertThat(admins.get(0).getPerms().get(3), is("MODERATE_CONTENT"));
+        assertThat(admins.get(0).getPerms().get(4), is("CREATE_ADS"));
+        assertThat(admins.get(0).getPerms().get(5), is("BASIC_ADMIN"));
+        assertThat(admins.get(0).getRole(), is("MANAGER"));
+
+        assertThat(admins.getPaging().getNext().toString(), is("https://graph.facebook.com/137246726435626/admins?access_token=access_token&limit=5000&offset=5000&__after_id=100001568838021"));
+        assertThat(admins.getPaging().getPrevious(), is(nullValue()));
+    }
+
 /*
     @Test
     public void getLikedPage() throws Exception {

@@ -1,0 +1,16 @@
+{
+    "data": [{
+        "id": "100001568838021",
+        "name": "Ryuji Yamashita",
+        "perms": [
+            "ADMINISTER",
+            "EDIT_PROFILE",
+            "CREATE_CONTENT",
+            "MODERATE_CONTENT",
+            "CREATE_ADS",
+            "BASIC_ADMIN"
+        ],
+        "role": "MANAGER"
+    }],
+    "paging": {"next": "https://graph.facebook.com/137246726435626/admins?access_token=access_token&limit=5000&offset=5000&__after_id=100001568838021"}
+}
