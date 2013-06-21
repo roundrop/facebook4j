@@ -1351,6 +1351,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     /* Page Methods */
 
+    public Page getPage() throws FacebookException {
+        return getPage("me", null);
+    }
+    public Page getPage(Reading reading) throws FacebookException {
+        return getPage("me", reading);
+    }
     public Page getPage(String pageId) throws FacebookException {
         return getPage(pageId, null);
     }

@@ -26,6 +26,23 @@ import java.net.URL;
  */
 public interface PageMethods {
     /**
+     * Returns the current page.
+     * @return page
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    Page getPage() throws FacebookException;
+
+    /**
+     * Returns the current page.
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return page
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    Page getPage(Reading reading) throws FacebookException;
+
+    /**
      * Returns the page.
      * @param pageId the ID of the page
      * @return page
