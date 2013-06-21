@@ -16,35 +16,58 @@
 
 package facebook4j;
 
-import static org.hamcrest.CoreMatchers.*;
+import facebook4j.internal.http.RequestMethod;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+
+import java.util.TimeZone;
+
+import static facebook4j.junit.ISO8601DateMatchers.*;
+import static facebook4j.junit.URLMatchers.*;
+import static org.hamcrest.core.Is.*;
 import static org.junit.Assert.*;
 
-import java.util.Calendar;
+@RunWith(Enclosed.class)
+public class EventMethodsTest {
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+    public static class GetEvents extends MockFacebookTestBase {
+        @Test
+        public void page_allfields() throws Exception {
+            facebook.setMockJSON("mock_json/events/page.json");
+            ResponseList<Event> events = facebook.getEvents("137246726435626", new Reading().fields("ticket_uri,cover,is_date_only,owner,parent_group,privacy,updated_time,venue,description,end_time,id,location,name,start_time,timezone"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/events")));
 
-public class EventMethodsTest extends FacebookTestBase {
+            assertThat(events.size(), is(1));
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+            Event event = events.get(0);
+            assertThat(event.getDescription(), is("Test Event Details"));
+            assertThat(event.getEndTime(), is(iso8601DateOf("2013-06-30T22:00:00+0900")));
+            assertThat(event.getId(), is("552962794746679"));
+            assertThat(event.isDateOnly(), is(false));
+            assertThat(event.getLocation(), is("Yokohama-shi"));
+            assertThat(event.getName(), is("Test Event"));
+            assertThat(event.getOwner().getCategory(), is("Software"));
+            assertThat(event.getOwner().getId(), is("137246726435626"));
+            assertThat(event.getOwner().getName(), is("F4J"));
+            assertThat(event.getPrivacy(), is(EventPrivacyType.OPEN));
+            assertThat(event.getStartTime(), is(iso8601DateOf("2013-06-30T19:00:00+0900")));
+            assertThat(event.getTicketURI().toString(), is("http://www.facebook.com/ajax/events/ticket.php?event_id=552962794746679&action_source=12"));
+            assertThat(event.getTimezone(), is(TimeZone.getTimeZone("Asia/Tokyo")));
+            assertThat(event.getUpdatedTime(), is(iso8601DateOf("2013-06-17T11:15:39+0000")));
+            assertThat(event.getVenue().getId(), is("191903894154620"));
+            assertThat(event.getVenue().getLatitude(), is(35.45));
+            assertThat(event.getVenue().getLongitude(), is(139.633));
+            assertThat(event.getVenue().getStreet(), is(""));
+            assertThat(event.getVenue().getZip(), is(""));
+
+            assertThat(events.getPaging().getNext().toString(), is("https://graph.facebook.com/137246726435626/events?fields=ticket_uri,cover,is_date_only,owner,parent_group,privacy,updated_time,venue,description,end_time,id,location,name,start_time,timezone&access_token=access_token&limit=5000&until=1372586400&__paging_token=552962794746679"));
+            assertThat(events.getPaging().getPrevious().toString(), is("https://graph.facebook.com/137246726435626/events?fields=ticket_uri,cover,is_date_only,owner,parent_group,privacy,updated_time,venue,description,end_time,id,location,name,start_time,timezone&access_token=access_token&limit=5000&since=1372586400&__paging_token=552962794746679&__previous=1"));
+        }
     }
 
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-    
+/*
     @Test
     public void get() throws Exception {
         Event event = facebook1.getEvent("359439267470540");
@@ -152,4 +175,5 @@ public class EventMethodsTest extends FacebookTestBase {
         boolean result = facebookBestFriend1.deleteEvent(eventId);
         assertThat(result, is(true));
     }
+*/
 }

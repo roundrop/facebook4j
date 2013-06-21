@@ -16,60 +16,62 @@
 
 package facebook4j.api;
 
-import java.net.URL;
-
 import facebook4j.Event;
 import facebook4j.EventUpdate;
 import facebook4j.FacebookException;
 import facebook4j.Media;
 import facebook4j.Photo;
 import facebook4j.PictureSize;
-import facebook4j.Post;
-import facebook4j.PostUpdate;
 import facebook4j.RSVPStatus;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
 import facebook4j.Video;
+
+import java.net.URL;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public interface EventMethods {
     /**
-     * Returns the events the current user is attending.
+     * Returns the events the current user/page is attending.
      * @return events
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - events
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Connections - events
      */
     ResponseList<Event> getEvents() throws FacebookException;
 
     /**
-     * Returns the events the current user is attending.
+     * Returns the events the current user/page is attending.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return events
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - events
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Connections - events
      */
     ResponseList<Event> getEvents(Reading reading) throws FacebookException;
 
     /**
-     * Returns the events a user is attending.
-     * @param userId the ID of a user
+     * Returns the events a user/page is attending.
+     * @param id the ID of a user
      * @return events
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - events
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Connections - events
      */
-    ResponseList<Event> getEvents(String userId) throws FacebookException;
+    ResponseList<Event> getEvents(String id) throws FacebookException;
 
     /**
-     * Returns the events a user is attending.
-     * @param userId the ID of a user
+     * Returns the events a user/page is attending.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return events
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - events
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Connections - events
      */
-    ResponseList<Event> getEvents(String userId, Reading reading) throws FacebookException;
+    ResponseList<Event> getEvents(String id, Reading reading) throws FacebookException;
     
 
     /**

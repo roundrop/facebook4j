@@ -16,16 +16,19 @@
 
 package facebook4j;
 
+import java.net.URI;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public interface Event extends FacebookResponse {
     String getId();
-    IdNameEntity getOwner();
+    Category getOwner();
     String getName();
     String getDescription();
+    Boolean isDateOnly();
     Date getStartTime();
     Date getEndTime();
     String getLocation();
@@ -33,6 +36,8 @@ public interface Event extends FacebookResponse {
     EventPrivacyType getPrivacy();
     Date getUpdatedTime();
     String getRsvpStatus();
+    URI getTicketURI();
+    TimeZone getTimezone();
 
     interface Venue {
         String getId();
@@ -42,5 +47,6 @@ public interface Event extends FacebookResponse {
         String getCountry();
         Double getLatitude();
         Double getLongitude();
+        String getZip();
     }
 }

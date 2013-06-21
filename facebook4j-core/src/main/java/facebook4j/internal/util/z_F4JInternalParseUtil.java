@@ -24,11 +24,19 @@ import facebook4j.internal.org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * A tiny parse utility class.
@@ -199,6 +207,24 @@ public final class z_F4JInternalParseUtil {
         }
     }
     
+    public static URI getURI(String name, JSONObject json) {
+        if (json.isNull(name)) {
+            return null;
+        }
+        try {
+            return new URI(getRawString(name, json));
+        } catch (URISyntaxException e) {
+            return null;
+        }
+    }
+
+    public static TimeZone getTimeZone(String name, JSONObject json) {
+        if (json.isNull(name)) {
+            return null;
+        }
+        return TimeZone.getTimeZone(getRawString(name, json));
+    }
+
     public static Map<String, String> getStringMap(String name, JSONObject json) throws FacebookException {
         if (json.isNull(name)) {
             return null;

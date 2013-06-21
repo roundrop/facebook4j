@@ -414,12 +414,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Event> getEvents(Reading reading) throws FacebookException {
         return getEvents("me", reading);
     }
-    public ResponseList<Event> getEvents(String userId) throws FacebookException {
-        return getEvents(userId, null);
+    public ResponseList<Event> getEvents(String id) throws FacebookException {
+        return getEvents(id, null);
     }
-    public ResponseList<Event> getEvents(String userId, Reading reading) throws FacebookException {
+    public ResponseList<Event> getEvents(String id, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createEventList(get(buildURL(userId, "events", reading)));
+        return factory.createEventList(get(buildURL(id, "events", reading)));
     }
 
     public String createEvent(EventUpdate eventUpdate) throws FacebookException {
