@@ -25,10 +25,7 @@ import facebook4j.conf.ConfigurationContext;
 public class MockFacebookFactory implements java.io.Serializable {
     private static final long serialVersionUID = -1602081543322156808L;
 
-    private static final MockFacebook SINGLETON
-            = new MockFacebookImpl(ConfigurationContext.getInstance(), new MockAuthorization());
-
     public static MockFacebook create() {
-        return SINGLETON;
+        return new MockFacebookImpl(ConfigurationContext.getInstance(), new MockAuthorization());
     }
 }
