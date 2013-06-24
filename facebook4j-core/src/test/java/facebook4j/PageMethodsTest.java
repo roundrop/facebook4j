@@ -22,7 +22,9 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 
 import static facebook4j.junit.F4JHttpParameterMatchers.*;
@@ -514,6 +516,319 @@ public class PageMethodsTest {
             assertThat(admins.getPaging().getNext().toString(), is("https://graph.facebook.com/137246726435626/admins?access_token=access_token&limit=5000&offset=5000&__after_id=100001568838021"));
             assertThat(admins.getPaging().getPrevious(), is(nullValue()));
         }
+    }
+
+    public static class GetTabs extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/page/tabs.json");
+            ResponseList<Tab> tabs = facebook.getTabs();
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/tabs")));
+
+            assertThat(tabs.size(), is(3));
+
+            Tab tab = tabs.get(0);
+            assertThat(tab.getId(), is("137246726435626/tabs/photos"));
+            assertThat(tab.getName(), is("Photos"));
+            assertThat(tab.getLink().toString(), is("http://www.facebook.com/pages/F4J/137246726435626?sk=photos"));
+            assertThat(tab.getApplication().getId(), is("2305272732"));
+            assertThat(tab.getApplication().getName(), is("Photos"));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(1));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL().toString(), is("https://fbcdn-photos-c-a.akamaihd.net/hphotos-ak-prn1/851586_10151609549247733_1069686154_n.gif"));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+
+            tab = tabs.get(1);
+            assertThat(tab.getId(), is("137246726435626/tabs/likes"));
+            assertThat(tab.getName(), is("Likes"));
+            assertThat(tab.getLink().toString(), is("http://www.facebook.com/pages/F4J/137246726435626?sk=likes"));
+            assertThat(tab.getApplication(), is(nullValue()));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(true));
+            assertThat(tab.getPosition(), is(2));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL(), is(nullValue()));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+
+            tab = tabs.get(2);
+            assertThat(tab.getId(), is("137246726435626/tabs/events"));
+            assertThat(tab.getName(), is("Events"));
+            assertThat(tab.getLink().toString(), is("http://www.facebook.com/pages/F4J/137246726435626?sk=events"));
+            assertThat(tab.getApplication().getId(), is("2344061033"));
+            assertThat(tab.getApplication().getName(), is("Events"));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(3));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL().toString(), is("https://fbcdn-photos-f-a.akamaihd.net/hphotos-ak-prn1/851576_10151412710481034_396386689_n.png"));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+        }
+
+        @Test
+        public void me_reading() throws Exception {
+            facebook.setMockJSON("mock_json/page/tabs_fields_limit.json");
+            ResponseList<Tab> tabs = facebook.getTabs(new Reading().fields("name").fields("position").limit(2));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/tabs")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "name,position"));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "2"));
+
+            assertThat(tabs.size(), is(2));
+
+            Tab tab = tabs.get(0);
+            assertThat(tab.getId(), is("137246726435626/tabs/photos"));
+            assertThat(tab.getName(), is("Photos"));
+            assertThat(tab.getLink(), is(nullValue()));
+            assertThat(tab.getApplication(), is(nullValue()));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(1));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL(), is(nullValue()));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+
+            tab = tabs.get(1);
+            assertThat(tab.getId(), is("137246726435626/tabs/likes"));
+            assertThat(tab.getName(), is("Likes"));
+            assertThat(tab.getLink(), is(nullValue()));
+            assertThat(tab.getApplication(), is(nullValue()));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(2));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL(), is(nullValue()));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/page/tabs.json");
+            ResponseList<Tab> tabs = facebook.getTabs("137246726435626");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/tabs")));
+
+            assertThat(tabs.size(), is(3));
+
+            Tab tab = tabs.get(0);
+            assertThat(tab.getId(), is("137246726435626/tabs/photos"));
+            assertThat(tab.getName(), is("Photos"));
+            assertThat(tab.getLink().toString(), is("http://www.facebook.com/pages/F4J/137246726435626?sk=photos"));
+            assertThat(tab.getApplication().getId(), is("2305272732"));
+            assertThat(tab.getApplication().getName(), is("Photos"));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(1));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL().toString(), is("https://fbcdn-photos-c-a.akamaihd.net/hphotos-ak-prn1/851586_10151609549247733_1069686154_n.gif"));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+
+            tab = tabs.get(1);
+            assertThat(tab.getId(), is("137246726435626/tabs/likes"));
+            assertThat(tab.getName(), is("Likes"));
+            assertThat(tab.getLink().toString(), is("http://www.facebook.com/pages/F4J/137246726435626?sk=likes"));
+            assertThat(tab.getApplication(), is(nullValue()));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(true));
+            assertThat(tab.getPosition(), is(2));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL(), is(nullValue()));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+
+            tab = tabs.get(2);
+            assertThat(tab.getId(), is("137246726435626/tabs/events"));
+            assertThat(tab.getName(), is("Events"));
+            assertThat(tab.getLink().toString(), is("http://www.facebook.com/pages/F4J/137246726435626?sk=events"));
+            assertThat(tab.getApplication().getId(), is("2344061033"));
+            assertThat(tab.getApplication().getName(), is("Events"));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(3));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL().toString(), is("https://fbcdn-photos-f-a.akamaihd.net/hphotos-ak-prn1/851576_10151412710481034_396386689_n.png"));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+        }
+
+        @Test
+        public void id_reading() throws Exception {
+            facebook.setMockJSON("mock_json/page/tabs_fields_limit.json");
+            ResponseList<Tab> tabs = facebook.getTabs("137246726435626", new Reading().fields("name").fields("position").limit(2));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/tabs")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "name,position"));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "2"));
+
+            assertThat(tabs.size(), is(2));
+
+            Tab tab = tabs.get(0);
+            assertThat(tab.getId(), is("137246726435626/tabs/photos"));
+            assertThat(tab.getName(), is("Photos"));
+            assertThat(tab.getLink(), is(nullValue()));
+            assertThat(tab.getApplication(), is(nullValue()));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(1));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL(), is(nullValue()));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+
+            tab = tabs.get(1);
+            assertThat(tab.getId(), is("137246726435626/tabs/likes"));
+            assertThat(tab.getName(), is("Likes"));
+            assertThat(tab.getLink(), is(nullValue()));
+            assertThat(tab.getApplication(), is(nullValue()));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(2));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL(), is(nullValue()));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+        }
+    }
+
+    public static class GetInstalledTabs extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/page/installed_tabs.json");
+            List<String> appId = new ArrayList<String>();
+            appId.add("2344061033");
+            ResponseList<Tab> installedTabs = facebook.getInstalledTabs(appId);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/tabs/2344061033")));
+
+            assertThat(installedTabs.size(), is(1));
+
+            Tab tab = installedTabs.get(0);
+            assertThat(tab.getId(), is("137246726435626/tabs/events"));
+            assertThat(tab.getName(), is("Events"));
+            assertThat(tab.getLink().toString(), is("http://www.facebook.com/pages/F4J/137246726435626?sk=events"));
+            assertThat(tab.getApplication().getId(), is("2344061033"));
+            assertThat(tab.getApplication().getName(), is("Events"));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(3));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL().toString(), is("https://fbcdn-photos-f-a.akamaihd.net/hphotos-ak-prn1/851576_10151412710481034_396386689_n.png"));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+        }
+
+        @Test
+        public void me_reading() throws Exception {
+            facebook.setMockJSON("mock_json/page/installed_tabs_fields.json");
+            List<String> appId = new ArrayList<String>();
+            appId.add("2344061033");
+            ResponseList<Tab> installedTabs = facebook.getInstalledTabs(appId, new Reading().fields("name,image_url,position"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/tabs/2344061033")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "name,image_url,position"));
+
+            assertThat(installedTabs.size(), is(1));
+
+            Tab tab = installedTabs.get(0);
+            assertThat(tab.getId(), is("137246726435626/tabs/events"));
+            assertThat(tab.getName(), is("Events"));
+            assertThat(tab.getLink(), is(nullValue()));
+            assertThat(tab.getApplication(), is(nullValue()));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(3));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL().toString(), is("https://fbcdn-photos-f-a.akamaihd.net/hphotos-ak-prn1/851576_10151412710481034_396386689_n.png"));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+        }
+
+        @Test
+        public void me_appids() throws Exception {
+            facebook.setMockJSON("mock_json/page/installed_tabs_2.json");
+            List<String> appIds = new ArrayList<String>();
+            appIds.add("2344061033");
+            appIds.add("photos");
+            appIds.add("zzzz");
+            ResponseList<Tab> installedTabs = facebook.getInstalledTabs(appIds);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/tabs/2344061033,photos,zzzz")));
+
+            assertThat(installedTabs.size(), is(2));
+
+            Tab tab = installedTabs.get(0);
+            assertThat(tab.getId(), is("137246726435626/tabs/photos"));
+            assertThat(tab.getName(), is("Photos"));
+            assertThat(tab.getLink().toString(), is("http://www.facebook.com/pages/F4J/137246726435626?sk=photos"));
+            assertThat(tab.getApplication().getId(), is("2305272732"));
+            assertThat(tab.getApplication().getName(), is("Photos"));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(1));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL().toString(), is("https://fbcdn-photos-c-a.akamaihd.net/hphotos-ak-prn1/851586_10151609549247733_1069686154_n.gif"));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+
+            tab = installedTabs.get(1);
+            assertThat(tab.getId(), is("137246726435626/tabs/events"));
+            assertThat(tab.getName(), is("Events"));
+            assertThat(tab.getLink().toString(), is("http://www.facebook.com/pages/F4J/137246726435626?sk=events"));
+            assertThat(tab.getApplication().getId(), is("2344061033"));
+            assertThat(tab.getApplication().getName(), is("Events"));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(3));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL().toString(), is("https://fbcdn-photos-f-a.akamaihd.net/hphotos-ak-prn1/851576_10151412710481034_396386689_n.png"));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+        }
+
+        @Test
+        public void id_appid() throws Exception {
+            facebook.setMockJSON("mock_json/page/installed_tabs.json");
+            List<String> appId = new ArrayList<String>();
+            appId.add("2344061033");
+            ResponseList<Tab> installedTabs = facebook.getInstalledTabs("137246726435626", appId);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/tabs/2344061033")));
+
+            assertThat(installedTabs.size(), is(1));
+
+            Tab tab = installedTabs.get(0);
+            assertThat(tab.getId(), is("137246726435626/tabs/events"));
+            assertThat(tab.getName(), is("Events"));
+            assertThat(tab.getLink().toString(), is("http://www.facebook.com/pages/F4J/137246726435626?sk=events"));
+            assertThat(tab.getApplication().getId(), is("2344061033"));
+            assertThat(tab.getApplication().getName(), is("Events"));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(3));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL().toString(), is("https://fbcdn-photos-f-a.akamaihd.net/hphotos-ak-prn1/851576_10151412710481034_396386689_n.png"));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+        }
+
+        @Test
+        public void id_reading() throws Exception {
+            facebook.setMockJSON("mock_json/page/installed_tabs_fields.json");
+            List<String> appId = new ArrayList<String>();
+            appId.add("2344061033");
+            ResponseList<Tab> installedTabs = facebook.getInstalledTabs("137246726435626", appId, new Reading().fields("name,image_url,position"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/tabs/2344061033")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "name,image_url,position"));
+
+            assertThat(installedTabs.size(), is(1));
+
+            Tab tab = installedTabs.get(0);
+            assertThat(tab.getId(), is("137246726435626/tabs/events"));
+            assertThat(tab.getName(), is("Events"));
+            assertThat(tab.getLink(), is(nullValue()));
+            assertThat(tab.getApplication(), is(nullValue()));
+            assertThat(tab.getCustomName(), is(nullValue()));
+            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.getPosition(), is(3));
+            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.getImageURL().toString(), is("https://fbcdn-photos-f-a.akamaihd.net/hphotos-ak-prn1/851576_10151412710481034_396386689_n.png"));
+            assertThat(tab.getCustomImageURL(), is(nullValue()));
+        }
+
     }
 
 /*

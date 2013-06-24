@@ -16,6 +16,7 @@
 
 package facebook4j.junit;
 
+import facebook4j.internal.http.HttpParameter;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -59,17 +60,21 @@ public final class URLMatchers {
     public static Matcher<URL> hasParameter(final String name, final String value) {
         return new TypeSafeMatcher<URL>() {
             private List<String> actualParams = new ArrayList<String>();
+            private String encodedName;
+            private String encodedValue;
 
             @Override
             public boolean matchesSafely(URL actual) {
+                encodedName = HttpParameter.encode(name);
+                encodedValue = HttpParameter.encode(value);
                 String query = actual.getQuery();
                 if (query == null) return false;
                 String[] params = query.split("&");
                 for (String param : params) {
                     String[] nameAndValue = param.split("=");
-                    if (nameAndValue[0].equals(name)) {
+                    if (nameAndValue[0].equals(encodedName)) {
                         actualParams.add(nameAndValue[0] + "=" + nameAndValue[1]);
-                        if (nameAndValue[1].equals(value)) {
+                        if (nameAndValue[1].equals(encodedValue)) {
                             return true;
                         }
                     }
@@ -78,7 +83,7 @@ public final class URLMatchers {
             }
 
             public void describeTo(Description desc) {
-                desc.appendValue(name + "=" + value);
+                desc.appendValue(encodedName + "=" + encodedValue);
                 if (actualParams.size() > 0) {
                     desc.appendText(" but actual is ");
                     desc.appendValue(actualParams.get(0));
@@ -87,7 +92,7 @@ public final class URLMatchers {
                         desc.appendValue(actualParams.get(i));
                     }
                 } else {
-                    desc.appendText(" but actual has no '" + name + "' parameter");
+                    desc.appendText(" but actual has no '" + encodedName + "' parameter");
                 }
             }
         };

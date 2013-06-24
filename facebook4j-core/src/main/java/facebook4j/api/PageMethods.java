@@ -16,9 +16,26 @@
 
 package facebook4j.api;
 
-import facebook4j.*;
+import facebook4j.Admin;
+import facebook4j.FacebookException;
+import facebook4j.Insight;
+import facebook4j.Media;
+import facebook4j.Milestone;
+import facebook4j.MilestoneUpdate;
+import facebook4j.Page;
+import facebook4j.PagePhotoUpdate;
+import facebook4j.PageSetting;
+import facebook4j.PageSettingUpdate;
+import facebook4j.PageUpdate;
+import facebook4j.PictureSize;
+import facebook4j.Post;
+import facebook4j.Reading;
+import facebook4j.ResponseList;
+import facebook4j.Tab;
+import facebook4j.Tagged;
 
 import java.net.URL;
+import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -349,6 +366,86 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
      */
     ResponseList<Admin> getPageAdmins(String pageId, Reading reading) throws FacebookException;
+
+    /**
+     * Returns the current Page's profile tabs.
+     * Note that this method requires 'page' access_token.
+     * @return tabs
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
+     */
+    ResponseList<Tab> getTabs() throws FacebookException;
+
+    /**
+     * Returns the current Page's profile tabs.
+     * Note that this method requires 'page' access_token.
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return tabs
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
+     */
+    ResponseList<Tab> getTabs(Reading reading) throws FacebookException;
+
+    /**
+     * Returns the Page's profile tabs.
+     * Note that this method requires 'page' access_token.
+     * @param pageId the ID of the page
+     * @return tabs
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
+     */
+    ResponseList<Tab> getTabs(String pageId) throws FacebookException;
+
+    /**
+     * Returns the Page's profile tabs.
+     * Note that this method requires 'page' access_token.
+     * @param pageId the ID of the page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return tabs
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
+     */
+    ResponseList<Tab> getTabs(String pageId, Reading reading) throws FacebookException;
+
+    /**
+     * Returns the current Page's profile tabs if a specific app is installed.
+     * @param appIds the IDs of app
+     * @return tabs
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
+     */
+    ResponseList<Tab> getInstalledTabs(List<String> appIds) throws FacebookException;
+
+    /**
+     * Returns the current Page's profile tabs if a specific app is installed.
+     * @param appIds the IDs of app
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return tabs
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
+     */
+    ResponseList<Tab> getInstalledTabs(List<String> appIds, Reading reading) throws FacebookException;
+
+    /**
+     * Returns the Page's profile tabs if a specific app is installed.
+     * @param pageId the ID of the page
+     * @param appIds the IDs of app
+     * @return tabs
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
+     */
+    ResponseList<Tab> getInstalledTabs(String pageId, List<String> appIds) throws FacebookException;
+
+    /**
+     * Returns the Page's profile tabs if a specific app is installed.
+     * @param pageId the ID of the page
+     * @param appIds the IDs of app
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return tabs
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
+     */
+    ResponseList<Tab> getInstalledTabs(String pageId, List<String> appIds, Reading reading) throws FacebookException;
 
     /**
      * Returns a specific page that the current user has liked.

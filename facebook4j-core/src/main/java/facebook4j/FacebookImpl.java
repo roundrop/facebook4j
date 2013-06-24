@@ -1498,6 +1498,35 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createAdminList(get(buildURL(pageId, "admins", reading)));
     }
 
+    public ResponseList<Tab> getTabs() throws FacebookException {
+        return getTabs("me", null);
+    }
+    public ResponseList<Tab> getTabs(Reading reading) throws FacebookException {
+        return getTabs("me", reading);
+    }
+    public ResponseList<Tab> getTabs(String pageId) throws FacebookException {
+        return getTabs(pageId, null);
+    }
+    public ResponseList<Tab> getTabs(String pageId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createTabList(get(buildURL(pageId, "tabs", reading)));
+    }
+
+    public ResponseList<Tab> getInstalledTabs(List<String> appIds) throws FacebookException {
+        return getInstalledTabs("me", appIds, null);
+    }
+    public ResponseList<Tab> getInstalledTabs(List<String> appIds, Reading reading) throws FacebookException {
+        return getInstalledTabs("me", appIds, reading);
+    }
+    public ResponseList<Tab> getInstalledTabs(String pageId, List<String> appIds) throws FacebookException {
+        return getInstalledTabs(pageId, appIds, null);
+    }
+    public ResponseList<Tab> getInstalledTabs(String pageId, List<String> appIds, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        String _appIds = z_F4JInternalStringUtil.join(appIds.toArray(new String[appIds.size()]), ",");
+        return factory.createTabList(get(buildURL(pageId, "tabs/" + _appIds, reading)));
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }
