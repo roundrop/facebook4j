@@ -1481,8 +1481,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean deleteMilestone(String milestoneId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildURL(milestoneId));
-//        return Boolean.valueOf(res.asString().trim());
-        return true;    //Facebook does not return boolean...
+        return Boolean.valueOf(res.asString().trim());
     }
 
     public ResponseList<Admin> getPageAdmins() throws FacebookException {

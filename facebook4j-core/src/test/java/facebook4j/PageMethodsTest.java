@@ -459,7 +459,7 @@ public class PageMethodsTest {
     public static class DeleteMilestone extends MockFacebookTestBase {
         @Test
         public void id() throws FacebookException {
-            facebook.setMockJSON("mock_json/empty.json");
+            facebook.setMockJSON("mock_json/true.json");
             boolean result = facebook.deleteMilestone("187182304775401");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
             assertThat(facebook.getEndpointURL(), is(pathOf("/187182304775401")));
