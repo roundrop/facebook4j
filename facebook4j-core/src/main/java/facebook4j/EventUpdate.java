@@ -16,44 +16,65 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.HttpParameter;
+import facebook4j.internal.util.z_F4JInternalStringUtil;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import facebook4j.internal.http.HttpParameter;
-import facebook4j.internal.util.z_F4JInternalStringUtil;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public class EventUpdate implements java.io.Serializable {
-    private static final long serialVersionUID = 375802784481895434L;
+    private static final long serialVersionUID = -6106165246149864606L;
 
-    private final String name;
-    private final Calendar startTime;
+    private String name;
+    private Calendar startTime;
     private Calendar endTime;
     private String description;
     private String location;
     private String locationId;
     private EventPrivacyType privacyType;
+    private URI ticketURI;
+    private Boolean noFeedStory;
+
+    public EventUpdate() {
+    }
 
     public EventUpdate(String name, Calendar startTime) {
         this.name = name;
         this.startTime = startTime;
     }
 
-    public EventUpdate(String name, Calendar startTime, Calendar endTime,
-            String description, String location, String locationId,
-            EventPrivacyType privacyType) {
-        this.name = name;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.description = description;
-        this.location = location;
-        this.locationId = locationId;
-        this.privacyType = privacyType;
+    public String getName() {
+        return name;
     }
-    
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public EventUpdate name(String name) {
+        setName(name);
+        return this;
+    }
+
+    public Calendar getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Calendar startTime) {
+        this.startTime = startTime;
+    }
+
+    public EventUpdate startTime(Calendar startTime) {
+        setStartTime(startTime);
+        return this;
+    }
+
     public Calendar getEndTime() {
         return endTime;
     }
@@ -119,18 +140,47 @@ public class EventUpdate implements java.io.Serializable {
         return this;
     }
 
-    public String getName() {
-        return name;
+    public URI getTicketURI() {
+        return ticketURI;
     }
 
-    public Calendar getStartTime() {
-        return startTime;
+    public void setTicketURI(URI ticketURI) {
+        this.ticketURI = ticketURI;
+    }
+    public void setTicketURI(String ticketURI) throws URISyntaxException {
+        this.ticketURI = new URI(ticketURI);
+    }
+
+    public EventUpdate ticketURI(URI ticketURI) {
+        setTicketURI(ticketURI);
+        return this;
+    }
+    public EventUpdate ticketURI(String ticketURI) throws URISyntaxException {
+        setTicketURI(ticketURI);
+        return this;
+    }
+
+    public Boolean getNoFeedStory() {
+        return noFeedStory;
+    }
+
+    public void setNoFeedStory(Boolean noFeedStory) {
+        this.noFeedStory = noFeedStory;
+    }
+
+    public EventUpdate noFeedStory(Boolean noFeedStory) {
+        setNoFeedStory(noFeedStory);
+        return this;
     }
 
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
-        params.add(new HttpParameter("name", name));
-        params.add(new HttpParameter("start_time", z_F4JInternalStringUtil.formatISO8601Datetime(startTime)));
+        if (name != null) {
+            params.add(new HttpParameter("name", name));
+        }
+        if (startTime != null) {
+            params.add(new HttpParameter("start_time", z_F4JInternalStringUtil.formatISO8601Datetime(startTime)));
+        }
         if (endTime != null) {
             params.add(new HttpParameter("end_time", z_F4JInternalStringUtil.formatISO8601Datetime(endTime)));
         }
@@ -146,78 +196,61 @@ public class EventUpdate implements java.io.Serializable {
         if (privacyType != null) {
             params.add(new HttpParameter("privacy_type", privacyType.toString()));
         }
+        if (ticketURI != null) {
+            params.add(new HttpParameter("ticket_uri", ticketURI.toString()));
+        }
+        if (noFeedStory != null) {
+            params.add(new HttpParameter("no_feed_story", noFeedStory));
+        }
         return params.toArray(new HttpParameter[params.size()]);
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result
-                + ((description == null) ? 0 : description.hashCode());
-        result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
-        result = prime * result
-                + ((location == null) ? 0 : location.hashCode());
-        result = prime * result
-                + ((locationId == null) ? 0 : locationId.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result
-                + ((privacyType == null) ? 0 : privacyType.hashCode());
-        result = prime * result
-                + ((startTime == null) ? 0 : startTime.hashCode());
-        return result;
-    }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EventUpdate)) return false;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        EventUpdate other = (EventUpdate) obj;
-        if (description == null) {
-            if (other.description != null)
-                return false;
-        } else if (!description.equals(other.description))
-            return false;
-        if (endTime == null) {
-            if (other.endTime != null)
-                return false;
-        } else if (!endTime.equals(other.endTime))
-            return false;
-        if (location == null) {
-            if (other.location != null)
-                return false;
-        } else if (!location.equals(other.location))
-            return false;
-        if (locationId == null) {
-            if (other.locationId != null)
-                return false;
-        } else if (!locationId.equals(other.locationId))
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (privacyType != other.privacyType)
-            return false;
-        if (startTime == null) {
-            if (other.startTime != null)
-                return false;
-        } else if (!startTime.equals(other.startTime))
-            return false;
+        EventUpdate that = (EventUpdate) o;
+
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (endTime != null ? !endTime.equals(that.endTime) : that.endTime != null) return false;
+        if (location != null ? !location.equals(that.location) : that.location != null) return false;
+        if (locationId != null ? !locationId.equals(that.locationId) : that.locationId != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (noFeedStory != null ? !noFeedStory.equals(that.noFeedStory) : that.noFeedStory != null) return false;
+        if (privacyType != that.privacyType) return false;
+        if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) return false;
+        if (ticketURI != null ? !ticketURI.equals(that.ticketURI) : that.ticketURI != null) return false;
+
         return true;
     }
 
     @Override
-    public String toString() {
-        return "EventUpdate [name=" + name + ", startTime=" + startTime
-                + ", endTime=" + endTime + ", description=" + description
-                + ", location=" + location + ", locationId=" + locationId
-                + ", privacyType=" + privacyType + "]";
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
+        result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        result = 31 * result + (locationId != null ? locationId.hashCode() : 0);
+        result = 31 * result + (privacyType != null ? privacyType.hashCode() : 0);
+        result = 31 * result + (ticketURI != null ? ticketURI.hashCode() : 0);
+        result = 31 * result + (noFeedStory != null ? noFeedStory.hashCode() : 0);
+        return result;
     }
 
+    @Override
+    public String toString() {
+        return "EventUpdate{" +
+                "name='" + name + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", locationId='" + locationId + '\'' +
+                ", privacyType=" + privacyType +
+                ", ticketURI=" + ticketURI +
+                ", noFeedStory=" + noFeedStory +
+                '}';
+    }
 }

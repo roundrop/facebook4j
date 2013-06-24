@@ -75,23 +75,25 @@ public interface EventMethods {
     
 
     /**
-     * Creates the event for the current user.
-     * @param eventUpdate a event to be created
+     * Creates the event for the current user/page.
      * @return The new event ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#events">User#events - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#events">Page#events - Facebook Developers</a> - Connections - events
+     * @param eventUpdate
      */
     String createEvent(EventUpdate eventUpdate) throws FacebookException;
 
     /**
-     * Creates the event for a user.
-     * @param userId the ID of a user
+     * Creates the event for a user/page.
+     * @param id the ID of a user/page
      * @param eventUpdate a event to be created
      * @return The new event ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#events">User#events - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#events">Page#events - Facebook Developers</a> - Connections - events
      */
-    String createEvent(String userId, EventUpdate eventUpdate) throws FacebookException;
+    String createEvent(String id, EventUpdate eventUpdate) throws FacebookException;
     
     /**
      * Updates the event.
@@ -100,6 +102,7 @@ public interface EventMethods {
      * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#events">User#events - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#events">Page#events - Facebook Developers</a> - Connections - events
      */
     boolean editEvent(String eventId, EventUpdate eventUpdate) throws FacebookException;
     
@@ -109,6 +112,7 @@ public interface EventMethods {
      * @return true if delete is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#events">User#events - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#events">Page#events - Facebook Developers</a> - Connections - events
      */
     boolean deleteEvent(String eventId) throws FacebookException;
 

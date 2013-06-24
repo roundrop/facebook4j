@@ -4,7 +4,9 @@ import facebook4j.auth.AccessToken;
 import org.junit.Before;
 
 import java.io.InputStream;
+import java.util.Calendar;
 import java.util.Properties;
+import java.util.TimeZone;
 
 public abstract class MockFacebookTestBase {
 
@@ -36,6 +38,13 @@ public abstract class MockFacebookTestBase {
         if (accessToken != null) {
             facebook.setOAuthAccessToken(new AccessToken(accessToken));
         }
+    }
+
+    protected Calendar createCal(int year, int month, int day, int hour, int minute, int second, TimeZone tz) {
+        Calendar cal = Calendar.getInstance(tz);
+        cal.clear();
+        cal.set(year, month-1, day, hour, minute, second);
+        return cal;
     }
 
 }

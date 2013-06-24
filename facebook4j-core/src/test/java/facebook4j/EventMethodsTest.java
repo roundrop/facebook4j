@@ -21,8 +21,11 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
+import java.net.URI;
+import java.util.Calendar;
 import java.util.TimeZone;
 
+import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
 import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.core.Is.*;
@@ -64,6 +67,74 @@ public class EventMethodsTest {
 
             assertThat(events.getPaging().getNext().toString(), is("https://graph.facebook.com/137246726435626/events?fields=ticket_uri,cover,is_date_only,owner,parent_group,privacy,updated_time,venue,description,end_time,id,location,name,start_time,timezone&access_token=access_token&limit=5000&until=1372586400&__paging_token=552962794746679"));
             assertThat(events.getPaging().getPrevious().toString(), is("https://graph.facebook.com/137246726435626/events?fields=ticket_uri,cover,is_date_only,owner,parent_group,privacy,updated_time,venue,description,end_time,id,location,name,start_time,timezone&access_token=access_token&limit=5000&since=1372586400&__paging_token=552962794746679&__previous=1"));
+        }
+    }
+
+    public static class CreateEvent extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/id.json");
+            Calendar startTime = createCal(2012, 9, 30, 12, 34, 56, TimeZone.getTimeZone("UTC"));
+            EventUpdate eventUpdate = new EventUpdate("Test Event", startTime);
+            String eventId = facebook.createEvent(eventUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/events")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("name", "Test Event"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("start_time", "2012-09-30T12:34:56+0000"));
+
+            assertThat(eventId, is("1234567890123456"));
+        }
+
+        @Test
+        public void me_page() throws Exception {
+            facebook.setMockJSON("mock_json/id.json");
+            Calendar startTime = createCal(2013, 7, 1, 12, 0, 0, TimeZone.getTimeZone("UTC"));
+            Calendar endTime = createCal(2013, 7, 1, 13, 0, 0, TimeZone.getTimeZone("UTC"));
+            EventUpdate eventUpdate = new EventUpdate("Test Event", startTime)
+                                        .endTime(endTime)
+                                        .description("Test description")
+                                        .location("Gran Tokyo South Tower")
+                                        .locationId("154470644580235")
+                                        .ticketURI(new URI("http://facebook4j.org"))
+                                        .noFeedStory(true);
+            String eventId = facebook.createEvent(eventUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/events")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("name", "Test Event"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("start_time", "2013-07-01T12:00:00+0000"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("end_time", "2013-07-01T13:00:00+0000"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("description", "Test description"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("location", "Gran Tokyo South Tower"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("location_id", "154470644580235"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("ticket_uri", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("no_feed_story", "true"));
+
+            assertThat(eventId, is("1234567890123456"));
+        }
+    }
+
+    public static class EditEvent extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            Calendar endTime = createCal(2013, 7, 1, 15, 0, 0, TimeZone.getTimeZone("UTC"));
+            EventUpdate eventUpdate = new EventUpdate()
+                                        .endTime(endTime);
+            boolean result = facebook.editEvent("138661276338112", eventUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/138661276338112")));
+            assertThat(result, is(true));
+        }
+    }
+
+    public static class DeleteEvent extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean result = facebook.deleteEvent("138661276338112");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/138661276338112")));
+            assertThat(result, is(true));
         }
     }
 

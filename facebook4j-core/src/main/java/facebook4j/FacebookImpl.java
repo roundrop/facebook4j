@@ -425,9 +425,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public String createEvent(EventUpdate eventUpdate) throws FacebookException {
         return createEvent("me", eventUpdate);
     }
-    public String createEvent(String userId, EventUpdate eventUpdate) throws FacebookException {
+    public String createEvent(String id, EventUpdate eventUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
-        JSONObject json = post(buildURL(userId, "events"), eventUpdate.asHttpParameterArray())
+        JSONObject json = post(buildURL(id, "events"), eventUpdate.asHttpParameterArray())
                           .asJSONObject();
         return getRawString("id", json);
     }

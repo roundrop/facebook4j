@@ -64,14 +64,23 @@ public final class MockHttpClientWrapper extends HttpClientWrapper {
     protected HttpResponse request(HttpRequest req) throws FacebookException {
         request = req;
         String url = req.getURL();
+        logger.info("---- URL:");
         logger.info(url);
+        logger.info("---- HTTP Parameters:");
+        for (HttpParameter httpParameter : req.getParameters()) {
+            logger.info(httpParameter.getName() + "=" + httpParameter.getValue());
+        }
 
         String json = mockJSONResourceName != null ? readMockJSON() : null;
         if (json == null) {
             HttpResponse res = super.request(req);
             try {
-                JSONObject jsonObject = res.asJSONObject();
-                json = jsonObject.toString(4);
+                if (res.asString().startsWith("{")) {
+                    JSONObject jsonObject = res.asJSONObject();
+                    json = jsonObject.toString(4);
+                } else {
+                    json = res.asString();
+                }
                 registerMockJSON(json);
             } catch (IOException e) {
                 throw new FacebookException("write mock_json failed.", e);
