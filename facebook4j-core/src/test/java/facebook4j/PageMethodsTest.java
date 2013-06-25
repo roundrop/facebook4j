@@ -25,6 +25,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 import static facebook4j.junit.F4JHttpParameterMatchers.*;
@@ -884,6 +885,70 @@ public class PageMethodsTest {
             assertThat(blocked.size(), is(1));
             assertThat(blocked.get(0).getId(), is("1234567890"));
             assertThat(blocked.get(0).getName(), is("Foo Bar"));
+        }
+    }
+
+    public static class Block extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/page/block.json");
+            List<String> userIds = new ArrayList<String>();
+            String uid1 = "1111111111";
+            userIds.add(uid1);
+            String uid2 = "2222222222";
+            userIds.add(uid2);
+            Map<String,Boolean> block = facebook.block(userIds);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/blocked")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("uid", uid1 + "," + uid2));
+
+            assertThat(block.size(), is(2));
+            assertThat(block.get(uid1), is(true));
+            assertThat(block.get(uid2), is(false));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/page/block.json");
+            List<String> userIds = new ArrayList<String>();
+            String uid1 = "1111111111";
+            userIds.add(uid1);
+            String uid2 = "2222222222";
+            userIds.add(uid2);
+            Map<String,Boolean> block = facebook.block("137246726435626", userIds);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/blocked")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("uid", uid1 + "," + uid2));
+
+            assertThat(block.size(), is(2));
+            assertThat(block.get(uid1), is(true));
+            assertThat(block.get(uid2), is(false));
+        }
+    }
+
+    public static class Unblock extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            String uid = "1111111111";
+            boolean unblock = facebook.unblock(uid);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/blocked")));
+            assertThat(facebook.getEndpointURL(), hasParameter("uid", uid));
+
+            assertThat(unblock, is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            String uid = "1111111111";
+            boolean unblock = facebook.unblock("137246726435626", uid);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/blocked")));
+            assertThat(facebook.getEndpointURL(), hasParameter("uid", uid));
+
+            assertThat(unblock, is(true));
         }
     }
 

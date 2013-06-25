@@ -32,6 +32,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -1541,6 +1542,33 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createUserList(get(buildURL(pageId, "blocked", reading)));
     }
 
+    public Map<String, Boolean> block(List<String> userIds) throws FacebookException {
+        return block("me", userIds);
+    }
+    public Map<String, Boolean> block(String pageId, List<String> userIds) throws FacebookException {
+        ensureAuthorizationEnabled();
+        String _userIds = z_F4JInternalStringUtil.join(userIds.toArray(new String[userIds.size()]), ",");
+        HttpResponse res = post(buildURL(pageId, "blocked"), new HttpParameter[]{new HttpParameter("uid", _userIds)});
+        Map<String, Boolean> blocks = new HashMap<String, Boolean>();
+        JSONObject jsonObject = res.asJSONObject();
+        Iterator<String> uids = jsonObject.keys();
+        while (uids.hasNext()) {
+            String uid = uids.next();
+            boolean result = getBoolean(uid, jsonObject);
+            blocks.put(uid, result);
+        }
+        return blocks;
+    }
+
+    public boolean unblock(String userId) throws FacebookException {
+        return unblock("me", userId);
+    }
+    public boolean unblock(String pageId, String userId) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = delete(buildURL(pageId, "blocked"), new HttpParameter[]{new HttpParameter("uid", userId)});
+        return Boolean.valueOf(res.asString().trim());
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }
@@ -2349,7 +2377,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     private HttpResponse delete(String url, HttpParameter[] parameters) throws FacebookException {
         if (!conf.isMBeanEnabled()) {
-            return http.delete(url, (containsAccessToken(parameters) ? null : auth));
+            return http.delete(url, parameters, (containsAccessToken(parameters) ? null : auth));
         } else {
             // intercept HTTP call for monitoring purposes
             HttpResponse response = null;

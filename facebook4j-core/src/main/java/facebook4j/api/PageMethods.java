@@ -37,6 +37,7 @@ import facebook4j.User;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -483,6 +484,44 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#blocked">Page#blocked - Facebook Developers</a>
      */
     ResponseList<User> getBlocked(String pageId, Reading reading) throws FacebookException;
+
+    /**
+     * Blocks users from posting content to the current page.
+     * @param userIds user IDs you wish to block
+     * @return Map where the keys are the user IDs and the values a boolean of whether or not the block was successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#blocked">Page#blocked - Facebook Developers</a>
+     */
+    Map<String, Boolean> block(List<String> userIds) throws FacebookException;
+
+    /**
+     * Blocks users from posting content to the current page.
+     * @param pageId the ID of the page
+     * @param userIds user IDs you wish to block
+     * @return Map where the keys are the user IDs and the values a boolean of whether or not the block was successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#blocked">Page#blocked - Facebook Developers</a>
+     */
+    Map<String, Boolean> block(String pageId, List<String> userIds) throws FacebookException;
+
+    /**
+     * Unblocks the blocked user for the current page.
+     * @param userId the IDs of the user
+     * @return true if unblock is successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#blocked">Page#blocked - Facebook Developers</a>
+     */
+    boolean unblock(String userId) throws FacebookException;
+
+    /**
+     * Unblocks the blocked user for the page.
+     * @param pageId the ID of the page
+     * @param userId the IDs of the user
+     * @return true if unblock is successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#blocked">Page#blocked - Facebook Developers</a>
+     */
+    boolean unblock(String pageId, String userId) throws FacebookException;
 
     /**
      * Returns a specific page that the current user has liked.
