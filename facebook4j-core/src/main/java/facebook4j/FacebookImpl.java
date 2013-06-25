@@ -1527,6 +1527,20 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createTabList(get(buildURL(pageId, "tabs/" + _appIds, reading)));
     }
 
+    public ResponseList<User> getBlocked() throws FacebookException {
+        return getBlocked("me", null);
+    }
+    public ResponseList<User> getBlocked(Reading reading) throws FacebookException {
+        return getBlocked("me", reading);
+    }
+    public ResponseList<User> getBlocked(String pageId) throws FacebookException {
+        return getBlocked(pageId, null);
+    }
+    public ResponseList<User> getBlocked(String pageId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createUserList(get(buildURL(pageId, "blocked", reading)));
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }

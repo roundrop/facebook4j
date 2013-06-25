@@ -831,6 +831,62 @@ public class PageMethodsTest {
 
     }
 
+    public static class GetBlocked extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/page/blocked_2.json");
+            ResponseList<User> blocked = facebook.getBlocked();
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/blocked")));
+
+            assertThat(blocked.size(), is(2));
+            assertThat(blocked.get(0).getId(), is("1111111111"));
+            assertThat(blocked.get(0).getName(), is("Foo Name"));
+            assertThat(blocked.get(1).getId(), is("2222222222"));
+            assertThat(blocked.get(1).getName(), is("Bar Name"));
+        }
+
+        @Test
+        public void me_reading() throws Exception {
+            facebook.setMockJSON("mock_json/page/blocked.json");
+            ResponseList<User> blocked = facebook.getBlocked(new Reading().limit(1));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/blocked")));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "1"));
+
+            assertThat(blocked.size(), is(1));
+            assertThat(blocked.get(0).getId(), is("1234567890"));
+            assertThat(blocked.get(0).getName(), is("Foo Bar"));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/page/blocked_2.json");
+            ResponseList<User> blocked = facebook.getBlocked("137246726435626");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/blocked")));
+
+            assertThat(blocked.size(), is(2));
+            assertThat(blocked.get(0).getId(), is("1111111111"));
+            assertThat(blocked.get(0).getName(), is("Foo Name"));
+            assertThat(blocked.get(1).getId(), is("2222222222"));
+            assertThat(blocked.get(1).getName(), is("Bar Name"));
+        }
+
+        @Test
+        public void id_reading() throws Exception {
+            facebook.setMockJSON("mock_json/page/blocked.json");
+            ResponseList<User> blocked = facebook.getBlocked("137246726435626", new Reading().limit(1));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/blocked")));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "1"));
+
+            assertThat(blocked.size(), is(1));
+            assertThat(blocked.get(0).getId(), is("1234567890"));
+            assertThat(blocked.get(0).getName(), is("Foo Bar"));
+        }
+    }
+
 /*
     @Test
     public void getLikedPage() throws Exception {

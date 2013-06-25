@@ -33,6 +33,7 @@ import facebook4j.Reading;
 import facebook4j.ResponseList;
 import facebook4j.Tab;
 import facebook4j.Tagged;
+import facebook4j.User;
 
 import java.net.URL;
 import java.util.List;
@@ -446,6 +447,42 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
      */
     ResponseList<Tab> getInstalledTabs(String pageId, List<String> appIds, Reading reading) throws FacebookException;
+
+    /**
+     * Returns a list of users blocked from the current Page.
+     * @return users
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#blocked">Page#blocked - Facebook Developers</a>
+     */
+    ResponseList<User> getBlocked() throws FacebookException;
+
+    /**
+     * Returns a list of users blocked from the current Page.
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return users
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#blocked">Page#blocked - Facebook Developers</a>
+     */
+    ResponseList<User> getBlocked(Reading reading) throws FacebookException;
+
+    /**
+     * Returns a list of users blocked from the Page.
+     * @param pageId the ID of the page
+     * @return users
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#blocked">Page#blocked - Facebook Developers</a>
+     */
+    ResponseList<User> getBlocked(String pageId) throws FacebookException;
+
+    /**
+     * Returns a list of users blocked from the Page.
+     * @param pageId the ID of the page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return users
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#blocked">Page#blocked - Facebook Developers</a>
+     */
+    ResponseList<User> getBlocked(String pageId, Reading reading) throws FacebookException;
 
     /**
      * Returns a specific page that the current user has liked.
