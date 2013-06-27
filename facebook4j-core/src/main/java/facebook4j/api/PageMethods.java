@@ -23,6 +23,7 @@ import facebook4j.Media;
 import facebook4j.Milestone;
 import facebook4j.MilestoneUpdate;
 import facebook4j.Offer;
+import facebook4j.OfferUpdate;
 import facebook4j.Page;
 import facebook4j.PagePhotoUpdate;
 import facebook4j.PageSetting;
@@ -559,6 +560,33 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#offers">Page#offers - Facebook Developers</a>
      */
     ResponseList<Offer> getOffers(String pageId, Reading reading) throws FacebookException;
+
+    /**
+     * Creates an offer for the current page.
+     * @param offerUpdate a createOffer to be created
+     * @return The new createOffer ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#offers">Page#offers - Facebook Developers</a>
+     */
+    String createOffer(OfferUpdate offerUpdate) throws FacebookException;
+
+    /**
+     * Creates an offers for the page.
+     * @param pageId the ID of the page
+     * @param offerUpdate a createOffer to be created
+     * @return The new createOffer ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#offers">Page#offers - Facebook Developers</a>
+     */
+    String createOffer(String pageId, OfferUpdate offerUpdate) throws FacebookException;
+
+    /**
+     * Deletes the createOffer.
+     * @param offerId the ID of the createOffer
+     * @return true if delete is successful
+     * @throws FacebookException
+     */
+    boolean deleteOffer(String offerId) throws FacebookException;
 
     /**
      * Returns a specific page that the current user has liked.

@@ -21,9 +21,11 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -1065,6 +1067,130 @@ public class PageMethodsTest {
             assertThat(offer.isPublished(), is(true));
             assertThat(offer.getScheduledPublishTime(), is(1372331021));
             assertThat(offer.getReminderTime(), is(iso8601DateOf("2013-07-27T19:00:00+0000")));
+        }
+    }
+
+    public static class CreateOffer extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/id.json");
+            OfferUpdate offerUpdate = new OfferUpdate()
+                                      .title("title")
+                                      .expirationTime(createCal(2013, 6, 27, 19, 0, 0))
+                                      .terms("terms")
+                                      .imageURL(new URL("http://facebook4j.org/image_url"))
+                                      .claimLimit(300)
+                                      .couponType("online_only")
+                                      .qrcode("qrcode")
+                                      .barcode("barcode")
+                                      .redemptionLink(new URL("http://facebook4j.org/redemption_link"))
+                                      .redemptionCode("redemption_code")
+                                      .isPublished(true)
+                                      .scheduledPublishTime(1372331021)
+                                      .reminderTime(createCal(2013, 7, 27, 19, 0, 0));
+            String offerId = facebook.createOffer(offerUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/offers")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("title", "title"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("expiration_time", "2013-06-27T19:00:00+0000"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("terms", "terms"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("image_url", "http://facebook4j.org/image_url"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("claim_limit", "300"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("coupon_type", "online_only"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("qrcode", "qrcode"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("barcode", "barcode"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_link", "http://facebook4j.org/redemption_link"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_code", "redemption_code"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("published", "true"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("scheduled_publish_time", "1372331021"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("reminder_time", "2013-07-27T19:00:00+0000"));
+
+            assertThat(offerId, is("1234567890123456"));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/id.json");
+            OfferUpdate offerUpdate = new OfferUpdate()
+                                      .title("title")
+                                      .expirationTime(createCal(2013, 6, 27, 19, 0, 0))
+                                      .terms("terms")
+                                      .imageURL(new URL("http://facebook4j.org/image_url"))
+                                      .claimLimit(300)
+                                      .couponType("online_only")
+                                      .qrcode("qrcode")
+                                      .barcode("barcode")
+                                      .redemptionLink(new URL("http://facebook4j.org/redemption_link"))
+                                      .redemptionCode("redemption_code")
+                                      .isPublished(true)
+                                      .scheduledPublishTime(1372331021)
+                                      .reminderTime(createCal(2013, 7, 27, 19, 0, 0));
+            String offerId = facebook.createOffer("137246726435626", offerUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/offers")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("title", "title"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("expiration_time", "2013-06-27T19:00:00+0000"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("terms", "terms"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("image_url", "http://facebook4j.org/image_url"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("claim_limit", "300"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("coupon_type", "online_only"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("qrcode", "qrcode"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("barcode", "barcode"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_link", "http://facebook4j.org/redemption_link"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_code", "redemption_code"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("published", "true"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("scheduled_publish_time", "1372331021"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("reminder_time", "2013-07-27T19:00:00+0000"));
+
+            assertThat(offerId, is("1234567890123456"));
+        }
+
+        @Test
+        public void id_media_scheduledPublishTimeAsDate() throws Exception {
+            facebook.setMockJSON("mock_json/id.json");
+            OfferUpdate offerUpdate = new OfferUpdate()
+                                      .title("title")
+                                      .expirationTime(createCal(2013, 6, 27, 19, 0, 0))
+                                      .terms("terms")
+                                      .image(new Media(new File("src/test/resources/test_image.png")))
+                                      .claimLimit(300)
+                                      .couponType("online_only")
+                                      .qrcode("qrcode")
+                                      .barcode("barcode")
+                                      .redemptionLink(new URL("http://facebook4j.org/redemption_link"))
+                                      .redemptionCode("redemption_code")
+                                      .isPublished(true)
+                                      .scheduledPublishTime(new Date(1372331021000L))
+                                      .reminderTime(createCal(2013, 7, 27, 19, 0, 0));
+            String offerId = facebook.createOffer("137246726435626", offerUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/offers")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("title", "title"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("expiration_time", "2013-06-27T19:00:00+0000"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("terms", "terms"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("claim_limit", "300"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("coupon_type", "online_only"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("qrcode", "qrcode"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("barcode", "barcode"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_link", "http://facebook4j.org/redemption_link"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_code", "redemption_code"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("published", "true"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("scheduled_publish_time", "1372331021"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("reminder_time", "2013-07-27T19:00:00+0000"));
+
+            assertThat(offerId, is("1234567890123456"));
+        }
+    }
+
+    public static class DeleteOffer extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean result = facebook.deleteOffer("1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456")));
+
+            assertThat(result, is(true));
         }
     }
 

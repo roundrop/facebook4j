@@ -46,5 +46,8 @@ public abstract class MockFacebookTestBase {
         cal.set(year, month-1, day, hour, minute, second);
         return cal;
     }
+    protected Calendar createCal(int year, int month, int day, int hour, int minute, int second) {
+        return createCal(year, month, day, hour, minute, second, TimeZone.getTimeZone("UTC"));
+    }
 
 }
