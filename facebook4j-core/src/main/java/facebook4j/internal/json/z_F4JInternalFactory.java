@@ -50,6 +50,7 @@ import facebook4j.Movie;
 import facebook4j.Music;
 import facebook4j.Note;
 import facebook4j.Notification;
+import facebook4j.Offer;
 import facebook4j.Page;
 import facebook4j.PageSetting;
 import facebook4j.Permission;
@@ -197,6 +198,8 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<Admin> createAdminList(HttpResponse res) throws FacebookException;
 
     ResponseList<Tab> createTabList(HttpResponse res) throws FacebookException;
+
+    ResponseList<Offer> createOfferList(HttpResponse res) throws FacebookException;
 
 
     Application createApplication(HttpResponse res) throws FacebookException;

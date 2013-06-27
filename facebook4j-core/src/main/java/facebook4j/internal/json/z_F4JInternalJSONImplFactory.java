@@ -50,6 +50,7 @@ import facebook4j.Movie;
 import facebook4j.Music;
 import facebook4j.Note;
 import facebook4j.Notification;
+import facebook4j.Offer;
 import facebook4j.Page;
 import facebook4j.PageSetting;
 import facebook4j.Permission;
@@ -364,6 +365,10 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
 
     public ResponseList<Tab> createTabList(HttpResponse res) throws FacebookException {
         return TabJSONImpl.createTabList(res, conf);
+    }
+
+    public ResponseList<Offer> createOfferList(HttpResponse res) throws FacebookException {
+        return OfferJSONImpl.createOfferList(res, conf);
     }
 
     public Application createApplication(HttpResponse res) throws FacebookException {

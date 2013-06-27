@@ -22,6 +22,7 @@ import facebook4j.Insight;
 import facebook4j.Media;
 import facebook4j.Milestone;
 import facebook4j.MilestoneUpdate;
+import facebook4j.Offer;
 import facebook4j.Page;
 import facebook4j.PagePhotoUpdate;
 import facebook4j.PageSetting;
@@ -522,6 +523,42 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#blocked">Page#blocked - Facebook Developers</a>
      */
     boolean unblock(String pageId, String userId) throws FacebookException;
+
+    /**
+     * Returns a list of offers of the current page.
+     * @return offers
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#offers">Page#offers - Facebook Developers</a>
+     */
+    ResponseList<Offer> getOffers() throws FacebookException;
+
+    /**
+     * Returns a list of offers of the current page.
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return offers
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#offers">Page#offers - Facebook Developers</a>
+     */
+    ResponseList<Offer> getOffers(Reading reading) throws FacebookException;
+
+    /**
+     * Returns a list of offers of the current page.
+     * @param pageId the ID of the page
+     * @return offers
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#offers">Page#offers - Facebook Developers</a>
+     */
+    ResponseList<Offer> getOffers(String pageId) throws FacebookException;
+
+    /**
+     * Returns a list of offers of the current page.
+     * @param pageId the ID of the page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return offers
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#offers">Page#offers - Facebook Developers</a>
+     */
+    ResponseList<Offer> getOffers(String pageId, Reading reading) throws FacebookException;
 
     /**
      * Returns a specific page that the current user has liked.

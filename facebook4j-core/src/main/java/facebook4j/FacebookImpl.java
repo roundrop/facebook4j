@@ -1569,6 +1569,20 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return Boolean.valueOf(res.asString().trim());
     }
 
+    public ResponseList<Offer> getOffers() throws FacebookException {
+        return getOffers("me", null);
+    }
+    public ResponseList<Offer> getOffers(Reading reading) throws FacebookException {
+        return getOffers("me", reading);
+    }
+    public ResponseList<Offer> getOffers(String pageId) throws FacebookException {
+        return getOffers(pageId, null);
+    }
+    public ResponseList<Offer> getOffers(String pageId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createOfferList(get(buildURL(pageId, "offers", reading)));
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }
