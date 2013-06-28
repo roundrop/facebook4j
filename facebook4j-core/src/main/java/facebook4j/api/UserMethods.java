@@ -16,13 +16,13 @@
 
 package facebook4j.api;
 
-import java.net.URL;
-import java.util.List;
-
 import facebook4j.FacebookException;
 import facebook4j.PictureSize;
 import facebook4j.Reading;
 import facebook4j.User;
+
+import java.net.URL;
+import java.util.List;
 
 
 /**
@@ -102,6 +102,42 @@ public interface UserMethods {
      */
     URL getPictureURL(String userId, PictureSize size) throws FacebookException;
     
+    /**
+     * Returns the url of the current user's profile picture over a secure connection.
+     * @return url
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - picture
+     */
+    URL getSSLPictureURL() throws FacebookException;
+
+    /**
+     * Returns the url of the current user's profile picture over a secure connection.
+     * @param size {@link PictureSize picture size}
+     * @return url
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - picture
+     */
+    URL getSSLPictureURL(PictureSize size) throws FacebookException;
+
+    /**
+     * Returns the url of a user's profile picture over a secure connection.
+     * @param userId the ID of a user
+     * @return url
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - picture
+     */
+    URL getSSLPictureURL(String userId) throws FacebookException;
+
+    /**
+     * Returns the url of a user's profile picture over a secure connection.
+     * @param userId the ID of a user
+     * @param size {@link PictureSize picture size}
+     * @return url
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - picture
+     */
+    URL getSSLPictureURL(String userId, PictureSize size) throws FacebookException;
+
     /**
      * Returns the users specified by IDs.
      * @param ids the IDs of users

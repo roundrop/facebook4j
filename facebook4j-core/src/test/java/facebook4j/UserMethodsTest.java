@@ -16,12 +16,14 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.RequestMethod;
 import org.junit.Test;
 
 import java.net.URL;
 import java.util.List;
 
 import static facebook4j.junit.ISO8601DateMatchers.*;
+import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -166,6 +168,52 @@ public class UserMethodsTest extends MockFacebookTestBase {
         URL url = facebook.getPictureURL(PictureSize.large);
         assertThat(url.toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/1111_22222_333333_q.jpg"));
         url = facebook.getPictureURL("22222", PictureSize.large);
+        assertThat(url.toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/1111_22222_333333_q.jpg"));
+    }
+
+    @Test
+    public void getSSLPictureURL() throws Exception {
+        facebook.setMockJSON("mock_json/user/me_picture.json");
+        URL url = facebook.getSSLPictureURL();
+        assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+        assertThat(facebook.getEndpointURL(), is(pathOf("/me/picture")));
+        assertThat(facebook.getEndpointURL(), hasParameter("return_ssl_resources", "1"));
+
+        assertThat(url.toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/1111_22222_333333_q.jpg"));
+    }
+
+    @Test
+    public void getSSLPictureURL_size() throws Exception {
+        facebook.setMockJSON("mock_json/user/me_picture.json");
+        URL url = facebook.getSSLPictureURL(PictureSize.large);
+        assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+        assertThat(facebook.getEndpointURL(), is(pathOf("/me/picture")));
+        assertThat(facebook.getEndpointURL(), hasParameter("type", "large"));
+        assertThat(facebook.getEndpointURL(), hasParameter("return_ssl_resources", "1"));
+
+        assertThat(url.toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/1111_22222_333333_q.jpg"));
+    }
+
+    @Test
+    public void getSSLPictureURL_id() throws Exception {
+        facebook.setMockJSON("mock_json/user/me_picture.json");
+        URL url = facebook.getSSLPictureURL("22222");
+        assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+        assertThat(facebook.getEndpointURL(), is(pathOf("/22222/picture")));
+        assertThat(facebook.getEndpointURL(), hasParameter("return_ssl_resources", "1"));
+
+        assertThat(url.toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/1111_22222_333333_q.jpg"));
+    }
+
+    @Test
+    public void getSSLPictureURL_id_size() throws Exception {
+        facebook.setMockJSON("mock_json/user/me_picture.json");
+        URL url = facebook.getSSLPictureURL("22222", PictureSize.large);
+        assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+        assertThat(facebook.getEndpointURL(), is(pathOf("/22222/picture")));
+        assertThat(facebook.getEndpointURL(), hasParameter("type", "large"));
+        assertThat(facebook.getEndpointURL(), hasParameter("return_ssl_resources", "1"));
+
         assertThat(url.toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/1111_22222_333333_q.jpg"));
     }
 

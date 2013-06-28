@@ -128,7 +128,22 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public URL getPictureURL(String userId, PictureSize size) throws FacebookException {
         return _getPictureURL(userId, size);
     }
-    
+
+    public URL getSSLPictureURL() throws FacebookException {
+        ensureAuthorizationEnabled();
+        return getSSLPictureURL("me");
+    }
+    public URL getSSLPictureURL(PictureSize size) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return getSSLPictureURL("me", size);
+    }
+    public URL getSSLPictureURL(String userId) throws FacebookException {
+        return getSSLPictureURL(userId, null);
+    }
+    public URL getSSLPictureURL(String userId, PictureSize size) throws FacebookException {
+        return _getSSLPictureURL(userId, size);
+    }
+
     public List<User> getUsers(String... ids) throws FacebookException {
         ensureAuthorizationEnabled();
         return factory.createUserArray(get(conf.getRestBaseURL(), new HttpParameter[] {
@@ -2204,7 +2219,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         }
         return (ResponseList<T>) fetchPaging(url, paging.getJSONObjectType());
     }
-    
+
     @SuppressWarnings("unchecked")
     public <T> ResponseList<T> fetchPrevious(Paging<T> paging) throws FacebookException {
         ensureAuthorizationEnabled();
@@ -2240,6 +2255,21 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         } else {
             res = get(url);
         }
+        try {
+            return new URL(res.getResponseHeader("Location"));
+        } catch (MalformedURLException urle) {
+            throw new FacebookException(urle.getMessage(), urle);
+        }
+    }
+
+    private URL _getSSLPictureURL(String objectId, PictureSize size) throws FacebookException {
+        String url = buildURL(objectId, "picture");
+        HttpResponse res;
+        HttpParameter[] params = new HttpParameter[]{new HttpParameter("return_ssl_resources", "1")};
+        if (size != null) {
+            params = HttpParameter.merge(params, new HttpParameter("type", size.toString()));
+        }
+        res = get(url, params);
         try {
             return new URL(res.getResponseHeader("Location"));
         } catch (MalformedURLException urle) {
