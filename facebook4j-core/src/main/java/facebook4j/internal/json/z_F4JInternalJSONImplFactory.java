@@ -540,6 +540,27 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         if (jsonObjectType == Subscriber.class) {
             return (ResponseList<T>) createSubscriberList(res);
         }
+        if (jsonObjectType == Page.class) {
+            return (ResponseList<T>) createPageList(res);
+        }
+        if (jsonObjectType == PageSetting.class) {
+            return (ResponseList<T>) createPageSettingList(res);
+        }
+        if (jsonObjectType == Tagged.class) {
+            return (ResponseList<T>) createTaggedList(res);
+        }
+        if (jsonObjectType == Milestone.class) {
+            return (ResponseList<T>) createMilestoneList(res);
+        }
+        if (jsonObjectType == Admin.class) {
+            return (ResponseList<T>) createAdminList(res);
+        }
+        if (jsonObjectType == Tab.class) {
+            return (ResponseList<T>) createTabList(res);
+        }
+        if (jsonObjectType == Offer.class) {
+            return (ResponseList<T>) createOfferList(res);
+        }
         if (jsonObjectType == JSONObject.class) {
             return (ResponseList<T>) createJSONObjectList(res);
         }
