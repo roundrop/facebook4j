@@ -22,7 +22,13 @@ import java.net.URL;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public interface Paging<T> {
+    Class<?> getJSONObjectType();
+    Paging.Cursors getCursors();
     URL getPrevious();
     URL getNext();
-    Class<?> getJSONObjectType();
+
+    interface Cursors {
+        String getAfter();
+        String getBefore();
+    }
 }
