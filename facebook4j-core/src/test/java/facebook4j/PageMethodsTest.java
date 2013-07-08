@@ -211,6 +211,52 @@ public class PageMethodsTest {
         }
     }
 
+    public static class UpdatePageProfilePhoto extends MockFacebookTestBase {
+        @Test
+        public void me_url() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.updatePageProfilePhoto(new URL("http://facebook4j.org/images/ogp.png"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/picture")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id_url() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.updatePageProfilePhoto("137246726435626", new URL("http://facebook4j.org/images/ogp.png"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/picture")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void me_media() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            File file = new File("src/test/resources/500x500.png");
+            Media source = new Media(file);
+            boolean actual = facebook.updatePageProfilePhoto(source);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/picture")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id_media() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            File file = new File("src/test/resources/500x500.png");
+            Media source = new Media(file);
+            boolean actual = facebook.updatePageProfilePhoto("137246726435626", source);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/picture")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
     public static class GetGlobalBrandChildren extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {

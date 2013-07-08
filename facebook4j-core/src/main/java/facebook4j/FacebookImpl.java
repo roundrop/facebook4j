@@ -1417,15 +1417,24 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return Boolean.valueOf(res.asString().trim());
     }
 
-    public void updatePageProfilePhoto(String pageId, URL picture) throws FacebookException {
-        ensureAuthorizationEnabled();
-        post(buildURL(pageId, "picture"), new HttpParameter[] {new HttpParameter("picture", picture.toString())});
+    public boolean updatePageProfilePhoto(URL picture) throws FacebookException {
+        return updatePageProfilePhoto("me", picture);
     }
-    public void updatePageProfilePhoto(String pageId, Media source) throws FacebookException {
+    public boolean updatePageProfilePhoto(String pageId, URL picture) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = post(buildURL(pageId, "picture"), new HttpParameter[]{new HttpParameter("picture", picture.toString())});
+        return Boolean.valueOf(res.asString().trim());
+    }
+
+    public boolean updatePageProfilePhoto(Media source) throws FacebookException {
+        return updatePageProfilePhoto("me", source);
+    }
+    public boolean updatePageProfilePhoto(String pageId, Media source) throws FacebookException {
         ensureAuthorizationEnabled();
         List<HttpParameter> httpParams = new ArrayList<HttpParameter>();
         httpParams.add(source.asHttpParameter("source"));
-        post(buildURL(pageId, "picture"), httpParams.toArray(new HttpParameter[httpParams.size()]));
+        HttpResponse res = post(buildURL(pageId, "picture"), httpParams.toArray(new HttpParameter[httpParams.size()]));
+        return Boolean.valueOf(res.asString().trim());
     }
 
     public ResponseList<PageSetting> getPageSettings() throws FacebookException {

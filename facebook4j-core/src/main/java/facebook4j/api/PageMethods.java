@@ -176,13 +176,29 @@ public interface PageMethods {
     boolean updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException;
 
     /**
+     * Updates the profile photo for the current Page.
+     * @param picture A URL to the photo
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
+     */
+    boolean updatePageProfilePhoto(URL picture) throws FacebookException;
+
+    /**
      * Updates the profile photo for a Page.
      * @param pageId the ID of the page
      * @param picture A URL to the photo
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
      */
-    void updatePageProfilePhoto(String pageId, URL picture) throws FacebookException;
+    boolean updatePageProfilePhoto(String pageId, URL picture) throws FacebookException;
+
+    /**
+     * Updates the profile photo for the current Page.
+     * @param source Photo content
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
+     */
+    boolean updatePageProfilePhoto(Media source) throws FacebookException;
 
     /**
      * Updates the profile photo for a Page.
@@ -191,7 +207,7 @@ public interface PageMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
      */
-    void updatePageProfilePhoto(String pageId, Media source) throws FacebookException;
+    boolean updatePageProfilePhoto(String pageId, Media source) throws FacebookException;
 
     /**
      * Returns the settings for the current page.
