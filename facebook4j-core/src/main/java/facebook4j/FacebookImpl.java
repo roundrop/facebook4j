@@ -1614,6 +1614,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return Boolean.valueOf(res.asString().trim());
     }
 
+    public Offer getOffer(String offerId) throws FacebookException {
+        return factory.createOffer(get(buildURL(offerId)));
+    }
+
     public Page getLikedPage(String pageId) throws FacebookException {
         return getLikedPage("me", pageId, null);
     }

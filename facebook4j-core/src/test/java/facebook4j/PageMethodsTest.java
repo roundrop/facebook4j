@@ -1194,6 +1194,33 @@ public class PageMethodsTest {
         }
     }
 
+    public static class GetOffer extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/page/offer.json");
+            Offer actual = facebook.getOffer("1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456")));
+
+            assertThat(actual.getRedemptionCode(), is("998877"));
+            assertThat(actual.getReminderTime(), is(iso8601DateOf("2013-07-27T19:00:00+0000")));
+            assertThat(actual.getClaimLimit(), is(300));
+            assertThat(actual.getTerms(), is("The description of the terms under which the offer can be claimed"));
+            assertThat(actual.getCouponType(), is("online_only"));
+            assertThat(actual.getScheduledPublishTime(), is(1372331021));
+            assertThat(actual.getFrom().getId(), is("22222222"));
+            assertThat(actual.getFrom().getCategory(), is("Page Category"));
+            assertThat(actual.getFrom().getName(), is("Page Name"));
+            assertThat(actual.getExpirationTime(), is(iso8601DateOf("2014-03-31T12:30:00+0000")));
+            assertThat(actual.getRedemptionLink().toString(), is("http://facebook4j.org/redemption"));
+            assertThat(actual.getId(), is("11111111"));
+            assertThat(actual.getTitle(), is("The title of the Offer"));
+            assertThat(actual.getImageURL().toString(), is("http://facebook4j.org/image.png"));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2013-06-27T19:00:00+0000")));
+            assertThat(actual.isPublished(), is(true));
+        }
+    }
+
 /*
     @Test
     public void getLikedPage() throws Exception {

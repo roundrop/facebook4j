@@ -371,6 +371,10 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return OfferJSONImpl.createOfferList(res, conf);
     }
 
+    public Offer createOffer(HttpResponse res) throws FacebookException {
+        return new OfferJSONImpl(res, conf);
+    }
+
     public Application createApplication(HttpResponse res) throws FacebookException {
         return new ApplicationJSONImpl(res, conf);
     }

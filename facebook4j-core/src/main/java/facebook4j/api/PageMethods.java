@@ -589,6 +589,14 @@ public interface PageMethods {
     boolean deleteOffer(String offerId) throws FacebookException;
 
     /**
+     * Returns the offer.
+     * @param offerId the ID of the offer
+     * @return offer
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    Offer getOffer(String offerId) throws FacebookException;
+
+    /**
      * Returns a specific page that the current user has liked.
      * @param pageId the ID of a page
      * @return page

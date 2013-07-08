@@ -1,0 +1,20 @@
+{
+    "id": "11111111",
+    "from": {
+        "id": "22222222",
+        "name": "Page Name",
+        "category": "Page Category"
+    },
+    "title": "The title of the Offer",
+    "created_time": "2013-06-27T19:00:00+0000",
+    "expiration_time": "2014-03-31T12:30:00+0000",
+    "terms": "The description of the terms under which the offer can be claimed",
+    "image_url": "http://facebook4j.org/image.png",
+    "claim_limit": 300,
+    "coupon_type": "online_only",
+    "redemption_link": "http://facebook4j.org/redemption",
+    "redemption_code": "998877",
+    "published": true,
+    "scheduled_publish_time": 1372331021,
+    "reminder_time": "2013-07-27T19:00:00+0000"
+}
