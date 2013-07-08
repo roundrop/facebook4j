@@ -23,7 +23,7 @@ import java.util.Set;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public class FeedTargeting extends Targeting implements java.io.Serializable {
+public class FeedTargetingParameter extends TargetingParameter implements java.io.Serializable {
     private static final long serialVersionUID = -4978831942434930510L;
 
     private Gender genders;
@@ -37,7 +37,7 @@ public class FeedTargeting extends Targeting implements java.io.Serializable {
     private Set<String> collegeMajors;
     private Set<Integer> collegeYears;
 
-    public FeedTargeting() {
+    public FeedTargetingParameter() {
     }
 
     public void setGenders(Gender genders) {
@@ -80,52 +80,52 @@ public class FeedTargeting extends Targeting implements java.io.Serializable {
         this.collegeYears = collegeYears;
     }
 
-    public FeedTargeting genders(Gender genders) {
+    public FeedTargetingParameter genders(Gender genders) {
         setGenders(genders);
         return this;
     }
 
-    public FeedTargeting ageMax(Integer ageMax) {
+    public FeedTargetingParameter ageMax(Integer ageMax) {
         setAgeMax(ageMax);
         return this;
     }
 
-    public FeedTargeting ageMin(Integer ageMin) {
+    public FeedTargetingParameter ageMin(Integer ageMin) {
         setAgeMin(ageMin);
         return this;
     }
 
-    public FeedTargeting relationshipStatuses(Set<Integer> relationshipStatuses) {
+    public FeedTargetingParameter relationshipStatuses(Set<Integer> relationshipStatuses) {
         setRelationshipStatuses(relationshipStatuses);
         return this;
     }
 
-    public FeedTargeting interestedIn(Set<Integer> interestedIn) {
+    public FeedTargetingParameter interestedIn(Set<Integer> interestedIn) {
         setInterestedIn(interestedIn);
         return this;
     }
 
-    public FeedTargeting educationStatuses(Set<Integer> educationStatuses) {
+    public FeedTargetingParameter educationStatuses(Set<Integer> educationStatuses) {
         setEducationStatuses(educationStatuses);
         return this;
     }
 
-    public FeedTargeting workNetworks(Set<IdNameEntity> workNetworks) {
+    public FeedTargetingParameter workNetworks(Set<IdNameEntity> workNetworks) {
         setWorkNetworks(workNetworks);
         return this;
     }
 
-    public FeedTargeting collegeNetworks(Set<IdNameEntity> collegeNetworks) {
+    public FeedTargetingParameter collegeNetworks(Set<IdNameEntity> collegeNetworks) {
         setCollegeNetworks(collegeNetworks);
         return this;
     }
 
-    public FeedTargeting collegeMajors(Set<String> collegeMajors) {
+    public FeedTargetingParameter collegeMajors(Set<String> collegeMajors) {
         setCollegeMajors(collegeMajors);
         return this;
     }
 
-    public FeedTargeting collegeYears(Set<Integer> collegeYears) {
+    public FeedTargetingParameter collegeYears(Set<Integer> collegeYears) {
         setCollegeYears(collegeYears);
         return this;
     }
@@ -189,10 +189,10 @@ public class FeedTargeting extends Targeting implements java.io.Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FeedTargeting)) return false;
+        if (!(o instanceof FeedTargetingParameter)) return false;
         if (!super.equals(o)) return false;
 
-        FeedTargeting that = (FeedTargeting) o;
+        FeedTargetingParameter that = (FeedTargetingParameter) o;
 
         if (ageMax != null ? !ageMax.equals(that.ageMax) : that.ageMax != null) return false;
         if (ageMin != null ? !ageMin.equals(that.ageMin) : that.ageMin != null) return false;
@@ -230,7 +230,7 @@ public class FeedTargeting extends Targeting implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "FeedTargeting{" +
+        return "FeedTargetingParameter{" +
                 "genders=" + genders +
                 ", ageMax=" + ageMax +
                 ", ageMin=" + ageMin +

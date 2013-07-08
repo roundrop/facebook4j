@@ -131,6 +131,236 @@ public class PageMethodsTest {
         }
     }
 
+    public static class GetPromotablePosts extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/page/promotable_posts.json");
+            ResponseList<Post> actuals = facebook.getPromotablePosts();
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/promotable_posts")));
+
+            assertThat(actuals.size(), is(8));
+            Post actual1 = actuals.get(0);
+            assertThat(actual1.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/DggDhA4z4tO.gif"));
+            assertThat(actual1.getApplication().getId(), is("145634995501895"));
+            assertThat(actual1.getApplication().getName(), is("Graph API Explorer"));
+            assertThat(actual1.getLink().toString(), is("http://www.facebook.com/photo.php?v=188027738024191"));
+            assertThat(actual1.getObjectId(), is("188027738024191"));
+            assertThat(actual1.getPrivacy().getNetworks().size(), is(0));
+            assertThat(actual1.getPrivacy().getFriends(), is(PrivacyType.EMPTY));
+            assertThat(actual1.getPrivacy().getAllow().size(), is(0));
+            assertThat(actual1.getPrivacy().getDescription().get(0), is("Public"));
+            assertThat(actual1.getPrivacy().getDeny().size(), is(0));
+            assertThat(actual1.getPrivacy().getValue(), is(PrivacyType.EVERYONE));
+            assertThat(actual1.getFrom().getId(), is("137246726435626"));
+            assertThat(actual1.getFrom().getCategory(), is("Software"));
+            assertThat(actual1.getFrom().getName(), is("F4J"));
+            assertThat(actual1.getProperties().size(), is(1));
+            assertThat(actual1.getProperties().get(0).getText(), is("0:24"));
+            assertThat(actual1.getProperties().get(0).getName(), is("Length"));
+            assertThat(actual1.getType(), is("video"));
+            assertThat(actual1.getUpdatedTime(), is(iso8601DateOf("2013-06-19T16:04:25+0000")));
+            assertThat(actual1.getId(), is("137246726435626_188027738024191"));
+            assertThat(actual1.getPicture().toString(), is("https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-ash4/245372_188027814690850_188027738024191_43297_2415_b.jpg"));
+            assertThat(actual1.getSource().toString(), is("https://fbcdn-video-a.akamaihd.net/hvideo-ak-ash2/v/1033172_188027771357521_581032840_n.mp4?oh=882dbc6a693971c04fcdc839ad76c81a&oe=51D66588&__gda__=1373048358_4b16384645d1ee556ea065ce9fab293b"));
+            assertThat(actual1.getStatusType(), is("added_video"));
+            assertThat(actual1.getName(), is("Jun 20, 2013 1:04am"));
+            assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2013-06-19T16:04:25+0000")));
+            assertThat(actual1.isPublished(), is(true));
+            Post actual2 = actuals.get(1);
+            assertThat(actual2.getMessage(), is("page's status update"));
+            assertThat(actual2.getId(), is("137246726435626_185932178233747"));
+            assertThat(actual2.getApplication().getId(), is("145634995501895"));
+            assertThat(actual2.getApplication().getName(), is("Graph API Explorer"));
+            assertThat(actual2.getStatusType(), is("mobile_status_update"));
+            assertThat(actual2.getPrivacy().getNetworks().size(), is(0));
+            assertThat(actual2.getPrivacy().getFriends(), is(PrivacyType.EMPTY));
+            assertThat(actual2.getPrivacy().getAllow().size(), is(0));
+            assertThat(actual2.getPrivacy().getDescription().get(0), is("Public"));
+            assertThat(actual2.getPrivacy().getDeny().size(), is(0));
+            assertThat(actual2.getPrivacy().getValue(), is(PrivacyType.EVERYONE));
+            assertThat(actual2.getFrom().getId(), is("137246726435626"));
+            assertThat(actual2.getFrom().getCategory(), is("Software"));
+            assertThat(actual2.getFrom().getName(), is("F4J"));
+            assertThat(actual2.getType(), is("status"));
+            assertThat(actual2.getCreatedTime(), is(iso8601DateOf("2013-06-13T16:17:44+0000")));
+            assertThat(actual2.getUpdatedTime(), is(iso8601DateOf("2013-06-13T16:17:44+0000")));
+            assertThat(actual2.isPublished(), is(true));
+            Post actual7 = actuals.get(6);
+            assertThat(actual7.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/aS8ecmYRys0.gif"));
+            assertThat(actual7.getApplication().getId(), is("145634995501895"));
+            assertThat(actual7.getApplication().getName(), is("Graph API Explorer"));
+            assertThat(actual7.getTargeting().getCountries().get(0), is("US"));
+            assertThat(actual7.getTargeting().getCountries().get(1), is("GB"));
+            assertThat(actual7.getLink().toString(), is("http://facebook4j.org/"));
+            assertThat(actual7.getPrivacy().getNetworks().size(), is(0));
+            assertThat(actual7.getPrivacy().getFriends(), is(PrivacyType.EMPTY));
+            assertThat(actual7.getPrivacy().getAllow().size(), is(0));
+            assertThat(actual7.getPrivacy().getDescription().get(0), is("United States"));
+            assertThat(actual7.getPrivacy().getDescription().get(1), is("United Kingdom"));
+            assertThat(actual7.getPrivacy().getDeny().size(), is(0));
+            assertThat(actual7.getPrivacy().getValue(), is(PrivacyType.CUSTOM));
+            assertThat(actual7.getCaption(), is("facebook4j.org"));
+            assertThat(actual7.getFrom().getId(), is("137246726435626"));
+            assertThat(actual7.getFrom().getCategory(), is("Software"));
+            assertThat(actual7.getFrom().getName(), is("F4J"));
+            assertThat(actual7.getType(), is("link"));
+            assertThat(actual7.getUpdatedTime(), is(iso8601DateOf("2013-03-14T06:45:49+0000")));
+            assertThat(actual7.getId(), is("137246726435626_492351237497482"));
+            assertThat(actual7.getMessage(), is("Testing. Succeeded?"));
+            assertThat(actual7.getPicture().toString(), is("https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBcXOUoJ_WBlQ2G&w=154&h=154&url=http%3A%2F%2Ffacebook4j.org%2Fimages%2Fhero.png"));
+            assertThat(actual7.getStatusType(), is("shared_story"));
+            assertThat(actual7.getDescription(), is("Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library."));
+            assertThat(actual7.getName(), is("Facebook4J - A Java library for the Facebook Graph API"));
+            assertThat(actual7.getCreatedTime(), is(iso8601DateOf("2013-03-14T06:45:49+0000")));
+            assertThat(actual7.isPublished(), is(true));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/page/promotable_posts_fields_limit3.json");
+            ResponseList<Post> actuals = facebook.getPromotablePosts(new Reading().fields("name,link").limit(3));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/promotable_posts")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "name,link"));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "3"));
+
+            assertThat(actuals.size(), is(3));
+
+            Post actual1 = actuals.get(0);
+            assertThat(actual1.getIcon(), is(nullValue()));
+            assertThat(actual1.getApplication(), is(nullValue()));
+            assertThat(actual1.getLink().toString(), is("http://www.facebook.com/photo.php?v=188027738024191"));
+            assertThat(actual1.getObjectId(), is(nullValue()));
+            assertThat(actual1.getPrivacy(), is(nullValue()));
+            assertThat(actual1.getFrom(), is(nullValue()));
+            assertThat(actual1.getProperties(), is(nullValue()));
+            assertThat(actual1.getType(), is(nullValue()));
+            assertThat(actual1.getUpdatedTime(), is(nullValue()));
+            assertThat(actual1.getId(), is("137246726435626_188027738024191"));
+            assertThat(actual1.getPicture(), is(nullValue()));
+            assertThat(actual1.getSource(), is(nullValue()));
+            assertThat(actual1.getStatusType(), is(nullValue()));
+            assertThat(actual1.getName(), is("Jun 20, 2013 1:04am"));
+            assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2013-06-19T16:04:25+0000")));
+            assertThat(actual1.isPublished(), is(nullValue()));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/page/promotable_posts.json");
+            ResponseList<Post> actuals = facebook.getPromotablePosts("137246726435626");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/promotable_posts")));
+
+            assertThat(actuals.size(), is(8));
+            Post actual1 = actuals.get(0);
+            assertThat(actual1.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/DggDhA4z4tO.gif"));
+            assertThat(actual1.getApplication().getId(), is("145634995501895"));
+            assertThat(actual1.getApplication().getName(), is("Graph API Explorer"));
+            assertThat(actual1.getLink().toString(), is("http://www.facebook.com/photo.php?v=188027738024191"));
+            assertThat(actual1.getObjectId(), is("188027738024191"));
+            assertThat(actual1.getPrivacy().getNetworks().size(), is(0));
+            assertThat(actual1.getPrivacy().getFriends(), is(PrivacyType.EMPTY));
+            assertThat(actual1.getPrivacy().getAllow().size(), is(0));
+            assertThat(actual1.getPrivacy().getDescription().get(0), is("Public"));
+            assertThat(actual1.getPrivacy().getDeny().size(), is(0));
+            assertThat(actual1.getPrivacy().getValue(), is(PrivacyType.EVERYONE));
+            assertThat(actual1.getFrom().getId(), is("137246726435626"));
+            assertThat(actual1.getFrom().getCategory(), is("Software"));
+            assertThat(actual1.getFrom().getName(), is("F4J"));
+            assertThat(actual1.getProperties().size(), is(1));
+            assertThat(actual1.getProperties().get(0).getText(), is("0:24"));
+            assertThat(actual1.getProperties().get(0).getName(), is("Length"));
+            assertThat(actual1.getType(), is("video"));
+            assertThat(actual1.getUpdatedTime(), is(iso8601DateOf("2013-06-19T16:04:25+0000")));
+            assertThat(actual1.getId(), is("137246726435626_188027738024191"));
+            assertThat(actual1.getPicture().toString(), is("https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-ash4/245372_188027814690850_188027738024191_43297_2415_b.jpg"));
+            assertThat(actual1.getSource().toString(), is("https://fbcdn-video-a.akamaihd.net/hvideo-ak-ash2/v/1033172_188027771357521_581032840_n.mp4?oh=882dbc6a693971c04fcdc839ad76c81a&oe=51D66588&__gda__=1373048358_4b16384645d1ee556ea065ce9fab293b"));
+            assertThat(actual1.getStatusType(), is("added_video"));
+            assertThat(actual1.getName(), is("Jun 20, 2013 1:04am"));
+            assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2013-06-19T16:04:25+0000")));
+            assertThat(actual1.isPublished(), is(true));
+            Post actual2 = actuals.get(1);
+            assertThat(actual2.getMessage(), is("page's status update"));
+            assertThat(actual2.getId(), is("137246726435626_185932178233747"));
+            assertThat(actual2.getApplication().getId(), is("145634995501895"));
+            assertThat(actual2.getApplication().getName(), is("Graph API Explorer"));
+            assertThat(actual2.getStatusType(), is("mobile_status_update"));
+            assertThat(actual2.getPrivacy().getNetworks().size(), is(0));
+            assertThat(actual2.getPrivacy().getFriends(), is(PrivacyType.EMPTY));
+            assertThat(actual2.getPrivacy().getAllow().size(), is(0));
+            assertThat(actual2.getPrivacy().getDescription().get(0), is("Public"));
+            assertThat(actual2.getPrivacy().getDeny().size(), is(0));
+            assertThat(actual2.getPrivacy().getValue(), is(PrivacyType.EVERYONE));
+            assertThat(actual2.getFrom().getId(), is("137246726435626"));
+            assertThat(actual2.getFrom().getCategory(), is("Software"));
+            assertThat(actual2.getFrom().getName(), is("F4J"));
+            assertThat(actual2.getType(), is("status"));
+            assertThat(actual2.getCreatedTime(), is(iso8601DateOf("2013-06-13T16:17:44+0000")));
+            assertThat(actual2.getUpdatedTime(), is(iso8601DateOf("2013-06-13T16:17:44+0000")));
+            assertThat(actual2.isPublished(), is(true));
+            Post actual7 = actuals.get(6);
+            assertThat(actual7.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/aS8ecmYRys0.gif"));
+            assertThat(actual7.getApplication().getId(), is("145634995501895"));
+            assertThat(actual7.getApplication().getName(), is("Graph API Explorer"));
+            assertThat(actual7.getTargeting().getCountries().get(0), is("US"));
+            assertThat(actual7.getTargeting().getCountries().get(1), is("GB"));
+            assertThat(actual7.getLink().toString(), is("http://facebook4j.org/"));
+            assertThat(actual7.getPrivacy().getNetworks().size(), is(0));
+            assertThat(actual7.getPrivacy().getFriends(), is(PrivacyType.EMPTY));
+            assertThat(actual7.getPrivacy().getAllow().size(), is(0));
+            assertThat(actual7.getPrivacy().getDescription().get(0), is("United States"));
+            assertThat(actual7.getPrivacy().getDescription().get(1), is("United Kingdom"));
+            assertThat(actual7.getPrivacy().getDeny().size(), is(0));
+            assertThat(actual7.getPrivacy().getValue(), is(PrivacyType.CUSTOM));
+            assertThat(actual7.getCaption(), is("facebook4j.org"));
+            assertThat(actual7.getFrom().getId(), is("137246726435626"));
+            assertThat(actual7.getFrom().getCategory(), is("Software"));
+            assertThat(actual7.getFrom().getName(), is("F4J"));
+            assertThat(actual7.getType(), is("link"));
+            assertThat(actual7.getUpdatedTime(), is(iso8601DateOf("2013-03-14T06:45:49+0000")));
+            assertThat(actual7.getId(), is("137246726435626_492351237497482"));
+            assertThat(actual7.getMessage(), is("Testing. Succeeded?"));
+            assertThat(actual7.getPicture().toString(), is("https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBcXOUoJ_WBlQ2G&w=154&h=154&url=http%3A%2F%2Ffacebook4j.org%2Fimages%2Fhero.png"));
+            assertThat(actual7.getStatusType(), is("shared_story"));
+            assertThat(actual7.getDescription(), is("Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library."));
+            assertThat(actual7.getName(), is("Facebook4J - A Java library for the Facebook Graph API"));
+            assertThat(actual7.getCreatedTime(), is(iso8601DateOf("2013-03-14T06:45:49+0000")));
+            assertThat(actual7.isPublished(), is(true));
+        }
+
+        @Test
+        public void id_reading() throws Exception {
+            facebook.setMockJSON("mock_json/page/promotable_posts_fields_limit3.json");
+            ResponseList<Post> actuals = facebook.getPromotablePosts("137246726435626", new Reading().fields("name,link").limit(3));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/promotable_posts")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "name,link"));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "3"));
+
+            assertThat(actuals.size(), is(3));
+
+            Post actual1 = actuals.get(0);
+            assertThat(actual1.getIcon(), is(nullValue()));
+            assertThat(actual1.getApplication(), is(nullValue()));
+            assertThat(actual1.getLink().toString(), is("http://www.facebook.com/photo.php?v=188027738024191"));
+            assertThat(actual1.getObjectId(), is(nullValue()));
+            assertThat(actual1.getPrivacy(), is(nullValue()));
+            assertThat(actual1.getFrom(), is(nullValue()));
+            assertThat(actual1.getProperties(), is(nullValue()));
+            assertThat(actual1.getType(), is(nullValue()));
+            assertThat(actual1.getUpdatedTime(), is(nullValue()));
+            assertThat(actual1.getId(), is("137246726435626_188027738024191"));
+            assertThat(actual1.getPicture(), is(nullValue()));
+            assertThat(actual1.getSource(), is(nullValue()));
+            assertThat(actual1.getStatusType(), is(nullValue()));
+            assertThat(actual1.getName(), is("Jun 20, 2013 1:04am"));
+            assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2013-06-19T16:04:25+0000")));
+            assertThat(actual1.isPublished(), is(nullValue()));
+        }
+    }
+
     public static class GetGlobalBrandChildren extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
@@ -1307,7 +1537,7 @@ public class PageMethodsTest {
                 .name("Facebook4J - A Java library for the Facebook Graph API")
                 .caption("facebook4j.org")
                 .description("Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library.")
-                .targeting(new Targeting().country("US").country("GB"));
+                .targeting(new TargetingParameter().country("US").country("GB"));
         String postId = real.postFeed(pageId, postUpdate);
         assertThat(postId, is(notNullValue()));
         Post post = real.getPost(postId);
@@ -1436,9 +1666,9 @@ public class PageMethodsTest {
         Set<String> countries = new HashSet<String>();
         countries.add("US");
         countries.add("GB");
-        Targeting targeting = new Targeting().countries(countries);
+        TargetingParameter targeting = new TargetingParameter().countries(countries);
         pagePhotoUpdate.setTargeting(targeting);
-        FeedTargeting feedTargeting = new FeedTargeting().genders(FeedTargeting.Gender.Male);
+        FeedTargetingParameter feedTargeting = new FeedTargetingParameter().genders(FeedTargetingParameter.Gender.Male);
         feedTargeting.setAgeMin(20);
         feedTargeting.setAgeMax(40);
         pagePhotoUpdate.setFeedTargeting(feedTargeting);

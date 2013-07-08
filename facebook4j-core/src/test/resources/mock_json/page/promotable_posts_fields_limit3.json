@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "created_time": "2013-06-19T16:04:25+0000",
+            "id": "137246726435626_188027738024191",
+            "link": "http://www.facebook.com/photo.php?v=188027738024191",
+            "name": "Jun 20, 2013 1:04am"
+        },
+        {
+            "created_time": "2013-06-13T16:17:44+0000",
+            "id": "137246726435626_185932178233747"
+        },
+        {
+            "created_time": "2013-03-22T08:42:18+0000",
+            "id": "137246726435626_155690557924576"
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/137246726435626/promotable_posts?fields=name,link&limit=3&access_token=access_token&until=1363941737",
+        "previous": "https://graph.facebook.com/137246726435626/promotable_posts?fields=name,link&limit=3&access_token=access_token&since=1371657865&__previous=1"
+    }
+}

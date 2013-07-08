@@ -17,7 +17,6 @@
 package facebook4j;
 
 import facebook4j.internal.http.HttpParameter;
-import facebook4j.internal.org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,8 +30,8 @@ public class PagePhotoUpdate implements java.io.Serializable {
 
     private Media source;
     private String message;
-    private Targeting targeting;
-    private FeedTargeting feedTargeting;
+    private TargetingParameter targeting;
+    private FeedTargetingParameter feedTargeting;
     private Boolean published;
     private Integer scheduledPublishTime;
 
@@ -58,28 +57,28 @@ public class PagePhotoUpdate implements java.io.Serializable {
         return this;
     }
 
-    public Targeting getTargeting() {
+    public TargetingParameter getTargeting() {
         return targeting;
     }
 
-    public void setTargeting(Targeting targeting) {
+    public void setTargeting(TargetingParameter targeting) {
         this.targeting = targeting;
     }
 
-    public PagePhotoUpdate targeting(Targeting targeting) {
-        setTargeting(targeting);
+    public PagePhotoUpdate targeting(TargetingParameter targetingParameter) {
+        setTargeting(targetingParameter);
         return this;
     }
 
-    public FeedTargeting getFeedTargeting() {
+    public FeedTargetingParameter getFeedTargeting() {
         return feedTargeting;
     }
 
-    public void setFeedTargeting(FeedTargeting feedTargeting) {
+    public void setFeedTargeting(FeedTargetingParameter feedTargeting) {
         this.feedTargeting = feedTargeting;
     }
 
-    public PagePhotoUpdate feedTargeting(FeedTargeting feedTargeting) {
+    public PagePhotoUpdate feedTargeting(FeedTargetingParameter feedTargeting) {
         setFeedTargeting(feedTargeting);
         return this;
     }

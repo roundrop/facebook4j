@@ -16,17 +16,8 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import facebook4j.Application;
+import facebook4j.Category;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
@@ -36,11 +27,22 @@ import facebook4j.Post;
 import facebook4j.Privacy;
 import facebook4j.ResponseList;
 import facebook4j.Tag;
+import facebook4j.Targeting;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -49,7 +51,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private static final long serialVersionUID = 5829948216755728751L;
 
     private String id;
-    private IdNameEntity from;
+    private Category from;
     private List<IdNameEntity> to;
     private String message;
     private List<Tag> messageTags;
@@ -72,12 +74,13 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private Map<String, Tag[]> storyTags;
     private List<IdNameEntity> withTags;
     private PagableList<Comment> comments;
-    private Long objectId;
+    private String objectId;
     private Application application;
     private Date createdTime;
     private Date updatedTime;
     private Boolean isPublished;
     private Integer scheduledPublishTime;
+    private Targeting targeting;
 
     /*package*/PostJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -99,7 +102,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             id = getRawString("id", json);
             if (!json.isNull("from")) {
                 JSONObject fromJSONObject = json.getJSONObject("from");
-                from = new IdNameEntityJSONImpl(fromJSONObject);
+                from = new CategoryJSONImpl(fromJSONObject);
             }
             if (!json.isNull("to")) {
                 JSONArray toJSONArray = json.getJSONObject("to").getJSONArray("data");
@@ -226,7 +229,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 }
             }
             if (!json.isNull("object_id")) {
-                objectId = getLong("object_id", json);
+                objectId = getRawString("object_id", json);
             }
             if (!json.isNull("application")) {
                 JSONObject applicationJSONObject = json.getJSONObject("application");
@@ -238,6 +241,9 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 isPublished = getBoolean("is_published", json);
             }
             scheduledPublishTime = getInt("scheduled_publish_time", json);
+            if (!json.isNull("targeting")) {
+                targeting = new TargetingJSONImpl(json.getJSONObject("targeting"));
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -247,7 +253,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return id;
     }
 
-    public IdNameEntity getFrom() {
+    public Category getFrom() {
         return from;
     }
 
@@ -339,7 +345,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return comments;
     }
 
-    public Long getObjectId() {
+    public String getObjectId() {
         return objectId;
     }
 
@@ -361,6 +367,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
 
     public Date getScheduledPublishTime() {
         return new Date(scheduledPublishTime * 1000);
+    }
+
+    public Targeting getTargeting() {
+        return targeting;
     }
 
     /*package*/
@@ -437,17 +447,18 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 ", sharesCount=" + sharesCount +
                 ", likes=" + likes +
                 ", place=" + place +
-                ", statusType=" + statusType +
+                ", statusType='" + statusType + '\'' +
                 ", story='" + story + '\'' +
                 ", storyTags=" + storyTags +
                 ", withTags=" + withTags +
                 ", comments=" + comments +
-                ", objectId=" + objectId +
+                ", objectId='" + objectId + '\'' +
                 ", application=" + application +
                 ", createdTime=" + createdTime +
                 ", updatedTime=" + updatedTime +
                 ", isPublished=" + isPublished +
                 ", scheduledPublishTime=" + scheduledPublishTime +
+                ", targeting=" + targeting +
                 '}';
     }
 

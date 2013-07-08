@@ -26,7 +26,7 @@ import java.util.Map;
  */
 public interface Post extends FacebookResponse {
     String getId();
-    IdNameEntity getFrom();
+    Category getFrom();
     List<IdNameEntity> getTo();
     String getMessage();
     List<Tag> getMessageTags();
@@ -49,12 +49,13 @@ public interface Post extends FacebookResponse {
     Map<String, Tag[]> getStoryTags();
     List<IdNameEntity> getWithTags();
     PagableList<Comment> getComments();
-    Long getObjectId();
+    String getObjectId();
     Application getApplication();
     Date getCreatedTime();
     Date getUpdatedTime();
     Boolean isPublished();
     Date getScheduledPublishTime();
+    Targeting getTargeting();
     
     interface Action {
         String getName();

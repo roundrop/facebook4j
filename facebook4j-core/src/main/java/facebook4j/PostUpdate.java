@@ -16,14 +16,13 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.HttpParameter;
+import facebook4j.internal.org.json.JSONObject;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import facebook4j.Post.Action;
-import facebook4j.internal.http.HttpParameter;
-import facebook4j.internal.org.json.JSONObject;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -44,7 +43,7 @@ public class PostUpdate implements java.io.Serializable {
     private PrivacyBean privacy;
     private String objectAttachment;
 
-    private Targeting targeting;
+    private TargetingParameter targeting;
 
     private Boolean published;
     private Integer scheduledPublishTime;
@@ -200,16 +199,16 @@ public class PostUpdate implements java.io.Serializable {
         return this;
     }
 
-    public Targeting getTargeting() {
+    public TargetingParameter getTargeting() {
         return targeting;
     }
 
-    public void setTargeting(Targeting targeting) {
+    public void setTargeting(TargetingParameter targeting) {
         this.targeting = targeting;
     }
 
-    public PostUpdate targeting(Targeting targeting) {
-        setTargeting(targeting);
+    public PostUpdate targeting(TargetingParameter targetingParameter) {
+        setTargeting(targetingParameter);
         return this;
     }
 
