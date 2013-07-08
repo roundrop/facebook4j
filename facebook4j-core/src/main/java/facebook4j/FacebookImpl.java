@@ -1408,9 +1408,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createPostList(get(buildURL(pageId, "promotable_posts", reading)));
     }
 
-    public void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException {
+    public boolean updatePageBasicAttributes(PageUpdate pageUpdate) throws FacebookException {
+        return updatePageBasicAttributes("me", pageUpdate);
+    }
+    public boolean updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
-        post(buildURL(pageId, "picture"), pageUpdate.asHttpParameterArray());
+        HttpResponse res = post(buildURL(pageId), pageUpdate.asHttpParameterArray());
+        return Boolean.valueOf(res.asString().trim());
     }
 
     public void updatePageProfilePhoto(String pageId, URL picture) throws FacebookException {

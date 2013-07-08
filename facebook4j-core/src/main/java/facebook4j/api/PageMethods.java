@@ -160,12 +160,20 @@ public interface PageMethods {
 
     /**
      * Updates a Page's basic attributes.
+     * @param pageUpdate the page to be updated
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a>
+     */
+    boolean updatePageBasicAttributes(PageUpdate pageUpdate) throws FacebookException;
+
+    /**
+     * Updates a Page's basic attributes.
      * @param pageId the ID of the page
      * @param pageUpdate the page to be updated
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a>
      */
-    void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException;
+    boolean updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException;
 
     /**
      * Updates the profile photo for a Page.

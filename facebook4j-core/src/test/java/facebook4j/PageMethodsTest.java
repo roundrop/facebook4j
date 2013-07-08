@@ -159,6 +159,58 @@ public class PageMethodsTest {
         }
     }
 
+    public static class UpdatePageBasicAttributes extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            PageUpdate pageUpdate = new PageUpdate()
+                                    .about("Facebook4J: A Java library for the Facebook Graph API.")
+                                    .description("Facebook4J: A Java library for the Facebook Graph API.\n" +
+                                            "This library provides the ease of use like Twitter4J.\n" +
+                                            "Facebook4J is an unofficial library.")
+                                    .generalInfo("Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0.")
+                                    .website("http://facebook4j.org")
+                                    .phone("");
+            boolean actual = facebook.updatePageBasicAttributes(pageUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("about", "Facebook4J: A Java library for the Facebook Graph API."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("description", "Facebook4J: A Java library for the Facebook Graph API.\n" +
+                                                                        "This library provides the ease of use like Twitter4J.\n" +
+                                                                        "Facebook4J is an unofficial library."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("general_info", "Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("website", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("phone", ""));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            PageUpdate pageUpdate = new PageUpdate()
+                                    .about("Facebook4J: A Java library for the Facebook Graph API.")
+                                    .description("Facebook4J: A Java library for the Facebook Graph API.\n" +
+                                            "This library provides the ease of use like Twitter4J.\n" +
+                                            "Facebook4J is an unofficial library.")
+                                    .generalInfo("Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0.")
+                                    .website("http://facebook4j.org")
+                                    .phone("");
+            boolean actual = facebook.updatePageBasicAttributes("137246726435626", pageUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("about", "Facebook4J: A Java library for the Facebook Graph API."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("description", "Facebook4J: A Java library for the Facebook Graph API.\n" +
+                                                                        "This library provides the ease of use like Twitter4J.\n" +
+                                                                        "Facebook4J is an unofficial library."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("general_info", "Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("website", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("phone", ""));
+
+            assertThat(actual, is(true));
+        }
+    }
+
     public static class GetGlobalBrandChildren extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
