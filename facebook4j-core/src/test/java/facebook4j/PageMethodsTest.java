@@ -87,6 +87,50 @@ public class PageMethodsTest {
         }
     }
 
+    public static class GetPagePictureURL extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/page/picture.json");
+            URL actual = facebook.getPagePictureURL();
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/picture")));
+
+            assertThat(actual.toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/211200_137246726435626_559668710_q.jpg"));
+        }
+
+        @Test
+        public void size() throws Exception {
+            facebook.setMockJSON("mock_json/page/picture.json");
+            URL actual = facebook.getPagePictureURL(PictureSize.large);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/picture")));
+            assertThat(facebook.getEndpointURL(), hasParameter("type", "large"));
+
+            assertThat(actual.toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/211200_137246726435626_559668710_q.jpg"));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/page/picture.json");
+            URL actual = facebook.getPagePictureURL("137246726435626");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/picture")));
+
+            assertThat(actual.toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/211200_137246726435626_559668710_q.jpg"));
+        }
+
+        @Test
+        public void id_size() throws Exception {
+            facebook.setMockJSON("mock_json/page/picture.json");
+            URL actual = facebook.getPagePictureURL("137246726435626", PictureSize.large);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/picture")));
+            assertThat(facebook.getEndpointURL(), hasParameter("type", "large"));
+
+            assertThat(actual.toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/211200_137246726435626_559668710_q.jpg"));
+        }
+    }
+
     public static class GetGlobalBrandChildren extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
