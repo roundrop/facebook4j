@@ -186,6 +186,14 @@ public interface PageMethods {
     void updatePageProfilePhoto(String pageId, Media source) throws FacebookException;
 
     /**
+     * Returns the settings for the current page.
+     * @return settings
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<PageSetting> getPageSettings() throws FacebookException;
+
+    /**
      * Returns the settings for the page.
      * @param pageId the ID of the page
      * @return settings

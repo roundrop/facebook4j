@@ -1424,6 +1424,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         post(buildURL(pageId, "picture"), httpParams.toArray(new HttpParameter[httpParams.size()]));
     }
 
+    public ResponseList<PageSetting> getPageSettings() throws FacebookException {
+        return getPageSettings("me");
+    }
     public ResponseList<PageSetting> getPageSettings(String pageId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = get(buildURL(pageId, "settings"));

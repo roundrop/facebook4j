@@ -87,6 +87,78 @@ public class PageMethodsTest {
         }
     }
 
+    public static class GetPageSettings extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/page/settings.json");
+            ResponseList<PageSetting> actuals = facebook.getPageSettings();
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/settings")));
+
+            assertThat(actuals.size(), is(8));
+
+            PageSetting actual1 = actuals.get(0);
+            assertThat(actual1.getSetting(), is("USERS_CAN_POST"));
+            assertThat(actual1.getValue(), is(true));
+            PageSetting actual2 = actuals.get(1);
+            assertThat(actual2.getSetting(), is("USERS_CAN_MESSAGE"));
+            assertThat(actual2.getValue(), is(true));
+            PageSetting actual3 = actuals.get(2);
+            assertThat(actual3.getSetting(), is("PAGE_MODERATION_BLACKLIST"));
+            assertThat(actual3.getValue(), is(false));
+            PageSetting actual4 = actuals.get(3);
+            assertThat(actual4.getSetting(), is("USERS_CAN_POST_PHOTOS"));
+            assertThat(actual4.getValue(), is(true));
+            PageSetting actual5 = actuals.get(4);
+            assertThat(actual5.getSetting(), is("USERS_CAN_TAG_PHOTOS"));
+            assertThat(actual5.getValue(), is(false));
+            PageSetting actual6 = actuals.get(5);
+            assertThat(actual6.getSetting(), is("WALL_COMBINED_POSTS"));
+            assertThat(actual6.getValue(), is(false));
+            PageSetting actual7 = actuals.get(6);
+            assertThat(actual7.getSetting(), is("PLATFORM_OPTOUTS_CAN_POST"));
+            assertThat(actual7.getValue(), is(true));
+            PageSetting actual8 = actuals.get(7);
+            assertThat(actual8.getSetting(), is("SHOW_RECENT_POSTS_BY_OTHERS"));
+            assertThat(actual8.getValue(), is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/page/settings.json");
+            ResponseList<PageSetting> actuals = facebook.getPageSettings("137246726435626");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/settings")));
+
+            assertThat(actuals.size(), is(8));
+
+            PageSetting actual1 = actuals.get(0);
+            assertThat(actual1.getSetting(), is("USERS_CAN_POST"));
+            assertThat(actual1.getValue(), is(true));
+            PageSetting actual2 = actuals.get(1);
+            assertThat(actual2.getSetting(), is("USERS_CAN_MESSAGE"));
+            assertThat(actual2.getValue(), is(true));
+            PageSetting actual3 = actuals.get(2);
+            assertThat(actual3.getSetting(), is("PAGE_MODERATION_BLACKLIST"));
+            assertThat(actual3.getValue(), is(false));
+            PageSetting actual4 = actuals.get(3);
+            assertThat(actual4.getSetting(), is("USERS_CAN_POST_PHOTOS"));
+            assertThat(actual4.getValue(), is(true));
+            PageSetting actual5 = actuals.get(4);
+            assertThat(actual5.getSetting(), is("USERS_CAN_TAG_PHOTOS"));
+            assertThat(actual5.getValue(), is(false));
+            PageSetting actual6 = actuals.get(5);
+            assertThat(actual6.getSetting(), is("WALL_COMBINED_POSTS"));
+            assertThat(actual6.getValue(), is(false));
+            PageSetting actual7 = actuals.get(6);
+            assertThat(actual7.getSetting(), is("PLATFORM_OPTOUTS_CAN_POST"));
+            assertThat(actual7.getValue(), is(true));
+            PageSetting actual8 = actuals.get(7);
+            assertThat(actual8.getSetting(), is("SHOW_RECENT_POSTS_BY_OTHERS"));
+            assertThat(actual8.getValue(), is(true));
+        }
+    }
+
     public static class GetGlobalBrandChildren extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
