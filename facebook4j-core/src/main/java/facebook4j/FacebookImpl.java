@@ -1408,22 +1408,38 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createPostList(get(buildURL(pageId, "promotable_posts", reading)));
     }
 
-    public void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException {
+    public boolean updatePageBasicAttributes(PageUpdate pageUpdate) throws FacebookException {
+        return updatePageBasicAttributes("me", pageUpdate);
+    }
+    public boolean updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
-        post(buildURL(pageId, "picture"), pageUpdate.asHttpParameterArray());
+        HttpResponse res = post(buildURL(pageId), pageUpdate.asHttpParameterArray());
+        return Boolean.valueOf(res.asString().trim());
     }
 
-    public void updatePageProfilePhoto(String pageId, URL picture) throws FacebookException {
-        ensureAuthorizationEnabled();
-        post(buildURL(pageId, "picture"), new HttpParameter[] {new HttpParameter("picture", picture.toString())});
+    public boolean updatePageProfilePhoto(URL picture) throws FacebookException {
+        return updatePageProfilePhoto("me", picture);
     }
-    public void updatePageProfilePhoto(String pageId, Media source) throws FacebookException {
+    public boolean updatePageProfilePhoto(String pageId, URL picture) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = post(buildURL(pageId, "picture"), new HttpParameter[]{new HttpParameter("picture", picture.toString())});
+        return Boolean.valueOf(res.asString().trim());
+    }
+
+    public boolean updatePageProfilePhoto(Media source) throws FacebookException {
+        return updatePageProfilePhoto("me", source);
+    }
+    public boolean updatePageProfilePhoto(String pageId, Media source) throws FacebookException {
         ensureAuthorizationEnabled();
         List<HttpParameter> httpParams = new ArrayList<HttpParameter>();
         httpParams.add(source.asHttpParameter("source"));
-        post(buildURL(pageId, "picture"), httpParams.toArray(new HttpParameter[httpParams.size()]));
+        HttpResponse res = post(buildURL(pageId, "picture"), httpParams.toArray(new HttpParameter[httpParams.size()]));
+        return Boolean.valueOf(res.asString().trim());
     }
 
+    public ResponseList<PageSetting> getPageSettings() throws FacebookException {
+        return getPageSettings("me");
+    }
     public ResponseList<PageSetting> getPageSettings(String pageId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = get(buildURL(pageId, "settings"));
@@ -1612,6 +1628,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildURL(offerId));
         return Boolean.valueOf(res.asString().trim());
+    }
+
+    public Offer getOffer(String offerId) throws FacebookException {
+        return factory.createOffer(get(buildURL(offerId)));
     }
 
     public Page getLikedPage(String pageId) throws FacebookException {

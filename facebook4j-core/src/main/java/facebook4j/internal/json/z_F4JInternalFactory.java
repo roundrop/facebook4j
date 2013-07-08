@@ -200,6 +200,7 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<Tab> createTabList(HttpResponse res) throws FacebookException;
 
     ResponseList<Offer> createOfferList(HttpResponse res) throws FacebookException;
+    Offer createOffer(HttpResponse res) throws FacebookException;
 
 
     Application createApplication(HttpResponse res) throws FacebookException;

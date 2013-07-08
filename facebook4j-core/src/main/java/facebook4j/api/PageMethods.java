@@ -160,12 +160,28 @@ public interface PageMethods {
 
     /**
      * Updates a Page's basic attributes.
+     * @param pageUpdate the page to be updated
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a>
+     */
+    boolean updatePageBasicAttributes(PageUpdate pageUpdate) throws FacebookException;
+
+    /**
+     * Updates a Page's basic attributes.
      * @param pageId the ID of the page
      * @param pageUpdate the page to be updated
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a>
      */
-    void updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException;
+    boolean updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException;
+
+    /**
+     * Updates the profile photo for the current Page.
+     * @param picture A URL to the photo
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
+     */
+    boolean updatePageProfilePhoto(URL picture) throws FacebookException;
 
     /**
      * Updates the profile photo for a Page.
@@ -174,7 +190,15 @@ public interface PageMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
      */
-    void updatePageProfilePhoto(String pageId, URL picture) throws FacebookException;
+    boolean updatePageProfilePhoto(String pageId, URL picture) throws FacebookException;
+
+    /**
+     * Updates the profile photo for the current Page.
+     * @param source Photo content
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
+     */
+    boolean updatePageProfilePhoto(Media source) throws FacebookException;
 
     /**
      * Updates the profile photo for a Page.
@@ -183,7 +207,15 @@ public interface PageMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
      */
-    void updatePageProfilePhoto(String pageId, Media source) throws FacebookException;
+    boolean updatePageProfilePhoto(String pageId, Media source) throws FacebookException;
+
+    /**
+     * Returns the settings for the current page.
+     * @return settings
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a>
+     */
+    ResponseList<PageSetting> getPageSettings() throws FacebookException;
 
     /**
      * Returns the settings for the page.
@@ -587,6 +619,14 @@ public interface PageMethods {
      * @throws FacebookException
      */
     boolean deleteOffer(String offerId) throws FacebookException;
+
+    /**
+     * Returns the offer.
+     * @param offerId the ID of the offer
+     * @return offer
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    Offer getOffer(String offerId) throws FacebookException;
 
     /**
      * Returns a specific page that the current user has liked.

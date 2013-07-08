@@ -1,0 +1,34 @@
+{"data": [
+    {
+        "setting": "USERS_CAN_POST",
+        "value": true
+    },
+    {
+        "setting": "USERS_CAN_MESSAGE",
+        "value": true
+    },
+    {
+        "setting": "PAGE_MODERATION_BLACKLIST",
+        "value": null
+    },
+    {
+        "setting": "USERS_CAN_POST_PHOTOS",
+        "value": true
+    },
+    {
+        "setting": "USERS_CAN_TAG_PHOTOS",
+        "value": false
+    },
+    {
+        "setting": "WALL_COMBINED_POSTS",
+        "value": false
+    },
+    {
+        "setting": "PLATFORM_OPTOUTS_CAN_POST",
+        "value": true
+    },
+    {
+        "setting": "SHOW_RECENT_POSTS_BY_OTHERS",
+        "value": true
+    }
+]}

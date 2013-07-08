@@ -361,6 +361,176 @@ public class PageMethodsTest {
         }
     }
 
+    public static class UpdatePageBasicAttributes extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            PageUpdate pageUpdate = new PageUpdate()
+                                    .about("Facebook4J: A Java library for the Facebook Graph API.")
+                                    .description("Facebook4J: A Java library for the Facebook Graph API.\n" +
+                                            "This library provides the ease of use like Twitter4J.\n" +
+                                            "Facebook4J is an unofficial library.")
+                                    .generalInfo("Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0.")
+                                    .website("http://facebook4j.org")
+                                    .phone("");
+            boolean actual = facebook.updatePageBasicAttributes(pageUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("about", "Facebook4J: A Java library for the Facebook Graph API."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("description", "Facebook4J: A Java library for the Facebook Graph API.\n" +
+                                                                        "This library provides the ease of use like Twitter4J.\n" +
+                                                                        "Facebook4J is an unofficial library."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("general_info", "Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("website", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("phone", ""));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            PageUpdate pageUpdate = new PageUpdate()
+                                    .about("Facebook4J: A Java library for the Facebook Graph API.")
+                                    .description("Facebook4J: A Java library for the Facebook Graph API.\n" +
+                                            "This library provides the ease of use like Twitter4J.\n" +
+                                            "Facebook4J is an unofficial library.")
+                                    .generalInfo("Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0.")
+                                    .website("http://facebook4j.org")
+                                    .phone("");
+            boolean actual = facebook.updatePageBasicAttributes("137246726435626", pageUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("about", "Facebook4J: A Java library for the Facebook Graph API."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("description", "Facebook4J: A Java library for the Facebook Graph API.\n" +
+                                                                        "This library provides the ease of use like Twitter4J.\n" +
+                                                                        "Facebook4J is an unofficial library."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("general_info", "Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("website", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("phone", ""));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+    public static class UpdatePageProfilePhoto extends MockFacebookTestBase {
+        @Test
+        public void me_url() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.updatePageProfilePhoto(new URL("http://facebook4j.org/images/ogp.png"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/picture")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id_url() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.updatePageProfilePhoto("137246726435626", new URL("http://facebook4j.org/images/ogp.png"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/picture")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void me_media() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            File file = new File("src/test/resources/500x500.png");
+            Media source = new Media(file);
+            boolean actual = facebook.updatePageProfilePhoto(source);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/picture")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id_media() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            File file = new File("src/test/resources/500x500.png");
+            Media source = new Media(file);
+            boolean actual = facebook.updatePageProfilePhoto("137246726435626", source);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/picture")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+    public static class GetPageSettings extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/page/settings.json");
+            ResponseList<PageSetting> actuals = facebook.getPageSettings();
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/settings")));
+
+            assertThat(actuals.size(), is(8));
+
+            PageSetting actual1 = actuals.get(0);
+            assertThat(actual1.getSetting(), is("USERS_CAN_POST"));
+            assertThat(actual1.getValue(), is(true));
+            PageSetting actual2 = actuals.get(1);
+            assertThat(actual2.getSetting(), is("USERS_CAN_MESSAGE"));
+            assertThat(actual2.getValue(), is(true));
+            PageSetting actual3 = actuals.get(2);
+            assertThat(actual3.getSetting(), is("PAGE_MODERATION_BLACKLIST"));
+            assertThat(actual3.getValue(), is(false));
+            PageSetting actual4 = actuals.get(3);
+            assertThat(actual4.getSetting(), is("USERS_CAN_POST_PHOTOS"));
+            assertThat(actual4.getValue(), is(true));
+            PageSetting actual5 = actuals.get(4);
+            assertThat(actual5.getSetting(), is("USERS_CAN_TAG_PHOTOS"));
+            assertThat(actual5.getValue(), is(false));
+            PageSetting actual6 = actuals.get(5);
+            assertThat(actual6.getSetting(), is("WALL_COMBINED_POSTS"));
+            assertThat(actual6.getValue(), is(false));
+            PageSetting actual7 = actuals.get(6);
+            assertThat(actual7.getSetting(), is("PLATFORM_OPTOUTS_CAN_POST"));
+            assertThat(actual7.getValue(), is(true));
+            PageSetting actual8 = actuals.get(7);
+            assertThat(actual8.getSetting(), is("SHOW_RECENT_POSTS_BY_OTHERS"));
+            assertThat(actual8.getValue(), is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/page/settings.json");
+            ResponseList<PageSetting> actuals = facebook.getPageSettings("137246726435626");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/settings")));
+
+            assertThat(actuals.size(), is(8));
+
+            PageSetting actual1 = actuals.get(0);
+            assertThat(actual1.getSetting(), is("USERS_CAN_POST"));
+            assertThat(actual1.getValue(), is(true));
+            PageSetting actual2 = actuals.get(1);
+            assertThat(actual2.getSetting(), is("USERS_CAN_MESSAGE"));
+            assertThat(actual2.getValue(), is(true));
+            PageSetting actual3 = actuals.get(2);
+            assertThat(actual3.getSetting(), is("PAGE_MODERATION_BLACKLIST"));
+            assertThat(actual3.getValue(), is(false));
+            PageSetting actual4 = actuals.get(3);
+            assertThat(actual4.getSetting(), is("USERS_CAN_POST_PHOTOS"));
+            assertThat(actual4.getValue(), is(true));
+            PageSetting actual5 = actuals.get(4);
+            assertThat(actual5.getSetting(), is("USERS_CAN_TAG_PHOTOS"));
+            assertThat(actual5.getValue(), is(false));
+            PageSetting actual6 = actuals.get(5);
+            assertThat(actual6.getSetting(), is("WALL_COMBINED_POSTS"));
+            assertThat(actual6.getValue(), is(false));
+            PageSetting actual7 = actuals.get(6);
+            assertThat(actual7.getSetting(), is("PLATFORM_OPTOUTS_CAN_POST"));
+            assertThat(actual7.getValue(), is(true));
+            PageSetting actual8 = actuals.get(7);
+            assertThat(actual8.getSetting(), is("SHOW_RECENT_POSTS_BY_OTHERS"));
+            assertThat(actual8.getValue(), is(true));
+        }
+    }
+
     public static class GetGlobalBrandChildren extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
@@ -1465,6 +1635,33 @@ public class PageMethodsTest {
             assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456")));
 
             assertThat(result, is(true));
+        }
+    }
+
+    public static class GetOffer extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/page/offer.json");
+            Offer actual = facebook.getOffer("1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456")));
+
+            assertThat(actual.getRedemptionCode(), is("998877"));
+            assertThat(actual.getReminderTime(), is(iso8601DateOf("2013-07-27T19:00:00+0000")));
+            assertThat(actual.getClaimLimit(), is(300));
+            assertThat(actual.getTerms(), is("The description of the terms under which the offer can be claimed"));
+            assertThat(actual.getCouponType(), is("online_only"));
+            assertThat(actual.getScheduledPublishTime(), is(1372331021));
+            assertThat(actual.getFrom().getId(), is("22222222"));
+            assertThat(actual.getFrom().getCategory(), is("Page Category"));
+            assertThat(actual.getFrom().getName(), is("Page Name"));
+            assertThat(actual.getExpirationTime(), is(iso8601DateOf("2014-03-31T12:30:00+0000")));
+            assertThat(actual.getRedemptionLink().toString(), is("http://facebook4j.org/redemption"));
+            assertThat(actual.getId(), is("11111111"));
+            assertThat(actual.getTitle(), is("The title of the Offer"));
+            assertThat(actual.getImageURL().toString(), is("http://facebook4j.org/image.png"));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2013-06-27T19:00:00+0000")));
+            assertThat(actual.isPublished(), is(true));
         }
     }
 
