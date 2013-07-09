@@ -16,6 +16,8 @@
 
 package facebook4j;
 
+import java.util.List;
+
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
@@ -24,4 +26,5 @@ public interface Account extends FacebookResponse {
     String getAccessToken();
     String getCategory();
     String getId();
+    List<String> getPerms();
 }
