@@ -25,94 +25,94 @@ import facebook4j.internal.util.z_F4JInternalStringUtil;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public final class PrivacyBuilder {
-    private PrivacyBean privacyBean = new PrivacyBean();
+    private PrivacyParameter privacyParameter = new PrivacyParameter();
     
     public PrivacyBuilder setValue(PrivacyType value) {
         checkNotBuilt();
-        privacyBean.setValue(value.toString());
+        privacyParameter.setValue(value.toString());
         return this;
     }
 
     public PrivacyBuilder setFriends(PrivacyType friends) {
         checkNotBuilt();
-        privacyBean.setFriends(friends.toString());
+        privacyParameter.setFriends(friends.toString());
         return this;
     }
 
     public PrivacyBuilder setNetworks(String networks) {
         checkNotBuilt();
-        privacyBean.setNetworks(networks);
+        privacyParameter.setNetworks(networks);
         return this;
     }
     public PrivacyBuilder setNetworks(List<String> networks) {
         checkNotBuilt();
-        privacyBean.setNetworks(z_F4JInternalStringUtil.join((String[]) networks.toArray(new String[networks.size()])));
+        privacyParameter.setNetworks(z_F4JInternalStringUtil.join((String[]) networks.toArray(new String[networks.size()])));
         return this;
     }
     public PrivacyBuilder addNetwork(String network) {
         checkNotBuilt();
-        String networks = privacyBean.getNetworks();
+        String networks = privacyParameter.getNetworks();
         if (networks == null) {
-            privacyBean.setNetworks(network);
+            privacyParameter.setNetworks(network);
         } else {
-            privacyBean.setNetworks(networks + "," + network);
+            privacyParameter.setNetworks(networks + "," + network);
         }
         return this;
     }
 
     public PrivacyBuilder setAllow(String allow) {
         checkNotBuilt();
-        privacyBean.setAllow(allow);
+        privacyParameter.setAllow(allow);
         return this;
     }
     public PrivacyBuilder setAllow(List<String> allow) {
         checkNotBuilt();
-        privacyBean.setAllow(z_F4JInternalStringUtil.join((String[]) allow.toArray(new String[allow.size()])));
+        privacyParameter.setAllow(z_F4JInternalStringUtil.join((String[]) allow.toArray(new String[allow.size()])));
         return this;
     }
     public PrivacyBuilder addAllow(String allow) {
         checkNotBuilt();
-        String allows = privacyBean.getAllow();
+        String allows = privacyParameter.getAllow();
         if (allows == null) {
-            privacyBean.setAllow(allow);
+            privacyParameter.setAllow(allow);
         } else {
-            privacyBean.setAllow(allows + "," + allow);
+            privacyParameter.setAllow(allows + "," + allow);
         }
         return this;
     }
 
     public PrivacyBuilder setDeny(String deny) {
         checkNotBuilt();
-        privacyBean.setDeny(deny);
+        privacyParameter.setDeny(deny);
         return this;
     }
     public PrivacyBuilder setDeny(List<String> deny) {
         checkNotBuilt();
-        privacyBean.setDeny(z_F4JInternalStringUtil.join((String[]) deny.toArray(new String[deny.size()])));
+        privacyParameter.setDeny(z_F4JInternalStringUtil.join((String[]) deny.toArray(new String[deny.size()])));
         return this;
     }
     public PrivacyBuilder addDeny(String deny) {
         checkNotBuilt();
-        String denys = privacyBean.getDeny();
+        String denys = privacyParameter.getDeny();
         if (denys == null) {
-            privacyBean.setDeny(deny);
+            privacyParameter.setDeny(deny);
         } else {
-            privacyBean.setDeny(denys + "," + deny);
+            privacyParameter.setDeny(denys + "," + deny);
         }
         return this;
     }
 
-    public PrivacyBean build() {
+    public PrivacyParameter build() {
         checkNotBuilt();
         try {
-            return privacyBean;
+            return privacyParameter;
         } finally {
-            privacyBean = null;
+            privacyParameter = null;
         }
     }
 
     private void checkNotBuilt() {
-        if (privacyBean == null) {
+        if (privacyParameter == null) {
             throw new IllegalStateException("Cannot use this builder any longer, build() has already been called");
         }
     }

@@ -40,7 +40,7 @@ public class PostUpdate implements java.io.Serializable {
     
     private String place;
     private String tags;
-    private PrivacyBean privacy;
+    private PrivacyParameter privacy;
     private String objectAttachment;
 
     private TargetingParameter targeting;
@@ -173,15 +173,15 @@ public class PostUpdate implements java.io.Serializable {
         return this;
     }
 
-    public PrivacyBean getPrivacy() {
+    public PrivacyParameter getPrivacy() {
         return privacy;
     }
 
-    public void setPrivacy(PrivacyBean privacy) {
+    public void setPrivacy(PrivacyParameter privacy) {
         this.privacy = privacy;
     }
     
-    public PostUpdate privacy(PrivacyBean privacy) {
+    public PostUpdate privacy(PrivacyParameter privacy) {
         setPrivacy(privacy);
         return this;
     }

@@ -29,7 +29,7 @@ public final class AlbumCreate implements java.io.Serializable {
 
     private final String name;
     private String message;
-    private PrivacyBean privacy;
+    private PrivacyParameter privacy;
 
     public AlbumCreate(String name) {
         this.name = name;
@@ -40,12 +40,12 @@ public final class AlbumCreate implements java.io.Serializable {
         this.message = message;
     }
 
-    public AlbumCreate(String name, PrivacyBean privacy) {
+    public AlbumCreate(String name, PrivacyParameter privacy) {
         this.name = name;
         this.privacy = privacy;
     }
 
-    public AlbumCreate(String name, String message, PrivacyBean privacy) {
+    public AlbumCreate(String name, String message, PrivacyParameter privacy) {
         this.name = name;
         this.message = message;
         this.privacy = privacy;
@@ -64,15 +64,15 @@ public final class AlbumCreate implements java.io.Serializable {
         return this;
     }
 
-    public PrivacyBean getPrivacy() {
+    public PrivacyParameter getPrivacy() {
         return privacy;
     }
 
-    public void setPrivacy(PrivacyBean privacy) {
+    public void setPrivacy(PrivacyParameter privacy) {
         this.privacy = privacy;
     }
     
-    public AlbumCreate privacy(PrivacyBean privacy) {
+    public AlbumCreate privacy(PrivacyParameter privacy) {
         setPrivacy(privacy);
         return this;
     }

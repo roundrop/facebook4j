@@ -22,7 +22,7 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public class PrivacyBean implements java.io.Serializable {
+public class PrivacyParameter implements java.io.Serializable {
     private static final long serialVersionUID = 3427495429925711593L;
 
     private String value;
@@ -103,7 +103,7 @@ public class PrivacyBean implements java.io.Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PrivacyBean other = (PrivacyBean) obj;
+        PrivacyParameter other = (PrivacyParameter) obj;
         if (allow == null) {
             if (other.allow != null)
                 return false;
@@ -134,7 +134,7 @@ public class PrivacyBean implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "PrivacyBean [value=" + value + ", friends=" + friends
+        return "PrivacyParameter [value=" + value + ", friends=" + friends
                 + ", networks=" + networks + ", allow=" + allow + ", deny="
                 + deny + "]";
     }

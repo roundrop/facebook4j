@@ -95,7 +95,7 @@ public class AlbumMethodsTest extends MockFacebookTestBase {
 /*
     @Test
     public void create() throws Exception {
-        PrivacyBean privacy = new PrivacyBuilder().setValue(PrivacyType.EVERYONE).build();
+        PrivacyParameter privacy = new PrivacyBuilder().setValue(PrivacyType.EVERYONE).build();
         String albumId = facebook1.createAlbum(new AlbumCreate("create() test album", "create() test message", privacy));
         assertThat(albumId, is(notNullValue()));
     }
