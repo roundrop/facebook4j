@@ -39,8 +39,11 @@ public enum PrivacyType {
         if (privacyTypeString.equals("")) {
             return PrivacyType.EMPTY;
         }
+        if (privacyTypeString.toUpperCase().equals("FRIENDS")) {
+            return PrivacyType.ALL_FRIENDS;
+        }
         for (PrivacyType privacyType : PrivacyType.values()) {
-            if (privacyType.toString().equals(privacyTypeString)) {
+            if (privacyType.toString().equals(privacyTypeString.toUpperCase())) {
                 return privacyType;
             }
         }

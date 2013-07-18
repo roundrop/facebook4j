@@ -1,0 +1,88 @@
+{
+    "data": [
+        {
+            "can_upload": false,
+            "count": 34,
+            "cover_photo": "1000000000001",
+            "created_time": "2011-08-17T11:03:11+0000",
+            "from": {
+                "id": "11000000000001",
+                "name": "Taro Yamada"
+            },
+            "id": "111000000001",
+            "link": "http://www.facebook.com/album.php?fbid=1111000001&id=11111000001&aid=50926",
+            "name": "Mobile Uploads",
+            "privacy": "everyone",
+            "type": "mobile",
+            "updated_time": "2013-07-07T08:01:44+0000"
+        },
+        {
+            "can_upload": false,
+            "count": 32,
+            "cover_photo": "20000000001",
+            "created_time": "2012-01-28T02:05:19+0000",
+            "from": {
+                "id": "11000000000001",
+                "name": "Taro Yamada"
+            },
+            "id": "2220000000001",
+            "link": "http://www.facebook.com/album.php?fbid=22220000001&id=2222200001&aid=69301",
+            "name": "foursquare Photos",
+            "privacy": "friends",
+            "type": "app",
+            "updated_time": "2013-05-05T05:48:11+0000"
+        },
+        {
+            "can_upload": false,
+            "count": 6,
+            "cover_photo": "3000000000001",
+            "created_time": "2011-11-11T16:56:08+0000",
+            "from": {
+                "id": "11000000000001",
+                "name": "Taro Yamada"
+            },
+            "id": "3330000000001",
+            "link": "http://www.facebook.com/album.php?fbid=3333000001&id=3333300001&aid=60658",
+            "name": "Timeline Photos",
+            "privacy": "everyone",
+            "type": "wall",
+            "updated_time": "2013-03-04T16:04:16+0000"
+        },
+        {
+            "can_upload": false,
+            "count": 2,
+            "cover_photo": "40000000000001",
+            "created_time": "2011-04-21T11:44:43+0000",
+            "from": {
+                "id": "11000000000001",
+                "name": "Taro Yamada"
+            },
+            "id": "444000000001",
+            "link": "http://www.facebook.com/album.php?fbid=44440000001&id=4444400001&aid=36789",
+            "name": "Profile Pictures",
+            "privacy": "everyone",
+            "type": "profile",
+            "updated_time": "2013-01-25T14:30:59+0000"
+        },
+        {
+            "can_upload": false,
+            "count": 2,
+            "cover_photo": "50000000000001",
+            "created_time": "2012-01-30T15:13:07+0000",
+            "from": {
+                "id": "11000000000001",
+                "name": "Taro Yamada"
+            },
+            "id": "555000000001",
+            "link": "http://www.facebook.com/album.php?fbid=55550000001&id=5555500001&aid=69618",
+            "name": "Cover Photos",
+            "privacy": "everyone",
+            "type": "unknown",
+            "updated_time": "2012-05-22T17:13:52+0000"
+        }
+    ],
+    "paging": {"cursors": {
+        "after": "MjM2NDQzNzU2NDE3OTE3",
+        "before": "MTk2Mjg3MTU3MTAwMjQ0"
+    }}
+}

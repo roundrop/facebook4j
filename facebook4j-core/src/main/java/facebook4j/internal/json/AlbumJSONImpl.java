@@ -80,7 +80,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             link = getURL("link", json);
             coverPhoto = getRawString("cover_photo", json);
             privacy = PrivacyType.getInstance(getRawString("privacy", json));
-            count = getPrimitiveInt("count", json);
+            count = getInt("count", json);
             type = getRawString("type", json);
             createdTime = getISO8601Datetime("created_time", json);
             updatedTime = getISO8601Datetime("updated_time", json);
