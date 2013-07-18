@@ -14,7 +14,7 @@ public abstract class MockFacebookTestBase {
 
     @Before
     public void setUp() throws Exception {
-        InputStream is = FacebookTestBase.class.getResourceAsStream("/test.properties");
+        InputStream is = MockFacebookTestBase.class.getResourceAsStream("/test.properties");
         Properties p = new Properties();
         p.load(is);
         is.close();

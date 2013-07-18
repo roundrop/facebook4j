@@ -16,20 +16,12 @@
 
 package facebook4j;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import java.util.List;
-
-import org.junit.Test;
-
-
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  * @see <a href="https://developers.facebook.com/docs/reference/api/domain/">Domain - Facebook Developers</a>
  */
-public class DomainMethodsTest extends FacebookTestBase {
-
+public class DomainMethodsTest {
+/*
     @Test
     public void getById() throws Exception {
         String id = "369296215699";
@@ -57,5 +49,5 @@ public class DomainMethodsTest extends FacebookTestBase {
         assertThat(domains.get(1).getId(), is("345629607804"));
         assertThat(domains.get(1).getName(), is("example.com"));
     }
-    
+*/
 }

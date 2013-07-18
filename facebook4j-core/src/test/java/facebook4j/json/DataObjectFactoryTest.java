@@ -16,29 +16,8 @@
 
 package facebook4j.json;
 
-import facebook4j.FacebookFactory;
-import facebook4j.FacebookTestBase;
-import facebook4j.Post;
-import facebook4j.ResponseList;
-import facebook4j.auth.AccessToken;
-import facebook4j.auth.OAuthAuthorization;
-import facebook4j.conf.Configuration;
-import facebook4j.conf.ConfigurationBuilder;
-import org.hamcrest.CoreMatchers;
-import org.junit.*;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-public class DataObjectFactoryTest extends FacebookTestBase {
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
+public class DataObjectFactoryTest {
+/*
     @Before
     public void setUp() throws Exception {
         Configuration conf = new ConfigurationBuilder().setOAuthAppId(appId).setOAuthAppSecret(appSecret)
@@ -59,5 +38,5 @@ public class DataObjectFactoryTest extends FacebookTestBase {
         assertThat(rawJSON, is(notNullValue()));
         System.out.println(rawJSON);
     }
-
+*/
 }

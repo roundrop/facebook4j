@@ -16,18 +16,12 @@
 
 package facebook4j;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
-
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  * @see <a href="https://developers.facebook.com/docs/reference/api/domain/">Domain - Facebook Developers</a>
  */
-public class FriendMethodsTest extends FacebookTestBase {
-
+public class FriendMethodsTest {
+/*
     @Test
     public void getFriends() throws Exception {
         ResponseList<Friend> friends = facebookBestFriend1.getFriends();
@@ -46,5 +40,5 @@ public class FriendMethodsTest extends FacebookTestBase {
         assertThat(friend.getBirthday(), is("08/08/1980"));
         assertThat(friend.getHometown(), is(nullValue()));
     }
-
+*/
 }

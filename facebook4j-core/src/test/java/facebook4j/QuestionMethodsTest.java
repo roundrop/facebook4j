@@ -1,36 +1,8 @@
 package facebook4j;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+public class QuestionMethodsTest {
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import facebook4j.Question.Option;
-
-import java.util.Date;
-
-public class QuestionMethodsTest extends FacebookTestBase {
-
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
+/*
     @Test
     public void getQuestions_me() throws Exception {
         // require page access token
@@ -105,5 +77,5 @@ public class QuestionMethodsTest extends FacebookTestBase {
         assertThat(question.getId(), is(questionId));
         assertThat(question.getOptions().size(), is(4));
     }
-
+*/
 }

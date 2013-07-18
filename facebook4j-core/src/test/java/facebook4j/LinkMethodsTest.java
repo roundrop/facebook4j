@@ -16,31 +16,9 @@
 
 package facebook4j;
 
-import org.junit.*;
+public class LinkMethodsTest {
 
-import java.net.URL;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
-
-public class LinkMethodsTest extends FacebookTestBase {
-
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-    
+/*
     @Test
     public void getLinks_me() throws Exception {
         ResponseList<Link> links = facebook1.getLinks();
@@ -59,5 +37,5 @@ public class LinkMethodsTest extends FacebookTestBase {
             System.out.println(link);
         }
     }
-
+*/
 }

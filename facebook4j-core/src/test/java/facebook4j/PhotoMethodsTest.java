@@ -16,35 +16,9 @@
 
 package facebook4j;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+public class PhotoMethodsTest {
 
-import java.io.File;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-public class PhotoMethodsTest extends FacebookTestBase {
-
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
+/*
     @Test
     public void post_delete() throws Exception {
         File file = new File("src/test/resources/test_image.png");
@@ -55,5 +29,5 @@ public class PhotoMethodsTest extends FacebookTestBase {
         boolean deleteResult = facebook1.deletePhoto(photoId);
         assertThat(deleteResult, is(true));
     }
-
+*/
 }

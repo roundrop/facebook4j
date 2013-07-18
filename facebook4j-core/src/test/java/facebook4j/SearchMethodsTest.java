@@ -16,38 +16,15 @@
 
 package facebook4j;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import facebook4j.internal.org.json.JSONObject;
-
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public class SearchMethodsTest extends FacebookTestBase {
+public class SearchMethodsTest {
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
+/*
     @Test
     public void searchPosts() throws Exception {
-        ResponseList<Post> posts = facebook1.searchPosts("watermelon"/*, new Reading().fields("name")*/);
+        ResponseList<Post> posts = facebook1.searchPosts("watermelon");
         for (Post post : posts) {
             System.out.println(post);
         }
@@ -60,7 +37,7 @@ public class SearchMethodsTest extends FacebookTestBase {
     @Test
     public void searchUsers() throws Exception {
         //TODO
-        ResponseList<User> users = facebook1.searchUsers("roundrop"/*, new Reading().fields("name", "gender")*/);
+        ResponseList<User> users = facebook1.searchUsers("roundrop");
         for (User user : users) {
             System.out.println(user);
         }
@@ -153,4 +130,5 @@ public class SearchMethodsTest extends FacebookTestBase {
             System.out.println(result);
         }
     }
+*/
 }

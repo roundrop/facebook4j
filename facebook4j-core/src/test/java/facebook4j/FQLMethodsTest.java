@@ -16,43 +16,13 @@
 
 package facebook4j;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import facebook4j.internal.org.json.JSONArray;
-import facebook4j.internal.org.json.JSONObject;
-
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  * @see <a href="https://developers.facebook.com/docs/reference/fql/">Facebook Query Language (FQL) - Facebook Developers</a>
  */
-public class FQLMethodsTest extends FacebookTestBase {
+public class FQLMethodsTest {
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
+/*
     @Test
     public void executeFQL() throws Exception {
         String query = "SELECT uid2 FROM friend WHERE uid1=me()";
@@ -77,5 +47,5 @@ public class FQLMethodsTest extends FacebookTestBase {
         JSONArray myNameJSONArray = result.get("my name");
         assertThat((String) myNameJSONArray.getJSONObject(0).get("name"), is("bestfriend one"));
     }
-
+*/
 }

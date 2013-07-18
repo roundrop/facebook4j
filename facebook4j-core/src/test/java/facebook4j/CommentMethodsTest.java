@@ -16,33 +16,9 @@
 
 package facebook4j;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-public class CommentMethodsTest extends FacebookTestBase {
+public class CommentMethodsTest {
     
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
+/*
     @Test
     public void get() throws Exception {
         ResponseList<Album> albums = facebook1.getAlbums();
@@ -85,6 +61,6 @@ public class CommentMethodsTest extends FacebookTestBase {
 
         facebook1.deleteComment(commentId);
     }
-    
+*/
 
 }

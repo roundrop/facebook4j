@@ -16,28 +16,12 @@
 
 package facebook4j.auth;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
-import org.junit.Test;
-
-import facebook4j.Facebook;
-import facebook4j.FacebookFactory;
-import facebook4j.FacebookTestBase;
-import facebook4j.conf.Configuration;
-import facebook4j.conf.ConfigurationBuilder;
-import facebook4j.internal.http.HttpClientWrapper;
-import facebook4j.internal.http.HttpParameter;
-import facebook4j.internal.http.HttpResponse;
-
 /**
  * @author Yusuke Yamamoto - yusuke at mac.com
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public class OAuthTest extends FacebookTestBase {
-    
+public class OAuthTest {
+/*
     @Test
     public void deterministic() throws Exception {
         ArrayList list1 = new ArrayList();
@@ -115,5 +99,5 @@ public class OAuthTest extends FacebookTestBase {
         String unreserved = "abcdefghijklmnopqrstuvwzyxABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~";
         assertThat(HttpParameter.encode(unreserved), is(unreserved));
     }
-
+*/
 }
