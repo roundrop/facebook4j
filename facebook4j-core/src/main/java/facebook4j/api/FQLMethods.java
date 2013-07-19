@@ -16,10 +16,11 @@
 
 package facebook4j.api;
 
-import java.util.Map;
-
 import facebook4j.FacebookException;
 import facebook4j.internal.org.json.JSONArray;
+
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -35,6 +36,16 @@ public interface FQLMethods {
     JSONArray executeFQL(String query) throws FacebookException;
 
     /**
+     * Executes a single FQL query.
+     * @param query FQL query
+     * @param locale Locale
+     * @return array of json objects
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/fql/">Facebook Query Language (FQL) - Facebook Developers</a>
+     */
+    JSONArray executeFQL(String query, Locale locale) throws FacebookException;
+
+    /**
      * Executes multiple FQL queries.
      * @param queries FQL queries
      * @return results Map (key => given query's key : value => array of json objects)
@@ -42,5 +53,15 @@ public interface FQLMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/fql/">Facebook Query Language (FQL) - Facebook Developers</a>
      */
     Map<String, JSONArray> executeMultiFQL(Map<String, String> queries) throws FacebookException;
+
+    /**
+     * Executes multiple FQL queries.
+     * @param queries FQL queries
+     * @param locale Locale
+     * @return results Map (key => given query's key : value => array of json objects)
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/fql/">Facebook Query Language (FQL) - Facebook Developers</a>
+     */
+    Map<String, JSONArray> executeMultiFQL(Map<String, String> queries, Locale locale) throws FacebookException;
 
 }
