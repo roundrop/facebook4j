@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
@@ -2132,12 +2133,19 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     /* FQL Methods */
     
     public JSONArray executeFQL(String query) throws FacebookException {
+        return executeFQL(query, null);
+    }
+    public JSONArray executeFQL(String query, Locale locale) throws FacebookException {
         ensureAuthorizationEnabled();
         String url = "";
         try {
             url = conf.getRestBaseURL() + "fql?q=" + URLEncoder.encode(query, "UTF-8");
         } catch (UnsupportedEncodingException ignore) {
         }
+        if (locale != null) {
+            url += "&locale=" + HttpParameter.encode(locale.toString());
+        }
+
         JSONObject json = get(url).asJSONObject();
         try {
             return json.getJSONArray("data");
@@ -2145,11 +2153,18 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
     }
-    
+
     public Map<String, JSONArray> executeMultiFQL(Map<String, String> queries) throws FacebookException {
+        return executeMultiFQL(queries, null);
+    }
+    public Map<String, JSONArray> executeMultiFQL(Map<String, String> queries, Locale locale) throws FacebookException {
         ensureAuthorizationEnabled();
-        JSONObject json = get(conf.getRestBaseURL() + "fql?q=" + convertQueriesToJson(queries))
-                          .asJSONObject();
+        String url = conf.getRestBaseURL() + "fql?q=" + convertQueriesToJson(queries);
+        if (locale != null) {
+            url += "&locale=" + HttpParameter.encode(locale.toString());
+        }
+        JSONObject json = get(url)
+                .asJSONObject();
         Map<String, JSONArray> result = new HashMap<String, JSONArray>();
         try {
             JSONArray jsonArray = json.getJSONArray("data");
