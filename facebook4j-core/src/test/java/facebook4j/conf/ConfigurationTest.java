@@ -16,43 +16,22 @@
 
 package facebook4j.conf;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import facebook4j.Version;
+import org.junit.Test;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import facebook4j.Version;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 /**
  * @author Yusuke Yamamoto - yusuke at mac.com
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public class ConfigurationTest {
-
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
 
     @Test
     public void getInstance() {
@@ -72,7 +51,7 @@ public class ConfigurationTest {
 
     @Test
     public void configuration() throws Exception {
-        ConfigurationBase conf = new PropertyConfiguration();
+        ConfigurationBase conf;
 
         String test = "f4j";
         String override = "system property";
