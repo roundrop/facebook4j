@@ -16,6 +16,9 @@
 
 package facebook4j;
 
+import facebook4j.auth.Authorization;
+import facebook4j.auth.OAuthAuthorization;
+import facebook4j.conf.ConfigurationBuilder;
 import org.junit.Before;
 
 import java.io.InputStream;
@@ -37,6 +40,14 @@ public abstract class FacebookTestBase {
         System.setProperty("facebook4j.loggerFactory", p.getProperty("loggerFactory") == null ? "facebook4j.internal.logging.StdOutLoggerFactory" : p.getProperty("loggerFactory"));
         System.setProperty("facebook4j.http.prettyDebug", p.getProperty("http.prettyDebug") == null ? "true" : p.getProperty("http.prettyDebug"));
         System.setProperty("facebook4j.jsonStoreEnabled", p.getProperty("jsonStoreEnabled") == null ? "true" : p.getProperty("jsonStoreEnabled"));
+    }
+
+    protected Facebook createFacebook() {
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setOAuthAppId(p.getProperty("oauth.appId")).setOAuthAppSecret(p.getProperty("oauth.appSecret"));
+        cb.setOAuthAccessToken(p.getProperty("oauth.accessToken"));
+        Authorization auth = new OAuthAuthorization(cb.build());
+        return new FacebookFactory().getInstance(auth);
     }
 
     protected Calendar createCal(int year, int month, int day, int hour, int minute, int second, TimeZone tz) {
