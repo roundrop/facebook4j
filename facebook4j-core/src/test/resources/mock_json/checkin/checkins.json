@@ -1,0 +1,161 @@
+{
+    "data": [
+        {
+            "application": {
+                "id": "6628568379",
+                "name": "Facebook for iPhone",
+                "namespace": "fbiphone"
+            },
+            "comments": {
+                "data": [
+                    {
+                        "can_remove": true,
+                        "created_time": "2012-02-14T12:19:52+0000",
+                        "from": {
+                            "id": "1234567890123456",
+                            "name": "Name Name1"
+                        },
+                        "id": "2345678901234567_1111111",
+                        "like_count": 0,
+                        "message": "comment1...",
+                        "user_likes": false
+                    },
+                    {
+                        "can_remove": true,
+                        "created_time": "2012-02-14T14:04:40+0000",
+                        "from": {
+                            "id": "3456789012345678",
+                            "name": "Name Name2"
+                        },
+                        "id": "2345678901234567_2222222",
+                        "like_count": 0,
+                        "message": "comment2...",
+                        "user_likes": false
+                    }
+                ],
+                "paging": {"cursors": {
+                    "after": "Mg==",
+                    "before": "MQ=="
+                }}
+            },
+            "created_time": "2012-02-14T10:27:03+0000",
+            "from": {
+                "id": "1234567890123456",
+                "name": "Name Name1"
+            },
+            "id": "222222222222222",
+            "likes": {
+                "data": [
+                    {
+                        "id": "311111111111111",
+                        "name": "Name Name3"
+                    },
+                    {
+                        "id": "322222222222222",
+                        "name": "Name Name4"
+                    },
+                    {
+                        "id": "333333333333333",
+                        "name": "Name Name5"
+                    },
+                    {
+                        "id": "344444444444444",
+                        "name": "Name Name6"
+                    }
+                ],
+                "paging": {"cursors": {
+                    "after": "MTAwMDAxNTQ4NTEzNjU4",
+                    "before": "MTAwMDAyNTU4NDQ3Nzg5"
+                }}
+            },
+            "message": "message1...",
+            "place": {
+                "id": "154470644580235",
+                "location": {
+                    "city": "Chiyoda-ku",
+                    "country": "Japan",
+                    "latitude": 35.681076836862,
+                    "longitude": 139.76740305911,
+                    "state": "Tokyo",
+                    "street": "Marunouchi1-9-2",
+                    "zip": "100-6690"
+                },
+                "name": "Gran Tokyo South Tower"
+            }
+        },
+        {
+            "application": {
+                "id": "6628568379",
+                "name": "Facebook for iPhone",
+                "namespace": "fbiphone"
+            },
+            "created_time": "2012-01-27T00:32:09+0000",
+            "from": {
+                "id": "1234567890123456",
+                "name": "Name Name1"
+            },
+            "id": "444444444444444",
+            "likes": {
+                "data": [
+                    {
+                        "id": "5111111111111111",
+                        "name": "Name Name7"
+                    },
+                    {
+                        "id": "5222222222222222",
+                        "name": "Name Name8"
+                    }
+                ],
+                "paging": {"cursors": {
+                    "after": "MTAwMDAwMzM4NDY4Njg2",
+                    "before": "MTAwMDAxMjg4OTA5ODEw"
+                }}
+            },
+            "message": "message2...",
+            "place": {
+                "id": "532123656820659",
+                "location": {
+                    "city": "Minato-ku",
+                    "country": "Japan",
+                    "latitude": 35.644253731576,
+                    "longitude": 139.74310960422,
+                    "state": "Tokyo",
+                    "street": "",
+                    "zip": ""
+                },
+                "name": "Bellesalle Mita"
+            }
+        },
+        {
+            "application": {
+                "id": "6628568379",
+                "name": "Facebook for iPhone",
+                "namespace": "fbiphone"
+            },
+            "created_time": "2011-09-04T05:09:49+0000",
+            "from": {
+                "id": "1234567890123456",
+                "name": "Name Name1"
+            },
+            "id": "666666666666666",
+            "message": "message3...",
+            "place": {
+                "id": "178106048903380",
+                "location": {
+                    "city": "Ota-ku",
+                    "country": "Japan",
+                    "latitude": 35.545670908077,
+                    "longitude": 139.77104818379,
+                    "state": "Tokyo",
+                    "street": "Haneda Airport3-3-2",
+                    "zip": "144-0041"
+                },
+                "name": "Haneda Airport"
+            }
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/1234567890123456/checkins?access_token=access_token&limit=25&until=1314853428&__paging_token=184820248256447",
+        "previous": "https://graph.facebook.com/1234567890123456/checkins?access_token=access_token&limit=25&since=1373716703&__paging_token=542957045765908&__previous=1"
+    }
+}
