@@ -16,9 +16,16 @@
 
 package facebook4j.auth;
 
-public class AuthorizationTest {
+import facebook4j.Facebook;
+import facebook4j.FacebookFactory;
+import facebook4j.FacebookTestBase;
+import org.junit.Test;
 
-/*
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
+public class AuthorizationTest extends FacebookTestBase {
+
     @Test
     public void anonymousInstance() throws Exception {
         Facebook facebook = new FacebookFactory().getInstance();
@@ -43,5 +50,5 @@ public class AuthorizationTest {
         Authorization auth = facebook.getAuthorization();
         assertThat(auth, instanceOf(OAuthAuthorization.class));
     }
-*/
+
 }
