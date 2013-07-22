@@ -21,8 +21,10 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -94,7 +96,7 @@ public class ReadingTest {
         }
     }
 
-    public static class Until {
+    public static class Until extends FacebookTestBase {
         @Test
         public void phpFormat() throws Exception {
             Reading reading = new Reading().until("1372155564");
@@ -110,8 +112,8 @@ public class ReadingTest {
         // http://www.crystal-creation.com/web-appli/converter/unix-time/
         @Test
         public void date() throws Exception {
-            Date date = new SimpleDateFormat("yyyy/M/d HH:mm:ss").parse("2013/6/28 19:57:15");
-            Reading reading = new Reading().until(date);
+            Calendar cal = createCal(2013, 6, 28, 19, 57, 15, TimeZone.getTimeZone("JST"));
+            Reading reading = new Reading().until(cal.getTime());
             assertThat(reading.getQuery(), is("until=1372417035"));
         }
 
@@ -122,7 +124,7 @@ public class ReadingTest {
         }
     }
 
-    public static class Since {
+    public static class Since extends FacebookTestBase {
         @Test
         public void phpFormat() throws Exception {
             Reading reading = new Reading().since("1372155564");
@@ -138,8 +140,8 @@ public class ReadingTest {
         // http://www.crystal-creation.com/web-appli/converter/unix-time/
         @Test
         public void date() throws Exception {
-            Date date = new SimpleDateFormat("yyyy/M/d HH:mm:ss").parse("2013/6/28 19:57:15");
-            Reading reading = new Reading().since(date);
+            Calendar cal = createCal(2013, 6, 28, 19, 57, 15, TimeZone.getTimeZone("JST"));
+            Reading reading = new Reading().since(cal.getTime());
             assertThat(reading.getQuery(), is("since=1372417035"));
         }
 
