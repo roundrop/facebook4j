@@ -60,6 +60,7 @@ public final class z_F4JInternalParseUtil {
 
     private static final String ISO8601_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
     private static final String ISO8601_DATE_FORMAT_WITHOUT_TZ = "yyyy-MM-dd'T'HH:mm:ss";
+    private static final String ISO8601_DATE_FORMAT_WITHOUT_TIME = "yyyy-MM-dd";
 
     private z_F4JInternalParseUtil() {
         // should never be instantiated
@@ -190,7 +191,11 @@ public final class z_F4JInternalParseUtil {
             try {
                 return new SimpleDateFormat(ISO8601_DATE_FORMAT_WITHOUT_TZ).parse(dateString);
             } catch (ParseException e2) {
-                return null;
+                try {
+                    return new SimpleDateFormat(ISO8601_DATE_FORMAT_WITHOUT_TIME).parse(dateString);
+                } catch (ParseException e3) {
+                    return null;
+                }
             }
         }
     }
