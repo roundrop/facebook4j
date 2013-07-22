@@ -65,8 +65,12 @@ public final class URLMatchers {
 
             @Override
             public boolean matchesSafely(URL actual) {
-                encodedName = HttpParameter.encode(name);
-                encodedValue = HttpParameter.encode(value);
+                if (name != null) {
+                    encodedName = HttpParameter.encode(name);
+                }
+                if (value != null) {
+                    encodedValue = HttpParameter.encode(value);
+                }
                 String query = actual.getQuery();
                 if (query == null) return false;
                 String[] params = query.split("&");

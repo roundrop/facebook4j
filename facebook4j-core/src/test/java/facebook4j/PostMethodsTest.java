@@ -16,16 +16,10 @@
 
 package facebook4j;
 
+import org.junit.Test;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-
-import java.net.URL;
-import java.util.List;
-
-import org.hamcrest.CoreMatchers;
-import org.junit.*;
-
-import facebook4j.Post.Action;
 
 public class PostMethodsTest extends MockFacebookTestBase {
 
@@ -85,7 +79,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
 
     @Test
     public void postStatusMessage_page() throws Exception {
-        facebook.setMockJSON("mock_json/id.json");
+        facebook.setMockJSON("mock_json/post_id.json");
         String postId = facebook.postStatusMessage("137246726435626", "page's status update");
         assertThat(postId, is("137246726435626_185932178233747"));
     }
