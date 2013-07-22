@@ -22,6 +22,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -34,10 +35,10 @@ import static org.junit.Assert.*;
 @RunWith(Enclosed.class)
 public class EventMethodsTest {
 
-    public static class GetEvents extends MockFacebookTestBase {
+    public static class getEvents extends MockFacebookTestBase {
         @Test
         public void page_allfields() throws Exception {
-            facebook.setMockJSON("mock_json/events/page.json");
+            facebook.setMockJSON("mock_json/event/page.json");
             ResponseList<Event> events = facebook.getEvents("137246726435626", new Reading().fields("ticket_uri,cover,is_date_only,owner,parent_group,privacy,updated_time,venue,description,end_time,id,location,name,start_time,timezone"));
             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
             assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/events")));
@@ -70,7 +71,7 @@ public class EventMethodsTest {
         }
     }
 
-    public static class CreateEvent extends MockFacebookTestBase {
+    public static class createEvent extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/id.json");
@@ -113,7 +114,7 @@ public class EventMethodsTest {
         }
     }
 
-    public static class EditEvent extends MockFacebookTestBase {
+    public static class editEvent extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
@@ -127,7 +128,7 @@ public class EventMethodsTest {
         }
     }
 
-    public static class DeleteEvent extends MockFacebookTestBase {
+    public static class deleteEvent extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
@@ -135,6 +136,22 @@ public class EventMethodsTest {
             assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
             assertThat(facebook.getEndpointURL(), is(pathOf("/138661276338112")));
             assertThat(result, is(true));
+        }
+    }
+
+    public static class getEvent extends MockFacebookTestBase {
+        @Test
+        public void withoutTime() throws Exception {
+            facebook.setMockJSON("mock_json/event/date_without_time.json");
+            Event actual = facebook.getEvent("495480000534584");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/495480000534584")));
+
+            assertThat(actual.getId(), is("495480000534584"));
+            assertThat(actual.getTimezone(), is(TimeZone.getTimeZone("Europe/Prague")));
+            assertThat(actual.getRsvpStatus(), is("attending"));
+            assertThat(actual.getName(), is("TestEvent"));
+            assertThat(actual.getStartTime(), is(new SimpleDateFormat("yyyy-MM-dd").parse("2013-07-22")));
         }
     }
 
