@@ -16,27 +16,46 @@
 
 package facebook4j.json;
 
+import facebook4j.MockFacebook;
+import facebook4j.MockFacebookFactory;
+import facebook4j.Page;
+import facebook4j.auth.AccessToken;
+import facebook4j.conf.Configuration;
+import facebook4j.conf.ConfigurationBuilder;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 public class DataObjectFactoryTest {
-/*
+
+    protected MockFacebook facebook;
+
     @Before
     public void setUp() throws Exception {
-        Configuration conf = new ConfigurationBuilder().setOAuthAppId(appId).setOAuthAppSecret(appSecret)
-                                                       .setJSONStoreEnabled(true)
-                                                       .build();
-        facebook1 = new FacebookFactory().getInstance(new OAuthAuthorization(conf));
-        facebook1.setOAuthAccessToken(new AccessToken(id1.getAccessToken(), null));
-    }
-
-    @After
-    public void tearDown() throws Exception {
+        Configuration conf = new ConfigurationBuilder().setJSONStoreEnabled(true).build();
+        facebook = MockFacebookFactory.create(conf);
+        facebook.setOAuthAppId("mock", "json");
+        facebook.setOAuthAccessToken(new AccessToken("required"));
     }
 
     @Test
     public void getRawJSON() throws Exception {
-        ResponseList<Post> posts = facebook1.getPosts();
-        String rawJSON = DataObjectFactory.getRawJSON(posts);
+        facebook.setMockJSON("mock_json/page/f4j.json");
+        Page page = facebook.getPage();
+        String rawJSON = DataObjectFactory.getRawJSON(page);
         assertThat(rawJSON, is(notNullValue()));
-        System.out.println(rawJSON);
     }
-*/
+
+    @Test
+    public void createPage() throws Exception {
+        facebook.setMockJSON("mock_json/page/f4j.json");
+        Page page = facebook.getPage();
+        String rawJSON = DataObjectFactory.getRawJSON(page);
+        Page actual = DataObjectFactory.createPage(rawJSON);
+        assertThat(actual, is(page));
+        assertThat(actual.toString(), is(page.toString()));
+    }
+
 }
