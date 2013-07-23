@@ -16,11 +16,6 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.net.URL;
-import java.util.Date;
-
 import facebook4j.Cover;
 import facebook4j.FacebookException;
 import facebook4j.Page;
@@ -31,6 +26,11 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.net.URL;
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -199,6 +199,23 @@ import facebook4j.internal.org.json.JSONObject;
         } catch (JSONException jsone) {
             throw new FacebookException(jsone);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PageJSONImpl)) return false;
+
+        PageJSONImpl pageJSON = (PageJSONImpl) o;
+
+        if (id != null ? !id.equals(pageJSON.id) : pageJSON.id != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
