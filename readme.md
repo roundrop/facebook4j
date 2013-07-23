@@ -1,11 +1,11 @@
-# Facebook4J
+# Facebook4J [![Build Status](https://roundrop.ci.cloudbees.com/buildStatus/icon?job=Facebook4J-2.0.0)](https://roundrop.ci.cloudbees.com/job/Facebook4J-2.0.0/)
 Facebook4J is a Facebook Graph API binding library for the Java language licensed under Apache License 2.0.
 
 ## Usage
 see: [http://facebook4j.org](http://facebook4j.org)
 
 ## Version
-1.1.8
+2.0.0-SNAPSHOT
 
 ## License
 Facebook4J is released under Apache License 2.0.
