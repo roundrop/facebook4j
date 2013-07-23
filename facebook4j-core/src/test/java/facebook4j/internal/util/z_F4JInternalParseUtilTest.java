@@ -123,7 +123,7 @@ public class z_F4JInternalParseUtilTest {
     public static class getISO8601Datetime extends FacebookTestBase {
         @Before
         public void setUp() {
-            System.setProperty("user.timezone", "UTC");
+            TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         }
 
         @Test
@@ -133,7 +133,6 @@ public class z_F4JInternalParseUtilTest {
             assertThat(actual, is(notNullValue()));
             assertThat(actual, instanceOf(java.util.Date.class));
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            df.setTimeZone(TimeZone.getTimeZone("UTC"));
             assertThat(actual, is(df.parse("2012-07-31 20:49:44")));
 
             json = new JSONObject("{\"datetime\": \"2012-07-31T20:49:44+0000\"}");
@@ -152,7 +151,6 @@ public class z_F4JInternalParseUtilTest {
             assertThat(actual, is(notNullValue()));
             assertThat(actual, instanceOf(java.util.Date.class));
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            df.setTimeZone(TimeZone.getTimeZone("UTC"));
             assertThat(actual, is(df.parse("2012-08-01 05:49:44")));
 
             json = new JSONObject("{\"datetime\": \"2012-07-31T20:49:44\"}");
@@ -171,7 +169,6 @@ public class z_F4JInternalParseUtilTest {
             assertThat(actual, is(notNullValue()));
             assertThat(actual, instanceOf(java.util.Date.class));
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            df.setTimeZone(TimeZone.getTimeZone("UTC"));
             assertThat(actual, is(df.parse("2012-08-01 00:00:00")));
 
             json = new JSONObject("{\"datetime\": \"2012-07-31\"}");
