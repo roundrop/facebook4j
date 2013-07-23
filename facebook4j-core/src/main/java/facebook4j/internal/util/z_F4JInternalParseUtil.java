@@ -17,17 +17,14 @@
 package facebook4j.internal.util;
 
 import facebook4j.FacebookException;
-import facebook4j.internal.http.HTMLEntity;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -75,10 +72,6 @@ public final class z_F4JInternalParseUtil {
         }
     };
 
-    public static String getUnescapedString(String str, JSONObject json) {
-        return HTMLEntity.unescape(getRawString(str, json));
-    }
-
     public static String getRawString(String name, JSONObject json) {
         try {
             if (json.isNull(name)) {
@@ -89,17 +82,6 @@ public final class z_F4JInternalParseUtil {
         } catch (JSONException jsone) {
             return null;
         }
-    }
-
-    public static String getURLDecodedString(String name, JSONObject json) {
-        String returnValue = getRawString(name, json);
-        if (returnValue != null) {
-            try {
-                returnValue = URLDecoder.decode(returnValue, "UTF-8");
-            } catch (UnsupportedEncodingException ignore) {
-            }
-        }
-        return returnValue;
     }
 
     public static int getPrimitiveInt(String name, JSONObject json) {
@@ -141,7 +123,11 @@ public final class z_F4JInternalParseUtil {
         if (null == str || "".equals(str) || "null".equals(str)) {
             return -1;
         } else {
-            return Long.valueOf(str);
+            try {
+                return Long.valueOf(str);
+            } catch (NumberFormatException nfe) {
+                return -1;
+            }
         }
     }
 
@@ -151,8 +137,13 @@ public final class z_F4JInternalParseUtil {
     public static Long getLong(String str) {
         if (null == str || "".equals(str) || "null".equals(str)) {
             return null;
+        } else {
+            try {
+                return Long.valueOf(str);
+            } catch (NumberFormatException nfe) {
+                return null;
+            }
         }
-        return Long.valueOf(str);
     }
 
     public static double getDouble(String name, JSONObject json) {
