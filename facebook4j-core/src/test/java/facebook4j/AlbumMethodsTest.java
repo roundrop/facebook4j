@@ -122,7 +122,7 @@ public class AlbumMethodsTest {
             assertThat(actual1.getName(), is(nullValue()));
             assertThat(actual1.getLink().toString(), is("http://www.facebook.com/album.php?fbid=1111000001&id=11111000001&aid=50926"));
             assertThat(actual1.getPrivacy(), is(nullValue()));
-            assertThat(actual1.canUpload(), is(false));
+            assertThat(actual1.canUpload(), is(nullValue()));
             assertThat(actual1.getFrom(), is(nullValue()));
             assertThat(actual1.getType(), is(nullValue()));
             assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2011-08-17T11:03:11+0000")));
@@ -169,7 +169,7 @@ public class AlbumMethodsTest {
             assertThat(actual1.getName(), is(nullValue()));
             assertThat(actual1.getLink().toString(), is("http://www.facebook.com/album.php?fbid=1111000001&id=11111000001&aid=50926"));
             assertThat(actual1.getPrivacy(), is(nullValue()));
-            assertThat(actual1.canUpload(), is(false));
+            assertThat(actual1.canUpload(), is(nullValue()));
             assertThat(actual1.getFrom(), is(nullValue()));
             assertThat(actual1.getType(), is(nullValue()));
             assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2011-08-17T11:03:11+0000")));
@@ -244,6 +244,49 @@ public class AlbumMethodsTest {
 
             Album withLocation = albums.get(23);
             assertThat(withLocation.getLocation(), is("Paris, France"));
+        }
+    }
+
+    public static class getAlbum extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/album/album.json");
+            Album actual = facebook.getAlbum("285019608226998");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/285019608226998")));
+
+            assertThat(actual.getId(), is("222222222222222"));
+            assertThat(actual.getCoverPhoto(), is("111111111111111"));
+            assertThat(actual.getCount(), is(33));
+            assertThat(actual.getName(), is("foursquare Photos"));
+            assertThat(actual.getLink().toString(), is("https://www.facebook.com/album.php?fbid=222222222222222&id=100001568838021&aid=69301"));
+            assertThat(actual.getPrivacy(), is(PrivacyType.ALL_FRIENDS));
+            assertThat(actual.canUpload(), is(false));
+            assertThat(actual.getFrom().getId(), is("1234567890123456"));
+            assertThat(actual.getFrom().getName(), is("Name Name1"));
+            assertThat(actual.getType(), is("app"));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2012-01-28T02:05:19+0000")));
+            assertThat(actual.getUpdatedTime(), is(iso8601DateOf("2013-07-20T03:36:05+0000")));
+        }
+
+        @Test
+        public void id_reading() throws Exception {
+            facebook.setMockJSON("mock_json/album/album_link.json");
+            Album actual = facebook.getAlbum("285019608226998");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/285019608226998")));
+
+            assertThat(actual.getId(), is("222222222222222"));
+            assertThat(actual.getCoverPhoto(), is(nullValue()));
+            assertThat(actual.getCount(), is(nullValue()));
+            assertThat(actual.getName(), is(nullValue()));
+            assertThat(actual.getLink().toString(), is("https://www.facebook.com/album.php?fbid=222222222222222&id=100001568838021&aid=69301"));
+            assertThat(actual.getPrivacy(), is(nullValue()));
+            assertThat(actual.canUpload(), is(nullValue()));
+            assertThat(actual.getFrom(), is(nullValue()));
+            assertThat(actual.getType(), is(nullValue()));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2012-01-28T02:05:19+0000")));
+            assertThat(actual.getUpdatedTime(), is(nullValue()));
         }
     }
 
