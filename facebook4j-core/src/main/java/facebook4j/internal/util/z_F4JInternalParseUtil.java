@@ -155,10 +155,10 @@ public final class z_F4JInternalParseUtil {
         }
     }
 
-    public static boolean getBoolean(String name, JSONObject json) {
+    public static Boolean getBoolean(String name, JSONObject json) {
         String str = getRawString(name, json);
         if (null == str || "null".equals(str)) {
-            return false;
+            return null;
         }
         return Boolean.valueOf(str);
     }
