@@ -25,7 +25,7 @@ import java.util.List;
  */
 public interface Photo extends FacebookResponse {
     String getId();
-    IdNameEntity getFrom();
+    Category getFrom();
     List<Tag> getTags();
     String getName();
     URL getIcon();

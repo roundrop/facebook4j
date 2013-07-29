@@ -290,6 +290,129 @@ public class AlbumMethodsTest {
         }
     }
 
+    public static class getAlbumPhotos extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/album/photos.json");
+            ResponseList<Photo> actuals = facebook.getAlbumPhotos("10150146071791729");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10150146071791729/photos")));
+
+            assertThat(actuals.size(), is(25));
+            Photo actual1 = actuals.get(0);
+            assertThat(actual1.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yz/r/StEh3RhPvjk.gif"));
+            assertThat(actual1.getLink().toString(), is("https://www.facebook.com/photo.php?fbid=10150146071831729&set=a.10150146071791729.324257.20531316728&type=1"));
+            assertThat(actual1.getWidth(), is(720));
+            assertThat(actual1.getFrom().getId(), is("20531316728"));
+            assertThat(actual1.getFrom().getCategory(), is("Product/service"));
+            assertThat(actual1.getFrom().getName(), is("Facebook"));
+            assertThat(actual1.getUpdatedTime(), is(iso8601DateOf("2011-02-02T17:00:50+0000")));
+            assertThat(actual1.getId(), is("10150146071831729"));
+            assertThat(actual1.getPicture().toString(), is("https://fbcdn-photos-g-a.akamaihd.net/hphotos-ak-prn2/168119_10150146071831729_5116892_s.jpg"));
+            assertThat(actual1.getHeight(), is(483));
+            assertThat(actual1.getSource().toString(), is("https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-prn2/168119_10150146071831729_5116892_n.jpg"));
+            assertThat(actual1.getLikes().get(0).getId(), is("100004124615974"));
+            assertThat(actual1.getLikes().get(0).getName(), is("Flipper Flipper"));
+            assertThat(actual1.getLikes().get(10).getId(), is("1309758195"));
+            assertThat(actual1.getLikes().get(10).getName(), is("Yanaphat Sasomsup"));
+            assertThat(actual1.getLikes().get(20).getId(), is("100003760832386"));
+            assertThat(actual1.getLikes().get(20).getName(), is("Francis Leo"));
+            assertThat(actual1.getLikes().get(24).getId(), is("1395579847"));
+            assertThat(actual1.getLikes().get(24).getName(), is("Huu Thinh"));
+            assertThat(actual1.getLikes().getPaging().getNext().toString(), is("https://graph.facebook.com/10150146071831729/likes?access_token=access_token&limit=25&after=MTM5NTU3OTg0Nw%3D%3D"));
+            assertThat(actual1.getLikes().getPaging().getCursors().getAfter(), is("MTM5NTU3OTg0Nw=="));
+            assertThat(actual1.getLikes().getPaging().getCursors().getBefore(), is("MTAwMDA0MTI0NjE1OTc0"));
+            assertThat(actual1.getImages().size(), is(8));
+            assertThat(actual1.getImages().get(0).getHeight(), is(483));
+            assertThat(actual1.getImages().get(0).getWidth(), is(720));
+            assertThat(actual1.getImages().get(0).getSource().toString(), is("https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-prn2/168119_10150146071831729_5116892_n.jpg"));
+            assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2011-02-02T16:47:46+0000")));
+            assertThat(actual1.getComments().get(0).isUserLikes(), is(false));
+            assertThat(actual1.getComments().get(0).getMessage(), is("wish u all a very happy new year!!\nKung Hei Fat Choi!!!~!"));
+            assertThat(actual1.getComments().get(0).getId(), is("10150146071831729_4508512"));
+            assertThat(actual1.getComments().get(0).getLikeCount(), is(1));
+            assertThat(actual1.getComments().get(0).getFrom().getId(), is("688085523"));
+            assertThat(actual1.getComments().get(0).getFrom().getName(), is("Freda LjungBergkamp Wong"));
+            assertThat(actual1.getComments().get(0).canRemove(), is(false));
+            assertThat(actual1.getComments().get(0).getCreatedTime(), is(iso8601DateOf("2011-02-02T17:17:42+0000")));
+            assertThat(actual1.getComments().get(24).isUserLikes(), is(false));
+            assertThat(actual1.getComments().get(24).getMessage(), is("aunque ya estamos en febrero: feliz año nuevo"));
+            assertThat(actual1.getComments().get(24).getId(), is("10150146071831729_4579705"));
+            assertThat(actual1.getComments().get(24).getLikeCount(), is(1));
+            assertThat(actual1.getComments().get(24).getFrom().getId(), is("100001529892712"));
+            assertThat(actual1.getComments().get(24).getFrom().getName(), is("Ana Luz Herrera Barrantes"));
+            assertThat(actual1.getComments().get(24).canRemove(), is(false));
+            assertThat(actual1.getComments().get(24).getCreatedTime(), is(iso8601DateOf("2011-02-10T21:55:22+0000")));
+            assertThat(actual1.getComments().getPaging().getNext().toString(), is("https://graph.facebook.com/10150146071831729/comments?access_token=access_token&limit=25&after=Mjg%3D"));
+            assertThat(actual1.getComments().getPaging().getCursors().getAfter(), is("Mjg="));
+            assertThat(actual1.getComments().getPaging().getCursors().getBefore(), is("MQ=="));
+
+            Photo actual25 = actuals.get(24);
+            assertThat(actual25.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yz/r/StEh3RhPvjk.gif"));
+            assertThat(actual25.getLink().toString(), is("https://www.facebook.com/photo.php?fbid=10150146074231729&set=a.10150146071791729.324257.20531316728&type=1"));
+            assertThat(actual25.getWidth(), is(720));
+            assertThat(actual25.getFrom().getId(), is("20531316728"));
+            assertThat(actual25.getFrom().getCategory(), is("Product/service"));
+            assertThat(actual25.getFrom().getName(), is("Facebook"));
+            assertThat(actual25.getUpdatedTime(), is(iso8601DateOf("2011-02-02T17:00:50+0000")));
+            assertThat(actual25.getId(), is("10150146074231729"));
+            assertThat(actual25.getPicture().toString(), is("https://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-ash3/167155_10150146074231729_4322235_s.jpg"));
+            assertThat(actual25.getHeight(), is(480));
+            assertThat(actual25.getSource().toString(), is("https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-ash3/167155_10150146074231729_4322235_n.jpg"));
+            assertThat(actual25.getLikes().get(0).getId(), is("100002296554927"));
+            assertThat(actual25.getLikes().get(0).getName(), is("Joseph Oese"));
+            assertThat(actual25.getLikes().get(10).getId(), is("100001293816457"));
+            assertThat(actual25.getLikes().get(10).getName(), is("Cleonice Lacerda"));
+            assertThat(actual25.getLikes().get(20).getId(), is("529193178"));
+            assertThat(actual25.getLikes().get(20).getName(), is("Rózsika Nagy"));
+            assertThat(actual25.getLikes().get(24).getId(), is("100004257395674"));
+            assertThat(actual25.getLikes().get(24).getName(), is("Ilina Marino"));
+            assertThat(actual25.getLikes().getPaging().getNext().toString(), is("https://graph.facebook.com/10150146074231729/likes?access_token=access_token&limit=25&after=MTAwMDA0MjU3Mzk1Njc0"));
+            assertThat(actual25.getLikes().getPaging().getCursors().getAfter(), is("MTAwMDA0MjU3Mzk1Njc0"));
+            assertThat(actual25.getLikes().getPaging().getCursors().getBefore(), is("MTAwMDAyMjk2NTU0OTI3"));
+            assertThat(actual25.getImages().get(0).getHeight(), is(480));
+            assertThat(actual25.getImages().get(0).getWidth(), is(720));
+            assertThat(actual25.getImages().get(0).getSource().toString(), is("https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-ash3/167155_10150146074231729_4322235_n.jpg"));
+            assertThat(actual25.getCreatedTime(), is(iso8601DateOf("2011-02-02T16:51:28+0000")));
+            assertThat(actual25.getComments().get(0).isUserLikes(), is(false));
+            assertThat(actual25.getComments().get(0).getMessage(), is("cute"));
+            assertThat(actual25.getComments().get(0).getId(), is("10150146074231729_4508656"));
+            assertThat(actual25.getComments().get(0).getLikeCount(), is(1));
+            assertThat(actual25.getComments().get(0).getFrom().getId(), is("1352248795"));
+            assertThat(actual25.getComments().get(0).getFrom().getName(), is("Jeffrey Montesa"));
+            assertThat(actual25.getComments().get(0).canRemove(), is(false));
+            assertThat(actual25.getComments().get(0).getCreatedTime(), is(iso8601DateOf("2011-02-02T17:20:40+0000")));
+            assertThat(actual25.getComments().get(24).isUserLikes(), is(false));
+            assertThat(actual25.getComments().get(24).getMessage(), is("bonitoooooooosssssssss"));
+            assertThat(actual25.getComments().get(24).getId(), is("10150146074231729_4896270"));
+            assertThat(actual25.getComments().get(24).getLikeCount(), is(0));
+            assertThat(actual25.getComments().get(24).getFrom().getId(), is("100001117971123"));
+            assertThat(actual25.getComments().get(24).getFrom().getName(), is("Daniela Desireth Gonzalez"));
+            assertThat(actual25.getComments().get(24).canRemove(), is(false));
+            assertThat(actual25.getComments().get(24).getCreatedTime(), is(iso8601DateOf("2011-03-29T16:07:35+0000")));
+            assertThat(actual25.getComments().getPaging().getNext().toString(), is("https://graph.facebook.com/10150146074231729/comments?access_token=access_token&limit=25&after=MzM%3D"));
+            assertThat(actual25.getComments().getPaging().getCursors().getAfter(), is("MzM="));
+            assertThat(actual25.getComments().getPaging().getCursors().getBefore(), is("NA=="));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/album/photos_source_limit1.json");
+            ResponseList<Photo> actuals = facebook.getAlbumPhotos("10150146071791729", new Reading().fields("source").limit(1));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10150146071791729/photos")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "source"));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "1"));
+
+            assertThat(actuals.size(), is(1));
+            Photo actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("10150146071831729"));
+            assertThat(actual1.getSource().toString(), is("https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-prn2/168119_10150146071831729_5116892_n.jpg"));
+            assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2011-02-02T16:47:46+0000")));
+        }
+
+    }
+
 /*
     @Test
     public void create() throws Exception {

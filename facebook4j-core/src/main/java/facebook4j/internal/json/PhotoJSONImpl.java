@@ -16,16 +16,9 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import facebook4j.Category;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
-import facebook4j.IdNameEntity;
 import facebook4j.Like;
 import facebook4j.PagableList;
 import facebook4j.Photo;
@@ -38,6 +31,13 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
@@ -45,7 +45,7 @@ import facebook4j.internal.org.json.JSONObject;
     private static final long serialVersionUID = -6530726368840036344L;
 
     private String id;
-    private IdNameEntity from;
+    private Category from;
     private List<Tag> tags;
     private String name;
     private URL icon;
@@ -82,7 +82,7 @@ import facebook4j.internal.org.json.JSONObject;
             id = getRawString("id", json);
             if (!json.isNull("from")) {
                 JSONObject fromJSONObject = json.getJSONObject("from");
-                from = new IdNameEntityJSONImpl(fromJSONObject);
+                from = new CategoryJSONImpl(fromJSONObject);
             }
             if (!json.isNull("tags")) {
                 JSONObject tagsJSONObject = json.getJSONObject("tags");
@@ -151,7 +151,7 @@ import facebook4j.internal.org.json.JSONObject;
         return id;
     }
 
-    public IdNameEntity getFrom() {
+    public Category getFrom() {
         return from;
     }
 
