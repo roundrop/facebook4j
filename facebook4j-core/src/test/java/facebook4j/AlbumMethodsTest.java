@@ -21,6 +21,9 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
+import java.io.File;
+
+import static facebook4j.junit.F4JHttpParameterMatchers.hasPostParameter;
 import static facebook4j.junit.ISO8601DateMatchers.*;
 import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -517,6 +520,31 @@ public class AlbumMethodsTest {
             String actual = facebook.createAlbum("roundrop", albumCreate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/roundrop/albums")));
+
+            assertThat(actual, is("1234567890123456"));
+        }
+    }
+
+    public static class addAlbumPhoto extends MockFacebookTestBase {
+        @Test
+        public void noMessage() throws Exception {
+            facebook.setMockJSON("mock_json/id_and_post_id.json");
+            Media photo = new Media(new File("src/test/resources/test_image.png"));
+            String actual = facebook.addAlbumPhoto("500000000000001", photo);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/photos")));
+
+            assertThat(actual, is("1234567890123456"));
+        }
+
+        @Test
+        public void withMessage() throws Exception {
+            facebook.setMockJSON("mock_json/id_and_post_id.json");
+            Media photo = new Media(new File("src/test/resources/test_image.png"));
+            String actual = facebook.addAlbumPhoto("500000000000001", photo, "test photo.");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/photos")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "test photo."));
 
             assertThat(actual, is("1234567890123456"));
         }
