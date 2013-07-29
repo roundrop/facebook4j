@@ -563,6 +563,30 @@ public class AlbumMethodsTest {
         }
     }
 
+    public static class likeAlbum extends MockFacebookTestBase {
+        @Test
+        public void like() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.likeAlbum("500000000000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/likes")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+    public static class unlikeAlbum extends MockFacebookTestBase {
+        @Test
+        public void unlike() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.unlikeAlbum("500000000000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/likes")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
 /*
     @Test
     public void create() throws Exception {
