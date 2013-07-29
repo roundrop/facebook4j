@@ -413,6 +413,47 @@ public class AlbumMethodsTest {
 
     }
 
+    public static class getAlbumComments extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/album/comments.json");
+            ResponseList<Comment> actuals = facebook.getAlbumComments("1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/comments")));
+
+            assertThat(actuals.size(), is(1));
+            Comment actual1 = actuals.get(0);
+            assertThat(actual1.isUserLikes(), is(false));
+            assertThat(actual1.getMessage(), is("test"));
+            assertThat(actual1.getId(), is("1234567890123456_5174487"));
+            assertThat(actual1.getLikeCount(), is(0));
+            assertThat(actual1.getFrom().getId(), is("100001568838021"));
+            assertThat(actual1.getFrom().getName(), is("Ryuji Yamashita"));
+            assertThat(actual1.canRemove(), is(true));
+            assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2013-07-29T09:06:04+0000")));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/album/comments_from.json");
+            ResponseList<Comment> actuals = facebook.getAlbumComments("1234567890123456", new Reading().fields("from"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/comments")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "from"));
+
+            assertThat(actuals.size(), is(1));
+            Comment actual1 = actuals.get(0);
+            assertThat(actual1.isUserLikes(), is(nullValue()));
+            assertThat(actual1.getMessage(), is(nullValue()));
+            assertThat(actual1.getId(), is("1234567890123456_5174487"));
+            assertThat(actual1.getLikeCount(), is(-1));
+            assertThat(actual1.getFrom().getId(), is("100001568838021"));
+            assertThat(actual1.getFrom().getName(), is("Ryuji Yamashita"));
+            assertThat(actual1.canRemove(), is(nullValue()));
+            assertThat(actual1.getCreatedTime(), is(nullValue()));
+        }
+    }
+
 /*
     @Test
     public void create() throws Exception {
