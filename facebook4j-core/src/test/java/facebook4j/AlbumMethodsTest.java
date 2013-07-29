@@ -454,6 +454,50 @@ public class AlbumMethodsTest {
         }
     }
 
+    public static class getAlbumLikes extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/album/likes.json");
+            ResponseList<Like> actuals = facebook.getAlbumLikes("10150146071791729");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10150146071791729/likes")));
+
+            assertThat(actuals.size(), is(25));
+            Like actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("100002157503112"));
+            assertThat(actual1.getName(), is("Iveta Frybertova"));
+            Like actual10 = actuals.get(9);
+            assertThat(actual10.getId(), is("100004624061391"));
+            assertThat(actual10.getName(), is("Darren Dunn"));
+            Like actual20 = actuals.get(19);
+            assertThat(actual20.getId(), is("100003571250095"));
+            assertThat(actual20.getName(), is("Abhijit Barhate"));
+            Like actual25 = actuals.get(24);
+            assertThat(actual25.getId(), is("100000636243141"));
+            assertThat(actual25.getName(), is("張家茂"));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/album/likes_limit3.json");
+            ResponseList<Like> actuals = facebook.getAlbumLikes("10150146071791729", new Reading().limit(3));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10150146071791729/likes")));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "3"));
+
+            assertThat(actuals.size(), is(3));
+            Like actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("100002157503112"));
+            assertThat(actual1.getName(), is("Iveta Frybertova"));
+            Like actual2 = actuals.get(1);
+            assertThat(actual2.getId(), is("100005214576616"));
+            assertThat(actual2.getName(), is("Nguyễn Đăng Tú"));
+            Like actual3 = actuals.get(2);
+            assertThat(actual3.getId(), is("100004748435046"));
+            assertThat(actual3.getName(), is("Paul Pandi Yadav"));
+        }
+    }
+
 /*
     @Test
     public void create() throws Exception {

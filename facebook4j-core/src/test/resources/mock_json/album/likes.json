@@ -1,0 +1,111 @@
+{
+    "data": [
+        {
+            "id": "100002157503112",
+            "name": "Iveta Frybertova"
+        },
+        {
+            "id": "100005214576616",
+            "name": "Nguyễn Đăng Tú"
+        },
+        {
+            "id": "100004748435046",
+            "name": "Paul Pandi Yadav"
+        },
+        {
+            "id": "100005751341135",
+            "name": "Laindia Anacaona Incomparable"
+        },
+        {
+            "id": "100002930445443",
+            "name": "Abbas Yavarzadeh"
+        },
+        {
+            "id": "100004626637291",
+            "name": "Maryam Yadasa"
+        },
+        {
+            "id": "100005487160678",
+            "name": "Ercan Cem"
+        },
+        {
+            "id": "100005116094599",
+            "name": "Appapi Five-sl"
+        },
+        {
+            "id": "100003337717356",
+            "name": "Adel Youssef Youssef"
+        },
+        {
+            "id": "100004624061391",
+            "name": "Darren Dunn"
+        },
+        {
+            "id": "100003867202492",
+            "name": "Josefa Marta De Almeida Maciel Marta"
+        },
+        {
+            "id": "503665427",
+            "name": "Alvin Sng"
+        },
+        {
+            "id": "100005207139737",
+            "name": "Mamadou Barro"
+        },
+        {
+            "id": "100004566731217",
+            "name": "Mohamed Abd Elrahman"
+        },
+        {
+            "id": "100004872935409",
+            "name": "Anggota Bnc"
+        },
+        {
+            "id": "100000013440313",
+            "name": "Mima Boudjermine"
+        },
+        {
+            "id": "100003164430455",
+            "name": "Kimmy Smith"
+        },
+        {
+            "id": "100005000293128",
+            "name": "Amjad Bashir"
+        },
+        {
+            "id": "100001711738694",
+            "name": "Jackey Last Frinds"
+        },
+        {
+            "id": "100003571250095",
+            "name": "Abhijit Barhate"
+        },
+        {
+            "id": "1486339618",
+            "name": "Jimmy Justin"
+        },
+        {
+            "id": "100001337875053",
+            "name": "Javier Enrrique Abrantes Ferreira"
+        },
+        {
+            "id": "100004886887296",
+            "name": "Corwinuv Hunt"
+        },
+        {
+            "id": "100002872808325",
+            "name": "Vivek Ranawat"
+        },
+        {
+            "id": "100000636243141",
+            "name": "張家茂"
+        }
+    ],
+    "paging": {
+        "cursors": {
+            "after": "MTAwMDAwNjM2MjQzMTQx",
+            "before": "MTAwMDAyMTU3NTAzMTEy"
+        },
+        "next": "https://graph.facebook.com/10150146071791729/likes?access_token=access_token&limit=25&after=MTAwMDAwNjM2MjQzMTQx"
+    }
+}
