@@ -550,6 +550,19 @@ public class AlbumMethodsTest {
         }
     }
 
+    public static class commentAlbum extends MockFacebookTestBase {
+        @Test
+        public void comment() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            String actual = facebook.commentAlbum("500000000000001", "test comment.");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/comments")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "test comment."));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+    }
+
 /*
     @Test
     public void create() throws Exception {
