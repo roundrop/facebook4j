@@ -18,12 +18,15 @@ package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import static facebook4j.junit.ISO8601DateMatchers.*;
 import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+@RunWith(Enclosed.class)
 public class CheckinMethodsTest extends MockFacebookTestBase {
 
     public static class getCheckins extends MockFacebookTestBase {
