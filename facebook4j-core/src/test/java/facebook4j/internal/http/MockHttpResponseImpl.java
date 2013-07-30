@@ -5,6 +5,7 @@ import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
 public class MockHttpResponseImpl extends HttpResponseImpl {
+    private static final String DUMMY_URL = "https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-ash3/644169_573207722741517_740837405_a.jpg";
 
     MockHttpResponseImpl(String content) {
         super(content);
@@ -20,7 +21,7 @@ public class MockHttpResponseImpl extends HttpResponseImpl {
             } catch (JSONException e) {
                 throw new AssertionError();
             } catch (FacebookException e) {
-                throw new AssertionError();
+                return DUMMY_URL;
             }
         }
         return super.getResponseHeader(name);

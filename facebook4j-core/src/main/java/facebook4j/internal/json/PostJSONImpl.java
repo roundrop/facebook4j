@@ -147,7 +147,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 properties = new ArrayList<Post.Property>();
                 for (int i = 0; i < propertyJSONArray.length(); i++) {
                     JSONObject propertyJSONObject = propertyJSONArray.getJSONObject(i);
-                    properties.add(this.new PropertyJSONImpl(propertyJSONObject));
+                    properties.add(new PropertyJSONImpl(propertyJSONObject));
                 }
             }
             icon = getRawString("icon", json);
@@ -156,7 +156,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 actions = new ArrayList<Post.Action>();
                 for (int i = 0; i < actionJSONArray.length(); i++) {
                     JSONObject actionJSONObject = actionJSONArray.getJSONObject(i);
-                    actions.add(this.new ActionJSONImpl(actionJSONObject));
+                    actions.add(new ActionJSONImpl(actionJSONObject));
                 }
             }
             if (!json.isNull("privacy")) {

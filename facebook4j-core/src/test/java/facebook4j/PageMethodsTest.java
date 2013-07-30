@@ -477,7 +477,7 @@ public class PageMethodsTest {
             assertThat(actual2.getValue(), is(true));
             PageSetting actual3 = actuals.get(2);
             assertThat(actual3.getSetting(), is("PAGE_MODERATION_BLACKLIST"));
-            assertThat(actual3.getValue(), is(false));
+            assertThat(actual3.getValue(), is(nullValue()));
             PageSetting actual4 = actuals.get(3);
             assertThat(actual4.getSetting(), is("USERS_CAN_POST_PHOTOS"));
             assertThat(actual4.getValue(), is(true));
@@ -512,7 +512,7 @@ public class PageMethodsTest {
             assertThat(actual2.getValue(), is(true));
             PageSetting actual3 = actuals.get(2);
             assertThat(actual3.getSetting(), is("PAGE_MODERATION_BLACKLIST"));
-            assertThat(actual3.getValue(), is(false));
+            assertThat(actual3.getValue(), is(nullValue()));
             PageSetting actual4 = actuals.get(3);
             assertThat(actual4.getSetting(), is("USERS_CAN_POST_PHOTOS"));
             assertThat(actual4.getValue(), is(true));
@@ -1031,9 +1031,9 @@ public class PageMethodsTest {
             assertThat(tab.getLink(), is(nullValue()));
             assertThat(tab.getApplication(), is(nullValue()));
             assertThat(tab.getCustomName(), is(nullValue()));
-            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.isPermanent(), is(nullValue()));
             assertThat(tab.getPosition(), is(1));
-            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.isNonConnectionLandingTab(), is(nullValue()));
             assertThat(tab.getImageURL(), is(nullValue()));
             assertThat(tab.getCustomImageURL(), is(nullValue()));
 
@@ -1043,9 +1043,9 @@ public class PageMethodsTest {
             assertThat(tab.getLink(), is(nullValue()));
             assertThat(tab.getApplication(), is(nullValue()));
             assertThat(tab.getCustomName(), is(nullValue()));
-            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.isPermanent(), is(nullValue()));
             assertThat(tab.getPosition(), is(2));
-            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.isNonConnectionLandingTab(), is(nullValue()));
             assertThat(tab.getImageURL(), is(nullValue()));
             assertThat(tab.getCustomImageURL(), is(nullValue()));
         }
@@ -1115,9 +1115,9 @@ public class PageMethodsTest {
             assertThat(tab.getLink(), is(nullValue()));
             assertThat(tab.getApplication(), is(nullValue()));
             assertThat(tab.getCustomName(), is(nullValue()));
-            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.isPermanent(), is(nullValue()));
             assertThat(tab.getPosition(), is(1));
-            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.isNonConnectionLandingTab(), is(nullValue()));
             assertThat(tab.getImageURL(), is(nullValue()));
             assertThat(tab.getCustomImageURL(), is(nullValue()));
 
@@ -1127,9 +1127,9 @@ public class PageMethodsTest {
             assertThat(tab.getLink(), is(nullValue()));
             assertThat(tab.getApplication(), is(nullValue()));
             assertThat(tab.getCustomName(), is(nullValue()));
-            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.isPermanent(), is(nullValue()));
             assertThat(tab.getPosition(), is(2));
-            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.isNonConnectionLandingTab(), is(nullValue()));
             assertThat(tab.getImageURL(), is(nullValue()));
             assertThat(tab.getCustomImageURL(), is(nullValue()));
         }
@@ -1179,9 +1179,9 @@ public class PageMethodsTest {
             assertThat(tab.getLink(), is(nullValue()));
             assertThat(tab.getApplication(), is(nullValue()));
             assertThat(tab.getCustomName(), is(nullValue()));
-            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.isPermanent(), is(nullValue()));
             assertThat(tab.getPosition(), is(3));
-            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.isNonConnectionLandingTab(), is(nullValue()));
             assertThat(tab.getImageURL().toString(), is("https://fbcdn-photos-f-a.akamaihd.net/hphotos-ak-prn1/851576_10151412710481034_396386689_n.png"));
             assertThat(tab.getCustomImageURL(), is(nullValue()));
         }
@@ -1269,9 +1269,9 @@ public class PageMethodsTest {
             assertThat(tab.getLink(), is(nullValue()));
             assertThat(tab.getApplication(), is(nullValue()));
             assertThat(tab.getCustomName(), is(nullValue()));
-            assertThat(tab.isPermanent(), is(false));
+            assertThat(tab.isPermanent(), is(nullValue()));
             assertThat(tab.getPosition(), is(3));
-            assertThat(tab.isNonConnectionLandingTab(), is(false));
+            assertThat(tab.isNonConnectionLandingTab(), is(nullValue()));
             assertThat(tab.getImageURL().toString(), is("https://fbcdn-photos-f-a.akamaihd.net/hphotos-ak-prn1/851576_10151412710481034_396386689_n.png"));
             assertThat(tab.getCustomImageURL(), is(nullValue()));
         }
