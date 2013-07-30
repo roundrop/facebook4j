@@ -21,6 +21,9 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
+import java.net.URL;
+
+import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
 import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -428,6 +431,44 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
             assertThat(actuals.getPaging().getCursors().getAfter(), is("MTAwMDAzNjQ0NTM4NDk2"));
             assertThat(actuals.getPaging().getCursors().getBefore(), is("MTAwMDAzNjQ0NTM4NDk2"));
             assertThat(actuals.getPaging().getNext().toString(), is("https://graph.facebook.com/542957045765908/likes?limit=1&access_token=access_token&after=MTAwMDAzNjQ0NTM4NDk2"));
+        }
+    }
+
+    public static class checkin extends MockFacebookTestBase {
+        @Test
+        public void me_minimum_args() throws Exception {
+            facebook.setMockJSON("mock_json/id.json");
+            String place = "100404700021921";
+            GeoLocation coordinates = new GeoLocation(35.675272122419, 139.69321689514);
+            CheckinCreate checkinCreate = new CheckinCreate(place, coordinates);
+            String actual = facebook.checkin(checkinCreate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/checkins")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("place", "100404700021921"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("coordinates", "{\"longitude\":139.69321689514,\"latitude\":35.675272122419}"));
+
+            assertThat(actual, is("1234567890123456"));
+        }
+
+        @Test
+        public void id_all_args() throws Exception {
+            facebook.setMockJSON("mock_json/id.json");
+            String place = "100404700021921";
+            GeoLocation coordinates = new GeoLocation(35.675272122419, 139.69321689514);
+            String tags = null;
+            String message = "test message";
+            URL link = new URL("http://www.facebook.com/");
+            URL picture = null;
+            CheckinCreate checkinCreate = new CheckinCreate(place, coordinates, tags, message, link, picture);
+            String actual = facebook.checkin("100000000000001", checkinCreate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001/checkins")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("place", "100404700021921"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("coordinates", "{\"longitude\":139.69321689514,\"latitude\":35.675272122419}"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "test message"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://www.facebook.com/"));
+
+            assertThat(actual, is("1234567890123456"));
         }
     }
 
