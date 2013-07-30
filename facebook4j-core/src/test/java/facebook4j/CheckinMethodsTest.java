@@ -326,6 +326,65 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
         }
     }
 
+    public static class getCheckinComments extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/checkin/comments.json");
+            ResponseList<Comment> actuals = facebook.getCheckinComments("500000000000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/comments")));
+
+            assertThat(actuals.size(), is(2));
+            Comment actual1 = actuals.get(0);
+            assertThat(actual1.isUserLikes(), is(false));
+            assertThat(actual1.getMessage(), is("message1"));
+            assertThat(actual1.getId(), is("500000000000001_4726985"));
+            assertThat(actual1.getLikeCount(), is(0));
+            assertThat(actual1.getFrom().getId(), is("100000000000001"));
+            assertThat(actual1.getFrom().getName(), is("Name  Name1"));
+            assertThat(actual1.canRemove(), is(true));
+            assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2013-03-19T09:55:03+0000")));
+            Comment actual2 = actuals.get(1);
+            assertThat(actual2.isUserLikes(), is(false));
+            assertThat(actual2.getMessage(), is("message2"));
+            assertThat(actual2.getId(), is("500000000000001_4727422"));
+            assertThat(actual2.getLikeCount(), is(0));
+            assertThat(actual2.getFrom().getId(), is("100000000000002"));
+            assertThat(actual2.getFrom().getName(), is("Name Name2"));
+            assertThat(actual2.canRemove(), is(true));
+            assertThat(actual2.getCreatedTime(), is(iso8601DateOf("2013-03-19T13:03:26+0000")));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/checkin/comments_from.json");
+            ResponseList<Comment> actuals = facebook.getCheckinComments("500000000000001", new Reading().fields("from"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/comments")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "from"));
+
+            assertThat(actuals.size(), is(2));
+            Comment actual1 = actuals.get(0);
+            assertThat(actual1.isUserLikes(), is(nullValue()));
+            assertThat(actual1.getMessage(), is(nullValue()));
+            assertThat(actual1.getId(), is("500000000000001_4726985"));
+            assertThat(actual1.getLikeCount(), is(-1));
+            assertThat(actual1.getFrom().getId(), is("100000000000001"));
+            assertThat(actual1.getFrom().getName(), is("Name  Name1"));
+            assertThat(actual1.canRemove(), is(nullValue()));
+            assertThat(actual1.getCreatedTime(), is(nullValue()));
+            Comment actual2 = actuals.get(1);
+            assertThat(actual2.isUserLikes(), is(nullValue()));
+            assertThat(actual2.getMessage(), is(nullValue()));
+            assertThat(actual2.getId(), is("500000000000001_4727422"));
+            assertThat(actual2.getLikeCount(), is(-1));
+            assertThat(actual2.getFrom().getId(), is("100000000000002"));
+            assertThat(actual2.getFrom().getName(), is("Name Name2"));
+            assertThat(actual2.canRemove(), is(nullValue()));
+            assertThat(actual2.getCreatedTime(), is(nullValue()));
+        }
+    }
+
 /*
     private String checkin1() throws Exception {
         String place = "100404700021921";
