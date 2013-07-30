@@ -16,14 +16,11 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.util.Date;
-
 import facebook4j.Application;
 import facebook4j.Checkin;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
+import facebook4j.GeoLocation;
 import facebook4j.IdNameEntity;
 import facebook4j.PagableList;
 import facebook4j.Place;
@@ -33,6 +30,10 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -50,6 +51,7 @@ import facebook4j.internal.org.json.JSONObject;
     private String message;
     private PagableList<Comment> comments;
     private String type;
+    private GeoLocation coordinates;
 
     /*package*/CheckinJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -114,6 +116,11 @@ import facebook4j.internal.org.json.JSONObject;
                 }
             }
             type = getRawString("type", json);
+            if (!json.isNull("coordinates")) {
+                JSONObject coordinatesJSONObject = json.getJSONObject("coordinates");
+                coordinates = new GeoLocation(coordinatesJSONObject.getDouble("latitude"),
+                                              coordinatesJSONObject.getDouble("longitude"));
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -157,6 +164,10 @@ import facebook4j.internal.org.json.JSONObject;
     
     public String getType() {
         return type;
+    }
+
+    public GeoLocation getCoordinates() {
+        return coordinates;
     }
 
     /*package*/
@@ -213,11 +224,18 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "CheckinJSONImpl [id=" + id + ", from=" + from + ", tags="
-                + tags + ", place=" + place + ", application=" + application
-                + ", createdTime=" + createdTime + ", likes=" + likes
-                + ", message=" + message + ", comments=" + comments + ", type="
-                + type + "]";
+        return "CheckinJSONImpl{" +
+                "id='" + id + '\'' +
+                ", from=" + from +
+                ", tags=" + tags +
+                ", place=" + place +
+                ", application=" + application +
+                ", createdTime=" + createdTime +
+                ", likes=" + likes +
+                ", message='" + message + '\'' +
+                ", comments=" + comments +
+                ", type='" + type + '\'' +
+                ", coordinates=" + coordinates +
+                '}';
     }
-
 }

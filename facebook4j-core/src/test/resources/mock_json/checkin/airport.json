@@ -1,0 +1,27 @@
+{
+    "application": {
+        "id": "6628568379",
+        "name": "Facebook for iPhone",
+        "namespace": "fbiphone"
+    },
+    "created_time": "2011-09-04T05:09:49+0000",
+    "from": {
+        "id": "100001568838021",
+        "name": "Ryuji Yamashita"
+    },
+    "id": "200000000000001",
+    "message": "Haneda",
+    "place": {
+        "id": "178106048903380",
+        "location": {
+            "city": "Ota-ku",
+            "country": "Japan",
+            "latitude": 35.545670908077,
+            "longitude": 139.77104818379,
+            "state": "Tokyo",
+            "street": "羽田空港3-3-2",
+            "zip": "144-0041"
+        },
+        "name": "Haneda Airport"
+    }
+}

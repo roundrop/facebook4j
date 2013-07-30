@@ -280,6 +280,52 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
         }
     }
 
+    public static class getCheckin extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/checkin/airport.json");
+            Checkin actual = facebook.getCheckin("200000000000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/200000000000001")));
+
+            assertThat(actual.getMessage(), is("Haneda"));
+            assertThat(actual.getId(), is("200000000000001"));
+            assertThat(actual.getApplication().getId(), is("6628568379"));
+            assertThat(actual.getApplication().getName(), is("Facebook for iPhone"));
+            assertThat(actual.getApplication().getNamespace(), is("fbiphone"));
+            assertThat(actual.getFrom().getId(), is("100001568838021"));
+            assertThat(actual.getFrom().getName(), is("Ryuji Yamashita"));
+            assertThat(actual.getPlace().getId(), is("178106048903380"));
+            assertThat(actual.getPlace().getLocation().getZip(), is("144-0041"));
+            assertThat(actual.getPlace().getLocation().getStreet(), is("羽田空港3-3-2"));
+            assertThat(actual.getPlace().getLocation().getState(), is("Tokyo"));
+            assertThat(actual.getPlace().getLocation().getLongitude(), is(139.77104818379));
+            assertThat(actual.getPlace().getLocation().getLatitude(), is(35.545670908077));
+            assertThat(actual.getPlace().getLocation().getCountry(), is("Japan"));
+            assertThat(actual.getPlace().getLocation().getCity(), is("Ota-ku"));
+            assertThat(actual.getPlace().getName(), is("Haneda Airport"));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2011-09-04T05:09:49+0000")));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/checkin/coordinates.json");
+            Checkin actual = facebook.getCheckin("200000000000001", new Reading().fields("coordinates"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/200000000000001")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "coordinates"));
+
+            assertThat(actual.getMessage(), is(nullValue()));
+            assertThat(actual.getId(), is("200000000000001"));
+            assertThat(actual.getApplication(), is(nullValue()));
+            assertThat(actual.getFrom(), is(nullValue()));
+            assertThat(actual.getPlace(), is(nullValue()));
+            assertThat(actual.getCoordinates().getLongitude(), is(139.77104818379));
+            assertThat(actual.getCoordinates().getLatitude(), is(35.545670908077));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2011-09-04T05:09:49+0000")));
+        }
+    }
+
 /*
     private String checkin1() throws Exception {
         String place = "100404700021921";

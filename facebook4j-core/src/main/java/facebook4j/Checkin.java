@@ -32,4 +32,5 @@ public interface Checkin extends FacebookResponse {
     String getMessage();
     PagableList<Comment> getComments();
     String getType();
+    GeoLocation getCoordinates();
 }
