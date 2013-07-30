@@ -385,6 +385,49 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
         }
     }
 
+    public static class getCheckinLikes extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/checkin/likes.json");
+            ResponseList<Like> actuals = facebook.getCheckinLikes("1122334455667788");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1122334455667788/likes")));
+
+            assertThat(actuals.size(), is(5));
+            Like actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("100000000000001"));
+            assertThat(actual1.getName(), is("Name Name1"));
+            Like actual2 = actuals.get(1);
+            assertThat(actual2.getId(), is("100000000000002"));
+            assertThat(actual2.getName(), is("Name Name2"));
+            Like actual3 = actuals.get(2);
+            assertThat(actual3.getId(), is("100000000000003"));
+            assertThat(actual3.getName(), is("Name Name3"));
+            Like actual4 = actuals.get(3);
+            assertThat(actual4.getId(), is("100000000000004"));
+            assertThat(actual4.getName(), is("Name Name4"));
+            Like actual5 = actuals.get(4);
+            assertThat(actual5.getId(), is("100000000000005"));
+            assertThat(actual5.getName(), is("Name Name5"));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/checkin/likes_limit1.json");
+            ResponseList<Like> actuals = facebook.getCheckinLikes("1122334455667788", new Reading().limit(1));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1122334455667788/likes")));
+
+            assertThat(actuals.size(), is(1));
+            Like actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("100000000000001"));
+            assertThat(actual1.getName(), is("Name Name1"));
+            assertThat(actuals.getPaging().getCursors().getAfter(), is("MTAwMDAzNjQ0NTM4NDk2"));
+            assertThat(actuals.getPaging().getCursors().getBefore(), is("MTAwMDAzNjQ0NTM4NDk2"));
+            assertThat(actuals.getPaging().getNext().toString(), is("https://graph.facebook.com/542957045765908/likes?limit=1&access_token=access_token&after=MTAwMDAzNjQ0NTM4NDk2"));
+        }
+    }
+
 /*
     private String checkin1() throws Exception {
         String place = "100404700021921";
