@@ -16,15 +16,6 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-
 import facebook4j.Cover;
 import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
@@ -36,6 +27,15 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * A data class representing Basic user information element
@@ -105,7 +105,10 @@ import facebook4j.internal.org.json.JSONObject;
             lastName = getRawString("last_name", json);
             gender = getRawString("gender", json);
             if (!json.isNull("locale")) {
-                locale = new Locale(getRawString("locale", json));
+                String[] _locale = getRawString("locale", json).split("_");
+                String language = _locale[0];
+                String country = _locale[1];
+                locale = new Locale(language, country);
             }
             if (!json.isNull("languages")) {
                 JSONArray languagesJSONArray = json.getJSONArray("languages");
