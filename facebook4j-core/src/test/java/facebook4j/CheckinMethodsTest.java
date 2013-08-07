@@ -485,6 +485,30 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
         }
     }
 
+    public static class likeCheckin extends MockFacebookTestBase {
+        @Test
+        public void like() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.likeCheckin("112233445566");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/112233445566/likes")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+    public static class unlikeCheckin extends MockFacebookTestBase {
+        @Test
+        public void unlike() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.unlikeCheckin("112233445566");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/112233445566/likes")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
 /*
     private String checkin1() throws Exception {
         String place = "100404700021921";
