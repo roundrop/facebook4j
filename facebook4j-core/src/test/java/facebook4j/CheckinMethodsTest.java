@@ -472,6 +472,19 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
         }
     }
 
+    public static class commentCheckin extends MockFacebookTestBase {
+        @Test
+        public void comment() throws Exception {
+            facebook.setMockJSON("mock_json/id.json");
+            String actual = facebook.commentCheckin("112233445566", "test comment for checkin.");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/112233445566/comments")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "test comment for checkin."));
+
+            assertThat(actual, is("1234567890123456"));
+        }
+    }
+
 /*
     private String checkin1() throws Exception {
         String place = "100404700021921";
