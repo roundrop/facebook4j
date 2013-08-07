@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Locale;
 
 import static facebook4j.junit.ISO8601DateMatchers.*;
 import static facebook4j.junit.URLMatchers.*;
@@ -55,7 +56,7 @@ public class UserMethodsTest extends MockFacebookTestBase {
         assertThat(me.getId(), is("6666"));
         assertThat(me.getLastName(), is("Lastname"));
         assertThat(me.getLink().toString(), is("http://www.facebook.com/roundrop"));
-        assertThat(me.getLocale().toString(), is("en_us"));
+        assertThat(me.getLocale(), is(Locale.US));
         assertThat(me.getLocation().getId(), is("7777"));
         assertThat(me.getLocation().getName(), is("Location Name"));
         assertThat(me.getName(), is("Firstname Lastname"));
@@ -117,7 +118,7 @@ public class UserMethodsTest extends MockFacebookTestBase {
         assertThat(user.getId(), is("6666"));
         assertThat(user.getLastName(), is("Lastname"));
         assertThat(user.getLink().toString(), is("http://www.facebook.com/roundrop"));
-        assertThat(user.getLocale().toString(), is("en_us"));
+        assertThat(user.getLocale(), is(Locale.US));
         assertThat(user.getLocation().getId(), is("7777"));
         assertThat(user.getLocation().getName(), is("Location Name"));
         assertThat(user.getName(), is("Firstname Lastname"));
