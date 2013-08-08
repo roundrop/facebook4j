@@ -60,6 +60,38 @@ public class CommentMethodsTest {
         }
     }
 
+    public static class getCommentLikes extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/comment/likes.json");
+            ResponseList<Like> actuals = facebook.getCommentLikes("100000000000001_90000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_90000001/likes")));
+
+            assertThat(actuals.size(), is(2));
+            Like actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("100000000000001"));
+            assertThat(actual1.getName(), is("Name Name1"));
+            Like actual2 = actuals.get(1);
+            assertThat(actual2.getId(), is("100000000000002"));
+            assertThat(actual2.getName(), is("Name Name2"));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/comment/likes_limit1.json");
+            ResponseList<Like> actuals = facebook.getCommentLikes("100000000000001_90000001", new Reading().limit(1));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_90000001/likes")));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "1"));
+
+            assertThat(actuals.size(), is(1));
+            Like actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("100000000000001"));
+            assertThat(actual1.getName(), is("Name Name1"));
+        }
+    }
+
 /*
     @Test
     public void get() throws Exception {
