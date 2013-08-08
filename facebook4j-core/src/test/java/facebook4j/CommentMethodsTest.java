@@ -92,6 +92,30 @@ public class CommentMethodsTest {
         }
     }
 
+    public static class likeComment extends MockFacebookTestBase {
+        @Test
+        public void like() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.likeComment("100000000000001_90000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_90000001/likes")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+    public static class unlikeComment extends MockFacebookTestBase {
+        @Test
+        public void unlike() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.unlikeComment("100000000000001_90000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_90000001/likes")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
 /*
     @Test
     public void get() throws Exception {
