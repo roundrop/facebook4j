@@ -48,6 +48,18 @@ public class CommentMethodsTest {
         }
     }
 
+    public static class deleteComment extends MockFacebookTestBase {
+        @Test
+        public void delete() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deleteComment("100000000000001_50000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_50000001")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
 /*
     @Test
     public void get() throws Exception {
