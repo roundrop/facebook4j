@@ -16,8 +16,38 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.RequestMethod;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+
+import static facebook4j.junit.ISO8601DateMatchers.*;
+import static facebook4j.junit.URLMatchers.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
+@RunWith(Enclosed.class)
 public class CommentMethodsTest {
-    
+
+    public static class getComment extends MockFacebookTestBase {
+        @Test
+        public void simple() throws Exception {
+            facebook.setMockJSON("mock_json/comment/simple.json");
+            Comment actual = facebook.getComment("100000000000001_50000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_50000001")));
+
+            assertThat(actual.isUserLikes(), is(false));
+            assertThat(actual.getMessage(), is("Enjoy!!"));
+            assertThat(actual.getId(), is("100000000000001_50000001"));
+            assertThat(actual.getLikeCount(), is(1));
+            assertThat(actual.getFrom().getId(), is("1234567890123456"));
+            assertThat(actual.getFrom().getName(), is("Name Name1"));
+            assertThat(actual.canRemove(), is(false));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2013-08-07T04:08:42+0000")));
+        }
+    }
+
 /*
     @Test
     public void get() throws Exception {
