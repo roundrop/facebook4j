@@ -74,7 +74,7 @@ public class PageSettingJSONImpl extends FacebookResponseImpl implements PageSet
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<PageSetting> settings = new ResponseListImpl<PageSetting>(size, json);
             for (int i = 0; i < size; i++) {
                 PageSetting setting = new PageSettingJSONImpl(list.getJSONObject(i));

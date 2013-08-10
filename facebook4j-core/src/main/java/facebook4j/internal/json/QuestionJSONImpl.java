@@ -16,10 +16,6 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.util.Date;
-
 import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
 import facebook4j.PagableList;
@@ -30,6 +26,10 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -72,6 +72,8 @@ import facebook4j.internal.org.json.JSONObject;
             if (!json.isNull("options")) {
                 JSONObject optionsJSONObject = json.getJSONObject("options");
                 options = createOptionList(optionsJSONObject);
+            } else {
+                options = new PagableListImpl<Question.Option>(0);
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -110,7 +112,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Question> questions = new ResponseListImpl<Question>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject questionJSONObject = list.getJSONObject(i);
@@ -252,7 +254,7 @@ import facebook4j.internal.org.json.JSONObject;
     throws FacebookException {
         try {
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             PagableList<Question.Option> options = new PagableListImpl<Question.Option>(size, json);
             for (int i = 0; i < size; i++) {
                 Question.Option option = new OptionJSONImpl(list.getJSONObject(i));
@@ -273,7 +275,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Question.Option> options = new ResponseListImpl<Question.Option>(size, json);
             for (int i = 0; i < size; i++) {
                 Question.Option option = new OptionJSONImpl(list.getJSONObject(i));

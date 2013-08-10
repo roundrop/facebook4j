@@ -16,15 +16,15 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.util.ArrayList;
-
 import facebook4j.FacebookException;
 import facebook4j.PagableList;
 import facebook4j.Paging;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -37,6 +37,10 @@ import facebook4j.internal.org.json.JSONObject;
 
     /*package*/PagableListImpl() {
         super();
+    }
+
+    /*package*/PagableListImpl(int size) {
+        super(size);
     }
 
     /*package*/PagableListImpl(JSONObject json, T... t) throws FacebookException {

@@ -163,7 +163,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Event> events = new ResponseListImpl<Event>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject eventJSONObject = list.getJSONObject(i);

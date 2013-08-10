@@ -16,19 +16,26 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import facebook4j.*;
+import facebook4j.Category;
+import facebook4j.Comment;
+import facebook4j.FacebookException;
+import facebook4j.IdNameEntity;
+import facebook4j.PagableList;
+import facebook4j.ResponseList;
+import facebook4j.Video;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -76,13 +83,13 @@ import facebook4j.internal.org.json.JSONObject;
             if (!json.isNull("tags")) {
                 JSONObject tagsJSONObject = json.getJSONObject("tags");
                 JSONArray tagsJSONArray = tagsJSONObject.getJSONArray("data");
-                int size = tagsJSONArray.length();
+                final int size = tagsJSONArray.length();
                 tags = new ArrayList<IdNameEntity>(size);
                 for (int i = 0; i < size; i++) {
                     tags.add(new IdNameEntityJSONImpl(tagsJSONArray.getJSONObject(i)));
                 }
             } else {
-                tags = new ArrayList<IdNameEntity>();
+                tags = Collections.emptyList();
             }
             name = getRawString("name", json);
             description = getRawString("description", json);
@@ -90,24 +97,33 @@ import facebook4j.internal.org.json.JSONObject;
             embedHtml = getRawString("embed_html", json);
             if (!json.isNull("format")) {
                 JSONArray formatJSONArray = json.getJSONArray("format");
-                int size = formatJSONArray.length();
+                final int size = formatJSONArray.length();
                 format = new ArrayList<Format>(size);
                 for (int i = 0; i < size; i++) {
                     format.add(new FormatJSONImpl(formatJSONArray.getJSONObject(i)));
                 }
+            } else {
+                format = Collections.emptyList();
             }
             icon = getURL("icon", json);
             source = getURL("source", json);
             createdTime = getISO8601Datetime("created_time", json);
             updatedTime = getISO8601Datetime("updated_time", json);
             if (!json.isNull("comments")) {
-                JSONArray commentJSONArray = json.getJSONObject("comments").getJSONArray("data");
-                int size = commentJSONArray.length();
-                comments = new PagableListImpl<Comment>(size, json.getJSONObject("comments"));
-                for (int i = 0; i < size; i++) {
-                    CommentJSONImpl comment = new CommentJSONImpl(commentJSONArray.getJSONObject(i));
-                    comments.add(comment);
+                JSONObject commentsJSONObject = json.getJSONObject("comments");
+                if (!commentsJSONObject.isNull("data")) {
+                    JSONArray list = commentsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    comments = new PagableListImpl<Comment>(size, json.getJSONObject("comments"));
+                    for (int i = 0; i < size; i++) {
+                        CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
+                        comments.add(comment);
+                    }
+                } else {
+                    comments = new PagableListImpl<Comment>(1, commentsJSONObject);
                 }
+            } else {
+                comments = new PagableListImpl<Comment>(0);
             }
             link = getURL("link", json);
         } catch (JSONException jsone) {
@@ -179,7 +195,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Video> videos = new ResponseListImpl<Video>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject videoJSONObject = list.getJSONObject(i);

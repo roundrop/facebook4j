@@ -234,7 +234,7 @@ public class PageMethodsTest {
             assertThat(actual1.getObjectId(), is(nullValue()));
             assertThat(actual1.getPrivacy(), is(nullValue()));
             assertThat(actual1.getFrom(), is(nullValue()));
-            assertThat(actual1.getProperties(), is(nullValue()));
+            assertThat(actual1.getProperties().size(), is(0));
             assertThat(actual1.getType(), is(nullValue()));
             assertThat(actual1.getUpdatedTime(), is(nullValue()));
             assertThat(actual1.getId(), is("137246726435626_188027738024191"));
@@ -348,7 +348,7 @@ public class PageMethodsTest {
             assertThat(actual1.getObjectId(), is(nullValue()));
             assertThat(actual1.getPrivacy(), is(nullValue()));
             assertThat(actual1.getFrom(), is(nullValue()));
-            assertThat(actual1.getProperties(), is(nullValue()));
+            assertThat(actual1.getProperties().size(), is(0));
             assertThat(actual1.getType(), is(nullValue()));
             assertThat(actual1.getUpdatedTime(), is(nullValue()));
             assertThat(actual1.getId(), is("137246726435626_188027738024191"));
@@ -696,7 +696,7 @@ public class PageMethodsTest {
             assertThat(photo.getLink().toString(), is("http://www.facebook.com/photo.php?fbid=203494769804107&set=o.65341080064&type=1"));
             assertThat(photo.getPicture().toString(), is("https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-frc1/q75/s480x480/1001458_203494769804107_274974554_n.jpg"));
             assertThat(tagged1.getMessage(), is("Wow!"));
-            assertThat(tagged1.getMessageTags(), is(nullValue()));
+            assertThat(tagged1.getMessageTags().size(), is(0));
             assertThat(tagged1.getObjectId(), is("203494769804107"));
             assertThat(tagged1.getPrivacy().getValue(), is(PrivacyType.EMPTY));
             assertThat(tagged1.getTo().size(), is(1));
@@ -753,7 +753,7 @@ public class PageMethodsTest {
             assertThat(video.getPicture().toString(), is("https://fbexternal-a.akamaihd.net/safe_image.php?d=AQDEyOas7zVTfgSY&w=130&h=130&url=http%3A%2F%2Fi1.ytimg.com%2Fvi%2F8P-VE8K1O6U%2Fmaxresdefault.jpg%3Ffeature%3Dog"));
             assertThat(video.getSource().toString(), is("http://www.youtube.com/v/8P-VE8K1O6U?version=3&autohide=1&autoplay=1"));
             assertThat(tagged9.getMessage(), is("WOW! Beautiful!"));
-            assertThat(tagged9.getMessageTags(), is(nullValue()));
+            assertThat(tagged9.getMessageTags().size(), is(0));
             assertThat(tagged9.getObjectId(), is(nullValue()));
             assertThat(tagged9.getPrivacy().getValue(), is(PrivacyType.EMPTY));
             assertThat(tagged9.getTo().size(), is(1));

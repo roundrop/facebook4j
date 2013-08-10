@@ -22,6 +22,7 @@ import facebook4j.Comment;
 import facebook4j.FacebookException;
 import facebook4j.GeoLocation;
 import facebook4j.IdNameEntity;
+import facebook4j.Like;
 import facebook4j.PagableList;
 import facebook4j.Place;
 import facebook4j.ResponseList;
@@ -47,7 +48,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Place place;
     private Application application;
     private Date createdTime;
-    private PagableList<IdNameEntity> likes;
+    private PagableList<Like> likes;
     private String message;
     private PagableList<Comment> comments;
     private String type;
@@ -78,12 +79,14 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             if (!json.isNull("tags")) {
                 JSONObject tagsJSONObject = json.getJSONObject("tags");
                 JSONArray list = tagsJSONObject.getJSONArray("data");
-                int size = list.length();
+                final int size = list.length();
                 tags = new PagableListImpl<IdNameEntity>(size, tagsJSONObject);
                 for (int i = 0; i < size; i++) {
                     IdNameEntityJSONImpl tag = new IdNameEntityJSONImpl(list.getJSONObject(i));
                     tags.add(tag);
                 }
+            } else {
+                tags = new PagableListImpl<IdNameEntity>(0);
             }
             if (!json.isNull("place")) {
                 JSONObject placeJSONObject = json.getJSONObject("place");
@@ -96,24 +99,36 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             createdTime = getISO8601Datetime("created_time", json);
             if (!json.isNull("likes")) {
                 JSONObject likesJSONObject = json.getJSONObject("likes");
-                JSONArray list = likesJSONObject.getJSONArray("data");
-                int size = list.length();
-                likes = new PagableListImpl<IdNameEntity>(size, likesJSONObject);
-                for (int i = 0; i < size; i++) {
-                    IdNameEntityJSONImpl like = new IdNameEntityJSONImpl(list.getJSONObject(i));
-                    likes.add(like);
+                if (!likesJSONObject.isNull("data")) {
+                    JSONArray list = likesJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    likes = new PagableListImpl<Like>(size, likesJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
+                        likes.add(like);
+                    }
+                } else {
+                    likes = new PagableListImpl<Like>(1, likesJSONObject);
                 }
+            } else {
+                likes = new PagableListImpl<Like>(0);
             }
             message = getRawString("message", json);
             if (!json.isNull("comments")) {
                 JSONObject commentsJSONObject = json.getJSONObject("comments");
-                JSONArray list = commentsJSONObject.getJSONArray("data");
-                int size = list.length();
-                comments = new PagableListImpl<Comment>(size, commentsJSONObject);
-                for (int i = 0; i < size; i++) {
-                    CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
-                    comments.add(comment);
+                if (!commentsJSONObject.isNull("data")) {
+                    JSONArray list = commentsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    comments = new PagableListImpl<Comment>(size, commentsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
+                        comments.add(comment);
+                    }
+                } else {
+                    comments = new PagableListImpl<Comment>(1, commentsJSONObject);
                 }
+            } else {
+                comments = new PagableListImpl<Comment>(0);
             }
             type = getRawString("type", json);
             if (!json.isNull("coordinates")) {
@@ -150,7 +165,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return createdTime;
     }
 
-    public PagableList<IdNameEntity> getLikes() {
+    public PagableList<Like> getLikes() {
         return likes;
     }
 
@@ -178,7 +193,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Checkin> checkins = new ResponseListImpl<Checkin>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject checkinJSONObject = list.getJSONObject(i);

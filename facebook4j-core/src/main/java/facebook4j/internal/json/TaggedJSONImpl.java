@@ -90,6 +90,8 @@ public class TaggedJSONImpl extends FacebookResponseImpl implements Tagged, java
                     }
                     messageTags.put(key, tags);
                 }
+            } else {
+                messageTags = Collections.emptyMap();
             }
             if (!json.isNull("object_id")) {
                 objectId = getRawString("object_id", json);
@@ -102,6 +104,8 @@ public class TaggedJSONImpl extends FacebookResponseImpl implements Tagged, java
                     JSONObject toJSONObject = toJSONArray.getJSONObject(i);
                     to.add(new CategoryJSONImpl(toJSONObject));
                 }
+            } else {
+                to = Collections.emptyList();
             }
             updatedTime = getISO8601Datetime("updated_time", json);
         } catch (JSONException jsone) {
@@ -161,7 +165,7 @@ public class TaggedJSONImpl extends FacebookResponseImpl implements Tagged, java
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Tagged> taggeds = new ResponseListImpl<Tagged>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject taggedJSONObject = list.getJSONObject(i);

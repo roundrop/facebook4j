@@ -145,7 +145,7 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
             assertThat(actual1.getMessage(), is(nullValue()));
             assertThat(actual1.getId(), is("222222222222222"));
             assertThat(actual1.getApplication(), is(nullValue()));
-            assertThat(actual1.getLikes(), is(nullValue()));
+            assertThat(actual1.getLikes().size(), is(0));
             assertThat(actual1.getFrom(), is(nullValue()));
             assertThat(actual1.getPlace().getId(), is("154470644580235"));
             assertThat(actual1.getPlace().getLocation().getZip(), is("100-6690"));
@@ -157,7 +157,7 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
             assertThat(actual1.getPlace().getLocation().getCity(), is("Chiyoda-ku"));
             assertThat(actual1.getPlace().getName(), is("Gran Tokyo South Tower"));
             assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2012-02-14T10:27:03+0000")));
-            assertThat(actual1.getComments(), is(nullValue()));
+            assertThat(actual1.getComments().size(), is(0));
         }
 
         @Test
@@ -230,7 +230,7 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
             assertThat(actual1.getMessage(), is(nullValue()));
             assertThat(actual1.getId(), is("222222222222222"));
             assertThat(actual1.getApplication(), is(nullValue()));
-            assertThat(actual1.getLikes(), is(nullValue()));
+            assertThat(actual1.getLikes().size(), is(0));
             assertThat(actual1.getFrom(), is(nullValue()));
             assertThat(actual1.getPlace().getId(), is("154470644580235"));
             assertThat(actual1.getPlace().getLocation().getZip(), is("100-6690"));
@@ -242,7 +242,7 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
             assertThat(actual1.getPlace().getLocation().getCity(), is("Chiyoda-ku"));
             assertThat(actual1.getPlace().getName(), is("Gran Tokyo South Tower"));
             assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2012-02-14T10:27:03+0000")));
-            assertThat(actual1.getComments(), is(nullValue()));
+            assertThat(actual1.getComments().size(), is(0));
         }
 
         @Test

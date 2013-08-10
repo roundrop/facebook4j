@@ -78,7 +78,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Family> familys = new ResponseListImpl<Family>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject familyJSONObject = list.getJSONObject(i);

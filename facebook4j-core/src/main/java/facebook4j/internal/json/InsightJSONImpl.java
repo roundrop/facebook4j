@@ -16,11 +16,6 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.io.Serializable;
-import java.util.*;
-
 import facebook4j.FacebookException;
 import facebook4j.Insight;
 import facebook4j.ResponseList;
@@ -29,6 +24,15 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -99,7 +103,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Insight> insights = new ResponseListImpl<Insight>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject insightJSONObject = list.getJSONObject(i);
@@ -210,7 +214,7 @@ import facebook4j.internal.org.json.JSONObject;
     private List<Insight.Value> createValueList(JSONObject json) throws FacebookException {
         try {
             JSONArray list = json.getJSONArray("values");
-            int size = list.length();
+            final int size = list.length();
             List<Insight.Value> values = new ArrayList<Insight.Value>(size);
             for (int i = 0; i < size; i++) {
                 Insight.Value value = new ValueJSONImpl(list.getJSONObject(i));

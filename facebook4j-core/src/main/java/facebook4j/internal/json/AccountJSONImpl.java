@@ -26,6 +26,7 @@ import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
@@ -67,13 +68,13 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             id = getRawString("id", json);
             if (!json.isNull("perms")) {
                 JSONArray permsJSONArray = json.getJSONArray("perms");
-                int size = permsJSONArray.length();
+                final int size = permsJSONArray.length();
                 perms = new ArrayList<String>(size);
                 for (int i = 0; i < size; i++) {
                     perms.add((String) permsJSONArray.get(i));
                 }
             } else {
-                perms = new ArrayList<String>(0);
+                perms = Collections.emptyList();
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone);
@@ -108,7 +109,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Account> accounts = new ResponseListImpl<Account>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject accountJSONObject = list.getJSONObject(i);

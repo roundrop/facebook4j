@@ -36,6 +36,7 @@ import facebook4j.internal.org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -111,6 +112,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                     JSONObject toJSONObject = toJSONArray.getJSONObject(i);
                     to.add(new IdNameEntityJSONImpl(toJSONObject));
                 }
+            } else {
+                to = Collections.emptyList();
             }
             message = getRawString("message", json);
             if (!json.isNull("message_tags")) {
@@ -135,6 +138,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                         }
                     }
                 }
+            } else {
+                messageTags = Collections.emptyList();
             }
             picture = getURL("picture", json);
             link = getURL("link", json);
@@ -149,6 +154,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                     JSONObject propertyJSONObject = propertyJSONArray.getJSONObject(i);
                     properties.add(new PropertyJSONImpl(propertyJSONObject));
                 }
+            } else {
+                properties = Collections.emptyList();
             }
             icon = getRawString("icon", json);
             if (!json.isNull("actions")) {
@@ -158,6 +165,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                     JSONObject actionJSONObject = actionJSONArray.getJSONObject(i);
                     actions.add(new ActionJSONImpl(actionJSONObject));
                 }
+            } else {
+                actions = Collections.emptyList();
             }
             if (!json.isNull("privacy")) {
                 JSONObject privacyJSONObject = json.getJSONObject("privacy");
@@ -174,7 +183,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 JSONObject likesJSONObject = json.getJSONObject("likes");
                 if (!likesJSONObject.isNull("data")) {
                     JSONArray list = likesJSONObject.getJSONArray("data");
-                    int size = list.length();
+                    final int size = list.length();
                     likes = new PagableListImpl<IdNameEntity>(size, likesJSONObject);
                     for (int i = 0; i < size; i++) {
                         IdNameEntityJSONImpl like = new IdNameEntityJSONImpl(list.getJSONObject(i));
@@ -183,6 +192,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 } else {
                     likes = new PagableListImpl<IdNameEntity>(1, likesJSONObject);
                 }
+            } else {
+                likes = new PagableListImpl<IdNameEntity>(0);
             }
             if (!json.isNull("place")) {
                 JSONObject placeJSONObject = json.getJSONObject("place");
@@ -205,6 +216,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                     }
                     storyTags.put(key, tags);
                 }
+            } else {
+                storyTags = Collections.emptyMap();
             }
             if (!json.isNull("with_tags")) {
                 JSONArray withTagsJSONArray = json.getJSONObject("with_tags").getJSONArray("data");
@@ -213,12 +226,14 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                     JSONObject withTagJSONObject = withTagsJSONArray.getJSONObject(i);
                     withTags.add(new IdNameEntityJSONImpl(withTagJSONObject));
                 }
+            } else {
+                withTags = Collections.emptyList();
             }
             if (!json.isNull("comments")) {
                 JSONObject commentsJSONObject = json.getJSONObject("comments");
                 if (!commentsJSONObject.isNull("data")) {
                     JSONArray list = commentsJSONObject.getJSONArray("data");
-                    int size = list.length();
+                    final int size = list.length();
                     comments = new PagableListImpl<Comment>(size, commentsJSONObject);
                     for (int i = 0; i < size; i++) {
                         CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
@@ -227,6 +242,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 } else {
                     comments = new PagableListImpl<Comment>(1, commentsJSONObject);
                 }
+            } else {
+                comments = new PagableListImpl<Comment>(0);
             }
             if (!json.isNull("object_id")) {
                 objectId = getRawString("object_id", json);
@@ -381,7 +398,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Post> posts = new ResponseListImpl<Post>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject postJSONObject = list.getJSONObject(i);

@@ -33,6 +33,7 @@ import facebook4j.internal.org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -87,12 +88,14 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             if (!json.isNull("tags")) {
                 JSONObject tagsJSONObject = json.getJSONObject("tags");
                 JSONArray list = tagsJSONObject.getJSONArray("data");
-                int size = list.length();
+                final int size = list.length();
                 tags = new ArrayList<Tag>(size);
                 for (int i = 0; i < size; i++) {
                     TagJSONImpl tag = new TagJSONImpl(list.getJSONObject(i));
                     tags.add(tag);
                 }
+            } else {
+                tags = Collections.emptyList();
             }
             name = getRawString("name", json);
             icon = getURL("icon", json);
@@ -111,6 +114,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                     JSONObject image = imagesJSONArray.getJSONObject(i);
                     images.add(new PhotoJSONImpl.ImageJSONImpl(image));
                 }
+            } else {
+                images = Collections.emptyList();
             }
             link = getURL("link", json);
             if (!json.isNull("place")) {
@@ -124,23 +129,35 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             if (!json.isNull("comments")) {
                 JSONObject commentsJSONObject = json.getJSONObject("comments");
-                JSONArray list = commentsJSONObject.getJSONArray("data");
-                int size = list.length();
-                comments = new PagableListImpl<Comment>(size, commentsJSONObject);
-                for (int i = 0; i < size; i++) {
-                    CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
-                    comments.add(comment);
+                if (!commentsJSONObject.isNull("data")) {
+                    JSONArray list = commentsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    comments = new PagableListImpl<Comment>(size, commentsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
+                        comments.add(comment);
+                    }
+                } else {
+                    comments = new PagableListImpl<Comment>(1, commentsJSONObject);
                 }
+            } else {
+                comments = new PagableListImpl<Comment>(0);
             }
             if (!json.isNull("likes")) {
                 JSONObject likesJSONObject = json.getJSONObject("likes");
-                JSONArray list = likesJSONObject.getJSONArray("data");
-                int size = list.length();
-                likes = new PagableListImpl<Like>(size, likesJSONObject);
-                for (int i = 0; i < size; i++) {
-                    LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
-                    likes.add(like);
+                if (!likesJSONObject.isNull("data")) {
+                    JSONArray list = likesJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    likes = new PagableListImpl<Like>(size, likesJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
+                        likes.add(like);
+                    }
+                } else {
+                    likes = new PagableListImpl<Like>(1, likesJSONObject);
                 }
+            } else {
+                likes = new PagableListImpl<Like>(0);
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -223,7 +240,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Photo> photos = new ResponseListImpl<Photo>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject photoJSONObject = list.getJSONObject(i);

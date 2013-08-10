@@ -26,6 +26,7 @@ import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
@@ -39,7 +40,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private String id;
     private String name;
     private String role;
-    private List<String> perms = new ArrayList<String>();
+    private List<String> perms;
 
     /*package*/AdminJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -63,12 +64,16 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         if (!json.isNull("perms")) {
             try {
                 JSONArray permsJSONArray = json.getJSONArray("perms");
+                final int size = permsJSONArray.length();
+                perms = new ArrayList<String>(size);
                 for (int i = 0; i < permsJSONArray.length(); i++) {
                     perms.add(permsJSONArray.getString(i));
                 }
             } catch (JSONException jsone) {
                 throw new FacebookException(jsone);
             }
+        } else {
+            perms = Collections.emptyList();
         }
     }
 
@@ -96,7 +101,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Admin> admins = new ResponseListImpl<Admin>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject adminJSONObject = list.getJSONObject(i);

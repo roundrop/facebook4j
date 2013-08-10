@@ -28,6 +28,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -223,7 +224,7 @@ public final class z_F4JInternalParseUtil {
 
     public static Map<String, String> getStringMap(String name, JSONObject json) throws FacebookException {
         if (json.isNull(name)) {
-            return null;
+            return Collections.emptyMap();
         }
         try {
             JSONObject jsonObject = json.getJSONObject(name);
@@ -242,7 +243,7 @@ public final class z_F4JInternalParseUtil {
 
     public static Map<String, Long> getLongMap(String name, JSONObject json) throws FacebookException {
         if (json.isNull(name)) {
-            return null;
+            return Collections.emptyMap();
         }
         try {
             JSONObject jsonObject = json.getJSONObject(name);
@@ -261,7 +262,7 @@ public final class z_F4JInternalParseUtil {
 
     public static Map<String, Boolean> getBooleanMap(String name, JSONObject json) throws FacebookException {
         if (json.isNull(name)) {
-            return null;
+            return Collections.emptyMap();
         }
         try {
             JSONObject jsonObject = json.getJSONObject(name);
@@ -280,11 +281,11 @@ public final class z_F4JInternalParseUtil {
     
     public static List<String> getStringList(String name, JSONObject json) throws FacebookException {
         if (json.isNull(name)) {
-            return null;
+            return Collections.emptyList();
         }
         try {
             JSONArray jsonArray = json.getJSONArray(name);
-            int size = jsonArray.length();
+            final int size = jsonArray.length();
             List<String> result = new ArrayList<String>(size);
             for (int i = 0; i < size; i++) {
                 result.add(jsonArray.getString(i));

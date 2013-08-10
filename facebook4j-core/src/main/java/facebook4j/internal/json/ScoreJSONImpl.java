@@ -16,7 +16,6 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 import facebook4j.Application;
 import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
@@ -27,6 +26,8 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -89,7 +90,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Score> scores = new ResponseListImpl<Score>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject scoreJSONObject = list.getJSONObject(i);
