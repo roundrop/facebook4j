@@ -525,7 +525,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     public ResponseList<RSVPStatus> getRSVPStatusInAttending(String eventId) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createRSVPStatusList(get(buildEndpoint(eventId, "attnding")));
+        return factory.createRSVPStatusList(get(buildEndpoint(eventId, "attending")));
     }
     public ResponseList<RSVPStatus> getRSVPStatusInAttending(String eventId, String userId) throws FacebookException {
         ensureAuthorizationEnabled();

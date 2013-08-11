@@ -212,7 +212,7 @@ public interface EventMethods {
      * Invites a user to the event.
      * @param eventId the ID of a event
      * @param userId the ID of the user
-     * @return the user has been invited to this event
+     * @return true if the invite is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/event/#invited">Event#invited - Facebook Developers</a>
      */

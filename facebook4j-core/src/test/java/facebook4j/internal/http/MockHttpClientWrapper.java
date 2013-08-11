@@ -68,7 +68,11 @@ public final class MockHttpClientWrapper extends HttpClientWrapper {
         logger.info(url);
         logger.info("---- HTTP Parameters:");
         for (HttpParameter httpParameter : req.getParameters()) {
-            logger.info(httpParameter.getName() + "=" + httpParameter.getValue());
+            if (httpParameter.getFile() != null) {
+                logger.info(httpParameter.getName() + "=" + httpParameter.getFile());
+            } else {
+                logger.info(httpParameter.getName() + "=" + httpParameter.getValue());
+            }
         }
 
         String json = mockJSONResourceName != null ? readMockJSON() : null;
