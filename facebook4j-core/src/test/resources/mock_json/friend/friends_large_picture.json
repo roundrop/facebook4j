@@ -1,0 +1,29 @@
+{
+    "data": [
+        {
+            "id": "100000001",
+            "name": "Friend Name1",
+            "picture": {"data": {
+                "is_silhouette": false,
+                "url": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/111111_111111111_111111111_n.jpg"
+            }}
+        },
+        {
+            "id": "100000002",
+            "name": "Friend Name2",
+            "picture": {"data": {
+                "is_silhouette": false,
+                "url": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/111111_111111111_111111112_n.jpg"
+            }}
+        },
+        {
+            "id": "100000003",
+            "name": "Friend Name3",
+            "picture": {"data": {
+                "is_silhouette": false,
+                "url": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/111111_111111111_111111113_n.jpg"
+            }}
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/friends?fields=name,picture.type%28large%29&limit=3&access_token=access_token&offset=3&__after_id=1063192913"}
+}

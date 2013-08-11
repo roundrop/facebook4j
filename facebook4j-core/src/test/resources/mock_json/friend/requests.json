@@ -1,0 +1,23 @@
+{
+    "data": [{
+        "created_time": "2013-08-11T12:17:01+0000",
+        "from": {
+            "id": "100000000000002",
+            "name": "bestfriend two"
+        },
+        "to": {
+            "id": "100000000000001",
+            "name": "bestfriend one"
+        },
+        "unread": true
+    }],
+    "paging": {
+        "next": "https://graph.facebook.com/100000000000001/friendrequests?access_token=access_token&limit=25&until=1376223421",
+        "previous": "https://graph.facebook.com/100000000000001/friendrequests?access_token=access_token&limit=25&since=1376223421&__previous=1"
+    },
+    "summary": {
+        "total_count": 1,
+        "unread_count": 1,
+        "updated_time": "2013-08-11T12:17:01+0000"
+    }
+}

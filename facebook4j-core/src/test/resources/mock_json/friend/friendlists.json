@@ -1,0 +1,25 @@
+{
+    "data": [
+        {
+            "id": "200000000000001",
+            "list_type": "work",
+            "name": "atWare, Inc."
+        },
+        {
+            "id": "200000000000002",
+            "list_type": "family",
+            "name": "Family"
+        },
+        {
+            "id": "200000000000003",
+            "list_type": "close_friends",
+            "name": "Close Friends"
+        },
+        {
+            "id": "200000000000004",
+            "list_type": "current_city",
+            "name": "Yokohama-shi, Kanagawa, Japan Area"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/friendlists?access_token=access_token&limit=5000&offset=5000&__after_id=200000000000005"}
+}

@@ -884,7 +884,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     public ResponseList<Friend> getFriendlistMembers(String friendlistId) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createFriendList(get(buildEndpoint(friendlistId)));
+        return factory.createFriendList(get(buildEndpoint(friendlistId + "/members")));
     }
 
     public ResponseList<Friend> getBelongsFriend(String friendId) throws FacebookException {

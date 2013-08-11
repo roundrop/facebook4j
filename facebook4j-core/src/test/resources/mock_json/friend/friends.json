@@ -1,0 +1,25 @@
+{
+    "data": [
+        {
+            "id": "100000001",
+            "name": "Friend Name1"
+        },
+        {
+            "id": "100000002",
+            "name": "Friend Name2"
+        },
+        {
+            "id": "100000003",
+            "name": "Friend Name3"
+        },
+        {
+            "id": "100000004",
+            "name": "Friend Name4"
+        },
+        {
+            "id": "100000005",
+            "name": "Friend Name5"
+        }
+   ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/friends?access_token=access_token&limit=5000&offset=5000&__after_id=100005035901666"}
+}
