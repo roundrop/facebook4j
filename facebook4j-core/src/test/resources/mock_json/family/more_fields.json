@@ -1,0 +1,27 @@
+{
+    "data": [
+        {
+            "first_name": "Name1",
+            "id": "100000000000001",
+            "last_name": "Family"
+        },
+        {
+            "birthday": "08/21/1981",
+            "education": [{
+                "school": {
+                    "id": "111111111111111",
+                    "name": "School Name"
+                },
+                "type": "High School",
+                "year": {
+                    "id": "22222222222222",
+                    "name": "1998"
+                }
+            }],
+            "first_name": "Name2",
+            "id": "100000000000002",
+            "last_name": "Family"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/family?fields=first_name,last_name,birthday,education&access_token=access_token&limit=5000&offset=5000&__after_id=3333333333"}
+}

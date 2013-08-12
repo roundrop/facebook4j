@@ -16,8 +16,6 @@
 
 package facebook4j;
 
-public interface Family extends FacebookResponse {
-    String getId();
-    String getName();
+public interface Family extends User {
     String getRelationship();
 }
