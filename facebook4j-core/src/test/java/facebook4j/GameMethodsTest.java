@@ -21,7 +21,10 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
-import static facebook4j.junit.ISO8601DateMatchers.iso8601DateOf;
+import java.net.URL;
+
+import static facebook4j.junit.F4JHttpParameterMatchers.hasPostParameter;
+import static facebook4j.junit.ISO8601DateMatchers.*;
 import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -174,6 +177,52 @@ public class GameMethodsTest {
             assertThat(actual1.getApplication().getId(), is("291549705119"));
             assertThat(actual1.getApplication().getName(), is("CityVille"));
             assertThat(actual1.getApplication().getNamespace(), is("cityville"));
+        }
+    }
+
+    public static class postAchievement extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/id.json");
+            String actual = facebook.postAchievement(new URL("http://fb-client-0.cityville.zynga.com/fbAchievement.php?id=70"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/achievements")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("achievement", "http://fb-client-0.cityville.zynga.com/fbAchievement.php?id=70"));
+
+            assertThat(actual, is("1234567890123456"));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/id.json");
+            String actual = facebook.postAchievement("1234567890123456", new URL("http://fb-client-0.cityville.zynga.com/fbAchievement.php?id=70"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/achievements")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("achievement", "http://fb-client-0.cityville.zynga.com/fbAchievement.php?id=70"));
+
+            assertThat(actual, is("1234567890123456"));
+        }
+    }
+
+    public static class deleteAchievement extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deleteAchievement(new URL("http://fb-client-0.cityville.zynga.com/fbAchievement.php?id=70"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/achievements")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deleteAchievement("1234567890123456", new URL("http://fb-client-0.cityville.zynga.com/fbAchievement.php?id=70"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/achievements")));
+
+            assertThat(actual, is(true));
         }
     }
 
