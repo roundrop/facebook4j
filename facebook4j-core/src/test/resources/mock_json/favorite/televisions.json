@@ -1,0 +1,23 @@
+{
+    "data": [
+        {
+            "category": "Tv network",
+            "created_time": "2012-11-19T02:07:52+0000",
+            "id": "103594929727422",
+            "name": "WOWOW"
+        },
+        {
+            "category": "Tv network",
+            "created_time": "2011-07-20T09:31:39+0000",
+            "id": "7245371700",
+            "name": "MTV"
+        },
+        {
+            "category": "Tv",
+            "created_time": "2011-04-04T14:55:49+0000",
+            "id": "101914609847998",
+            "name": "Wbs"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/television?access_token=access_token&limit=5000&offset=5000&__after_id=1111111111111111"}
+}

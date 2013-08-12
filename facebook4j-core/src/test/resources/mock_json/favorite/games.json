@@ -1,0 +1,53 @@
+{
+    "data": [
+        {
+            "category": "Games/toys",
+            "created_time": "2012-04-03T12:29:07+0000",
+            "id": "130565650316009",
+            "name": "We Rule"
+        },
+        {
+            "category": "App page",
+            "created_time": "2012-01-23T08:34:19+0000",
+            "id": "54956996099",
+            "name": "Vampire Wars"
+        },
+        {
+            "category": "App page",
+            "created_time": "2012-01-18T21:59:45+0000",
+            "id": "71775107787",
+            "name": "Mafia Wars"
+        },
+        {
+            "category": "App page",
+            "created_time": "2012-01-14T03:13:06+0000",
+            "id": "163284270385134",
+            "name": "Café World"
+        },
+        {
+            "category": "App page",
+            "created_time": "2011-11-15T23:08:33+0000",
+            "id": "146422375406131",
+            "name": "Mafia Wars Shakedown"
+        },
+        {
+            "category": "Games/toys",
+            "created_time": "2011-10-26T00:53:03+0000",
+            "id": "155882001096299",
+            "name": "Crime City"
+        },
+        {
+            "category": "App page",
+            "created_time": "2011-09-20T20:25:29+0000",
+            "id": "141722189242467",
+            "name": "Mafia Wars 2"
+        },
+        {
+            "category": "Games/toys",
+            "created_time": "2011-02-02T14:23:49+0000",
+            "id": "185143404835907",
+            "name": "Cafe World"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/games?access_token=access_token&limit=5000&offset=5000&__after_id=111111111111111"}
+}

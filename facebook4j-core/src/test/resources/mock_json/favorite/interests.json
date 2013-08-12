@@ -1,0 +1,17 @@
+{
+    "data": [
+        {
+            "category": "Interest",
+            "created_time": "2013-08-12T05:07:24+0000",
+            "id": "108712535819960",
+            "name": "Open-source software"
+        },
+        {
+            "category": "Interest",
+            "created_time": "2013-07-30T03:39:31+0000",
+            "id": "101882226520576",
+            "name": "Programming"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/interests?access_token=access_token&limit=5000&offset=5000&__after_id=100000000000000"}
+}

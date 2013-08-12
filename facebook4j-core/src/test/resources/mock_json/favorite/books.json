@@ -1,0 +1,17 @@
+{
+    "data": [
+        {
+            "category": "Book",
+            "created_time": "2013-08-12T04:37:20+0000",
+            "id": "222861334397059",
+            "name": "Refactoring: improving the design of existing code"
+        },
+        {
+            "category": "Book",
+            "created_time": "2013-08-12T04:33:20+0000",
+            "id": "416221618453649",
+            "name": "Effective Java"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/books?access_token=access_token&limit=5000&offset=5000&__after_id=555555555555555"}
+}
