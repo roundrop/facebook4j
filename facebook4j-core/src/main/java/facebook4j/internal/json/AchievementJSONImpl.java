@@ -84,7 +84,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             if (!json.isNull("importance")) {
                 importance = getPrimitiveInt("importance", json);
             }
-            achievement = new AchievementJSONImpl.AchievedObjectJSONImpl(json.getJSONObject("achievement"));
+            if (!json.isNull("achievement")) {
+                achievement = new AchievementJSONImpl.AchievedObjectJSONImpl(json.getJSONObject("achievement"));
+            }
             if (!json.isNull("likes")) {
                 JSONObject likesJSONObject = json.getJSONObject("likes");
                 if (!likesJSONObject.isNull("data")) {
