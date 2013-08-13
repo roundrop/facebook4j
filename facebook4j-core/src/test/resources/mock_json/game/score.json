@@ -1,0 +1,18 @@
+{
+    "data": [
+        {
+            "user": {
+                "id": "1234567890123456",
+                "name": "Name Name1"
+            },
+            "score": 256,
+            "application": {
+                "id": "291549705119",
+                "name": "CityVille",
+                "namespace": "cityville"
+            },
+            "type": "score"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/scores?access_token=access_token&offset=1&__after_id=555555555555555"}
+}

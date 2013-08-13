@@ -226,4 +226,142 @@ public class GameMethodsTest {
         }
     }
 
+    public static class getScores extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/game/scores.json");
+            ResponseList<Score> actuals = facebook.getScores();
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/scores")));
+
+            assertThat(actuals.size(), is(2));
+            Score actual1 = actuals.get(0);
+            assertThat(actual1.getApplication().getId(), is("291549705119"));
+            assertThat(actual1.getApplication().getName(), is("CityVille"));
+            assertThat(actual1.getApplication().getNamespace(), is("cityville"));
+            assertThat(actual1.getScore(), is(256));
+            assertThat(actual1.getType(), is("score"));
+            assertThat(actual1.getUser().getId(), is("1234567890123456"));
+            assertThat(actual1.getUser().getName(), is("Name Name1"));
+            Score actual2 = actuals.get(1);
+            assertThat(actual2.getApplication().getId(), is("266989143414"));
+            assertThat(actual2.getApplication().getName(), is("Pioneer Trail"));
+            assertThat(actual2.getApplication().getNamespace(), is("pioneertrail"));
+            assertThat(actual2.getScore(), is(65535));
+            assertThat(actual2.getType(), is("score"));
+            assertThat(actual2.getUser().getId(), is("1234567890123456"));
+            assertThat(actual2.getUser().getName(), is("Name Name1"));
+        }
+
+        @Test
+        public void me_reading() throws Exception {
+            facebook.setMockJSON("mock_json/game/score.json");
+            ResponseList<Score> actuals = facebook.getScores(new Reading().limit(1));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/scores")));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "1"));
+
+            assertThat(actuals.size(), is(1));
+            Score actual1 = actuals.get(0);
+            assertThat(actual1.getApplication().getId(), is("291549705119"));
+            assertThat(actual1.getApplication().getName(), is("CityVille"));
+            assertThat(actual1.getApplication().getNamespace(), is("cityville"));
+            assertThat(actual1.getScore(), is(256));
+            assertThat(actual1.getType(), is("score"));
+            assertThat(actual1.getUser().getId(), is("1234567890123456"));
+            assertThat(actual1.getUser().getName(), is("Name Name1"));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/game/scores.json");
+            ResponseList<Score> actuals = facebook.getScores("1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/scores")));
+
+            assertThat(actuals.size(), is(2));
+            Score actual1 = actuals.get(0);
+            assertThat(actual1.getApplication().getId(), is("291549705119"));
+            assertThat(actual1.getApplication().getName(), is("CityVille"));
+            assertThat(actual1.getApplication().getNamespace(), is("cityville"));
+            assertThat(actual1.getScore(), is(256));
+            assertThat(actual1.getType(), is("score"));
+            assertThat(actual1.getUser().getId(), is("1234567890123456"));
+            assertThat(actual1.getUser().getName(), is("Name Name1"));
+            Score actual2 = actuals.get(1);
+            assertThat(actual2.getApplication().getId(), is("266989143414"));
+            assertThat(actual2.getApplication().getName(), is("Pioneer Trail"));
+            assertThat(actual2.getApplication().getNamespace(), is("pioneertrail"));
+            assertThat(actual2.getScore(), is(65535));
+            assertThat(actual2.getType(), is("score"));
+            assertThat(actual2.getUser().getId(), is("1234567890123456"));
+            assertThat(actual2.getUser().getName(), is("Name Name1"));
+        }
+
+        @Test
+        public void id_reading() throws Exception {
+            facebook.setMockJSON("mock_json/game/score.json");
+            ResponseList<Score> actuals = facebook.getScores("1234567890123456", new Reading().limit(1));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/scores")));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "1"));
+
+            assertThat(actuals.size(), is(1));
+            Score actual1 = actuals.get(0);
+            assertThat(actual1.getApplication().getId(), is("291549705119"));
+            assertThat(actual1.getApplication().getName(), is("CityVille"));
+            assertThat(actual1.getApplication().getNamespace(), is("cityville"));
+            assertThat(actual1.getScore(), is(256));
+            assertThat(actual1.getType(), is("score"));
+            assertThat(actual1.getUser().getId(), is("1234567890123456"));
+            assertThat(actual1.getUser().getName(), is("Name Name1"));
+        }
+    }
+
+    public static class postScore extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.postScore(65535);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/scores")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("score", "65535"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.postScore("1234567890123456", 65535);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/scores")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("score", "65535"));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+    public static class deleteScore extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deleteScore();
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/scores")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deleteScore("1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/scores")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
 }
