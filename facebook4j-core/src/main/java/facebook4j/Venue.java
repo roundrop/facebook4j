@@ -16,24 +16,16 @@
 
 package facebook4j;
 
-import java.net.URL;
-import java.util.Date;
-
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Group extends FacebookResponse {
-    Integer getVersion();
-    String getName();
+public interface Venue {
     String getId();
-    Boolean isAdministrator();
-    Integer getBookmarkOrder();
-    
-    IdNameEntity getOwner();
-    String getDescription();
-    GroupPrivacyType getPrivacy();
-    URL getIcon();
-    Date getUpdatedTime();
-    String getEmail();
-    Venue getVenue();
+    String getStreet();
+    String getCity();
+    String getState();
+    String getCountry();
+    Double getLatitude();
+    Double getLongitude();
+    String getZip();
 }

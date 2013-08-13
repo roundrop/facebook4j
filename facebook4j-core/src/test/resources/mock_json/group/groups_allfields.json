@@ -1,0 +1,49 @@
+{
+    "data": [
+        {
+            "bookmark_order": 1,
+            "email": "500000000000001@groups.facebook.com",
+            "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yr/r/zzzzzzzzzz.png",
+            "id": "500000000000001",
+            "name": "Group Name1",
+            "owner": {
+                "id": "101010101010",
+                "name": "Owner Name1"
+            },
+            "privacy": "OPEN",
+            "updated_time": "2013-08-11T15:18:40+0000",
+            "venue": {"street": ""}
+        },
+        {
+            "bookmark_order": 3,
+            "description": "Group2 Description",
+            "email": "500000000000002@groups.facebook.com",
+            "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yc/r/yyyyyyyyyyyyyyyy.png",
+            "id": "500000000000002",
+            "name": "Group Name2",
+            "owner": {
+                "id": "2020202020",
+                "name": "Owner Name2"
+            },
+            "privacy": "OPEN",
+            "updated_time": "2013-08-02T04:33:26+0000",
+            "venue": {"street": ""}
+        },
+        {
+            "administrator": true,
+            "bookmark_order": 5,
+            "email": "500000000000003@groups.facebook.com",
+            "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yI/r/xxxxxxxxxxxxxxxx.png",
+            "id": "500000000000003",
+            "name": "Group Name3",
+            "owner": {
+                "id": "1234567890123456",
+                "name": "Owner Name3"
+            },
+            "privacy": "SECRET",
+            "updated_time": "2012-11-27T23:44:34+0000",
+            "venue": {"street": "Street Name3"}
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/groups?fields=administrator,bookmark_order,cover,description,email,icon,id,link,name,owner,parent,privacy,unread,updated_time,venue&access_token=access_token&limit=5000&offset=5000&__after_id=232323232323223"}
+}

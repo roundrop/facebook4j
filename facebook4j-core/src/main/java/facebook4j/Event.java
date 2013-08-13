@@ -32,21 +32,10 @@ public interface Event extends FacebookResponse {
     Date getStartTime();
     Date getEndTime();
     String getLocation();
-    Event.Venue getVenue();
+    Venue getVenue();
     EventPrivacyType getPrivacy();
     Date getUpdatedTime();
     String getRsvpStatus();
     URI getTicketURI();
     TimeZone getTimezone();
-
-    interface Venue {
-        String getId();
-        String getStreet();
-        String getCity();
-        String getState();
-        String getCountry();
-        Double getLatitude();
-        Double getLongitude();
-        String getZip();
-    }
 }

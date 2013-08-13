@@ -21,6 +21,7 @@ import facebook4j.Group;
 import facebook4j.GroupPrivacyType;
 import facebook4j.IdNameEntity;
 import facebook4j.ResponseList;
+import facebook4j.Venue;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
@@ -50,6 +51,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private URL icon;
     private Date updatedTime;
     private String email;
+    private Venue venue;
 
     /*package*/GroupJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -78,14 +80,16 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             
             if (!json.isNull("owner")) {
-                JSONObject ownerJSONObject = json.getJSONObject("owner");
-                owner = new IdNameEntityJSONImpl(ownerJSONObject);
+                owner = new IdNameEntityJSONImpl(json.getJSONObject("owner"));
             }
             description = getRawString("description", json);
             privacy = GroupPrivacyType.getInstance(getRawString("privacy", json));
             icon = getURL("icon", json);
             updatedTime = getISO8601Datetime("updated_time", json);
             email = getRawString("email", json);
+            if (!json.isNull("venue")) {
+                venue = new VenueJSONImpl(json.getJSONObject("venue"));
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -128,6 +132,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
     public String getEmail() {
         return email;
+    }
+
+    public Venue getVenue() {
+        return venue;
     }
 
     /*package*/
@@ -184,9 +192,19 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     @Override
     public String toString() {
-        return "GroupJSONImpl [version=" + version + ", name=" + name + ", id="
-                + id + ", administrator=" + administrator + ", bookmarkOrder="
-                + bookmarkOrder + "]";
+        return "GroupJSONImpl{" +
+                "version=" + version +
+                ", name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                ", administrator=" + administrator +
+                ", bookmarkOrder=" + bookmarkOrder +
+                ", owner=" + owner +
+                ", description='" + description + '\'' +
+                ", privacy=" + privacy +
+                ", icon=" + icon +
+                ", updatedTime=" + updatedTime +
+                ", email='" + email + '\'' +
+                ", venue=" + venue +
+                '}';
     }
-
 }
