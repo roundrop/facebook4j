@@ -193,4 +193,98 @@ public class GroupMethodsTest {
         }
     }
 
+    public static class getGroupFeed extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/group/feed.json");
+            ResponseList<Post> actuals = facebook.getGroupFeed("500000000000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/feed")));
+
+            assertThat(actuals.size(), is(2));
+            Post actual1 = actuals.get(0);
+            assertThat(actual1.getTo().get(0).getId(), is("500000000000001"));
+            assertThat(actual1.getTo().get(0).getName(), is("Group Name1"));
+            assertThat(actual1.getMessage(), is("Message1"));
+            assertThat(actual1.getId(), is("500000000000001_400000000000001"));
+            assertThat(actual1.getLikes().getCount(), is(6));
+            assertThat(actual1.getLikes().get(0).getId(), is("200000001"));
+            assertThat(actual1.getLikes().get(0).getName(), is("Like Name1"));
+            assertThat(actual1.getLikes().get(1).getId(), is("200000002"));
+            assertThat(actual1.getLikes().get(1).getName(), is("Like Name2"));
+            assertThat(actual1.getLikes().get(2).getId(), is("200000003"));
+            assertThat(actual1.getLikes().get(2).getName(), is("Like Name3"));
+            assertThat(actual1.getLikes().get(3).getId(), is("200000004"));
+            assertThat(actual1.getLikes().get(3).getName(), is("Like Name4"));
+            assertThat(actual1.getPrivacy().getValue(), is(PrivacyType.EMPTY));
+            assertThat(actual1.getFrom().getId(), is("100000000000001"));
+            assertThat(actual1.getFrom().getName(), is("From Name1"));
+            assertThat(actual1.getType(), is("status"));
+            assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2013-08-11T15:18:40+0000")));
+            assertThat(actual1.getUpdatedTime(), is(iso8601DateOf("2013-08-11T15:18:40+0000")));
+            assertThat(actual1.getActions().get(0).getLink().toString(), is("https://www.facebook.com/500000000000001/posts/400000000000001"));
+            assertThat(actual1.getActions().get(0).getName(), is("Comment"));
+            assertThat(actual1.getActions().get(1).getLink().toString(), is("https://www.facebook.com/500000000000001/posts/400000000000001"));
+            assertThat(actual1.getActions().get(1).getName(), is("Like"));
+            Post actual2 = actuals.get(1);
+            assertThat(actual2.getTo().get(0).getId(), is("500000000000001"));
+            assertThat(actual2.getTo().get(0).getName(), is("Group Name1"));
+            assertThat(actual2.getMessage(), is("Message2"));
+            assertThat(actual2.getId(), is("500000000000001_400000000000002"));
+            assertThat(actual2.getLikes().getCount(), is(3));
+            assertThat(actual2.getLikes().get(0).getId(), is("300000001"));
+            assertThat(actual2.getLikes().get(0).getName(), is("Like Name21"));
+            assertThat(actual2.getLikes().get(1).getId(), is("300000001"));
+            assertThat(actual2.getLikes().get(1).getName(), is("Like Name22"));
+            assertThat(actual2.getLikes().get(2).getId(), is("300000001"));
+            assertThat(actual2.getLikes().get(2).getName(), is("Like Name23"));
+            assertThat(actual2.getPrivacy().getValue(), is(PrivacyType.EMPTY));
+            assertThat(actual2.getFrom().getId(), is("100000000000001"));
+            assertThat(actual2.getFrom().getName(), is("From Name2"));
+            assertThat(actual2.getType(), is("status"));
+            assertThat(actual2.getCreatedTime(), is(iso8601DateOf("2013-08-07T17:13:51+0000")));
+            assertThat(actual2.getUpdatedTime(), is(iso8601DateOf("2013-08-08T22:46:07+0000")));
+            assertThat(actual2.getComments().get(0).isUserLikes(), is(false));
+            assertThat(actual2.getComments().get(0).getMessage(), is("Comment1"));
+            assertThat(actual2.getComments().get(0).getId(), is("570000000000001"));
+            assertThat(actual2.getComments().get(0).getLikeCount(), is(1));
+            assertThat(actual2.getComments().get(0).getFrom().getId(), is("3000000001"));
+            assertThat(actual2.getComments().get(0).getFrom().getName(), is("Comment Name1"));
+            assertThat(actual2.getComments().get(0).canRemove(), is(false));
+            assertThat(actual2.getComments().get(0).getCreatedTime(), is(iso8601DateOf("2013-08-07T21:30:13+0000")));
+            assertThat(actual2.getComments().get(1).isUserLikes(), is(false));
+            assertThat(actual2.getComments().get(1).getMessage(), is("Comment2"));
+            assertThat(actual2.getComments().get(1).getId(), is("576458272413130"));
+            assertThat(actual2.getComments().get(1).getLikeCount(), is(0));
+            assertThat(actual2.getComments().get(1).getFrom().getId(), is("3000000002"));
+            assertThat(actual2.getComments().get(1).getFrom().getName(), is("Comment Name2"));
+            assertThat(actual2.getComments().get(1).canRemove(), is(false));
+            assertThat(actual2.getComments().get(1).getCreatedTime(), is(iso8601DateOf("2013-08-08T00:21:38+0000")));
+            assertThat(actual2.getComments().getPaging().getCursors().getAfter(), is("NTc2ODY3OTA1NzA1NTAw"));
+            assertThat(actual2.getComments().getPaging().getCursors().getBefore(), is("NTc2NDAxNzQ5MDg1NDQ5"));
+            assertThat(actual2.getActions().get(0).getLink().toString(), is("https://www.facebook.com/500000000000001/posts/400000000000002"));
+            assertThat(actual2.getActions().get(0).getName(), is("Comment"));
+            assertThat(actual2.getActions().get(1).getLink().toString(), is("https://www.facebook.com/500000000000001/posts/400000000000002"));
+            assertThat(actual2.getActions().get(1).getName(), is("Like"));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/group/feed_message.json");
+            ResponseList<Post> actuals = facebook.getGroupFeed("547321978660093", new Reading().fields("message"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/547321978660093/feed")));
+
+            assertThat(actuals.size(), is(2));
+            Post actual1 = actuals.get(0);
+            assertThat(actual1.getMessage(), is("Message1"));
+            assertThat(actual1.getId(), is("500000000000001_400000000000001"));
+            assertThat(actual1.getUpdatedTime(), is(iso8601DateOf("2013-08-11T15:18:40+0000")));
+            Post actual2 = actuals.get(1);
+            assertThat(actual2.getMessage(), is("Message2"));
+            assertThat(actual2.getId(), is("500000000000001_400000000000002"));
+            assertThat(actual2.getUpdatedTime(), is(iso8601DateOf("2013-08-08T22:46:07+0000")));
+        }
+    }
+
 }
