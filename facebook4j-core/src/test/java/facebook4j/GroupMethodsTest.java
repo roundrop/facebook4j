@@ -161,4 +161,36 @@ public class GroupMethodsTest {
         }
     }
 
+    public static class getGroup extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/group/group.json");
+            Group actual = facebook.getGroup("500000000000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001")));
+
+            assertThat(actual.getId(), is("500000000000001"));
+            assertThat(actual.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yr/r/zzzzzzzzzzzz.png"));
+            assertThat(actual.getEmail(), is("500000000000001@groups.facebook.com"));
+            assertThat(actual.getName(), is("Group Name1"));
+            assertThat(actual.getPrivacy(), is(GroupPrivacyType.OPEN));
+            assertThat(actual.getOwner().getId(), is("101010101010"));
+            assertThat(actual.getOwner().getName(), is("Owner Name1"));
+            assertThat(actual.getVenue().getStreet(), is(""));
+            assertThat(actual.getUpdatedTime(), is(iso8601DateOf("2013-08-11T15:18:40+0000")));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/group/group_name.json");
+            Group actual = facebook.getGroup("500000000000001", new Reading().fields("name"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001")));
+
+            assertThat(actual.getId(), is("500000000000001"));
+            assertThat(actual.getEmail(), is(nullValue()));
+            assertThat(actual.getName(), is("Group Name1"));
+        }
+    }
+
 }

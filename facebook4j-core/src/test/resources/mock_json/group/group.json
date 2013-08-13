@@ -1,0 +1,13 @@
+{
+    "email": "500000000000001@groups.facebook.com",
+    "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yr/r/zzzzzzzzzzzz.png",
+    "id": "500000000000001",
+    "name": "Group Name1",
+    "owner": {
+        "id": "101010101010",
+        "name": "Owner Name1"
+    },
+    "privacy": "OPEN",
+    "updated_time": "2013-08-11T15:18:40+0000",
+    "venue": {"street": ""}
+}
