@@ -21,6 +21,9 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
+import java.net.URL;
+
+import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
 import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -285,6 +288,53 @@ public class GroupMethodsTest {
             assertThat(actual2.getId(), is("500000000000001_400000000000002"));
             assertThat(actual2.getUpdatedTime(), is(iso8601DateOf("2013-08-08T22:46:07+0000")));
         }
+    }
+
+    public static class postGroupFeed extends MockFacebookTestBase {
+        @Test
+        public void onlyMessage() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            PostUpdate postUpdate = new PostUpdate("test message");
+            String actual = facebook.postGroupFeed("21212121212121", postUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/21212121212121/feed")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "test message"));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+
+        @Test
+        public void onlyURL() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            PostUpdate postUpdate = new PostUpdate(new URL("http://facebook4j.org"));
+            String actual = facebook.postGroupFeed("21212121212121", postUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/21212121212121/feed")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://facebook4j.org"));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+
+        @Test
+        public void share() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            PostUpdate postUpdate = new PostUpdate(new URL("http://facebook4j.org"))
+                                    .picture(new URL("http://facebook4j.org/images/hero.png"))
+                                    .name("Facebook4J - A Java library for the Facebook Graph API")
+                                    .caption("facebook4j.org")
+                                    .description("Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library.");
+            String actual = facebook.postGroupFeed("21212121212121", postUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/21212121212121/feed")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("picture", "http://facebook4j.org/images/hero.png"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("name", "Facebook4J - A Java library for the Facebook Graph API"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("caption", "facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("description", "Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library."));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+
     }
 
 }

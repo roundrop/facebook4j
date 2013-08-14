@@ -17,7 +17,7 @@
 package facebook4j;
 
 import facebook4j.internal.http.HttpParameter;
-import facebook4j.internal.org.json.JSONObject;
+import facebook4j.internal.org.json.JSONArray;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class PostUpdate implements java.io.Serializable {
     private String name;
     private String caption;
     private String description;
-    private List<Post.Action> actions;
+    private List<PostAction> actions;
     
     private String place;
     private String tags;
@@ -134,15 +134,15 @@ public class PostUpdate implements java.io.Serializable {
         return this;
     }
 
-    public List<Post.Action> getActions() {
+    public List<PostAction> getActions() {
         return actions;
     }
 
-    public void setActions(List<Post.Action> actions) {
+    public void setActions(List<PostAction> actions) {
         this.actions = actions;
     }
     
-    public PostUpdate actions(List<Post.Action> actions) {
+    public PostUpdate actions(List<PostAction> actions) {
         setActions(actions);
         return this;
     }
@@ -269,8 +269,8 @@ public class PostUpdate implements java.io.Serializable {
             params.add(new HttpParameter("description", description));
         }
         if (actions != null && actions.size() != 0) {
-            JSONObject json = new JSONObject(actions);
-            params.add(new HttpParameter("actions", json.toString()));
+            JSONArray jsonArray = new JSONArray(actions);
+            params.add(new HttpParameter("actions", jsonArray.toString()));
         }
         if (place != null) {
             params.add(new HttpParameter("place", place));
@@ -360,5 +360,25 @@ public class PostUpdate implements java.io.Serializable {
                 ", published=" + published +
                 ", scheduledPublishTime=" + scheduledPublishTime +
                 '}';
+    }
+
+    public static class PostAction implements Post.Action, java.io.Serializable {
+        private static final long serialVersionUID = 2016068387645669580L;
+
+        private String name;
+        private String link;
+
+        public PostAction(String name, String link) {
+            this.name = name;
+            this.link = link;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getLink() {
+            return link;
+        }
     }
 }
