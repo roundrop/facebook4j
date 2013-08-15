@@ -441,4 +441,34 @@ public class GroupMethodsTest {
         }
     }
 
+    public static class getGroupDocs extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/group/docs.json");
+            ResponseList<GroupDoc> actuals = facebook.getGroupDocs("195466193802264");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/195466193802264/docs")));
+
+            assertThat(actuals.size(), is(2));
+            GroupDoc actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("207279222620961"));
+            assertThat(actual1.getRevision(), is(207279219287628L));
+            assertThat(actual1.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yi/r/-64q65AWgXb.png"));
+            assertThat(actual1.getSubject(), is("DENEME"));
+            assertThat(actual1.getFrom().getId(), is("100000584317872"));
+            assertThat(actual1.getFrom().getName(), is("Şuhut Gündem Haber Portalı"));
+            assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2011-03-12T02:43:04+0000")));
+            assertThat(actual1.getUpdatedTime(), is(iso8601DateOf("2011-03-12T02:43:04+0000")));
+            GroupDoc actual2 = actuals.get(1);
+            assertThat(actual2.getMessage(), is("<p>Document text.</p>"));
+            assertThat(actual2.getId(), is("195467123802171"));
+            assertThat(actual2.getRevision(), is(195467120468838L));
+            assertThat(actual2.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yi/r/-64q65AWgXb.png"));
+            assertThat(actual2.getSubject(), is("Example Doc"));
+            assertThat(actual2.getFrom().getId(), is("202875"));
+            assertThat(actual2.getFrom().getName(), is("Ravi Grover"));
+            assertThat(actual2.getCreatedTime(), is(iso8601DateOf("2011-01-27T00:11:46+0000")));
+            assertThat(actual2.getUpdatedTime(), is(iso8601DateOf("2011-01-27T00:11:46+0000")));
+        }
+    }
 }
