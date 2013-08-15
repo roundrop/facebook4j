@@ -27,34 +27,29 @@ import facebook4j.internal.org.json.JSONObject;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
-/*package*/ final class GroupMemberJSONImpl implements GroupMember, java.io.Serializable {
+/*package*/ final class GroupMemberJSONImpl extends UserJSONImpl implements GroupMember, java.io.Serializable {
     private static final long serialVersionUID = 8912198140971501463L;
 
-    private String id;
-    private String name;
     private Boolean isAdministrator;
 
-    /*package*/GroupMemberJSONImpl(HttpResponse res) throws FacebookException {
+    /*package*/GroupMemberJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+        super(res, conf);
         JSONObject json = res.asJSONObject();
         init(json);
+        if (conf.isJSONStoreEnabled()) {
+            DataObjectFactoryUtil.clearThreadLocalMap();
+            DataObjectFactoryUtil.registerJSONObject(this, json);
+        }
     }
     /*package*/GroupMemberJSONImpl(JSONObject json) throws FacebookException {
-        super();
+        super(json);
         init(json);
     }
 
     private void init(JSONObject json) throws FacebookException {
-        id = getRawString("id", json);
-        name = getRawString("name", json);
         isAdministrator = getBoolean("administrator", json);
     }
 
-    public String getId() {
-        return id;
-    }
-    public String getName() {
-        return name;
-    }
     public Boolean isAdministrator() {
         return isAdministrator;
     }
@@ -87,32 +82,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        GroupMemberJSONImpl other = (GroupMemberJSONImpl) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
-    @Override
     public String toString() {
-        return "MemberEntityJSONImpl [id=" + id + ", name=" + name
-                + ", isAdministrator=" + isAdministrator + "]";
+        return "GroupMemberJSONImpl{" +
+                "isAdministrator=" + isAdministrator +
+                '}' +
+                " extends " + super.toString();
     }
-
 }

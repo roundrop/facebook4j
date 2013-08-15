@@ -19,8 +19,6 @@ package facebook4j;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface GroupMember {
-    String getId();
-    String getName();
+public interface GroupMember extends User {
     Boolean isAdministrator();
 }

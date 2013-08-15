@@ -375,4 +375,58 @@ public class GroupMethodsTest {
         }
     }
 
+    public static class getGroupMembers extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/group/members.json");
+            ResponseList<GroupMember> actuals = facebook.getGroupMembers("21212121212121");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/21212121212121/members")));
+
+            assertThat(actuals.size(), is(5));
+            GroupMember actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("1000000000000001"));
+            assertThat(actual1.getName(), is("Member Name1"));
+            assertThat(actual1.isAdministrator(), is(false));
+            GroupMember actual4 = actuals.get(3);
+            assertThat(actual4.getId(), is("1000000000000004"));
+            assertThat(actual4.getName(), is("Member Name4"));
+            assertThat(actual4.isAdministrator(), is(true));
+            GroupMember actual5 = actuals.get(4);
+            assertThat(actual5.getId(), is("1000000000000005"));
+            assertThat(actual5.getName(), is("Member Name5"));
+            assertThat(actual5.isAdministrator(), is(false));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/group/members_more_fields.json");
+            ResponseList<GroupMember> actuals = facebook.getGroupMembers("21212121212121", new Reading().fields("bio,gender,first_name,last_name,birthday"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/21212121212121/members")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "bio,gender,first_name,last_name,birthday"));
+
+            assertThat(actuals.size(), is(5));
+            GroupMember actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("1000000000000001"));
+            assertThat(actual1.getFirstName(), is("First1"));
+            assertThat(actual1.getBirthday(), is("04/28/1982"));
+            assertThat(actual1.getLastName(), is("Last1"));
+            assertThat(actual1.getGender(), is("male"));
+            GroupMember actual4 = actuals.get(3);
+            assertThat(actual4.getId(), is("1000000000000004"));
+            assertThat(actual4.getFirstName(), is("First4"));
+            assertThat(actual4.getLastName(), is("Last4"));
+            assertThat(actual4.getGender(), is("male"));
+            assertThat(actual4.isAdministrator(), is(nullValue()));
+            GroupMember actual5 = actuals.get(4);
+            assertThat(actual5.getId(), is("1000000000000005"));
+            assertThat(actual5.getFirstName(), is("First5"));
+            assertThat(actual5.getBirthday(), is("08/01/1971"));
+            assertThat(actual5.getBio(), is("Ruby Programmer.\r\nI Love Emacs."));
+            assertThat(actual5.getLastName(), is("Last5"));
+            assertThat(actual5.getGender(), is("male"));
+        }
+    }
+
 }
