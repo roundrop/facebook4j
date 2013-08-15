@@ -1,0 +1,129 @@
+{
+    "data": [
+        {
+            "category": "Interest",
+            "created_time": "2013-08-15T12:43:50+0000",
+            "id": "110985235591820",
+            "name": "Open source software"
+        },
+        {
+            "category": "Book",
+            "created_time": "2013-08-12T04:37:20+0000",
+            "id": "222861334397059",
+            "name": "Refactoring: improving the design of existing code"
+        },
+        {
+            "category": "Book",
+            "created_time": "2013-08-12T04:33:20+0000",
+            "id": "416221618453649",
+            "name": "Effective Java"
+        },
+        {
+            "category": "Interest",
+            "created_time": "2013-07-30T03:56:19+0000",
+            "id": "109542932398298",
+            "name": "Software Engineer"
+        },
+        {
+            "category": "Interest",
+            "created_time": "2013-07-30T03:39:31+0000",
+            "id": "101882226520576",
+            "name": "Programming"
+        },
+        {
+            "category": "Media/news/publishing",
+            "category_list": [{
+                "id": "169056916473899",
+                "name": "Broadcasting & Media Production"
+            }],
+            "created_time": "2013-07-27T04:36:23+0000",
+            "id": "155700184497508",
+            "name": "76.1 InterFM"
+        },
+        {
+            "category": "Computers/technology",
+            "created_time": "2013-06-27T11:12:12+0000",
+            "id": "170638726406709",
+            "name": "WebPay"
+        },
+        {
+            "category": "Artist",
+            "created_time": "2013-05-18T12:49:14+0000",
+            "id": "446965358683699",
+            "name": "Shishido kavka"
+        },
+        {
+            "category": "Computers/technology",
+            "created_time": "2013-04-22T02:59:03+0000",
+            "id": "311979678927537",
+            "name": "Java Day Tokyo"
+        },
+        {
+            "category": "Software",
+            "created_time": "2013-01-08T17:09:52+0000",
+            "id": "194735530632375",
+            "name": "XtraFinder"
+        },
+        {
+            "category": "Computers/technology",
+            "created_time": "2012-12-09T07:39:50+0000",
+            "id": "259655700571",
+            "name": "Eclipse"
+        },
+        {
+            "category": "Sport",
+            "created_time": "2012-10-27T02:14:02+0000",
+            "id": "151305608267717",
+            "name": "Volleyball"
+        },
+        {
+            "category": "Product/service",
+            "created_time": "2012-09-14T14:20:10+0000",
+            "id": "6108793458",
+            "name": "I <3  Java"
+        },
+        {
+            "category": "Concert tour",
+            "created_time": "2012-08-03T12:24:26+0000",
+            "id": "120070264737314",
+            "name": "WIRE"
+        },
+        {
+            "category": "Movie",
+            "created_time": "2012-07-22T14:20:11+0000",
+            "id": "217075251669293",
+            "name": "Blade Runner"
+        },
+        {
+            "category": "Musician/band",
+            "created_time": "2011-10-05T15:12:20+0000",
+            "id": "138311299573076",
+            "name": "Boom Boom Satellites"
+        },
+        {
+            "category": "Musician/band",
+            "created_time": "2011-03-14T13:41:36+0000",
+            "id": "21193697848",
+            "name": "Underworld"
+        },
+        {
+            "category": "Musician/band",
+            "created_time": "2011-03-14T13:38:24+0000",
+            "id": "107744869246829",
+            "name": "Hardfloor"
+        },
+        {
+            "category": "Community",
+            "created_time": "2011-03-14T13:34:20+0000",
+            "id": "138262512894263",
+            "name": "Galaxy 2 Galaxy"
+        },
+        {
+            "category": "Musician/band",
+            "created_time": "2011-02-21T16:18:28+0000",
+            "id": "178725115782",
+            "name": "Ken Ishii"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/likes?access_token=access_token&limit=5000&offset=5000&__after_id=1616161616161616"}
+}

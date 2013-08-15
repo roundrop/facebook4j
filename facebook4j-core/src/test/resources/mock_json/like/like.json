@@ -1,0 +1,9 @@
+{
+    "data": [{
+        "category": "Interest",
+        "created_time": "2013-08-15T12:43:50+0000",
+        "id": "110985235591820",
+        "name": "Open source software"
+    }],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/likes?limit=1&access_token=access_token&offset=1&__after_id=110985235591820"}
+}
