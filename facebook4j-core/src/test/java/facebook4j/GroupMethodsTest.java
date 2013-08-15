@@ -429,4 +429,16 @@ public class GroupMethodsTest {
         }
     }
 
+    public static class getGroupPictureURL extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/empty.json");
+            URL actual = facebook.getGroupPictureURL("195466193802264");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/195466193802264/picture")));
+
+            assertThat(actual.toString(), is("https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-ash3/644169_573207722741517_740837405_a.jpg"));
+        }
+    }
+
 }
