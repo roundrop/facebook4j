@@ -337,4 +337,42 @@ public class GroupMethodsTest {
 
     }
 
+    public static class postGroupLink extends MockFacebookTestBase {
+        @Test
+        public void onlyLink() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            String actual = facebook.postGroupLink("21212121212121", new URL("http://facebook4j.org"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/21212121212121/feed")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://facebook4j.org"));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+
+        @Test
+        public void withMessage() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            String actual = facebook.postGroupLink("21212121212121", new URL("http://facebook4j.org"), "The best Facebook API wrapper!");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/21212121212121/feed")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "The best Facebook API wrapper!"));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+    }
+
+    public static class postGroupStatusMessage extends MockFacebookTestBase {
+        @Test
+        public void status() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            String actual = facebook.postGroupStatusMessage("21212121212121", "Facebook4J is a Java library for the Facebook Graph API.");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/21212121212121/feed")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "Facebook4J is a Java library for the Facebook Graph API."));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+    }
+
 }
