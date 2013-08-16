@@ -1,0 +1,60 @@
+{
+    "data": [
+        {
+            "created_time": "2013-07-14T02:58:34+0000",
+            "id": "500000000000001"
+        },
+        {
+            "created_time": "2013-07-13T11:58:23+0000",
+            "id": "500000000000002",
+            "tags": {"data": [
+                {
+                    "id": "123456790123456",
+                    "name": "Name Name1"
+                },
+                {
+                    "id": "100000000000001",
+                    "name": "Name Name2"
+                }
+            ]}
+        },
+        {
+            "created_time": "2013-07-13T10:15:08+0000",
+            "id": "500000000000003"
+        },
+        {
+            "created_time": "2013-07-13T07:10:23+0000",
+            "id": "500000000000004",
+            "tags": {"data": [
+                {
+                    "id": "100000000000002",
+                    "name": "Name Name3"
+                },
+                {
+                    "id": "123456790123456",
+                    "name": "Name Name1"
+                },
+                {
+                    "id": "100000000000003",
+                    "name": "Name Name4"
+                }
+            ]}
+        },
+        {
+            "created_time": "2013-04-23T00:48:19+0000",
+            "id": "500000000000005"
+        },
+        {
+            "created_time": "2013-03-19T09:49:04+0000",
+            "id": "500000000000006",
+            "tags": {"data": [{
+                "id": "100000000000004",
+                "name": "Name Name5"
+            }]}
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/123456790123456/locations?fields=tags&access_token=access_token&limit=25&until=1313131313&__paging_token=4848484848484848",
+        "previous": "https://graph.facebook.com/123456790123456/locations?fields=tags&access_token=access_token&limit=25&since=1314141414&__paging_token=5757575757575757&__previous=1"
+    }
+}
