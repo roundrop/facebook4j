@@ -36,7 +36,6 @@ import facebook4j.Game;
 import facebook4j.Group;
 import facebook4j.GroupDoc;
 import facebook4j.GroupMember;
-import facebook4j.Inbox;
 import facebook4j.Insight;
 import facebook4j.Interest;
 import facebook4j.Like;
@@ -102,7 +101,6 @@ public final class DataObjectFactory {
     private static final Constructor<GroupDoc> groupDocConstructor;
     private static final Constructor<Group> groupConstructor;
     private static final Constructor<GroupMember> groupMemberConstructor;
-    private static final Constructor<Inbox> inboxConstructor;
     private static final Constructor<Insight> insightConstructor;
     private static final Constructor<Interest> interestConstructor;
     private static final Constructor<Like> likeConstructor;
@@ -192,9 +190,6 @@ public final class DataObjectFactory {
             
             groupMemberConstructor = (Constructor<GroupMember>) Class.forName("facebook4j.internal.json.GroupMemberJSONImpl").getDeclaredConstructor(JSONObject.class);
             groupMemberConstructor.setAccessible(true);
-
-            inboxConstructor = (Constructor<Inbox>) Class.forName("facebook4j.internal.json.InboxJSONImpl").getDeclaredConstructor(JSONObject.class);
-            inboxConstructor.setAccessible(true);
 
             insightConstructor = (Constructor<Insight>) Class.forName("facebook4j.internal.json.InsightJSONImpl").getDeclaredConstructor(JSONObject.class);
             insightConstructor.setAccessible(true);
@@ -726,28 +721,6 @@ public final class DataObjectFactory {
         try {
             JSONObject json = new JSONObject(rawJSON);
             return groupMemberConstructor.newInstance(json);
-        } catch (InstantiationException e) {
-            throw new FacebookException(e);
-        } catch (IllegalAccessException e) {
-            throw new AssertionError(e);
-        } catch (InvocationTargetException e) {
-            throw new FacebookException(e);
-        } catch (JSONException e) {
-            throw new FacebookException(e);
-        }
-    }
-
-    /**
-     * Constructs a Inbox object from rawJSON string.
-     *
-     * @param rawJSON raw JSON form as String
-     * @return Inbox
-     * @throws FacebookException when provided string is not a valid JSON string.
-     */
-    public static Inbox createInbox(String rawJSON) throws FacebookException {
-        try {
-            JSONObject json = new JSONObject(rawJSON);
-            return inboxConstructor.newInstance(json);
         } catch (InstantiationException e) {
             throw new FacebookException(e);
         } catch (IllegalAccessException e) {

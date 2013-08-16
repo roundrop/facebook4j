@@ -37,7 +37,6 @@ import facebook4j.Group;
 import facebook4j.GroupDoc;
 import facebook4j.GroupMember;
 import facebook4j.IdNameEntity;
-import facebook4j.Inbox;
 import facebook4j.InboxResponseList;
 import facebook4j.Insight;
 import facebook4j.Interest;
@@ -501,9 +500,6 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         }
         if (jsonObjectType == Location.class) {
             return (ResponseList<T>) createLocationList(res);
-        }
-        if (jsonObjectType == Inbox.class) {
-            return (ResponseList<T>) createInboxList(res);
         }
         if (jsonObjectType == Message.class) {
             return (ResponseList<T>) createMessageList(res);
