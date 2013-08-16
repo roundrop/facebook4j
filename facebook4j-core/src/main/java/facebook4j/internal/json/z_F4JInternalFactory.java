@@ -37,7 +37,6 @@ import facebook4j.Group;
 import facebook4j.GroupDoc;
 import facebook4j.GroupMember;
 import facebook4j.IdNameEntity;
-import facebook4j.Inbox;
 import facebook4j.InboxResponseList;
 import facebook4j.Insight;
 import facebook4j.Interest;
@@ -132,7 +131,7 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<Group> createGroupList(HttpResponse res) throws FacebookException;
 
     ResponseList<GroupDoc> createGroupDocList(HttpResponse res) throws FacebookException;
-    InboxResponseList<Inbox> createInboxList(HttpResponse res) throws FacebookException;
+    InboxResponseList<Message> createInboxList(HttpResponse res) throws FacebookException;
     
     ResponseList<Interest> createInterestList(HttpResponse res) throws FacebookException;
 

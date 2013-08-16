@@ -1061,16 +1061,16 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     /* Message Methods */
     
-    public InboxResponseList<Inbox> getInbox() throws FacebookException {
+    public InboxResponseList<Message> getInbox() throws FacebookException {
         return getInbox("me", null);
     }
-    public InboxResponseList<Inbox> getInbox(Reading reading) throws FacebookException {
+    public InboxResponseList<Message> getInbox(Reading reading) throws FacebookException {
         return getInbox("me", reading);
     }
-    public InboxResponseList<Inbox> getInbox(String userId) throws FacebookException {
+    public InboxResponseList<Message> getInbox(String userId) throws FacebookException {
         return getInbox(userId, null);
     }
-    public InboxResponseList<Inbox> getInbox(String userId, Reading reading) throws FacebookException {
+    public InboxResponseList<Message> getInbox(String userId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
         return factory.createInboxList(get(buildEndpoint(userId, "inbox", reading)));
     }

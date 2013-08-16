@@ -217,8 +217,8 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return GroupDocJSONImpl.createGroupDocList(res, conf);
     }
 
-    public InboxResponseList<Inbox> createInboxList(HttpResponse res) throws FacebookException {
-        return InboxJSONImpl.createInboxList(res, conf);
+    public InboxResponseList<Message> createInboxList(HttpResponse res) throws FacebookException {
+        return MessageJSONImpl.createInboxMessageList(res, conf);
     }
 
     public ResponseList<Interest> createInterestList(HttpResponse res) throws FacebookException {
