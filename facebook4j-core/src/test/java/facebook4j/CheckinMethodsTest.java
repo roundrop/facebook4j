@@ -383,7 +383,7 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
             assertThat(actual2.isUserLikes(), is(nullValue()));
             assertThat(actual2.getMessage(), is(nullValue()));
             assertThat(actual2.getId(), is("500000000000001_4727422"));
-            assertThat(actual2.getLikeCount(), is(-1));
+            assertThat(actual2.getLikeCount(), is(nullValue()));
             assertThat(actual2.getFrom().getId(), is("100000000000002"));
             assertThat(actual2.getFrom().getName(), is("Name Name2"));
             assertThat(actual2.canRemove(), is(nullValue()));
