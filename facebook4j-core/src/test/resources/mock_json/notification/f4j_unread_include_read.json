@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "created_time": "2013-08-17T09:59:13+0000",
+            "id": "notif_1234567890123456_80000009",
+            "unread": 1
+        },
+        {
+            "created_time": "2013-08-17T09:58:03+0000",
+            "id": "notif_1234567890123456_80000005",
+            "unread": 0
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/1234567890123456/notifications?fields=unread&access_token=access_token&limit=5000&until=1376733483&__paging_token=notif_1234567890123456_80000005",
+        "previous": "https://graph.facebook.com/1234567890123456/notifications?fields=unread&access_token=access_token&limit=5000&since=1376733553&__paging_token=notif_1234567890123456_80000009&__previous=1"
+    },
+    "summary": {
+        "unseen_count": 1,
+        "updated_time": "2013-08-17T09:59:13+0000"
+    }
+}
