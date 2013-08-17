@@ -450,7 +450,7 @@ public class AlbumMethodsTest {
             assertThat(actual1.isUserLikes(), is(nullValue()));
             assertThat(actual1.getMessage(), is(nullValue()));
             assertThat(actual1.getId(), is("1234567890123456_5174487"));
-            assertThat(actual1.getLikeCount(), is(-1));
+            assertThat(actual1.getLikeCount(), is(nullValue()));
             assertThat(actual1.getFrom().getId(), is("100001568838021"));
             assertThat(actual1.getFrom().getName(), is("Ryuji Yamashita"));
             assertThat(actual1.canRemove(), is(nullValue()));
