@@ -27,6 +27,6 @@ public interface Comment extends FacebookResponse {
     String getMessage();
     Boolean canRemove();
     Date getCreatedTime();
-    int getLikeCount();
+    Integer getLikeCount();
     Boolean isUserLikes();
 }

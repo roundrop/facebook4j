@@ -1,0 +1,18 @@
+{
+    "data": [{
+        "can_remove": true,
+        "created_time": "2013-08-17T09:14:37+0000",
+        "from": {
+            "id": "101010101010101010",
+            "name": "Comment Name1"
+        },
+        "id": "500000000000001_5223465",
+        "like_count": 1,
+        "message": "Comment test",
+        "user_likes": false
+    }],
+    "paging": {"cursors": {
+        "after": "MQ==",
+        "before": "MQ=="
+    }}
+}

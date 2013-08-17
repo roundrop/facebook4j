@@ -41,7 +41,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private String message;
     private Boolean canRemove;
     private Date createdTime;
-    private int likeCount;
+    private Integer likeCount;
     private Boolean isUserLikes;
     
     /*package*/CommentJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
@@ -71,7 +71,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             message = getRawString("message", json);
             canRemove = getBoolean("can_remove", json);
             createdTime = getISO8601Datetime("created_time", json);
-            likeCount = getPrimitiveInt("like_count", json);
+            likeCount = getInt("like_count", json);
             isUserLikes = getBoolean("user_likes", json);
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -98,7 +98,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return createdTime;
     }
 
-    public int getLikeCount() {
+    public Integer getLikeCount() {
         return likeCount;
     }
 
