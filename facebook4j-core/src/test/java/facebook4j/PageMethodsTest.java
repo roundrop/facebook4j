@@ -39,7 +39,7 @@ import static org.junit.Assert.*;
 @RunWith(Enclosed.class)
 public class PageMethodsTest {
 
-    public static class GetPage extends MockFacebookTestBase {
+    public static class getPage extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/page/f4j.json");
@@ -87,7 +87,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class GetPagePictureURL extends MockFacebookTestBase {
+    public static class getPagePictureURL extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/page/picture.json");
@@ -131,7 +131,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class GetPromotablePosts extends MockFacebookTestBase {
+    public static class getPromotablePosts extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/page/promotable_posts.json");
@@ -361,7 +361,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class UpdatePageBasicAttributes extends MockFacebookTestBase {
+    public static class updatePageBasicAttributes extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
@@ -413,7 +413,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class UpdatePageProfilePhoto extends MockFacebookTestBase {
+    public static class updatePageProfilePhoto extends MockFacebookTestBase {
         @Test
         public void me_url() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
@@ -459,7 +459,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class GetPageSettings extends MockFacebookTestBase {
+    public static class getPageSettings extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/page/settings.json");
@@ -531,7 +531,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class GetGlobalBrandChildren extends MockFacebookTestBase {
+    public static class getGlobalBrandChildren extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
             facebook.setMockJSON("mock_json/page/global_brand_children.json");
@@ -584,7 +584,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class GetPageInsights extends MockFacebookTestBase {
+    public static class getPageInsights extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
             facebook.setMockJSON("mock_json/page/insights.json");
@@ -670,7 +670,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class GetPageTagged extends MockFacebookTestBase {
+    public static class getPageTagged extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
             facebook.setMockJSON("mock_json/page/tagged.json");
@@ -764,7 +764,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class GetMilestones extends MockFacebookTestBase {
+    public static class getMilestones extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/page/milestones.json");
@@ -888,7 +888,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class CreateMilestone extends MockFacebookTestBase {
+    public static class createMilestone extends MockFacebookTestBase {
         @Test
         public void me() throws FacebookException {
             facebook.setMockJSON("mock_json/id.json");
@@ -905,7 +905,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class DeleteMilestone extends MockFacebookTestBase {
+    public static class deleteMilestone extends MockFacebookTestBase {
         @Test
         public void id() throws FacebookException {
             facebook.setMockJSON("mock_json/true.json");
@@ -917,7 +917,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class GetPageAdmins extends MockFacebookTestBase {
+    public static class getPageAdmins extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/page/admins.json");
@@ -965,7 +965,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class GetTabs extends MockFacebookTestBase {
+    public static class getTabs extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/page/tabs.json");
@@ -1135,7 +1135,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class GetInstalledTabs extends MockFacebookTestBase {
+    public static class getInstalledTabs extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/page/installed_tabs.json");
@@ -1278,7 +1278,7 @@ public class PageMethodsTest {
 
     }
 
-    public static class GetBlocked extends MockFacebookTestBase {
+    public static class getBlocked extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/page/blocked_2.json");
@@ -1334,7 +1334,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class Block extends MockFacebookTestBase {
+    public static class block extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/page/block.json");
@@ -1372,7 +1372,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class Unblock extends MockFacebookTestBase {
+    public static class unblock extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
@@ -1398,7 +1398,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class GetOffers extends MockFacebookTestBase {
+    public static class getOffers extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/page/offers.json");
@@ -1514,7 +1514,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class CreateOffer extends MockFacebookTestBase {
+    public static class createOffer extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/id.json");
@@ -1626,7 +1626,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class DeleteOffer extends MockFacebookTestBase {
+    public static class deleteOffer extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
@@ -1638,7 +1638,7 @@ public class PageMethodsTest {
         }
     }
 
-    public static class GetOffer extends MockFacebookTestBase {
+    public static class getOffer extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
             facebook.setMockJSON("mock_json/page/offer.json");
