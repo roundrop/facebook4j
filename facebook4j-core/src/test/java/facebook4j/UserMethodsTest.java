@@ -150,7 +150,7 @@ public class UserMethodsTest extends MockFacebookTestBase {
 
         assertThat(user.getLink(), is(nullValue()));
         assertThat(user.getLocale(), is(nullValue()));
-        assertThat(user.getTimezone(), is((double) -1));
+        assertThat(user.getTimezone(), is(nullValue()));
         assertThat(user.isInstalled(), is(nullValue()));
     }
 
