@@ -147,10 +147,10 @@ public final class z_F4JInternalParseUtil {
         }
     }
 
-    public static double getDouble(String name, JSONObject json) {
+    public static Double getDouble(String name, JSONObject json) {
         String str2 = getRawString(name, json);
         if (null == str2 || "".equals(str2) || "null".equals(str2)) {
-            return -1;
+            return null;
         } else {
             return Double.valueOf(str2);
         }

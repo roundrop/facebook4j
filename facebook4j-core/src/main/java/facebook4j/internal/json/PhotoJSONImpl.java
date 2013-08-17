@@ -47,7 +47,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     private String id;
     private Category from;
-    private List<Tag> tags;
+    private PagableList<Tag> tags;
     private String name;
     private URL icon;
     private URL picture;
@@ -89,13 +89,13 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 JSONObject tagsJSONObject = json.getJSONObject("tags");
                 JSONArray list = tagsJSONObject.getJSONArray("data");
                 final int size = list.length();
-                tags = new ArrayList<Tag>(size);
+                tags = new PagableListImpl<Tag>(size, tagsJSONObject);
                 for (int i = 0; i < size; i++) {
                     TagJSONImpl tag = new TagJSONImpl(list.getJSONObject(i));
                     tags.add(tag);
                 }
             } else {
-                tags = Collections.emptyList();
+                tags = new PagableListImpl<Tag>();
             }
             name = getRawString("name", json);
             icon = getURL("icon", json);
@@ -172,7 +172,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return from;
     }
 
-    public List<Tag> getTags() {
+    public PagableList<Tag> getTags() {
         return tags;
     }
 

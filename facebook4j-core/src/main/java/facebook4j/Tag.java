@@ -28,7 +28,7 @@ public interface Tag extends FacebookResponse {
     Integer getLength();
     String getType();
     
-    Integer getX();
-    Integer getY();
+    Double getX();
+    Double getY();
     Date getCreatedTime();
 }

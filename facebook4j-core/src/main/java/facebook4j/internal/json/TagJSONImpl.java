@@ -41,8 +41,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Integer length;
     private String type;
     
-    private Integer x;
-    private Integer y;
+    private Double x;
+    private Double y;
     private Date createdTime;
 
     /*package*/TagJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
@@ -76,12 +76,12 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         type = getRawString("type", json);
         
         if (!json.isNull("x")) {
-            x = getPrimitiveInt("x", json);
+            x = getDouble("x", json);
         } else {
             x = null;
         }
         if (!json.isNull("y")) {
-            y = getPrimitiveInt("y", json);
+            y = getDouble("y", json);
         } else {
             y = null;
         }
@@ -108,11 +108,11 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return type;
     }
 
-    public Integer getX() {
+    public Double getX() {
         return x;
     }
 
-    public Integer getY() {
+    public Double getY() {
         return y;
     }
 
