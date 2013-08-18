@@ -593,7 +593,7 @@ public class PhotoMethodsTest {
     public static class getPhotoLikes extends MockFacebookTestBase {
         @Test
         public void id() throws Exception {
-            facebook.setMockJSON("mocK_json/photo/likes.json");
+            facebook.setMockJSON("mock_json/photo/likes.json");
             ResponseList<Like> actuals = facebook.getPhotoLikes("10151509108346729");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
             assertThat(facebook.getEndpointURL(), is(pathOf("/10151509108346729/likes")));
@@ -612,7 +612,7 @@ public class PhotoMethodsTest {
 
         @Test
         public void reading() throws Exception {
-            facebook.setMockJSON("mocK_json/photo/likes_last5.json");
+            facebook.setMockJSON("mock_json/photo/likes_last5.json");
             ResponseList<Like> actuals = facebook.getPhotoLikes("10151509108346729", new Reading().limit(5));
             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
             assertThat(facebook.getEndpointURL(), is(pathOf("/10151509108346729/likes")));
