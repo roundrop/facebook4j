@@ -21,6 +21,11 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
+import java.io.File;
+import java.net.URL;
+import java.util.Arrays;
+
+import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
 import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -363,16 +368,427 @@ public class PhotoMethodsTest {
         }
     }
 
-/*
-    @Test
-    public void post_delete() throws Exception {
-        File file = new File("src/test/resources/test_image.png");
-        Media source = new Media(file);
-        String photoId = facebook1.postPhoto(source, "test message", null, false);
-        assertThat(photoId, is(notNullValue()));
+    public static class postPhoto extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/id_and_post_id.json");
+            File file = new File("src/test/resources/test_image.png");
+            String actual = facebook.postPhoto(new Media(file));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/photos")));
 
-        boolean deleteResult = facebook1.deletePhoto(photoId);
-        assertThat(deleteResult, is(true));
+            assertThat(actual, is("1234567890123456"));
+        }
+
+        @Test
+        public void me_withMesssage() throws Exception {
+            facebook.setMockJSON("mock_json/id_and_post_id.json");
+            File file = new File("src/test/resources/test_image.png");
+            PhotoUpdate photoUpdate = new PhotoUpdate(new Media(file))
+                                            .message("update photo with message");
+            String actual = facebook.postPhoto(photoUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/photos")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "update photo with message"));
+
+            assertThat(actual, is("1234567890123456"));
+        }
+
+        @Test
+        public void me_withAllParams() throws Exception {
+            facebook.setMockJSON("mock_json/id_and_post_id.json");
+            File file = new File("src/test/resources/test_image.png");
+            PhotoUpdate photoUpdate = new PhotoUpdate(new Media(file))
+                                            .message("update photo with message")
+                                            .place("178106048903380")
+                                            .noStory(true);
+            String actual = facebook.postPhoto(photoUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/photos")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "update photo with message"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("place", "178106048903380"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("no_story", "1"));
+
+            assertThat(actual, is("1234567890123456"));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/id_and_post_id.json");
+            File file = new File("src/test/resources/test_image.png");
+            String actual = facebook.postPhoto("1234567980123456", new Media(file));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567980123456/photos")));
+
+            assertThat(actual, is("1234567890123456"));
+        }
+
+        @Test
+        public void id_withAllParams() throws Exception {
+            facebook.setMockJSON("mock_json/id_and_post_id.json");
+            File file = new File("src/test/resources/test_image.png");
+            PhotoUpdate photoUpdate = new PhotoUpdate(new Media(file))
+                                            .message("update photo with message")
+                                            .place("178106048903380")
+                                            .noStory(true);
+            String actual = facebook.postPhoto("1234567980123456", photoUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567980123456/photos")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "update photo with message"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("place", "178106048903380"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("no_story", "1"));
+
+            assertThat(actual, is("1234567890123456"));
+        }
     }
-*/
+
+    public static class deletePhoto extends MockFacebookTestBase {
+        @Test
+        public void delete() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deletePhoto("583190938409862");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/583190938409862")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+    public static class getPhoto extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/photo/photo.json");
+            Photo actual = facebook.getPhoto("10151509108346729");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10151509108346729")));
+
+            assertThat(actual.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yz/r/StEh3RhPvjk.gif"));
+            assertThat(actual.getLink().toString(), is("https://www.facebook.com/photo.php?fbid=10151509108346729&set=a.494827881728.283935.20531316728&type=1"));
+            assertThat(actual.getWidth(), is(720));
+            assertThat(actual.getFrom().getId(), is("20531316728"));
+            assertThat(actual.getFrom().getCategory(), is("Product/service"));
+            assertThat(actual.getFrom().getName(), is("Facebook"));
+            assertThat(actual.getUpdatedTime(), is(iso8601DateOf("2012-10-12T21:32:03+0000")));
+            assertThat(actual.getId(), is("10151509108346729"));
+            assertThat(actual.getPicture().toString(), is("https://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-frc1/68051_10151509108346729_1731694342_s.png"));
+            assertThat(actual.getHeight(), is(720));
+            assertThat(actual.getSource().toString(), is("https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-frc1/s720x720/68051_10151509108346729_1731694342_n.png"));
+            assertThat(actual.getLikes().size(), is(25));
+            assertThat(actual.getLikes().get(0).getId(), is("100004756326584"));
+            assertThat(actual.getLikes().get(0).getName(), is("น้อง บีบี เด็กจัน"));
+            assertThat(actual.getLikes().get(24).getId(), is("100003963231548"));
+            assertThat(actual.getLikes().get(24).getName(), is("Supun Nalaka"));
+            assertThat(actual.getLikes().getPaging().getNext().toString(), is("https://graph.facebook.com/10151509108346729/likes?access_token=access_token&limit=25&after=MTAwMDAzOTYzMjMxNTQ4"));
+            assertThat(actual.getLikes().getPaging().getCursors().getAfter(), is("MTAwMDAzOTYzMjMxNTQ4"));
+            assertThat(actual.getLikes().getPaging().getCursors().getBefore(), is("MTAwMDA0NzU2MzI2NTg0"));
+            assertThat(actual.getImages().size(), is(8));
+            assertThat(actual.getImages().get(0).getHeight(), is(731));
+            assertThat(actual.getImages().get(0).getSource().toString(), is("https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-frc1/68051_10151509108346729_1731694342_n.png"));
+            assertThat(actual.getImages().get(0).getHeight(), is(731));
+            assertThat(actual.getImages().get(7).getHeight(), is(130));
+            assertThat(actual.getImages().get(7).getSource().toString(), is("https://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-frc1/s75x225/68051_10151509108346729_1731694342_s.png"));
+            assertThat(actual.getImages().get(7).getHeight(), is(130));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2012-10-12T21:32:03+0000")));
+            assertThat(actual.getComments().size(), is(25));
+            assertThat(actual.getComments().get(0).isUserLikes(), is(false));
+            assertThat(actual.getComments().get(0).getMessage(), is("O q  séria  do país sem  lei sem governo"));
+            assertThat(actual.getComments().get(0).getId(), is("10151509108346729_9528216"));
+            assertThat(actual.getComments().get(0).getLikeCount(), is(1));
+            assertThat(actual.getComments().get(0).getFrom().getId(), is("100004421163218"));
+            assertThat(actual.getComments().get(0).getFrom().getName(), is("Joaquina Joaquina Ou Jackeline"));
+            assertThat(actual.getComments().get(0).canRemove(), is(false));
+            assertThat(actual.getComments().get(0).getCreatedTime(), is(iso8601DateOf("2012-10-12T21:36:15+0000")));
+            assertThat(actual.getComments().get(24).isUserLikes(), is(false));
+            assertThat(actual.getComments().get(24).getMessage().toString(), is("https://www.facebook.com/www.beaport.net?fref=ts"));
+            assertThat(actual.getComments().get(24).getId(), is("10151509108346729_9531958"));
+            assertThat(actual.getComments().get(24).getLikeCount(), is(2));
+            assertThat(actual.getComments().get(24).getFrom().getId(), is("1053390528"));
+            assertThat(actual.getComments().get(24).getFrom().getName(), is("Yusuf Özdemir"));
+            assertThat(actual.getComments().get(24).canRemove(), is(false));
+            assertThat(actual.getComments().get(24).getCreatedTime(), is(iso8601DateOf("2012-10-13T10:37:04+0000")));
+            assertThat(actual.getComments().getPaging().getNext().toString(), is("https://graph.facebook.com/10151509108346729/comments?access_token=access_token&limit=25&after=MzE%3D"));
+            assertThat(actual.getComments().getPaging().getCursors().getAfter(), is("MzE="));
+            assertThat(actual.getComments().getPaging().getCursors().getBefore(), is("Mg=="));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/photo/photo_source.json");
+            Photo actual = facebook.getPhoto("10151509108346729", new Reading().fields("source"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10151509108346729")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "source"));
+
+            assertThat(actual.getId(), is("10151509108346729"));
+            assertThat(actual.getSource().toString(), is("https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-frc1/s720x720/68051_10151509108346729_1731694342_n.png"));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2012-10-12T21:32:03+0000")));
+        }
+    }
+
+    public static class getPhotoComments extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/photo/comments.json");
+            ResponseList<Comment> actuals = facebook.getPhotoComments("10151509108346729");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10151509108346729/comments")));
+
+            assertThat(actuals.size(), is(25));
+            Comment actual1 = actuals.get(0);
+            assertThat(actual1.isUserLikes(), is(false));
+            assertThat(actual1.getMessage(), is("O q  séria  do país sem  lei sem governo"));
+            assertThat(actual1.getId(), is("10151509108346729_9528216"));
+            assertThat(actual1.getLikeCount(), is(1));
+            assertThat(actual1.getFrom().getId(), is("100004421163218"));
+            assertThat(actual1.getFrom().getName(), is("Joaquina Joaquina Ou Jackeline"));
+            assertThat(actual1.canRemove(), is(false));
+            assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2012-10-12T21:36:15+0000")));
+            Comment actual25 = actuals.get(24);
+            assertThat(actual25.isUserLikes(), is(false));
+            assertThat(actual25.getMessage().toString(), is("https://www.facebook.com/www.beaport.net?fref=ts"));
+            assertThat(actual25.getId(), is("10151509108346729_9531958"));
+            assertThat(actual25.getLikeCount(), is(2));
+            assertThat(actual25.getFrom().getId(), is("1053390528"));
+            assertThat(actual25.getFrom().getName(), is("Yusuf Özdemir"));
+            assertThat(actual25.canRemove(), is(false));
+            assertThat(actual25.getCreatedTime(), is(iso8601DateOf("2012-10-13T10:37:04+0000")));
+            assertThat(actuals.getPaging().getNext().toString(), is("https://graph.facebook.com/10151509108346729/comments?access_token=access_token&limit=25&after=MzE%3D"));
+            assertThat(actuals.getPaging().getCursors().getAfter(), is("MzE="));
+            assertThat(actuals.getPaging().getCursors().getBefore(), is("Mg=="));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/photo/comments_like_count.json");
+            ResponseList<Comment> actuals = facebook.getPhotoComments("10151509108346729", new Reading().fields("like_count"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10151509108346729/comments")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "like_count"));
+
+            assertThat(actuals.size(), is(25));
+            Comment actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("10151509108346729_9528216"));
+            assertThat(actual1.getLikeCount(), is(1));
+            Comment actual2 = actuals.get(1);
+            assertThat(actual2.getId(), is("10151509108346729_9528506"));
+            assertThat(actual2.getLikeCount(), is(0));
+            Comment actual25 = actuals.get(24);
+            assertThat(actual25.getId(), is("10151509108346729_9531958"));
+            assertThat(actual25.getLikeCount(), is(2));
+        }
+    }
+
+    public static class commentPhoto extends MockFacebookTestBase {
+        @Test
+        public void comment() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            String actual = facebook.commentPhoto("500000000000001", "Test: comment to a photo.");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/comments")));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+    }
+
+    public static class getPhotoLikes extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mocK_json/photo/likes.json");
+            ResponseList<Like> actuals = facebook.getPhotoLikes("10151509108346729");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10151509108346729/likes")));
+
+            assertThat(actuals.size(), is(25));
+            Like actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("100004756326584"));
+            assertThat(actual1.getName(), is("น้อง บีบี เด็กจัน"));
+            Like actual25 = actuals.get(24);
+            assertThat(actual25.getId(), is("100003963231548"));
+            assertThat(actual25.getName(), is("Supun Nalaka"));
+            assertThat(actuals.getPaging().getNext().toString(), is("https://graph.facebook.com/10151509108346729/likes?access_token=access_token&limit=25&after=MTAwMDAzOTYzMjMxNTQ4"));
+            assertThat(actuals.getPaging().getCursors().getAfter(), is("MTAwMDAzOTYzMjMxNTQ4"));
+            assertThat(actuals.getPaging().getCursors().getBefore(), is("MTAwMDA0NzU2MzI2NTg0"));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mocK_json/photo/likes_last5.json");
+            ResponseList<Like> actuals = facebook.getPhotoLikes("10151509108346729", new Reading().limit(5));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10151509108346729/likes")));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "5"));
+
+            assertThat(actuals.size(), is(5));
+            Like actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("100004756326584"));
+            assertThat(actual1.getName(), is("น้อง บีบี เด็กจัน"));
+            Like actual5 = actuals.get(4);
+            assertThat(actual5.getId(), is("100006514060823"));
+            assertThat(actual5.getName(), is("แดงสบไหล ยาวไกล้"));
+            assertThat(actuals.getPaging().getNext().toString(), is("https://graph.facebook.com/10151509108346729/likes?limit=5&access_token=access_token&after=MTAwMDA2NTE0MDYwODIz"));
+            assertThat(actuals.getPaging().getCursors().getAfter(), is("MTAwMDA2NTE0MDYwODIz"));
+            assertThat(actuals.getPaging().getCursors().getBefore(), is("MTAwMDA0NzU2MzI2NTg0"));
+        }
+    }
+
+    public static class likePhoto extends MockFacebookTestBase {
+        @Test
+        public void like() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.likePhoto("500000000000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/likes")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+    public static class unlikePhoto extends MockFacebookTestBase {
+        @Test
+        public void unlike() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.unlikePhoto("500000000000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/likes")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+    public static class getPhotoURL extends MockFacebookTestBase {
+        @Test
+        public void url() throws Exception {
+            facebook.setMockJSON("mock_json/empty.json");
+            URL actual = facebook.getPhotoURL("10151509108346729");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10151509108346729/picture")));
+
+            assertThat(actual.toString(), is("https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-ash3/644169_573207722741517_740837405_a.jpg"));
+        }
+    }
+
+    public static class getTagsOnPhoto extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/photo/tags.json");
+            ResponseList<Tag> actuals = facebook.getTagsOnPhoto("500000000000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/tags")));
+
+            assertThat(actuals.size(), is(3));
+            Tag actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("300000000000001"));
+            assertThat(actual1.getName(), is("Tag Name1"));
+            assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2013-07-13T09:02:45+0000")));
+            assertThat(actual1.getY(), is(58.125));
+            assertThat(actual1.getX(), is(67.34375));
+            Tag actual3 = actuals.get(2);
+            assertThat(actual3.getId(), is("300000000000002"));
+            assertThat(actual3.getName(), is("Tag Name2"));
+            assertThat(actual3.getCreatedTime(), is(iso8601DateOf("2013-07-13T09:02:45+0000")));
+            assertThat(actual3.getY(), is(53.541667938232));
+            assertThat(actual3.getX(), is(28.906253814697));
+            assertThat(actuals.getPaging().getNext().toString(), is("https://graph.facebook.com/500000000000001/tags?access_token=access_token&limit=5000&offset=5000&__after_id=300000000000002"));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/photo/tags_name.json");
+            ResponseList<Tag> actuals = facebook.getTagsOnPhoto("500000000000001", new Reading().fields("name"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/tags")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "name"));
+
+            assertThat(actuals.size(), is(3));
+            Tag actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("300000000000001"));
+            assertThat(actual1.getName(), is("Tag Name1"));
+            assertThat(actual1.getCreatedTime(), is(nullValue()));
+            assertThat(actual1.getY(), is(nullValue()));
+            assertThat(actual1.getX(), is(nullValue()));
+            Tag actual3 = actuals.get(2);
+            assertThat(actual3.getId(), is("300000000000002"));
+            assertThat(actual3.getName(), is("Tag Name2"));
+            assertThat(actual3.getCreatedTime(), is(nullValue()));
+            assertThat(actual3.getY(), is(nullValue()));
+            assertThat(actual3.getX(), is(nullValue()));
+            assertThat(actuals.getPaging().getNext().toString(), is("https://graph.facebook.com/500000000000001/tags?fields=name&access_token=access_token&limit=5000&offset=5000&__after_id=300000000000002"));
+        }
+    }
+
+    public static class addTagToPhoto extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.addTagToPhoto("500000000000001", "300000000000004");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/tags")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("to", "300000000000004"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void ids() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.addTagToPhoto("500000000000001", Arrays.asList("300000000000005", "300000000000006"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/tags")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("tags", "[{\"tag_uid\":\"300000000000005\"},{\"tag_uid\":\"300000000000006\"}]"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void update() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            TagUpdate tagUpdate = new TagUpdate()
+                                        .to("300000000000007")
+                                        .tagText("tag text")
+                                        .x(57.34375)
+                                        .y(57.916664123535);
+            boolean actual = facebook.addTagToPhoto("500000000000001", tagUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/tags")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("to", "300000000000007"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("tag_text", "tag text"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("x", "57.34375"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("y", "57.916664123535"));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+    public static class updateTagOnPhoto extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            TagUpdate tagUpdate = new TagUpdate()
+                                        .to("300000000000007")
+                                        .x(157.34375)
+                                        .y(157.916664123535);
+            boolean actual = facebook.updateTagOnPhoto("500000000000001", tagUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/tags")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("to", "300000000000007"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("x", "157.34375"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("y", "157.916664123535"));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+    public static class deleteTagOnPhoto extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deleteTagOnPhoto("500000000000001", "300000000000007");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/tags")));
+            assertThat(facebook.getEndpointURL(), hasParameter("to", "300000000000007"));
+
+            assertThat(actual, is(true));
+        }
+    }
+
 }

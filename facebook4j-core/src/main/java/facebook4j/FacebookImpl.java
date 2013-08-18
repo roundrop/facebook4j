@@ -1739,7 +1739,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
     public ResponseList<Tag> getTagsOnPhoto(String photoId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
-        return factory.createTagList(get(buildEndpoint(photoId, reading)));
+        return factory.createTagList(get(buildEndpoint(photoId, "tags", reading)));
     }
 
     public boolean addTagToPhoto(String photoId, String toUserId) throws FacebookException {
@@ -1756,16 +1756,28 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     public boolean addTagToPhoto(String photoId, List<String> toUserIds) throws FacebookException {
         ensureAuthorizationEnabled();
-        HttpResponse res = post(buildEndpoint(photoId, "tags"), new HttpParameter[]{new HttpParameter("tags", new JSONArray(toUserIds).toString())});
+        if (toUserIds.size() == 0) throw new IllegalArgumentException("toUserIds size 0");
+        if (toUserIds.size() == 1) {
+            return addTagToPhoto(photoId, toUserIds.get(0));
+        }
+        List<Map<String, String>> tags = new ArrayList<Map<String, String>>(toUserIds.size());
+        for (String toUserId : toUserIds) {
+            Map<String, String> map = new HashMap<String, String>(1);
+            map.put("tag_uid", toUserId);
+            tags.add(map);
+        }
+        HttpResponse res = post(buildEndpoint(photoId, "tags"), new HttpParameter[]{new HttpParameter("tags", new JSONArray(tags).toString())});
         return Boolean.valueOf(res.asString().trim());
     }
 
-    public boolean updateTagOnPhoto(String photoId, String toUserId) throws FacebookException {
-        return addTagToPhoto(photoId, toUserId);
-    }
-    
     public boolean updateTagOnPhoto(String photoId, TagUpdate tagUpdate) throws FacebookException {
         return addTagToPhoto(photoId, tagUpdate);
+    }
+
+    public boolean deleteTagOnPhoto(String photoId, String toUserId) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = delete(buildEndpoint(photoId, "tags"), new HttpParameter[]{new HttpParameter("to", toUserId)});
+        return Boolean.valueOf(res.asString().trim());
     }
 
     public String postPhoto(Media source) throws FacebookException {

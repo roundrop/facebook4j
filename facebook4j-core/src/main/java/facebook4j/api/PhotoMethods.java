@@ -16,9 +16,6 @@
 
 package facebook4j.api;
 
-import java.net.URL;
-import java.util.List;
-
 import facebook4j.Comment;
 import facebook4j.FacebookException;
 import facebook4j.Like;
@@ -29,6 +26,9 @@ import facebook4j.Reading;
 import facebook4j.ResponseList;
 import facebook4j.Tag;
 import facebook4j.TagUpdate;
+
+import java.net.URL;
+import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -275,21 +275,21 @@ public interface PhotoMethods {
     /**
      * Updates the position of the tag on a photo.
      * @param photoId the ID of a photo
-     * @param toUserId the ID of the user to tag
-     * @return true if add is successful
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#tags">Photo#tags - Facebook Developers</a> - Connections - tags
-     */
-    boolean updateTagOnPhoto(String photoId, String toUserId) throws FacebookException;
-    
-    /**
-     * Updates the position of the tag on a photo.
-     * @param photoId the ID of a photo
      * @param tagUpdate tag information, supports 'to', 'x', 'y'
-     * @return true if add is successful
+     * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#tags">Photo#tags - Facebook Developers</a> - Connections - tags
      */
     boolean updateTagOnPhoto(String photoId, TagUpdate tagUpdate) throws FacebookException;
+
+    /**
+     * Deletes a tag for a particular user in the photo.
+     * @param photoId the ID of a photo
+     * @param toUserId the ID of the user to tag
+     * @return true if delete is successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#tags">Photo#tags - Facebook Developers</a> - Connections - tags
+     */
+    boolean deleteTagOnPhoto(String photoId, String toUserId) throws FacebookException;
 
 }

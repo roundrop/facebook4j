@@ -1,0 +1,17 @@
+{
+    "data": [
+        {
+            "id": "300000000000001",
+            "name": "Tag Name1"
+        },
+        {
+            "id": "1234567890123456",
+            "name": "My Name"
+        },
+        {
+            "id": "300000000000002",
+            "name": "Tag Name2"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/500000000000001/tags?fields=name&access_token=access_token&limit=5000&offset=5000&__after_id=300000000000002"}
+}
