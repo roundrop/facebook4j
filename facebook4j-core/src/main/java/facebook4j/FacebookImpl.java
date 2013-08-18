@@ -1771,28 +1771,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public String postPhoto(Media source) throws FacebookException {
         return postPhoto("me", source);
     }
-    public String postPhoto(Media source, String message, String place, boolean noStory) throws FacebookException {
-        return postPhoto("me", source, message, place, noStory);
+    public String postPhoto(PhotoUpdate photoUpdate) throws FacebookException {
+        return postPhoto("me", photoUpdate);
     }
     public String postPhoto(String userId, Media source) throws FacebookException {
-        return postPhoto(userId, source, null, null, false);
+        return postPhoto(userId, new PhotoUpdate(source));
     }
-    public String postPhoto(String userId, Media source, String message, String place, boolean noStory) throws FacebookException {
+    public String postPhoto(String userId, PhotoUpdate photoUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
-        List<HttpParameter> params = new ArrayList<HttpParameter>();
-        params.add(source.asHttpParameter("source"));
-        if (message != null) {
-            params.add(new HttpParameter("message", message));
-        }
-        if (place != null) {
-            params.add(new HttpParameter("place", place));
-        }
-        if (noStory) {
-            params.add(new HttpParameter("no_story", 1));
-        }
-        HttpParameter[] httpParameters = (HttpParameter[]) params.toArray(new HttpParameter[params.size()]);
-
-        JSONObject json = post(buildEndpoint(userId, "photos"), httpParameters).asJSONObject();
+        JSONObject json = post(buildEndpoint(userId, "photos"), photoUpdate.asHttpParameterArray()).asJSONObject();
         return getRawString("id", json);
     }
 

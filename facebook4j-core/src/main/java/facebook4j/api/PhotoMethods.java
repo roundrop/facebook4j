@@ -24,6 +24,7 @@ import facebook4j.FacebookException;
 import facebook4j.Like;
 import facebook4j.Media;
 import facebook4j.Photo;
+import facebook4j.PhotoUpdate;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
 import facebook4j.Tag;
@@ -87,15 +88,12 @@ public interface PhotoMethods {
 
     /**
      * Posts a photo to the current user's wall.
-     * @param source photo content
-     * @param message photo description
-     * @param place ID of the place associated with the Photo
-     * @param noStory If set to true, optionally suppresses the feed story that is automatically generated on a user’s profile when they upload a photo using your application.
+     * @param photoUpdate the photo to be created
      * @return The new photo ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#photos">User#photos - Facebook Developers</a>
      */
-    String postPhoto(Media source, String message, String place, boolean noStory) throws FacebookException;
+    String postPhoto(PhotoUpdate photoUpdate) throws FacebookException;
 
     /**
      * Posts the photo to a user's wall.
@@ -110,15 +108,12 @@ public interface PhotoMethods {
     /**
      * Posts the photo to a user's wall.
      * @param userId the ID of a user
-     * @param source photo content
-     * @param message photo description
-     * @param place Facebook ID of the place associated with the Photo
-     * @param noStory If set to true, optionally suppresses the feed story that is automatically generated on a user’s profile when they upload a photo using your application.
+     * @param photoUpdate the photo to be created
      * @return The new photo ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#photos">User#photos - Facebook Developers</a>
      */
-    String postPhoto(String userId, Media source, String message, String place, boolean noStory) throws FacebookException;
+    String postPhoto(String userId, PhotoUpdate photoUpdate) throws FacebookException;
 
 
     /**
