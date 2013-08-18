@@ -1,0 +1,112 @@
+{
+    "data": [{
+        "actions": [
+            {
+                "link": "https://www.facebook.com/1234567890123456/posts/500000000000006",
+                "name": "Comment"
+            },
+            {
+                "link": "https://www.facebook.com/1234567890123456/posts/500000000000006",
+                "name": "Like"
+            }
+        ],
+        "application": {
+            "id": "6628568379",
+            "name": "Facebook for iPhone",
+            "namespace": "fbiphone"
+        },
+        "caption": "Hoge checked in at Bar.",
+        "comments": {
+            "data": [
+                {
+                    "can_remove": false,
+                    "created_time": "2013-07-13T12:14:19+0000",
+                    "from": {
+                        "id": "100000000000007",
+                        "name": "Comment Name61"
+                    },
+                    "id": "570000000000006_5142665",
+                    "like_count": 0,
+                    "message": "within 30 minutes.",
+                    "user_likes": false
+                }
+            ],
+            "paging": {"cursors": {
+                "after": "NA==",
+                "before": "MQ=="
+            }}
+        },
+        "created_time": "2013-07-13T11:58:24+0000",
+        "from": {
+            "id": "100000000000008",
+            "name": "Tag Name1"
+        },
+        "icon": "https://www.facebook.com/images/icons/place.png",
+        "id": "1234567890123456_500000000000006",
+        "likes": {
+            "count": 5,
+            "data": [
+                {
+                    "id": "100000000000061",
+                    "name": "Like Name61"
+                },
+                {
+                    "id": "100000000000062",
+                    "name": "Like Name62"
+                },
+                {
+                    "id": "100000000000063",
+                    "name": "Like Name63"
+                },
+                {
+                    "id": "100000000000064",
+                    "name": "Like Name64"
+                }
+            ]
+        },
+        "link": "https://www.facebook.com/pages/gagagagagagaga/280016412038493",
+        "message": "potato",
+        "name": "Bar",
+        "picture": "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/y5/r/wwwwwwwwww.png",
+        "place": {
+            "id": "280016412038493",
+            "location": {
+                "city": "Hakodate-shi",
+                "country": "Japan",
+                "latitude": 41.78897476,
+                "longitude": 140.74763113,
+                "state": "Hokkaido",
+                "street": "",
+                "zip": ""
+            },
+            "name": "Bar"
+        },
+        "privacy": {"value": ""},
+        "to": {"data": [
+            {
+                "id": "1234567890123456",
+                "name": "My Name"
+            },
+            {
+                "id": "100000000000086",
+                "name": "With Name"
+            }
+        ]},
+        "type": "checkin",
+        "updated_time": "2013-07-13T14:55:31+0000",
+        "with_tags": {"data": [
+            {
+                "id": "1234567890123456",
+                "name": "My Name"
+            },
+            {
+                "id": "100000000000086",
+                "name": "With Name"
+            }
+        ]}
+    }],
+    "paging": {
+        "next": "https://graph.facebook.com/1234567890123456/tagged?access_token=access_token&limit=25&until=1373716703",
+        "previous": "https://graph.facebook.com/1234567890123456/tagged?access_token=access_token&limit=25&since=1373716704&__previous=1"
+    }
+}

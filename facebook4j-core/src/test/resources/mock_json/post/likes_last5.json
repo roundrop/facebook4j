@@ -1,0 +1,31 @@
+{
+    "data": [
+        {
+            "id": "1537490351",
+            "name": "Tsuneki Kusaba"
+        },
+        {
+            "id": "100000054876994",
+            "name": "Anthony Mwangi"
+        },
+        {
+            "id": "100004213897225",
+            "name": "Viky Itagi"
+        },
+        {
+            "id": "100005474054467",
+            "name": "Dasa Seshadri"
+        },
+        {
+            "id": "100002241863955",
+            "name": "Nisha Sahu"
+        }
+    ],
+    "paging": {
+        "cursors": {
+            "after": "NjIyMzY1NDUx",
+            "before": "MTUzNzQ5MDM1MQ=="
+        },
+        "next": "https://graph.facebook.com/216311481960_10201168076257947/likes?access_token=access_token&limit=25&after=NjIyMzY1NDUx"
+    }
+}

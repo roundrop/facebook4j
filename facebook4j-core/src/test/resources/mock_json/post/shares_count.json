@@ -1,0 +1,33 @@
+{
+    "data": [
+        {
+            "created_time": "2013-08-16T17:48:38+0000",
+            "id": "216311481960_10201168076257947",
+            "shares": {"count": 4198}
+        },
+        {
+            "created_time": "2013-08-15T17:53:57+0000",
+            "id": "216311481960_10151603459091961",
+            "shares": {"count": 1855}
+        },
+        {
+            "created_time": "2013-08-13T21:46:49+0000",
+            "id": "216311481960_10151600280421961",
+            "shares": {"count": 719}
+        },
+        {
+            "created_time": "2013-08-09T20:10:20+0000",
+            "id": "216311481960_10151592078496961",
+            "shares": {"count": 987}
+        },
+        {
+            "created_time": "2013-08-06T20:01:10+0000",
+            "id": "216311481960_10151586877031961",
+            "shares": {"count": 1345}
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/216311481960/posts?fields=shares&access_token=access_token&limit=25&until=1371405362",
+        "previous": "https://graph.facebook.com/216311481960/posts?fields=shares&access_token=access_token&limit=25&since=1376675318&__previous=1"
+    }
+}
