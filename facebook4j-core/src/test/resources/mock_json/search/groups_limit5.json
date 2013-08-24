@@ -1,0 +1,25 @@
+{
+    "data": [
+        {
+            "id": "305284592823142",
+            "name": "Programming pipz."
+        },
+        {
+            "id": "125942917465475",
+            "name": "programmingKUNO"
+        },
+        {
+            "id": "369049403222922",
+            "name": "Programming"
+        },
+        {
+            "id": "484250524945112",
+            "name": "Harvard Secondary School Program (SSP) '13"
+        },
+        {
+            "id": "200690936636126",
+            "name": "Passive Income Programs"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/search?q=programming&limit=5&type=group&access_token=access_token&offset=5&__after_id=200690936636126"}
+}

@@ -1,0 +1,52 @@
+{
+    "data": [
+        {
+            "category": "Software",
+            "category_list": [{
+                "id": "108472109230615",
+                "name": "Computer Services"
+            }],
+            "id": "152603664817327",
+            "name": "eXo Platform"
+        },
+        {
+            "category": "Arts/entertainment/nightlife",
+            "category_list": [{
+                "id": "133436743388217",
+                "name": "Arts & Entertainment"
+            }],
+            "id": "384041455043127",
+            "name": "Platform Glasgow"
+        },
+        {
+            "category": "Bar",
+            "category_list": [
+                {
+                    "id": "165679780146824",
+                    "name": "Food & Restaurant"
+                },
+                {
+                    "id": "110290705711626",
+                    "name": "Bar"
+                },
+                {
+                    "id": "109976259083543",
+                    "name": "Sports Venue & Stadium"
+                }
+            ],
+            "id": "104411956289378",
+            "name": "Platform 28"
+        },
+        {
+            "category": "Entertainment website",
+            "id": "478681505550947",
+            "name": "İtiraf Platformu Malatya"
+        },
+        {
+            "category": "Music video",
+            "id": "79544810932",
+            "name": "VEVO"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/search?q=platform&limit=5&type=page&access_token=access_token&offset=5&__after_id=79544810932"}
+}

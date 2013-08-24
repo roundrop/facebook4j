@@ -1,0 +1,130 @@
+{
+    "data": [
+        {
+            "application": {
+                "id": "350685531728",
+                "name": "Facebook for Android",
+                "namespace": "fbandroid"
+            },
+            "created_time": "2013-08-20T10:30:24+0000",
+            "from": {
+                "id": "100000000000001",
+                "name": "From Name1"
+            },
+            "id": "400000000000001",
+            "likes": {
+                "data": [
+                    {
+                        "id": "200000000000001",
+                        "name": "Like Name1"
+                    },
+                    {
+                        "id": "200000000000002",
+                        "name": "Like Name2"
+                    },
+                    {
+                        "id": "200000000000003",
+                        "name": "Like Name3"
+                    }
+                ],
+                "paging": {"cursors": {
+                    "after": "MTAwMDAzMTA0MjA0NjAy",
+                    "before": "MTAwMDAxMjcwMjU3MDU5"
+                }}
+            },
+            "message": "ana",
+            "place": {
+                "id": "174479159241890",
+                "location": {
+                    "city": "Ota-ku",
+                    "country": "Japan",
+                    "latitude": 35.550898482637,
+                    "longitude": 139.78833242848,
+                    "state": "Tokyo",
+                    "street": "",
+                    "zip": ""
+                },
+                "name": "ANA Lounge"
+            }
+        },
+        {
+            "application": {
+                "id": "6628568379",
+                "name": "Facebook for iPhone",
+                "namespace": "fbiphone"
+            },
+            "created_time": "2013-08-18T04:38:42+0000",
+            "from": {
+                "id": "100000000000002",
+                "name": "From Name2"
+            },
+            "id": "400000000000002",
+            "likes": {
+                "data": [
+                    {
+                        "id": "300000000000001",
+                        "name": "Like Name21"
+                    },
+                    {
+                        "id": "300000000000002",
+                        "name": "Like Name22"
+                    },
+                    {
+                        "id": "300000000000003",
+                        "name": "Like Name23"
+                    },
+                    {
+                        "id": "300000000000004",
+                        "name": "Like Name24"
+                    },
+                    {
+                        "id": "300000000000005",
+                        "name": "Like Name25"
+                    },
+                    {
+                        "id": "300000000000006",
+                        "name": "Like Name26"
+                    }
+                ],
+                "paging": {"cursors": {
+                    "after": "MTAwMDAwNjQzNzgxODQy",
+                    "before": "NjQ5MTQzNTAw"
+                }}
+            },
+            "place": {
+                "id": "145968818775790",
+                "location": {
+                    "city": "Yoshida-gun",
+                    "country": "Japan",
+                    "latitude": 36.089500128549,
+                    "longitude": 136.29786803334,
+                    "state": "Fukui",
+                    "street": "Eiheiji-cho",
+                    "zip": ""
+                },
+                "name": "Kenzo Sobaya"
+            },
+            "tags": {
+                "data": [
+                    {
+                        "id": "300000000000002",
+                        "name": "Like Name22"
+                    },
+                    {
+                        "id": "300000000000001",
+                        "name": "Like Name21"
+                    },
+                    {
+                        "id": "300000000000003",
+                        "name": "Like Name23"
+                    }
+                ],
+                "paging": {"next": "https://graph.facebook.com/400000000000002/tags?access_token=access_token&limit=25&offset=25&__after_id=564933715"}
+            }
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/search?type=checkin&access_token=access_token&limit=25&until=1376800722&__paging_token=400000000000002",
+        "previous": "https://graph.facebook.com/search?type=checkin&access_token=access_token&limit=25&since=1376994624&__paging_token=400000000000001&__previous=1"
+    }
+}
