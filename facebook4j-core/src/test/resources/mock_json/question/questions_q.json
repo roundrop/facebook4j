@@ -1,0 +1,9 @@
+{
+    "data": [
+        {
+            "id": "300000000000001",
+            "question": "What is your favorite programming language?"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/questions?fields=question&access_token=access_token&limit=50&offset=50&__after_id=381779171905254"}
+}
