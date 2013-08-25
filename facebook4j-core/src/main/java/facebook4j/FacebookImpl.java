@@ -2077,7 +2077,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     public ResponseList<Place> searchPlaces(String query, GeoLocation center, int distance, Reading reading) throws FacebookException {
         String url = buildSearchEndpoint(query, "place", reading)
-                        + "&center=" + center.asParameterString()
+                        + "&center=" + HttpParameter.encode(center.asParameterString())
                         + "&distance=" + distance;
         return factory.createPlaceList(get(url));
     }
@@ -2096,7 +2096,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     public ResponseList<Location> searchLocations(GeoLocation center, int distance, Reading reading) throws FacebookException {
         String url = buildSearchEndpoint(null, "location", reading)
-                + "&center=" + center.asParameterString()
+                + "&center=" + HttpParameter.encode(center.asParameterString())
                 + "&distance=" + distance;
         return factory.createLocationList(get(url));
     }

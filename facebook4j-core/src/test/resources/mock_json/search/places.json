@@ -1,0 +1,523 @@
+{
+    "data": [
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "151441331571686",
+            "location": {
+                "latitude": 36.718526684607,
+                "longitude": -4.429223900414,
+                "street": "",
+                "zip": ""
+            },
+            "name": "Dunkin' Coffee"
+        },
+        {
+            "category": "Food/beverages",
+            "category_list": [{
+                "id": "197871390225897",
+                "name": "Cafe"
+            }],
+            "id": "13856871189",
+            "location": {
+                "city": "Emeryville",
+                "country": "United States",
+                "latitude": 37.831093,
+                "longitude": -122.287113,
+                "state": "CA",
+                "street": "1400 Park Avenue",
+                "zip": ""
+            },
+            "name": "Peet's Coffee & Tea"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "192108214153222",
+                    "name": "Breakfast & Brunch Restaurant"
+                },
+                {
+                    "id": "170353509678476",
+                    "name": "Cyber Cafe"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                }
+            ],
+            "id": "113323032060158",
+            "location": {
+                "city": "New York",
+                "country": "United States",
+                "latitude": 40.757836105042,
+                "longitude": -73.984708768586,
+                "state": "NY",
+                "street": "1585 Broadway",
+                "zip": "10036"
+            },
+            "name": "Starbucks Coffee Times Square"
+        },
+        {
+            "category": "Media/news/publishing",
+            "category_list": [
+                {
+                    "id": "211155112228091",
+                    "name": "Event Venue"
+                },
+                {
+                    "id": "191684877517919",
+                    "name": "Publisher"
+                }
+            ],
+            "id": "412029578833375",
+            "location": {
+                "city": "Vashon",
+                "country": "United States",
+                "latitude": 47.375168,
+                "longitude": -122.431679,
+                "state": "WA",
+                "street": "25525 77th Ave SW",
+                "zip": "98070"
+            },
+            "name": "CoffeeTalk Media"
+        },
+        {
+            "category": "Food/beverages",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "150108431712141",
+                    "name": "Food & Grocery"
+                }
+            ],
+            "id": "56120464632",
+            "location": {
+                "city": "Waterbury",
+                "country": "United States",
+                "latitude": 44.34108,
+                "longitude": -72.73444,
+                "state": "VT",
+                "street": "33 Coffee Lane",
+                "zip": "05676"
+            },
+            "name": "Green Mountain Coffee"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "2500",
+                "name": "Local Business"
+            }],
+            "id": "204353946269163",
+            "location": {
+                "city": "Prishtinë",
+                "country": "Kosovo",
+                "latitude": 42.659900097522,
+                "longitude": 21.15700616253,
+                "street": "pallati i mediave p.n. / afer sheshit 21 ",
+                "zip": "10000"
+            },
+            "name": "Prince Coffee House"
+        },
+        {
+            "category": "Food/beverages",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "170355686348170",
+            "location": {
+                "city": "Dublin",
+                "country": "Ireland",
+                "latitude": 53.34444830454,
+                "longitude": -6.2612489841355,
+                "state": "",
+                "street": "3 College Green",
+                "zip": "Dublin 2"
+            },
+            "name": "Costa Coffee Ireland"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "322021481224623",
+            "location": {
+                "city": "Chennai",
+                "country": "India",
+                "latitude": 13.073801599547,
+                "longitude": 80.221380652835,
+                "state": "",
+                "street": "Cafe Coffee Day - Ampa Skywalk , 193926289498",
+                "zip": "600029"
+            },
+            "name": "Cafe Coffee Day - Ampa Skywalk"
+        },
+        {
+            "category": "Bar",
+            "category_list": [
+                {
+                    "id": "110290705711626",
+                    "name": "Bar"
+                },
+                {
+                    "id": "165679780146824",
+                    "name": "Food & Restaurant"
+                }
+            ],
+            "id": "417913951604394",
+            "location": {
+                "city": "Thessaloníki",
+                "country": "Greece",
+                "latitude": 40.631644328955,
+                "longitude": 22.94112690512,
+                "state": "",
+                "street": "Leoforos NIkis 13",
+                "zip": "54623"
+            },
+            "name": "Boston CoffeeTails & Friends"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "167954166588517",
+                    "name": "Diner"
+                },
+                {
+                    "id": "135930436481618",
+                    "name": "Lounge"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                }
+            ],
+            "id": "34315353611",
+            "location": {
+                "city": "Surat",
+                "country": "India",
+                "latitude": 21.171128494876,
+                "longitude": 72.790393372846,
+                "state": "",
+                "street": "Opp Sargam Shopping Center, Surgeon Society Lane, Near Parle Point",
+                "zip": "395007"
+            },
+            "name": "Coffee Culture"
+        },
+        {
+            "category": "Food/beverages",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "24329337724",
+            "location": {
+                "city": "Los Angeles",
+                "country": "United States",
+                "latitude": 34.042950193947,
+                "longitude": -118.3767759447,
+                "state": "CA",
+                "street": "1945 S. La Cienega Boulevard",
+                "zip": "90034"
+            },
+            "name": "The Coffee Bean & Tea Leaf"
+        },
+        {
+            "category": "Food/beverages",
+            "category_list": [
+                {
+                    "id": "200600219953504",
+                    "name": "Shopping & Retail"
+                },
+                {
+                    "id": "193831710644458",
+                    "name": "Italian Restaurant"
+                }
+            ],
+            "id": "247842395461",
+            "location": {
+                "city": "Rubano",
+                "country": "Italy",
+                "latitude": 45.32992171882,
+                "longitude": 11.822629214188,
+                "state": "",
+                "street": "Via Rossi , 3 f",
+                "zip": "35030"
+            },
+            "name": "Italian Coffee Lovers"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [{
+                "id": "273819889375819",
+                "name": "Restaurant"
+            }],
+            "id": "194788958244",
+            "location": {
+                "city": "Phnom Penh",
+                "country": "Cambodia",
+                "latitude": 11.55,
+                "longitude": 104.917,
+                "state": "",
+                "street": "#17, Street 214. (Near Pencil Supermarket and ICS)------Brown (2) St. 51 Corner 302 Near British International School-------Brown (3) St. 57 Corner 294 ------ Brown (4) #1 Sisowath Quay corner st. 98 (Adjacent to KFC Riverside)",
+                "zip": ""
+            },
+            "name": "BROWN Coffee and Bakery"
+        },
+        {
+            "category": "Food/beverages",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "433042920102411",
+            "location": {
+                "city": "Küçükçekmece",
+                "country": "Turkey",
+                "latitude": 40.987122818182,
+                "longitude": 28.789407840368,
+                "state": "",
+                "street": "Yeşilova Mah. Akdeniz Cad. No: 1-7 ",
+                "zip": ""
+            },
+            "name": "Gloria Jean's Coffees Türkiye"
+        },
+        {
+            "category": "Food/beverages",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "124818864257882",
+                    "name": "Donuts & Bagels"
+                },
+                {
+                    "id": "187827497907070",
+                    "name": "Bakery"
+                }
+            ],
+            "id": "130424181000",
+            "location": {
+                "latitude": 35.371931227912,
+                "longitude": -77.953547597364,
+                "street": "",
+                "zip": ""
+            },
+            "name": "Krispy Kreme Doughnuts"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                }
+            ],
+            "id": "204245682948348",
+            "location": {
+                "city": "Bukit Mertajam",
+                "country": "Malaysia",
+                "latitude": 5.3375918858875,
+                "longitude": 100.428486245,
+                "state": "",
+                "street": "",
+                "zip": "13600"
+            },
+            "name": "Starbucks Coffee, Autocity"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "187827497907070",
+                    "name": "Bakery"
+                }
+            ],
+            "id": "161806387205932",
+            "location": {
+                "city": "Lahore",
+                "country": "Pakistan",
+                "latitude": 31.507196516747,
+                "longitude": 74.354172547217,
+                "state": "",
+                "street": "",
+                "zip": ""
+            },
+            "name": "Coffee Tea and Company (CTC)"
+        },
+        {
+            "category": "Retail and consumer merchandise",
+            "category_list": [{
+                "id": "2239",
+                "name": "Retail and Consumer Merchandise"
+            }],
+            "id": "198333355974",
+            "location": {
+                "city": "Reading",
+                "country": "United States",
+                "latitude": 42.518315372255,
+                "longitude": -71.094414283078,
+                "state": "MA",
+                "street": "55 Walkers Brook Drive",
+                "zip": "01867"
+            },
+            "name": "Keurig"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "585726281445200",
+            "location": {
+                "city": "Nha Trang",
+                "country": "Vietnam",
+                "latitude": 12.251258143281,
+                "longitude": 109.19132557678,
+                "state": "",
+                "street": "09 Đào Duy Từ",
+                "zip": "09 Đào Duy Từ"
+            },
+            "name": "Coffee Talk"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "127892053948220",
+                    "name": "Cafeteria"
+                }
+            ],
+            "id": "26720551160",
+            "location": {
+                "latitude": 54.686431277664,
+                "longitude": 25.280248037542,
+                "street": "Vilnius | Kaunas | Klaipėda | Šiauliai | Druskininkai ",
+                "zip": ""
+            },
+            "name": "Coffee Inn"
+        },
+        {
+            "category": "Shopping/retail",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "605324449480040",
+            "location": {
+                "city": "Lake Worth",
+                "country": "United States",
+                "latitude": 26.567428,
+                "longitude": -80.187673,
+                "state": "FL",
+                "street": "8927 Hypoluxo Rd",
+                "zip": "33467"
+            },
+            "name": "I Love Coffee"
+        },
+        {
+            "category": "Food/beverages",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "273819889375819",
+                    "name": "Restaurant"
+                }
+            ],
+            "id": "103798806340963",
+            "location": {
+                "city": "Stockholm",
+                "country": "Sweden",
+                "latitude": 59.332182899293,
+                "longitude": 18.063824830343,
+                "state": "",
+                "street": "HQ Drottninggatan 55",
+                "zip": ""
+            },
+            "name": "Waynes Coffee"
+        },
+        {
+            "category": "Food/beverages",
+            "category_list": [{
+                "id": "197871390225897",
+                "name": "Cafe"
+            }],
+            "id": "164378986973025",
+            "location": {
+                "city": "Helsinki",
+                "country": "Finland",
+                "latitude": 60.168582846201,
+                "longitude": 24.94083515321,
+                "state": "",
+                "street": "Mannerheimintie 3",
+                "zip": "00100"
+            },
+            "name": "Robert's Coffee by Robert Paulig"
+        },
+        {
+            "category": "Bar",
+            "category_list": [
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "110290705711626",
+                    "name": "Bar"
+                }
+            ],
+            "id": "285561108121509",
+            "location": {
+                "city": "Galátsi",
+                "country": "Greece",
+                "latitude": 38.012859995462,
+                "longitude": 23.753690002078,
+                "state": "",
+                "street": "Syrou 7",
+                "zip": "11147"
+            },
+            "name": "Molliz coffee drinks & food"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/search?type=place&access_token=access_token&limit=25&offset=25&__after_id=285561108121509"}
+}

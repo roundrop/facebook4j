@@ -1,0 +1,589 @@
+{
+    "data": [
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "162264673824073",
+                    "name": "Specialty Grocery Store"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                }
+            ],
+            "id": "151116474914629",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.761003830281,
+                "longitude": -122.43336658638,
+                "state": "CA",
+                "street": "4023 18th St",
+                "zip": "94114-2501"
+            },
+            "name": "Philz Coffee - Castro"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                }
+            ],
+            "id": "145768288146",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.756441680648,
+                "longitude": -122.42122313109,
+                "state": "CA",
+                "street": "1026 Valencia Street",
+                "zip": "94110"
+            },
+            "name": "Ritual Coffee Roasters"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                }
+            ],
+            "id": "111745868854244",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.767003922045,
+                "longitude": -122.42198355131,
+                "state": "CA",
+                "street": "375 Valencia St",
+                "zip": "94103-3504"
+            },
+            "name": "Four Barrel Coffee"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "200863816597800",
+                    "name": "Ice Cream Parlor"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "187153754656815",
+                    "name": "Dessert Restaurant"
+                }
+            ],
+            "id": "121653874551894",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.761441867701,
+                "longitude": -122.425737,
+                "state": "CA",
+                "street": "3692 18th St",
+                "zip": "94110"
+            },
+            "name": "Bi-Rite Ice Cream"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "195498370504878",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.76487069397,
+                "longitude": -122.43213544929,
+                "state": "CA",
+                "street": "",
+                "zip": "94114"
+            },
+            "name": "Peets Coffee, Castro Dist."
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "273819889375819",
+                    "name": "Restaurant"
+                }
+            ],
+            "id": "371022899585573",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.765024,
+                "longitude": -122.422451,
+                "state": "CA",
+                "street": "3126 16th Street",
+                "zip": "94103"
+            },
+            "name": "Stanza Coffee Bar"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "273819889375819",
+                    "name": "Restaurant"
+                }
+            ],
+            "id": "38902026628",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.759343349908,
+                "longitude": -122.43539906764,
+                "state": "CA",
+                "street": "4117 Nineteenth St. @ Castro",
+                "zip": "94114"
+            },
+            "name": "Spike's Coffees & Teas"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "101412743253539",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.760993,
+                "longitude": -122.434749,
+                "state": "CA",
+                "street": "4094 18th Street",
+                "zip": "941142534"
+            },
+            "name": "Starbucks"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "187827497907070",
+                    "name": "Bakery"
+                },
+                {
+                    "id": "273819889375819",
+                    "name": "Restaurant"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                }
+            ],
+            "id": "393086010706921",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.760933443754,
+                "longitude": -122.4215830951,
+                "state": "CA",
+                "street": "746 Valencia Street",
+                "zip": "94110"
+            },
+            "name": "Craftsman and Wolves"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [{
+                "id": "273819889375819",
+                "name": "Restaurant"
+            }],
+            "id": "190102404364103",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.762941832258,
+                "longitude": -122.43444679479,
+                "state": "CA",
+                "street": "77 Dolores Terrace",
+                "zip": "94110"
+            },
+            "name": "Coffee Shop"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "2500",
+                "name": "Local Business"
+            }],
+            "id": "323775044366946",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.762526641635,
+                "longitude": -122.43524509493,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "Coffee Break :)"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                }
+            ],
+            "id": "163439987021460",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.765645,
+                "longitude": -122.424111,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "Coffee Bar"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                }
+            ],
+            "id": "303541573015969",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.7637886,
+                "longitude": -122.4297225,
+                "state": "CA",
+                "street": "",
+                "zip": "94114"
+            },
+            "name": "Peet's Coffee & Tea (2257 Market St.)"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "127892053948220",
+                    "name": "Cafeteria"
+                }
+            ],
+            "id": "222334887890541",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.761304,
+                "longitude": -122.425812,
+                "state": "CA",
+                "street": "501 Dolores St, ",
+                "zip": "94110"
+            },
+            "name": "Dolores Bottle Cafe"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "162264673824073",
+                    "name": "Specialty Grocery Store"
+                },
+                {
+                    "id": "273819889375819",
+                    "name": "Restaurant"
+                }
+            ],
+            "id": "145140138852353",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.7620724,
+                "longitude": -122.43510891667,
+                "state": "CA",
+                "street": "",
+                "zip": "94114"
+            },
+            "name": "Castro Coffee Company"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "198722103478014",
+                    "name": "Health Food Store"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "233804719972590",
+                    "name": "Bar & Grill"
+                }
+            ],
+            "id": "165097982486",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.762715,
+                "longitude": -122.421559,
+                "state": "CA",
+                "street": "92 Sycamore St",
+                "zip": "94110"
+            },
+            "name": "AP Coffee"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "2500",
+                "name": "Local Business"
+            }],
+            "id": "513297992027624",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.76405,
+                "longitude": -122.432762,
+                "state": "CA",
+                "street": "2299 Market Street ",
+                "zip": ""
+            },
+            "name": "Warehouse Coffee"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "2500",
+                "name": "Local Business"
+            }],
+            "id": "218879794791038",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.765977094922,
+                "longitude": -122.42415692443,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "Mmmm Coffee"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "248811365252465",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.762715,
+                "longitude": -122.421559,
+                "state": "CA",
+                "street": "94 Sycamore St",
+                "zip": "94110"
+            },
+            "name": "Graph Coffee"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "187827497907070",
+                    "name": "Bakery"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "187153754656815",
+                    "name": "Dessert Restaurant"
+                }
+            ],
+            "id": "121678054599283",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.765183427897,
+                "longitude": -122.43184670022,
+                "state": "CA",
+                "street": "2239 Market Street",
+                "zip": "94114"
+            },
+            "name": "Sweet Inspiration Bakery"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                },
+                {
+                    "id": "188296324525457",
+                    "name": "Sandwich Shop"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                }
+            ],
+            "id": "111433822211937",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.763097,
+                "longitude": -122.42647,
+                "state": "CA",
+                "street": "398 Dolores St",
+                "zip": "94110-1078"
+            },
+            "name": "Maxfield's House of Caffeine"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "152060704827758",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.760951200385,
+                "longitude": -122.43466964924,
+                "state": "CA",
+                "street": "4094 18th Street",
+                "zip": "94114"
+            },
+            "name": "Bearbucks"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "162264673824073",
+                    "name": "Specialty Grocery Store"
+                },
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                }
+            ],
+            "id": "106993719341616",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.764343772866,
+                "longitude": -122.42199517092,
+                "state": "CA",
+                "street": "521 Valencia St",
+                "zip": "94110-1114"
+            },
+            "name": "Muddy Waters Coffee House"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "203462172997785",
+                    "name": "Tea Room"
+                },
+                {
+                    "id": "197384240287028",
+                    "name": "Art Gallery"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                }
+            ],
+            "id": "172368392826629",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.76437,
+                "longitude": -122.43003,
+                "state": "CA",
+                "street": "3463 16th St.",
+                "zip": "94114"
+            },
+            "name": "Café Sophie"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "150432221681325",
+                    "name": "DVD & Video Store"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                }
+            ],
+            "id": "63018133564",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.761561383753,
+                "longitude": -122.42417675138,
+                "state": "CA",
+                "street": "3614 18th St.",
+                "zip": "94110"
+            },
+            "name": "Fayes Video & Espresso Bar"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/search?type=place&center=37.76,-122.427&distance=1000&access_token=access_token&limit=25&offset=25&__after_id=63018133564"}
+}

@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "id": "162050023957963",
+            "start_time": "2013-08-29T10:00:00+0530"
+        },
+        {
+            "id": "503529329723395",
+            "start_time": "2013-08-25T14:00:00+0500"
+        },
+        {
+            "id": "597121436988482",
+            "start_time": "2013-08-21T19:00:00+0200"
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/search?fields=start_time&q=conference&limit=3&type=event&access_token=access_token&until=1377104400&__paging_token=597121436988482",
+        "previous": "https://graph.facebook.com/search?fields=start_time&q=conference&limit=3&type=event&access_token=access_token&since=1377750600&__paging_token=162050023957963&__previous=1"
+    }
+}

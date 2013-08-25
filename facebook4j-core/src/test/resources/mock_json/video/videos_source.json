@@ -1,0 +1,23 @@
+{
+    "data": [
+        {
+            "id": "200000000000001",
+            "source": "https://fbcdn-video-a.akamaihd.net/hvideo-ak-frc1/v/700009_540000000000311_640003_n.mp4?oh=bccf9586be2b3fce7b458b92f2174493&oe=521B87B4&__gda__=1377578675_132b939affe2e6c312cfc7658095331b",
+            "updated_time": "2013-01-15T17:29:53+0000"
+        },
+        {
+            "id": "200000000000002",
+            "source": "https://fbcdn-video-a.akamaihd.net/cfs-ak-ash4/v/83859/196/200000000000002_51549.mp4?oh=c97e9e2ef115e8ac2adcaa3f50d2be2a&oe=521B9A20&__gda__=1377613400_6babd9ce3596da294274be178cc35ccf",
+            "updated_time": "2011-03-21T05:48:04+0000"
+        },
+        {
+            "id": "200000000000003",
+            "source": "https://fbcdn-video-a.akamaihd.net/cfs-ak-prn1/v/78921/936/200000000000003_64755.mp4?oh=830a9257182dcf18f223737a2ea32014&oe=521BD433&__gda__=1377585953_5aff4628dfe214079719812a0641b68e",
+            "updated_time": "2010-12-07T13:15:35+0000"
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/10000000000001/videos?fields=source&access_token=access_token&limit=25&until=1291727734",
+        "previous": "https://graph.facebook.com/10000000000001/videos?fields=source&access_token=access_token&limit=25&since=1358270993&__previous=1"
+    }
+}
