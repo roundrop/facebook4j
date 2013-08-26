@@ -23,7 +23,7 @@ import java.util.Date;
  */
 public interface Question extends FacebookResponse {
     String getId();
-    IdNameEntity getFrom();
+    Category getFrom();
     String getQuestion();
     Date getCreatedTime();
     Date getUpdatedTime();
@@ -31,7 +31,7 @@ public interface Question extends FacebookResponse {
     
     interface Option {
         String getId();
-        IdNameEntity getFrom();
+        Category getFrom();
         String getName();
         Integer getVoteCount();
         Date getCreatedTime();

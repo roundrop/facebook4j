@@ -16,8 +16,6 @@
 
 package facebook4j.api;
 
-import java.util.List;
-
 import facebook4j.FacebookException;
 import facebook4j.Question;
 import facebook4j.QuestionUpdate;
@@ -67,7 +65,7 @@ public interface QuestionMethods {
 
 
     /**
-     * Creates a question.
+     * Creates a current page's question.
      * @param questionUpdate the question to be created
      * @return The new question ID
      * @throws FacebookException when Facebook service or network is unavailable
@@ -77,7 +75,7 @@ public interface QuestionMethods {
 
     /**
      * Creates the question.
-     * @param id the ID of a user/page
+     * @param id the ID of a page
      * @param questionUpdate the question to be created
      * @return The new question ID
      * @throws FacebookException when Facebook service or network is unavailable

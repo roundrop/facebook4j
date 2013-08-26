@@ -16,8 +16,8 @@
 
 package facebook4j.internal.json;
 
+import facebook4j.Category;
 import facebook4j.FacebookException;
-import facebook4j.IdNameEntity;
 import facebook4j.PagableList;
 import facebook4j.Question;
 import facebook4j.ResponseList;
@@ -38,7 +38,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private static final long serialVersionUID = 1143276967891229953L;
 
     private String id;
-    private IdNameEntity from;
+    private Category from;
     private String question;
     private Date createdTime;
     private Date updatedTime;
@@ -64,7 +64,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             id = getRawString("id", json);
             if (!json.isNull("from")) {
                 JSONObject fromJSONObject = json.getJSONObject("from");
-                from = new IdNameEntityJSONImpl(fromJSONObject);
+                from = new CategoryJSONImpl(fromJSONObject);
             }
             question = getRawString("question", json);
             createdTime = getISO8601Datetime("created_time", json);
@@ -84,7 +84,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return id;
     }
 
-    public IdNameEntity getFrom() {
+    public Category getFrom() {
         return from;
     }
 
@@ -170,7 +170,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         private static final long serialVersionUID = -6022359823763655064L;
 
         private String id;
-        private IdNameEntity from;
+        private Category from;
         private String name;
         private Integer voteCount;
         private Date createdTime;
@@ -181,7 +181,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 id = getRawString("id", json);
                 if (!json.isNull("from")) {
                     JSONObject fromJSONObject = json.getJSONObject("from");
-                    from = new IdNameEntityJSONImpl(fromJSONObject);
+                    from = new CategoryJSONImpl(fromJSONObject);
                 }
                 name = getRawString("name", json);
                 voteCount = getPrimitiveInt("vote_count", json);
@@ -196,7 +196,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             return id;
         }
 
-        public IdNameEntity getFrom() {
+        public Category getFrom() {
             return from;
         }
 

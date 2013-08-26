@@ -1,0 +1,49 @@
+{
+    "data": [
+        {
+            "created_time": "2013-03-18T10:34:18+0000",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "id": "260686110733539",
+            "name": "C#",
+            "vote_count": 0
+        },
+        {
+            "created_time": "2013-03-18T10:34:19+0000",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "id": "320634584706152",
+            "name": "Ruby",
+            "vote_count": 0
+        },
+        {
+            "created_time": "2013-03-18T10:34:20+0000",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "id": "302535046540868",
+            "name": "PHP",
+            "vote_count": 0
+        },
+        {
+            "created_time": "2013-03-18T10:34:21+0000",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "id": "462870730453151",
+            "name": "Java",
+            "vote_count": 0
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/154498061377159/options?access_token=access_token&limit=25&offset=25&__after_id=462870730453151"}
+}
