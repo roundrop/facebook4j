@@ -1,0 +1,24 @@
+{
+    "data": [
+        {
+            "id": "100003403570846",
+            "name": "安倍晋三"
+        },
+        {
+            "id": "1414141414",
+            "name": "Foo Name"
+        },
+        {
+            "id": "2424242424",
+            "name": "Bar Name"
+        }
+    ],
+    "paging": {
+        "cursors": {
+            "after": "NzEyNTA2MDc2",
+            "before": "MTQzNjYxMjQ5OQ=="
+        },
+        "next": "https://graph.facebook.com/1234567890123456/subscribedto?access_token=access_token&limit=25&after=NzEyNTA2MDc2"
+    },
+    "summary": {"total_count": 27}
+}

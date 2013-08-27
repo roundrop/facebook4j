@@ -1,0 +1,24 @@
+{
+    "data": [
+        {
+            "id": "100000000000001",
+            "name": "Subscriber Name1"
+        },
+        {
+            "id": "100000000000002",
+            "name": "Subscriber Name2"
+        },
+        {
+            "id": "100000000000003",
+            "name": "Subscriber Name3"
+        }
+    ],
+    "paging": {
+        "cursors": {
+            "after": "MTAwMDAyMTE3MTczOTc4",
+            "before": "MTAwMDAxNjYxNDgyMjM4"
+        },
+        "next": "https://graph.facebook.com/1234567890123456/subscribers?access_token=access_token&limit=25&after=MTAwMDAyMTE3MTczOTc4"
+    },
+    "summary": {"total_count": 43}
+}
