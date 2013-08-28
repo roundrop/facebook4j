@@ -21,6 +21,7 @@ import facebook4j.Category;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
+import facebook4j.Like;
 import facebook4j.PagableList;
 import facebook4j.Place;
 import facebook4j.Post;
@@ -63,12 +64,12 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private String description;
     private URL source;
     private List<Post.Property> properties;
-    private String icon;
+    private URL icon;
     private List<Post.Action> actions;
     private Privacy privacy;
     private String type;
     private Integer sharesCount;
-    private PagableList<IdNameEntity> likes;
+    private PagableList<Like> likes;
     private Place place;
     private String statusType;
     private String story;
@@ -157,7 +158,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             } else {
                 properties = Collections.emptyList();
             }
-            icon = getRawString("icon", json);
+            icon = getURL("icon", json);
             if (!json.isNull("actions")) {
                 JSONArray actionJSONArray = json.getJSONArray("actions");
                 actions = new ArrayList<Post.Action>();
@@ -184,16 +185,16 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 if (!likesJSONObject.isNull("data")) {
                     JSONArray list = likesJSONObject.getJSONArray("data");
                     final int size = list.length();
-                    likes = new PagableListImpl<IdNameEntity>(size, likesJSONObject);
+                    likes = new PagableListImpl<Like>(size, likesJSONObject);
                     for (int i = 0; i < size; i++) {
-                        IdNameEntityJSONImpl like = new IdNameEntityJSONImpl(list.getJSONObject(i));
+                        LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
                         likes.add(like);
                     }
                 } else {
-                    likes = new PagableListImpl<IdNameEntity>(1, likesJSONObject);
+                    likes = new PagableListImpl<Like>(1, likesJSONObject);
                 }
             } else {
-                likes = new PagableListImpl<IdNameEntity>(0);
+                likes = new PagableListImpl<Like>(0);
             }
             if (!json.isNull("place")) {
                 JSONObject placeJSONObject = json.getJSONObject("place");
@@ -314,7 +315,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return properties;
     }
 
-    public String getIcon() {
+    public URL getIcon() {
         return icon;
     }
 
@@ -334,7 +335,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return sharesCount;
     }
 
-    public PagableList<IdNameEntity> getLikes() {
+    public PagableList<Like> getLikes() {
         return likes;
     }
 

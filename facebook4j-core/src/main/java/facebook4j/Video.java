@@ -26,7 +26,7 @@ import java.util.List;
 public interface Video extends FacebookResponse {
     String getId();
     Category getFrom();
-    List<IdNameEntity> getTags();
+    List<Tag> getTags();
     String getName();
     String getDescription();
     URL getPicture();

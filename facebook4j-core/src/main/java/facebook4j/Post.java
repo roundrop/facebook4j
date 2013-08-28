@@ -37,12 +37,12 @@ public interface Post extends FacebookResponse {
     String getDescription();
     URL getSource();
     List<Post.Property> getProperties();
-    String getIcon();
+    URL getIcon();
     List<Post.Action> getActions();
     Privacy getPrivacy();
     String getType();
     Integer getSharesCount();
-    PagableList<IdNameEntity> getLikes();
+    PagableList<Like> getLikes();
     Place getPlace();
     String getStatusType();
     String getStory();

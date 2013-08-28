@@ -458,7 +458,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(status.getFrom().getName(), is("Facebook Developers"));
 //        assertThat(status.getFrom().getCategory(), is("Product/service"));  //TODO
             assertThat(status.getId(), is("10150293984393553"));
-            PagableList<IdNameEntity> likes = status.getLikes();
+            PagableList<Like> likes = status.getLikes();
             assertThat(likes.size(), is(25));
             assertThat(likes.get(0).getId(), is("100002589774742"));
             assertThat(likes.get(0).getName(), is("Katsumi Ohmuro"));

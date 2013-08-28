@@ -716,7 +716,7 @@ public class PageMethodsTest {
             assertThat(post.getCreatedTime(), is(iso8601DateOf("2013-06-06T14:16:16+0000")));
             assertThat(post.getFrom().getId(), is("1558890061"));
             assertThat(post.getFrom().getName(), is("Joshua Snow Hansén"));
-            assertThat(post.getIcon(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/aS8ecmYRys0.gif"));
+            assertThat(post.getIcon().toString(), is("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/aS8ecmYRys0.gif"));
             assertThat(post.getLink().toString(), is("http://www.runningtowardshome.com/2013/06/grand-canyon-r2r2r.html"));
             assertThat(post.getName(), is("Running Towards Home | ©: My Quest to Run the Grand Canyon R2R2R"));
             assertThat(post.getPicture().toString(), is("https://fbexternal-a.akamaihd.net/safe_image.php?d=AQCk6K-KS0vS1qlM&w=154&h=154&url=http%3A%2F%2F3.bp.blogspot.com%2F-rbFFZFuvNiQ%2FUX33eAIvYjI%2FAAAAAAAAN2g%2FmJUZSlj7B1M%2Fs240%2FBeforeAfter2.png"));

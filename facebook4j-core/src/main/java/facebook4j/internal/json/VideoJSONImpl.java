@@ -19,9 +19,9 @@ package facebook4j.internal.json;
 import facebook4j.Category;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
-import facebook4j.IdNameEntity;
 import facebook4j.PagableList;
 import facebook4j.ResponseList;
+import facebook4j.Tag;
 import facebook4j.Video;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
@@ -45,7 +45,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     private String id;
     private Category from;
-    private List<IdNameEntity> tags;
+    private List<Tag> tags;
     private String name;
     private String description;
     private URL picture;
@@ -84,9 +84,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 JSONObject tagsJSONObject = json.getJSONObject("tags");
                 JSONArray tagsJSONArray = tagsJSONObject.getJSONArray("data");
                 final int size = tagsJSONArray.length();
-                tags = new ArrayList<IdNameEntity>(size);
+                tags = new ArrayList<Tag>(size);
                 for (int i = 0; i < size; i++) {
-                    tags.add(new IdNameEntityJSONImpl(tagsJSONArray.getJSONObject(i)));
+                    tags.add(new TagJSONImpl(tagsJSONArray.getJSONObject(i)));
                 }
             } else {
                 tags = Collections.emptyList();
@@ -139,7 +139,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return from;
     }
 
-    public List<IdNameEntity> getTags() {
+    public List<Tag> getTags() {
         return tags;
     }
 
