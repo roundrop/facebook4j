@@ -74,7 +74,13 @@ public final class HttpRequest implements java.io.Serializable {
             this.parameters = NULL_PARAMETERS;
         } else {
             this.url = url;
-            this.parameters = parameters;
+            // Modified for Facebook4J start
+            if (parameters == null) {
+                this.parameters = NULL_PARAMETERS;
+            } else {
+                this.parameters = parameters;
+            }
+            // Modified for Facebook4J end
         }
         this.authorization = authorization;
         this.requestHeaders = requestHeaders;
