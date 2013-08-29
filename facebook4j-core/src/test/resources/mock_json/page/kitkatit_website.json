@@ -1,0 +1,8 @@
+{
+    "data": [{
+        "id": "160430023972443",
+        "name": "Kit Kat",
+        "website": "www.kitkat.it"
+    }],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/likes?fields=name,website&target_id=160430023972443&access_token=access_token&limit=5000&offset=5000&__after_id=160430023972443"}
+}

@@ -1514,6 +1514,60 @@ public class PageMethodsTest {
         }
     }
 
+    public static class getLikedPage extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/page/kitkatit.json");
+            Page actual = facebook.getLikedPage("160430023972443");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/likes/160430023972443")));
+
+            assertThat(actual.getId(), is("160430023972443"));
+            assertThat(actual.getCategory(), is("Company"));
+            assertThat(actual.getName(), is("Kit Kat"));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2013-08-29T04:56:49+0000")));
+        }
+
+        @Test
+        public void me_reading() throws Exception {
+            facebook.setMockJSON("mock_json/page/kitkatit_website.json");
+            Page actual = facebook.getLikedPage("160430023972443", new Reading().fields("name").fields("website"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/likes/160430023972443")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "name,website"));
+
+            assertThat(actual.getId(), is("160430023972443"));
+            assertThat(actual.getWebsite(), is("www.kitkat.it"));
+            assertThat(actual.getName(), is("Kit Kat"));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/page/kitkatit.json");
+            Page actual = facebook.getLikedPage("1234567890123456", "160430023972443");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/likes/160430023972443")));
+
+            assertThat(actual.getId(), is("160430023972443"));
+            assertThat(actual.getCategory(), is("Company"));
+            assertThat(actual.getName(), is("Kit Kat"));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2013-08-29T04:56:49+0000")));
+        }
+
+        @Test
+        public void id_reading() throws Exception {
+            facebook.setMockJSON("mock_json/page/kitkatit_website.json");
+            Page actual = facebook.getLikedPage("1234567890123456", "160430023972443", new Reading().fields("name").fields("website"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/likes/160430023972443")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "name,website"));
+
+            assertThat(actual.getId(), is("160430023972443"));
+            assertThat(actual.getWebsite(), is("www.kitkat.it"));
+            assertThat(actual.getName(), is("Kit Kat"));
+        }
+    }
+
     public static class createOffer extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
