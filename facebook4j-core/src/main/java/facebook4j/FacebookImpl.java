@@ -1127,20 +1127,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createLikeList(get(buildEndpoint(userId, "likes", reading)));
     }
 
-    public ResponseList<Like> getLikesBelongs(String pageId) throws FacebookException {
-        return getLikesBelongs("me", pageId, null);
-    }
-    public ResponseList<Like> getLikesBelongs(String pageId, Reading reading) throws FacebookException {
-        return getLikesBelongs("me", pageId, reading);
-    }
-    public ResponseList<Like> getLikesBelongs(String userId, String pageId) throws FacebookException {
-        return getLikesBelongs(userId, pageId, null);
-    }
-    public ResponseList<Like> getLikesBelongs(String userId, String pageId, Reading reading) throws FacebookException {
-        ensureAuthorizationEnabled();
-        return factory.createLikeList(get(buildEndpoint(userId, "likes/" + pageId, reading)));
-    }
-
     /* Comment Methods */
 
     public Comment getComment(String commentId) throws FacebookException {
