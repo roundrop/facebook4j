@@ -16,7 +16,6 @@
 package facebook4j;
 
 import facebook4j.internal.logging.Logger;
-import facebook4j.internal.util.z_F4JInternalStringUtil;
 import facebook4j.management.APIStatistics;
 import facebook4j.management.APIStatisticsMBean;
 import facebook4j.management.APIStatisticsOpenMBean;
@@ -30,8 +29,6 @@ import javax.management.ObjectName;
 import java.lang.management.ManagementFactory;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Singleton instance of all Twitter API monitoring. Handles URL parsing and "wire off" logic.
@@ -93,24 +90,8 @@ public class FacebookAPIMonitor {
         try {
             URL url = new URL(facebookUrl);
             String method = url.getPath();
-            if (method.startsWith("/fql") || method.startsWith("/search")) {
-                method += "?" + removeAccessTokenFromQueryString(url.getQuery());
-            }
             STATISTICS.methodCalled(method, elapsedTime, success);
         } catch (MalformedURLException ignore) {}
     }
 
-    private String removeAccessTokenFromQueryString(String queryString) {
-        String[] params = queryString.split("&");
-        List<String> track = new ArrayList<String>();
-        int i = 0;
-        for (String param : params) {
-            String paramName = param.split("=")[0];
-            if (!paramName.equals("access_token")) {
-                track.add(param);
-                i++;
-            }
-        }
-        return z_F4JInternalStringUtil.join(track.toArray(new String[track.size()]), "&");
-    }
 }

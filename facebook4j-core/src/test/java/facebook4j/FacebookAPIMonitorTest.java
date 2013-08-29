@@ -36,14 +36,14 @@ public class FacebookAPIMonitorTest {
     public void methodCalled_fql() throws Exception {
         final String path = "/fql?q=SELECT+uid2+FROM+friend+WHERE+uid1=me()&access_token=access_token";
         apiMonitor.methodCalled(BASE_URL + path, 1000l, true);
-        checkMethodStats("/fql?q=SELECT+uid2+FROM+friend+WHERE+uid1=me()");
+        checkMethodStats("/fql");
     }
 
     @Test
     public void methodCalled_search() throws Exception {
         final String path = "/search?q=watermelon&access_token=access_token&type=post";
         apiMonitor.methodCalled(BASE_URL + path, 1000l, true);
-        checkMethodStats("/search?q=watermelon&type=post");
+        checkMethodStats("/search");
     }
 
     // Helper methods
