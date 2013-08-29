@@ -26,8 +26,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 
 import static facebook4j.junit.F4JHttpParameterMatchers.*;
@@ -1746,6 +1748,56 @@ public class PageMethodsTest {
             assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/feed")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("backdated_time", "1362249213"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("backdated_time_granularity", "month"));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+    }
+
+    public static class postPagePhoto extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            Media source = new Media(new File("src/test/resources/test_image.png"));
+            PagePhotoUpdate pagePhotoUpdate = new PagePhotoUpdate(source).message("upload photo to the page test.");
+            Set<String> countries = new HashSet<String>();
+            countries.add("US");
+            countries.add("GB");
+            TargetingParameter targeting = new TargetingParameter().countries(countries);
+            pagePhotoUpdate.setTargeting(targeting);
+            FeedTargetingParameter feedTargeting = new FeedTargetingParameter().genders(FeedTargetingParameter.Gender.Male);
+            feedTargeting.setAgeMin(20);
+            feedTargeting.setAgeMax(40);
+            pagePhotoUpdate.setFeedTargeting(feedTargeting);
+            String actual = facebook.postPagePhoto(pagePhotoUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/photos")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "upload photo to the page test."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("targeting", "{\"countries\":[\"US\",\"GB\"]}"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("feed_targeting", "{\"age_min\":20,\"genders\":{\"value\":1},\"age_max\":40}"));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            Media source = new Media(new File("src/test/resources/test_image.png"));
+            PagePhotoUpdate pagePhotoUpdate = new PagePhotoUpdate(source).message("upload photo to the page test.");
+            Set<String> countries = new HashSet<String>();
+            countries.add("US");
+            countries.add("GB");
+            TargetingParameter targeting = new TargetingParameter().countries(countries);
+            pagePhotoUpdate.setTargeting(targeting);
+            FeedTargetingParameter feedTargeting = new FeedTargetingParameter().genders(FeedTargetingParameter.Gender.Male);
+            feedTargeting.setAgeMin(20);
+            feedTargeting.setAgeMax(40);
+            pagePhotoUpdate.setFeedTargeting(feedTargeting);
+            String actual = facebook.postPagePhoto("137246726435626", pagePhotoUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/photos")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "upload photo to the page test."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("targeting", "{\"countries\":[\"US\",\"GB\"]}"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("feed_targeting", "{\"age_min\":20,\"genders\":{\"value\":1},\"age_max\":40}"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
         }

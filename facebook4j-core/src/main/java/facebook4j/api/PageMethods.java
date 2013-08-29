@@ -258,6 +258,15 @@ public interface PageMethods {
 
     /**
      * Posts a photo to the current page's wall.
+     * @param pagePhotoUpdate photo content, targeting and more
+     * @return The new photo ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#photos">Page#photos - Facebook Developers</a>
+     */
+    String postPagePhoto(PagePhotoUpdate pagePhotoUpdate) throws FacebookException;
+
+    /**
+     * Posts a photo to a page's wall.
      * @param pageId the ID of a page
      * @param pagePhotoUpdate photo content, targeting and more
      * @return The new photo ID

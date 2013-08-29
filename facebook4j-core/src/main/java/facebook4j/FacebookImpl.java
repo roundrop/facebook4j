@@ -1449,6 +1449,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return getRawString("id", json);
     }
 
+    public String postPagePhoto(PagePhotoUpdate pagePhotoUpdate) throws FacebookException {
+        return postPagePhoto("me", pagePhotoUpdate);
+    }
     public String postPagePhoto(String pageId, PagePhotoUpdate pagePhotoUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         JSONObject json = post(buildEndpoint(pageId, "photos"), pagePhotoUpdate.asHttpParameterArray()).asJSONObject();
