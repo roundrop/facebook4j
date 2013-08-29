@@ -1433,6 +1433,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createPageSettingList(res);
     }
 
+    public boolean updatePageSetting(PageSettingUpdate pageSettingUpdate) throws FacebookException {
+        return updatePageSetting("me", pageSettingUpdate);
+    }
     public boolean updatePageSetting(String pageId, PageSettingUpdate pageSettingUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(pageId, "settings"), pageSettingUpdate.asHttpParameterArray());

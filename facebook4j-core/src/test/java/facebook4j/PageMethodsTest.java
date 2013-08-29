@@ -1803,6 +1803,34 @@ public class PageMethodsTest {
         }
     }
 
+    public static class updatePageSetting extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            PageSettingUpdate pageSettingUpdate = new PageSettingUpdate("USERS_CAN_POST", false);
+            boolean actual = facebook.updatePageSetting(pageSettingUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/settings")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("setting", "USERS_CAN_POST"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("value", "false"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            PageSettingUpdate pageSettingUpdate = new PageSettingUpdate("USERS_CAN_POST", false);
+            boolean actual = facebook.updatePageSetting("137246726435626", pageSettingUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/settings")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("setting", "USERS_CAN_POST"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("value", "false"));
+
+            assertThat(actual, is(true));
+        }
+    }
+
 /*
     @Test
     public void getLikedPage() throws Exception {

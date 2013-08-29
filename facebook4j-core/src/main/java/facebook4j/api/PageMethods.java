@@ -228,6 +228,15 @@ public interface PageMethods {
     ResponseList<PageSetting> getPageSettings(String pageId) throws FacebookException;
 
     /**
+     * Updates the setting for the current page.
+     * @param pageSettingUpdate setting
+     * @return true if the setting was successfully set or changed
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#settings">Page#settings - Facebook Developers</a>
+     */
+    boolean updatePageSetting(PageSettingUpdate pageSettingUpdate) throws FacebookException;
+
+    /**
      * Updates the setting for the page.
      * @param pageId the ID of the page
      * @param pageSettingUpdate setting
