@@ -17,6 +17,7 @@
 package facebook4j.api;
 
 import facebook4j.Admin;
+import facebook4j.BackdatingPostUpdate;
 import facebook4j.FacebookException;
 import facebook4j.Insight;
 import facebook4j.Media;
@@ -235,6 +236,25 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#settings">Page#settings - Facebook Developers</a>
      */
     boolean updatePageSetting(String pageId, PageSettingUpdate pageSettingUpdate) throws FacebookException;
+
+    /**
+     * Creates the post that's back-dated to the current page's wall.
+     * @param backdatingPostUpdate the post to be created
+     * @return The new post ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#backdating">Page#backdating - Facebook Developers</a>
+     */
+    String postBackdatingFeed(BackdatingPostUpdate backdatingPostUpdate) throws FacebookException;
+
+    /**
+     * Creates the post that's back-dated to a page's wall.
+     * @param pageId the ID of a page
+     * @param backdatingPostUpdate the post to be created
+     * @return The new post ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#backdating">Page#backdating - Facebook Developers</a>
+     */
+    String postBackdatingFeed(String pageId, BackdatingPostUpdate backdatingPostUpdate) throws FacebookException;
 
     /**
      * Posts a photo to the current page's wall.

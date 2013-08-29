@@ -1719,6 +1719,38 @@ public class PageMethodsTest {
         }
     }
 
+    public static class postBackdatingFeed extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            BackdatingPostUpdate backdatingPostUpdate = new BackdatingPostUpdate("backdating post test.")
+                                                            .backdatedTime(1362249213)
+                                                            .backdatedTimeGranularity(BackdatedTimeGranularity.day);
+            String actual = facebook.postBackdatingFeed(backdatingPostUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/feed")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("backdated_time", "1362249213"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("backdated_time_granularity", "day"));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            BackdatingPostUpdate backdatingPostUpdate = new BackdatingPostUpdate("backdating post test.")
+                                                            .backdatedTime(1362249213)
+                                                            .backdatedTimeGranularity(BackdatedTimeGranularity.month);
+            String actual = facebook.postBackdatingFeed("137246726435626", backdatingPostUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/feed")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("backdated_time", "1362249213"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("backdated_time_granularity", "month"));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+    }
+
 /*
     @Test
     public void getLikedPage() throws Exception {

@@ -1439,6 +1439,16 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return Boolean.valueOf(res.asString().trim());
     }
 
+    public String postBackdatingFeed(BackdatingPostUpdate backdatingPostUpdate) throws FacebookException {
+        return postBackdatingFeed("me", backdatingPostUpdate);
+    }
+    public String postBackdatingFeed(String pageId, BackdatingPostUpdate backdatingPostUpdate) throws FacebookException {
+        ensureAuthorizationEnabled();
+        JSONObject json = post(buildEndpoint(pageId, "feed"), backdatingPostUpdate.asHttpParameterArray())
+                .asJSONObject();
+        return getRawString("id", json);
+    }
+
     public String postPagePhoto(String pageId, PagePhotoUpdate pagePhotoUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         JSONObject json = post(buildEndpoint(pageId, "photos"), pagePhotoUpdate.asHttpParameterArray()).asJSONObject();
