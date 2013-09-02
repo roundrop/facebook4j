@@ -66,13 +66,6 @@ public final class z_F4JInternalParseUtil {
         throw new AssertionError();
     }
 
-    private static ThreadLocal<Map<String, SimpleDateFormat>> formatMap = new ThreadLocal<Map<String, SimpleDateFormat>>() {
-        @Override
-        protected Map<String, SimpleDateFormat> initialValue() {
-            return new HashMap<String, SimpleDateFormat>();
-        }
-    };
-
     public static String getRawString(String name, JSONObject json) {
         try {
             if (json.isNull(name)) {
@@ -174,18 +167,30 @@ public final class z_F4JInternalParseUtil {
         if (dateString == null) {
             return null;
         }
-        return parseISO8601Date(dateString);
+        if (json.isNull("timezone")) {
+            return parseISO8601Date(dateString);
+        } else {
+            TimeZone timezone = getTimeZone("timezone", json);
+            return parseISO8601Date(dateString, timezone);
+        }
     }
 
     private static Date parseISO8601Date(String dateString) {
+        return parseISO8601Date(dateString, TimeZone.getTimeZone("UTC"));
+    }
+    private static Date parseISO8601Date(String dateString, TimeZone timezone) {
         try {
             return new SimpleDateFormat(ISO8601_DATE_FORMAT).parse(dateString);
         } catch (ParseException e1) {
             try {
-                return new SimpleDateFormat(ISO8601_DATE_FORMAT_WITHOUT_TZ).parse(dateString);
+                SimpleDateFormat sdf = new SimpleDateFormat(ISO8601_DATE_FORMAT_WITHOUT_TZ);
+                sdf.setTimeZone(timezone);
+                return sdf.parse(dateString);
             } catch (ParseException e2) {
                 try {
-                    return new SimpleDateFormat(ISO8601_DATE_FORMAT_WITHOUT_TIME).parse(dateString);
+                    SimpleDateFormat sdf = new SimpleDateFormat(ISO8601_DATE_FORMAT_WITHOUT_TIME);
+                    sdf.setTimeZone(timezone);
+                    return sdf.parse(dateString);
                 } catch (ParseException e3) {
                     return null;
                 }

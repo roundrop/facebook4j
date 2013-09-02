@@ -225,13 +225,13 @@ public class EventMethodsTest {
 
             assertThat(actual.getId(), is("331218348435"));
             assertThat(actual.getLocation(), is("The Phoenix"));
-            assertThat(actual.getEndTime(), is(iso8601DateOf("2010-03-14T17:30:00")));
+            assertThat(actual.getEndTime(), is(iso8601DateWithoutTzOf("2010-03-14T17:30:00")));
             assertThat(actual.getDescription(), is("Join the Facebook team and local developers for a deep dive into the latest and most exciting ways developers are building with Facebook technologies.  \n\nCome to learn, stay to make friends!\n\nTentative Agenda:\n2:00 - 2:30 PM - Registration\n2:30 - 3:30 PM - Learn the latest from Facebook and local developers\n3:30 - 5:30 PM - Drink with friends!  Stay and mingle with your developer community.\n\n*Come early!  Drink tickets and t-shirts provided to the first 300 attendees.  Cash bar provided for all attendees.\n\nTopics & Speakers:\n--Multi-Platform Social Games (Gareth Davis, Facebook) \n--Increasing Mobile Engagement with Facebook Connect (Josh Williams, Gowalla)\n--Facebook Integration with Seesmic (or How to Build Community Using Octopus Balls...) (John Yamasaki, Seesmic)\n--Going multi-platform: the brave new world beyond facebook.com (Sebastien de Halleux, Playfish / EA Interactive)\n--Socially Connected Exploding Gems Everywhere...Excellent! (Jon David, PopCap Games)\n\n* Emceed by Austin local: whurley, Chaotic Moon Studios\n* All are welcome to attend, no badge is required.\n* If you can't make it in person, you can join the live stream, beginning at 2:00 PM CST, here: http://ustream.tv/fbplatform  \n\n***DAYLIGHT SAVINGS STARTS SUNDAY AT 2 AM, PLEASE ADJUST YOUR CLOCKS ACCORDINGLY***"));
             assertThat(actual.getName(), is("Facebook Developer Garage Austin - SXSW Edition"));
             assertThat(actual.getPrivacy(), is(EventPrivacyType.OPEN));
             assertThat(actual.getOwner().getId(), is("2503747"));
             assertThat(actual.getOwner().getName(), is("Julia Lam"));
-            assertThat(actual.getStartTime(), is(iso8601DateOf("2010-03-14T14:00:00")));
+            assertThat(actual.getStartTime(), is(iso8601DateWithoutTzOf("2010-03-14T14:00:00")));
             assertThat(actual.isDateOnly(), is(false));
             assertThat(actual.getVenue().getStreet(), is("409 Colorado St."));
             assertThat(actual.getVenue().getState(), is("Texas"));
@@ -257,7 +257,7 @@ public class EventMethodsTest {
             assertThat(actual.getName(), is("Facebook Developer Garage Austin - SXSW Edition"));
             assertThat(actual.getPrivacy(), is(nullValue()));
             assertThat(actual.getOwner(), is(nullValue()));
-            assertThat(actual.getStartTime(), is(iso8601DateOf("2010-03-14T14:00:00")));
+            assertThat(actual.getStartTime(), is(iso8601DateWithoutTzOf("2010-03-14T14:00:00")));
             assertThat(actual.isDateOnly(), is(nullValue()));
             assertThat(actual.getVenue(), is(nullValue()));
             assertThat(actual.getUpdatedTime(), is(nullValue()));
@@ -274,7 +274,9 @@ public class EventMethodsTest {
             assertThat(actual.getTimezone(), is(TimeZone.getTimeZone("Europe/Prague")));
             assertThat(actual.getRsvpStatus(), is("attending"));
             assertThat(actual.getName(), is("TestEvent"));
-            assertThat(actual.getStartTime(), is(new SimpleDateFormat("yyyy-MM-dd").parse("2013-07-22")));
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            sdf.setTimeZone(TimeZone.getTimeZone("Europe/Prague"));
+            assertThat(actual.getStartTime(), is(sdf.parse("2013-07-22")));
         }
     }
 
