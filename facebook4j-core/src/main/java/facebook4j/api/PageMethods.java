@@ -26,6 +26,7 @@ import facebook4j.MilestoneUpdate;
 import facebook4j.Offer;
 import facebook4j.OfferUpdate;
 import facebook4j.Page;
+import facebook4j.PageCoverUpdate;
 import facebook4j.PagePhotoUpdate;
 import facebook4j.PageSetting;
 import facebook4j.PageSettingUpdate;
@@ -162,6 +163,7 @@ public interface PageMethods {
     /**
      * Updates a Page's basic attributes.
      * @param pageUpdate the page to be updated
+     * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a>
      */
@@ -171,6 +173,7 @@ public interface PageMethods {
      * Updates a Page's basic attributes.
      * @param pageId the ID of the page
      * @param pageUpdate the page to be updated
+     * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a>
      */
@@ -179,6 +182,7 @@ public interface PageMethods {
     /**
      * Updates the profile photo for the current Page.
      * @param picture A URL to the photo
+     * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
      */
@@ -188,6 +192,7 @@ public interface PageMethods {
      * Updates the profile photo for a Page.
      * @param pageId the ID of the page
      * @param picture A URL to the photo
+     * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
      */
@@ -196,6 +201,7 @@ public interface PageMethods {
     /**
      * Updates the profile photo for the current Page.
      * @param source Photo content
+     * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
      */
@@ -205,10 +211,30 @@ public interface PageMethods {
      * Updates the profile photo for a Page.
      * @param pageId the ID of the page
      * @param source Photo content
+     * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
      */
     boolean updatePageProfilePhoto(String pageId, Media source) throws FacebookException;
+
+    /**
+     * Updates the profile photo for the current page.
+     * @param pageCoverUpdate the cover photo for the page to be updated
+     * @return true if update is successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Cover Photo
+     */
+    boolean updatePageCoverPhoto(PageCoverUpdate pageCoverUpdate) throws FacebookException;
+
+    /**
+     * Updates the profile photo for the current page.
+     * @param pageId the ID of the page
+     * @param pageCoverUpdate the cover photo for the page to be updated
+     * @return true if update is successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Cover Photo
+     */
+    boolean updatePageCoverPhoto(String pageId, PageCoverUpdate pageCoverUpdate) throws FacebookException;
 
     /**
      * Returns the settings for the current page.

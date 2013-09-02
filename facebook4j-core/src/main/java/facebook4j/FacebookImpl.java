@@ -1424,6 +1424,16 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return Boolean.valueOf(res.asString().trim());
     }
 
+    public boolean updatePageCoverPhoto(PageCoverUpdate pageCoverUpdate) throws FacebookException {
+        return updatePageCoverPhoto("me", pageCoverUpdate);
+    }
+    public boolean updatePageCoverPhoto(String pageId, PageCoverUpdate pageCoverUpdate) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = post(buildEndpoint(pageId), pageCoverUpdate.asHttpParameterArray());
+        return Boolean.valueOf(res.asString().trim());
+    }
+
+
     public ResponseList<PageSetting> getPageSettings() throws FacebookException {
         return getPageSettings("me");
     }
