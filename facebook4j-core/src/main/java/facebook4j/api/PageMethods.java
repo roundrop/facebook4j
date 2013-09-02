@@ -522,6 +522,23 @@ public interface PageMethods {
     ResponseList<Tab> getInstalledTabs(String pageId, List<String> appIds, Reading reading) throws FacebookException;
 
     /**
+     * Installs a profile_tab at the end of the current list of installed tabs for the current page.
+     * @param appId the ID of the application for which to install the tab
+     * @return true if install is successful
+     * @throws FacebookException
+     */
+    boolean installTab(String appId) throws FacebookException;
+
+    /**
+     * Installs a profile_tab at the end of the current list of installed tabs for the current page.
+     * @param pageId the ID of the page
+     * @param appId the ID of the application for which to install the tab
+     * @return true if install is successful
+     * @throws FacebookException
+     */
+    boolean installTab(String pageId, String appId) throws FacebookException;
+
+    /**
      * Returns a list of users blocked from the current Page.
      * @return users
      * @throws FacebookException when Facebook service or network is unavailable

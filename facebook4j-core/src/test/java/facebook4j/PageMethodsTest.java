@@ -1280,6 +1280,30 @@ public class PageMethodsTest {
 
     }
 
+    public static class installTab extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.installTab("2344061033");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/tabs")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("app_id", "2344061033"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.installTab("137246726435626", "2344061033");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/tabs")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("app_id", "2344061033"));
+
+            assertThat(actual, is(true));
+        }
+    }
+
     public static class getBlocked extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {

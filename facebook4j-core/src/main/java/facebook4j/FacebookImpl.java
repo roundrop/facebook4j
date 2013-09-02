@@ -1562,6 +1562,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createTabList(get(buildEndpoint(pageId, "tabs/" + _appIds, reading)));
     }
 
+    public boolean installTab(String appId) throws FacebookException {
+        return installTab("me", appId);
+    }
+    public boolean installTab(String pageId, String appId) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = post(buildEndpoint(pageId, "tabs"), new HttpParameter[]{new HttpParameter("app_id", appId)});
+        return Boolean.valueOf(res.asString().trim());
+    }
+
     public ResponseList<User> getBlocked() throws FacebookException {
         return getBlocked("me", null);
     }
