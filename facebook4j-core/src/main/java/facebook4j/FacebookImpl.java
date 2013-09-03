@@ -1581,6 +1581,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return Boolean.valueOf(res.asString().trim());
     }
 
+    public boolean displayPagePost(String postId, boolean isHidden) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = post(buildEndpoint(postId), new HttpParameter[]{new HttpParameter("is_hidden", isHidden)});
+        return Boolean.valueOf(res.asString().trim());
+    }
+
     public ResponseList<User> getBlocked() throws FacebookException {
         return getBlocked("me", null);
     }

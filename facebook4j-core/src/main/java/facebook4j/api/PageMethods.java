@@ -184,7 +184,7 @@ public interface PageMethods {
      * @param picture A URL to the photo
      * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a> - Setting a Page Profile Photo
      */
     boolean updatePageProfilePhoto(URL picture) throws FacebookException;
 
@@ -194,7 +194,7 @@ public interface PageMethods {
      * @param picture A URL to the photo
      * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a> - Setting a Page Profile Photo
      */
     boolean updatePageProfilePhoto(String pageId, URL picture) throws FacebookException;
 
@@ -203,7 +203,7 @@ public interface PageMethods {
      * @param source Photo content
      * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a> - Setting a Page Profile Photo
      */
     boolean updatePageProfilePhoto(Media source) throws FacebookException;
 
@@ -213,7 +213,7 @@ public interface PageMethods {
      * @param source Photo content
      * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Page Profile Photo
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a> - Setting a Page Profile Photo
      */
     boolean updatePageProfilePhoto(String pageId, Media source) throws FacebookException;
 
@@ -222,7 +222,7 @@ public interface PageMethods {
      * @param pageCoverUpdate the cover photo for the page to be updated
      * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Cover Photo
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a> - Setting a Cover Photo
      */
     boolean updatePageCoverPhoto(PageCoverUpdate pageCoverUpdate) throws FacebookException;
 
@@ -232,9 +232,18 @@ public interface PageMethods {
      * @param pageCoverUpdate the cover photo for the page to be updated
      * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Setting a Cover Photo
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a> - Setting a Cover Photo
      */
     boolean updatePageCoverPhoto(String pageId, PageCoverUpdate pageCoverUpdate) throws FacebookException;
+
+    /**
+     * Hides/Shows the page's post that is published by a non-admin user.
+     * @param postId the ID of the post in the page
+     * @param isHidden whether a post is hidden
+     * @return true if hide/show is successful
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#attributes">Page#attributes - Facebook Developers</a> - Hiding a Page Post
+     */
+    boolean displayPagePost(String postId, boolean isHidden) throws FacebookException;
 
     /**
      * Returns the settings for the current page.
@@ -551,7 +560,7 @@ public interface PageMethods {
      * Installs a profile_tab at the end of the current list of installed tabs for the current page.
      * @param appId the ID of the application for which to install the tab
      * @return true if install is successful
-     * @throws FacebookException
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
      */
     boolean installTab(String appId) throws FacebookException;
 
@@ -560,7 +569,7 @@ public interface PageMethods {
      * @param pageId the ID of the page
      * @param appId the ID of the application for which to install the tab
      * @return true if install is successful
-     * @throws FacebookException
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
      */
     boolean installTab(String pageId, String appId) throws FacebookException;
 

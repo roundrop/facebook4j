@@ -1885,4 +1885,28 @@ public class PageMethodsTest {
         }
     }
 
+    public static class displayPagePost extends MockFacebookTestBase {
+        @Test
+        public void hide() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.displayPagePost("137246726435626_210759175751047", true);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626_210759175751047")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("is_hidden", "true"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void show() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.displayPagePost("137246726435626_210759175751047", false);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626_210759175751047")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("is_hidden", "false"));
+
+            assertThat(actual, is(true));
+        }
+    }
+
 }
