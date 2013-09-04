@@ -1581,6 +1581,24 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return Boolean.valueOf(res.asString().trim());
     }
 
+    public boolean updateTab(String tabId, TabUpdate tabUpdate) throws FacebookException {
+        return updateTab("me", tabId, tabUpdate);
+    }
+    public boolean updateTab(String pageId, String tabId, TabUpdate tabUpdate) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = post(buildEndpoint(pageId, "tabs/" + tabId), tabUpdate.asHttpParameterArray());
+        return Boolean.valueOf(res.asString().trim());
+    }
+
+    public boolean deleteTab(String tabId) throws FacebookException {
+        return deleteTab("me", tabId);
+    }
+    public boolean deleteTab(String pageId, String tabId) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = delete(buildEndpoint(pageId, "tabs/" + tabId));
+        return Boolean.valueOf(res.asString().trim());
+    }
+
     public boolean displayPagePost(String postId, boolean isHidden) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(postId), new HttpParameter[]{new HttpParameter("is_hidden", isHidden)});

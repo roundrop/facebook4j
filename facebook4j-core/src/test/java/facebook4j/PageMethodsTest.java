@@ -1909,4 +1909,58 @@ public class PageMethodsTest {
         }
     }
 
+    public static class updateTab extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            TabUpdate tabUpdate = new TabUpdate()
+                                    .position(4)
+                                    .nonConnectionLandingTab(true);
+            boolean actual = facebook.updateTab("notes", tabUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/tabs/notes")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("position", "4"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("is_non_connection_landing_tab", "true"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            TabUpdate tabUpdate = new TabUpdate()
+                                    .position(4)
+                                    .nonConnectionLandingTab(true);
+            boolean actual = facebook.updateTab("137246726435626", "notes", tabUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/tabs/notes")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("position", "4"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("is_non_connection_landing_tab", "true"));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+    public static class deleteTab extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deleteTab("notes");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/tabs/notes")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deleteTab("137246726435626", "notes");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/tabs/notes")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
 }

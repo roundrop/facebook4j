@@ -36,6 +36,7 @@ import facebook4j.Post;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
 import facebook4j.Tab;
+import facebook4j.TabUpdate;
 import facebook4j.Tagged;
 import facebook4j.User;
 
@@ -572,6 +573,42 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
      */
     boolean installTab(String pageId, String appId) throws FacebookException;
+
+    /**
+     * Updates an installed profile_tab for the current page.
+     * @param tabId the ID of the tab
+     * @param tabUpdate tab to be updated
+     * @return true if the update is successful
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
+     */
+    boolean updateTab(String tabId, TabUpdate tabUpdate) throws FacebookException;
+
+    /**
+     * Updates an installed profile_tab for the page.
+     * @param pageId the ID of the page
+     * @param tabId the ID of the tab
+     * @param tabUpdate tab to be updated
+     * @return true if the update is successful
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#tabs">Page#tabs - Facebook Developers</a>
+     */
+    boolean updateTab(String pageId, String tabId, TabUpdate tabUpdate) throws FacebookException;
+
+    /**
+     * Deletes an installed profile_tab where is_permanent is not true for the current page.
+     * @param tabId the ID of the tab
+     * @return true if the delete is successful
+     * @throws FacebookException
+     */
+    boolean deleteTab(String tabId) throws FacebookException;
+
+    /**
+     * Deletes an installed profile_tab where is_permanent is not true for the page.
+     * @param pageId the ID of the page
+     * @param tabId the ID of the tab
+     * @return true if the delete is successful
+     * @throws FacebookException
+     */
+    boolean deleteTab(String pageId, String tabId) throws FacebookException;
 
     /**
      * Returns a list of users blocked from the current Page.
