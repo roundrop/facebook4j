@@ -113,6 +113,31 @@ public class EventMethodsTest {
         }
 
         @Test
+        public void group() throws Exception {
+            facebook.setMockJSON("mock_json/event/group.json");
+            String groupId = "547321978660093";
+            ResponseList<Event> actuals = facebook.getEvents(groupId);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/547321978660093/events")));
+
+            assertThat(actuals.size(), is(2));
+            Event actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("344025155729339"));
+            assertThat(actual1.getTimezone(), is(TimeZone.getTimeZone("Asia/Tokyo")));
+            assertThat(actual1.getLocation(), is("Oracle Aoyama Center"));
+            assertThat(actual1.getEndTime(), is(iso8601DateOf("2013-10-19T22:00:00+0900")));
+            assertThat(actual1.getName(), is("Java"));
+            assertThat(actual1.getStartTime(), is(iso8601DateOf("2013-10-19T10:00:00+0900")));
+            Event actual2 = actuals.get(1);
+            assertThat(actual2.getId(), is("352961404835185"));
+            assertThat(actual2.getTimezone(), is(TimeZone.getTimeZone("America/Los_Angeles")));
+            assertThat(actual2.getLocation(), is("4101 Judah Street San Francisco"));
+            assertThat(actual2.getEndTime(), is(iso8601DateOf("2013-09-26T22:00:00-0700")));
+            assertThat(actual2.getName(), is("Crab Party"));
+            assertThat(actual2.getStartTime(), is(iso8601DateOf("2013-09-26T19:00:00-0700")));
+        }
+
+        @Test
         public void page_allfields() throws Exception {
             facebook.setMockJSON("mock_json/event/page.json");
             ResponseList<Event> events = facebook.getEvents("137246726435626", new Reading().fields("ticket_uri,cover,is_date_only,owner,parent_group,privacy,updated_time,venue,description,end_time,id,location,name,start_time,timezone"));

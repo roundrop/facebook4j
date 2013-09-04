@@ -53,7 +53,7 @@ public interface EventMethods {
     ResponseList<Event> getEvents(Reading reading) throws FacebookException;
 
     /**
-     * Returns the events a user/page is attending.
+     * Returns the events a user/event/page is attending.
      * @param id the ID of a user
      * @return events
      * @throws FacebookException when Facebook service or network is unavailable
@@ -63,7 +63,7 @@ public interface EventMethods {
     ResponseList<Event> getEvents(String id) throws FacebookException;
 
     /**
-     * Returns the events a user/page is attending.
+     * Returns the events a user/event/page is attending.
      * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return events
@@ -85,7 +85,7 @@ public interface EventMethods {
     String createEvent(EventUpdate eventUpdate) throws FacebookException;
 
     /**
-     * Creates the event for a user/page.
+     * Creates the event for a user/event/page.
      * @param id the ID of a user/page
      * @param eventUpdate a event to be created
      * @return The new event ID
