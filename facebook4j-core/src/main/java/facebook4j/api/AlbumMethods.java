@@ -16,10 +16,8 @@
 
 package facebook4j.api;
 
-import java.net.URL;
-
 import facebook4j.Album;
-import facebook4j.AlbumCreate;
+import facebook4j.AlbumUpdate;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
 import facebook4j.Like;
@@ -27,6 +25,8 @@ import facebook4j.Media;
 import facebook4j.Photo;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
+
+import java.net.URL;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -71,22 +71,22 @@ public interface AlbumMethods {
 
     /**
      * Creates the current user's photo album.
-     * @param albumCreate the album to be created
+     * @param albumUpdate the album to be created
      * @return The new album ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#albums">User#albums - Facebook Developers</a>
      */
-    String createAlbum(AlbumCreate albumCreate) throws FacebookException;
+    String createAlbum(AlbumUpdate albumUpdate) throws FacebookException;
 
     /**
      * Creates the user's photo album.
      * @param userId the ID of a user
-     * @param albumCreate the album to be created
+     * @param albumUpdate the album to be created
      * @return The new album ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#albums">User#albums - Facebook Developers</a>
      */
-    String createAlbum(String userId, AlbumCreate albumCreate) throws FacebookException;
+    String createAlbum(String userId, AlbumUpdate albumUpdate) throws FacebookException;
 
 
     /**

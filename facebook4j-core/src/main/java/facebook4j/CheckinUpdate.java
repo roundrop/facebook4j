@@ -22,7 +22,7 @@ import java.util.List;
 
 import facebook4j.internal.http.HttpParameter;
 
-public final class CheckinCreate implements java.io.Serializable {
+public final class CheckinUpdate implements java.io.Serializable {
     private static final long serialVersionUID = -6053752054448309622L;
 
     private final String place;
@@ -32,13 +32,13 @@ public final class CheckinCreate implements java.io.Serializable {
     private URL link;
     private URL picture;
 
-    public CheckinCreate(String place, GeoLocation coordinates) {
+    public CheckinUpdate(String place, GeoLocation coordinates) {
         this.place = place;
         this.coordinates = coordinates;
     }
 
-    public CheckinCreate(String place, GeoLocation coordinates, String tags,
-            String message, URL link, URL picture) {
+    public CheckinUpdate(String place, GeoLocation coordinates, String tags,
+                         String message, URL link, URL picture) {
         this.place = place;
         this.coordinates = coordinates;
         this.tags = tags;
@@ -55,7 +55,7 @@ public final class CheckinCreate implements java.io.Serializable {
         this.tags = tags;
     }
     
-    public CheckinCreate tags(String tags) {
+    public CheckinUpdate tags(String tags) {
         setTags(tags);
         return this;
     }
@@ -68,7 +68,7 @@ public final class CheckinCreate implements java.io.Serializable {
         this.message = message;
     }
     
-    public CheckinCreate message(String message) {
+    public CheckinUpdate message(String message) {
         setMessage(message);
         return this;
     }
@@ -81,7 +81,7 @@ public final class CheckinCreate implements java.io.Serializable {
         this.link = link;
     }
     
-    public CheckinCreate link(URL link) {
+    public CheckinUpdate link(URL link) {
         setLink(link);
         return this;
     }
@@ -94,7 +94,7 @@ public final class CheckinCreate implements java.io.Serializable {
         this.picture = picture;
     }
     
-    public CheckinCreate picture(URL picture) {
+    public CheckinUpdate picture(URL picture) {
         setPicture(picture);
         return this;
     }
@@ -148,7 +148,7 @@ public final class CheckinCreate implements java.io.Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        CheckinCreate other = (CheckinCreate) obj;
+        CheckinUpdate other = (CheckinUpdate) obj;
         if (coordinates == null) {
             if (other.coordinates != null)
                 return false;
@@ -184,7 +184,7 @@ public final class CheckinCreate implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "CheckinCreate [place=" + place + ", coordinates=" + coordinates
+        return "CheckinUpdate [place=" + place + ", coordinates=" + coordinates
                 + ", tags=" + tags + ", message=" + message + ", link=" + link
                 + ", picture=" + picture + "]";
     }

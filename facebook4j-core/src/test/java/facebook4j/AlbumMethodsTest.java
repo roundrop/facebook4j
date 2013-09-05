@@ -506,8 +506,8 @@ public class AlbumMethodsTest {
         @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/id.json");
-            AlbumCreate albumCreate = new AlbumCreate("test album");
-            String actual = facebook.createAlbum(albumCreate);
+            AlbumUpdate albumUpdate = new AlbumUpdate("test album");
+            String actual = facebook.createAlbum(albumUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/me/albums")));
 
@@ -517,8 +517,8 @@ public class AlbumMethodsTest {
         @Test
         public void id() throws Exception {
             facebook.setMockJSON("mock_json/id.json");
-            AlbumCreate albumCreate = new AlbumCreate("test album");
-            String actual = facebook.createAlbum("roundrop", albumCreate);
+            AlbumUpdate albumUpdate = new AlbumUpdate("test album");
+            String actual = facebook.createAlbum("roundrop", albumUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/roundrop/albums")));
 

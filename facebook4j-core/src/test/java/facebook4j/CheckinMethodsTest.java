@@ -30,7 +30,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
-public class CheckinMethodsTest extends MockFacebookTestBase {
+public class CheckinMethodsTest {
 
     public static class getCheckins extends MockFacebookTestBase {
         @Test
@@ -440,8 +440,8 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
             facebook.setMockJSON("mock_json/id.json");
             String place = "100404700021921";
             GeoLocation coordinates = new GeoLocation(35.675272122419, 139.69321689514);
-            CheckinCreate checkinCreate = new CheckinCreate(place, coordinates);
-            String actual = facebook.checkin(checkinCreate);
+            CheckinUpdate checkinUpdate = new CheckinUpdate(place, coordinates);
+            String actual = facebook.checkin(checkinUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/me/checkins")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("place", "100404700021921"));
@@ -459,8 +459,8 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
             String message = "test message";
             URL link = new URL("http://www.facebook.com/");
             URL picture = null;
-            CheckinCreate checkinCreate = new CheckinCreate(place, coordinates, tags, message, link, picture);
-            String actual = facebook.checkin("100000000000001", checkinCreate);
+            CheckinUpdate checkinUpdate = new CheckinUpdate(place, coordinates, tags, message, link, picture);
+            String actual = facebook.checkin("100000000000001", checkinUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001/checkins")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("place", "100404700021921"));
@@ -513,7 +513,7 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
     private String checkin1() throws Exception {
         String place = "100404700021921";
         GeoLocation coordinates = new GeoLocation(35.675272122419, 139.69321689514);
-        CheckinCreate checkin = new CheckinCreate(place, coordinates);
+        CheckinUpdate checkin = new CheckinUpdate(place, coordinates);
         return facebook1.checkin(checkin);
     }
     
@@ -524,7 +524,7 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
         String message = "test message";
         URL link = new URL("http://www.facebook.com/");
         URL picture = null;
-        CheckinCreate checkin = new CheckinCreate(place, coordinates, tags, message, link, picture);
+        CheckinUpdate checkin = new CheckinUpdate(place, coordinates, tags, message, link, picture);
         return facebook1.checkin(checkin);
     }
     
@@ -538,7 +538,7 @@ public class CheckinMethodsTest extends MockFacebookTestBase {
     public void createByOtherUser() throws Exception {
         String place = "100404700021921";
         GeoLocation coordinates = new GeoLocation(35.675272122419, 139.69321689514);
-        CheckinCreate checkin = new CheckinCreate(place, coordinates);
+        CheckinUpdate checkin = new CheckinUpdate(place, coordinates);
         facebook2.checkin(id1.getId(), checkin);
     }
     

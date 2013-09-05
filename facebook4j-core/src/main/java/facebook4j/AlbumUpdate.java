@@ -24,28 +24,28 @@ import facebook4j.internal.http.HttpParameter;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public final class AlbumCreate implements java.io.Serializable {
+public final class AlbumUpdate implements java.io.Serializable {
     private static final long serialVersionUID = 4089671461658360414L;
 
     private final String name;
     private String message;
     private PrivacyParameter privacy;
 
-    public AlbumCreate(String name) {
+    public AlbumUpdate(String name) {
         this.name = name;
     }
 
-    public AlbumCreate(String name, String message) {
+    public AlbumUpdate(String name, String message) {
         this.name = name;
         this.message = message;
     }
 
-    public AlbumCreate(String name, PrivacyParameter privacy) {
+    public AlbumUpdate(String name, PrivacyParameter privacy) {
         this.name = name;
         this.privacy = privacy;
     }
 
-    public AlbumCreate(String name, String message, PrivacyParameter privacy) {
+    public AlbumUpdate(String name, String message, PrivacyParameter privacy) {
         this.name = name;
         this.message = message;
         this.privacy = privacy;
@@ -59,7 +59,7 @@ public final class AlbumCreate implements java.io.Serializable {
         this.message = message;
     }
     
-    public AlbumCreate message(String message) {
+    public AlbumUpdate message(String message) {
         setMessage(message);
         return this;
     }
@@ -72,7 +72,7 @@ public final class AlbumCreate implements java.io.Serializable {
         this.privacy = privacy;
     }
     
-    public AlbumCreate privacy(PrivacyParameter privacy) {
+    public AlbumUpdate privacy(PrivacyParameter privacy) {
         setPrivacy(privacy);
         return this;
     }
@@ -111,7 +111,7 @@ public final class AlbumCreate implements java.io.Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        AlbumCreate other = (AlbumCreate) obj;
+        AlbumUpdate other = (AlbumUpdate) obj;
         if (message == null) {
             if (other.message != null)
                 return false;
@@ -132,7 +132,7 @@ public final class AlbumCreate implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "AlbumCreate [name=" + name + ", message=" + message
+        return "AlbumUpdate [name=" + name + ", message=" + message
                 + ", privacy=" + privacy + "]";
     }
 

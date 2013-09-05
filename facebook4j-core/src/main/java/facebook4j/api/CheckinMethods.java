@@ -17,7 +17,7 @@
 package facebook4j.api;
 
 import facebook4j.Checkin;
-import facebook4j.CheckinCreate;
+import facebook4j.CheckinUpdate;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
 import facebook4j.Like;
@@ -74,24 +74,24 @@ public interface CheckinMethods {
 
     /**
      * Checkins the place as the current user.
-     * @param checkinCreate the checkin to be created
+     * @param checkinUpdate the checkin to be created
      * @return The new checkin ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#checkins">User#checkins - Facebook Developers</a>
      * @deprecated creating a Post with a location attached
      */
-    String checkin(CheckinCreate checkinCreate) throws FacebookException;
+    String checkin(CheckinUpdate checkinUpdate) throws FacebookException;
 
     /**
      * Checkins the place as a user.
      * @param userId the ID of a user
-     * @param checkinCreate the checkin to be created
+     * @param checkinUpdate the checkin to be created
      * @return The new checkin ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#checkins">User#checkins - Facebook Developers</a>
      * @deprecated creating a Post with a location attached
      */
-    String checkin(String userId, CheckinCreate checkinCreate) throws FacebookException;
+    String checkin(String userId, CheckinUpdate checkinUpdate) throws FacebookException;
 
     /**
      * Returns a single checkin information.

@@ -248,12 +248,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createAlbum(get(buildEndpoint(albumId, reading)));
     }
     
-    public String createAlbum(AlbumCreate albumCreate) throws FacebookException {
-        return createAlbum("me", albumCreate);
+    public String createAlbum(AlbumUpdate albumUpdate) throws FacebookException {
+        return createAlbum("me", albumUpdate);
     }
-    public String createAlbum(String userId, AlbumCreate albumCreate) throws FacebookException {
+    public String createAlbum(String userId, AlbumUpdate albumUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
-        JSONObject json = post(buildEndpoint(userId, "albums"), albumCreate.asHttpParameterArray())
+        JSONObject json = post(buildEndpoint(userId, "albums"), albumUpdate.asHttpParameterArray())
                           .asJSONObject();
         try {
             return json.getString("id");
@@ -362,12 +362,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createCheckinList(get(buildEndpoint(id, "checkins", reading)));
     }
 
-    public String checkin(CheckinCreate checkinCreate) throws FacebookException {
-        return checkin("me", checkinCreate);
+    public String checkin(CheckinUpdate checkinUpdate) throws FacebookException {
+        return checkin("me", checkinUpdate);
     }
-    public String checkin(String userId, CheckinCreate checkinCreate) throws FacebookException {
+    public String checkin(String userId, CheckinUpdate checkinUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
-        JSONObject json = post(buildEndpoint(userId, "checkins"), checkinCreate.asHttpParameterArray())
+        JSONObject json = post(buildEndpoint(userId, "checkins"), checkinUpdate.asHttpParameterArray())
                           .asJSONObject();
         return getRawString("id", json);
     }
