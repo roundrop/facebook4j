@@ -6,7 +6,7 @@
   <packaging>jar</packaging>
   <name>facebook4j-core</name>
   <description>A Java library for the Facebook Graph API</description>
-  <url>http://maven.apache.org</url>
+  <url>http://facebook4j.org/</url>
   <licenses>
     <license>
       <name>Apache License 2.0</name>
@@ -30,9 +30,18 @@
         <role>architect</role>
         <role>developer</role>
       </roles>
-      <timezone>-9</timezone>
+      <timezone>+9</timezone>
     </developer>
   </developers>
+  <mailingLists>
+    <mailingList>
+      <name>Facebook4J</name>
+      <subscribe>facebook4j+subscribe@googlegroups.com</subscribe>
+      <unsubscribe>facebook4j+unsubscribe@googlegroups.com</unsubscribe>
+      <post>facebook4j@googlegroups.com</post>
+      <archive>http://groups.google.com/group/facebook4j</archive>
+    </mailingList>
+  </mailingLists>
   <distributionManagement>
     <repository>
       <id>sonatype-nexus-staging</id>
