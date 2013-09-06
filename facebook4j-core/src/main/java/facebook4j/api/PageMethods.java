@@ -46,7 +46,7 @@ import java.util.Map;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
- * @since Facebook4J 1.2.0
+ * @since Facebook4J 2.0.0
  */
 public interface PageMethods {
     /**

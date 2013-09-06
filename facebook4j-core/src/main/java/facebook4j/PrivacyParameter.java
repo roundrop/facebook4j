@@ -21,6 +21,7 @@ import facebook4j.internal.org.json.JSONObject;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.0.0
  */
 public class PrivacyParameter implements java.io.Serializable {
     private static final long serialVersionUID = 3427495429925711593L;

@@ -289,6 +289,7 @@ public interface PhotoMethods {
      * @return true if delete is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#tags">Photo#tags - Facebook Developers</a> - Connections - tags
+     * @since Facebook4J 2.0.0
      */
     boolean deleteTagOnPhoto(String photoId, String toUserId) throws FacebookException;
 

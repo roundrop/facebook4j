@@ -16,13 +16,14 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.HttpParameter;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import facebook4j.internal.http.HttpParameter;
-
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.0.0
  */
 public class PageUpdate implements java.io.Serializable {
     private static final long serialVersionUID = 6472977369112573757L;

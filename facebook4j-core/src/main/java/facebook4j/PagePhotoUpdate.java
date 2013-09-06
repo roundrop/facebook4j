@@ -24,6 +24,7 @@ import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.0.0
  */
 public class PagePhotoUpdate implements java.io.Serializable {
     private static final long serialVersionUID = -2690799855513822140L;

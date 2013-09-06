@@ -209,6 +209,7 @@ public interface SearchMethods {
      * @return pages
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/search/">Search - Facebook Developers</a>
+     * @since Facebook4J 2.0.0
      */
     ResponseList<Page> searchPages(String query) throws FacebookException;
 
@@ -219,6 +220,7 @@ public interface SearchMethods {
      * @return pages
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/search/">Search - Facebook Developers</a>
+     * @since Facebook4J 2.0.0
      */
     ResponseList<Page> searchPages(String query, Reading reading) throws FacebookException;
 

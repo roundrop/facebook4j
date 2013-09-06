@@ -20,6 +20,7 @@ import java.net.URL;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.0.0
  */
 public interface Tab extends FacebookResponse {
     String getId();

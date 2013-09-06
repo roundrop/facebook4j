@@ -24,6 +24,7 @@ import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.0.0
  */
 public class VideoUpdate implements java.io.Serializable {
     private static final long serialVersionUID = -757292229143435735L;

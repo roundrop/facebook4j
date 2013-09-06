@@ -107,6 +107,7 @@ public interface UserMethods {
      * @return url
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - picture
+     * @since Facebook4J 2.0.0
      */
     URL getSSLPictureURL() throws FacebookException;
 
@@ -116,6 +117,7 @@ public interface UserMethods {
      * @return url
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - picture
+     * @since Facebook4J 2.0.0
      */
     URL getSSLPictureURL(PictureSize size) throws FacebookException;
 
@@ -125,6 +127,7 @@ public interface UserMethods {
      * @return url
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - picture
+     * @since Facebook4J 2.0.0
      */
     URL getSSLPictureURL(String userId) throws FacebookException;
 
@@ -135,6 +138,7 @@ public interface UserMethods {
      * @return url
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - picture
+     * @since Facebook4J 2.0.0
      */
     URL getSSLPictureURL(String userId, PictureSize size) throws FacebookException;
 

@@ -35,6 +35,9 @@ public interface Insight extends FacebookResponse {
         Value.Entry getValue();
         Date getEndTime();
 
+        /**
+         * @since Facebook4J 2.0.0
+         */
         interface Entry {
             Long get();
             Long get(String key);

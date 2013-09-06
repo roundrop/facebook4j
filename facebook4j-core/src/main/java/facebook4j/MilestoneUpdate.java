@@ -25,6 +25,7 @@ import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.0.0
  */
 public final class MilestoneUpdate implements java.io.Serializable {
     private static final long serialVersionUID = 7488064115483210172L;

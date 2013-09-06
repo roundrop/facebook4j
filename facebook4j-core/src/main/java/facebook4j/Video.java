@@ -39,6 +39,9 @@ public interface Video extends FacebookResponse {
     PagableList<Comment> getComments();
     URL getLink();
 
+    /**
+     * @since Facebook4J 2.0.0
+     */
     interface Format {
         String getEmbedHtml();
         String getFilter();

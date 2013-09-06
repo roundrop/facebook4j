@@ -27,6 +27,9 @@ public interface Paging<T> {
     URL getPrevious();
     URL getNext();
 
+    /**
+     * @since Facebook4J 2.0.0
+     */
     interface Cursors {
         String getAfter();
         String getBefore();

@@ -22,6 +22,7 @@ import java.util.Set;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.0.0
  */
 public class FeedTargetingParameter extends TargetingParameter implements java.io.Serializable {
     private static final long serialVersionUID = -4978831942434930510L;
@@ -245,6 +246,9 @@ public class FeedTargetingParameter extends TargetingParameter implements java.i
     }
 
 
+    /**
+     * @since Facebook4J 2.0.0
+     */
     public static enum Gender {
         Male(1),
         Female(2),

@@ -18,6 +18,7 @@ package facebook4j;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.0.0
  */
 public enum BackdatedTimeGranularity {
     year,

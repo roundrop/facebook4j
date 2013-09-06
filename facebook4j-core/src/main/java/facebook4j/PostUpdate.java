@@ -362,6 +362,9 @@ public class PostUpdate implements java.io.Serializable {
                 '}';
     }
 
+    /**
+     * @since Facebook4J 2.0.0
+     */
     public static class PostAction implements Post.Action, java.io.Serializable {
         private static final long serialVersionUID = 2016068387645669580L;
 

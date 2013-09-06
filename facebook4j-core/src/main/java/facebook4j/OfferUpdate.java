@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
- * @since Facebook4J 1.2.0
+ * @since Facebook4J 2.0.0
  */
 public class OfferUpdate implements java.io.Serializable {
     private static final long serialVersionUID = -6990777853567019761L;
