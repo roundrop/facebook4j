@@ -33,6 +33,10 @@
       <timezone>+9</timezone>
     </developer>
   </developers>
+  <issueManagement>
+    <system>Jira</system>
+    <url>https://roundrop.atlassian.net/browse/FFJ</url>
+  </issueManagement>
   <mailingLists>
     <mailingList>
       <name>Facebook4J</name>
