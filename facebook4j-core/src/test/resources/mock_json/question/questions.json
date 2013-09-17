@@ -1,0 +1,97 @@
+{
+    "data": [
+        {
+            "created_time": "2012-11-24T03:47:34+0000",
+            "from": {
+                "id": "1234567890123456",
+                "name": "My Name"
+            },
+            "id": "300000000000001",
+            "options": {
+                "data": [
+                    {
+                        "created_time": "2012-11-24T03:47:33+0000",
+                        "from": {
+                            "id": "1234567890123456",
+                            "name": "My Name"
+                        },
+                        "id": "400000000000001",
+                        "name": "Java",
+                        "vote_count": 1
+                    },
+                    {
+                        "created_time": "2012-11-24T03:47:31+0000",
+                        "from": {
+                            "id": "1234567890123456",
+                            "name": "My Name"
+                        },
+                        "id": "400000000000002",
+                        "name": "Ruby",
+                        "vote_count": 0
+                    },
+                    {
+                        "created_time": "2012-11-24T03:47:32+0000",
+                        "from": {
+                            "id": "1234567890123456",
+                            "name": "My Name"
+                        },
+                        "id": "400000000000003",
+                        "name": "PHP",
+                        "vote_count": 0
+                    }
+                ],
+
+                "paging": {"next": "https://graph.facebook.com/300000000000001/options?access_token=access_token&limit=25&offset=25&__after_id=300000000000001"}
+            },
+            "question": "What is your favorite programming language?",
+            "updated_time": "2012-11-24T03:47:34+0000"
+        },
+        {
+            "created_time": "2012-11-24T03:47:34+0000",
+            "from": {
+                "id": "1234567890123456",
+                "name": "My Name"
+            },
+            "id": "300000000000001",
+            "options": {
+                "data": [
+                    {
+                        "created_time": "2012-11-24T03:47:33+0000",
+                        "from": {
+                            "id": "1234567890123456",
+                            "name": "My Name"
+                        },
+                        "id": "400000000000001",
+                        "name": "Java",
+                        "vote_count": 1
+                    },
+                    {
+                        "created_time": "2012-11-24T03:47:31+0000",
+                        "from": {
+                            "id": "1234567890123456",
+                            "name": "My Name"
+                        },
+                        "id": "400000000000002",
+                        "name": "Ruby",
+                        "vote_count": 0
+                    },
+                    {
+                        "created_time": "2012-11-24T03:47:32+0000",
+                        "from": {
+                            "id": "1234567890123456",
+                            "name": "My Name"
+                        },
+                        "id": "400000000000003",
+                        "name": "PHP",
+                        "vote_count": 0
+                    }
+                ],
+
+                "paging": {"next": "https://graph.facebook.com/300000000000001/options?access_token=access_token&limit=25&offset=25&__after_id=300000000000001"}
+            },
+            "question": "What is your favorite programming language?",
+            "updated_time": "2012-11-24T03:47:34+0000"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/questions?access_token=access_token&limit=50&offset=50&__after_id=300000000000001"}
+}

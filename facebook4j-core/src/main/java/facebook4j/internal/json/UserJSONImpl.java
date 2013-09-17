@@ -30,6 +30,7 @@ import facebook4j.internal.org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -52,7 +53,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private String lastName;
     private String gender;
     private Locale locale;
-    private List<IdNameEntity> languages = new ArrayList<IdNameEntity>();
+    private List<IdNameEntity> languages;
     private URL link;
     private String username;
     private String thirdPartyId;
@@ -63,14 +64,14 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private String bio;
     private String birthday;
     private Cover cover;
-    private List<User.Education> education = new ArrayList<User.Education>();
+    private List<User.Education> education;
     private String email;
     private IdNameEntity hometown;
-    private List<String> interestedIn = new ArrayList<String>();
+    private List<String> interestedIn;
     private IdNameEntity location;
     private String political;
-    private List<IdNameEntity> favoriteAthletes = new ArrayList<IdNameEntity>();
-    private List<IdNameEntity> favoriteTeams = new ArrayList<IdNameEntity>();
+    private List<IdNameEntity> favoriteAthletes;
+    private List<IdNameEntity> favoriteTeams;
     private Picture picture;
     private String quotes;
     private String relationshipStatus;
@@ -78,7 +79,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private IdNameEntity significantOther;
     private User.VideoUploadLimits videoUploadLimits;
     private URL website;
-    private List<User.Work> work = new ArrayList<User.Work>();
+    private List<User.Work> work;
 
     /*package*/UserJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         if (conf.isJSONStoreEnabled()) {
@@ -112,9 +113,13 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             if (!json.isNull("languages")) {
                 JSONArray languagesJSONArray = json.getJSONArray("languages");
-                for (int i = 0; i < languagesJSONArray.length(); i++) {
+                final int size = languagesJSONArray.length();
+                languages = new ArrayList<IdNameEntity>(size);
+                for (int i = 0; i < size; i++) {
                     languages.add(new IdNameEntityJSONImpl(languagesJSONArray.getJSONObject(i)));
                 }
+            } else {
+                languages = Collections.emptyList();
             }
             link = getURL("link", json);
             username = getRawString("username", json);
@@ -131,9 +136,13 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             if (!json.isNull("education")) {
                 JSONArray educationJSONArray = json.getJSONArray("education");
-                for (int i = 0; i < educationJSONArray.length(); i++) {
+                final int size = educationJSONArray.length();
+                education = new ArrayList<User.Education>(size);
+                for (int i = 0; i < size; i++) {
                     education.add(new EducationJSONImpl(educationJSONArray.getJSONObject(i)));
                 }
+            } else {
+                education = Collections.emptyList();
             }
             email = getRawString("email", json);
             if (!json.isNull("hometown")) {
@@ -142,9 +151,13 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             if (!json.isNull("interestedIn")) {
                 JSONArray interestedInJSONArray = json.getJSONArray("interested_in");
-                for (int i = 0; i < interestedInJSONArray.length(); i++) {
+                final int size = interestedInJSONArray.length();
+                interestedIn = new ArrayList<String>(size);
+                for (int i = 0; i < size; i++) {
                     interestedIn.add(interestedInJSONArray.getString(i));
                 }
+            } else {
+                interestedIn = Collections.emptyList();
             }
             if (!json.isNull("location")) {
                 JSONObject locationJSON = json.getJSONObject("location");
@@ -153,15 +166,23 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             political = getRawString("political", json);
             if (!json.isNull("favorite_athletes")) {
                 JSONArray favoriteAthletesJSONArray = json.getJSONArray("favorite_athletes");
+                final int size = favoriteAthletesJSONArray.length();
+                favoriteAthletes = new ArrayList<IdNameEntity>(size);
                 for (int i = 0; i < favoriteAthletesJSONArray.length(); i++) {
                     favoriteAthletes.add(new IdNameEntityJSONImpl(favoriteAthletesJSONArray.getJSONObject(i)));
                 }
+            } else {
+                favoriteAthletes = Collections.emptyList();
             }
             if (!json.isNull("favorite_teams")) {
                 JSONArray favoriteTeamsJSONArray = json.getJSONArray("favorite_teams");
-                for (int i = 0; i < favoriteTeamsJSONArray.length(); i++) {
+                final int size = favoriteTeamsJSONArray.length();
+                favoriteTeams = new ArrayList<IdNameEntity>(size);
+                for (int i = 0; i < size; i++) {
                     favoriteTeams.add(new IdNameEntityJSONImpl(favoriteTeamsJSONArray.getJSONObject(i)));
                 }
+            } else {
+                favoriteTeams = Collections.emptyList();
             }
             if (!json.isNull("picture")) {
                 String pictureRawString = getRawString("picture", json);
@@ -186,9 +207,13 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             website = getURL("website", json);
             if (!json.isNull("work")) {
                 JSONArray workJSONArray = json.getJSONArray("work");
-                for (int i = 0; i < workJSONArray.length(); i++) {
+                final int size = workJSONArray.length();
+                work = new ArrayList<Work>(size);
+                for (int i = 0; i < size; i++) {
                     work.add(new WorkJSONImpl(workJSONArray.getJSONObject(i)));
                 }
+            } else {
+                work = Collections.emptyList();
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage() + ":" + json.toString(), jsone);
@@ -339,7 +364,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<User> users = new ResponseListImpl<User>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject userJSONObject = list.getJSONObject(i);
@@ -459,6 +484,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                     for (int i = 0; i < concentrationJSONArray.length(); i++) {
                         concentration.add(new IdNameEntityJSONImpl(concentrationJSONArray.getJSONObject(i)));
                     }
+                } else {
+                    concentration = Collections.emptyList();
                 }
                 if (!json.isNull("classes")) {
                     JSONArray classesJSONArray = json.getJSONArray("classes");
@@ -466,6 +493,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                     for (int i = 0; i < classesJSONArray.length(); i++) {
                         classes.add(new EducationClassJSONImpl(classesJSONArray.getJSONObject(i)));
                     }
+                } else {
+                    classes = Collections.emptyList();
                 }
                 if (!json.isNull("with")) {
                     JSONArray withJSONArray = json.getJSONArray("with");
@@ -473,6 +502,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                     for (int i = 0; i < withJSONArray.length(); i++) {
                         with.add(new IdNameEntityJSONImpl(withJSONArray.getJSONObject(i)));
                     }
+                } else {
+                    with = Collections.emptyList();
                 }
             } catch (JSONException jsone) {
                 throw new FacebookException(jsone);
@@ -594,6 +625,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                     for (int i = 0; i < withJSONArray.length(); i++) {
                         with.add(new IdNameEntityJSONImpl(withJSONArray.getJSONObject(i)));
                     }
+                } else {
+                    with = Collections.emptyList();
                 }
                 description = getRawString("description", json);
             } catch (JSONException jsone) {

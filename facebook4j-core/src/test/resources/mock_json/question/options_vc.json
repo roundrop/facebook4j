@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "id": "462870730453151",
+            "vote_count": 1
+        },
+        {
+            "id": "260686110733539",
+            "vote_count": 0
+        },
+        {
+            "id": "320634584706152",
+            "vote_count": 0
+        },
+        {
+            "id": "302535046540868",
+            "vote_count": 0
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/154498061377159/options?fields=vote_count&access_token=access_token&limit=25&offset=25&__after_id=302535046540868"}
+}

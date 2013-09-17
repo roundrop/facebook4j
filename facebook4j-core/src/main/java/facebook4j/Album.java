@@ -25,7 +25,7 @@ import java.util.List;
  */
 public interface Album extends FacebookResponse {
     String getId();
-    IdNameEntity getFrom();
+    Category getFrom();
     String getName();
     String getDescription();
     String getLocation();
@@ -37,7 +37,9 @@ public interface Album extends FacebookResponse {
     Date getCreatedTime();
     Date getUpdatedTime();
     Boolean canUpload();
+    Place getPlace();
     
-    List<Like> getLikes();
-    
+    PagableList<Like> getLikes();
+    PagableList<Comment> getComments();
+
 }

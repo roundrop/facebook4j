@@ -29,15 +29,22 @@ public enum PrivacyType {
     NO_FRIENDS,
     SELF,
     CUSTOM,
+    EMPTY,
     ;
     
     public static PrivacyType getInstance(String privacyTypeString) {
         if (privacyTypeString == null) {
             return null;
         }
-        for (PrivacyType eventPrivacyType : PrivacyType.values()) {
-            if (eventPrivacyType.toString().equals(privacyTypeString)) {
-                return eventPrivacyType;
+        if (privacyTypeString.equals("")) {
+            return PrivacyType.EMPTY;
+        }
+        if (privacyTypeString.toUpperCase().equals("FRIENDS")) {
+            return PrivacyType.ALL_FRIENDS;
+        }
+        for (PrivacyType privacyType : PrivacyType.values()) {
+            if (privacyType.toString().equals(privacyTypeString.toUpperCase())) {
+                return privacyType;
             }
         }
         return null;

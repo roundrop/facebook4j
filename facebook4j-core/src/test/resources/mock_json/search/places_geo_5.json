@@ -1,0 +1,123 @@
+{
+    "data": [
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "162264673824073",
+                    "name": "Specialty Grocery Store"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                }
+            ],
+            "id": "151116474914629",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.761003830281,
+                "longitude": -122.43336658638,
+                "state": "CA",
+                "street": "4023 18th St",
+                "zip": "94114-2501"
+            },
+            "name": "Philz Coffee - Castro"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                }
+            ],
+            "id": "145768288146",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.756441680648,
+                "longitude": -122.42122313109,
+                "state": "CA",
+                "street": "1026 Valencia Street",
+                "zip": "94110"
+            },
+            "name": "Ritual Coffee Roasters"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                }
+            ],
+            "id": "111745868854244",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.767003922045,
+                "longitude": -122.42198355131,
+                "state": "CA",
+                "street": "375 Valencia St",
+                "zip": "94103-3504"
+            },
+            "name": "Four Barrel Coffee"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "200863816597800",
+                    "name": "Ice Cream Parlor"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "187153754656815",
+                    "name": "Dessert Restaurant"
+                }
+            ],
+            "id": "121653874551894",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.761441867701,
+                "longitude": -122.425737,
+                "state": "CA",
+                "street": "3692 18th St",
+                "zip": "94110"
+            },
+            "name": "Bi-Rite Ice Cream"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "195498370504878",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.76487069397,
+                "longitude": -122.43213544929,
+                "state": "CA",
+                "street": "",
+                "zip": "94114"
+            },
+            "name": "Peets Coffee, Castro Dist."
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/search?limit=5&type=place&center=37.76,-122.427&distance=1000&access_token=access_token&offset=5&__after_id=195498370504878"}
+}

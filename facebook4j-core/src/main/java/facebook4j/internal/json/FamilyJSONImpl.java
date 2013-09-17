@@ -30,15 +30,13 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class FamilyJSONImpl extends FacebookResponseImpl implements Family, java.io.Serializable {
-    private static final long serialVersionUID = 468378124925584733L;
-    
-    private String id;
-    private String name;
+/*package*/ final class FamilyJSONImpl extends UserJSONImpl implements Family, java.io.Serializable {
+    private static final long serialVersionUID = 3676633893253219856L;
+
     private String relationship;
     
     /*package*/FamilyJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
-        super(res);
+        super(res, conf);
         JSONObject json = res.asJSONObject();
         init(json);
         if (conf.isJSONStoreEnabled()) {
@@ -48,22 +46,12 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
 
     /*package*/FamilyJSONImpl(JSONObject json) throws FacebookException {
-        super();
+        super(json);
         init(json);
     }
 
     private void init(JSONObject json) throws FacebookException {
-        id = getRawString("id", json);
-        name = getRawString("name", json);
         relationship = getRawString("relationship", json);
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getRelationship() {
@@ -78,7 +66,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Family> familys = new ResponseListImpl<Family>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject familyJSONObject = list.getJSONObject(i);
@@ -98,34 +86,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        FamilyJSONImpl other = (FamilyJSONImpl) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "FamilyMemberJSONImpl [id=" + id + ", name=" + name
-                + ", relationship=" + relationship + "]";
+        return "FamilyJSONImpl{" +
+                "relationship='" + relationship + '\'' +
+                '}' +
+                " extends " + super.toString();
     }
-
 }

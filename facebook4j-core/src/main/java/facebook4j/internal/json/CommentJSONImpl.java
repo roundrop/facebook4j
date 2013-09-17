@@ -16,19 +16,19 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.util.Date;
-
+import facebook4j.Category;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
-import facebook4j.IdNameEntity;
 import facebook4j.ResponseList;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -37,12 +37,12 @@ import facebook4j.internal.org.json.JSONObject;
     private static final long serialVersionUID = 4049049358890693823L;
 
     private String id;
-    private IdNameEntity from;
+    private Category from;
     private String message;
     private Boolean canRemove;
     private Date createdTime;
-    private int likeCount;
-    private Boolean isUserLinks;
+    private Integer likeCount;
+    private Boolean isUserLikes;
     
     /*package*/CommentJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -64,15 +64,15 @@ import facebook4j.internal.org.json.JSONObject;
             id = getRawString("id", json);
             if (!json.isNull("from")) {
                 JSONObject fromJSONObject = json.getJSONObject("from");
-                from = new IdNameEntityJSONImpl(fromJSONObject);
+                from = new CategoryJSONImpl(fromJSONObject);
             } else {
                 from = null;
             }
             message = getRawString("message", json);
             canRemove = getBoolean("can_remove", json);
             createdTime = getISO8601Datetime("created_time", json);
-            likeCount = getPrimitiveInt("like_count", json);
-            isUserLinks = getBoolean("user_likes", json);
+            likeCount = getInt("like_count", json);
+            isUserLikes = getBoolean("user_likes", json);
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -82,7 +82,7 @@ import facebook4j.internal.org.json.JSONObject;
         return id;
     }
 
-    public IdNameEntity getFrom() {
+    public Category getFrom() {
         return from;
     }
 
@@ -98,12 +98,12 @@ import facebook4j.internal.org.json.JSONObject;
         return createdTime;
     }
 
-    public int getLikeCount() {
+    public Integer getLikeCount() {
         return likeCount;
     }
 
-    public Boolean isUserLinks() {
-        return isUserLinks;
+    public Boolean isUserLikes() {
+        return isUserLikes;
     }
 
     /*package*/
@@ -114,7 +114,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Comment> comments = new ResponseListImpl<Comment>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject commentJSONObject = list.getJSONObject(i);
@@ -163,7 +163,7 @@ import facebook4j.internal.org.json.JSONObject;
         return "CommentJSONImpl [id=" + id + ", from=" + from + ", message="
                 + message + ", canRemove=" + canRemove + ", createdTime="
                 + createdTime + ", likeCount=" + likeCount + ", isUserLinks="
-                + isUserLinks + "]";
+                + isUserLikes + "]";
     }
 
 }

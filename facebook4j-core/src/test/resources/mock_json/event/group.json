@@ -1,0 +1,24 @@
+{
+    "data": [
+        {
+            "end_time": "2013-10-19T22:00:00+0900",
+            "id": "344025155729339",
+            "location": "Oracle Aoyama Center",
+            "name": "Java",
+            "start_time": "2013-10-19T10:00:00+0900",
+            "timezone": "Asia/Tokyo"
+        },
+        {
+            "end_time": "2013-09-26T22:00:00-0700",
+            "id": "352961404835185",
+            "location": "4101 Judah Street San Francisco",
+            "name": "Crab Party",
+            "start_time": "2013-09-26T19:00:00-0700",
+            "timezone": "America/Los_Angeles"
+        }
+    ],
+    "paging": {"cursors": {
+        "after": "MzUyOTYxNDA0ODM1MTg1",
+        "before": "MzQ0MDI1MTU1NzI5MzM5"
+    }}
+}

@@ -16,11 +16,10 @@
 
 package facebook4j.internal.json;
 
-import java.util.List;
-
 import facebook4j.Account;
 import facebook4j.Achievement;
 import facebook4j.Activity;
+import facebook4j.Admin;
 import facebook4j.Album;
 import facebook4j.Application;
 import facebook4j.Book;
@@ -36,20 +35,23 @@ import facebook4j.Friendlist;
 import facebook4j.Game;
 import facebook4j.Group;
 import facebook4j.GroupDoc;
+import facebook4j.GroupMember;
 import facebook4j.IdNameEntity;
-import facebook4j.Inbox;
 import facebook4j.InboxResponseList;
 import facebook4j.Insight;
 import facebook4j.Interest;
 import facebook4j.Like;
 import facebook4j.Link;
 import facebook4j.Location;
-import facebook4j.GroupMember;
 import facebook4j.Message;
+import facebook4j.Milestone;
 import facebook4j.Movie;
 import facebook4j.Music;
 import facebook4j.Note;
 import facebook4j.Notification;
+import facebook4j.Offer;
+import facebook4j.Page;
+import facebook4j.PageSetting;
 import facebook4j.Permission;
 import facebook4j.Photo;
 import facebook4j.Place;
@@ -62,13 +64,17 @@ import facebook4j.ResponseList;
 import facebook4j.Score;
 import facebook4j.Subscribedto;
 import facebook4j.Subscriber;
+import facebook4j.Tab;
 import facebook4j.Tag;
+import facebook4j.Tagged;
 import facebook4j.Television;
 import facebook4j.TestUser;
 import facebook4j.User;
 import facebook4j.Video;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -125,7 +131,7 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<Group> createGroupList(HttpResponse res) throws FacebookException;
 
     ResponseList<GroupDoc> createGroupDocList(HttpResponse res) throws FacebookException;
-    InboxResponseList<Inbox> createInboxList(HttpResponse res) throws FacebookException;
+    InboxResponseList<Message> createInboxList(HttpResponse res) throws FacebookException;
     
     ResponseList<Interest> createInterestList(HttpResponse res) throws FacebookException;
 
@@ -144,7 +150,12 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<Note> createNoteList(HttpResponse res) throws FacebookException;
     
     ResponseList<Notification> createNotificationList(HttpResponse res) throws FacebookException;
-    
+
+    Page createPage(HttpResponse res) throws FacebookException;
+    ResponseList<Page> createPageList(HttpResponse res) throws FacebookException;
+
+    ResponseList<PageSetting> createPageSettingList(HttpResponse res) throws FacebookException;
+
     Message createMessage(HttpResponse res) throws FacebookException;
     ResponseList<Message> createMessageList(HttpResponse res) throws FacebookException;
     
@@ -178,7 +189,19 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<GroupMember> createGroupMemberList(HttpResponse res) throws FacebookException;
 
     ResponseList<Insight> createInsightList(HttpResponse res) throws FacebookException;
-    
+
+    ResponseList<Tagged> createTaggedList(HttpResponse res) throws FacebookException;
+
+    ResponseList<Milestone> createMilestoneList(HttpResponse res) throws FacebookException;
+
+    ResponseList<Admin> createAdminList(HttpResponse res) throws FacebookException;
+
+    ResponseList<Tab> createTabList(HttpResponse res) throws FacebookException;
+
+    ResponseList<Offer> createOfferList(HttpResponse res) throws FacebookException;
+    Offer createOffer(HttpResponse res) throws FacebookException;
+
+
     Application createApplication(HttpResponse res) throws FacebookException;
     
     

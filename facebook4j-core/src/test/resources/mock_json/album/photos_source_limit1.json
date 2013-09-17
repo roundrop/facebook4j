@@ -1,0 +1,14 @@
+{
+    "data": [{
+        "created_time": "2011-02-02T16:47:46+0000",
+        "id": "10150146071831729",
+        "source": "https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-prn2/168119_10150146071831729_5116892_n.jpg"
+    }],
+    "paging": {
+        "cursors": {
+            "after": "MTAxNTAxNDYwNzE4MzE3Mjk=",
+            "before": "MTAxNTAxNDYwNzE4MzE3Mjk="
+        },
+        "next": "https://graph.facebook.com/10150146071791729/photos?fields=source&limit=1&access_token=access_token&after=MTAxNTAxNDYwNzE4MzE3Mjk%3D"
+    }
+}

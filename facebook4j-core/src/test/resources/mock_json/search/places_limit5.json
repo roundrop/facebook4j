@@ -1,0 +1,114 @@
+{
+    "data": [
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "128673187201735",
+                "name": "Coffee Shop"
+            }],
+            "id": "151441331571686",
+            "location": {
+                "latitude": 36.718526684607,
+                "longitude": -4.429223900414,
+                "street": "",
+                "zip": ""
+            },
+            "name": "Dunkin' Coffee"
+        },
+        {
+            "category": "Food/beverages",
+            "category_list": [{
+                "id": "197871390225897",
+                "name": "Cafe"
+            }],
+            "id": "13856871189",
+            "location": {
+                "city": "Emeryville",
+                "country": "United States",
+                "latitude": 37.831093,
+                "longitude": -122.287113,
+                "state": "CA",
+                "street": "1400 Park Avenue",
+                "zip": ""
+            },
+            "name": "Peet's Coffee & Tea"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "192108214153222",
+                    "name": "Breakfast & Brunch Restaurant"
+                },
+                {
+                    "id": "170353509678476",
+                    "name": "Cyber Cafe"
+                },
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                }
+            ],
+            "id": "113323032060158",
+            "location": {
+                "city": "New York",
+                "country": "United States",
+                "latitude": 40.757836105042,
+                "longitude": -73.984708768586,
+                "state": "NY",
+                "street": "1585 Broadway",
+                "zip": "10036"
+            },
+            "name": "Starbucks Coffee Times Square"
+        },
+        {
+            "category": "Media/news/publishing",
+            "category_list": [
+                {
+                    "id": "211155112228091",
+                    "name": "Event Venue"
+                },
+                {
+                    "id": "191684877517919",
+                    "name": "Publisher"
+                }
+            ],
+            "id": "412029578833375",
+            "location": {
+                "city": "Vashon",
+                "country": "United States",
+                "latitude": 47.375168,
+                "longitude": -122.431679,
+                "state": "WA",
+                "street": "25525 77th Ave SW",
+                "zip": "98070"
+            },
+            "name": "CoffeeTalk Media"
+        },
+        {
+            "category": "Food/beverages",
+            "category_list": [
+                {
+                    "id": "128673187201735",
+                    "name": "Coffee Shop"
+                },
+                {
+                    "id": "150108431712141",
+                    "name": "Food & Grocery"
+                }
+            ],
+            "id": "56120464632",
+            "location": {
+                "city": "Waterbury",
+                "country": "United States",
+                "latitude": 44.34108,
+                "longitude": -72.73444,
+                "state": "VT",
+                "street": "33 Coffee Lane",
+                "zip": "05676"
+            },
+            "name": "Green Mountain Coffee"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/search?limit=5&type=place&access_token=access_token&offset=5&__after_id=56120464632"}
+}

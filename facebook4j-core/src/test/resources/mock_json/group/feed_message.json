@@ -1,0 +1,18 @@
+{
+    "data": [
+        {
+            "id": "500000000000001_400000000000001",
+            "message": "Message1",
+            "updated_time": "2013-08-11T15:18:40+0000"
+        },
+        {
+            "id": "500000000000001_400000000000002",
+            "message": "Message2",
+            "updated_time": "2013-08-08T22:46:07+0000"
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/500000000000001/feed?fields=message&access_token=access_token&limit=25&until=1373285427&__paging_token=500000000000001_556785624380395",
+        "previous": "https://graph.facebook.com/500000000000001/feed?fields=message&access_token=access_token&limit=25&since=1376234320&__paging_token=500000000000001_578404392218518&__previous=1"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "data": [
+        {
+            "id": "1234567890123456",
+            "name": "Name Name1",
+            "rsvp_status": "declined"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/331218348435/declined?access_token=access_token&limit=5000&offset=5000&__after_id=542365225"}
+}

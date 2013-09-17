@@ -15,7 +15,6 @@
  */
 package facebook4j;
 
-import facebook4j.conf.ConfigurationContext;
 import facebook4j.internal.logging.Logger;
 import facebook4j.management.APIStatistics;
 import facebook4j.management.APIStatisticsMBean;
@@ -28,8 +27,8 @@ import javax.management.MalformedObjectNameException;
 import javax.management.NotCompliantMBeanException;
 import javax.management.ObjectName;
 import java.lang.management.ManagementFactory;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Singleton instance of all Twitter API monitoring. Handles URL parsing and "wire off" logic.
@@ -38,13 +37,14 @@ import java.util.regex.Pattern;
  *
  * @author Nick Dellamaggiore (nick.dellamaggiore <at> gmail.com)
  * @since Twitter4J 2.2.1
+ *
+ * @author Ryuji Yamashita - roundrop at gmail.com
+ * <ul>
+ *   <li>Changed for Facebook API</li>
+ * </ul>
  */
 public class FacebookAPIMonitor {
     private static final Logger logger = Logger.getLogger(FacebookAPIMonitor.class);
-    // https?:\/\/[^\/]+\/([a-zA-Z_\.]*).*
-    // finds the "method" part a Twitter REST API url, ignoring member-specific resource names
-    private static final Pattern pattern =
-            Pattern.compile("https?:\\/\\/[^\\/]+\\/\\d+\\/([a-zA-Z_\\.]*).*");
 
     private static final FacebookAPIMonitor SINGLETON = new FacebookAPIMonitor();
 
@@ -52,32 +52,11 @@ public class FacebookAPIMonitor {
 
 
     static {
-        boolean isJDK14orEarlier = false;
         try {
-            String versionStr = System.getProperty("java.specification.version");
-            if (versionStr != null) {
-                isJDK14orEarlier = 1.5d > Double.parseDouble(versionStr);
-            }
-            if (ConfigurationContext.getInstance().isDalvik()) {
-                // quick and dirty workaround for TFJ-296
-                // it must be an Android/Dalvik/Harmony side issue!!!!
-                System.setProperty("http.keepAlive", "false");
-            }
-        } catch (SecurityException ignore) {
-            // Unsigned applets are not allowed to access System properties
-            isJDK14orEarlier = true;
-        }
-        try {
-
             MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-            if (isJDK14orEarlier) {
-                ObjectName oName = new ObjectName("facebook4j.mbean:type=APIStatistics");
-                mbs.registerMBean(STATISTICS, oName);
-            } else {
-                ObjectName oName = new ObjectName("facebook4j.mbean:type=APIStatisticsOpenMBean");
-                APIStatisticsOpenMBean openMBean = new APIStatisticsOpenMBean(STATISTICS);
-                mbs.registerMBean(openMBean, oName);
-            }
+            ObjectName oName = new ObjectName("facebook4j.mbean:type=APIStatisticsOpenMBean");
+            APIStatisticsOpenMBean openMBean = new APIStatisticsOpenMBean(STATISTICS);
+            mbs.registerMBean(openMBean, oName);
         } catch (InstanceAlreadyExistsException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
@@ -107,11 +86,12 @@ public class FacebookAPIMonitor {
         return STATISTICS;
     }
 
-    void methodCalled(String twitterUrl, long elapsedTime, boolean success) {
-        Matcher matcher = pattern.matcher(twitterUrl);
-        if (matcher.matches() && matcher.groupCount() > 0) {
-            String method = matcher.group(1);
+    void methodCalled(String facebookUrl, long elapsedTime, boolean success) {
+        try {
+            URL url = new URL(facebookUrl);
+            String method = url.getPath();
             STATISTICS.methodCalled(method, elapsedTime, success);
-        }
+        } catch (MalformedURLException ignore) {}
     }
+
 }

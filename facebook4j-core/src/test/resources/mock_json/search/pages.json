@@ -1,0 +1,218 @@
+{
+    "data": [
+        {
+            "category": "Software",
+            "category_list": [{
+                "id": "108472109230615",
+                "name": "Computer Services"
+            }],
+            "id": "152603664817327",
+            "name": "eXo Platform"
+        },
+        {
+            "category": "Arts/entertainment/nightlife",
+            "category_list": [{
+                "id": "133436743388217",
+                "name": "Arts & Entertainment"
+            }],
+            "id": "384041455043127",
+            "name": "Platform Glasgow"
+        },
+        {
+            "category": "Bar",
+            "category_list": [
+                {
+                    "id": "165679780146824",
+                    "name": "Food & Restaurant"
+                },
+                {
+                    "id": "110290705711626",
+                    "name": "Bar"
+                },
+                {
+                    "id": "109976259083543",
+                    "name": "Sports Venue & Stadium"
+                }
+            ],
+            "id": "104411956289378",
+            "name": "Platform 28"
+        },
+        {
+            "category": "Entertainment website",
+            "id": "478681505550947",
+            "name": "İtiraf Platformu Malatya"
+        },
+        {
+            "category": "Music video",
+            "id": "79544810932",
+            "name": "VEVO"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "110290705711626",
+                    "name": "Bar"
+                },
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                },
+                {
+                    "id": "180256082015845",
+                    "name": "Pizza Place"
+                }
+            ],
+            "id": "595769617114855",
+            "name": "Platform Pizza Bar"
+        },
+        {
+            "category": "Internet/software",
+            "category_list": [
+                {
+                    "id": "200154933429705",
+                    "name": "Web Development"
+                },
+                {
+                    "id": "187393124625179",
+                    "name": "Web Design"
+                }
+            ],
+            "id": "428016260545712",
+            "name": "Platform Technology"
+        },
+        {
+            "category": "Media/news/publishing",
+            "category_list": [
+                {
+                    "id": "198121916870488",
+                    "name": "Radio & Communication Equipment"
+                },
+                {
+                    "id": "108366235907857",
+                    "name": "Newspaper"
+                },
+                {
+                    "id": "163272113725616",
+                    "name": "Advertising Service"
+                }
+            ],
+            "id": "139106646283365",
+            "name": "Pendik Platform"
+        },
+        {
+            "category": "Health/medical/pharmacy",
+            "category_list": [
+                {
+                    "id": "211987392145473",
+                    "name": "Health Spa"
+                },
+                {
+                    "id": "191681657527859",
+                    "name": "Fitness Center"
+                },
+                {
+                    "id": "184405378265823",
+                    "name": "Gym"
+                }
+            ],
+            "id": "362034114769",
+            "name": "Platform-3"
+        },
+        {
+            "category": "Society/culture website",
+            "id": "358736174188508",
+            "name": "Platform of Women"
+        },
+        {
+            "category": "Restaurant/cafe",
+            "category_list": [
+                {
+                    "id": "197871390225897",
+                    "name": "Cafe"
+                },
+                {
+                    "id": "219222658110242",
+                    "name": "Smoothie & Juice Bar"
+                }
+            ],
+            "id": "1391455807739031",
+            "name": "Platform 5 Cafe Bar"
+        },
+        {
+            "category": "Community",
+            "id": "231072346971611",
+            "name": "Taksim Platformu"
+        },
+        {
+            "category": "Education",
+            "id": "538570489526395",
+            "name": "Platforma Sukcesu"
+        },
+        {
+            "category": "Entertainment website",
+            "id": "291721647541946",
+            "name": "The Platform"
+        },
+        {
+            "category": "App page",
+            "id": "358450090894807",
+            "name": "Quiz Platform"
+        },
+        {
+            "category": "Software",
+            "id": "164042616995544",
+            "name": "WhatsApp"
+        },
+        {
+            "category": "Community",
+            "id": "220995064663597",
+            "name": "A Platform for Good"
+        },
+        {
+            "category": "Tv",
+            "id": "142737279109138",
+            "name": "Political platform on raypower FM"
+        },
+        {
+            "category": "Product/service",
+            "id": "19292868552",
+            "name": "Facebook Developers"
+        },
+        {
+            "category": "App page",
+            "id": "138161468666",
+            "name": "piZap.com"
+        },
+        {
+            "category": "Book",
+            "id": "111987952151151",
+            "name": "Platform"
+        },
+        {
+            "category": "Clothing",
+            "id": "27639519808",
+            "name": "New Look"
+        },
+        {
+            "category": "Product/service",
+            "id": "213110905425722",
+            "name": "Nuuvem Platform"
+        },
+        {
+            "category": "Community organization",
+            "category_list": [{
+                "id": "152880021441864",
+                "name": "Community Organization"
+            }],
+            "id": "445770885509163",
+            "name": "Platform - פלטפורם"
+        },
+        {
+            "category": "Health/medical/pharmaceuticals",
+            "id": "354725424655619",
+            "name": "Medi Platform"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/search?q=platform&type=page&access_token=access_token&limit=25&offset=25&__after_id=354725424655619"}
+}

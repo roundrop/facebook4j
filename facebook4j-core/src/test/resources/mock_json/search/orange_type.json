@@ -1,0 +1,38 @@
+{
+    "data": [
+        {
+            "created_time": "2013-08-24T15:00:57+0000",
+            "id": "100001298510899_529736190412993",
+            "type": "link"
+        },
+        {
+            "created_time": "2013-08-24T15:00:52+0000",
+            "id": "223323704442098_494027654038367",
+            "type": "status"
+        },
+        {
+            "created_time": "2013-08-24T15:00:52+0000",
+            "id": "137779199765425_141223569420988",
+            "type": "status"
+        },
+        {
+            "created_time": "2013-08-24T15:00:51+0000",
+            "id": "332846243512224_357932094336972",
+            "type": "status"
+        },
+        {
+            "created_time": "2013-08-24T15:00:48+0000",
+            "id": "224866424308409_377448565716860",
+            "type": "status"
+        },
+        {
+            "created_time": "2013-08-24T15:00:47+0000",
+            "id": "100000220926222_708635602487131",
+            "type": "photo"
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/search?fields=type&q=orange&access_token=access_token&limit=25&until=1377356446",
+        "previous": "https://graph.facebook.com/search?fields=type&q=orange&access_token=access_token&limit=25&since=1377356457&__previous=1"
+    }
+}

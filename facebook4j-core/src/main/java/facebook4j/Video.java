@@ -25,15 +25,28 @@ import java.util.List;
  */
 public interface Video extends FacebookResponse {
     String getId();
-    IdNameEntity getFrom();
-    List<IdNameEntity> getTags();
+    Category getFrom();
+    List<Tag> getTags();
     String getName();
     String getDescription();
     URL getPicture();
     String getEmbedHtml();
+    List<Video.Format> getFormat();
     URL getIcon();
     URL getSource();
     Date getCreatedTime();
     Date getUpdatedTime();
     PagableList<Comment> getComments();
+    URL getLink();
+
+    /**
+     * @since Facebook4J 2.0.0
+     */
+    interface Format {
+        String getEmbedHtml();
+        String getFilter();
+        Integer getHeight();
+        Integer getWidth();
+        URL getPicture();
+    }
 }

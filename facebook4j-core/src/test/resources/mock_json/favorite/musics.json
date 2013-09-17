@@ -1,0 +1,35 @@
+{
+    "data": [
+        {
+            "category": "Musician/band",
+            "created_time": "2011-10-05T15:12:20+0000",
+            "id": "138311299573076",
+            "name": "Boom Boom Satellites"
+        },
+        {
+            "category": "Musician/band",
+            "created_time": "2011-03-15T15:42:13+0000",
+            "id": "112445962100233",
+            "name": "Takkyu Ishino"
+        },
+        {
+            "category": "Musician/band",
+            "created_time": "2011-03-14T13:41:36+0000",
+            "id": "21193697848",
+            "name": "Underworld"
+        },
+        {
+            "category": "Musician/band",
+            "created_time": "2011-03-14T13:38:24+0000",
+            "id": "107744869246829",
+            "name": "Hardfloor"
+        },
+        {
+            "category": "Musician/band",
+            "created_time": "2011-02-21T16:18:28+0000",
+            "id": "178725115782",
+            "name": "Ken Ishii"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/music?access_token=access_token&limit=5000&offset=5000&__after_id=777777777777777"}
+}

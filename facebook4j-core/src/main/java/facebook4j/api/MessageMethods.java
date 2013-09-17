@@ -17,7 +17,6 @@
 package facebook4j.api;
 
 import facebook4j.FacebookException;
-import facebook4j.Inbox;
 import facebook4j.InboxResponseList;
 import facebook4j.Message;
 import facebook4j.Reading;
@@ -30,7 +29,7 @@ public interface MessageMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - inbox
      */
-    InboxResponseList<Inbox> getInbox() throws FacebookException;
+    InboxResponseList<Message> getInbox() throws FacebookException;
 
     /**
      * Returns the messages in the current user's inbox.
@@ -39,7 +38,7 @@ public interface MessageMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - inbox
      */
-    InboxResponseList<Inbox> getInbox(Reading reading) throws FacebookException;
+    InboxResponseList<Message> getInbox(Reading reading) throws FacebookException;
 
     /**
      * Returns the messages in a user's inbox.
@@ -48,7 +47,7 @@ public interface MessageMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - inbox
      */
-    InboxResponseList<Inbox> getInbox(String userId) throws FacebookException;
+    InboxResponseList<Message> getInbox(String userId) throws FacebookException;
 
     /**
      * Returns the messages in a user's inbox.
@@ -58,7 +57,7 @@ public interface MessageMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - inbox
      */
-    InboxResponseList<Inbox> getInbox(String userId, Reading reading) throws FacebookException;
+    InboxResponseList<Message> getInbox(String userId, Reading reading) throws FacebookException;
 
 
     /**

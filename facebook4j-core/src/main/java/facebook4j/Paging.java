@@ -22,7 +22,16 @@ import java.net.URL;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public interface Paging<T> {
+    Class<?> getJSONObjectType();
+    Paging.Cursors getCursors();
     URL getPrevious();
     URL getNext();
-    Class<?> getJSONObjectType();
+
+    /**
+     * @since Facebook4J 2.0.0
+     */
+    interface Cursors {
+        String getAfter();
+        String getBefore();
+    }
 }

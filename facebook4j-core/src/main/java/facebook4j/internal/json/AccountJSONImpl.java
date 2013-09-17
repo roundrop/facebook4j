@@ -16,7 +16,6 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 import facebook4j.Account;
 import facebook4j.FacebookException;
 import facebook4j.ResponseList;
@@ -25,6 +24,12 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -36,6 +41,7 @@ import facebook4j.internal.org.json.JSONObject;
     private String accessToken;
     private String category;
     private String id;
+    private List<String> perms;
 
     /*package*/AccountJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -47,18 +53,32 @@ import facebook4j.internal.org.json.JSONObject;
         }
     }
 
-    /*package*/AccountJSONImpl(JSONObject json) {
+    /*package*/AccountJSONImpl(JSONObject json) throws FacebookException {
         super();
         init(json);
     }
 
-    private void init(JSONObject json) {
-        name = getRawString("name", json);
-        if (!json.isNull("access_token")) {
-            accessToken = getRawString("access_token", json);
+    private void init(JSONObject json) throws FacebookException {
+        try {
+            name = getRawString("name", json);
+            if (!json.isNull("access_token")) {
+                accessToken = getRawString("access_token", json);
+            }
+            category = getRawString("category", json);
+            id = getRawString("id", json);
+            if (!json.isNull("perms")) {
+                JSONArray permsJSONArray = json.getJSONArray("perms");
+                final int size = permsJSONArray.length();
+                perms = new ArrayList<String>(size);
+                for (int i = 0; i < size; i++) {
+                    perms.add((String) permsJSONArray.get(i));
+                }
+            } else {
+                perms = Collections.emptyList();
+            }
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone);
         }
-        category = getRawString("category", json);
-        id = getRawString("id", json);
     }
 
     public String getName() {
@@ -77,6 +97,10 @@ import facebook4j.internal.org.json.JSONObject;
         return id;
     }
 
+    public List<String> getPerms() {
+        return perms;
+    }
+
     /*package*/
     static ResponseList<Account> createAccountList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -85,7 +109,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Account> accounts = new ResponseListImpl<Account>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject accountJSONObject = list.getJSONObject(i);
@@ -131,8 +155,12 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "AccountJSONImpl [name=" + name + ", accessToken=" + accessToken
-                + ", category=" + category + ", id=" + id + "]";
+        return "AccountJSONImpl{" +
+                "name='" + name + '\'' +
+                ", accessToken='" + accessToken + '\'' +
+                ", category='" + category + '\'' +
+                ", id='" + id + '\'' +
+                ", perms=" + perms +
+                '}';
     }
-
 }

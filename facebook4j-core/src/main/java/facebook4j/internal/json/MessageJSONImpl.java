@@ -16,15 +16,10 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import facebook4j.Comment;
 import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
+import facebook4j.InboxResponseList;
 import facebook4j.Message;
 import facebook4j.PagableList;
 import facebook4j.ResponseList;
@@ -33,6 +28,13 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -47,6 +49,8 @@ import facebook4j.internal.org.json.JSONObject;
     private Date createdTime;
     private Date updatedTime;
     private PagableList<Comment> comments;
+    private Integer unread;
+    private Integer unseen;
 
     /*package*/MessageJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -77,19 +81,33 @@ import facebook4j.internal.org.json.JSONObject;
                 for (int i = 0; i < toJSONArray.length(); i++) {
                     to.add(new IdNameEntityJSONImpl(toJSONArray.getJSONObject(i)));
                 }
+            } else {
+                to = Collections.emptyList();
             }
             message = getRawString("message", json);
             createdTime = getISO8601Datetime("created_time", json);
             updatedTime = getISO8601Datetime("updated_time", json);
             if (!json.isNull("comments")) {
                 JSONObject commentsJSONObject = json.getJSONObject("comments");
-                JSONArray list = commentsJSONObject.getJSONArray("data");
-                int size = list.length();
-                comments = new PagableListImpl<Comment>(size, commentsJSONObject);
-                for (int i = 0; i < size; i++) {
-                    CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
-                    comments.add(comment);
+                if (!commentsJSONObject.isNull("data")) {
+                    JSONArray list = commentsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    comments = new PagableListImpl<Comment>(size, commentsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
+                        comments.add(comment);
+                    }
+                } else {
+                    comments = new PagableListImpl<Comment>(1, commentsJSONObject);
                 }
+            } else {
+                comments = new PagableListImpl<Comment>(0);
+            }
+            if (!json.isNull("unread")) {
+                unread = getPrimitiveInt("unread", json);
+            }
+            if (!json.isNull("unseen")) {
+                unseen = getPrimitiveInt("unseen", json);
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -117,6 +135,13 @@ import facebook4j.internal.org.json.JSONObject;
     public PagableList<Comment> getComments() {
         return comments;
     }
+    public Integer getUnread() {
+        return unread;
+    }
+
+    public Integer getUnseen() {
+        return unseen;
+    }
 
     /*package*/
     static ResponseList<Message> createMessageList(HttpResponse res, Configuration conf) throws FacebookException {
@@ -126,8 +151,35 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Message> messages = new ResponseListImpl<Message>(size, json);
+            for (int i = 0; i < size; i++) {
+                JSONObject messageJSONObject = list.getJSONObject(i);
+                Message message = new MessageJSONImpl(messageJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(message, messageJSONObject);
+                }
+                messages.add(message);
+            }
+            if (conf.isJSONStoreEnabled()) {
+                DataObjectFactoryUtil.registerJSONObject(messages, list);
+            }
+            return messages;
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone);
+        }
+    }
+
+    /*package*/
+    static InboxResponseList<Message> createInboxMessageList(HttpResponse res, Configuration conf) throws FacebookException {
+        try {
+            if (conf.isJSONStoreEnabled()) {
+                DataObjectFactoryUtil.clearThreadLocalMap();
+            }
+            JSONObject json = res.asJSONObject();
+            JSONArray list = json.getJSONArray("data");
+            final int size = list.length();
+            InboxResponseList<Message> messages = new InboxResponseListImpl<Message>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject messageJSONObject = list.getJSONObject(i);
                 Message message = new MessageJSONImpl(messageJSONObject);
@@ -172,10 +224,16 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "MessageJSONImpl [id=" + id + ", from=" + from + ", to=" + to
-                + ", message=" + message + ", createdTime=" + createdTime
-                + ", updatedTime=" + updatedTime + ", comments=" + comments
-                + "]";
+        return "MessageJSONImpl{" +
+                "id='" + id + '\'' +
+                ", from=" + from +
+                ", to=" + to +
+                ", message='" + message + '\'' +
+                ", createdTime=" + createdTime +
+                ", updatedTime=" + updatedTime +
+                ", comments=" + comments +
+                ", unread=" + unread +
+                ", unseen=" + unseen +
+                '}';
     }
-
 }

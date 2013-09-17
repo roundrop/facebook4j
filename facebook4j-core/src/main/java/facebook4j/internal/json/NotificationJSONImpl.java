@@ -16,11 +16,6 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.net.URL;
-import java.util.Date;
-
 import facebook4j.Application;
 import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
@@ -31,6 +26,11 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.net.URL;
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -47,6 +47,7 @@ import facebook4j.internal.org.json.JSONObject;
     private URL link;
     private Application application;
     private Boolean unread;
+    private Notification.TargetObject targetObject;
 
     /*package*/NotificationJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -78,7 +79,15 @@ import facebook4j.internal.org.json.JSONObject;
             updatedTime = getISO8601Datetime("updated_time", json);
             title = getRawString("title", json);
             link = getURL("link", json);
-            unread = getBoolean("unread", json);
+            if (!json.isNull("application")) {
+                application = new ApplicationJSONImpl(json.getJSONObject("application"));
+            }
+            if (!json.isNull("unread")) {
+                unread = getFlag("unread", json);
+            }
+            if (!json.isNull("object")) {
+                targetObject = new TargetObjectJSONImpl(json.getJSONObject("object"));
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -88,72 +97,40 @@ import facebook4j.internal.org.json.JSONObject;
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public IdNameEntity getFrom() {
         return from;
-    }
-
-    public void setFrom(IdNameEntity from) {
-        this.from = from;
     }
 
     public IdNameEntity getTo() {
         return to;
     }
 
-    public void setTo(IdNameEntity to) {
-        this.to = to;
-    }
-
     public Date getCreatedTime() {
         return createdTime;
-    }
-
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
     }
 
     public Date getUpdatedTime() {
         return updatedTime;
     }
 
-    public void setUpdatedTime(Date updatedTime) {
-        this.updatedTime = updatedTime;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public URL getLink() {
         return link;
     }
 
-    public void setLink(URL link) {
-        this.link = link;
-    }
-
     public Application getApplication() {
         return application;
-    }
-
-    public void setApplication(Application application) {
-        this.application = application;
     }
 
     public Boolean unread() {
         return unread;
     }
 
-    public void setUnread(Boolean unread) {
-        this.unread = unread;
+    public TargetObject getTargetObject() {
+        return targetObject;
     }
 
     /*package*/
@@ -164,7 +141,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Notification> notifications = new ResponseListImpl<Notification>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject notificationJSONObject = list.getJSONObject(i);
@@ -214,6 +191,51 @@ import facebook4j.internal.org.json.JSONObject;
                 + to + ", createdTime=" + createdTime + ", updatedTime="
                 + updatedTime + ", title=" + title + ", link=" + link
                 + ", application=" + application + ", unread=" + unread + "]";
+    }
+
+    private static class TargetObjectJSONImpl implements Notification.TargetObject, java.io.Serializable {
+        private static final long serialVersionUID = 6760783049866927374L;
+
+        private String id;
+        private String type;
+
+        TargetObjectJSONImpl(JSONObject json) {
+            id = getRawString("id", json);
+            type = getRawString("type", json);
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof TargetObjectJSONImpl)) return false;
+
+            TargetObjectJSONImpl that = (TargetObjectJSONImpl) o;
+
+            if (id != null ? !id.equals(that.id) : that.id != null) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            return id != null ? id.hashCode() : 0;
+        }
+
+        @Override
+        public String toString() {
+            return "TargetObjectJSONImpl{" +
+                    "id='" + id + '\'' +
+                    ", type='" + type + '\'' +
+                    '}';
+        }
     }
 
 }

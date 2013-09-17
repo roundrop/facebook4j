@@ -1,0 +1,31 @@
+{
+    "data": [{
+        "description": "Test Event Details",
+        "end_time": "2013-06-30T22:00:00+0900",
+        "id": "552962794746679",
+        "is_date_only": false,
+        "location": "Yokohama-shi",
+        "name": "Test Event",
+        "owner": {
+            "category": "Software",
+            "id": "137246726435626",
+            "name": "F4J"
+        },
+        "privacy": "OPEN",
+        "start_time": "2013-06-30T19:00:00+0900",
+        "ticket_uri": "http://www.facebook.com/ajax/events/ticket.php?event_id=552962794746679&action_source=12",
+        "timezone": "Asia/Tokyo",
+        "updated_time": "2013-06-17T11:15:39+0000",
+        "venue": {
+            "id": "191903894154620",
+            "latitude": 35.45,
+            "longitude": 139.633,
+            "street": "",
+            "zip": ""
+        }
+    }],
+    "paging": {
+        "next": "https://graph.facebook.com/137246726435626/events?fields=ticket_uri,cover,is_date_only,owner,parent_group,privacy,updated_time,venue,description,end_time,id,location,name,start_time,timezone&access_token=access_token&limit=5000&until=1372586400&__paging_token=552962794746679",
+        "previous": "https://graph.facebook.com/137246726435626/events?fields=ticket_uri,cover,is_date_only,owner,parent_group,privacy,updated_time,venue,description,end_time,id,location,name,start_time,timezone&access_token=access_token&limit=5000&since=1372586400&__paging_token=552962794746679&__previous=1"
+    }
+}

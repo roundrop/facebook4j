@@ -28,62 +28,68 @@ import facebook4j.ResponseList;
  */
 public interface NoteMethods {
     /**
-     * Returns the current user's notes.
+     * Returns the current user's/page's notes.
      * @return notes
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#notes">User#notes - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#notes">Page#notes - Facebook Developers</a>
      */
     ResponseList<Note> getNotes() throws FacebookException;
 
     /**
-     * Returns the current user's notes.
+     * Returns the current user's/page's notes.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return notes
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#notes">User#notes - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#notes">Page#notes - Facebook Developers</a>
      */
     ResponseList<Note> getNotes(Reading reading) throws FacebookException;
 
     /**
-     * Returns a user's notes.
-     * @param userId the ID of a user
+     * Returns a user's/page's notes.
+     * @param id the ID of a user/page
      * @return notes
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#notes">User#notes - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#notes">Page#notes - Facebook Developers</a>
      */
-    ResponseList<Note> getNotes(String userId) throws FacebookException;
+    ResponseList<Note> getNotes(String id) throws FacebookException;
 
     /**
-     * Returns a user's notes.
-     * @param userId the ID of a user
+     * Returns a user's/page's notes.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return notes
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#notes">User#notes - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#notes">Page#notes - Facebook Developers</a>
      */
-    ResponseList<Note> getNotes(String userId, Reading reading) throws FacebookException;
+    ResponseList<Note> getNotes(String id, Reading reading) throws FacebookException;
 
 
     /**
-     * Creates the current user's note.
+     * Creates the current user's/page's note.
      * @param subject the subject of the note
      * @param message note content
      * @return The new note ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#notes">User#notes - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#notes">Page#notes - Facebook Developers</a>
      */
     String createNote(String subject, String message) throws FacebookException;
 
     /**
-     * Creates the note on behalf of a user.
-     * @param userId the ID of a user
+     * Creates the note on behalf of a user/page.
+     * @param id the ID of a user/page
      * @param subject the subject of the note
      * @param message note content
      * @return The new note ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#notes">User#notes - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#notes">Page#notes - Facebook Developers</a>
      */
-    String createNote(String userId, String subject, String message) throws FacebookException;
+    String createNote(String id, String subject, String message) throws FacebookException;
 
 
     /**

@@ -46,7 +46,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Television> televisions = new ResponseListImpl<Television>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject televisionJSONObject = list.getJSONObject(i);

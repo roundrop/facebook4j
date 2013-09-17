@@ -16,11 +16,6 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.net.URL;
-import java.util.Date;
-
 import facebook4j.FacebookException;
 import facebook4j.GroupDoc;
 import facebook4j.IdNameEntity;
@@ -31,6 +26,11 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
+import java.net.URL;
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
@@ -40,7 +40,9 @@ import facebook4j.internal.org.json.JSONObject;
     private String id;
     private IdNameEntity from;
     private String subject;
+    private String message;
     private URL icon;
+    private Date createdTime;
     private Date updatedTime;
     private Long revision;
     private Boolean canEdit;
@@ -69,7 +71,9 @@ import facebook4j.internal.org.json.JSONObject;
                 from = new IdNameEntityJSONImpl(fromJSONObject);
             }
             subject = getRawString("subject", json);
+            message = getRawString("message", json);
             icon = getURL("icon", json);
+            createdTime = getISO8601Datetime("created_time", json);
             updatedTime = getISO8601Datetime("updated_time", json);
             revision = getLong("revision", json);
             canEdit = getBoolean("can_edit", json);
@@ -91,8 +95,16 @@ import facebook4j.internal.org.json.JSONObject;
         return subject;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
     public URL getIcon() {
         return icon;
+    }
+
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
     public Date getUpdatedTime() {
@@ -119,7 +131,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<GroupDoc> docs = new ResponseListImpl<GroupDoc>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject groupDocJSONObject = list.getJSONObject(i);
@@ -165,10 +177,17 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "GroupDocJSONImpl [id=" + id + ", from=" + from + ", subject="
-                + subject + ", icon=" + icon + ", updatedTime=" + updatedTime
-                + ", revision=" + revision + ", canEdit=" + canEdit
-                + ", canDelete=" + canDelete + "]";
+        return "GroupDocJSONImpl{" +
+                "id='" + id + '\'' +
+                ", from=" + from +
+                ", subject='" + subject + '\'' +
+                ", message='" + message + '\'' +
+                ", icon=" + icon +
+                ", createdTime=" + createdTime +
+                ", updatedTime=" + updatedTime +
+                ", revision=" + revision +
+                ", canEdit=" + canEdit +
+                ", canDelete=" + canDelete +
+                '}';
     }
-
 }

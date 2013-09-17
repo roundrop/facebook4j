@@ -16,10 +16,10 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.HttpParameter;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import facebook4j.internal.http.HttpParameter;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -29,13 +29,13 @@ public class TagUpdate implements java.io.Serializable {
 
     private String to;
     private String tagText;
-    private Integer x;
-    private Integer y;
+    private Double x;
+    private Double y;
 
     public TagUpdate() {
     }
 
-    public TagUpdate(String to, String tagText, Integer x, Integer y) {
+    public TagUpdate(String to, String tagText, Double x, Double y) {
         this.to = to;
         this.tagText = tagText;
         this.x = x;
@@ -68,28 +68,28 @@ public class TagUpdate implements java.io.Serializable {
         return this;
     }
 
-    public Integer getX() {
+    public Double getX() {
         return x;
     }
 
-    public void setX(Integer x) {
+    public void setX(Double x) {
         this.x = x;
     }
     
-    public TagUpdate x(Integer x) {
+    public TagUpdate x(Double x) {
         setX(x);
         return this;
     }
 
-    public Integer getY() {
+    public Double getY() {
         return y;
     }
 
-    public void setY(Integer y) {
+    public void setY(Double y) {
         this.y = y;
     }
     
-    public TagUpdate y(Integer y) {
+    public TagUpdate y(Double y) {
         setY(y);
         return this;
     }

@@ -18,96 +18,71 @@ package facebook4j.api;
 
 import java.net.URL;
 
-import facebook4j.Comment;
-import facebook4j.FacebookException;
-import facebook4j.Like;
-import facebook4j.Media;
-import facebook4j.Reading;
-import facebook4j.ResponseList;
-import facebook4j.Video;
+import facebook4j.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public interface VideoMethods {
     /**
-     * Returns the videos the current user has been tagged in.
+     * Returns the videos the current user has been tagged in / the current page has uploaded.
      * @return videos
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#videos">User#videos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#videos">Page#videos - Facebook Developers</a>
      */
     ResponseList<Video> getVideos() throws FacebookException;
 
     /**
-     * Returns the videos the current user has been tagged in.
+     * Returns the videos the current user has been tagged in / the current page has uploaded.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return videos
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#videos">User#videos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#videos">Page#videos - Facebook Developers</a>
      */
     ResponseList<Video> getVideos(Reading reading) throws FacebookException;
 
     /**
-     * Returns the videos a user has been tagged in.
-     * @param userId the ID of a user
+     * Returns the videos a user has been tagged in / the current page has uploaded.
+     * @param id the ID of a user/page
      * @return videos
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#videos">User#videos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#videos">Page#videos - Facebook Developers</a>
      */
-    ResponseList<Video> getVideos(String userId) throws FacebookException;
+    ResponseList<Video> getVideos(String id) throws FacebookException;
 
     /**
-     * Returns the videos a user has been tagged in.
-     * @param userId the ID of a user
+     * Returns the videos a user has been tagged in / the current page has uploaded.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return videos
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#videos">User#videos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#videos">Page#videos - Facebook Developers</a>
      */
-    ResponseList<Video> getVideos(String userId, Reading reading) throws FacebookException;
+    ResponseList<Video> getVideos(String id, Reading reading) throws FacebookException;
 
 
     /**
-     * Posts the video to the current user's wall.
-     * @param source video content
+     * Posts the video to the current user's/page's wall.
+     * @param videoUpdate video content
      * @return The new video ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#videos">User#videos - Facebook Developers</a>
      */
-    String postVideo(Media source) throws FacebookException;
+    String postVideo(VideoUpdate videoUpdate) throws FacebookException;
 
     /**
-     * Posts the video to the current user's wall.
-     * @param source video content
-     * @param title video title
-     * @param description video description
+     * Posts the video to a user's/page's wall.
+     * @param id the ID of a user
+     * @param videoUpdate video content
      * @return The new video ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#videos">User#videos - Facebook Developers</a>
      */
-    String postVideo(Media source, String title, String description) throws FacebookException;
-
-    /**
-     * Posts the video to a user's wall.
-     * @param userId the ID of a user
-     * @param source video content
-     * @return The new video ID
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#videos">User#videos - Facebook Developers</a>
-     */
-    String postVideo(String userId, Media source) throws FacebookException;
-
-    /**
-     * Posts the video to a user's wall.
-     * @param userId the ID of a user
-     * @param source video content
-     * @param title video title
-     * @param description video description
-     * @return The new video ID
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#videos">User#videos - Facebook Developers</a>
-     */
-    String postVideo(String userId, Media source, String title, String description) throws FacebookException;
+    String postVideo(String id, VideoUpdate videoUpdate) throws FacebookException;
 
 
     /**

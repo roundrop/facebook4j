@@ -24,7 +24,7 @@ import java.util.Date;
  */
 public interface Note extends FacebookResponse {
     String getId();
-    IdNameEntity getFrom();
+    Category getFrom();
     String getSubject();
     String getMessage();
     PagableList<Comment> getComments();

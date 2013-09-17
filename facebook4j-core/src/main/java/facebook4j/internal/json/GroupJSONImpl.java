@@ -16,21 +16,22 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.net.URL;
-import java.util.Date;
-
 import facebook4j.FacebookException;
 import facebook4j.Group;
 import facebook4j.GroupPrivacyType;
 import facebook4j.IdNameEntity;
 import facebook4j.ResponseList;
+import facebook4j.Venue;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.net.URL;
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -50,6 +51,7 @@ import facebook4j.internal.org.json.JSONObject;
     private URL icon;
     private Date updatedTime;
     private String email;
+    private Venue venue;
 
     /*package*/GroupJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -78,14 +80,16 @@ import facebook4j.internal.org.json.JSONObject;
             }
             
             if (!json.isNull("owner")) {
-                JSONObject ownerJSONObject = json.getJSONObject("owner");
-                owner = new IdNameEntityJSONImpl(ownerJSONObject);
+                owner = new IdNameEntityJSONImpl(json.getJSONObject("owner"));
             }
             description = getRawString("description", json);
             privacy = GroupPrivacyType.getInstance(getRawString("privacy", json));
             icon = getURL("icon", json);
             updatedTime = getISO8601Datetime("updated_time", json);
             email = getRawString("email", json);
+            if (!json.isNull("venue")) {
+                venue = new VenueJSONImpl(json.getJSONObject("venue"));
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -130,6 +134,10 @@ import facebook4j.internal.org.json.JSONObject;
         return email;
     }
 
+    public Venue getVenue() {
+        return venue;
+    }
+
     /*package*/
     static ResponseList<Group> createGroupList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -138,7 +146,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Group> groups = new ResponseListImpl<Group>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject groupJSONObject = list.getJSONObject(i);
@@ -184,9 +192,19 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "GroupJSONImpl [version=" + version + ", name=" + name + ", id="
-                + id + ", administrator=" + administrator + ", bookmarkOrder="
-                + bookmarkOrder + "]";
+        return "GroupJSONImpl{" +
+                "version=" + version +
+                ", name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                ", administrator=" + administrator +
+                ", bookmarkOrder=" + bookmarkOrder +
+                ", owner=" + owner +
+                ", description='" + description + '\'' +
+                ", privacy=" + privacy +
+                ", icon=" + icon +
+                ", updatedTime=" + updatedTime +
+                ", email='" + email + '\'' +
+                ", venue=" + venue +
+                '}';
     }
-
 }

@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "bookmark_order": 1,
+            "id": "500000000000001",
+            "name": "Group Name1"
+        },
+        {
+            "bookmark_order": 3,
+            "id": "500000000000002",
+            "name": "Group Name2"
+        },
+        {
+            "administrator": true,
+            "bookmark_order": 2,
+            "id": "500000000000003",
+            "name": "Group Name3"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/groups?access_token=access_token&limit=5000&offset=5000&__after_id=2222222222222"}
+}

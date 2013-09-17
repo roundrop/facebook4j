@@ -16,10 +16,6 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.util.Date;
-
 import facebook4j.FacebookException;
 import facebook4j.ResponseList;
 import facebook4j.Tag;
@@ -28,6 +24,10 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -41,8 +41,8 @@ import facebook4j.internal.org.json.JSONObject;
     private Integer length;
     private String type;
     
-    private Integer x;
-    private Integer y;
+    private Double x;
+    private Double y;
     private Date createdTime;
 
     /*package*/TagJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
@@ -64,7 +64,7 @@ import facebook4j.internal.org.json.JSONObject;
         id = getRawString("id", json);
         name = getRawString("name", json);
         if (!json.isNull("offset")) {
-            offset = getPrimitiveInt("offset");
+            offset = getPrimitiveInt("offset", json);
         } else {
             offset = null;
         }
@@ -76,12 +76,12 @@ import facebook4j.internal.org.json.JSONObject;
         type = getRawString("type", json);
         
         if (!json.isNull("x")) {
-            x = getPrimitiveInt("x", json);
+            x = getDouble("x", json);
         } else {
             x = null;
         }
         if (!json.isNull("y")) {
-            y = getPrimitiveInt("y", json);
+            y = getDouble("y", json);
         } else {
             y = null;
         }
@@ -108,11 +108,11 @@ import facebook4j.internal.org.json.JSONObject;
         return type;
     }
 
-    public Integer getX() {
+    public Double getX() {
         return x;
     }
 
-    public Integer getY() {
+    public Double getY() {
         return y;
     }
 
@@ -128,7 +128,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Tag> tags = new ResponseListImpl<Tag>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject tagJSONObject = list.getJSONObject(i);

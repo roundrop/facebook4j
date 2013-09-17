@@ -1,0 +1,15 @@
+{
+    "data": [
+        {
+            "link": "http://www.facebook.com/album.php?fbid=1111000001&id=11111000001&aid=50926",
+            "id": "111000000001",
+            "created_time": "2011-08-17T11:03:11+0000"
+        }
+    ],
+    "paging": {"cursors": {
+        "after": "MjM2NDQzNzU2NDE3OTE3",
+        "before": "MTk2Mjg3MTU3MTAwMjQ0"
+    },
+        "next": "https://graph.facebook.com/2222000001/albums?fields=link&limit=1&after=MjM2NDQzNzU2NDE3OTE3"
+    }
+}

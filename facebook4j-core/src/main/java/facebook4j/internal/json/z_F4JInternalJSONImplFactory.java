@@ -16,11 +16,10 @@
 
 package facebook4j.internal.json;
 
-import java.util.List;
-
 import facebook4j.Account;
 import facebook4j.Achievement;
 import facebook4j.Activity;
+import facebook4j.Admin;
 import facebook4j.Album;
 import facebook4j.Application;
 import facebook4j.Book;
@@ -36,20 +35,23 @@ import facebook4j.Friendlist;
 import facebook4j.Game;
 import facebook4j.Group;
 import facebook4j.GroupDoc;
+import facebook4j.GroupMember;
 import facebook4j.IdNameEntity;
-import facebook4j.Inbox;
 import facebook4j.InboxResponseList;
 import facebook4j.Insight;
 import facebook4j.Interest;
 import facebook4j.Like;
 import facebook4j.Link;
 import facebook4j.Location;
-import facebook4j.GroupMember;
 import facebook4j.Message;
+import facebook4j.Milestone;
 import facebook4j.Movie;
 import facebook4j.Music;
 import facebook4j.Note;
 import facebook4j.Notification;
+import facebook4j.Offer;
+import facebook4j.Page;
+import facebook4j.PageSetting;
 import facebook4j.Permission;
 import facebook4j.Photo;
 import facebook4j.Place;
@@ -62,7 +64,9 @@ import facebook4j.ResponseList;
 import facebook4j.Score;
 import facebook4j.Subscribedto;
 import facebook4j.Subscriber;
+import facebook4j.Tab;
 import facebook4j.Tag;
+import facebook4j.Tagged;
 import facebook4j.Television;
 import facebook4j.TestUser;
 import facebook4j.User;
@@ -70,6 +74,8 @@ import facebook4j.Video;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -210,8 +216,8 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return GroupDocJSONImpl.createGroupDocList(res, conf);
     }
 
-    public InboxResponseList<Inbox> createInboxList(HttpResponse res) throws FacebookException {
-        return InboxJSONImpl.createInboxList(res, conf);
+    public InboxResponseList<Message> createInboxList(HttpResponse res) throws FacebookException {
+        return MessageJSONImpl.createInboxMessageList(res, conf);
     }
 
     public ResponseList<Interest> createInterestList(HttpResponse res) throws FacebookException {
@@ -259,6 +265,18 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
 
     public Note createNote(HttpResponse res) throws FacebookException {
         return new NoteJSONImpl(res, conf);
+    }
+
+    public Page createPage(HttpResponse res) throws FacebookException {
+        return new PageJSONImpl(res, conf);
+    }
+
+    public ResponseList<Page> createPageList(HttpResponse res) throws FacebookException {
+        return PageJSONImpl.createPageList(res, conf);
+    }
+
+    public ResponseList<PageSetting> createPageSettingList(HttpResponse res) throws FacebookException {
+        return PageSettingJSONImpl.createLikeList(res, conf);
     }
 
     public List<Permission> createPermissions(HttpResponse res) throws FacebookException {
@@ -330,6 +348,30 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
 
     public ResponseList<Insight> createInsightList(HttpResponse res) throws FacebookException {
         return InsightJSONImpl.createInsightList(res, conf);
+    }
+
+    public ResponseList<Tagged> createTaggedList(HttpResponse res) throws FacebookException {
+        return TaggedJSONImpl.createTaggedList(res, conf);
+    }
+
+    public ResponseList<Milestone> createMilestoneList(HttpResponse res) throws FacebookException {
+        return MilestoneJSONImpl.createMilestoneList(res, conf);
+    }
+
+    public ResponseList<Admin> createAdminList(HttpResponse res) throws FacebookException {
+        return AdminJSONImpl.createAdminList(res, conf);
+    }
+
+    public ResponseList<Tab> createTabList(HttpResponse res) throws FacebookException {
+        return TabJSONImpl.createTabList(res, conf);
+    }
+
+    public ResponseList<Offer> createOfferList(HttpResponse res) throws FacebookException {
+        return OfferJSONImpl.createOfferList(res, conf);
+    }
+
+    public Offer createOffer(HttpResponse res) throws FacebookException {
+        return new OfferJSONImpl(res, conf);
     }
 
     public Application createApplication(HttpResponse res) throws FacebookException {
@@ -459,9 +501,6 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         if (jsonObjectType == Location.class) {
             return (ResponseList<T>) createLocationList(res);
         }
-        if (jsonObjectType == Inbox.class) {
-            return (ResponseList<T>) createInboxList(res);
-        }
         if (jsonObjectType == Message.class) {
             return (ResponseList<T>) createMessageList(res);
         }
@@ -500,6 +539,27 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         }
         if (jsonObjectType == Subscriber.class) {
             return (ResponseList<T>) createSubscriberList(res);
+        }
+        if (jsonObjectType == Page.class) {
+            return (ResponseList<T>) createPageList(res);
+        }
+        if (jsonObjectType == PageSetting.class) {
+            return (ResponseList<T>) createPageSettingList(res);
+        }
+        if (jsonObjectType == Tagged.class) {
+            return (ResponseList<T>) createTaggedList(res);
+        }
+        if (jsonObjectType == Milestone.class) {
+            return (ResponseList<T>) createMilestoneList(res);
+        }
+        if (jsonObjectType == Admin.class) {
+            return (ResponseList<T>) createAdminList(res);
+        }
+        if (jsonObjectType == Tab.class) {
+            return (ResponseList<T>) createTabList(res);
+        }
+        if (jsonObjectType == Offer.class) {
+            return (ResponseList<T>) createOfferList(res);
         }
         if (jsonObjectType == JSONObject.class) {
             return (ResponseList<T>) createJSONObjectList(res);

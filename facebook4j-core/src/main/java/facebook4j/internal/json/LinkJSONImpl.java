@@ -16,21 +16,23 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.util.Date;
-
 import facebook4j.Comment;
 import facebook4j.FacebookException;
-import facebook4j.Link;
 import facebook4j.IdNameEntity;
+import facebook4j.Like;
+import facebook4j.Link;
 import facebook4j.PagableList;
+import facebook4j.Privacy;
 import facebook4j.ResponseList;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -42,6 +44,7 @@ import facebook4j.internal.org.json.JSONObject;
     private IdNameEntity from;
     private String link;
     private String name;
+    private PagableList<Like> likes;
     private PagableList<Comment> comments;
     private String description;
     private String icon;
@@ -49,6 +52,7 @@ import facebook4j.internal.org.json.JSONObject;
     private String message;
     private Date createdTime;
     private String type;
+    private Privacy privacy;
 
     /*package*/LinkJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -74,16 +78,37 @@ import facebook4j.internal.org.json.JSONObject;
             }
             link = getRawString("link", json);
             name = getRawString("name", json);
+            if (!json.isNull("likes")) {
+                JSONObject likesJSONObject = json.getJSONObject("likes");
+                if (!likesJSONObject.isNull("data")) {
+                    JSONArray list = likesJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    likes = new PagableListImpl<Like>(size, likesJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
+                        likes.add(like);
+                    }
+                } else {
+                    likes = new PagableListImpl<Like>(1, likesJSONObject);
+                }
+            } else {
+                likes = new PagableListImpl<Like>(0);
+            }
             if (!json.isNull("comments")) {
                 JSONObject commentsJSONObject = json.getJSONObject("comments");
-                JSONArray list = commentsJSONObject.getJSONArray("data");
-                int size = list.length();
-                comments = new PagableListImpl<Comment>(size, commentsJSONObject);
-                for (int i = 0; i < size; i++) {
-                    CommentJSONImpl tag = new CommentJSONImpl(list.getJSONObject(i));
-                    comments.add(tag);
+                if (!commentsJSONObject.isNull("data")) {
+                    JSONArray list = commentsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    comments = new PagableListImpl<Comment>(size, commentsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        CommentJSONImpl tag = new CommentJSONImpl(list.getJSONObject(i));
+                        comments.add(tag);
+                    }
+                } else {
+                    comments = new PagableListImpl<Comment>(1, commentsJSONObject);
                 }
-                
+            } else {
+                comments = new PagableListImpl<Comment>(0);
             }
             description = getRawString("description", json);
             icon = getRawString("icon", json);
@@ -91,6 +116,10 @@ import facebook4j.internal.org.json.JSONObject;
             message = getRawString("message", json);
             createdTime = getISO8601Datetime("created_time", json);
             type = getRawString("type", json);
+            if (!json.isNull("privacy")) {
+                JSONObject privacyJSONObject = json.getJSONObject("privacy");
+                privacy = new PrivacyJSONImpl(privacyJSONObject);
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -110,6 +139,10 @@ import facebook4j.internal.org.json.JSONObject;
 
     public String getName() {
         return name;
+    }
+
+    public PagableList<Like> getLikes() {
+        return likes;
     }
 
     public PagableList<Comment> getComments() {
@@ -140,6 +173,10 @@ import facebook4j.internal.org.json.JSONObject;
         return type;
     }
 
+    public Privacy getPrivacy() {
+        return privacy;
+    }
+
     /*package*/
     static ResponseList<Link> createLinkList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -148,7 +185,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Link> links = new ResponseListImpl<Link>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject linkJSONObject = list.getJSONObject(i);
@@ -194,11 +231,20 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "LinkJSONImpl [id=" + id + ", from=" + from + ", link=" + link
-                + ", name=" + name + ", comments=" + comments
-                + ", description=" + description + ", icon=" + icon
-                + ", picture=" + picture + ", message=" + message
-                + ", createdTime=" + createdTime + ", type=" + type + "]";
+        return "LinkJSONImpl{" +
+                "id='" + id + '\'' +
+                ", from=" + from +
+                ", link='" + link + '\'' +
+                ", name='" + name + '\'' +
+                ", likes=" + likes +
+                ", comments=" + comments +
+                ", description='" + description + '\'' +
+                ", icon='" + icon + '\'' +
+                ", picture='" + picture + '\'' +
+                ", message='" + message + '\'' +
+                ", createdTime=" + createdTime +
+                ", type='" + type + '\'' +
+                ", privacy=" + privacy +
+                '}';
     }
-
 }

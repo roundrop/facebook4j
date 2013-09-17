@@ -1,0 +1,23 @@
+{
+    "data": [
+        {
+            "created_time": "2010-03-12T13:15:18+0000",
+            "id": "103019776398301",
+            "source": "https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-prn1/24508_103019776398301_7078156_n.jpg"
+        },
+        {
+            "created_time": "2010-03-12T13:15:18+0000",
+            "id": "103019783064967",
+            "source": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn1/24508_103019783064967_4854447_n.jpg"
+        },
+        {
+            "created_time": "2010-03-12T13:15:18+0000",
+            "id": "103019779731634",
+            "source": "https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-ash3/24508_103019779731634_3930425_n.jpg"
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/331218348435/photos?fields=source&limit=3&access_token=access_token&until=1268399715",
+        "previous": "https://graph.facebook.com/331218348435/photos?fields=source&limit=3&access_token=access_token&since=1268399718&__previous=1"
+    }
+}

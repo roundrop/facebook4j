@@ -16,40 +16,15 @@
 
 package facebook4j.auth;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import facebook4j.Facebook;
 import facebook4j.FacebookFactory;
 import facebook4j.FacebookTestBase;
-import facebook4j.auth.Authorization;
-import facebook4j.auth.NullAuthorization;
-import facebook4j.auth.OAuthAuthorization;
+import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class AuthorizationTest extends FacebookTestBase {
-
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
 
     @Test
     public void anonymousInstance() throws Exception {
@@ -75,4 +50,5 @@ public class AuthorizationTest extends FacebookTestBase {
         Authorization auth = facebook.getAuthorization();
         assertThat(auth, instanceOf(OAuthAuthorization.class));
     }
+
 }

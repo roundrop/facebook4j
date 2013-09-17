@@ -16,14 +16,63 @@
 
 package facebook4j.json;
 
+import facebook4j.Account;
+import facebook4j.Achievement;
+import facebook4j.Activity;
+import facebook4j.Admin;
+import facebook4j.Album;
+import facebook4j.Book;
+import facebook4j.Category;
+import facebook4j.Checkin;
+import facebook4j.Comment;
+import facebook4j.Domain;
+import facebook4j.Event;
+import facebook4j.FacebookException;
+import facebook4j.Family;
+import facebook4j.Friend;
+import facebook4j.FriendRequest;
+import facebook4j.Friendlist;
+import facebook4j.Game;
+import facebook4j.Group;
+import facebook4j.GroupDoc;
+import facebook4j.GroupMember;
+import facebook4j.Insight;
+import facebook4j.Interest;
+import facebook4j.Like;
+import facebook4j.Link;
+import facebook4j.Location;
+import facebook4j.Message;
+import facebook4j.Milestone;
+import facebook4j.Movie;
+import facebook4j.Music;
+import facebook4j.Note;
+import facebook4j.Notification;
+import facebook4j.Offer;
+import facebook4j.Page;
+import facebook4j.PageSetting;
+import facebook4j.Photo;
+import facebook4j.Place;
+import facebook4j.Poke;
+import facebook4j.Post;
+import facebook4j.Question;
+import facebook4j.QuestionVotes;
+import facebook4j.RSVPStatus;
+import facebook4j.Score;
+import facebook4j.Subscribedto;
+import facebook4j.Subscriber;
+import facebook4j.Tab;
+import facebook4j.Tag;
+import facebook4j.Tagged;
+import facebook4j.Television;
+import facebook4j.User;
+import facebook4j.Video;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
-
-import facebook4j.*;
-import facebook4j.internal.org.json.JSONException;
-import facebook4j.internal.org.json.JSONObject;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -36,8 +85,10 @@ public final class DataObjectFactory {
     private static final Constructor<Account> accountConstructor;
     private static final Constructor<Achievement> achievementConstructor;
     private static final Constructor<Activity> activityConstructor;
+    private static final Constructor<Admin> adminConstructor;
     private static final Constructor<Album> albumConstructor;
     private static final Constructor<Book> bookConstructor;
+    private static final Constructor<Category> categoryConstructor;
     private static final Constructor<Checkin> checkinConstructor;
     private static final Constructor<Comment> commentConstructor;
     private static final Constructor<Domain> domainConstructor;
@@ -50,17 +101,20 @@ public final class DataObjectFactory {
     private static final Constructor<GroupDoc> groupDocConstructor;
     private static final Constructor<Group> groupConstructor;
     private static final Constructor<GroupMember> groupMemberConstructor;
-    private static final Constructor<Inbox> inboxConstructor;
     private static final Constructor<Insight> insightConstructor;
     private static final Constructor<Interest> interestConstructor;
     private static final Constructor<Like> likeConstructor;
     private static final Constructor<Link> linkConstructor;
     private static final Constructor<Location> locationConstructor;
     private static final Constructor<Message> messageConstructor;
+    private static final Constructor<Milestone> milestoneConstructor;
     private static final Constructor<Movie> movieConstructor;
     private static final Constructor<Music> musicConstructor;
     private static final Constructor<Note> noteConstructor;
     private static final Constructor<Notification> notificationConstructor;
+    private static final Constructor<Offer> offerConstructor;
+    private static final Constructor<Page> pageConstructor;
+    private static final Constructor<PageSetting> pageSettingConstructor;
     private static final Constructor<Photo> photoConstructor;
     private static final Constructor<Place> placeConstructor;
     private static final Constructor<Poke> pokeConstructor;
@@ -71,6 +125,8 @@ public final class DataObjectFactory {
     private static final Constructor<Score> scoreConstructor;
     private static final Constructor<Subscribedto> subscribedtoConstructor;
     private static final Constructor<Subscriber> subscriberConstructor;
+    private static final Constructor<Tab> tabConstructor;
+    private static final Constructor<Tagged> taggedConstructor;
     private static final Constructor<Tag> tagConstructor;
     private static final Constructor<Television> televisionConstructor;
     private static final Constructor<User> userConstructor;
@@ -87,11 +143,17 @@ public final class DataObjectFactory {
             activityConstructor = (Constructor<Activity>) Class.forName("facebook4j.internal.json.ActivityJSONImpl").getDeclaredConstructor(JSONObject.class);
             activityConstructor.setAccessible(true);
 
+            adminConstructor = (Constructor<Admin>) Class.forName("facebook4j.internal.json.AdminJSONImpl").getDeclaredConstructor(JSONObject.class);
+            adminConstructor.setAccessible(true);
+
             albumConstructor = (Constructor<Album>) Class.forName("facebook4j.internal.json.AlbumJSONImpl").getDeclaredConstructor(JSONObject.class);
             albumConstructor.setAccessible(true);
 
             bookConstructor = (Constructor<Book>) Class.forName("facebook4j.internal.json.BookJSONImpl").getDeclaredConstructor(JSONObject.class);
             bookConstructor.setAccessible(true);
+
+            categoryConstructor = (Constructor<Category>) Class.forName("facebook4j.internal.json.CategoryJSONImpl").getDeclaredConstructor(JSONObject.class);
+            categoryConstructor.setAccessible(true);
 
             checkinConstructor = (Constructor<Checkin>) Class.forName("facebook4j.internal.json.CheckinJSONImpl").getDeclaredConstructor(JSONObject.class);
             checkinConstructor.setAccessible(true);
@@ -129,9 +191,6 @@ public final class DataObjectFactory {
             groupMemberConstructor = (Constructor<GroupMember>) Class.forName("facebook4j.internal.json.GroupMemberJSONImpl").getDeclaredConstructor(JSONObject.class);
             groupMemberConstructor.setAccessible(true);
 
-            inboxConstructor = (Constructor<Inbox>) Class.forName("facebook4j.internal.json.InboxJSONImpl").getDeclaredConstructor(JSONObject.class);
-            inboxConstructor.setAccessible(true);
-
             insightConstructor = (Constructor<Insight>) Class.forName("facebook4j.internal.json.InsightJSONImpl").getDeclaredConstructor(JSONObject.class);
             insightConstructor.setAccessible(true);
 
@@ -150,6 +209,9 @@ public final class DataObjectFactory {
             messageConstructor = (Constructor<Message>) Class.forName("facebook4j.internal.json.MessageJSONImpl").getDeclaredConstructor(JSONObject.class);
             messageConstructor.setAccessible(true);
             
+            milestoneConstructor = (Constructor<Milestone>) Class.forName("facebook4j.internal.json.MilestoneJSONImpl").getDeclaredConstructor(JSONObject.class);
+            milestoneConstructor.setAccessible(true);
+
             movieConstructor = (Constructor<Movie>) Class.forName("facebook4j.internal.json.MovieJSONImpl").getDeclaredConstructor(JSONObject.class);
             movieConstructor.setAccessible(true);
 
@@ -161,6 +223,15 @@ public final class DataObjectFactory {
 
             notificationConstructor = (Constructor<Notification>) Class.forName("facebook4j.internal.json.NotificationJSONImpl").getDeclaredConstructor(JSONObject.class);
             notificationConstructor.setAccessible(true);
+
+            offerConstructor = (Constructor<Offer>) Class.forName("facebook4j.internal.json.OfferJSONImpl").getDeclaredConstructor(JSONObject.class);
+            offerConstructor.setAccessible(true);
+
+            pageConstructor = (Constructor<Page>) Class.forName("facebook4j.internal.json.PageJSONImpl").getDeclaredConstructor(JSONObject.class);
+            pageConstructor.setAccessible(true);
+
+            pageSettingConstructor = (Constructor<PageSetting>) Class.forName("facebook4j.internal.json.PageSettingJSONImpl").getDeclaredConstructor(JSONObject.class);
+            pageSettingConstructor.setAccessible(true);
 
             photoConstructor = (Constructor<Photo>) Class.forName("facebook4j.internal.json.PhotoJSONImpl").getDeclaredConstructor(JSONObject.class);
             photoConstructor.setAccessible(true);
@@ -192,9 +263,15 @@ public final class DataObjectFactory {
             subscriberConstructor = (Constructor<Subscriber>) Class.forName("facebook4j.internal.json.SubscriberJSONImpl").getDeclaredConstructor(JSONObject.class);
             subscriberConstructor.setAccessible(true);
 
+            tabConstructor = (Constructor<Tab>) Class.forName("facebook4j.internal.json.TabJSONImpl").getDeclaredConstructor(JSONObject.class);
+            tabConstructor.setAccessible(true);
+            
+            taggedConstructor = (Constructor<Tagged>) Class.forName("facebook4j.internal.json.TaggedJSONImpl").getDeclaredConstructor(JSONObject.class);
+            taggedConstructor.setAccessible(true);
+
             tagConstructor = (Constructor<Tag>) Class.forName("facebook4j.internal.json.TagJSONImpl").getDeclaredConstructor(JSONObject.class);
             tagConstructor.setAccessible(true);
-            
+
             televisionConstructor = (Constructor<Television>) Class.forName("facebook4j.internal.json.TelevisionJSONImpl").getDeclaredConstructor(JSONObject.class);
             televisionConstructor.setAccessible(true);
 
@@ -304,6 +381,28 @@ public final class DataObjectFactory {
     }
 
     /**
+     * Constructs a Admin object from rawJSON string.
+     *
+     * @param rawJSON raw JSON form as String
+     * @return Admin
+     * @throws FacebookException when provided string is not a valid JSON string.
+     */
+    public static Admin createAdmin(String rawJSON) throws FacebookException {
+        try {
+            JSONObject json = new JSONObject(rawJSON);
+            return adminConstructor.newInstance(json);
+        } catch (InstantiationException e) {
+            throw new FacebookException(e);
+        } catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+        } catch (InvocationTargetException e) {
+            throw new FacebookException(e);
+        } catch (JSONException e) {
+            throw new FacebookException(e);
+        }
+    }
+
+    /**
      * Constructs a Album object from rawJSON string.
      *
      * @param rawJSON raw JSON form as String
@@ -336,6 +435,28 @@ public final class DataObjectFactory {
         try {
             JSONObject json = new JSONObject(rawJSON);
             return bookConstructor.newInstance(json);
+        } catch (InstantiationException e) {
+            throw new FacebookException(e);
+        } catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+        } catch (InvocationTargetException e) {
+            throw new FacebookException(e);
+        } catch (JSONException e) {
+            throw new FacebookException(e);
+        }
+    }
+
+    /**
+     * Constructs a Category object from rawJSON string.
+     *
+     * @param rawJSON raw JSON form as String
+     * @return Category
+     * @throws FacebookException when provided string is not a valid JSON string.
+     */
+    public static Category createCategory(String rawJSON) throws FacebookException {
+        try {
+            JSONObject json = new JSONObject(rawJSON);
+            return categoryConstructor.newInstance(json);
         } catch (InstantiationException e) {
             throw new FacebookException(e);
         } catch (IllegalAccessException e) {
@@ -434,7 +555,7 @@ public final class DataObjectFactory {
             throw new FacebookException(e);
         }
     }
-    
+
     /**
      * Constructs a Family object from rawJSON string.
      *
@@ -612,28 +733,6 @@ public final class DataObjectFactory {
     }
 
     /**
-     * Constructs a Inbox object from rawJSON string.
-     *
-     * @param rawJSON raw JSON form as String
-     * @return Inbox
-     * @throws FacebookException when provided string is not a valid JSON string.
-     */
-    public static Inbox createInbox(String rawJSON) throws FacebookException {
-        try {
-            JSONObject json = new JSONObject(rawJSON);
-            return inboxConstructor.newInstance(json);
-        } catch (InstantiationException e) {
-            throw new FacebookException(e);
-        } catch (IllegalAccessException e) {
-            throw new AssertionError(e);
-        } catch (InvocationTargetException e) {
-            throw new FacebookException(e);
-        } catch (JSONException e) {
-            throw new FacebookException(e);
-        }
-    }
-
-    /**
      * Constructs a Insight object from rawJSON string.
      *
      * @param rawJSON raw JSON form as String
@@ -766,6 +865,28 @@ public final class DataObjectFactory {
     }
     
     /**
+     * Constructs a Milestone object from rawJSON string.
+     *
+     * @param rawJSON raw JSON form as String
+     * @return Milestone
+     * @throws FacebookException when provided string is not a valid JSON string.
+     */
+    public static Milestone createMilestone(String rawJSON) throws FacebookException {
+        try {
+            JSONObject json = new JSONObject(rawJSON);
+            return milestoneConstructor.newInstance(json);
+        } catch (InstantiationException e) {
+            throw new FacebookException(e);
+        } catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+        } catch (InvocationTargetException e) {
+            throw new FacebookException(e);
+        } catch (JSONException e) {
+            throw new FacebookException(e);
+        }
+    }
+
+    /**
      * Constructs a Movie object from rawJSON string.
      *
      * @param rawJSON raw JSON form as String
@@ -842,6 +963,72 @@ public final class DataObjectFactory {
         try {
             JSONObject json = new JSONObject(rawJSON);
             return notificationConstructor.newInstance(json);
+        } catch (InstantiationException e) {
+            throw new FacebookException(e);
+        } catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+        } catch (InvocationTargetException e) {
+            throw new FacebookException(e);
+        } catch (JSONException e) {
+            throw new FacebookException(e);
+        }
+    }
+
+    /**
+     * Constructs a Offer object from rawJSON string.
+     *
+     * @param rawJSON raw JSON form as String
+     * @return Offer
+     * @throws FacebookException when provided string is not a valid JSON string.
+     */
+    public static Offer createOffer(String rawJSON) throws FacebookException {
+        try {
+            JSONObject json = new JSONObject(rawJSON);
+            return offerConstructor.newInstance(json);
+        } catch (InstantiationException e) {
+            throw new FacebookException(e);
+        } catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+        } catch (InvocationTargetException e) {
+            throw new FacebookException(e);
+        } catch (JSONException e) {
+            throw new FacebookException(e);
+        }
+    }
+
+    /**
+     * Constructs a Page object from rawJSON string.
+     *
+     * @param rawJSON raw JSON form as String
+     * @return Page
+     * @throws FacebookException when provided string is not a valid JSON string.
+     */
+    public static Page createPage(String rawJSON) throws FacebookException {
+        try {
+            JSONObject json = new JSONObject(rawJSON);
+            return pageConstructor.newInstance(json);
+        } catch (InstantiationException e) {
+            throw new FacebookException(e);
+        } catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+        } catch (InvocationTargetException e) {
+            throw new FacebookException(e);
+        } catch (JSONException e) {
+            throw new FacebookException(e);
+        }
+    }
+
+    /**
+     * Constructs a PageSetting object from rawJSON string.
+     *
+     * @param rawJSON raw JSON form as String
+     * @return PageSetting
+     * @throws FacebookException when provided string is not a valid JSON string.
+     */
+    public static PageSetting createPageSetting(String rawJSON) throws FacebookException {
+        try {
+            JSONObject json = new JSONObject(rawJSON);
+            return pageSettingConstructor.newInstance(json);
         } catch (InstantiationException e) {
             throw new FacebookException(e);
         } catch (IllegalAccessException e) {
@@ -1062,6 +1249,50 @@ public final class DataObjectFactory {
         try {
             JSONObject json = new JSONObject(rawJSON);
             return subscriberConstructor.newInstance(json);
+        } catch (InstantiationException e) {
+            throw new FacebookException(e);
+        } catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+        } catch (InvocationTargetException e) {
+            throw new FacebookException(e);
+        } catch (JSONException e) {
+            throw new FacebookException(e);
+        }
+    }
+
+    /**
+     * Constructs a Tab object from rawJSON string.
+     *
+     * @param rawJSON raw JSON form as String
+     * @return Tab
+     * @throws FacebookException when provided string is not a valid JSON string.
+     */
+    public static Tab createTab(String rawJSON) throws FacebookException {
+        try {
+            JSONObject json = new JSONObject(rawJSON);
+            return tabConstructor.newInstance(json);
+        } catch (InstantiationException e) {
+            throw new FacebookException(e);
+        } catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+        } catch (InvocationTargetException e) {
+            throw new FacebookException(e);
+        } catch (JSONException e) {
+            throw new FacebookException(e);
+        }
+    }
+
+    /**
+     * Constructs a Tagged object from rawJSON string.
+     *
+     * @param rawJSON raw JSON form as String
+     * @return Tagged
+     * @throws FacebookException when provided string is not a valid JSON string.
+     */
+    public static Tagged createTagged(String rawJSON) throws FacebookException {
+        try {
+            JSONObject json = new JSONObject(rawJSON);
+            return taggedConstructor.newInstance(json);
         } catch (InstantiationException e) {
             throw new FacebookException(e);
         } catch (IllegalAccessException e) {

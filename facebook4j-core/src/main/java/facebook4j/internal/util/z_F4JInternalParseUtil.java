@@ -16,26 +16,25 @@
 
 package facebook4j.internal.util;
 
-import java.io.UnsupportedEncodingException;
+import facebook4j.FacebookException;
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
+
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
-
-import facebook4j.FacebookException;
-import facebook4j.internal.http.HTMLEntity;
-import facebook4j.internal.org.json.JSONArray;
-import facebook4j.internal.org.json.JSONException;
-import facebook4j.internal.org.json.JSONObject;
 
 /**
  * A tiny parse utility class.
@@ -67,17 +66,6 @@ public final class z_F4JInternalParseUtil {
         throw new AssertionError();
     }
 
-    private static ThreadLocal<Map<String, SimpleDateFormat>> formatMap = new ThreadLocal<Map<String, SimpleDateFormat>>() {
-        @Override
-        protected Map<String, SimpleDateFormat> initialValue() {
-            return new HashMap<String, SimpleDateFormat>();
-        }
-    };
-
-    public static String getUnescapedString(String str, JSONObject json) {
-        return HTMLEntity.unescape(getRawString(str, json));
-    }
-
     public static String getRawString(String name, JSONObject json) {
         try {
             if (json.isNull(name)) {
@@ -88,17 +76,6 @@ public final class z_F4JInternalParseUtil {
         } catch (JSONException jsone) {
             return null;
         }
-    }
-
-    public static String getURLDecodedString(String name, JSONObject json) {
-        String returnValue = getRawString(name, json);
-        if (returnValue != null) {
-            try {
-                returnValue = URLDecoder.decode(returnValue, "UTF-8");
-            } catch (UnsupportedEncodingException ignore) {
-            }
-        }
-        return returnValue;
     }
 
     public static int getPrimitiveInt(String name, JSONObject json) {
@@ -140,7 +117,11 @@ public final class z_F4JInternalParseUtil {
         if (null == str || "".equals(str) || "null".equals(str)) {
             return -1;
         } else {
-            return Long.valueOf(str);
+            try {
+                return Long.valueOf(str);
+            } catch (NumberFormatException nfe) {
+                return -1;
+            }
         }
     }
 
@@ -150,23 +131,28 @@ public final class z_F4JInternalParseUtil {
     public static Long getLong(String str) {
         if (null == str || "".equals(str) || "null".equals(str)) {
             return null;
+        } else {
+            try {
+                return Long.valueOf(str);
+            } catch (NumberFormatException nfe) {
+                return null;
+            }
         }
-        return Long.valueOf(str);
     }
 
-    public static double getDouble(String name, JSONObject json) {
+    public static Double getDouble(String name, JSONObject json) {
         String str2 = getRawString(name, json);
         if (null == str2 || "".equals(str2) || "null".equals(str2)) {
-            return -1;
+            return null;
         } else {
             return Double.valueOf(str2);
         }
     }
 
-    public static boolean getBoolean(String name, JSONObject json) {
+    public static Boolean getBoolean(String name, JSONObject json) {
         String str = getRawString(name, json);
         if (null == str || "null".equals(str)) {
-            return false;
+            return null;
         }
         return Boolean.valueOf(str);
     }
@@ -181,18 +167,30 @@ public final class z_F4JInternalParseUtil {
         if (dateString == null) {
             return null;
         }
-        return parseISO8601Date(dateString);
+        if (json.isNull("timezone")) {
+            return parseISO8601Date(dateString);
+        } else {
+            TimeZone timezone = getTimeZone("timezone", json);
+            return parseISO8601Date(dateString, timezone);
+        }
     }
 
     private static Date parseISO8601Date(String dateString) {
+        return parseISO8601Date(dateString, TimeZone.getTimeZone("UTC"));
+    }
+    private static Date parseISO8601Date(String dateString, TimeZone timezone) {
         try {
             return new SimpleDateFormat(ISO8601_DATE_FORMAT).parse(dateString);
         } catch (ParseException e1) {
             try {
-                return new SimpleDateFormat(ISO8601_DATE_FORMAT_WITHOUT_TZ).parse(dateString);
+                SimpleDateFormat sdf = new SimpleDateFormat(ISO8601_DATE_FORMAT_WITHOUT_TZ);
+                sdf.setTimeZone(timezone);
+                return sdf.parse(dateString);
             } catch (ParseException e2) {
                 try {
-                    return new SimpleDateFormat(ISO8601_DATE_FORMAT_WITHOUT_TIME).parse(dateString);
+                    SimpleDateFormat sdf = new SimpleDateFormat(ISO8601_DATE_FORMAT_WITHOUT_TIME);
+                    sdf.setTimeZone(timezone);
+                    return sdf.parse(dateString);
                 } catch (ParseException e3) {
                     return null;
                 }
@@ -211,9 +209,27 @@ public final class z_F4JInternalParseUtil {
         }
     }
     
-    public static Map<String, String> getStringMap(String name, JSONObject json) throws FacebookException {
+    public static URI getURI(String name, JSONObject json) {
         if (json.isNull(name)) {
             return null;
+        }
+        try {
+            return new URI(getRawString(name, json));
+        } catch (URISyntaxException e) {
+            return null;
+        }
+    }
+
+    public static TimeZone getTimeZone(String name, JSONObject json) {
+        if (json.isNull(name)) {
+            return null;
+        }
+        return TimeZone.getTimeZone(getRawString(name, json));
+    }
+
+    public static Map<String, String> getStringMap(String name, JSONObject json) throws FacebookException {
+        if (json.isNull(name)) {
+            return Collections.emptyMap();
         }
         try {
             JSONObject jsonObject = json.getJSONObject(name);
@@ -230,9 +246,28 @@ public final class z_F4JInternalParseUtil {
         }
     }
 
+    public static Map<String, Long> getLongMap(String name, JSONObject json) throws FacebookException {
+        if (json.isNull(name)) {
+            return Collections.emptyMap();
+        }
+        try {
+            JSONObject jsonObject = json.getJSONObject(name);
+            HashMap<String, Long> result = new HashMap<String, Long>();
+            @SuppressWarnings("unchecked")
+            Iterator<String> keys = jsonObject.keys();
+            while (keys.hasNext()) {
+                String key = (String) keys.next();
+                result.put(key, jsonObject.getLong(key));
+            }
+            return result;
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone.getMessage(), jsone);
+        }
+    }
+
     public static Map<String, Boolean> getBooleanMap(String name, JSONObject json) throws FacebookException {
         if (json.isNull(name)) {
-            return null;
+            return Collections.emptyMap();
         }
         try {
             JSONObject jsonObject = json.getJSONObject(name);
@@ -251,11 +286,11 @@ public final class z_F4JInternalParseUtil {
     
     public static List<String> getStringList(String name, JSONObject json) throws FacebookException {
         if (json.isNull(name)) {
-            return null;
+            return Collections.emptyList();
         }
         try {
             JSONArray jsonArray = json.getJSONArray(name);
-            int size = jsonArray.length();
+            final int size = jsonArray.length();
             List<String> result = new ArrayList<String>(size);
             for (int i = 0; i < size; i++) {
                 result.add(jsonArray.getString(i));

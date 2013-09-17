@@ -1,0 +1,15 @@
+{
+    "data": [
+        {
+            "id": "100000000000001",
+            "name": "Family Name1",
+            "relationship": "brother"
+        },
+        {
+            "id": "100000000000002",
+            "name": "Family Name2",
+            "relationship": "brother"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/family?access_token=access_token&limit=5000&offset=5000&__after_id=111111111"}
+}

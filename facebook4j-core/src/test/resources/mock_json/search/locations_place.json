@@ -1,0 +1,32 @@
+{
+    "data": [{
+        "application": {
+            "id": "2305272732",
+            "name": "Photos"
+        },
+        "created_time": "2012-02-26T08:09:56+0000",
+        "from": {
+            "id": "100000000000001",
+            "name": "From Name"
+        },
+        "id": "306562006072081",
+        "place": {
+            "id": "166793820034304",
+            "location": {
+                "city": "Menlo Park",
+                "country": "United States",
+                "latitude": 37.484254836239,
+                "longitude": -122.14853582158,
+                "state": "CA",
+                "street": "1 Hacker Way",
+                "zip": "94025"
+            },
+            "name": "Facebook HQ"
+        },
+        "type": "photo"
+    }],
+    "paging": {
+        "next": "https://graph.facebook.com/search?type=location&place=166793820034304&access_token=access_token&limit=25&until=1330243796&__paging_token=306562006072081",
+        "previous": "https://graph.facebook.com/search?type=location&place=166793820034304&access_token=access_token&limit=25&since=1330243796&__paging_token=306562006072081&__previous=1"
+    }
+}

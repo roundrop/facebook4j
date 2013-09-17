@@ -16,13 +16,6 @@
 
 package facebook4j.auth;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
-import org.junit.Test;
-
 import facebook4j.Facebook;
 import facebook4j.FacebookFactory;
 import facebook4j.FacebookTestBase;
@@ -31,31 +24,39 @@ import facebook4j.conf.ConfigurationBuilder;
 import facebook4j.internal.http.HttpClientWrapper;
 import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.http.HttpResponse;
+import facebook4j.junit.category.RealAPITests;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+
+import java.util.ArrayList;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 /**
  * @author Yusuke Yamamoto - yusuke at mac.com
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public class OAuthTest extends FacebookTestBase {
-    
     @Test
     public void deterministic() throws Exception {
         ArrayList list1 = new ArrayList();
         ArrayList list2 = new ArrayList();
         assertThat(list1, is(list2));
         Facebook Facebook1 = new FacebookFactory().getInstance();
-        Facebook1.setOAuthAppId(appId, appSecret);
+        Facebook1.setOAuthAppId("appId", "appSecret");
         Facebook Facebook2 = new FacebookFactory().getInstance();
-        Facebook2.setOAuthAppId(appId, appSecret);
+        Facebook2.setOAuthAppId("appId", "appSecret");
         assertThat(Facebook1, is(Facebook2));
     }
 
+    @Category(RealAPITests.class)
     @Test
     public void OAuth() throws Exception {
         ConfigurationBuilder build = new ConfigurationBuilder();
-        String oAuthAccessToken = p.getProperty("real.oauth.accessToken");
-        String oAuthAppId = p.getProperty("real.oauth.appId");
-        String oAuthAppSecret = p.getProperty("real.oauth.appSecret");
+        String oAuthAccessToken = p.getProperty("oauth.accessToken");
+        String oAuthAppId = p.getProperty("oauth.appId");
+        String oAuthAppSecret = p.getProperty("oauth.appSecret");
         build.setOAuthAccessToken(oAuthAccessToken);
         build.setOAuthAppId(oAuthAppId);
         build.setOAuthAppSecret(oAuthAppSecret);
@@ -67,25 +68,31 @@ public class OAuthTest extends FacebookTestBase {
     @Test(expected = IllegalStateException.class)
     public void illegalStatus() throws Exception {
         new FacebookFactory().getInstance().getOAuthAccessToken();
-        fail("should throw IllegalStateException since AppID hasn't been acquired.");
     }
 
+    @Category(RealAPITests.class)
     @Test
-    public void accessToken() throws Exception {
+    public void accessToken_res() throws Exception {
+        String appId = p.getProperty("oauth.appId");
+        String appSecret = p.getProperty("oauth.appSecret");
+
         ConfigurationBuilder build = new ConfigurationBuilder();
         build.setOAuthAppId(appId);
         build.setOAuthAppSecret(appSecret);
         Configuration configuration = build.build();
         HttpClientWrapper http = new HttpClientWrapper(configuration);
         HttpResponse res = http.get(configuration.getOAuthAccessTokenURL() +
-                                    "?client_id=" + appId +
-                                    "&client_secret=" + appSecret +
-                                    "&grant_type=client_credentials");
+                "?client_id=" + appId +
+                "&client_secret=" + appSecret +
+                "&grant_type=client_credentials");
         AccessToken at = new AccessToken(res);
         assertThat(at.getToken(), is(notNullValue()));
         assertThat(at.getExpires(), is(nullValue()));
+    }
 
-        at = new AccessToken("6377362-kW0YV1ymaqEUCSHP29ux169mDeA4kQfhEuqkdvHk", 123456789012345L);
+    @Test
+    public void accessToken_string() throws Exception {
+        AccessToken at = new AccessToken("6377362-kW0YV1ymaqEUCSHP29ux169mDeA4kQfhEuqkdvHk", 123456789012345L);
         assertThat(at.getToken(), is("6377362-kW0YV1ymaqEUCSHP29ux169mDeA4kQfhEuqkdvHk"));
         assertThat(at.getExpires(), is(123456789012345L));
 
@@ -115,5 +122,4 @@ public class OAuthTest extends FacebookTestBase {
         String unreserved = "abcdefghijklmnopqrstuvwzyxABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~";
         assertThat(HttpParameter.encode(unreserved), is(unreserved));
     }
-
 }

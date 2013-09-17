@@ -16,80 +16,84 @@
 
 package facebook4j.api;
 
-import java.net.URL;
-
 import facebook4j.Event;
 import facebook4j.EventUpdate;
 import facebook4j.FacebookException;
 import facebook4j.Media;
 import facebook4j.Photo;
 import facebook4j.PictureSize;
-import facebook4j.Post;
-import facebook4j.PostUpdate;
 import facebook4j.RSVPStatus;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
 import facebook4j.Video;
+
+import java.net.URL;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public interface EventMethods {
     /**
-     * Returns the events the current user is attending.
+     * Returns the events the current user/page is attending.
      * @return events
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - events
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Connections - events
      */
     ResponseList<Event> getEvents() throws FacebookException;
 
     /**
-     * Returns the events the current user is attending.
+     * Returns the events the current user/page is attending.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return events
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - events
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Connections - events
      */
     ResponseList<Event> getEvents(Reading reading) throws FacebookException;
 
     /**
-     * Returns the events a user is attending.
-     * @param userId the ID of a user
+     * Returns the events a user/event/page is attending.
+     * @param id the ID of a user
      * @return events
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - events
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Connections - events
      */
-    ResponseList<Event> getEvents(String userId) throws FacebookException;
+    ResponseList<Event> getEvents(String id) throws FacebookException;
 
     /**
-     * Returns the events a user is attending.
-     * @param userId the ID of a user
+     * Returns the events a user/event/page is attending.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return events
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - events
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/">Page - Facebook Developers</a> - Connections - events
      */
-    ResponseList<Event> getEvents(String userId, Reading reading) throws FacebookException;
+    ResponseList<Event> getEvents(String id, Reading reading) throws FacebookException;
     
 
     /**
-     * Creates the event for the current user.
-     * @param eventUpdate a event to be created
+     * Creates the event for the current user/page.
      * @return The new event ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#events">User#events - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#events">Page#events - Facebook Developers</a> - Connections - events
+     * @param eventUpdate
      */
     String createEvent(EventUpdate eventUpdate) throws FacebookException;
 
     /**
-     * Creates the event for a user.
-     * @param userId the ID of a user
+     * Creates the event for a user/event/page.
+     * @param id the ID of a user/page
      * @param eventUpdate a event to be created
      * @return The new event ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#events">User#events - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#events">Page#events - Facebook Developers</a> - Connections - events
      */
-    String createEvent(String userId, EventUpdate eventUpdate) throws FacebookException;
+    String createEvent(String id, EventUpdate eventUpdate) throws FacebookException;
     
     /**
      * Updates the event.
@@ -98,6 +102,7 @@ public interface EventMethods {
      * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#events">User#events - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#events">Page#events - Facebook Developers</a> - Connections - events
      */
     boolean editEvent(String eventId, EventUpdate eventUpdate) throws FacebookException;
     
@@ -107,6 +112,7 @@ public interface EventMethods {
      * @return true if delete is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#events">User#events - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#events">Page#events - Facebook Developers</a> - Connections - events
      */
     boolean deleteEvent(String eventId) throws FacebookException;
 
@@ -130,37 +136,6 @@ public interface EventMethods {
      */
     Event getEvent(String eventId, Reading reading) throws FacebookException;
 
-
-    /**
-     * Returns the event's wall.
-     * @param eventId the ID of a event
-     * @return event's feed
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/event/#feed">Event#feed - Facebook Developers</a>
-     */
-    ResponseList<Post> getEventFeed(String eventId) throws FacebookException;
-
-    /**
-     * Returns the event's wall.
-     * @param eventId the ID of a event
-     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
-     * @return event's feed
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/event/#feed">Event#feed - Facebook Developers</a>
-     */
-    ResponseList<Post> getEventFeed(String eventId, Reading reading) throws FacebookException;
-
-
-    /**
-     * Creates the post on a event's wall.
-     * @param eventId the ID of a event
-     * @param postUpdate the post to be created
-     * @return The new post ID
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/event/#posts">Event#posts - Facebook Developers</a>
-     */
-    String postEventFeed(String eventId, PostUpdate postUpdate) throws FacebookException;
-    
 
     /**
      * Posts the link on a event's wall.
@@ -237,7 +212,7 @@ public interface EventMethods {
      * Invites a user to the event.
      * @param eventId the ID of a event
      * @param userId the ID of the user
-     * @return the user has been invited to this event
+     * @return true if the invite is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/event/#invited">Event#invited - Facebook Developers</a>
      */

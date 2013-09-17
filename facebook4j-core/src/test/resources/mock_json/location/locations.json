@@ -1,0 +1,86 @@
+{
+    "data": [
+        {
+            "application": {
+                "id": "6628568379",
+                "name": "Facebook for iPhone",
+                "namespace": "fbiphone"
+            },
+            "created_time": "2013-08-04T00:17:53+0000",
+            "from": {
+                "id": "1234567890123456",
+                "name": "From Name"
+            },
+            "id": "575740359154920",
+            "place": {
+                "id": "262956980385539",
+                "location": {
+                    "latitude": 34.75762856,
+                    "longitude": 131.88856357,
+                    "street": "",
+                    "zip": ""
+                },
+                "name": "Araisokan"
+            },
+            "type": "photo"
+        },
+        {
+            "application": {
+                "id": "6628568379",
+                "name": "Facebook for iPhone",
+                "namespace": "fbiphone"
+            },
+            "created_time": "2013-07-31T08:37:26+0000",
+            "from": {
+                "id": "1234567890123456",
+                "name": "From Name"
+            },
+            "id": "574034109325545",
+            "place": {
+                "id": "167166979985363",
+                "location": {
+                    "city": "Chuo-ku",
+                    "country": "Japan",
+                    "latitude": 35.65692512948,
+                    "longitude": 139.78167227116,
+                    "state": "Tokyo",
+                    "street": "Harumi1-8-16",
+                    "zip": "104-0053"
+                },
+                "name": "Harumi Island Triton Square"
+            },
+            "type": "checkin"
+        },
+        {
+            "application": {
+                "id": "6628568379",
+                "name": "Facebook for iPhone",
+                "namespace": "fbiphone"
+            },
+            "created_time": "2013-07-14T02:58:34+0000",
+            "from": {
+                "id": "1234567890123456",
+                "name": "From Name"
+            },
+            "id": "565425746853048",
+            "place": {
+                "id": "172643522795721",
+                "location": {
+                    "city": "Hakodate-shi",
+                    "country": "Japan",
+                    "latitude": 41.795708973186,
+                    "longitude": 140.75461653069,
+                    "state": "Hokkaido",
+                    "street": "Goryokaku-cho44",
+                    "zip": ""
+                },
+                "name": "Goryokaku Park"
+            },
+            "type": "status"
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/1234567890123456/locations?access_token=access_token&limit=25&until=1313131313&__paging_token=4848484848484848",
+        "previous": "https://graph.facebook.com/1234567890123456/locations?access_token=access_token&limit=25&since=131413141314&__paging_token=5757575757575757&__previous=1"
+    }
+}

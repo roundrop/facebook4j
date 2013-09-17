@@ -26,6 +26,7 @@ public interface Link extends FacebookResponse {
     IdNameEntity getFrom();
     String getLink();
     String getName();
+    PagableList<Like> getLikes();
     PagableList<Comment> getComments();
     String getDescription();
     String getIcon();
@@ -33,4 +34,5 @@ public interface Link extends FacebookResponse {
     String getMessage();
     Date getCreatedTime();
     String getType();
+    Privacy getPrivacy();
 }

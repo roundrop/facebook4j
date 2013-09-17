@@ -1,0 +1,91 @@
+{
+    "data": [
+        {
+            "application": {
+                "id": "6628568379",
+                "name": "Facebook for iPhone",
+                "namespace": "fbiphone"
+            },
+            "created_time": "2012-04-28T05:28:36+0000",
+            "from": {
+                "id": "1111",
+                "name": "From Name1"
+            },
+            "id": "2222",
+            "likes": {
+                "data": [
+                    {
+                        "id": "3331",
+                        "name": "Like Name1"
+                    },
+                    {
+                        "id": "3332",
+                        "name": "Like Name2"
+                    },
+                    {
+                        "id": "3333",
+                        "name": "Like Name3"
+                    }
+                ],
+                "paging": {"cursors": {
+                    "after": "MTAwMDAzMTk1MjIxODEx",
+                    "before": "MTAwMDAzMjMzMTcwNDA3"
+                }}
+            },
+            "message": "Message",
+            "place": {
+                "id": "149655571740038",
+                "location": {
+                    "city": "Sumida-ku",
+                    "country": "Japan",
+                    "latitude": 35.710235962898,
+                    "longitude": 139.81112668973,
+                    "state": "Tokyo",
+                    "street": "押上1-1-13",
+                    "zip": "131-0045"
+                },
+                "name": "東京スカイツリー (Tokyo Sky Tree)"
+            }
+        },
+        {
+            "application": {
+                "id": "6628568379",
+                "name": "Facebook for iPhone",
+                "namespace": "fbiphone"
+            },
+            "created_time": "2011-11-23T04:06:55+0000",
+            "from": {
+                "id": "4444",
+                "name": "From Name2"
+            },
+            "id": "5555",
+            "likes": {
+                "data": [{
+                    "id": "6661",
+                    "name": "Like Name4"
+                }],
+                "paging": {"cursors": {
+                    "after": "MTAwMDAxMTE1MzE1MTAx",
+                    "before": "MTAwMDAxMTE1MzE1MTAx"
+                }}
+            },
+            "place": {
+                "id": "149655571740038",
+                "location": {
+                    "city": "Sumida-ku",
+                    "country": "Japan",
+                    "latitude": 35.710235962898,
+                    "longitude": 139.81112668973,
+                    "state": "Tokyo",
+                    "street": "押上1-1-13",
+                    "zip": "131-0045"
+                },
+                "name": "東京スカイツリー (Tokyo Sky Tree)"
+            }
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/149655571740038/checkins?access_token=access_token&limit=25&until=1111111111&__paging_token=179367212156708",
+        "previous": "https://graph.facebook.com/149655571740038/checkins?access_token=access_token&limit=25&since=2222222222&__paging_token=395794067108539&__previous=1"
+    }
+}

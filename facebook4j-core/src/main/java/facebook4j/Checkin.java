@@ -28,8 +28,9 @@ public interface Checkin extends FacebookResponse {
     Place getPlace();
     Application getApplication();
     Date getCreatedTime();
-    PagableList<IdNameEntity> getLikes();
+    PagableList<Like> getLikes();
     String getMessage();
     PagableList<Comment> getComments();
     String getType();
+    GeoLocation getCoordinates();
 }

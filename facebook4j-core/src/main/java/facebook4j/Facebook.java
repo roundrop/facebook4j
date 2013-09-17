@@ -36,6 +36,7 @@ import facebook4j.api.LocationMethods;
 import facebook4j.api.MessageMethods;
 import facebook4j.api.NoteMethods;
 import facebook4j.api.NotificationMethods;
+import facebook4j.api.PageMethods;
 import facebook4j.api.PermissionMethods;
 import facebook4j.api.PhotoMethods;
 import facebook4j.api.PokeMethods;
@@ -73,6 +74,7 @@ public interface Facebook extends java.io.Serializable,
     MessageMethods,
     NoteMethods,
     NotificationMethods,
+    PageMethods,
     PermissionMethods,
     PhotoMethods,
     PokeMethods,

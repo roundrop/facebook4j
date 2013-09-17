@@ -27,4 +27,6 @@ public interface Message extends FacebookResponse {
     Date getCreatedTime();
     Date getUpdatedTime();
     PagableList<Comment> getComments();
+    Integer getUnread();
+    Integer getUnseen();
 }

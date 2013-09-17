@@ -1,0 +1,10 @@
+{"data": [
+    {
+        "fql_result_set": [{"uid": 1234567890123456}],
+        "name": "my_id"
+    },
+    {
+        "fql_result_set": [{"name": "foo bar"}],
+        "name": "my_name"
+    }
+]}

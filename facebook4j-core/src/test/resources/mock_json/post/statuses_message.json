@@ -1,0 +1,23 @@
+{
+    "data": [
+        {
+            "id": "500000000000001",
+            "message": "Sunrise",
+            "updated_time": "2013-08-06T10:36:10+0000"
+        },
+        {
+            "id": "500000000000002",
+            "message": "3G",
+            "updated_time": "2013-08-02T03:39:56+0000"
+        },
+        {
+            "id": "500000000000003",
+            "message": "New!",
+            "updated_time": "2013-07-14T02:58:34+0000"
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/1234567890123456/statuses?fields=message&access_token=access_token&limit=25&until=1322234199&__paging_token=2444444444444",
+        "previous": "https://graph.facebook.com/1234567890123456/statuses?fields=message&access_token=access_token&limit=25&since=1375785370&__paging_token=50000000000009&__previous=1"
+    }
+}

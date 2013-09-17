@@ -1,0 +1,7 @@
+{
+    "data": [{
+        "id": "100000002",
+        "name": "Friend Name2"
+    }],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/friends?uid=100000002&access_token=access_token&limit=5000&offset=5000&__after_id=100000003"}
+}

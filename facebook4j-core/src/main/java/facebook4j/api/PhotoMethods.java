@@ -16,58 +16,65 @@
 
 package facebook4j.api;
 
-import java.net.URL;
-import java.util.List;
-
 import facebook4j.Comment;
 import facebook4j.FacebookException;
 import facebook4j.Like;
 import facebook4j.Media;
 import facebook4j.Photo;
+import facebook4j.PhotoUpdate;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
 import facebook4j.Tag;
 import facebook4j.TagUpdate;
+
+import java.net.URL;
+import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public interface PhotoMethods {
     /**
-     * Returns the photos the current user is tagged in.
+     * Returns the photos the current user/page is tagged in.
      * @return photos
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#photos">User#photos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#photos">Page#photos - Facebook Developers</a>
      */
     ResponseList<Photo> getPhotos() throws FacebookException;
 
     /**
-     * Returns the photos the current user is tagged in.
+     * Returns the photos the current user/page is tagged in.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return photos
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#photos">User#photos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#photos">Page#photos - Facebook Developers</a>
      */
     ResponseList<Photo> getPhotos(Reading reading) throws FacebookException;
 
     /**
-     * Returns the photos a user is tagged in.
-     * @param userId the ID of a user
+     * Returns the photos a user is tagged in / uploaded to a page / published to an event.
+     * @param id the ID of a user/page/event
      * @return photos
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#photos">User#photos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#photos">Page#photos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/event/#photos">Event#photos - Facebook Developers</a>
      */
-    ResponseList<Photo> getPhotos(String userId) throws FacebookException;
+    ResponseList<Photo> getPhotos(String id) throws FacebookException;
 
     /**
-     * Returns the photos a user is tagged in.
-     * @param userId the ID of a user
+     * Returns the photos a user is tagged in / uploaded to a page / published to an event.
+     * @param id the ID of a user/page/event
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return photos
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#photos">User#photos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#photos">Page#photos - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/event/#photos">Event#photos - Facebook Developers</a>
      */
-    ResponseList<Photo> getPhotos(String userId, Reading reading) throws FacebookException;
+    ResponseList<Photo> getPhotos(String id, Reading reading) throws FacebookException;
 
 
     /**
@@ -81,15 +88,12 @@ public interface PhotoMethods {
 
     /**
      * Posts a photo to the current user's wall.
-     * @param source photo content
-     * @param message photo description
-     * @param Facebook ID of the place associated with the Photo
-     * @param noStory If set to true, optionally suppresses the feed story that is automatically generated on a user’s profile when they upload a photo using your application.
+     * @param photoUpdate the photo to be created
      * @return The new photo ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#photos">User#photos - Facebook Developers</a>
      */
-    String postPhoto(Media source, String message, String place, boolean noStory) throws FacebookException;
+    String postPhoto(PhotoUpdate photoUpdate) throws FacebookException;
 
     /**
      * Posts the photo to a user's wall.
@@ -104,15 +108,12 @@ public interface PhotoMethods {
     /**
      * Posts the photo to a user's wall.
      * @param userId the ID of a user
-     * @param source photo content
-     * @param message photo description
-     * @param place Facebook ID of the place associated with the Photo
-     * @param noStory If set to true, optionally suppresses the feed story that is automatically generated on a user’s profile when they upload a photo using your application.
+     * @param photoUpdate the photo to be created
      * @return The new photo ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#photos">User#photos - Facebook Developers</a>
      */
-    String postPhoto(String userId, Media source, String message, String place, boolean noStory) throws FacebookException;
+    String postPhoto(String userId, PhotoUpdate photoUpdate) throws FacebookException;
 
 
     /**
@@ -274,21 +275,22 @@ public interface PhotoMethods {
     /**
      * Updates the position of the tag on a photo.
      * @param photoId the ID of a photo
-     * @param toUserId the ID of the user to tag
-     * @return true if add is successful
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#tags">Photo#tags - Facebook Developers</a> - Connections - tags
-     */
-    boolean updateTagOnPhoto(String photoId, String toUserId) throws FacebookException;
-    
-    /**
-     * Updates the position of the tag on a photo.
-     * @param photoId the ID of a photo
      * @param tagUpdate tag information, supports 'to', 'x', 'y'
-     * @return true if add is successful
+     * @return true if update is successful
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#tags">Photo#tags - Facebook Developers</a> - Connections - tags
      */
     boolean updateTagOnPhoto(String photoId, TagUpdate tagUpdate) throws FacebookException;
+
+    /**
+     * Deletes a tag for a particular user in the photo.
+     * @param photoId the ID of a photo
+     * @param toUserId the ID of the user to tag
+     * @return true if delete is successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#tags">Photo#tags - Facebook Developers</a> - Connections - tags
+     * @since Facebook4J 2.0.0
+     */
+    boolean deleteTagOnPhoto(String photoId, String toUserId) throws FacebookException;
 
 }

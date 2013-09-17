@@ -16,17 +16,7 @@
 
 package facebook4j.api;
 
-import facebook4j.Checkin;
-import facebook4j.Event;
-import facebook4j.FacebookException;
-import facebook4j.GeoLocation;
-import facebook4j.Group;
-import facebook4j.Location;
-import facebook4j.Place;
-import facebook4j.Post;
-import facebook4j.Reading;
-import facebook4j.ResponseList;
-import facebook4j.User;
+import facebook4j.*;
 import facebook4j.internal.org.json.JSONObject;
 
 /**
@@ -212,6 +202,27 @@ public interface SearchMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/#searching">Graph API#searching - Facebook Developers</a>
      */
     ResponseList<Location> searchLocations(String placeId, Reading reading) throws FacebookException;
+
+    /**
+     * Searches pages.
+     * @param query the search condition
+     * @return pages
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/search/">Search - Facebook Developers</a>
+     * @since Facebook4J 2.0.0
+     */
+    ResponseList<Page> searchPages(String query) throws FacebookException;
+
+    /**
+     * Searches pages.
+     * @param query the search condition
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return pages
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/search/">Search - Facebook Developers</a>
+     * @since Facebook4J 2.0.0
+     */
+    ResponseList<Page> searchPages(String query, Reading reading) throws FacebookException;
 
     /**
      * Searches every type all public objects.

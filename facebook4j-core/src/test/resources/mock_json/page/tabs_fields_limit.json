@@ -1,0 +1,15 @@
+{
+    "data": [
+        {
+            "id": "137246726435626/tabs/photos",
+            "name": "Photos",
+            "position": 1
+        },
+        {
+            "id": "137246726435626/tabs/likes",
+            "name": "Likes",
+            "position": 2
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/137246726435626/tabs?fields=name,position&limit=2&access_token=CAACEdEose0cBAKZCtQth1tGNaKednqk8xBnThyjvMuAVnTEvop7uTZBDAHDt1oOZAM0GiZBHeaY8ZAMFT3ZBcRZB4p0HHyTJinhUKJ6U8Y1hhZAFC1F2hbylZCZAdR86q2oSsmIamdfPnrJkzoKJFkDIASrq4bftZCXdqdNIUMYiNuIZC7aySAg7y2ox&offset=2&__after_id=137246726435626%2Ftabs%2Flikes"}
+}

@@ -23,10 +23,10 @@ import java.util.Date;
  */
 public interface Comment extends FacebookResponse {
     String getId();
-    IdNameEntity getFrom();
+    Category getFrom();
     String getMessage();
     Boolean canRemove();
     Date getCreatedTime();
-    int getLikeCount();
-    Boolean isUserLinks();
+    Integer getLikeCount();
+    Boolean isUserLikes();
 }

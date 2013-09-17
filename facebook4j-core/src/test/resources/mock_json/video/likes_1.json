@@ -1,0 +1,13 @@
+{
+    "data": [{
+        "id": "100000000000001",
+        "name": "Like Name1"
+    }],
+    "paging": {
+        "cursors": {
+            "after": "MTAwMDAyMjY0NDkxNjQ1",
+            "before": "MTAwMDAyMjY0NDkxNjQ1"
+        },
+        "next": "https://graph.facebook.com/600000000000001/likes?limit=1&access_token=access_token&after=MTAwMDAyMjY0NDkxNjQ1"
+    }
+}

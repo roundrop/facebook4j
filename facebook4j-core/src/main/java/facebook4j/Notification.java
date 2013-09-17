@@ -33,4 +33,13 @@ public interface Notification extends FacebookResponse {
     URL getLink();
     Application getApplication();
     Boolean unread();
+    Notification.TargetObject getTargetObject();
+
+    /**
+     * @since Facebook4J 2.0.0
+     */
+    interface TargetObject {
+        String getId();
+        String getType();
+    }
 }

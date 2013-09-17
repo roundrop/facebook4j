@@ -34,7 +34,7 @@ import static facebook4j.internal.http.RequestMethod.PUT;
  *
  * @author Yusuke Yamamoto - yusuke at mac.com
  */
-public final class HttpClientWrapper implements java.io.Serializable {
+public class HttpClientWrapper implements java.io.Serializable {
     private final HttpClientWrapperConfiguration wrapperConf;
     private HttpClient http;
 
@@ -59,7 +59,7 @@ public final class HttpClientWrapper implements java.io.Serializable {
         http.shutdown();
     }
 
-    private HttpResponse request(HttpRequest req) throws FacebookException {
+    protected HttpResponse request(HttpRequest req) throws FacebookException {
         HttpResponse res;
         try {
             res = http.request(req);

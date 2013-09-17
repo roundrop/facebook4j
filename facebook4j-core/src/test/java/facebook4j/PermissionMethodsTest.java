@@ -16,40 +16,61 @@
 
 package facebook4j;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import facebook4j.internal.http.RequestMethod;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static facebook4j.junit.URLMatchers.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-public class PermissionMethodsTest extends FacebookTestBase {
+@RunWith(Enclosed.class)
+public class PermissionMethodsTest {
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+    public static class getPermissions extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/permission/all.json");
+            List<Permission> actuals = facebook.getPermissions();
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/permissions")));
+
+            assertThat(actuals.size(), is(80));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/permission/all.json");
+            List<Permission> actuals = facebook.getPermissions("1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/permissions")));
+
+            assertThat(actuals.size(), is(80));
+        }
     }
 
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
+    public static class revokePermission extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.revokePermission("email");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/permissions/email")));
 
-    @Before
-    public void setUp() throws Exception {
-    }
+            assertThat(actual, is(true));
+        }
 
-    @After
-    public void tearDown() throws Exception {
-    }
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.revokePermission("1234567890123456", "email");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/permissions/email")));
 
-    @Test
-    public void test() throws Exception {
-        List<Permission> permissions = facebook1.getPermissions();
-        for (Permission permission : permissions) {
-            assertThat(permission.isGranted(), is(true));
+            assertThat(actual, is(true));
         }
     }
 

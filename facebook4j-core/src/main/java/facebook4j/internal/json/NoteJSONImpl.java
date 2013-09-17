@@ -16,22 +16,17 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.net.URL;
-import java.util.Date;
-
-import facebook4j.Comment;
-import facebook4j.FacebookException;
-import facebook4j.IdNameEntity;
-import facebook4j.Note;
-import facebook4j.PagableList;
-import facebook4j.ResponseList;
+import facebook4j.*;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.net.URL;
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -40,7 +35,7 @@ import facebook4j.internal.org.json.JSONObject;
     private static final long serialVersionUID = -4829935468293079130L;
 
     private String id;
-    private IdNameEntity from;
+    private Category from;
     private String subject;
     private String message;
     private PagableList<Comment> comments;
@@ -68,19 +63,25 @@ import facebook4j.internal.org.json.JSONObject;
             id = getRawString("id", json);
             if (!json.isNull("from")) {
                 JSONObject fromJSONObject = json.getJSONObject("from");
-                from = new IdNameEntityJSONImpl(fromJSONObject);
+                from = new CategoryJSONImpl(fromJSONObject);
             }
             subject = getRawString("subject", json);
             message = getRawString("message", json);
             if (!json.isNull("comments")) {
                 JSONObject commentsJSONObject = json.getJSONObject("comments");
-                JSONArray list = commentsJSONObject.getJSONArray("data");
-                int size = list.length();
-                comments = new PagableListImpl<Comment>(size, commentsJSONObject);
-                for (int i = 0; i < size; i++) {
-                    CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
-                    comments.add(comment);
+                if (!commentsJSONObject.isNull("data")) {
+                    JSONArray list = commentsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    comments = new PagableListImpl<Comment>(size, commentsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
+                        comments.add(comment);
+                    }
+                } else {
+                    comments = new PagableListImpl<Comment>(1, commentsJSONObject);
                 }
+            } else {
+                comments = new PagableListImpl<Comment>(0);
             }
             createdTime = getISO8601Datetime("created_time", json);
             updatedTime = getISO8601Datetime("updated_time", json);
@@ -93,7 +94,7 @@ import facebook4j.internal.org.json.JSONObject;
     public String getId() {
         return id;
     }
-    public IdNameEntity getFrom() {
+    public Category getFrom() {
         return from;
     }
     public String getSubject() {
@@ -123,7 +124,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Note> notes = new ResponseListImpl<Note>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject noteJSONObject = list.getJSONObject(i);

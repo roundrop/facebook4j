@@ -16,108 +16,253 @@
 
 package facebook4j;
 
-import facebook4j.FacebookResponse.Metadata;
-import facebook4j.FacebookResponse.Metadata.Connections;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
- * @see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
  */
-public class ReadingTest extends FacebookTestBase {
+@RunWith(Enclosed.class)
+public class ReadingTest {
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
-    @Test
-    public void fields() throws Exception {
-        User user = facebook1.getUser(id2.getId(), new Reading().fields("id", "name", "picture"));
-        assertThat(user.getId(), is(notNullValue()));
-        assertThat(user.getName(), is(notNullValue()));
-        assertThat(user.getPicture(), is(notNullValue()));
-        assertThat(user.getGender(), is(nullValue()));
-    }
-    
-    @Test
-    public void withLocation() throws Exception {
-        ResponseList<Post> posts = facebook1.getHome(new Reading().withLocation());
-        for (Post post : posts) {
-            assertThat(post.getPlace(), is(notNullValue()));
+    public static class Fields {
+        @Test(expected = NullPointerException.class)
+        public void nul() throws Exception {
+            new Reading().fields(null);
         }
-    }
-    
-    @Test
-    public void limit() throws Exception {
-        ResponseList<Like> likes = facebook1.getUserLikes("216311481960", new Reading().limit(3));
-        assertThat(likes.size(), is(3));
-    }
-    
-    @Test
-    public void offset() throws Exception {
-        ResponseList<Like> likes = facebook1.getUserLikes("216311481960", new Reading().limit(3).offset(1));
-        assertThat(likes.size(), is(3));
-    }
 
-    @Test
-    public void until() throws Exception {
-        ResponseList<Post> posts = facebook1.searchPosts("orange", new Reading().until("yesterday"));
-        assertThat(posts.size() > 0, is(true));
-    }
-    
-    @Test
-    public void metadata() throws Exception {
-        Event event = facebook1.getEvent("331218348435");
-        assertThat(event.getMetadata(), is(nullValue()));
+        @Test
+        public void single() throws Exception {
+            Reading reading = new Reading().fields("email");
+            assertThat(reading.getQuery(), is("fields=email"));
 
-        event = facebook1.getEvent("331218348435", new Reading().metadata());
-        Metadata metadata = event.getMetadata();
-        assertThat(metadata, is(notNullValue()));
-        Connections connections = metadata.getConnections();
-        List<String> connectionNames = connections.getConnectionNames();
-        assertThat(connectionNames.size(), is(8));
-        for (String connectionName : connectionNames) {
-            String url = connections.getURL(connectionName).toString();
-            assertThat(url.substring(url.lastIndexOf("/")+1, url.indexOf("?")), is(connectionName));
+            String[] array = {"email"};
+            reading = new Reading().fields(array);
+            assertThat(reading.getQuery(), is("fields=email"));
         }
-    }
-    
-    @Test
-    public void filter() throws Exception {
-        ResponseList<Post> posts = facebookBestFriend1.getHome(new Reading().filter("app_2305272732"));    //to retrive your News Feed filtered by photos
-        for (Post post : posts) {
-            assertThat(post.getPicture(), is(notNullValue()));
+
+        @Test
+        public void multi() throws Exception {
+            Reading reading = new Reading().fields("id,name,email");
+            assertThat(reading.getQuery(), is("fields=id%2Cname%2Cemail"));
+
+            reading = new Reading().fields("id", "name", "email");
+            assertThat(reading.getQuery(), is("fields=id%2Cname%2Cemail"));
+
+            reading = new Reading().fields("id").fields("name").fields("email");
+            assertThat(reading.getQuery(), is("fields=id%2Cname%2Cemail"));
+
+            String[] array = {"id", "name", "email"};
+            reading = new Reading().fields(array);
+            assertThat(reading.getQuery(), is("fields=id%2Cname%2Cemail"));
         }
     }
 
-    @Test
-    public void since() throws Exception {
-        Date since = new Date(new Date().getTime() - (1000*60*60*24*3));
-        ResponseList<Post> feed = facebook1.getFeed(new Reading().since(since));
-        for (Post post : feed) {
-            System.out.println(post);
+    public static class Limit {
+        @Test
+        public void limit() throws Exception {
+            Reading reading = new Reading().limit(10);
+            assertThat(reading.getQuery(), is("limit=10"));
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void duplicate() throws Exception {
+            Reading reading = new Reading().limit(10);
+            reading.limit(20);
         }
     }
+
+    public static class Offset {
+        @Test
+        public void offset() throws Exception {
+            Reading reading = new Reading().offset(10);
+            assertThat(reading.getQuery(), is("offset=10"));
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void duplicate() throws Exception {
+            Reading reading = new Reading().offset(10);
+            reading.offset(20);
+        }
+    }
+
+    public static class Until extends FacebookTestBase {
+        @Test
+        public void phpFormat() throws Exception {
+            Reading reading = new Reading().until("1372155564");
+            assertThat(reading.getQuery(), is("until=1372155564"));
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void phpFormat_duplicate() throws Exception {
+            Reading reading = new Reading().until("1372155564");
+            reading.until("1372155565");
+        }
+
+        // http://www.crystal-creation.com/web-appli/converter/unix-time/
+        @Test
+        public void date() throws Exception {
+            Calendar cal = createCal(2013, 6, 28, 19, 57, 15, TimeZone.getTimeZone("JST"));
+            Reading reading = new Reading().until(cal.getTime());
+            assertThat(reading.getQuery(), is("until=1372417035"));
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void date_duplicate() throws Exception {
+            Date date = new SimpleDateFormat("yyyy/M/d HH:mm:ss").parse("2013/6/28 19:57:15");
+            new Reading().until(date).until(date);
+        }
+    }
+
+    public static class Since extends FacebookTestBase {
+        @Test
+        public void phpFormat() throws Exception {
+            Reading reading = new Reading().since("1372155564");
+            assertThat(reading.getQuery(), is("since=1372155564"));
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void phpFormat_duplicate() throws Exception {
+            Reading reading = new Reading().since("1372155564");
+            reading.since("1372155565");
+        }
+
+        // http://www.crystal-creation.com/web-appli/converter/unix-time/
+        @Test
+        public void date() throws Exception {
+            Calendar cal = createCal(2013, 6, 28, 19, 57, 15, TimeZone.getTimeZone("JST"));
+            Reading reading = new Reading().since(cal.getTime());
+            assertThat(reading.getQuery(), is("since=1372417035"));
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void date_duplicate() throws Exception {
+            Date date = new SimpleDateFormat("yyyy/M/d HH:mm:ss").parse("2013/6/28 19:57:15");
+            new Reading().since(date).since(date);
+        }
+    }
+
+    public static class After {
+        @Test
+        public void after() throws Exception {
+            Reading reading = new Reading().after("MTAxNTExOTQ1MjAwNzI5NDE=");
+            assertThat(reading.getQuery(), is("after=MTAxNTExOTQ1MjAwNzI5NDE%3D"));
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void duplicate() throws Exception {
+            Reading reading = new Reading().after("MTAxNTExOTQ1MjAwNzI5NDE=");
+            reading.after("MTAxNTExOTQ1MjAwNzI5NDE=");
+        }
+    }
+
+    public static class Before {
+        @Test
+        public void before() throws Exception {
+            Reading reading = new Reading().before("NDMyNzQyODI3OTQw");
+            assertThat(reading.getQuery(), is("before=NDMyNzQyODI3OTQw"));
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void duplicate() throws Exception {
+            Reading reading = new Reading().before("NDMyNzQyODI3OTQw");
+            reading.before("NDMyNzQyODI3OTQw");
+        }
+    }
+
+    public static class Metadata {
+        @Test
+        public void metadata() throws Exception {
+            Reading reading = new Reading().metadata();
+            assertThat(reading.getQuery(), is("metadata=1"));
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void duplicate() throws Exception {
+            Reading reading = new Reading().metadata();
+            reading.metadata();
+        }
+    }
+
+    public static class Locale_ {
+        @Test(expected = NullPointerException.class)
+        public void nul() throws Exception {
+            new Reading().locale(null);
+        }
+
+        @Test
+        public void locale() throws Exception {
+            Reading reading = new Reading().locale(Locale.JAPAN);
+            assertThat(reading.getQuery(), is("locale=ja_JP"));
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void duplicate() throws Exception {
+            Reading reading = new Reading().locale(Locale.JAPAN);
+            reading.locale(Locale.JAPAN);
+        }
+    }
+
+    public static class WithLocation {
+        @Test
+        public void withLocation() throws Exception {
+            Reading reading = new Reading().withLocation();
+            assertThat(reading.getQuery(), is("with=location"));
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void duplicate() throws Exception {
+            Reading reading = new Reading().withLocation();
+            reading.withLocation();
+        }
+    }
+
+    public static class Combination {
+        @Test
+        public void offset_based() throws Exception {
+            Reading reading = new Reading()
+                    .fields("id", "name")
+                    .fields("email")
+                    .limit(20)
+                    .offset(10)
+                    .metadata()
+                    .withLocation();
+            assertThat(reading.getQuery(), is("fields=id%2Cname%2Cemail&limit=20&offset=10&metadata=1&with=location"));
+        }
+
+        @Test
+        public void time_based() throws Exception {
+            Reading reading = new Reading()
+                    .fields("id", "name")
+                    .fields("email")
+                    .until("1364587774")
+                    .since("1364849754")
+                    .metadata()
+                    .withLocation();
+            assertThat(reading.getQuery(), is("fields=id%2Cname%2Cemail&until=1364587774&since=1364849754&metadata=1&with=location"));
+        }
+
+        @Test
+        public void cursor_based() throws Exception {
+            Reading reading = new Reading()
+                    .fields("id", "name")
+                    .fields("email")
+                    .after("AaBbCc")
+                    .before("DdEeFf")
+                    .metadata()
+                    .withLocation();
+            assertThat(reading.getQuery(), is("fields=id%2Cname%2Cemail&after=AaBbCc&before=DdEeFf&metadata=1&with=location"));
+        }
+    }
+
 }

@@ -16,23 +16,17 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.net.URL;
-import java.util.Date;
-import java.util.List;
-
-import facebook4j.Album;
-import facebook4j.FacebookException;
-import facebook4j.IdNameEntity;
-import facebook4j.Like;
-import facebook4j.PrivacyType;
-import facebook4j.ResponseList;
+import facebook4j.*;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.net.URL;
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
  /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -41,7 +35,7 @@ import facebook4j.internal.org.json.JSONObject;
     private static final long serialVersionUID = 4708626697445405636L;
 
     private String id;
-    private IdNameEntity from;
+    private Category from;
     private String name;
     private String description;
     private String location;
@@ -53,8 +47,10 @@ import facebook4j.internal.org.json.JSONObject;
     private Date createdTime;
     private Date updatedTime;
     private Boolean canUpload;
+    private Place place;
     
-    private List<Like> likes;
+    private PagableList<Like> likes;
+    private PagableList<Comment> comments;
 
     /*package*/AlbumJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -76,29 +72,58 @@ import facebook4j.internal.org.json.JSONObject;
             id = getRawString("id", json);
             if (!json.isNull("from")) {
                 JSONObject fromJSONObject = json.getJSONObject("from");
-                from = new IdNameEntityJSONImpl(fromJSONObject);
+                from = new CategoryJSONImpl(fromJSONObject);
             }
             name = getRawString("name", json);
             description = getRawString("description", json);
+            location = getRawString("location", json);
             link = getURL("link", json);
             coverPhoto = getRawString("cover_photo", json);
             privacy = PrivacyType.getInstance(getRawString("privacy", json));
-            count = getPrimitiveInt("count", json);
+            count = getInt("count", json);
             type = getRawString("type", json);
             createdTime = getISO8601Datetime("created_time", json);
             updatedTime = getISO8601Datetime("updated_time", json);
             canUpload = getBoolean("can_upload", json);
+            if (!json.isNull("place")) {
+                JSONObject placeJSONObject = json.getJSONObject("place");
+                place = new PlaceJSONImpl(placeJSONObject);
+            }
             
             if (!json.isNull("likes")) {
                 JSONObject likesJSONObject = json.getJSONObject("likes");
-                JSONArray list = likesJSONObject.getJSONArray("data");
-                int size = list.length();
-                likes = new PagableListImpl<Like>(size, likesJSONObject);
-                for (int i = 0; i < size; i++) {
-                    LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
-                    likes.add(like);
+                if (!likesJSONObject.isNull("data")) {
+                    JSONArray list = likesJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    likes = new PagableListImpl<Like>(size, likesJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
+                        likes.add(like);
+                    }
+                } else {
+                    likes = new PagableListImpl<Like>(1, likesJSONObject);
                 }
+            } else {
+                likes = new PagableListImpl<Like>(0);
             }
+
+            if (!json.isNull("comments")) {
+                JSONObject commentsJSONObject = json.getJSONObject("comments");
+                if (!commentsJSONObject.isNull("data")) {
+                    JSONArray list = commentsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    comments = new PagableListImpl<Comment>(size, commentsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
+                        comments.add(comment);
+                    }
+                } else {
+                    comments = new PagableListImpl<Comment>(1, commentsJSONObject);
+                }
+            } else {
+                comments = new PagableListImpl<Comment>(0);
+            }
+
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -108,7 +133,7 @@ import facebook4j.internal.org.json.JSONObject;
         return id;
     }
 
-    public IdNameEntity getFrom() {
+    public Category getFrom() {
         return from;
     }
 
@@ -156,8 +181,16 @@ import facebook4j.internal.org.json.JSONObject;
         return canUpload;
     }
 
-    public List<Like> getLikes() {
+    public Place getPlace() {
+        return place;
+    }
+
+    public PagableList<Like> getLikes() {
         return likes;
+    }
+
+    public PagableList<Comment> getComments() {
+        return comments;
     }
 
     /*package*/
@@ -168,7 +201,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Album> albums = new ResponseListImpl<Album>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject albumJSONObject = list.getJSONObject(i);
@@ -212,15 +245,25 @@ import facebook4j.internal.org.json.JSONObject;
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "AlbumJSONImpl [id=" + id + ", from=" + from + ", name=" + name
-                + ", description=" + description + ", location=" + location
-                + ", link=" + link + ", coverPhoto=" + coverPhoto
-                + ", privacy=" + privacy + ", count=" + count + ", type="
-                + type + ", createdTime=" + createdTime + ", updatedTime="
-                + updatedTime + ", canUpload=" + canUpload + ", likes=" + likes
-                + "]";
-    }
-
-}
+     @Override
+     public String toString() {
+         return "AlbumJSONImpl{" +
+                 "id='" + id + '\'' +
+                 ", from=" + from +
+                 ", name='" + name + '\'' +
+                 ", description='" + description + '\'' +
+                 ", location='" + location + '\'' +
+                 ", link=" + link +
+                 ", coverPhoto='" + coverPhoto + '\'' +
+                 ", privacy=" + privacy +
+                 ", count=" + count +
+                 ", type='" + type + '\'' +
+                 ", createdTime=" + createdTime +
+                 ", updatedTime=" + updatedTime +
+                 ", canUpload=" + canUpload +
+                 ", place=" + place +
+                 ", likes=" + likes +
+                 ", comments=" + comments +
+                 '}';
+     }
+ }

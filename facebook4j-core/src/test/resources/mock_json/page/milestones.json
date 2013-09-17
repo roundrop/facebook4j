@@ -1,0 +1,47 @@
+{
+    "data": [
+        {
+            "created_time": "2013-06-14T10:37:32+0000",
+            "description": "https://github.com/roundrop/facebook4j",
+            "end_time": "2013-04-24T19:02:00+0000",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "id": "186353804858251",
+            "start_time": "2013-04-24T19:01:00+0000",
+            "title": "30 stars!!!",
+            "updated_time": "2013-06-14T10:37:33+0000"
+        },
+        {
+            "created_time": "2013-06-14T10:36:53+0000",
+            "description": "https://github.com/roundrop/facebook4j",
+            "end_time": "2013-02-25T20:00:00+0000",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "id": "186353704858261",
+            "start_time": "2013-02-25T20:00:00+0000",
+            "title": "20 stars!!",
+            "updated_time": "2013-06-14T10:36:53+0000"
+        },
+        {
+            "created_time": "2013-06-14T10:36:08+0000",
+            "description": "https://github.com/roundrop/facebook4j",
+            "end_time": "2012-12-02T20:00:02+0000",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "id": "186353611524937",
+            "start_time": "2012-12-02T20:0:01+0000",
+            "title": "10 stars!",
+            "updated_time": "2013-06-14T10:36:09+0000"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/137246726435626/milestones?access_token=access_token&limit=5000&offset=5000&__after_id=186353611524937"}
+}

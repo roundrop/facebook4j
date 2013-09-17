@@ -28,9 +28,9 @@ import facebook4j.internal.org.json.JSONObject;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class SubscribedtoJSONImpl extends IdNameJSONImpl implements Subscribedto, java.io.Serializable {
-    private static final long serialVersionUID = -7857240273604678452L;
-    
+/*package*/ final class SubscribedtoJSONImpl extends UserJSONImpl implements Subscribedto, java.io.Serializable {
+    private static final long serialVersionUID = -1599666455117047339L;
+
     /*package*/SubscribedtoJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res, conf);
    }
@@ -47,7 +47,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Subscribedto> subscribedtos = new ResponseListImpl<Subscribedto>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject subscribedtoJSONObject = list.getJSONObject(i);
@@ -68,7 +68,7 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "SubscribedtoJSONImpl [id=" + id + ", name=" + name + "]";
+        return "SubscribedtoJSONImpl extends " + super.toString();
     }
 
 }

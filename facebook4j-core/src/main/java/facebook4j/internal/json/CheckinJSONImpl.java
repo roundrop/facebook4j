@@ -16,15 +16,13 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.util.Date;
-
 import facebook4j.Application;
 import facebook4j.Checkin;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
+import facebook4j.GeoLocation;
 import facebook4j.IdNameEntity;
+import facebook4j.Like;
 import facebook4j.PagableList;
 import facebook4j.Place;
 import facebook4j.ResponseList;
@@ -33,6 +31,10 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -46,10 +48,11 @@ import facebook4j.internal.org.json.JSONObject;
     private Place place;
     private Application application;
     private Date createdTime;
-    private PagableList<IdNameEntity> likes;
+    private PagableList<Like> likes;
     private String message;
     private PagableList<Comment> comments;
     private String type;
+    private GeoLocation coordinates;
 
     /*package*/CheckinJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -76,12 +79,14 @@ import facebook4j.internal.org.json.JSONObject;
             if (!json.isNull("tags")) {
                 JSONObject tagsJSONObject = json.getJSONObject("tags");
                 JSONArray list = tagsJSONObject.getJSONArray("data");
-                int size = list.length();
+                final int size = list.length();
                 tags = new PagableListImpl<IdNameEntity>(size, tagsJSONObject);
                 for (int i = 0; i < size; i++) {
                     IdNameEntityJSONImpl tag = new IdNameEntityJSONImpl(list.getJSONObject(i));
                     tags.add(tag);
                 }
+            } else {
+                tags = new PagableListImpl<IdNameEntity>(0);
             }
             if (!json.isNull("place")) {
                 JSONObject placeJSONObject = json.getJSONObject("place");
@@ -94,26 +99,43 @@ import facebook4j.internal.org.json.JSONObject;
             createdTime = getISO8601Datetime("created_time", json);
             if (!json.isNull("likes")) {
                 JSONObject likesJSONObject = json.getJSONObject("likes");
-                JSONArray list = likesJSONObject.getJSONArray("data");
-                int size = list.length();
-                likes = new PagableListImpl<IdNameEntity>(size, likesJSONObject);
-                for (int i = 0; i < size; i++) {
-                    IdNameEntityJSONImpl like = new IdNameEntityJSONImpl(list.getJSONObject(i));
-                    likes.add(like);
+                if (!likesJSONObject.isNull("data")) {
+                    JSONArray list = likesJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    likes = new PagableListImpl<Like>(size, likesJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
+                        likes.add(like);
+                    }
+                } else {
+                    likes = new PagableListImpl<Like>(1, likesJSONObject);
                 }
+            } else {
+                likes = new PagableListImpl<Like>(0);
             }
             message = getRawString("message", json);
             if (!json.isNull("comments")) {
                 JSONObject commentsJSONObject = json.getJSONObject("comments");
-                JSONArray list = commentsJSONObject.getJSONArray("data");
-                int size = list.length();
-                comments = new PagableListImpl<Comment>(size, commentsJSONObject);
-                for (int i = 0; i < size; i++) {
-                    CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
-                    comments.add(comment);
+                if (!commentsJSONObject.isNull("data")) {
+                    JSONArray list = commentsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    comments = new PagableListImpl<Comment>(size, commentsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
+                        comments.add(comment);
+                    }
+                } else {
+                    comments = new PagableListImpl<Comment>(1, commentsJSONObject);
                 }
+            } else {
+                comments = new PagableListImpl<Comment>(0);
             }
             type = getRawString("type", json);
+            if (!json.isNull("coordinates")) {
+                JSONObject coordinatesJSONObject = json.getJSONObject("coordinates");
+                coordinates = new GeoLocation(coordinatesJSONObject.getDouble("latitude"),
+                                              coordinatesJSONObject.getDouble("longitude"));
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -143,7 +165,7 @@ import facebook4j.internal.org.json.JSONObject;
         return createdTime;
     }
 
-    public PagableList<IdNameEntity> getLikes() {
+    public PagableList<Like> getLikes() {
         return likes;
     }
 
@@ -159,6 +181,10 @@ import facebook4j.internal.org.json.JSONObject;
         return type;
     }
 
+    public GeoLocation getCoordinates() {
+        return coordinates;
+    }
+
     /*package*/
     static ResponseList<Checkin> createCheckinList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -167,7 +193,7 @@ import facebook4j.internal.org.json.JSONObject;
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Checkin> checkins = new ResponseListImpl<Checkin>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject checkinJSONObject = list.getJSONObject(i);
@@ -213,11 +239,18 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "CheckinJSONImpl [id=" + id + ", from=" + from + ", tags="
-                + tags + ", place=" + place + ", application=" + application
-                + ", createdTime=" + createdTime + ", likes=" + likes
-                + ", message=" + message + ", comments=" + comments + ", type="
-                + type + "]";
+        return "CheckinJSONImpl{" +
+                "id='" + id + '\'' +
+                ", from=" + from +
+                ", tags=" + tags +
+                ", place=" + place +
+                ", application=" + application +
+                ", createdTime=" + createdTime +
+                ", likes=" + likes +
+                ", message='" + message + '\'' +
+                ", comments=" + comments +
+                ", type='" + type + '\'' +
+                ", coordinates=" + coordinates +
+                '}';
     }
-
 }

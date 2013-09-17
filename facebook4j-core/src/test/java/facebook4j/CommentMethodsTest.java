@@ -16,33 +16,107 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.RequestMethod;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+
+import static facebook4j.junit.ISO8601DateMatchers.*;
+import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+@RunWith(Enclosed.class)
+public class CommentMethodsTest {
 
-public class CommentMethodsTest extends FacebookTestBase {
-    
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+    public static class getComment extends MockFacebookTestBase {
+        @Test
+        public void simple() throws Exception {
+            facebook.setMockJSON("mock_json/comment/simple.json");
+            Comment actual = facebook.getComment("100000000000001_50000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_50000001")));
+
+            assertThat(actual.isUserLikes(), is(false));
+            assertThat(actual.getMessage(), is("Enjoy!!"));
+            assertThat(actual.getId(), is("100000000000001_50000001"));
+            assertThat(actual.getLikeCount(), is(1));
+            assertThat(actual.getFrom().getId(), is("1234567890123456"));
+            assertThat(actual.getFrom().getName(), is("Name Name1"));
+            assertThat(actual.canRemove(), is(false));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2013-08-07T04:08:42+0000")));
+        }
     }
 
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
+    public static class deleteComment extends MockFacebookTestBase {
+        @Test
+        public void delete() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deleteComment("100000000000001_50000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_50000001")));
+
+            assertThat(actual, is(true));
+        }
     }
 
-    @Before
-    public void setUp() throws Exception {
+    public static class getCommentLikes extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/comment/likes.json");
+            ResponseList<Like> actuals = facebook.getCommentLikes("100000000000001_90000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_90000001/likes")));
+
+            assertThat(actuals.size(), is(2));
+            Like actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("100000000000001"));
+            assertThat(actual1.getName(), is("Name Name1"));
+            Like actual2 = actuals.get(1);
+            assertThat(actual2.getId(), is("100000000000002"));
+            assertThat(actual2.getName(), is("Name Name2"));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/comment/likes_limit1.json");
+            ResponseList<Like> actuals = facebook.getCommentLikes("100000000000001_90000001", new Reading().limit(1));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_90000001/likes")));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "1"));
+
+            assertThat(actuals.size(), is(1));
+            Like actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("100000000000001"));
+            assertThat(actual1.getName(), is("Name Name1"));
+        }
     }
 
-    @After
-    public void tearDown() throws Exception {
+    public static class likeComment extends MockFacebookTestBase {
+        @Test
+        public void like() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.likeComment("100000000000001_90000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_90000001/likes")));
+
+            assertThat(actual, is(true));
+        }
     }
 
+    public static class unlikeComment extends MockFacebookTestBase {
+        @Test
+        public void unlike() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.unlikeComment("100000000000001_90000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_90000001/likes")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
+/*
     @Test
     public void get() throws Exception {
         ResponseList<Album> albums = facebook1.getAlbums();
@@ -85,6 +159,6 @@ public class CommentMethodsTest extends FacebookTestBase {
 
         facebook1.deleteComment(commentId);
     }
-    
+*/
 
 }

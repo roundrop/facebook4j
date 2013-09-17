@@ -1,0 +1,17 @@
+{
+    "data": [
+        {
+            "id": "100000000001",
+            "name": "Mutual Name1"
+        },
+        {
+            "id": "100000000002",
+            "name": "Mutual Name2"
+        },
+        {
+            "id": "100000000003",
+            "name": "Mutual Name3"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/1234567890123456/mutualfriends?user=21212121&access_token=access_token&limit=5000&offset=5000&__after_id=100000000004"}
+}

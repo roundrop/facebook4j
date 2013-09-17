@@ -1,0 +1,330 @@
+{
+    "data": [
+        {
+            "actions": [
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/188027738024191",
+                    "name": "Comment"
+                },
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/188027738024191",
+                    "name": "Like"
+                }
+            ],
+            "application": {
+                "id": "145634995501895",
+                "name": "Graph API Explorer"
+            },
+            "created_time": "2013-06-19T16:04:25+0000",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/DggDhA4z4tO.gif",
+            "id": "137246726435626_188027738024191",
+            "is_published": true,
+            "link": "http://www.facebook.com/photo.php?v=188027738024191",
+            "name": "Jun 20, 2013 1:04am",
+            "object_id": "188027738024191",
+            "picture": "https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-ash4/245372_188027814690850_188027738024191_43297_2415_b.jpg",
+            "privacy": {
+                "allow": "",
+                "deny": "",
+                "description": "Public",
+                "friends": "",
+                "networks": "",
+                "value": "EVERYONE"
+            },
+            "properties": [{
+                "name": "Length",
+                "text": "0:24"
+            }],
+            "source": "https://fbcdn-video-a.akamaihd.net/hvideo-ak-ash2/v/1033172_188027771357521_581032840_n.mp4?oh=882dbc6a693971c04fcdc839ad76c81a&oe=51D66588&__gda__=1373048358_4b16384645d1ee556ea065ce9fab293b",
+            "status_type": "added_video",
+            "type": "video",
+            "updated_time": "2013-06-19T16:04:25+0000"
+        },
+        {
+            "actions": [
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/185932178233747",
+                    "name": "Comment"
+                },
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/185932178233747",
+                    "name": "Like"
+                }
+            ],
+            "application": {
+                "id": "145634995501895",
+                "name": "Graph API Explorer"
+            },
+            "created_time": "2013-06-13T16:17:44+0000",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "id": "137246726435626_185932178233747",
+            "is_published": true,
+            "message": "page's status update",
+            "privacy": {
+                "allow": "",
+                "deny": "",
+                "description": "Public",
+                "friends": "",
+                "networks": "",
+                "value": "EVERYONE"
+            },
+            "status_type": "mobile_status_update",
+            "type": "status",
+            "updated_time": "2013-06-13T16:17:44+0000"
+        },
+        {
+            "actions": [
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/155690557924576",
+                    "name": "Comment"
+                },
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/155690557924576",
+                    "name": "Like"
+                }
+            ],
+            "application": {
+                "id": "145634995501895",
+                "name": "Graph API Explorer"
+            },
+            "created_time": "2013-03-22T08:42:18+0000",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yg/r/5PpICR5KcPe.png",
+            "id": "137246726435626_155690557924576",
+            "is_published": true,
+            "object_id": "155688447924787",
+            "privacy": {
+                "allow": "",
+                "deny": "",
+                "description": "Public",
+                "friends": "",
+                "networks": "",
+                "value": "EVERYONE"
+            },
+            "story": "F4J asked: What is your favorite programming language?",
+            "type": "question",
+            "updated_time": "2013-03-22T08:42:18+0000"
+        },
+        {
+            "actions": [
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/155688727924759",
+                    "name": "Comment"
+                },
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/155688727924759",
+                    "name": "Like"
+                }
+            ],
+            "application": {
+                "id": "145634995501895",
+                "name": "Graph API Explorer"
+            },
+            "created_time": "2013-03-22T08:29:15+0000",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yg/r/5PpICR5KcPe.png",
+            "id": "137246726435626_155688727924759",
+            "is_published": true,
+            "object_id": "155688711258094",
+            "privacy": {
+                "allow": "",
+                "deny": "",
+                "description": "Public",
+                "friends": "",
+                "networks": "",
+                "value": "EVERYONE"
+            },
+            "story": "F4J asked: What is your favorite programming language?",
+            "type": "question",
+            "updated_time": "2013-03-22T08:29:15+0000"
+        },
+        {
+            "actions": [
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/154500198043612",
+                    "name": "Comment"
+                },
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/154500198043612",
+                    "name": "Like"
+                }
+            ],
+            "application": {
+                "id": "145634995501895",
+                "name": "Graph API Explorer"
+            },
+            "created_time": "2013-03-18T10:49:22+0000",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yg/r/5PpICR5KcPe.png",
+            "id": "137246726435626_154500198043612",
+            "is_published": true,
+            "object_id": "154498061377159",
+            "privacy": {
+                "allow": "",
+                "deny": "",
+                "description": "Public",
+                "friends": "",
+                "networks": "",
+                "value": "EVERYONE"
+            },
+            "story": "F4J asked: What is your favorite programming language?",
+            "type": "question",
+            "updated_time": "2013-03-18T10:49:22+0000"
+        },
+        {
+            "actions": [
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/120681724785461",
+                    "name": "Comment"
+                },
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/120681724785461",
+                    "name": "Like"
+                }
+            ],
+            "application": {
+                "id": "145634995501895",
+                "name": "Graph API Explorer"
+            },
+            "caption": "facebook4j.org",
+            "created_time": "2013-03-15T10:17:50+0000",
+            "description": "Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library.",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/aS8ecmYRys0.gif",
+            "id": "137246726435626_120681724785461",
+            "is_published": true,
+            "link": "http://facebook4j.org/",
+            "message": "Testing. Succeeded?",
+            "name": "Facebook4J - A Java library for the Facebook Graph API",
+            "picture": "https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBcXOUoJ_WBlQ2G&w=154&h=154&url=http%3A%2F%2Ffacebook4j.org%2Fimages%2Fhero.png",
+            "privacy": {
+                "allow": "",
+                "deny": "",
+                "description": "Public",
+                "friends": "",
+                "networks": "",
+                "value": "EVERYONE"
+            },
+            "status_type": "shared_story",
+            "type": "link",
+            "updated_time": "2013-03-15T10:17:50+0000"
+        },
+        {
+            "actions": [
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/492351237497482",
+                    "name": "Comment"
+                },
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/492351237497482",
+                    "name": "Like"
+                }
+            ],
+            "application": {
+                "id": "145634995501895",
+                "name": "Graph API Explorer"
+            },
+            "caption": "facebook4j.org",
+            "created_time": "2013-03-14T06:45:49+0000",
+            "description": "Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library.",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/aS8ecmYRys0.gif",
+            "id": "137246726435626_492351237497482",
+            "is_published": true,
+            "link": "http://facebook4j.org/",
+            "message": "Testing. Succeeded?",
+            "name": "Facebook4J - A Java library for the Facebook Graph API",
+            "picture": "https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBcXOUoJ_WBlQ2G&w=154&h=154&url=http%3A%2F%2Ffacebook4j.org%2Fimages%2Fhero.png",
+            "privacy": {
+                "allow": "",
+                "deny": "",
+                "description": "United States, United Kingdom",
+                "friends": "",
+                "networks": "",
+                "value": "CUSTOM"
+            },
+            "status_type": "shared_story",
+            "targeting": {"countries": [
+                "US",
+                "GB"
+            ]},
+            "type": "link",
+            "updated_time": "2013-03-14T06:45:49+0000"
+        },
+        {
+            "actions": [
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/400899133341666",
+                    "name": "Comment"
+                },
+                {
+                    "link": "http://www.facebook.com/137246726435626/posts/400899133341666",
+                    "name": "Like"
+                }
+            ],
+            "application": {
+                "id": "145634995501895",
+                "name": "Graph API Explorer"
+            },
+            "caption": "facebook4j.org",
+            "created_time": "2013-03-14T06:37:22+0000",
+            "description": "Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library.",
+            "from": {
+                "category": "Software",
+                "id": "137246726435626",
+                "name": "F4J"
+            },
+            "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/aS8ecmYRys0.gif",
+            "id": "137246726435626_400899133341666",
+            "is_published": true,
+            "link": "http://facebook4j.org/",
+            "message": "Testing. Succeeded?",
+            "name": "Facebook4J - A Java library for the Facebook Graph API",
+            "picture": "https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBcXOUoJ_WBlQ2G&w=154&h=154&url=http%3A%2F%2Ffacebook4j.org%2Fimages%2Fhero.png",
+            "privacy": {
+                "allow": "",
+                "deny": "",
+                "description": "Public",
+                "friends": "",
+                "networks": "",
+                "value": "EVERYONE"
+            },
+            "status_type": "shared_story",
+            "type": "link",
+            "updated_time": "2013-03-14T06:37:22+0000"
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/137246726435626/promotable_posts?access_token=access_token&limit=25&until=1363243041",
+        "previous": "https://graph.facebook.com/137246726435626/promotable_posts?access_token=access_token&limit=25&since=1371657865&__previous=1"
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "data": [
+        {
+            "gender": "male",
+            "id": "100000000000001",
+            "name": "Subscriber Name1"
+        },
+        {
+            "gender": "male",
+            "id": "100000000000002",
+            "name": "Subscriber Name2"
+        },
+        {
+            "gender": "female",
+            "id": "100000000000003",
+            "name": "Subscriber Name3"
+        }
+    ],
+    "paging": {
+        "cursors": {
+            "after": "MTAwMDAyMTE3MTczOTc4",
+            "before": "MTAwMDAxNjYxNDgyMjM4"
+        },
+        "next": "https://graph.facebook.com/1234567890123456/subscribers?fields=name,gender&access_token=access_token&limit=25&after=MTAwMDAyMTE3MTczOTc4"
+    },
+    "summary": {"total_count": 43}
+}

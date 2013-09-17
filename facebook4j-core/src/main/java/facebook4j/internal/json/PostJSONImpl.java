@@ -16,40 +16,44 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import facebook4j.Application;
+import facebook4j.Category;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
+import facebook4j.Like;
 import facebook4j.PagableList;
 import facebook4j.Place;
 import facebook4j.Post;
 import facebook4j.Privacy;
 import facebook4j.ResponseList;
 import facebook4j.Tag;
+import facebook4j.Targeting;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.Serializable {
-    private static final long serialVersionUID = 1303895381110118187L;
+    private static final long serialVersionUID = 5829948216755728751L;
 
     private String id;
-    private IdNameEntity from;
+    private Category from;
     private List<IdNameEntity> to;
     private String message;
     private List<Tag> messageTags;
@@ -60,22 +64,25 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private String description;
     private URL source;
     private List<Post.Property> properties;
-    private String icon;
+    private URL icon;
     private List<Post.Action> actions;
     private Privacy privacy;
     private String type;
     private Integer sharesCount;
-    private PagableList<IdNameEntity> likes;
+    private PagableList<Like> likes;
     private Place place;
     private String statusType;
     private String story;
     private Map<String, Tag[]> storyTags;
     private List<IdNameEntity> withTags;
     private PagableList<Comment> comments;
-    private Long objectId;
+    private String objectId;
     private Application application;
     private Date createdTime;
     private Date updatedTime;
+    private Boolean isPublished;
+    private Integer scheduledPublishTime;
+    private Targeting targeting;
 
     /*package*/PostJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -97,7 +104,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             id = getRawString("id", json);
             if (!json.isNull("from")) {
                 JSONObject fromJSONObject = json.getJSONObject("from");
-                from = new IdNameEntityJSONImpl(fromJSONObject);
+                from = new CategoryJSONImpl(fromJSONObject);
             }
             if (!json.isNull("to")) {
                 JSONArray toJSONArray = json.getJSONObject("to").getJSONArray("data");
@@ -106,6 +113,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                     JSONObject toJSONObject = toJSONArray.getJSONObject(i);
                     to.add(new IdNameEntityJSONImpl(toJSONObject));
                 }
+            } else {
+                to = Collections.emptyList();
             }
             message = getRawString("message", json);
             if (!json.isNull("message_tags")) {
@@ -130,6 +139,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                         }
                     }
                 }
+            } else {
+                messageTags = Collections.emptyList();
             }
             picture = getURL("picture", json);
             link = getURL("link", json);
@@ -142,17 +153,21 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 properties = new ArrayList<Post.Property>();
                 for (int i = 0; i < propertyJSONArray.length(); i++) {
                     JSONObject propertyJSONObject = propertyJSONArray.getJSONObject(i);
-                    properties.add(this.new PropertyJSONImpl(propertyJSONObject));
+                    properties.add(new PropertyJSONImpl(propertyJSONObject));
                 }
+            } else {
+                properties = Collections.emptyList();
             }
-            icon = getRawString("icon", json);
+            icon = getURL("icon", json);
             if (!json.isNull("actions")) {
                 JSONArray actionJSONArray = json.getJSONArray("actions");
                 actions = new ArrayList<Post.Action>();
                 for (int i = 0; i < actionJSONArray.length(); i++) {
                     JSONObject actionJSONObject = actionJSONArray.getJSONObject(i);
-                    actions.add(this.new ActionJSONImpl(actionJSONObject));
+                    actions.add(new ActionJSONImpl(actionJSONObject));
                 }
+            } else {
+                actions = Collections.emptyList();
             }
             if (!json.isNull("privacy")) {
                 JSONObject privacyJSONObject = json.getJSONObject("privacy");
@@ -169,15 +184,17 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 JSONObject likesJSONObject = json.getJSONObject("likes");
                 if (!likesJSONObject.isNull("data")) {
                     JSONArray list = likesJSONObject.getJSONArray("data");
-                    int size = list.length();
-                    likes = new PagableListImpl<IdNameEntity>(size, likesJSONObject);
+                    final int size = list.length();
+                    likes = new PagableListImpl<Like>(size, likesJSONObject);
                     for (int i = 0; i < size; i++) {
-                        IdNameEntityJSONImpl like = new IdNameEntityJSONImpl(list.getJSONObject(i));
+                        LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
                         likes.add(like);
                     }
                 } else {
-                    likes = new PagableListImpl<IdNameEntity>(1, likesJSONObject);
+                    likes = new PagableListImpl<Like>(1, likesJSONObject);
                 }
+            } else {
+                likes = new PagableListImpl<Like>(0);
             }
             if (!json.isNull("place")) {
                 JSONObject placeJSONObject = json.getJSONObject("place");
@@ -200,6 +217,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                     }
                     storyTags.put(key, tags);
                 }
+            } else {
+                storyTags = Collections.emptyMap();
             }
             if (!json.isNull("with_tags")) {
                 JSONArray withTagsJSONArray = json.getJSONObject("with_tags").getJSONArray("data");
@@ -208,12 +227,14 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                     JSONObject withTagJSONObject = withTagsJSONArray.getJSONObject(i);
                     withTags.add(new IdNameEntityJSONImpl(withTagJSONObject));
                 }
+            } else {
+                withTags = Collections.emptyList();
             }
             if (!json.isNull("comments")) {
                 JSONObject commentsJSONObject = json.getJSONObject("comments");
                 if (!commentsJSONObject.isNull("data")) {
                     JSONArray list = commentsJSONObject.getJSONArray("data");
-                    int size = list.length();
+                    final int size = list.length();
                     comments = new PagableListImpl<Comment>(size, commentsJSONObject);
                     for (int i = 0; i < size; i++) {
                         CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
@@ -222,9 +243,11 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 } else {
                     comments = new PagableListImpl<Comment>(1, commentsJSONObject);
                 }
+            } else {
+                comments = new PagableListImpl<Comment>(0);
             }
             if (!json.isNull("object_id")) {
-                objectId = getLong("object_id", json);
+                objectId = getRawString("object_id", json);
             }
             if (!json.isNull("application")) {
                 JSONObject applicationJSONObject = json.getJSONObject("application");
@@ -232,6 +255,13 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             }
             createdTime = getISO8601Datetime("created_time", json);
             updatedTime = getISO8601Datetime("updated_time", json);
+            if (!json.isNull("is_published")) {
+                isPublished = getBoolean("is_published", json);
+            }
+            scheduledPublishTime = getInt("scheduled_publish_time", json);
+            if (!json.isNull("targeting")) {
+                targeting = new TargetingJSONImpl(json.getJSONObject("targeting"));
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -241,7 +271,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return id;
     }
 
-    public IdNameEntity getFrom() {
+    public Category getFrom() {
         return from;
     }
 
@@ -285,7 +315,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return properties;
     }
 
-    public String getIcon() {
+    public URL getIcon() {
         return icon;
     }
 
@@ -305,7 +335,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return sharesCount;
     }
 
-    public PagableList<IdNameEntity> getLikes() {
+    public PagableList<Like> getLikes() {
         return likes;
     }
 
@@ -333,7 +363,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return comments;
     }
 
-    public Long getObjectId() {
+    public String getObjectId() {
         return objectId;
     }
 
@@ -349,6 +379,18 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return updatedTime;
     }
 
+    public Boolean isPublished() {
+        return isPublished;
+    }
+
+    public Date getScheduledPublishTime() {
+        return new Date(scheduledPublishTime * 1000);
+    }
+
+    public Targeting getTargeting() {
+        return targeting;
+    }
+
     /*package*/
     static ResponseList<Post> createPostList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -357,7 +399,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             }
             JSONObject json = res.asJSONObject();
             JSONArray list = json.getJSONArray("data");
-            int size = list.length();
+            final int size = list.length();
             ResponseList<Post> posts = new ResponseListImpl<Post>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject postJSONObject = list.getJSONObject(i);
@@ -423,15 +465,18 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 ", sharesCount=" + sharesCount +
                 ", likes=" + likes +
                 ", place=" + place +
-                ", statusType=" + statusType +
+                ", statusType='" + statusType + '\'' +
                 ", story='" + story + '\'' +
                 ", storyTags=" + storyTags +
                 ", withTags=" + withTags +
                 ", comments=" + comments +
-                ", objectId=" + objectId +
+                ", objectId='" + objectId + '\'' +
                 ", application=" + application +
                 ", createdTime=" + createdTime +
                 ", updatedTime=" + updatedTime +
+                ", isPublished=" + isPublished +
+                ", scheduledPublishTime=" + scheduledPublishTime +
+                ", targeting=" + targeting +
                 '}';
     }
 

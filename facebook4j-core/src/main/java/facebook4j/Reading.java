@@ -19,7 +19,6 @@ package facebook4j;
 import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.util.z_F4JInternalStringUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -33,8 +32,6 @@ import java.util.Map;
  */
 public class Reading implements java.io.Serializable {
     private static final long serialVersionUID = -8052261582496495423L;
-
-    private static final String FACEBOOK_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
 
     private Map<String, String> parameterMap = new LinkedHashMap<String, String>();
     
@@ -98,7 +95,8 @@ public class Reading implements java.io.Serializable {
         if (parameterMap.containsKey("until")) {
             throw new IllegalStateException("'until' already sets");
         }
-        parameterMap.put("until", new SimpleDateFormat(FACEBOOK_DATE_FORMAT).format(datetime));
+        long unixtime = datetime.getTime() / 1000L;
+        parameterMap.put("until", String.valueOf(unixtime));
         return this;
     }
 
@@ -122,7 +120,24 @@ public class Reading implements java.io.Serializable {
         if (parameterMap.containsKey("since")) {
             throw new IllegalStateException("'since' already sets");
         }
-        parameterMap.put("since", new SimpleDateFormat(FACEBOOK_DATE_FORMAT).format(datetime));
+        long unixtime = datetime.getTime() / 1000L;
+        parameterMap.put("since", String.valueOf(unixtime));
+        return this;
+    }
+
+    public Reading after(String cursor) {
+        if (parameterMap.containsKey("after")) {
+            throw new IllegalStateException("'after' already sets");
+        }
+        parameterMap.put("after", String.valueOf(cursor));
+        return this;
+    }
+
+    public Reading before(String cursor) {
+        if (parameterMap.containsKey("before")) {
+            throw new IllegalStateException("'before' already sets");
+        }
+        parameterMap.put("before", String.valueOf(cursor));
         return this;
     }
 

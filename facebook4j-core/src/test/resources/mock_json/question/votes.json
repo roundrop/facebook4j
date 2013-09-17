@@ -1,0 +1,19 @@
+{
+    "data": [
+        {
+            "id": "462870730453151",
+            "votes": {
+                "data": [{
+                    "id": "1234567890123456",
+                    "name": "My Name"
+                }],
+                "paging": {"next": "https://graph.facebook.com/462870730453151/votes?access_token=access_token&limit=5000&offset=5000&__after_id=100001568838021"}
+            }
+        },
+        {"id": "260686110733539"},
+        {"id": "320634584706152"},
+        {"id": "302535046540868"},
+        {"id": "455320461233522"}
+    ],
+    "paging": {"next": "https://graph.facebook.com/154498061377159/options?fields=votes&access_token=access_token&limit=25&offset=25&__after_id=455320461233522"}
+}

@@ -26,7 +26,9 @@ public interface GroupDoc extends FacebookResponse {
     String getId();
     IdNameEntity getFrom();
     String getSubject();
+    String getMessage();
     URL getIcon();
+    Date getCreatedTime();
     Date getUpdatedTime();
     Long getRevision();
     Boolean canEdit();

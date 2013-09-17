@@ -32,7 +32,7 @@ import facebook4j.ResponseList;
  */
 public interface PostMethods {
     /**
-     * Returns the current user's wall.
+     * Returns the current user's/page's/event's wall.
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#feed">User#feed - Facebook Developers</a>
@@ -40,7 +40,7 @@ public interface PostMethods {
     ResponseList<Post> getFeed() throws FacebookException;
 
     /**
-     * Returns the current user's wall.
+     * Returns the current user's/page's/event's wall.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
@@ -49,23 +49,23 @@ public interface PostMethods {
     ResponseList<Post> getFeed(Reading reading) throws FacebookException;
 
     /**
-     * Returns a user's wall.
-     * @param userId the ID of a user
+     * Returns a user's/page's/event's wall.
+     * @param id the ID of a user/page/event
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#feed">User#feed - Facebook Developers</a>
      */
-    ResponseList<Post> getFeed(String userId) throws FacebookException;
+    ResponseList<Post> getFeed(String id) throws FacebookException;
 
     /**
-     * Returns a user's wall.
-     * @param userId the ID of a user
+     * Returns a user's/page's/event's wall.
+     * @param id the ID of a user/page/event
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#feed">User#feed - Facebook Developers</a>
      */
-    ResponseList<Post> getFeed(String userId, Reading reading) throws FacebookException;
+    ResponseList<Post> getFeed(String id, Reading reading) throws FacebookException;
 
 
     /**
@@ -87,44 +87,7 @@ public interface PostMethods {
 
 
     /**
-     * Returns the current user's posted links.
-     * @return links
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#links">User#links - Facebook Developers</a>
-     */
-    ResponseList<Link> getLinks() throws FacebookException;
-
-    /**
-     * Returns the current user's posted links.
-     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
-     * @return links
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#links">User#links - Facebook Developers</a>
-     */
-    ResponseList<Link> getLinks(Reading reading) throws FacebookException;
-
-    /**
-     * Returns a user's posted links.
-     * @param userId the ID of a user
-     * @return links
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#links">User#links - Facebook Developers</a>
-     */
-    ResponseList<Link> getLinks(String userId) throws FacebookException;
-
-    /**
-     * Returns a user's posted links.
-     * @param userId the ID of a user
-     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
-     * @return links
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#links">User#links - Facebook Developers</a>
-     */
-    ResponseList<Link> getLinks(String userId, Reading reading) throws FacebookException;
-
-
-    /**
-     * Returns the current user's own posts.
+     * Returns the current user's/page's own posts.
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#posts">User#posts - Facebook Developers</a>
@@ -132,7 +95,7 @@ public interface PostMethods {
     ResponseList<Post> getPosts() throws FacebookException;
 
     /**
-     * Returns the current user's own posts.
+     * Returns the current user's/page's own posts.
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
@@ -141,23 +104,23 @@ public interface PostMethods {
     ResponseList<Post> getPosts(Reading reading) throws FacebookException;
 
     /**
-     * Returns the user's own posts.
-     * @param userId the ID of a user
+     * Returns the user's/page's own posts.
+     * @param id the ID of a user/page
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#posts">User#posts - Facebook Developers</a>
      */
-    ResponseList<Post> getPosts(String userId) throws FacebookException;
+    ResponseList<Post> getPosts(String id) throws FacebookException;
 
     /**
-     * Returns the user's own posts.
-     * @param userId the ID of a user
+     * Returns the user's/page's own posts.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#posts">User#posts - Facebook Developers</a>
      */
-    ResponseList<Post> getPosts(String userId, Reading reading) throws FacebookException;
+    ResponseList<Post> getPosts(String id, Reading reading) throws FacebookException;
 
 
     /**
@@ -178,23 +141,23 @@ public interface PostMethods {
     ResponseList<Post> getStatuses(Reading reading) throws FacebookException;
 
     /**
-     * Returns the user's status updates.
-     * @param userId the ID of a user
+     * Returns the user's/page's status updates.
+     * @param id the ID of a user/page
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#statuses">User#statuses - Facebook Developers</a>
      */
-    ResponseList<Post> getStatuses(String userId) throws FacebookException;
+    ResponseList<Post> getStatuses(String id) throws FacebookException;
 
     /**
-     * Returns the user's status updates.
-     * @param userId the ID of a user
+     * Returns the user's/page's status updates.
+     * @param id the ID of a user/page
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#statuses">User#statuses - Facebook Developers</a>
      */
-    ResponseList<Post> getStatuses(String userId, Reading reading) throws FacebookException;
+    ResponseList<Post> getStatuses(String id, Reading reading) throws FacebookException;
 
 
     /**
@@ -332,13 +295,13 @@ public interface PostMethods {
 
     /**
      * Creates the post.
-     * @param userId the ID of a user
+     * @param id the ID of a user/page/event
      * @param postUpdate the post to be created
      * @return The new post ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#posts">User#posts - Facebook Developers</a>
      */
-    String postFeed(String userId, PostUpdate postUpdate) throws FacebookException;
+    String postFeed(String id, PostUpdate postUpdate) throws FacebookException;
 
 
     /**
@@ -388,18 +351,20 @@ public interface PostMethods {
      * @return The new status message ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#statuses">User#statuses - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#statuses">Page#statuses - Facebook Developers</a>
      */
     String postStatusMessage(String message) throws FacebookException;
 
     /**
      * Creates the status message.
-     * @param userId the ID of a user
+     * @param id the ID of a user/page
      * @param message link message
      * @return The new status message ID
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#statuses">User#statuses - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/reference/api/page/#statuses">Page#statuses - Facebook Developers</a>
      */
-    String postStatusMessage(String userId, String message) throws FacebookException;
+    String postStatusMessage(String id, String message) throws FacebookException;
 
 
     /**

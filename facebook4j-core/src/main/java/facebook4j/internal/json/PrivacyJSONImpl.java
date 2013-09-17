@@ -16,15 +16,15 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import facebook4j.FacebookException;
 import facebook4j.Privacy;
 import facebook4j.PrivacyType;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -42,32 +42,44 @@ import facebook4j.internal.org.json.JSONObject;
     /*package*/public PrivacyJSONImpl(JSONObject json) throws FacebookException {
         value = PrivacyType.getInstance(getRawString("value", json));
         friends = PrivacyType.getInstance(getRawString("friends", json));
+        networks = new ArrayList<String>();
         if (!json.isNull("networks")) {
-            String[] networksArray = getRawString("networks", json).split(",");
-            networks = new ArrayList<String>(networksArray.length);
-            for (String network : networksArray) {
-                networks.add(network);
+            String networksString = getRawString("networks", json);
+            if (!networksString.equals("")) {
+                String[] networksArray = networksString.split(",");
+                for (String network : networksArray) {
+                    networks.add(network.trim());
+                }
             }
         }
+        allow = new ArrayList<String>();
         if (!json.isNull("allow")) {
-            String[] allowArray = getRawString("allow", json).split(",");
-            allow = new ArrayList<String>(allowArray.length);
-            for (String _allow : allowArray) {
-                allow.add(_allow);
+            String allowString = getRawString("allow", json);
+            if (!allowString.equals("")) {
+                String[] allowArray = allowString.split(",");
+                for (String _allow : allowArray) {
+                    allow.add(_allow.trim());
+                }
             }
         }
+        deny = new ArrayList<String>();
         if (!json.isNull("deny")) {
-            String[] denyArray = getRawString("deny", json).split(",");
-            deny = new ArrayList<String>(denyArray.length);
-            for (String _deny : denyArray) {
-                deny.add(_deny);
+            String denyString = getRawString("deny", json);
+            if (!denyString.equals("")) {
+                String[] denyArray = denyString.split(",");
+                for (String _deny : denyArray) {
+                    deny.add(_deny.trim());
+                }
             }
         }
+        description = new ArrayList<String>();
         if (!json.isNull("description")) {
-            String[] descriptionArray = getRawString("description", json).split(",");
-            description = new ArrayList<String>(descriptionArray.length);
-            for (String _description : descriptionArray) {
-                description.add(_description);
+            String descriptionString = getRawString("description", json);
+            if (!descriptionString.equals("")) {
+                String[] descriptionArray = descriptionString.split(",");
+                for (String _description : descriptionArray) {
+                    description.add(_description.trim());
+                }
             }
         }
     }

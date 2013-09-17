@@ -16,13 +16,13 @@
 
 package facebook4j.api;
 
-import java.net.URL;
-
 import facebook4j.Achievement;
 import facebook4j.FacebookException;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
 import facebook4j.Score;
+
+import java.net.URL;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -106,7 +106,6 @@ public interface GameMethods {
 
     /**
      * Returns the current scores for a user in games.
-     * @param userId the ID of a user
      * @return scores
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#scores">User#scores - Facebook Developers</a>
@@ -115,7 +114,6 @@ public interface GameMethods {
 
     /**
      * Returns the current scores for a user in games.
-     * @param userId the ID of a user
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
      * @return scores
      * @throws FacebookException when Facebook service or network is unavailable

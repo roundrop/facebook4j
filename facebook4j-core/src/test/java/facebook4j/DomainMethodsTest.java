@@ -16,46 +16,63 @@
 
 package facebook4j;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import facebook4j.internal.http.RequestMethod;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import org.junit.Test;
+import static facebook4j.junit.URLMatchers.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
+@RunWith(Enclosed.class)
+public class DomainMethodsTest {
+    public static class getDomain extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/domain/facebook.json");
+            Domain actual = facebook.getDomain("369296215699");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/369296215699")));
 
-/**
- * @author Ryuji Yamashita - roundrop at gmail.com
- * @see <a href="https://developers.facebook.com/docs/reference/api/domain/">Domain - Facebook Developers</a>
- */
-public class DomainMethodsTest extends FacebookTestBase {
-
-    @Test
-    public void getById() throws Exception {
-        String id = "369296215699";
-        Domain domain = unauthenticated.getDomain(id);
-        assertThat(domain.getId(), is(id));
-        assertThat(domain.getName().toLowerCase(), is("facebook.com"));
+            assertThat(actual.getId(), is("369296215699"));
+            assertThat(actual.getName(), is("Facebook.com"));
+        }
     }
 
-    @Test
-    public void getByName() throws Exception {
-        String name = "www.facebook.com";
-        Domain domain = unauthenticated.getDomainByName(name);
-        assertThat(domain.getId(), is("369296215699"));
-        assertThat(domain.getName().toLowerCase(), is("facebook.com"));
+    public static class getDomainByName extends MockFacebookTestBase {
+        @Test
+        public void name() throws Exception {
+            facebook.setMockJSON("mock_json/domain/facebook.json");
+            Domain actual = facebook.getDomainByName("www.facebook.com");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/")));
+            assertThat(facebook.getEndpointURL(), hasParameter("domain", "www.facebook.com"));
+
+            assertThat(actual.getId(), is("369296215699"));
+            assertThat(actual.getName(), is("Facebook.com"));
+        }
     }
 
-    @Test
-    public void getByNames() throws Exception {
-        String name1 = "www.facebook.com";
-        String name2 = "www.example.com";
-        List<Domain> domains = unauthenticated.getDomainsByName(name1, name2);
-        assertThat(domains.size(), is(2));
-        assertThat(domains.get(0).getId(), is("369296215699"));
-        assertThat(domains.get(0).getName().toLowerCase(), is("facebook.com"));
-        assertThat(domains.get(1).getId(), is("345629607804"));
-        assertThat(domains.get(1).getName(), is("example.com"));
+    public static class getDomainsByName extends MockFacebookTestBase {
+        @Test
+        public void names() throws Exception {
+            facebook.setMockJSON("mock_json/domain/domains.json");
+            List<Domain> actuals = facebook.getDomainsByName("www.facebook.com", "www.example.com");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/")));
+            assertThat(facebook.getEndpointURL(), hasParameter("domains", "www.facebook.com,www.example.com"));
+
+            assertThat(actuals.size(), is(2));
+            Domain actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("345629607804"));
+            assertThat(actual1.getName(), is("example.com"));
+            Domain actual2 = actuals.get(1);
+            assertThat(actual2.getId(), is("369296215699"));
+            assertThat(actual2.getName(), is("Facebook.com"));
+        }
     }
-    
+
 }
