@@ -35,6 +35,42 @@ import java.util.List;
  */
 public interface PhotoMethods {
     /**
+     * Returns All of the updates photos of the current user/page.
+     * @return photos
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers (Connections - /photos/uploaded)</a>
+     */
+    ResponseList<Photo> getUploadedPhotos() throws FacebookException;
+
+    /**
+     * Returns All of the updates photos of the current user/page.
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return photos
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers (Connections - /photos/uploaded)</a>
+     */
+    ResponseList<Photo> getUploadedPhotos(Reading reading) throws FacebookException;
+
+    /**
+     * Returns All of the updates photos of the current user/page.
+     * @param id the ID of a user/page
+     * @return photos
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers (Connections - /photos/uploaded)</a>
+     */
+    ResponseList<Photo> getUploadedPhotos(String id) throws FacebookException;
+
+    /**
+     * Returns All of the updates photos of the current user/page.
+     * @param id the ID of a user/page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return photos
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers (Connections - /photos/uploaded)</a>
+     */
+    ResponseList<Photo> getUploadedPhotos(String id, Reading reading) throws FacebookException;
+
+    /**
      * Returns the photos the current user/page is tagged in.
      * @return photos
      * @throws FacebookException when Facebook service or network is unavailable

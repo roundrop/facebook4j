@@ -41,6 +41,7 @@ public interface Photo extends FacebookResponse {
     Integer getPosition();
     PagableList<Comment> getComments();
     PagableList<Like> getLikes();
+    Category getAlbum();
     
     interface Image {
         Integer getHeight();

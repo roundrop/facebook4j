@@ -62,6 +62,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Integer position;
     private PagableList<Comment> comments;
     private PagableList<Like> likes;
+    private Category album;
 
     /*package*/PhotoJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -159,6 +160,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             } else {
                 likes = new PagableListImpl<Like>(0);
             }
+            if (!json.isNull("album")) {
+                album = new CategoryJSONImpl(json.getJSONObject("album"));
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -232,6 +236,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return likes;
     }
 
+    public Category getAlbum() {
+        return album;
+    }
+
     /*package*/
     static ResponseList<Photo> createPhotoList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -286,13 +294,26 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     @Override
     public String toString() {
-        return "PhotoJSONImpl [id=" + id + ", from=" + from + ", tags=" + tags
-                + ", name=" + name + ", icon=" + icon + ", picture=" + picture
-                + ", source=" + source + ", height=" + height + ", width="
-                + width + ", images=" + images + ", link=" + link + ", place="
-                + place + ", createdTime=" + createdTime + ", updatedTime="
-                + updatedTime + ", position=" + position + ", comments="
-                + comments + ", likes=" + likes + "]";
+        return "PhotoJSONImpl{" +
+                "id='" + id + '\'' +
+                ", from=" + from +
+                ", tags=" + tags +
+                ", name='" + name + '\'' +
+                ", icon=" + icon +
+                ", picture=" + picture +
+                ", source=" + source +
+                ", height=" + height +
+                ", width=" + width +
+                ", images=" + images +
+                ", link=" + link +
+                ", place=" + place +
+                ", createdTime=" + createdTime +
+                ", updatedTime=" + updatedTime +
+                ", position=" + position +
+                ", comments=" + comments +
+                ", likes=" + likes +
+                ", album=" + album +
+                '}';
     }
 
     private final class ImageJSONImpl implements Photo.Image, java.io.Serializable {

@@ -1716,7 +1716,21 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Photo Methods */
-    
+
+    public ResponseList<Photo> getUploadedPhotos() throws FacebookException {
+        return getUploadedPhotos("me", null);
+    }
+    public ResponseList<Photo> getUploadedPhotos(Reading reading) throws FacebookException {
+        return getUploadedPhotos("me", reading);
+    }
+    public ResponseList<Photo> getUploadedPhotos(String id) throws FacebookException {
+        return getUploadedPhotos(id, null);
+    }
+    public ResponseList<Photo> getUploadedPhotos(String id, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createPhotoList(get(buildEndpoint(id, "photos/uploaded", reading)));
+    }
+
     public ResponseList<Photo> getPhotos() throws FacebookException {
         return getPhotos("me", null);
     }

@@ -1,0 +1,113 @@
+{
+    "data": [
+        {
+            "album": {
+                "created_time": "2011-08-17T11:03:11+0000",
+                "id": "191919191919191",
+                "name": "Mobile Uploads"
+            },
+            "created_time": "2013-10-12T01:28:39+0000",
+            "id": "600000000000001",
+            "images": [
+                {
+                    "height": 960,
+                    "source": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn2/1375777_600000000000001_2091899828_n.jpg",
+                    "width": 540
+                },
+                {
+                    "height": 720,
+                    "source": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn2/q75/s720x720/1375777_600000000000001_2091899828_n.jpg",
+                    "width": 405
+                },
+                {
+                    "height": 600,
+                    "source": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn2/s600x600/1375777_600000000000001_2091899828_n.jpg",
+                    "width": 337
+                },
+                {
+                    "height": 480,
+                    "source": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn2/q77/s480x480/1375777_600000000000001_2091899828_n.jpg",
+                    "width": 270
+                },
+                {
+                    "height": 320,
+                    "source": "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn2/q79/s320x320/1375777_600000000000001_2091899828_n.jpg",
+                    "width": 180
+                },
+                {
+                    "height": 320,
+                    "source": "https://fbcdn-photos-c-a.akamaihd.net/hphotos-ak-prn2/1375777_600000000000001_2091899828_a.jpg",
+                    "width": 180
+                },
+                {
+                    "height": 130,
+                    "source": "https://fbcdn-photos-c-a.akamaihd.net/hphotos-ak-prn2/1375777_600000000000001_2091899828_s.jpg",
+                    "width": 73
+                },
+                {
+                    "height": 130,
+                    "source": "https://fbcdn-photos-c-a.akamaihd.net/hphotos-ak-prn2/s75x225/1375777_600000000000001_2091899828_s.jpg",
+                    "width": 73
+                }
+            ]
+        },
+        {
+            "album": {
+                "created_time": "2011-08-17T11:03:11+0000",
+                "id": "191919191919191",
+                "name": "Mobile Uploads"
+            },
+            "created_time": "2013-09-30T11:26:55+0000",
+            "id": "600000000000002",
+            "images": [
+                {
+                    "height": 720,
+                    "source": "https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-prn2/1186300_600000000000002_1541195281_n.jpg",
+                    "width": 960
+                },
+                {
+                    "height": 540,
+                    "source": "https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-prn2/q74/s720x720/1186300_600000000000002_1541195281_n.jpg",
+                    "width": 720
+                },
+                {
+                    "height": 450,
+                    "source": "https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-prn2/s600x600/1186300_600000000000002_1541195281_n.jpg",
+                    "width": 600
+                },
+                {
+                    "height": 360,
+                    "source": "https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-prn2/q71/s480x480/1186300_600000000000002_1541195281_n.jpg",
+                    "width": 480
+                },
+                {
+                    "height": 240,
+                    "source": "https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-prn2/q71/s320x320/1186300_600000000000002_1541195281_n.jpg",
+                    "width": 320
+                },
+                {
+                    "height": 135,
+                    "source": "https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-prn2/1186300_600000000000002_1541195281_a.jpg",
+                    "width": 180
+                },
+                {
+                    "height": 97,
+                    "source": "https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-prn2/1186300_600000000000002_1541195281_s.jpg",
+                    "width": 130
+                },
+                {
+                    "height": 97,
+                    "source": "https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-prn2/s75x225/1186300_600000000000002_1541195281_s.jpg",
+                    "width": 130
+                }
+            ]
+        }
+    ],
+    "paging": {
+        "cursors": {
+            "after": "NjA0ODM0OTY2MjQ1NDU5",
+            "before": "NjEwODg0Nzg4OTczODEw"
+        },
+        "next": "https://graph.facebook.com/1234567890123456/photos?fields=album,images&limit=2&type=uploaded&access_token=access_token&after=NjA0ODM0OTY2MjQ1NDU5"
+    }
+}
