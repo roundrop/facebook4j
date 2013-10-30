@@ -56,8 +56,12 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         try {
             id = getRawString("id", json);
             name = getRawString("name", json);
-            JSONObject locationJSONObject = json.getJSONObject("location");
-            location = new PlaceJSONImpl.LocationJSONImpl(locationJSONObject);
+            if (isJSONObject("location", json)) {
+                JSONObject locationJSONObject = json.getJSONObject("location");
+                location = new PlaceJSONImpl.LocationJSONImpl(locationJSONObject);
+            } else {
+                location = new PlaceJSONImpl.LocationJSONImpl(getRawString("location", json));
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -134,8 +138,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
 
     /*package*/ static final class LocationJSONImpl implements Location, java.io.Serializable {
-        private static final long serialVersionUID = -9144378506897014902L;
-        
+        private static final long serialVersionUID = 1578695411333203753L;
+
         private String street;
         private String city;
         private String state;
@@ -143,6 +147,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         private String zip;
         private Double latitude;
         private Double longitude;
+        private String text;
 
         /*package*/LocationJSONImpl(JSONObject json) throws FacebookException {
             street = getRawString("street", json);
@@ -152,6 +157,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             zip = getRawString("zip", json);
             latitude = getDouble("latitude", json);
             longitude = getDouble("longitude", json);
+        }
+        /*package*/LocationJSONImpl(String text) throws FacebookException {
+            this.text = text;
         }
 
         public String getStreet() {
@@ -175,94 +183,54 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         public Double getLongitude() {
             return longitude;
         }
-
-        @Override
-        public int hashCode() {
-            final int prime = 31;
-            int result = 1;
-            result = prime * result + ((city == null) ? 0 : city.hashCode());
-            result = prime * result
-                    + ((country == null) ? 0 : country.hashCode());
-            result = prime * result
-                    + ((latitude == null) ? 0 : latitude.hashCode());
-            result = prime * result
-                    + ((longitude == null) ? 0 : longitude.hashCode());
-            result = prime * result + ((state == null) ? 0 : state.hashCode());
-            result = prime * result
-                    + ((street == null) ? 0 : street.hashCode());
-            result = prime * result + ((zip == null) ? 0 : zip.hashCode());
-            return result;
+        public String getText() {
+            return text;
         }
 
         @Override
-        public boolean equals(Object obj) {
-            if (this == obj) {
-                return true;
-            }
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            LocationJSONImpl other = (LocationJSONImpl) obj;
-            if (city == null) {
-                if (other.city != null) {
-                    return false;
-                }
-            } else if (!city.equals(other.city)) {
-                return false;
-            }
-            if (country == null) {
-                if (other.country != null) {
-                    return false;
-                }
-            } else if (!country.equals(other.country)) {
-                return false;
-            }
-            if (latitude == null) {
-                if (other.latitude != null) {
-                    return false;
-                }
-            } else if (!latitude.equals(other.latitude)) {
-                return false;
-            }
-            if (longitude == null) {
-                if (other.longitude != null) {
-                    return false;
-                }
-            } else if (!longitude.equals(other.longitude)) {
-                return false;
-            }
-            if (state == null) {
-                if (other.state != null) {
-                    return false;
-                }
-            } else if (!state.equals(other.state)) {
-                return false;
-            }
-            if (street == null) {
-                if (other.street != null) {
-                    return false;
-                }
-            } else if (!street.equals(other.street)) {
-                return false;
-            }
-            if (zip == null) {
-                if (other.zip != null) {
-                    return false;
-                }
-            } else if (!zip.equals(other.zip)) {
-                return false;
-            }
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof LocationJSONImpl)) return false;
+
+            LocationJSONImpl that = (LocationJSONImpl) o;
+
+            if (city != null ? !city.equals(that.city) : that.city != null) return false;
+            if (country != null ? !country.equals(that.country) : that.country != null) return false;
+            if (latitude != null ? !latitude.equals(that.latitude) : that.latitude != null) return false;
+            if (longitude != null ? !longitude.equals(that.longitude) : that.longitude != null) return false;
+            if (state != null ? !state.equals(that.state) : that.state != null) return false;
+            if (street != null ? !street.equals(that.street) : that.street != null) return false;
+            if (text != null ? !text.equals(that.text) : that.text != null) return false;
+            if (zip != null ? !zip.equals(that.zip) : that.zip != null) return false;
+
             return true;
         }
 
         @Override
+        public int hashCode() {
+            int result = street != null ? street.hashCode() : 0;
+            result = 31 * result + (city != null ? city.hashCode() : 0);
+            result = 31 * result + (state != null ? state.hashCode() : 0);
+            result = 31 * result + (country != null ? country.hashCode() : 0);
+            result = 31 * result + (zip != null ? zip.hashCode() : 0);
+            result = 31 * result + (latitude != null ? latitude.hashCode() : 0);
+            result = 31 * result + (longitude != null ? longitude.hashCode() : 0);
+            result = 31 * result + (text != null ? text.hashCode() : 0);
+            return result;
+        }
+
+        @Override
         public String toString() {
-            return "LocationJSONImpl [street=" + street + ", city=" + city
-                    + ", state=" + state + ", country=" + country + ", zip=" + zip
-                    + ", latitude=" + latitude + ", longitude=" + longitude + "]";
+            return "LocationJSONImpl{" +
+                    "street='" + street + '\'' +
+                    ", city='" + city + '\'' +
+                    ", state='" + state + '\'' +
+                    ", country='" + country + '\'' +
+                    ", zip='" + zip + '\'' +
+                    ", latitude=" + latitude +
+                    ", longitude=" + longitude +
+                    ", text='" + text + '\'' +
+                    '}';
         }
     }
 }

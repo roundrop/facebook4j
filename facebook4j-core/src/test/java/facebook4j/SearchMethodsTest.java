@@ -59,6 +59,16 @@ public class SearchMethodsTest {
             assertThat(actual1.getActions().get(0).getLink().toString(), is("https://www.facebook.com/110821725680303/posts/483362711759534"));
             assertThat(actual1.getActions().get(1).getName(), is("Like"));
             assertThat(actual1.getActions().get(1).getLink().toString(), is("https://www.facebook.com/110821725680303/posts/483362711759534"));
+            Post actual24 = actuals.get(23);
+            Place.Location location = actual24.getPlace().getLocation();
+            assertThat(location.getText(), is("R\u1eebng Tr\u00e0m Tr\u00e0 S\u01b0"));
+            assertThat(location.getStreet(), is(nullValue()));
+            assertThat(location.getCity(), is(nullValue()));
+            assertThat(location.getState(), is(nullValue()));
+            assertThat(location.getCountry(), is(nullValue()));
+            assertThat(location.getZip(), is(nullValue()));
+            assertThat(location.getLatitude(), is(nullValue()));
+            assertThat(location.getLongitude(), is(nullValue()));
             Post actual25 = actuals.get(24);
             assertThat(actual25.getId(), is("633068986_10151834080613987"));
         }

@@ -1,3 +1,7 @@
 oauth.appId=xxxxxxxxxxx
 oauth.appSecret=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 oauth.accessToken=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+login.callbackURL=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+login.email=xxxxxxxxxxxxxxxxxx
+login.password=xxxxxxxxxxxxxxxxxx

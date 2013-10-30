@@ -384,6 +384,9 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     }
 
     public Date getScheduledPublishTime() {
+        if (scheduledPublishTime == null) {
+            return null;
+        }
         return new Date(scheduledPublishTime * 1000);
     }
 

@@ -300,5 +300,14 @@ public final class z_F4JInternalParseUtil {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
     }
-    
+
+    public static boolean isJSONObject(String name, JSONObject json) {
+        try {
+            Object object = json.get(name);
+            return (object instanceof JSONObject);
+        } catch (JSONException e) {
+            return false;
+        }
+    }
+
 }

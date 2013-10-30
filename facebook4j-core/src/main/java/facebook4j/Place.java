@@ -33,5 +33,6 @@ public interface Place extends FacebookResponse {
         String getZip();
         Double getLatitude();
         Double getLongitude();
+        String getText();
     }
 }

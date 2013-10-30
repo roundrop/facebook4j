@@ -16,11 +16,11 @@
 
 package facebook4j;
 
-import java.util.List;
-
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * An exception class that will be thrown when Facebook Graph API calls are failed.<br>
@@ -29,13 +29,14 @@ import facebook4j.internal.org.json.JSONObject;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public class FacebookException extends Exception {
-    private static final long serialVersionUID = 8394133786720654641L;
-    
+    private static final long serialVersionUID = 1200504652249544235L;
+
     private int statusCode = -1;
     private HttpResponse response;
     private String errorType;
     private String errorMessage;
     private int errorCode = -1;
+    private int errorSubcode = -1;
 
     public FacebookException(String message, Throwable cause) {
         super(message, cause);
@@ -70,10 +71,15 @@ public class FacebookException extends Exception {
                     this.errorType = error.getString("type");
                     this.errorMessage = error.getString("message");
                     this.errorCode = error.getInt("code");
+                    this.errorSubcode = error.getInt("error_subcode");
                 }
             } catch (JSONException ignore) {
             }
         }
+    }
+
+    public int getStatusCode() {
+        return this.statusCode;
     }
 
     public String getErrorType() {
@@ -88,8 +94,8 @@ public class FacebookException extends Exception {
         return errorCode;
     }
 
-    public int getStatusCode() {
-        return this.statusCode;
+    public int getErrorSubcode() {
+        return errorSubcode;
     }
 
     public String getResponseHeader(String name) {
@@ -122,56 +128,42 @@ public class FacebookException extends Exception {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + errorCode;
-        result = prime * result
-                + ((errorMessage == null) ? 0 : errorMessage.hashCode());
-        result = prime * result
-                + ((errorType == null) ? 0 : errorType.hashCode());
-        result = prime * result
-                + ((response == null) ? 0 : response.hashCode());
-        result = prime * result + statusCode;
-        return result;
-    }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FacebookException)) return false;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        FacebookException other = (FacebookException) obj;
-        if (errorCode != other.errorCode)
-            return false;
-        if (errorMessage == null) {
-            if (other.errorMessage != null)
-                return false;
-        } else if (!errorMessage.equals(other.errorMessage))
-            return false;
-        if (errorType == null) {
-            if (other.errorType != null)
-                return false;
-        } else if (!errorType.equals(other.errorType))
-            return false;
-        if (response == null) {
-            if (other.response != null)
-                return false;
-        } else if (!response.equals(other.response))
-            return false;
-        if (statusCode != other.statusCode)
-            return false;
+        FacebookException that = (FacebookException) o;
+
+        if (errorCode != that.errorCode) return false;
+        if (errorSubcode != that.errorSubcode) return false;
+        if (statusCode != that.statusCode) return false;
+        if (errorMessage != null ? !errorMessage.equals(that.errorMessage) : that.errorMessage != null) return false;
+        if (errorType != null ? !errorType.equals(that.errorType) : that.errorType != null) return false;
+        if (response != null ? !response.equals(that.response) : that.response != null) return false;
+
         return true;
     }
 
     @Override
-    public String toString() {
-        return "FacebookException [statusCode=" + statusCode + ", response="
-                + response + ", errorType=" + errorType + ", errorMessage="
-                + errorMessage + ", errorCode=" + errorCode + "]";
+    public int hashCode() {
+        int result = statusCode;
+        result = 31 * result + (response != null ? response.hashCode() : 0);
+        result = 31 * result + (errorType != null ? errorType.hashCode() : 0);
+        result = 31 * result + (errorMessage != null ? errorMessage.hashCode() : 0);
+        result = 31 * result + errorCode;
+        result = 31 * result + errorSubcode;
+        return result;
     }
 
+    @Override
+    public String toString() {
+        return "FacebookException{" +
+                "statusCode=" + statusCode +
+                ", response=" + response +
+                ", errorType='" + errorType + '\'' +
+                ", errorMessage='" + errorMessage + '\'' +
+                ", errorCode=" + errorCode +
+                ", errorSubcode=" + errorSubcode +
+                '}';
+    }
 }
