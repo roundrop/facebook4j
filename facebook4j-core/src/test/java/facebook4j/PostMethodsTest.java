@@ -575,6 +575,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual.getActions().get(1).getLink().toString(), is("https://www.facebook.com/19292868552/posts/10150189643478553"));
             assertThat(actual.getActions().get(2).getName(), is("Share"));
             assertThat(actual.getActions().get(2).getLink().toString(), is("http://networkedblogs.com/hGWk3?a=share"));
+            assertThat(actual.getScheduledPublishTime(), is(nullValue()));
         }
 
         @Test
