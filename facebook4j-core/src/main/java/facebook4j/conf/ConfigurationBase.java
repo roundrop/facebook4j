@@ -59,7 +59,8 @@ public class ConfigurationBase implements Configuration, Serializable {
     private String oAuthAppSecret;
     private String oAuthPermissions;
     private String oAuthAccessToken;
-    
+    private String callbackURL;
+
     private String oAuthAuthorizationURL;
     private String oAuthAccessTokenURL;
 
@@ -480,6 +481,7 @@ public class ConfigurationBase implements Configuration, Serializable {
         result = 31 * result + (oAuthAppId != null ? oAuthAppId.hashCode() : 0);
         result = 31 * result + (oAuthAppSecret != null ? oAuthAppSecret.hashCode() : 0);
         result = 31 * result + (oAuthAccessToken != null ? oAuthAccessToken.hashCode() : 0);
+        result = 31 * result + (callbackURL != null ? callbackURL.hashCode() : 0);
         result = 31 * result + (oAuthAuthorizationURL != null ? oAuthAuthorizationURL.hashCode() : 0);
         result = 31 * result + (oAuthAccessTokenURL != null ? oAuthAccessTokenURL.hashCode() : 0);
         result = 31 * result + (restBaseURL != null ? restBaseURL.hashCode() : 0);
@@ -609,4 +611,11 @@ public class ConfigurationBase implements Configuration, Serializable {
         return getInstance(this);
     }
 
+    public String getCallbackURL() {
+        return this.callbackURL;
+    }
+
+    public void setCallbackURL(String callbackURL) {
+        this.callbackURL = callbackURL;
+    }
 }

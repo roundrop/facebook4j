@@ -99,6 +99,11 @@ public class OAuthAuthorization implements Authorization, java.io.Serializable, 
         return this.oauthToken;
     }
 
+    public AccessToken getOAuthAccessToken(String oauthCode, String callbackURL) throws FacebookException {
+        this.callbackURL = callbackURL;
+        return getOAuthAccessToken(oauthCode);
+    }
+
     protected String getExchangeAccessTokenURL(String oauthCode) {
         return conf.getOAuthAccessTokenURL() +
                 "?client_id=" + this.appId + 
@@ -131,6 +136,11 @@ public class OAuthAuthorization implements Authorization, java.io.Serializable, 
 
     public void setOAuthAccessToken(AccessToken accessToken) {
         this.oauthToken = accessToken;
+    }
+
+    public void setOAuthAccessToken(AccessToken accessToken, String callbackURL) {
+        this.oauthToken = accessToken;
+        this.callbackURL = callbackURL;
     }
 
     public void setOAuthAppId(String appId, String appSecret) {

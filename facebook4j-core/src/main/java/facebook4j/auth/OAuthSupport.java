@@ -60,7 +60,18 @@ public interface OAuthSupport {
      * @see <a href="https://developers.facebook.com/docs/authentication/server-side/">Server-Side Authentication</a>
      */
     AccessToken getOAuthAccessToken(String oauthCode) throws FacebookException;
-    
+
+    /**
+     * Exchange the code for a User Access Token.
+     *
+     * @param oauthCode OAuth code.
+     * @param callbackURL callback URL
+     * @return User Access Token
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     * @see <a href="https://developers.facebook.com/docs/authentication/server-side/">Server-Side Authentication</a>
+     */
+    AccessToken getOAuthAccessToken(String oauthCode, String callbackURL) throws FacebookException;
+
     /**
      * Returns an App Access Token.
      *
@@ -76,5 +87,13 @@ public interface OAuthSupport {
      * @param accessToken accessToken
      */
     void setOAuthAccessToken(AccessToken accessToken);
-    
+
+    /**
+     * Sets the access token and callback URL
+     *
+     * @param accessToken
+     * @param callbackURL
+     */
+    void setOAuthAccessToken(AccessToken accessToken, String callbackURL);
+
 }

@@ -63,9 +63,13 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
             // try to find oauth tokens in the configuration
             if (consumerKey != null && consumerSecret != null) {
                 OAuthAuthorization oauth = new OAuthAuthorization(conf);
+                String callbackURL = conf.getCallbackURL();
                 String accessToken = conf.getOAuthAccessToken();
                 if (accessToken != null) {
-                    oauth.setOAuthAccessToken(new AccessToken(accessToken, null));
+                    if (callbackURL != null)
+                        oauth.setOAuthAccessToken(new AccessToken(accessToken, null), callbackURL);
+                    else
+                        oauth.setOAuthAccessToken(new AccessToken(accessToken, null));
                 }
                 this.auth = oauth;
             } else {
@@ -227,7 +231,11 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
     synchronized public AccessToken getOAuthAccessToken(String oauthCode) throws FacebookException {
         return getOAuth().getOAuthAccessToken(oauthCode);
     }
-    
+
+    public AccessToken getOAuthAccessToken(String oauthCode, String callbackURL) throws FacebookException {
+        return getOAuth().getOAuthAccessToken(oauthCode, callbackURL);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -241,6 +249,13 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
     public void setOAuthAccessToken(AccessToken accessToken) {
         getOAuth().setOAuthAccessToken(accessToken);
         
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setOAuthAccessToken(AccessToken accessToken, String callbackUrl) {
+        getOAuth().setOAuthAccessToken(accessToken, callbackUrl);
     }
 
     private OAuthSupport getOAuth() {
