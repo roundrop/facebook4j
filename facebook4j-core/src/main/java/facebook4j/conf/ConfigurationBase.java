@@ -59,7 +59,8 @@ public class ConfigurationBase implements Configuration, Serializable {
     private String oAuthAppSecret;
     private String oAuthPermissions;
     private String oAuthAccessToken;
-    
+    private String oAuthCallbackURL;
+
     private String oAuthAuthorizationURL;
     private String oAuthAccessTokenURL;
 
@@ -128,6 +129,7 @@ public class ConfigurationBase implements Configuration, Serializable {
         setOAuthAppId(null);
         setOAuthAppSecret(null);
         setOAuthAccessToken(null);
+        setOAuthCallbackURL(null);
         setClientVersion(Version.getVersion());
         setClientURL("http://facebook4j.org/en/facebook4j-" + Version.getVersion() + ".xml");
         setUserAgent("facebook4j http://facebook4j.org/ /" + Version.getVersion());
@@ -480,6 +482,7 @@ public class ConfigurationBase implements Configuration, Serializable {
         result = 31 * result + (oAuthAppId != null ? oAuthAppId.hashCode() : 0);
         result = 31 * result + (oAuthAppSecret != null ? oAuthAppSecret.hashCode() : 0);
         result = 31 * result + (oAuthAccessToken != null ? oAuthAccessToken.hashCode() : 0);
+        result = 31 * result + (oAuthCallbackURL != null ? oAuthCallbackURL.hashCode() : 0);
         result = 31 * result + (oAuthAuthorizationURL != null ? oAuthAuthorizationURL.hashCode() : 0);
         result = 31 * result + (oAuthAccessTokenURL != null ? oAuthAccessTokenURL.hashCode() : 0);
         result = 31 * result + (restBaseURL != null ? restBaseURL.hashCode() : 0);
@@ -609,4 +612,11 @@ public class ConfigurationBase implements Configuration, Serializable {
         return getInstance(this);
     }
 
+    public String getOAuthCallbackURL() {
+        return this.oAuthCallbackURL;
+    }
+
+    public void setOAuthCallbackURL(String oAuthCallbackURL) {
+        this.oAuthCallbackURL = oAuthCallbackURL;
+    }
 }
