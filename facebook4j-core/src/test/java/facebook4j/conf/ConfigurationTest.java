@@ -159,9 +159,9 @@ public class ConfigurationTest {
         conf = new PropertyConfiguration();
         assertThat(conf.getHttpReadTimeout(), is(4321));
 
-        writeFile("./facebook4j.properties", "callbackURL=http://localhost:8080/callback");
+        writeFile("./facebook4j.properties", "oauth.callbackURL=http://localhost:8080/callback");
         conf = new PropertyConfiguration();
-        assertThat(conf.getCallbackURL(), is("http://localhost:8080/callback"));
+        assertThat(conf.getOAuthCallbackURL(), is("http://localhost:8080/callback"));
 
         deleteFile("./facebook4j.properties");
     }

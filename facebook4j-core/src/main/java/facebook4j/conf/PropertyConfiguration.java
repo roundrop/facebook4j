@@ -63,6 +63,7 @@ public final class PropertyConfiguration extends ConfigurationBase implements Se
     public static final String OAUTH_APP_SECRET = "oauth.appSecret";
     public static final String OAUTH_ACCESS_TOKEN = "oauth.accessToken";
     public static final String OAUTH_PERMISSIONS = "oauth.permissions";
+    public static final String OAUTH_CALLBACK_URL = "oauth.callbackURL";
 
 
     public static final String OAUTH_AUTHORIZATION_URL = "oauth.authorizationURL";
@@ -267,6 +268,9 @@ public final class PropertyConfiguration extends ConfigurationBase implements Se
         }
         if (notNull(props, prefix, OAUTH_PERMISSIONS)) {
             setOAuthPermissions(getString(props, prefix, OAUTH_PERMISSIONS));
+        }
+        if (notNull(props, prefix, OAUTH_CALLBACK_URL)) {
+            setOAuthCallbackURL(getString(props, prefix, OAUTH_CALLBACK_URL));
         }
         if (notNull(props, prefix, CLIENT_VERSION)) {
             setClientVersion(getString(props, prefix, CLIENT_VERSION));

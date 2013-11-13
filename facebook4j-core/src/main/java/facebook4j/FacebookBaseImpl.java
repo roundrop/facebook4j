@@ -63,7 +63,7 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
             // try to find oauth tokens in the configuration
             if (consumerKey != null && consumerSecret != null) {
                 OAuthAuthorization oauth = new OAuthAuthorization(conf);
-                String callbackURL = conf.getCallbackURL();
+                String callbackURL = conf.getOAuthCallbackURL();
                 String accessToken = conf.getOAuthAccessToken();
                 if (accessToken != null) {
                     if (callbackURL != null)
@@ -256,6 +256,20 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
      */
     public void setOAuthAccessToken(AccessToken accessToken, String callbackUrl) {
         getOAuth().setOAuthAccessToken(accessToken, callbackUrl);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getOAuthCallbackURL() {
+        return getOAuth().getOAuthCallbackURL();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setOAuthCallbackURL(String callbackURL) {
+        getOAuth().setOAuthCallbackURL(callbackURL);
     }
 
     private OAuthSupport getOAuth() {

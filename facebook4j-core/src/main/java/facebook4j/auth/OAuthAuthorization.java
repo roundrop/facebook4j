@@ -143,6 +143,14 @@ public class OAuthAuthorization implements Authorization, java.io.Serializable, 
         this.callbackURL = callbackURL;
     }
 
+    public String getOAuthCallbackURL() {
+        return callbackURL;
+    }
+
+    public void setOAuthCallbackURL(String callbackURL) {
+        this.callbackURL = callbackURL;
+    }
+
     public void setOAuthAppId(String appId, String appSecret) {
         this.appId = appId != null ? appId : "";
         this.appSecret = appSecret != null ? appSecret : "";

@@ -145,7 +145,7 @@ public final class ConfigurationBuilder {
 
     public ConfigurationBuilder setCallbackURL(String callbackURL) {
         checkNotBuilt();
-        configurationBean.setCallbackURL(callbackURL);
+        configurationBean.setOAuthCallbackURL(callbackURL);
         return this;
     }
 

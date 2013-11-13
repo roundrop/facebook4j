@@ -31,5 +31,5 @@ public interface AuthorizationConfiguration {
 
     String getOAuthPermissions();
 
-    String getCallbackURL();
+    String getOAuthCallbackURL();
 }
