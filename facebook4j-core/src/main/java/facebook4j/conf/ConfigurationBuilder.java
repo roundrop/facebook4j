@@ -143,18 +143,18 @@ public final class ConfigurationBuilder {
         return this;
     }
 
-    public ConfigurationBuilder setCallbackURL(String callbackURL) {
-        checkNotBuilt();
-        configurationBean.setOAuthCallbackURL(callbackURL);
-        return this;
-    }
-
     public ConfigurationBuilder setOAuthPermissions(String oAuthPermissions) {
         checkNotBuilt();
         configurationBean.setOAuthPermissions(oAuthPermissions);
         return this;
     }
-    
+
+    public ConfigurationBuilder setOAuthCallbackURL(String callbackURL) {
+        checkNotBuilt();
+        configurationBean.setOAuthCallbackURL(callbackURL);
+        return this;
+    }
+
     public ConfigurationBuilder setOAuthAuthorizationURL(String oAuthAuthorizationURL) {
         checkNotBuilt();
         configurationBean.setOAuthAuthorizationURL(oAuthAuthorizationURL);

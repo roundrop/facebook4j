@@ -90,14 +90,6 @@ public interface OAuthSupport {
 
     /**
      * Sets the access token and callback URL
-     *
-     * @param accessToken User Access Token
-     * @param callbackURL callback URL
-     */
-    void setOAuthAccessToken(AccessToken accessToken, String callbackURL);
-
-    /**
-     * Sets the access token and callback URL
      * @return Callback URL
      */
     String getOAuthCallbackURL();

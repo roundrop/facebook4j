@@ -27,7 +27,7 @@ import facebook4j.internal.http.HttpResponse;
  * @see <a href="http://oauth.net/core/1.0a/">OAuth Core 1.0a</a>
  */
 public class OAuthAuthorization implements Authorization, java.io.Serializable, OAuthSupport {
-    private static final long serialVersionUID = -5790157037375431464L;
+    private static final long serialVersionUID = 712818287194022801L;
 
     private final Configuration conf;
     private transient static HttpClientWrapper http;

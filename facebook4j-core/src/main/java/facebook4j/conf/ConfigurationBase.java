@@ -16,14 +16,14 @@
 
 package facebook4j.conf;
 
+import facebook4j.Version;
+
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import facebook4j.Version;
 
 /**
  * Configuration base class with default settings.
@@ -35,7 +35,7 @@ import facebook4j.Version;
  * </ul>
  */
 public class ConfigurationBase implements Configuration, Serializable {
-    private static final long serialVersionUID = 5586574179433521020L;
+    private static final long serialVersionUID = 5701766282131825157L;
 
     private boolean debug;
     private String userAgent;
@@ -445,6 +445,14 @@ public class ConfigurationBase implements Configuration, Serializable {
         this.oAuthPermissions = oAuthPermissions;
     }
 
+    public String getOAuthCallbackURL() {
+        return this.oAuthCallbackURL;
+    }
+
+    public void setOAuthCallbackURL(String oAuthCallbackURL) {
+        this.oAuthCallbackURL = oAuthCallbackURL;
+    }
+
     static String fixURL(boolean useSSL, String url) {
         if (null == url) {
             return null;
@@ -481,11 +489,13 @@ public class ConfigurationBase implements Configuration, Serializable {
         result = 31 * result + defaultMaxPerRoute;
         result = 31 * result + (oAuthAppId != null ? oAuthAppId.hashCode() : 0);
         result = 31 * result + (oAuthAppSecret != null ? oAuthAppSecret.hashCode() : 0);
+        result = 31 * result + (oAuthPermissions != null ? oAuthPermissions.hashCode() : 0);
         result = 31 * result + (oAuthAccessToken != null ? oAuthAccessToken.hashCode() : 0);
         result = 31 * result + (oAuthCallbackURL != null ? oAuthCallbackURL.hashCode() : 0);
         result = 31 * result + (oAuthAuthorizationURL != null ? oAuthAuthorizationURL.hashCode() : 0);
         result = 31 * result + (oAuthAccessTokenURL != null ? oAuthAccessTokenURL.hashCode() : 0);
         result = 31 * result + (restBaseURL != null ? restBaseURL.hashCode() : 0);
+        result = 31 * result + (videoBaseURL != null ? videoBaseURL.hashCode() : 0);
         result = 31 * result + (jsonStoreEnabled ? 1 : 0);
         result = 31 * result + (mbeanEnabled ? 1 : 0);
         result = 31 * result + (clientVersion != null ? clientVersion.hashCode() : 0);
@@ -503,6 +513,8 @@ public class ConfigurationBase implements Configuration, Serializable {
 
         ConfigurationBase that = (ConfigurationBase) o;
 
+        if (IS_DALVIK != that.IS_DALVIK) return false;
+        if (IS_GAE != that.IS_GAE) return false;
         if (debug != that.debug) return false;
         if (defaultMaxPerRoute != that.defaultMaxPerRoute) return false;
         if (gzipEnabled != that.gzipEnabled) return false;
@@ -510,16 +522,14 @@ public class ConfigurationBase implements Configuration, Serializable {
         if (httpProxyPort != that.httpProxyPort) return false;
         if (httpReadTimeout != that.httpReadTimeout) return false;
         if (httpRetryCount != that.httpRetryCount) return false;
-        if (httpRetryIntervalSeconds != that.httpRetryIntervalSeconds)
-            return false;
-        if (httpStreamingReadTimeout != that.httpStreamingReadTimeout)
-            return false;
+        if (httpRetryIntervalSeconds != that.httpRetryIntervalSeconds) return false;
+        if (httpStreamingReadTimeout != that.httpStreamingReadTimeout) return false;
+        if (jsonStoreEnabled != that.jsonStoreEnabled) return false;
         if (maxTotalConnections != that.maxTotalConnections) return false;
         if (mbeanEnabled != that.mbeanEnabled) return false;
         if (prettyDebug != that.prettyDebug) return false;
         if (useSSL != that.useSSL) return false;
-        if (clientURL != null ? !clientURL.equals(that.clientURL) : that.clientURL != null)
-            return false;
+        if (clientURL != null ? !clientURL.equals(that.clientURL) : that.clientURL != null) return false;
         if (clientVersion != null ? !clientVersion.equals(that.clientVersion) : that.clientVersion != null)
             return false;
         if (httpProxyHost != null ? !httpProxyHost.equals(that.httpProxyHost) : that.httpProxyHost != null)
@@ -532,18 +542,20 @@ public class ConfigurationBase implements Configuration, Serializable {
             return false;
         if (oAuthAccessTokenURL != null ? !oAuthAccessTokenURL.equals(that.oAuthAccessTokenURL) : that.oAuthAccessTokenURL != null)
             return false;
+        if (oAuthAppId != null ? !oAuthAppId.equals(that.oAuthAppId) : that.oAuthAppId != null) return false;
+        if (oAuthAppSecret != null ? !oAuthAppSecret.equals(that.oAuthAppSecret) : that.oAuthAppSecret != null)
+            return false;
         if (oAuthAuthorizationURL != null ? !oAuthAuthorizationURL.equals(that.oAuthAuthorizationURL) : that.oAuthAuthorizationURL != null)
             return false;
-        if (oAuthAppId != null ? !oAuthAppId.equals(that.oAuthAppId) : that.oAuthAppId != null)
+        if (oAuthCallbackURL != null ? !oAuthCallbackURL.equals(that.oAuthCallbackURL) : that.oAuthCallbackURL != null)
             return false;
-        if (oAuthAppSecret != null ? !oAuthAppSecret.equals(that.oAuthAppSecret) : that.oAuthAppSecret != null)
+        if (oAuthPermissions != null ? !oAuthPermissions.equals(that.oAuthPermissions) : that.oAuthPermissions != null)
             return false;
         if (requestHeaders != null ? !requestHeaders.equals(that.requestHeaders) : that.requestHeaders != null)
             return false;
-        if (restBaseURL != null ? !restBaseURL.equals(that.restBaseURL) : that.restBaseURL != null)
-            return false;
-        if (userAgent != null ? !userAgent.equals(that.userAgent) : that.userAgent != null)
-            return false;
+        if (restBaseURL != null ? !restBaseURL.equals(that.restBaseURL) : that.restBaseURL != null) return false;
+        if (userAgent != null ? !userAgent.equals(that.userAgent) : that.userAgent != null) return false;
+        if (videoBaseURL != null ? !videoBaseURL.equals(that.videoBaseURL) : that.videoBaseURL != null) return false;
 
         return true;
     }
@@ -571,6 +583,7 @@ public class ConfigurationBase implements Configuration, Serializable {
                 ", oAuthAppSecret='" + oAuthAppSecret + '\'' +
                 ", oAuthPermissions='" + oAuthPermissions + '\'' +
                 ", oAuthAccessToken='" + oAuthAccessToken + '\'' +
+                ", oAuthCallbackURL='" + oAuthCallbackURL + '\'' +
                 ", oAuthAuthorizationURL='" + oAuthAuthorizationURL + '\'' +
                 ", oAuthAccessTokenURL='" + oAuthAccessTokenURL + '\'' +
                 ", restBaseURL='" + restBaseURL + '\'' +
@@ -612,11 +625,4 @@ public class ConfigurationBase implements Configuration, Serializable {
         return getInstance(this);
     }
 
-    public String getOAuthCallbackURL() {
-        return this.oAuthCallbackURL;
-    }
-
-    public void setOAuthCallbackURL(String oAuthCallbackURL) {
-        this.oAuthCallbackURL = oAuthCallbackURL;
-    }
 }

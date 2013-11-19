@@ -36,7 +36,7 @@ import java.util.Set;
  * </ul>
  */
 public final class PropertyConfiguration extends ConfigurationBase implements Serializable {
-    private static final long serialVersionUID = 6537028750900791704L;
+    private static final long serialVersionUID = 5542404995159935407L;
 
     public static final String DEBUG = "debug";
     public static final String HTTP_USER_AGENT = "http.userAgent";
