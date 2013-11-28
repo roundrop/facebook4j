@@ -16,15 +16,7 @@
 
 package facebook4j;
 
-import facebook4j.Question.Option;
-import facebook4j.auth.Authorization;
-import facebook4j.conf.Configuration;
-import facebook4j.internal.http.HttpParameter;
-import facebook4j.internal.http.HttpResponse;
-import facebook4j.internal.org.json.JSONArray;
-import facebook4j.internal.org.json.JSONException;
-import facebook4j.internal.org.json.JSONObject;
-import facebook4j.internal.util.z_F4JInternalStringUtil;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -37,7 +29,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+import facebook4j.Question.Option;
+import facebook4j.auth.Authorization;
+import facebook4j.conf.Configuration;
+import facebook4j.internal.http.HttpParameter;
+import facebook4j.internal.http.HttpResponse;
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
+import facebook4j.internal.util.z_F4JInternalStringUtil;
 
 /**
  * A java representation of the <a href="https://developers.facebook.com/docs/reference/api/">Facebook Graph API</a><br>
@@ -70,6 +70,30 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
                             .append(reading == null ? "" : "?" + reading.getQuery());
         return url.toString();
     }
+    private String buildEndpoint(String graphPath, Map<String, String> params) {
+        StringBuilder url = new StringBuilder();
+        url.append(conf.getRestBaseURL() + graphPath);
+        if (params != null && params.size() > 0) {
+        	
+            url.append("?");
+        	
+            int i=0;
+        	for (final String k : params.keySet()) {
+        		if (i>0) {
+        			url.append("&");
+        		}
+
+        		try {
+	        		url.append(URLEncoder.encode(k, "UTF-8"))
+	        		   .append("=")
+	        		   .append(URLEncoder.encode(params.get(k), "UTF-8"));
+                } catch (UnsupportedEncodingException ignore) {
+                }
+        		i++;
+        	}
+        }
+		return url.toString();
+	}
     
     private String buildVideoEndpoint(String id, String connection) {
         return buildVideoEndpoint(id, connection, null);
@@ -2330,7 +2354,38 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
 
-    /* common methods */
+    /* raw api methods */
+    
+    public JSONObject callGetAPI(String graphPath, Map<String, String> params) throws FacebookException {
+        ensureAuthorizationEnabled();
+        
+        // not supports "JSONStore" option because this method returns the json object itself.
+        return get(buildEndpoint(graphPath, params)).asJSONObject();
+    }
+
+    public JSONObject callPostAPI(String graphPath, Map<String, String> params) throws FacebookException {
+        ensureAuthorizationEnabled();
+        
+        // not supports "JSONStore" option because this method returns the json object itself.
+        final HttpParameter[] httpParameters = new HttpParameter[params.size()];
+        int i=0;
+        for (final String p : params.keySet()) {
+        	httpParameters[i++] = new HttpParameter(p, params.get(p));
+        }
+        return post(buildEndpoint(graphPath), httpParameters).asJSONObject();
+    }
+
+    public JSONArray executeBatch(JSONArray params) throws FacebookException {
+        ensureAuthorizationEnabled();
+        
+        // not supports "JSONStore" option because this method returns the json object itself.
+        final HttpParameter[] httpParameters = new HttpParameter[]{
+        		new HttpParameter("batch", params.toString())};
+        return post(buildEndpoint("/"), httpParameters).asJSONArray();
+    }
+
+    
+	/* common methods */
     
     private ResponseList<Comment> _getComments(String objectId, Reading reading) throws FacebookException {
         return factory.createCommentList(get(buildEndpoint(objectId, "comments", reading)));
