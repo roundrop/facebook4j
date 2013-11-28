@@ -74,26 +74,26 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         StringBuilder url = new StringBuilder();
         url.append(conf.getRestBaseURL() + graphPath);
         if (params != null && params.size() > 0) {
-        	
-            url.append("?");
-        	
-            int i=0;
-        	for (final String k : params.keySet()) {
-        		if (i>0) {
-        			url.append("&");
-        		}
 
-        		try {
-	        		url.append(URLEncoder.encode(k, "UTF-8"))
-	        		   .append("=")
-	        		   .append(URLEncoder.encode(params.get(k), "UTF-8"));
+            url.append("?");
+
+            int i = 0;
+            for (final String k : params.keySet()) {
+                if (i > 0) {
+                    url.append("&");
+                }
+
+                try {
+                    url.append(URLEncoder.encode(k, "UTF-8"))
+                       .append("=")
+                       .append(URLEncoder.encode(params.get(k), "UTF-8"));
                 } catch (UnsupportedEncodingException ignore) {
                 }
-        		i++;
-        	}
+                i++;
+            }
         }
-		return url.toString();
-	}
+        return url.toString();
+    }
     
     private String buildVideoEndpoint(String id, String connection) {
         return buildVideoEndpoint(id, connection, null);
@@ -2368,9 +2368,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         
         // not supports "JSONStore" option because this method returns the json object itself.
         final HttpParameter[] httpParameters = new HttpParameter[params.size()];
-        int i=0;
+        int i = 0;
         for (final String p : params.keySet()) {
-        	httpParameters[i++] = new HttpParameter(p, params.get(p));
+            httpParameters[i++] = new HttpParameter(p, params.get(p));
         }
         return post(buildEndpoint(graphPath), httpParameters).asJSONObject();
     }
@@ -2379,13 +2379,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         
         // not supports "JSONStore" option because this method returns the json object itself.
-        final HttpParameter[] httpParameters = new HttpParameter[]{
-        		new HttpParameter("batch", params.toString())};
+        final HttpParameter[] httpParameters = new HttpParameter[] {
+                new HttpParameter("batch", params.toString()) };
         return post(buildEndpoint("/"), httpParameters).asJSONArray();
     }
 
     
-	/* common methods */
+    /* common methods */
     
     private ResponseList<Comment> _getComments(String objectId, Reading reading) throws FacebookException {
         return factory.createCommentList(get(buildEndpoint(objectId, "comments", reading)));
