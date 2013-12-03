@@ -47,6 +47,16 @@ public interface RawAPIMethods {
     JSONObject callPostAPI(String graphPath, Map<String, String> params) throws FacebookException;
     
     /**
+     * Calls raw Facebook DELETE API simply
+     * 
+     * @param graphPath graphPath
+     * @param params parameters
+     * @return json object
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    boolean callDeleteAPI(String graphPath, Map<String, String> params) throws FacebookException;
+    
+    /**
      * Calls Facebook batch API
      * 
      * @param params batch parameters

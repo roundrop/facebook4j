@@ -2375,6 +2375,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return post(buildEndpoint(graphPath), httpParameters).asJSONObject();
     }
 
+    public boolean callDeleteAPI(String graphPath, Map<String, String> params) throws FacebookException {
+        ensureAuthorizationEnabled();
+        
+        HttpResponse res = delete(buildEndpoint(graphPath, params));
+        return Boolean.valueOf(res.asString().trim());
+    }
+
     public JSONArray executeBatch(JSONArray params) throws FacebookException {
         ensureAuthorizationEnabled();
         
