@@ -14,21 +14,17 @@
  * limitations under the License.
  */
 
-package facebook4j;
-
-import facebook4j.internal.http.HttpParameter;
-import facebook4j.internal.http.RequestMethod;
-
-import java.net.URL;
+package facebook4j.auth;
 
 /**
+ * An interface represents security support.
+ * 
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface MockFacebook extends Facebook {
-    void setOAuthAppId(String appId, String appSecret);
-    void setAppSecretProofEnabled(boolean appSecretProofEnabled);
-    void setMockJSON(String resourceName);
-    RequestMethod getHttpMethod();
-    URL getEndpointURL();
-    HttpParameter[] getHttpParameters();
+public interface Security extends java.io.Serializable {
+
+    boolean isAppSecretProofEnabled();
+
+    String generateAppSecretProof();
+
 }

@@ -36,7 +36,7 @@ import java.util.Set;
  * </ul>
  */
 public final class PropertyConfiguration extends ConfigurationBase implements Serializable {
-    private static final long serialVersionUID = 5542404995159935407L;
+    private static final long serialVersionUID = -8731831360470825131L;
 
     public static final String DEBUG = "debug";
     public static final String HTTP_USER_AGENT = "http.userAgent";
@@ -65,6 +65,8 @@ public final class PropertyConfiguration extends ConfigurationBase implements Se
     public static final String OAUTH_PERMISSIONS = "oauth.permissions";
     public static final String OAUTH_CALLBACK_URL = "oauth.callbackURL";
 
+    public static final String SECURITY_APP_SECRET_PROOF_ENABLED = "security.appSecretProofEnabled";
+    public static final String SECURITY_APP_SECRET_PROOF_CACHE_SIZE = "security.appSecretProofCacheSize";
 
     public static final String OAUTH_AUTHORIZATION_URL = "oauth.authorizationURL";
     public static final String OAUTH_ACCESS_TOKEN_URL = "oauth.accessTokenURL";
@@ -271,6 +273,12 @@ public final class PropertyConfiguration extends ConfigurationBase implements Se
         }
         if (notNull(props, prefix, OAUTH_CALLBACK_URL)) {
             setOAuthCallbackURL(getString(props, prefix, OAUTH_CALLBACK_URL));
+        }
+        if (notNull(props, prefix, SECURITY_APP_SECRET_PROOF_ENABLED)) {
+            setAppSecretProofEnabled(getBoolean(props, prefix, SECURITY_APP_SECRET_PROOF_ENABLED));
+        }
+        if (notNull(props, prefix, SECURITY_APP_SECRET_PROOF_CACHE_SIZE)) {
+            setAppSecretProofCacheSize(getIntProperty(props, prefix, SECURITY_APP_SECRET_PROOF_CACHE_SIZE));
         }
         if (notNull(props, prefix, CLIENT_VERSION)) {
             setClientVersion(getString(props, prefix, CLIENT_VERSION));

@@ -52,6 +52,17 @@ class MockFacebookImpl extends FacebookImpl implements MockFacebook {
         }
     }
 
+    public void setAppSecretProofEnabled(boolean appSecretProofEnabled) {
+        if (auth instanceof MockAuthorization) {
+            OAuthAuthorization oauth = new OAuthAuthorization(conf);
+            oauth.setAppSecretProofEnabled(appSecretProofEnabled);
+            this.auth = oauth;
+        } else
+        if (auth instanceof OAuthAuthorization) {
+            ((OAuthAuthorization) auth).setAppSecretProofEnabled(appSecretProofEnabled);
+        }
+    }
+
     public void setMockJSON(String resourceName) {
         ((MockHttpClientWrapper) http).setMockJSON(resourceName);
     }

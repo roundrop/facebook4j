@@ -32,4 +32,7 @@ public interface AuthorizationConfiguration {
     String getOAuthPermissions();
 
     String getOAuthCallbackURL();
+
+    boolean isAppSecretProofEnabled();
+    int getAppSecretProofCacheSize();
 }

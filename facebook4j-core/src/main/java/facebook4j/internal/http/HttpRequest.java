@@ -54,7 +54,7 @@ public final class HttpRequest implements java.io.Serializable {
      * @param method         Specifies the HTTP method
      * @param url            the request to request
      * @param parameters     parameters
-     * @param authorization  Authentication implementation. Currently BasicAuthentication, OAuthAuthentication and NullAuthentication are supported.
+     * @param authorization  Authentication implementation. Currently OAuthAuthentication and NullAuthentication are supported.
      * @param requestHeaders
      */
     public HttpRequest(RequestMethod method, String url, HttpParameter[] parameters
@@ -62,6 +62,7 @@ public final class HttpRequest implements java.io.Serializable {
         this.method = method;
         // Modified for Facebook4J start
         parameters = setAccessTokenParameter(parameters, authorization);
+        parameters = setAppSecretProofParameter(parameters, authorization);
         // Modified for Facebook4J end
         if (method != RequestMethod.POST && parameters != null && parameters.length != 0) {
             // Modified for Facebook4J start
@@ -93,6 +94,15 @@ public final class HttpRequest implements java.io.Serializable {
         AccessToken accessToken = ((OAuthAuthorization) authorization).getOAuthAccessToken();
         if (accessToken == null) return parameters;
         return HttpParameter.merge(parameters,  new HttpParameter("access_token", accessToken.getToken()));
+    }
+
+    private HttpParameter[] setAppSecretProofParameter(HttpParameter[] parameters, Authorization authorization) {
+        if (authorization == null) return parameters;
+        if (!(authorization instanceof OAuthAuthorization)) return parameters;
+        OAuthAuthorization oAuthAuthorization = (OAuthAuthorization) authorization;
+        if (!oAuthAuthorization.isAppSecretProofEnabled()) return parameters;
+        String appSecretProof = oAuthAuthorization.generateAppSecretProof();
+        return HttpParameter.merge(parameters,  new HttpParameter("appsecret_proof", appSecretProof));
     }
 
     public RequestMethod getMethod() {

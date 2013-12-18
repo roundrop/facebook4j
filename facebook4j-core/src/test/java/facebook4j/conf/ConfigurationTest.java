@@ -163,6 +163,21 @@ public class ConfigurationTest {
         conf = new PropertyConfiguration();
         assertThat(conf.getOAuthCallbackURL(), is("http://localhost:8080/callback"));
 
+        conf = new PropertyConfiguration();
+        assertThat(conf.isAppSecretProofEnabled(), is(false));
+        writeFile("./facebook4j.properties", "security.appSecretProofEnabled=true");
+        conf = new PropertyConfiguration();
+        assertThat(conf.isAppSecretProofEnabled(), is(true));
+        writeFile("./facebook4j.properties", "security.appSecretProofEnabled=false");
+        conf = new PropertyConfiguration();
+        assertThat(conf.isAppSecretProofEnabled(), is(false));
+
+        conf = new PropertyConfiguration();
+        assertThat(conf.getAppSecretProofCacheSize(), is(10));
+        writeFile("./facebook4j.properties", "security.appSecretProofCacheSize=50");
+        conf = new PropertyConfiguration();
+        assertThat(conf.getAppSecretProofCacheSize(), is(50));
+
         deleteFile("./facebook4j.properties");
     }
     

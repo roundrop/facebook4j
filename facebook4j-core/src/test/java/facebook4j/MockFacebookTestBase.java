@@ -32,6 +32,7 @@ public abstract class MockFacebookTestBase extends FacebookTestBase {
         String appId = p.getProperty("oauth.appId");
         String appSecret = p.getProperty("oauth.appSecret");
         String accessToken = p.getProperty("oauth.accessToken");
+        String appSecretProofEnabled = p.getProperty("security.appSecretProofEnabled");
         if (appId != null && appSecret != null) {
             facebook.setOAuthAppId(appId, appSecret);
             if (accessToken == null) {
@@ -40,6 +41,9 @@ public abstract class MockFacebookTestBase extends FacebookTestBase {
         }
         if (accessToken != null) {
             facebook.setOAuthAccessToken(new AccessToken(accessToken));
+        }
+        if (appSecretProofEnabled != null) {
+            facebook.setAppSecretProofEnabled(Boolean.valueOf(appSecretProofEnabled));
         }
     }
 

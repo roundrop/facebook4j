@@ -155,6 +155,18 @@ public final class ConfigurationBuilder {
         return this;
     }
 
+    public ConfigurationBuilder setAppSecretProofEnabled(boolean appSecretProofEnabled) {
+        checkNotBuilt();
+        configurationBean.setAppSecretProofEnabled(appSecretProofEnabled);
+        return this;
+    }
+
+    public ConfigurationBuilder setAppSecretProofCacheSize(int appSecretProofCacheSize) {
+        checkNotBuilt();
+        configurationBean.setAppSecretProofCacheSize(appSecretProofCacheSize);
+        return this;
+    }
+
     public ConfigurationBuilder setOAuthAuthorizationURL(String oAuthAuthorizationURL) {
         checkNotBuilt();
         configurationBean.setOAuthAuthorizationURL(oAuthAuthorizationURL);
