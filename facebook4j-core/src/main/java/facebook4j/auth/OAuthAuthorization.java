@@ -65,8 +65,7 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
             setOAuthAccessToken(new AccessToken(conf.getOAuthAccessToken(), null));
         }
         setAppSecretProofEnabled(conf.isAppSecretProofEnabled());
-        int appSecretProofCacheSize = 10;
-        appSecretProofCache = new z_F4JLRUCache<String, String>(appSecretProofCacheSize);
+        appSecretProofCache = new z_F4JLRUCache<String, String>(conf.getAppSecretProofCacheSize());
     }
 
     // implementations for Authorization
@@ -196,10 +195,10 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
         }
 
         String accessToken = oauthToken.getToken();
-        if (appSecretProofCache.containsKey(accessToken)) {
-            return appSecretProofCache.get(accessToken);
+        String cache = appSecretProofCache.get(accessToken);
+        if (cache != null) {
+            return cache;
         }
-
         byte[] byteHMAC = null;
         try {
             Mac mac = Mac.getInstance(HMAC_SHA_256);

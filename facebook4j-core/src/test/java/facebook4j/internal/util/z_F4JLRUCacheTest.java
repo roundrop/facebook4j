@@ -37,15 +37,6 @@ public class z_F4JLRUCacheTest {
     }
 
     @Test
-    public void containsKey() throws Exception {
-        z_F4JLRUCache<String, String> cache = new z_F4JLRUCache<String, String>(5);
-        cache.put("key1", "value1");
-        assertThat(cache.containsKey("key1"), is(true));
-        assertThat(cache.containsKey("key2"), is(false));
-        assertThat(cache.containsKey(null), is(false));
-    }
-
-    @Test
     public void LRU() throws Exception {
         z_F4JLRUCache<String, String> cache = new z_F4JLRUCache<String, String>(5);
         cache.put("key1", "value1");
@@ -61,33 +52,21 @@ public class z_F4JLRUCacheTest {
         cache.get("key2");
 
         cache.put("key6", "value6");
-        assertThat(cache.containsKey("key1"), is(true));
-        assertThat(cache.containsKey("key2"), is(true));
-        assertThat(cache.containsKey("key3"), is(false));   //removed
-        assertThat(cache.containsKey("key4"), is(true));
-        assertThat(cache.containsKey("key5"), is(true));
-        assertThat(cache.containsKey("key6"), is(true));
+        assertThat(cache.get("key2"), is(notNullValue()));
+        assertThat(cache.get("key3"), is(nullValue()));   //removed
 
         cache.put("key7", "value7");
-        assertThat(cache.containsKey("key1"), is(true));
-        assertThat(cache.containsKey("key2"), is(true));
-        assertThat(cache.containsKey("key3"), is(false));
-        assertThat(cache.containsKey("key4"), is(false));   //removed
-        assertThat(cache.containsKey("key5"), is(true));
-        assertThat(cache.containsKey("key6"), is(true));
-        assertThat(cache.containsKey("key7"), is(true));
+        assertThat(cache.get("key2"), is(notNullValue()));
+        assertThat(cache.get("key3"), is(nullValue()));
+        assertThat(cache.get("key4"), is(nullValue()));   //removed
 
         cache.get("key5");
         cache.put("key6", "******");
         cache.put("key8", "value8");
-        assertThat(cache.containsKey("key1"), is(false));   //removed
-        assertThat(cache.containsKey("key2"), is(true));
-        assertThat(cache.containsKey("key3"), is(false));
-        assertThat(cache.containsKey("key4"), is(false));
-        assertThat(cache.containsKey("key5"), is(true));    //alive
-        assertThat(cache.containsKey("key6"), is(true));
-        assertThat(cache.containsKey("key7"), is(true));
-        assertThat(cache.containsKey("key8"), is(true));
-
+        assertThat(cache.get("key1"), is(nullValue()));   //removed
+        assertThat(cache.get("key2"), is(notNullValue()));
+        assertThat(cache.get("key3"), is(nullValue()));
+        assertThat(cache.get("key4"), is(nullValue()));
+        assertThat(cache.get("key5"), is(notNullValue()));    //alive
     }
 }
