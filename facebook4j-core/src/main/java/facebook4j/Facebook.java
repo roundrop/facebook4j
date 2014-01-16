@@ -42,6 +42,7 @@ import facebook4j.api.PhotoMethods;
 import facebook4j.api.PokeMethods;
 import facebook4j.api.PostMethods;
 import facebook4j.api.QuestionMethods;
+import facebook4j.api.RawAPIMethods;
 import facebook4j.api.SearchMethods;
 import facebook4j.api.SubscribeMethods;
 import facebook4j.api.TestUserMethods;
@@ -85,5 +86,6 @@ public interface Facebook extends java.io.Serializable,
     InsightMethods,
     SearchMethods,
     TestUserMethods,
-    FQLMethods {
+    FQLMethods,
+    RawAPIMethods {
 }
