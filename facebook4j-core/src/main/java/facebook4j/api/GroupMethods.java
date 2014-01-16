@@ -125,7 +125,7 @@ public interface GroupMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/group/#links">Group#links - Facebook Developers</a>
      */
     String postGroupLink(String groupId, URL link) throws FacebookException;
-    
+
     /**
      * Posts the link on a group's wall.
      * @param groupId the ID of a group
@@ -197,5 +197,15 @@ public interface GroupMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/group/">Group - Facebook Developers</a> - Connections - docs
      */
     ResponseList<GroupDoc> getGroupDocs(String groupId, Reading reading) throws FacebookException;
+
+    /**
+     * Invites a user to the group.
+     * @param groupId the ID of a group
+     * @param userId the ID of the user
+     * @return true if the invite is successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/group/#invite_user">Group#invite_user - Facebook Developers</a>
+     */
+    boolean inviteToGroup(String groupId, String userId) throws FacebookException;
 
 }

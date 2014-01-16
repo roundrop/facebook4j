@@ -471,4 +471,16 @@ public class GroupMethodsTest {
             assertThat(actual2.getUpdatedTime(), is(iso8601DateOf("2011-01-27T00:11:46+0000")));
         }
     }
+
+    public static class inviteToGroup extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.inviteToGroup("123", "1234");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/123/members/1234")));
+
+            assertThat(actual, is(true));
+        }
+    }
 }
