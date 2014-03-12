@@ -17,6 +17,37 @@
 package facebook4j;
 
 import facebook4j.Question.Option;
+import facebook4j.api.AccountMethods;
+import facebook4j.api.ActivityMethods;
+import facebook4j.api.AlbumMethods;
+import facebook4j.api.CheckinMethods;
+import facebook4j.api.CommentMethods;
+import facebook4j.api.DomainMethods;
+import facebook4j.api.EventMethods;
+import facebook4j.api.FQLMethods;
+import facebook4j.api.FamilyMethods;
+import facebook4j.api.FavoriteMethods;
+import facebook4j.api.FriendMethods;
+import facebook4j.api.GameMethods;
+import facebook4j.api.GroupMethods;
+import facebook4j.api.InsightMethods;
+import facebook4j.api.LikeMethods;
+import facebook4j.api.LinkMethods;
+import facebook4j.api.LocationMethods;
+import facebook4j.api.MessageMethods;
+import facebook4j.api.NoteMethods;
+import facebook4j.api.NotificationMethods;
+import facebook4j.api.PageMethods;
+import facebook4j.api.PermissionMethods;
+import facebook4j.api.PhotoMethods;
+import facebook4j.api.PokeMethods;
+import facebook4j.api.PostMethods;
+import facebook4j.api.QuestionMethods;
+import facebook4j.api.SearchMethods;
+import facebook4j.api.SubscribeMethods;
+import facebook4j.api.TestUserMethods;
+import facebook4j.api.UserMethods;
+import facebook4j.api.VideoMethods;
 import facebook4j.auth.Authorization;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpParameter;
@@ -2559,4 +2590,129 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return false;
     }
 
+    /* narrow down API methods */
+
+    public UserMethods users() {
+        return this;
+    }
+
+    public AccountMethods accounts() {
+        return this;
+    }
+
+    public ActivityMethods activities() {
+        return this;
+    }
+
+    public AlbumMethods albums() {
+        return this;
+    }
+
+    public CheckinMethods checkins() {
+        return this;
+    }
+
+    public CommentMethods comments() {
+        return this;
+    }
+
+    public DomainMethods domains() {
+        return this;
+    }
+
+    public EventMethods events() {
+        return this;
+    }
+
+    public FamilyMethods family() {
+        return this;
+    }
+
+    public FavoriteMethods favorites() {
+        return this;
+    }
+
+    public FriendMethods friends() {
+        return this;
+    }
+
+    public GameMethods games() {
+        return this;
+    }
+
+    public GroupMethods groups() {
+        return this;
+    }
+
+    public LikeMethods likes() {
+        return this;
+    }
+
+    public LinkMethods links() {
+        return this;
+    }
+
+    public LocationMethods locations() {
+        return this;
+    }
+
+    public MessageMethods messages() {
+        return this;
+    }
+
+    public NoteMethods notes() {
+        return this;
+    }
+
+    public NotificationMethods notifications() {
+        return this;
+    }
+
+    public PageMethods pages() {
+        return this;
+    }
+
+    public PermissionMethods permissions() {
+        return this;
+    }
+
+    public PhotoMethods photos() {
+        return this;
+    }
+
+    public PokeMethods pokes() {
+        return this;
+    }
+
+    public PostMethods posts() {
+        return this;
+    }
+
+    public QuestionMethods questions() {
+        return this;
+    }
+
+    public SubscribeMethods subscribes() {
+        return this;
+    }
+
+    public VideoMethods videos() {
+        return this;
+    }
+
+    public InsightMethods insights() {
+        return this;
+    }
+
+    public SearchMethods search() {
+        return this;
+    }
+
+    public TestUserMethods testUsers() {
+        return this;
+    }
+
+    public FQLMethods fql() {
+        return this;
+    }
 }
