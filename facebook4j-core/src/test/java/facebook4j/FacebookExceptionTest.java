@@ -40,6 +40,12 @@ public class FacebookExceptionTest {
             assertThat(fe.getErrorType(), is("OAuthException"));
             assertThat(fe.getErrorCode(), is(190));
             assertThat(fe.getErrorSubcode(), is(-1));
+
+            assertThat(fe.toString().startsWith(
+                        "message - Invalid OAuth access token.\n" +
+                        "code - 190\n" +
+                        "Relevant"),
+                        is(true));
         }
 
         @Test
@@ -57,6 +63,13 @@ public class FacebookExceptionTest {
             assertThat(fe.getErrorType(), is("OAuthException"));
             assertThat(fe.getErrorCode(), is(190));
             assertThat(fe.getErrorSubcode(), is(460));
+
+            assertThat(fe.toString().startsWith(
+                    "message - Message describing the error\n" +
+                            "code - 190\n" +
+                            "subcode - 460\n" +
+                            "Relevant"),
+                    is(true));
         }
     }
 
@@ -79,8 +92,11 @@ public class FacebookExceptionTest {
                         "}" +
                     "}",
                     new IllegalStateException("test"));
-            assertThat(fe.getMessage().startsWith("{\"error"), is(true));
-            assertThat(fe.getMessage().endsWith("190}}"), is(true));
+            assertThat(fe.getMessage().startsWith(
+                        "message - Invalid OAuth access token.\n" +
+                        "code - 190\n" +
+                        "Relevant"),
+                        is(true));
             assertThat(fe.getCause(), instanceOf(IllegalStateException.class));
             assertThat(fe.getCause().getMessage(), is("test"));
             assertThat(fe.getErrorMessage(), is("Invalid OAuth access token."));

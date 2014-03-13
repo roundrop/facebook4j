@@ -62,6 +62,23 @@ public class FacebookException extends Exception {
         this.statusCode = statusCode;
     }
 
+    @Override
+    public String getMessage() {
+        StringBuilder value = new StringBuilder();
+        if (errorMessage != null && errorCode != -1) {
+            value.append("message - ").append(errorMessage).append("\n");
+            value.append("code - ").append(errorCode).append("\n");
+            if (errorSubcode != -1) {
+                value.append("subcode - ").append(errorSubcode).append("\n");
+            }
+            value.append("Relevant information for error recovery can be found on the Facebook Developers Document:\n")
+                 .append("\thttps://developers.facebook.com/docs/graph-api/using-graph-api/#errors\n");
+        } else {
+            value.append(super.getMessage());
+        }
+        return value.toString();
+    }
+
     private void decode(String str) {
         if (str != null && str.startsWith("{")) {
             try {
@@ -157,13 +174,14 @@ public class FacebookException extends Exception {
 
     @Override
     public String toString() {
-        return "FacebookException{" +
+        return getMessage() +
+                "\nFacebookException{" +
                 "statusCode=" + statusCode +
-                ", response=" + response +
                 ", errorType='" + errorType + '\'' +
                 ", errorMessage='" + errorMessage + '\'' +
                 ", errorCode=" + errorCode +
                 ", errorSubcode=" + errorSubcode +
+                ", version=" + Version.getVersion() +
                 '}';
     }
 }
