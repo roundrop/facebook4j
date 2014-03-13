@@ -180,7 +180,13 @@ public class ConfigurationTest {
 
         deleteFile("./facebook4j.properties");
     }
-    
+
+    @Test
+    public void environmentVariableBasedConfiguration() throws Exception{
+        Configuration conf = ConfigurationContext.getInstance();
+        // TODO
+    }
+
     private void writeFile(String path, String content) throws IOException {
         File file = new File(path);
         file.delete();
