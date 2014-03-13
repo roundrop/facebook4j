@@ -219,6 +219,16 @@ public interface FriendMethods {
      */
     boolean removeFriendlistMember(String friendlistId, String userId) throws FacebookException;
 
+    /**
+     * This method is an alias of: {@link facebook4j.api.FriendMethods#removeFriendlistMember(String, String)} .
+     * @param friendlistId the ID of a friend list
+     * @param userId the ID of a target user
+     * @return true if remove is successful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/FriendList/#members">FriendList#members - Facebook Developers</a>
+     */
+    boolean deleteFriendlistMember(String friendlistId, String userId) throws FacebookException;
+
 
     /**
      * Returns the current user's incoming friend requests.

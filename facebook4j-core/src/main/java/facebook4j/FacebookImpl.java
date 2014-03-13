@@ -905,6 +905,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return Boolean.valueOf(res.asString().trim());
     }
 
+    public boolean deleteFriendlistMember(String friendlistId, String userId) throws FacebookException {
+        return removeFriendlistMember(friendlistId, userId);
+    }
+
     public Friendlist getFriendlist(String friendlistId) throws FacebookException {
         return getFriendlist(friendlistId, null);
     }
@@ -1744,6 +1748,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(userId, "permissions/" + permissionName));
         return Boolean.valueOf(res.asString().trim());
+    }
+
+    public boolean deletePermission(String permissionName) throws FacebookException {
+        return revokePermission(permissionName);
+    }
+    public boolean deletePermission(String userId, String permissionName) throws FacebookException {
+        return revokePermission(userId, permissionName);
     }
 
     /* Photo Methods */
