@@ -364,6 +364,18 @@ public class FriendMethodsTest {
         }
     }
 
+    public static class deleteFriendlistMember extends MockFacebookTestBase {
+        @Test
+        public void add() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deleteFriendlistMember("579096788819277", "1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/579096788819277/members/1234567890123456")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
     public static class getFriendRequests extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {

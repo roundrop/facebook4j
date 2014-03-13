@@ -86,4 +86,159 @@ public interface Facebook extends java.io.Serializable,
     SearchMethods,
     TestUserMethods,
     FQLMethods {
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    UserMethods users();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    AccountMethods accounts();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    ActivityMethods activities();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    AlbumMethods albums();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    CheckinMethods checkins();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    CommentMethods comments();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    DomainMethods domains();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    EventMethods events();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    FamilyMethods family();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    FavoriteMethods favorites();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    FriendMethods friends();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    GameMethods games();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    GroupMethods groups();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    LikeMethods likes();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    LinkMethods links();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    LocationMethods locations();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    MessageMethods messages();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    NoteMethods notes();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    NotificationMethods notifications();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    PageMethods pages();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    PermissionMethods permissions();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    PhotoMethods photos();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    PokeMethods pokes();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    PostMethods posts();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    QuestionMethods questions();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    SubscribeMethods subscribes();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    VideoMethods videos();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    InsightMethods insights();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    SearchMethods search();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    TestUserMethods testUsers();
+
+    /**
+     * @since Facebook4J 2.0.5
+     */
+    FQLMethods fql();
 }

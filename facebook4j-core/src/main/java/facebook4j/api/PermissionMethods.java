@@ -16,10 +16,10 @@
 
 package facebook4j.api;
 
-import java.util.List;
-
 import facebook4j.FacebookException;
 import facebook4j.Permission;
+
+import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -61,5 +61,24 @@ public interface PermissionMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
      */
     boolean revokePermission(String userId, String permissionName) throws FacebookException;
+    
+    /**
+     * This method is an alias of: {@link facebook4j.api.PermissionMethods#revokePermission(String)} .
+     * @param permissionName permission name
+     * @return true if revoke is succressful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
+     */
+    boolean deletePermission(String permissionName) throws FacebookException;
+
+    /**
+     * This method is an alias of: {@link facebook4j.api.PermissionMethods#revokePermission(String, String)} .
+     * @param userId the ID of a user
+     * @param permissionName permission name
+     * @return true if revoke is succressful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
+     */
+    boolean deletePermission(String userId, String permissionName) throws FacebookException;
     
 }

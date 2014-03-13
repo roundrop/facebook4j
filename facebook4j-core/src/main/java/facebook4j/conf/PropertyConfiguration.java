@@ -25,6 +25,7 @@ import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -103,6 +104,12 @@ public final class PropertyConfiguration extends ConfigurationBase implements Se
         // load from system properties
         try {
             props = (Properties) System.getProperties().clone();
+            try {
+                Map<String, String> envMap = System.getenv();
+                for (String key : envMap.keySet()) {
+                    props.setProperty(key, envMap.get(key));
+                }
+            } catch (SecurityException ignore) {}
             normalize(props);
         } catch (SecurityException ignore) {
             // Unsigned applets are not allowed to access System properties

@@ -74,4 +74,26 @@ public class PermissionMethodsTest {
         }
     }
 
+    public static class deletePermission extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deletePermission("email");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/permissions/email")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/true.json");
+            boolean actual = facebook.deletePermission("1234567890123456", "email");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/permissions/email")));
+
+            assertThat(actual, is(true));
+        }
+    }
+
 }
