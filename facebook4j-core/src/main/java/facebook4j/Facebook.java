@@ -19,6 +19,7 @@ package facebook4j;
 import facebook4j.api.AccountMethods;
 import facebook4j.api.ActivityMethods;
 import facebook4j.api.AlbumMethods;
+import facebook4j.api.BatchRequestsMethods;
 import facebook4j.api.CheckinMethods;
 import facebook4j.api.CommentMethods;
 import facebook4j.api.DomainMethods;
@@ -87,6 +88,7 @@ public interface Facebook extends java.io.Serializable,
     SearchMethods,
     TestUserMethods,
     FQLMethods,
+    BatchRequestsMethods,
     RawAPIMethods {
 
     /**
@@ -243,4 +245,14 @@ public interface Facebook extends java.io.Serializable,
      * @since Facebook4J 2.0.5
      */
     FQLMethods fql();
+
+    /**
+     * @since Facebook4J 2.1.0
+     */
+    BatchRequestsMethods batch();
+
+    /**
+     * @since Facebook4J 2.1.0
+     */
+    RawAPIMethods rawAPI();
 }

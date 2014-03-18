@@ -1,0 +1,6 @@
+[
+    {
+        "code": 200,
+        "body": "{\"id\":\"1234567890123456\",\"name\":\"Me Name\",\"first_name\":\"Me\",\"last_name\":\"Name\",\"link\":\"https:\\/\\/www.facebook.com\\/roundrop\",\"birthday\":\"01\\/23\\/1975\",\"hometown\":{\"id\":\"186217314746492\",\"name\":\"Hiroshima-shi, Hiroshima, Japan\"},\"location\":{\"id\":\"163173617067956\",\"name\":\"Yokohama-shi, Kanagawa, Japan\"},\"bio\":\"Facebook4J: http:\\/\\/facebook4j.org\",\"work\":[{\"employer\":{\"id\":\"20000000000000001\",\"name\":\"company1\"},\"start_date\":\"2012-01-01\"},{\"employer\":{\"id\":\"3000000000000001\",\"name\":\"roundrop\"},\"start_date\":\"2011-09-01\",\"end_date\":\"2011-12-31\"}],\"sports\":[{\"id\":\"151305608267717\",\"name\":\"Volleyball\"}],\"education\":[{\"school\":{\"id\":\"30000000000000001\",\"name\":\"High School\"},\"year\":{\"id\":\"135676686463386\",\"name\":\"1994\"},\"type\":\"High School\"},{\"school\":{\"id\":\"300000000000002\",\"name\":\"College\"},\"year\":{\"id\":\"144560162276732\",\"name\":\"1998\"},\"type\":\"College\"}],\"gender\":\"male\",\"relationship_status\":\"Married\",\"email\":\"roundrop\\u0040gmail.com\",\"timezone\":9,\"locale\":\"en_US\",\"verified\":true,\"updated_time\":\"2014-02-23T05:15:52+0000\",\"username\":\"roundrop\"}"
+    }
+]

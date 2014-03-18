@@ -19,6 +19,7 @@ package facebook4j;
 import facebook4j.api.AccountMethods;
 import facebook4j.api.ActivityMethods;
 import facebook4j.api.AlbumMethods;
+import facebook4j.api.BatchRequestsMethods;
 import facebook4j.api.CheckinMethods;
 import facebook4j.api.CommentMethods;
 import facebook4j.api.DomainMethods;
@@ -42,6 +43,7 @@ import facebook4j.api.PhotoMethods;
 import facebook4j.api.PokeMethods;
 import facebook4j.api.PostMethods;
 import facebook4j.api.QuestionMethods;
+import facebook4j.api.RawAPIMethods;
 import facebook4j.api.SearchMethods;
 import facebook4j.api.SubscribeMethods;
 import facebook4j.api.TestUserMethods;
@@ -218,5 +220,15 @@ public class NarrowDownAPIMethodsTest {
     @Test
     public void fql() throws Exception {
         assertThat(facebook.fql(), instanceOf(FQLMethods.class));
+    }
+
+    @Test
+    public void batch() throws Exception {
+        assertThat(facebook.batch(), instanceOf(BatchRequestsMethods.class));
+    }
+
+    @Test
+    public void rawAPI() throws Exception {
+        assertThat(facebook.rawAPI(), instanceOf(RawAPIMethods.class));
     }
 }

@@ -65,4 +65,25 @@ public final class F4JHttpParameterMatchers {
         };
     }
 
+    @Factory
+    public static Matcher<HttpParameter[]> hasPostParameter(final String name) {
+        return new TypeSafeMatcher<HttpParameter[]>() {
+            private List<String> actualParams = new ArrayList<String>();
+
+            @Override
+            public boolean matchesSafely(HttpParameter[] actual) {
+                for (HttpParameter param : actual) {
+                    if (param.getName().equals(name)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            public void describeTo(Description desc) {
+                desc.appendText("actual has no '" + name + "' parameter");
+            }
+        };
+    }
+
 }

@@ -16,54 +16,71 @@
 
 package facebook4j.api;
 
+import facebook4j.FacebookException;
+import facebook4j.RawAPIResponse;
+
 import java.util.Map;
 
-import facebook4j.FacebookException;
-import facebook4j.internal.org.json.JSONArray;
-import facebook4j.internal.org.json.JSONObject;
-
 /**
+ * @since Facebook4J 2.1.0
  * @author Hiroaki Takeuchi - takke30 at gmail.com
  */
 public interface RawAPIMethods {
     /**
-     * Calls raw Facebook GET API simply
-     * 
-     * @param graphPath graphPath
-     * @param params parameters
-     * @return json object
+     * Calls raw Facebook GET API simply.
+     * This method not supports "JSONStore" option because this method returns the json object itself.
+     * @param relativeUrl relativeUrl
+     * @return response
      * @throws FacebookException when Facebook service or network is unavailable
      */
-    JSONObject callGetAPI(String graphPath, Map<String, String> params) throws FacebookException;
-    
+    RawAPIResponse callGetAPI(String relativeUrl) throws FacebookException;
+
     /**
-     * Calls raw Facebook POST API simply
-     * 
-     * @param graphPath graphPath
-     * @param params parameters
-     * @return json object
+     * Calls raw Facebook GET API simply.
+     * This method not supports "JSONStore" option because this method returns the json object itself.
+     * @param relativeUrl relativeUrl
+     * @param parameters GET parameters
+     * @return response
      * @throws FacebookException when Facebook service or network is unavailable
      */
-    JSONObject callPostAPI(String graphPath, Map<String, String> params) throws FacebookException;
-    
+    RawAPIResponse callGetAPI(String relativeUrl, Map<String, String> parameters) throws FacebookException;
+
     /**
-     * Calls raw Facebook DELETE API simply
-     * 
-     * @param graphPath graphPath
-     * @param params parameters
-     * @return json object
+     * Calls raw Facebook POST API simply.
+     * This method not supports "JSONStore" option because this method returns the json object itself.
+     * @param relativeUrl relativeUrl
+     * @return response
      * @throws FacebookException when Facebook service or network is unavailable
      */
-    boolean callDeleteAPI(String graphPath, Map<String, String> params) throws FacebookException;
-    
+    RawAPIResponse callPostAPI(String relativeUrl) throws FacebookException;
+
     /**
-     * Calls Facebook batch API
-     * 
-     * @param params batch parameters
-     * @return json array object
+     * Calls raw Facebook POST API simply.
+     * This method not supports "JSONStore" option because this method returns the json object itself.
+     * @param relativeUrl relativeUrl
+     * @param parameters POST parameters
+     * @return response
      * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/graph-api/making-multiple-requests/">Making Multiple API Requests - Facebook Developers</a>
      */
-    JSONArray executeBatch(JSONArray params) throws FacebookException;
+    RawAPIResponse callPostAPI(String relativeUrl, Map<String, String> parameters) throws FacebookException;
+
+    /**
+     * Calls raw Facebook DELETE API simply.
+     * This method not supports "JSONStore" option because this method returns the json object itself.
+     * @param relativeUrl relativeUrl
+     * @return response
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    RawAPIResponse callDeleteAPI(String relativeUrl) throws FacebookException;
+
+    /**
+     * Calls raw Facebook DELETE API simply.
+     * This method not supports "JSONStore" option because this method returns the json object itself.
+     * @param relativeUrl relativeUrl
+     * @param parameters parameters
+     * @return response
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    RawAPIResponse callDeleteAPI(String relativeUrl, Map<String, String> parameters) throws FacebookException;
 
 }
