@@ -37,7 +37,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 /**
  * @since Facebook4J 2.1.0
  */
-public class BatchResponseImpl extends HttpResponse implements BatchResponse {
+public class BatchResponseImpl extends HttpResponse implements BatchResponse, java.io.Serializable {
+    private static final long serialVersionUID = -6354217417137066979L;
+
     private static final Logger logger = Logger.getLogger(BatchResponseImpl.class);
 
     private JSONObject json;
