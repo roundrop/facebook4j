@@ -20,6 +20,7 @@ import facebook4j.Question.Option;
 import facebook4j.api.AccountMethods;
 import facebook4j.api.ActivityMethods;
 import facebook4j.api.AlbumMethods;
+import facebook4j.api.BatchRequestsMethods;
 import facebook4j.api.CheckinMethods;
 import facebook4j.api.CommentMethods;
 import facebook4j.api.DomainMethods;
@@ -43,6 +44,7 @@ import facebook4j.api.PhotoMethods;
 import facebook4j.api.PokeMethods;
 import facebook4j.api.PostMethods;
 import facebook4j.api.QuestionMethods;
+import facebook4j.api.RawAPIMethods;
 import facebook4j.api.SearchMethods;
 import facebook4j.api.SubscribeMethods;
 import facebook4j.api.TestUserMethods;
@@ -99,6 +101,30 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
                             .append(conf.getRestBaseURL() + id)
                             .append(connection == null ? "" : "/" + connection)
                             .append(reading == null ? "" : "?" + reading.getQuery());
+        return url.toString();
+    }
+    private String buildEndpoint(String path, Map<String, String> parameters) {
+        StringBuilder url = new StringBuilder();
+        url.append(conf.getRestBaseURL() + path);
+        if (parameters != null && parameters.size() > 0) {
+
+            url.append("?");
+
+            int i = 0;
+            for (final String k : parameters.keySet()) {
+                if (i > 0) {
+                    url.append("&");
+                }
+
+                try {
+                    url.append(URLEncoder.encode(k, "UTF-8"))
+                       .append("=")
+                       .append(URLEncoder.encode(parameters.get(k), "UTF-8"));
+                } catch (UnsupportedEncodingException ignore) {
+                }
+                i++;
+            }
+        }
         return url.toString();
     }
     
@@ -2372,6 +2398,91 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
 
+    /* Batch Requests Methods */
+
+    public List<BatchResponse> executeBatch(BatchRequests<BatchRequest> requests) throws FacebookException {
+        ensureAuthorizationEnabled();
+
+        JSONArray jsonArray = post(buildEndpoint(""), requests.asHttpParameterArray()).asJSONArray();
+        int size = jsonArray.length();
+        List<BatchResponse> result = new ArrayList<BatchResponse>(size);
+        for (int i = 0; i < size; i++) {
+            try {
+                if (jsonArray.isNull(i)) {
+                    result.add(null);
+                } else {
+                    JSONObject json = jsonArray.getJSONObject(i);
+                    result.add(new BatchResponseImpl(json));
+                }
+            } catch (JSONException e) {
+                throw new FacebookException(e);
+            }
+        }
+        return result;
+    }
+    
+
+    /* raw api methods */
+    
+    public RawAPIResponse callGetAPI(String relativeUrl) throws FacebookException {
+        return callGetAPI(relativeUrl, null);
+    }
+    public RawAPIResponse callGetAPI(String relativeUrl, Map<String, String> parameters) throws FacebookException {
+        ensureAuthorizationEnabled();
+
+        String path = relativeUrl;
+        if (relativeUrl.startsWith("/")) {
+            path = relativeUrl.substring(1);
+        }
+
+        // not supports "JSONStore" option because this method returns the json object itself.
+        HttpResponse res = get(buildEndpoint(path, parameters));
+        return new RawAPIResponseImpl(res);
+    }
+
+    public RawAPIResponse callPostAPI(String relativeUrl) throws FacebookException {
+        return callPostAPI(relativeUrl, null);
+    }
+    public RawAPIResponse callPostAPI(String relativeUrl, Map<String, String> parameters) throws FacebookException {
+        ensureAuthorizationEnabled();
+
+        String path = relativeUrl;
+        if (relativeUrl.startsWith("/")) {
+            path = relativeUrl.substring(1);
+        }
+
+        HttpResponse res;
+        if (parameters != null && parameters.size() > 0) {
+            final HttpParameter[] httpParameters = new HttpParameter[parameters.size()];
+            int i = 0;
+            for (final String p : parameters.keySet()) {
+                httpParameters[i++] = new HttpParameter(p, parameters.get(p));
+            }
+            res = post(buildEndpoint(path), httpParameters);
+        } else {
+            res = post(buildEndpoint(path));
+        }
+
+        // not supports "JSONStore" option because this method returns the json object itself.
+        return new RawAPIResponseImpl(res);
+    }
+
+    public RawAPIResponse callDeleteAPI(String relativeUrl) throws FacebookException {
+        return callDeleteAPI(relativeUrl, null);
+    }
+    public RawAPIResponse callDeleteAPI(String relativeUrl, Map<String, String> parameters) throws FacebookException {
+        ensureAuthorizationEnabled();
+
+        String path = relativeUrl;
+        if (relativeUrl.startsWith("/")) {
+            path = relativeUrl.substring(1);
+        }
+
+        // not supports "JSONStore" option because this method returns the json object itself.
+        HttpResponse res = delete(buildEndpoint(path, parameters));
+        return new RawAPIResponseImpl(res);
+    }
+
     /* common methods */
     
     private ResponseList<Comment> _getComments(String objectId, Reading reading) throws FacebookException {
@@ -2724,6 +2835,14 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     public FQLMethods fql() {
+        return this;
+    }
+
+    public BatchRequestsMethods batch() {
+        return this;
+    }
+
+    public RawAPIMethods rawAPI() {
         return this;
     }
 }

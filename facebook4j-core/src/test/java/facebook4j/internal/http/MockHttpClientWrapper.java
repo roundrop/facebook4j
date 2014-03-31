@@ -18,6 +18,7 @@ package facebook4j.internal.http;
 
 import facebook4j.FacebookException;
 import facebook4j.internal.logging.Logger;
+import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
@@ -79,11 +80,16 @@ public final class MockHttpClientWrapper extends HttpClientWrapper {
         if (json == null) {
             HttpResponse res = super.request(req);
             try {
-                if (res.asString().startsWith("{")) {
+                String responseAsString = res.asString();
+                if (responseAsString.startsWith("{")) {
                     JSONObject jsonObject = res.asJSONObject();
                     json = jsonObject.toString(4);
+                } else
+                if (responseAsString.startsWith("[")) {
+                    JSONArray jsonArray = res.asJSONArray();
+                    json = jsonArray.toString(4);
                 } else {
-                    json = res.asString();
+                    json = responseAsString;
                 }
                 registerMockJSON(json);
             } catch (IOException e) {

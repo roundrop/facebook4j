@@ -1,0 +1,82 @@
+[
+    {
+        "body": "{\"data\":[{\"name\":\"Friend Name1\",\"id\":\"500000001\"},{\"name\":\"Frined Name2\",\"id\":\"500000002\"}],\"paging\":{\"next\":\"https:\\/\\/graph.facebook.com\\/1234567890123456\\/friends?limit=5&access_token=access_token&offset=5&__after_id=1010101010\"}}",
+        "code": 200,
+        "headers": [
+            {
+                "name": "Connection",
+                "value": "close"
+            },
+            {
+                "name": "ETag",
+                "value": "\"e60e20528446cdd0b5b59bc9007ce63d36d680ff\""
+            },
+            {
+                "name": "Content-Type",
+                "value": "text/javascript; charset=UTF-8"
+            },
+            {
+                "name": "Pragma",
+                "value": "no-cache"
+            },
+            {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+            },
+            {
+                "name": "Cache-Control",
+                "value": "private, no-cache, no-store, must-revalidate"
+            },
+            {
+                "name": "Expires",
+                "value": "Sat, 01 Jan 2000 00:00:00 GMT"
+            },
+            {
+                "name": "x-fb-loadmon",
+                "value": "0,90.55,10"
+            }
+        ]
+    },
+    {
+        "body": "{\"500000001\":{\"id\":\"500000001\",\"name\":\"Friend Name1\",\"first_name\":\"Foo1\",\"last_name\":\"Bar1\",\"link\":\"https:\\/\\/www.facebook.com\\/foo1\",\"birthday\":\"01\\/11\\/1967\",\"hometown\":{\"id\":\"111111111111111\",\"name\":\"Hometown1\"},\"location\":{\"id\":\"111111111111111\",\"name\":\"Location1\"},\"bio\":\"Bio1.\",\"quotes\":\"Quotes1\",\"favorite_athletes\":[{\"id\":\"180000000001\",\"name\":\"Athlete1\"}],\"education\":[{\"school\":{\"id\":\"1300000000000001\",\"name\":\"School1\"},\"type\":\"High School\"}],\"gender\":\"female\",\"relationship_status\":\"Single\",\"locale\":\"en_US\",\"updated_time\":\"2014-01-17T00:36:24+0000\",\"username\":\"foo1\"},\"500000002\":{\"id\":\"500000002\",\"name\":\"Frined Name2\",\"first_name\":\"Friend\",\"last_name\":\"Name2\",\"link\":\"https:\\/\\/www.facebook.com\\/foo2\",\"birthday\":\"06\\/17\",\"hometown\":{\"id\":\"1000000000000002\",\"name\":\"Hometown2\"},\"location\":{\"id\":\"1000000000000002\",\"name\":\"Location2\"},\"work\":[{\"employer\":{\"id\":\"50000000000000002\",\"name\":\"Bar Inc.\"},\"location\":{\"id\":\"100000000000001\",\"name\":\"Company Location2\"},\"position\":{\"id\":\"100000000000002\",\"name\":\"bar bar\"},\"start_date\":\"2013-03-29\"}],\"sports\":[{\"id\":\"103780659661402\",\"name\":\"Skiing\"}],\"gender\":\"male\",\"locale\":\"ja_JP\",\"languages\":[{\"id\":\"109549852396760\",\"name\":\"Japanese\"},{\"id\":\"106059522759137\",\"name\":\"English\"},{\"id\":\"114007515345895\",\"name\":\"English\"}],\"updated_time\":\"2014-03-04T05:42:06+0000\",\"username\":\"bar2\"}}",
+        "code": 200,
+        "headers": [
+            {
+                "name": "Connection",
+                "value": "close"
+            },
+            {
+                "name": "Last-Modified",
+                "value": "2014-02-08T14:37:17+0000"
+            },
+            {
+                "name": "ETag",
+                "value": "\"e0ecc151186c3299dfc12cc3c266a1bd5f04327f\""
+            },
+            {
+                "name": "Content-Type",
+                "value": "text/javascript; charset=UTF-8"
+            },
+            {
+                "name": "Pragma",
+                "value": "no-cache"
+            },
+            {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+            },
+            {
+                "name": "Cache-Control",
+                "value": "private, no-cache, no-store, must-revalidate"
+            },
+            {
+                "name": "Expires",
+                "value": "Sat, 01 Jan 2000 00:00:00 GMT"
+            },
+            {
+                "name": "x-fb-loadmon",
+                "value": "0,90.55,10"
+            }
+        ]
+    }
+]

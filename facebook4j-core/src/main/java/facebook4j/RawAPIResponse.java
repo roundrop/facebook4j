@@ -16,27 +16,19 @@
 
 package facebook4j;
 
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONObject;
+
 /**
- * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.1.0
  */
-public final class Version {
-    private static final String VERSION = "2.1.0";
-    private static final String TITLE = "Facebook4J";
+public interface RawAPIResponse {
+    boolean isJSONObject();
+    boolean isJSONArray();
+    boolean isBoolean();
 
-    private Version() {
-        throw new AssertionError();
-    }
-
-    public static String getVersion() {
-        return VERSION;
-    }
-
-    /**
-     * prints the version string
-     *
-     * @param args will be just ignored.
-     */
-    public static void main(String[] args) {
-        System.out.println(TITLE + " " + VERSION);
-    }
+    JSONObject asJSONObject() throws FacebookException;
+    JSONArray asJSONArray() throws FacebookException;
+    boolean asBoolean() throws FacebookException;
+    String asString();
 }

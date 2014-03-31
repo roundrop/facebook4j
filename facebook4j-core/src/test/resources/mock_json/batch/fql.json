@@ -1,0 +1,30 @@
+[{
+    "body": "[{\"name\":\"Mark Zuckerberg\"}]",
+    "code": 200,
+    "headers": [
+        {
+            "name": "Connection",
+            "value": "close"
+        },
+        {
+            "name": "Expires",
+            "value": "Sat, 01 Jan 2000 00:00:00 GMT"
+        },
+        {
+            "name": "Cache-Control",
+            "value": "private, no-cache, no-store, must-revalidate"
+        },
+        {
+            "name": "Access-Control-Allow-Origin",
+            "value": "*"
+        },
+        {
+            "name": "Pragma",
+            "value": "no-cache"
+        },
+        {
+            "name": "Content-Type",
+            "value": "application/json"
+        }
+    ]
+}]

@@ -16,27 +16,23 @@
 
 package facebook4j;
 
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONObject;
+
+import java.util.List;
+import java.util.Map;
+
 /**
- * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.1.0
  */
-public final class Version {
-    private static final String VERSION = "2.1.0";
-    private static final String TITLE = "Facebook4J";
+public interface BatchResponse {
+    int getStatusCode();
 
-    private Version() {
-        throw new AssertionError();
-    }
+    String getResponseHeader(String name);
+    Map<String, List<String>> getResponseHeaderFields();
 
-    public static String getVersion() {
-        return VERSION;
-    }
-
-    /**
-     * prints the version string
-     *
-     * @param args will be just ignored.
-     */
-    public static void main(String[] args) {
-        System.out.println(TITLE + " " + VERSION);
-    }
+    String asString() throws FacebookException;
+    JSONObject asJSONObject() throws FacebookException;
+    ResponseList<JSONObject> asResponseList() throws FacebookException;
+    JSONArray asJSONArray() throws FacebookException;
 }

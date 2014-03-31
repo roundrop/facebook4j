@@ -41,7 +41,7 @@ public abstract class HttpResponse {
     private static final Logger logger = Logger.getLogger(HttpResponseImpl.class);
     protected final HttpClientConfiguration CONF;
 
-    HttpResponse() {
+    protected HttpResponse() {
         this.CONF = ConfigurationContext.getInstance();
     }
 

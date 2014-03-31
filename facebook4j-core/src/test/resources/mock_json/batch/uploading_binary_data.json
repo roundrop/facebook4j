@@ -1,0 +1,70 @@
+[
+    {
+        "body": "{\"id\":\"696350953760526\",\"post_id\":\"1234567890123456_696350960427192\"}",
+        "code": 200,
+        "headers": [
+            {
+                "name": "x-fb-loadmon",
+                "value": "0,80.55,20"
+            },
+            {
+                "name": "Connection",
+                "value": "close"
+            },
+            {
+                "name": "Expires",
+                "value": "Sat, 01 Jan 2000 00:00:00 GMT"
+            },
+            {
+                "name": "Cache-Control",
+                "value": "private, no-cache, no-store, must-revalidate"
+            },
+            {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+            },
+            {
+                "name": "Pragma",
+                "value": "no-cache"
+            },
+            {
+                "name": "Content-Type",
+                "value": "text/javascript; charset=UTF-8"
+            }
+        ]
+    },
+    {
+        "body": "{\"id\":\"696350950427193\",\"post_id\":\"1234567890123456_696350960427192\"}",
+        "code": 200,
+        "headers": [
+            {
+                "name": "x-fb-loadmon",
+                "value": "0,80.55,20"
+            },
+            {
+                "name": "Connection",
+                "value": "close"
+            },
+            {
+                "name": "Expires",
+                "value": "Sat, 01 Jan 2000 00:00:00 GMT"
+            },
+            {
+                "name": "Cache-Control",
+                "value": "private, no-cache, no-store, must-revalidate"
+            },
+            {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+            },
+            {
+                "name": "Pragma",
+                "value": "no-cache"
+            },
+            {
+                "name": "Content-Type",
+                "value": "text/javascript; charset=UTF-8"
+            }
+        ]
+    }
+]

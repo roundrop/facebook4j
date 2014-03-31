@@ -40,22 +40,30 @@ import facebook4j.internal.org.json.JSONObject;
 
     /*package*/
     static ResponseList<JSONObject> createJSONObjectList(HttpResponse res, Configuration conf) throws FacebookException {
+        return createJSONObjectList(res.asJSONObject(), conf);
+    }
+
+    /*package*/
+    static ResponseList<JSONObject> createJSONObjectList(JSONObject json) throws FacebookException {
+        return createJSONObjectList(json, null);
+    }
+
+    private static ResponseList<JSONObject> createJSONObjectList(JSONObject json, Configuration conf) throws FacebookException {
         try {
-            if (conf.isJSONStoreEnabled()) {
+            if (null != conf && conf.isJSONStoreEnabled()) {
                 DataObjectFactoryUtil.clearThreadLocalMap();
             }
-            JSONObject json = res.asJSONObject();
             JSONArray jsonArray = json.getJSONArray("data");
             final int size = jsonArray.length();
             ResponseList<JSONObject> results = new ResponseListImpl<JSONObject>(size, json);
             for (int i = 0; i < size; i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                if (conf.isJSONStoreEnabled()) {
+                if (null != conf && conf.isJSONStoreEnabled()) {
                     DataObjectFactoryUtil.registerJSONObject(jsonObject, jsonObject);
                 }
                 results.add(jsonObject);
             }
-            if (conf.isJSONStoreEnabled()) {
+            if (null != conf && conf.isJSONStoreEnabled()) {
                 DataObjectFactoryUtil.registerJSONObject(results, jsonArray);
             }
             return results;

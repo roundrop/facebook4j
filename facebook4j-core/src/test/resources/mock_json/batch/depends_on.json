@@ -1,0 +1,41 @@
+[
+    null,
+    {
+        "body":"{\"data\":[{\"id\":\"1234567890123456_600000000000002\",\"from\":{\"name\":\"Me Name\",\"id\":\"1234567890123456\"},\"story\":\"Me Name shared a link.\",\"link\":\"http:\\\/\\\/developers.facebook.com\\\/\",\"name\":\"Facebook Developers\",\"caption\":\"developers.facebook.com\",\"description\":\"Facebook Platform helps developers build, grow and monetize their business\",\"icon\":\"https:\\\/\\\/fbstatic-a.akamaihd.net\\\/rsrc.php\\\/v2\\\/yD\\\/r\\\/aSaSaSaSaS.gif\",\"actions\":[{\"name\":\"Comment\",\"link\":\"https:\\\/\\\/www.facebook.com\\\/1234567890123456\\\/posts\\\/600000000000002\"},{\"name\":\"Like\",\"link\":\"https:\\\/\\\/www.facebook.com\\\/1234567890123456\\\/posts\\\/600000000000002\"}],\"privacy\":{\"description\":\"Public\",\"value\":\"EVERYONE\",\"friends\":\"\",\"networks\":\"\",\"allow\":\"\",\"deny\":\"\"},\"type\":\"link\",\"status_type\":\"shared_story\",\"application\":{\"name\":\"Links\",\"id\":\"232323232323\"},\"created_time\":\"2014-03-12T16:54:42+0000\",\"updated_time\":\"2014-03-12T16:54:42+0000\"}],\"paging\":{\"previous\":\"https:\\\/\\\/graph.facebook.com\\\/1234567890123456\\\/feed?limit=1&access_token=access_token&until=1313131313\"}}",
+        "code": 200,
+        "headers": [
+            {
+                "name": "Connection",
+                "value": "close"
+            },
+            {
+                "name": "ETag",
+                "value": "\"f12e0c6ee7a500d4bd1a6356214aa5f66ec00320\""
+            },
+            {
+                "name": "Content-Type",
+                "value": "text/javascript; charset=UTF-8"
+            },
+            {
+                "name": "Pragma",
+                "value": "no-cache"
+            },
+            {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+            },
+            {
+                "name": "Cache-Control",
+                "value": "private, no-cache, no-store, must-revalidate"
+            },
+            {
+                "name": "Expires",
+                "value": "Sat, 01 Jan 2000 00:00:00 GMT"
+            },
+            {
+                "name": "x-fb-loadmon",
+                "value": "0,16.93,70"
+            }
+        ]
+    }
+]

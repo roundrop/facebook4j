@@ -390,6 +390,10 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return ResponseListImpl.createJSONObjectList(res, conf);
     }
     
+    public ResponseList<JSONObject> createJSONObjectList(JSONObject json) throws FacebookException {
+        return ResponseListImpl.createJSONObjectList(json);
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

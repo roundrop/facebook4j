@@ -48,27 +48,20 @@ import static facebook4j.internal.http.RequestMethod.POST;
  * </ul>
  */
 public class HttpClientImpl extends HttpClientBase implements HttpClient, HttpResponseCode, java.io.Serializable {
+    private static final long serialVersionUID = -1349112176863288573L;
+
     private static final Logger logger = Logger.getLogger(HttpClientImpl.class);
 
-    private static boolean isJDK14orEarlier = false;
-
-    private static final long serialVersionUID = -8819171414069621503L;
-
     static {
+        // disable keepAlive (Android 2.1 or earlier)
+        // quick and dirty workaround for TFJ-296
+        // @see http://stackoverflow.com/questions/1440957/
         try {
-            String versionStr = System.getProperty("java.specification.version");
-            if (versionStr != null) {
-                isJDK14orEarlier = 1.5d > Double.parseDouble(versionStr);
-            }
-            if (ConfigurationContext.getInstance().isDalvik()) {
-                isJDK14orEarlier = false;
-                // quick and dirty workaround for TFJ-296
-                // it must be an Android/Dalvik/Harmony side issue!!!!
+            // Integer.parseInt(Build.VERSION.SDK) < Build.VERSION_CODES.FROYO
+            if (Integer.parseInt((String) Class.forName("android.os.Build$VERSION").getField("SDK").get(null)) < 8) {
                 System.setProperty("http.keepAlive", "false");
             }
-        } catch (SecurityException ignore) {
-            // Unsigned applets are not allowed to access System properties
-            isJDK14orEarlier = true;
+        } catch (Exception ignore) {
         }
     }
 
@@ -78,9 +71,6 @@ public class HttpClientImpl extends HttpClientBase implements HttpClient, HttpRe
 
     public HttpClientImpl(HttpClientConfiguration conf) {
         super(conf);
-        if (isProxyConfigured() && isJDK14orEarlier) {
-            logger.warn("HTTP Proxy is not supported on JDK1.4 or earlier. Try facebook4j-httpclient-supoprt artifact");
-        }
     }
 
     private static final Map<HttpClientConfiguration, HttpClient> instanceMap = new HashMap<HttpClientConfiguration, HttpClient>(1);
@@ -247,7 +237,7 @@ public class HttpClientImpl extends HttpClientBase implements HttpClient, HttpRe
 
     protected HttpURLConnection getConnection(String url) throws IOException {
         HttpURLConnection con;
-        if (isProxyConfigured() && !isJDK14orEarlier) {
+        if (isProxyConfigured()) {
             if (CONF.getHttpProxyUser() != null && !CONF.getHttpProxyUser().equals("")) {
                 if (logger.isDebugEnabled()) {
                     logger.debug("Proxy AuthUser: " + CONF.getHttpProxyUser());
@@ -276,10 +266,10 @@ public class HttpClientImpl extends HttpClientBase implements HttpClient, HttpRe
         } else {
             con = (HttpURLConnection) new URL(url).openConnection();
         }
-        if (CONF.getHttpConnectionTimeout() > 0 && !isJDK14orEarlier) {
+        if (CONF.getHttpConnectionTimeout() > 0) {
             con.setConnectTimeout(CONF.getHttpConnectionTimeout());
         }
-        if (CONF.getHttpReadTimeout() > 0 && !isJDK14orEarlier) {
+        if (CONF.getHttpReadTimeout() > 0) {
             con.setReadTimeout(CONF.getHttpReadTimeout());
         }
         con.setInstanceFollowRedirects(false);
