@@ -21,7 +21,9 @@ import facebook4j.internal.http.HttpParameter;
 /**
  * @since Facebook4J 2.1.0
  */
-public class BatchAttachment {
+public class BatchAttachment implements java.io.Serializable {
+    private static final long serialVersionUID = -1608928794348894506L;
+
     private final String name;
     private final Media data;
 
@@ -42,4 +44,31 @@ public class BatchAttachment {
         return data.asHttpParameter(name);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BatchAttachment)) return false;
+
+        BatchAttachment that = (BatchAttachment) o;
+
+        if (data != null ? !data.equals(that.data) : that.data != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (data != null ? data.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "BatchAttachment{" +
+                "name='" + name + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }
