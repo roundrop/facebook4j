@@ -61,6 +61,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual1.getId(), is("1234567890123456_500000000000001"));
             assertThat(actual1.getMessage(), is("Sunrise"));
             assertThat(actual1.getPicture().toString(), is("https://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-prn2/1098080_570000000000001_1269337662_s.jpg"));
+            assertThat(actual1.getFullPicture().toString(), is("https://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-prn2/1098080_570000000000001_1269337662_full_picture.jpg"));
             assertThat(actual1.getStatusType(), is("mobile_status_update"));
             assertThat(actual1.getLikes().getCount(), is(13));
             assertThat(actual1.getLikes().get(0).getId(), is("100000000000011"));
@@ -145,6 +146,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual1.getId(), is("1234567890123456_500000000000001"));
             assertThat(actual1.getMessage(), is("Sunrise"));
             assertThat(actual1.getPicture().toString(), is("https://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-prn2/1098080_570000000000001_1269337662_s.jpg"));
+            assertThat(actual1.getFullPicture().toString(), is("https://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-prn2/1098080_570000000000001_1269337662_full_picture.jpg"));
             assertThat(actual1.getStatusType(), is("mobile_status_update"));
             assertThat(actual1.getLikes().getCount(), is(13));
             assertThat(actual1.getLikes().get(0).getId(), is("100000000000011"));
@@ -226,6 +228,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual1.getId(), is("100000000000001_410000000000001"));
             assertThat(actual1.getMessage(), is("Ebi"));
             assertThat(actual1.getPicture().toString(), is("https://fbcdn-photos-g-a.akamaihd.net/hphotos-ak-frc3/1185014_410000000000002_1666290908_s.jpg"));
+            assertThat(actual1.getFullPicture().toString(), is("https://fbcdn-photos-g-a.akamaihd.net/hphotos-ak-frc3/1185014_410000000000002_1666290908_full_picture.jpg"));
             assertThat(actual1.getStatusType(), is("added_photos"));
             assertThat(actual1.getLikes().getCount(), is(1));
             assertThat(actual1.getLikes().get(0).getId(), is("100000300000000"));
@@ -555,6 +558,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual.getUpdatedTime(), is(iso8601DateOf("2013-08-18T12:03:22+0000")));
             assertThat(actual.getId(), is("19292868552_10150189643478553"));
             assertThat(actual.getPicture().toString(), is("https://fbexternal-a.akamaihd.net/app_full_proxy.php?app=9953271133&v=3&size=z&cksum=e15ac22d55f6a9501d3b3ac64c5fb763&src=http%3A%2F%2Fimg.bitpixels.com%2Fgetthumbnail%3Fcode%3D78793%26size%3D120%26url%3Dhttp%3A%2F%2Fdevelopers.facebook.com%2Fblog%2F"));
+            assertThat(actual.getFullPicture().toString(), is("https://fbexternal-a.akamaihd.net/app_full_proxy.php?app=9953271133&v=3&size=z&cksum=e15ac22d55f6a9501d3b3ac64c5fb763&src=http%3A%2F%2Fimg.bitpixels.com%2Fgetthumbnail%3Fcode%3D78793%26size%3D120%26url%3Dhttp%3A%2F%2Fdevelopers.facebook.com%2Fblog%2F&full_picture"));
             assertThat(actual.getStatusType(), is("app_created_story"));
             assertThat(actual.getDescription(), is("\nWe continue to make Platform more secure for users. Earlier this year, we introduced the ability for users to browse Facebook over HTTPS. As a result, we provided \u201cSecure Canvas URL\u201d and \u201cSecure Tab URL\u201d fields in the Developer App for developers to serve their apps through an H"));
             assertThat(actual.getLikes().getCount(), is(8064));

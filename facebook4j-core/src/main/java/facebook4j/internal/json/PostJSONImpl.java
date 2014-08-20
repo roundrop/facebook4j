@@ -58,6 +58,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private String message;
     private List<Tag> messageTags;
     private URL picture;
+    private URL fullPicture;
     private URL link;
     private String name;
     private String caption;
@@ -143,6 +144,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 messageTags = Collections.emptyList();
             }
             picture = getURL("picture", json);
+            fullPicture = getURL("full_picture", json);
             link = getURL("link", json);
             name = getRawString("name", json);
             caption = getRawString("caption", json);
@@ -266,7 +268,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             throw new FacebookException(jsone.getMessage(), jsone);
         }
     }
-    
+
     public String getId() {
         return id;
     }
@@ -289,6 +291,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
 
     public URL getPicture() {
         return picture;
+    }
+
+    public URL getFullPicture() {
+      return fullPicture;
     }
 
     public URL getLink() {
@@ -455,6 +461,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 ", message='" + message + '\'' +
                 ", messageTags=" + messageTags +
                 ", picture=" + picture +
+                ", fullPicture=" + fullPicture +
                 ", link=" + link +
                 ", name='" + name + '\'' +
                 ", caption='" + caption + '\'' +
@@ -485,7 +492,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
 
     private class PropertyJSONImpl implements Post.Property, java.io.Serializable {
         private static final long serialVersionUID = -2917519371927503549L;
-        
+
         private final String name;
         private final String text;
         private final String href;
@@ -518,7 +525,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
 
     private class ActionJSONImpl implements Post.Action, java.io.Serializable {
         private static final long serialVersionUID = 2407371708630166786L;
-        
+
         private final String name;
         private final String link;
 

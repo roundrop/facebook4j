@@ -21,6 +21,7 @@
                 "id": "100000000000001",
                 "name": "Friend Name1"
             },
+            "full_picture": "https://fbcdn-photos-g-a.akamaihd.net/hphotos-ak-frc3/1185014_410000000000002_1666290908_full_picture.jpg",
             "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yx/r/zzzz1.gif",
             "id": "100000000000001_410000000000001",
             "likes": {
@@ -78,6 +79,7 @@
                 "id": "100000000000002",
                 "name": "Friend Name2"
             },
+            "full_picture": "https://fbcdn-photos-h-a.akamaihd.net/hphotos-ak-prn2/fafafafafaafdfa_full_picture.jpg",
             "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yx/r/zzzz2.gif",
             "id": "100000000000002_410000000000003",
             "likes": {
@@ -127,6 +129,7 @@
                 "id": "100000000000003",
                 "name": "bird"
             },
+            "full_picture": "https://fbcdn-photos-c-a.akamaihd.net/hphotos-ak-ash3/1175714_410000000000006_1268434293_full_picture.png",
             "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yz/r/zzzz3.gif",
             "id": "100000000000003_410000000000005",
             "likes": {

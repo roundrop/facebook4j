@@ -722,6 +722,7 @@ public class PageMethodsTest {
             assertThat(post.getLink().toString(), is("http://www.runningtowardshome.com/2013/06/grand-canyon-r2r2r.html"));
             assertThat(post.getName(), is("Running Towards Home | ©: My Quest to Run the Grand Canyon R2R2R"));
             assertThat(post.getPicture().toString(), is("https://fbexternal-a.akamaihd.net/safe_image.php?d=AQCk6K-KS0vS1qlM&w=154&h=154&url=http%3A%2F%2F3.bp.blogspot.com%2F-rbFFZFuvNiQ%2FUX33eAIvYjI%2FAAAAAAAAN2g%2FmJUZSlj7B1M%2Fs240%2FBeforeAfter2.png"));
+            assertThat(post.getFullPicture().toString(), is("https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-frc1/q75/s480x480/1001458_203494769804107_274974554_full_picture.jpg"));
             assertThat(tagged4.getMessage(), is("I've gotten the bug. My new addition to my bucket list? Run the Grand Canyon Rim to Rim to Rim. This needs to happen. 2014 anyone?"));
             assertThat(tagged4.getMessageTags().size(), is(1));
             assertThat(tagged4.getMessageTags().get("64").length, is(1));
