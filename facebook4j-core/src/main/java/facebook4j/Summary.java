@@ -16,22 +16,26 @@
 
 package facebook4j;
 
-import facebook4j.auth.MockAuthorization;
-import facebook4j.conf.Configuration;
-import facebook4j.conf.ConfigurationContext;
-
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.2.0
  */
-public class MockFacebookFactory implements java.io.Serializable {
-    private static final long serialVersionUID = -1602081543322156808L;
+public interface Summary {
+    SummaryOrder getOrder();
+    Integer getTotalCount();
 
-    public static MockFacebook create() {
-        return create(ConfigurationContext.getInstance());
-    }
-
-    public static MockFacebook create(Configuration conf) {
-        System.out.println("###############" + conf.getRestBaseURL());
-        return new MockFacebookImpl(conf, new MockAuthorization());
+    public enum SummaryOrder {
+        ranked,
+        chronological,
+        ;
+        public static SummaryOrder getInstance(String logic) {
+            for (SummaryOrder so : SummaryOrder.values()) {
+                if (so.toString().equals(logic.toLowerCase())) {
+                    return so;
+                }
+            }
+            //throw new IllegalArgumentException();
+            return null;
+        }
     }
 }

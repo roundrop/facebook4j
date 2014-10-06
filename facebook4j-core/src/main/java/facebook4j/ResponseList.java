@@ -21,4 +21,5 @@ package facebook4j;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public interface ResponseList<T> extends PagableList<T> {
+    Summary getSummary();
 }

@@ -17,13 +17,14 @@
 package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.junit.FacebookAPIVersion;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import java.net.URL;
 
-import static facebook4j.junit.F4JHttpParameterMatchers.hasPostParameter;
+import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
 import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -647,6 +648,51 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(facebook.getEndpointURL(), hasParameter("limit", "3"));
 
             assertThat(actuals.size(), is(3));
+
+            Summary summary = actuals.getSummary();
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.1")
+        public void withoutSummary() throws Exception {
+            facebook.setMockJSON("mock_json/post/comments_without_summary.json");
+            ResponseList<Comment> actuals = facebook.getPostComments("25781101980_10152312644461981");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.1/25781101980_10152312644461981/comments")));
+
+            Summary summary = actuals.getSummary();
+            assertThat(summary, is(nullValue()));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.1")
+        public void withSummary() throws Exception {
+            facebook.setMockJSON("mock_json/post/comments_with_summary.json");
+            ResponseList<Comment> actuals = facebook.getPostComments("25781101980_10152312644461981", new Reading().summary());
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.1/25781101980_10152312644461981/comments")));
+            assertThat(facebook.getEndpointURL(), hasParameter("summary", "true"));
+
+            Summary summary = actuals.getSummary();
+            assertThat(summary, is(notNullValue()));
+            assertThat(summary.getOrder(), is(Summary.SummaryOrder.ranked));
+            assertThat(summary.getTotalCount(), is(37));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.1")
+        public void withSummaryAsStream() throws Exception {
+            facebook.setMockJSON("mock_json/post/comments_with_summary_filter_stream.json");
+            ResponseList<Comment> actuals = facebook.getPostComments("25781101980_10152312644461981", new Reading().summary().filter("stream"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.1/25781101980_10152312644461981/comments")));
+            assertThat(facebook.getEndpointURL(), hasParameter("summary", "true"));
+            assertThat(facebook.getEndpointURL(), hasParameter("filter", "stream"));
+
+            Summary summary = actuals.getSummary();
+            assertThat(summary, is(notNullValue()));
+            assertThat(summary.getOrder(), is(Summary.SummaryOrder.chronological));
+            assertThat(summary.getTotalCount(), is(37));
         }
     }
 
@@ -676,6 +722,20 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(facebook.getEndpointURL(), hasParameter("limit", "5"));
 
             assertThat(actuals.size(), is(5));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.1")
+        public void withSummary() throws Exception {
+            facebook.setMockJSON("mock_json/post/likes_with_summary.json");
+            ResponseList<Like> actuals = facebook.getPostLikes("25781101980_10152312644461981", new Reading().summary());
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.1/25781101980_10152312644461981/likes")));
+            assertThat(facebook.getEndpointURL(), hasParameter("summary", "true"));
+
+            Summary summary = actuals.getSummary();
+            assertThat(summary, is(notNullValue()));
+            assertThat(summary.getTotalCount(), is(2596));
         }
     }
 

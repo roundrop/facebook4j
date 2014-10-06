@@ -22,9 +22,9 @@ import java.util.Date;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public interface InboxResponseList<T> extends ResponseList<T> {
-    InboxResponseList.Summary getSummary();
+    InboxSummary getInboxSummary();
     
-    interface Summary {
+    interface InboxSummary {
         Integer getUnseenCount();
         Integer getUnreadCount();
         Date getUpdatedTime();
