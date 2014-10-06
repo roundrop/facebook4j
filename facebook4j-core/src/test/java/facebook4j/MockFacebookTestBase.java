@@ -17,9 +17,18 @@
 package facebook4j;
 
 import facebook4j.auth.AccessToken;
+import facebook4j.conf.Configuration;
+import facebook4j.junit.FacebookAPIVersion;
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.rules.TestName;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public abstract class MockFacebookTestBase extends FacebookTestBase {
+    @Rule
+    public TestName name = new TestName();
 
     protected MockFacebook facebook;
 
@@ -45,6 +54,19 @@ public abstract class MockFacebookTestBase extends FacebookTestBase {
         if (appSecretProofEnabled != null) {
             facebook.setAppSecretProofEnabled(Boolean.valueOf(appSecretProofEnabled));
         }
+
+        // @FacebookAPIVersion
+        String restBaseURL = "https://graph.facebook.com/";
+        Method method = this.getClass().getMethod(this.name.getMethodName(), new Class[0]);
+        FacebookAPIVersion annotation = method.getAnnotation(FacebookAPIVersion.class);
+        if (annotation != null) {
+            String apiVersion = annotation.value();
+            restBaseURL += apiVersion + "/";
+        }
+        Configuration conf = ((FacebookBaseImpl) facebook).conf;
+        Field field = conf.getClass().getSuperclass().getDeclaredField("restBaseURL");
+        field.setAccessible(true);
+        field.set(conf, restBaseURL);
     }
 
 }

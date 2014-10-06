@@ -167,7 +167,15 @@ public class Reading implements java.io.Serializable {
         parameterMap.put("with", "location");
         return this;
     }
-    
+
+    public Reading summary() {
+        if (parameterMap.containsKey("summary")) {
+            throw new IllegalStateException("'summary' already sets");
+        }
+        parameterMap.put("summary", "true");
+        return this;
+    }
+
     public Reading filter(String filterName) {
         if (filterName == null) {
             throw new NullPointerException("filterName is null");

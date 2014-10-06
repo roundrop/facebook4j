@@ -18,6 +18,7 @@ package facebook4j.internal.json;
 
 import facebook4j.FacebookException;
 import facebook4j.ResponseList;
+import facebook4j.Summary;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
@@ -28,14 +29,27 @@ import facebook4j.internal.org.json.JSONObject;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 /*package*/ class ResponseListImpl<T> extends PagableListImpl<T> implements ResponseList<T> {
-    private static final long serialVersionUID = 1252744169603170859L;
+
+    private Summary summary;
 
     /*package*/ResponseListImpl(JSONObject json, T... t) throws FacebookException {
         super(json, t);
+        init(json);
     }
 
     /*package*/ResponseListImpl(int size, JSONObject json, T... t) throws FacebookException {
         super(size, json, t);
+        init(json);
+    }
+
+    private void init(JSONObject json) throws FacebookException {
+        if (!json.isNull("summary")) {
+            try {
+                summary = new SummaryJSONImpl(json.getJSONObject("summary"));
+            } catch (JSONException jsone) {
+                throw new FacebookException(jsone.getMessage(), jsone);
+            }
+        }
     }
 
     /*package*/
@@ -72,4 +86,7 @@ import facebook4j.internal.org.json.JSONObject;
         }
     }
 
+    public Summary getSummary() {
+        return summary;
+    }
 }
