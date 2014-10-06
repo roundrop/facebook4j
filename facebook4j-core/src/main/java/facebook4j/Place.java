@@ -16,6 +16,7 @@
 
 package facebook4j;
 
+import java.util.ArrayList;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -23,6 +24,7 @@ package facebook4j;
 public interface Place extends FacebookResponse {
     String getId();
     String getName();
+    ArrayList<Category> getCategories();
     Place.Location getLocation();
     
     interface Location {
