@@ -1,4 +1,4 @@
-# Facebook4J [![Build Status](https://travis-ci.org/roundrop/facebook4j.svg?branch=feature%2Ftravisci)](https://travis-ci.org/roundrop/facebook4j)
+# Facebook4J [![Build Status](https://travis-ci.org/roundrop/facebook4j.svg?branch=develop)](https://travis-ci.org/roundrop/facebook4j) [![Coverage Status](https://coveralls.io/repos/roundrop/facebook4j/badge.png?branch=develop)](https://coveralls.io/r/roundrop/facebook4j?branch=develop)
 Facebook4J is a Facebook Graph API binding library for the Java language licensed under Apache License 2.0.
 
 ## Usage
