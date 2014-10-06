@@ -65,14 +65,14 @@ public final class MockHttpClientWrapper extends HttpClientWrapper {
     protected HttpResponse request(HttpRequest req) throws FacebookException {
         request = req;
         String url = req.getURL();
-        logger.info("---- URL:");
-        logger.info(url);
-        logger.info("---- HTTP Parameters:");
+        logger.debug("---- URL:");
+        logger.debug(url);
+        logger.debug("---- HTTP Parameters:");
         for (HttpParameter httpParameter : req.getParameters()) {
             if (httpParameter.getFile() != null) {
-                logger.info(httpParameter.getName() + "=" + httpParameter.getFile());
+                logger.debug(httpParameter.getName() + "=" + httpParameter.getFile());
             } else {
-                logger.info(httpParameter.getName() + "=" + httpParameter.getValue());
+                logger.debug(httpParameter.getName() + "=" + httpParameter.getValue());
             }
         }
 
