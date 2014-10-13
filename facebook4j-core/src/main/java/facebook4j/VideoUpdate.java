@@ -17,7 +17,6 @@
 package facebook4j;
 
 import facebook4j.internal.http.HttpParameter;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -108,7 +107,7 @@ public class VideoUpdate implements java.io.Serializable {
 
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
-        params.add(new HttpParameter("source", source.getMediaFile()));
+        params.add(source.asHttpParameter("source"));
         if (title != null) {
             params.add(new HttpParameter("title", title));
         }
