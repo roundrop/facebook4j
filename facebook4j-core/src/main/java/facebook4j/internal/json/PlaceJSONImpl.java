@@ -35,7 +35,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 /*package*/ final class PlaceJSONImpl extends FacebookResponseImpl implements Place, java.io.Serializable {
-    private static final long serialVersionUID = -4977957628922020910L;
+    private static final long serialVersionUID = 859565077681007052L;
 
     private String id;
     private String name;
