@@ -31,7 +31,6 @@ public class MockFacebookFactory implements java.io.Serializable {
     }
 
     public static MockFacebook create(Configuration conf) {
-        System.out.println("###############" + conf.getRestBaseURL());
         return new MockFacebookImpl(conf, new MockAuthorization());
     }
 }
