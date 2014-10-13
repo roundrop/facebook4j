@@ -50,7 +50,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.Serializable {
-    private static final long serialVersionUID = 5829948216755728751L;
+    private static final long serialVersionUID = 9221631714701171423L;
 
     private String id;
     private Category from;
