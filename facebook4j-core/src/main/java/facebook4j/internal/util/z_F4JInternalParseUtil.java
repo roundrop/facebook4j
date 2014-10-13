@@ -309,5 +309,14 @@ public final class z_F4JInternalParseUtil {
             return false;
         }
     }
+    
+    public static boolean isJSONArray(String name, JSONObject json) {
+        try {
+            Object object = json.get(name);
+            return (object instanceof JSONArray);
+        } catch (JSONException e) {
+            return false;
+        }
+    }
 
 }

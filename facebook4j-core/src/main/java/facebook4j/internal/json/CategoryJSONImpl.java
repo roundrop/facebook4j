@@ -16,15 +16,15 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.util.Date;
-
 import facebook4j.Category;
 import facebook4j.FacebookException;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -101,7 +101,7 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "CategorizedEntityJSONImpl [id=" + id + ", name=" + name + ", category="
+        return "CategoryJSONImpl [id=" + id + ", name=" + name + ", category="
                 + category + ", createdTime=" + createdTime + "]";
     }
 

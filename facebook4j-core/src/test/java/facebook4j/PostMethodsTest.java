@@ -17,13 +17,14 @@
 package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.junit.FacebookAPIVersion;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import java.net.URL;
 
-import static facebook4j.junit.F4JHttpParameterMatchers.hasPostParameter;
+import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
 import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -61,6 +62,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual1.getId(), is("1234567890123456_500000000000001"));
             assertThat(actual1.getMessage(), is("Sunrise"));
             assertThat(actual1.getPicture().toString(), is("https://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-prn2/1098080_570000000000001_1269337662_s.jpg"));
+            assertThat(actual1.getFullPicture().toString(), is("https://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-prn2/1098080_570000000000001_1269337662_full_picture.jpg"));
             assertThat(actual1.getStatusType(), is("mobile_status_update"));
             assertThat(actual1.getLikes().getCount(), is(13));
             assertThat(actual1.getLikes().get(0).getId(), is("100000000000011"));
@@ -145,6 +147,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual1.getId(), is("1234567890123456_500000000000001"));
             assertThat(actual1.getMessage(), is("Sunrise"));
             assertThat(actual1.getPicture().toString(), is("https://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-prn2/1098080_570000000000001_1269337662_s.jpg"));
+            assertThat(actual1.getFullPicture().toString(), is("https://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-prn2/1098080_570000000000001_1269337662_full_picture.jpg"));
             assertThat(actual1.getStatusType(), is("mobile_status_update"));
             assertThat(actual1.getLikes().getCount(), is(13));
             assertThat(actual1.getLikes().get(0).getId(), is("100000000000011"));
@@ -226,6 +229,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual1.getId(), is("100000000000001_410000000000001"));
             assertThat(actual1.getMessage(), is("Ebi"));
             assertThat(actual1.getPicture().toString(), is("https://fbcdn-photos-g-a.akamaihd.net/hphotos-ak-frc3/1185014_410000000000002_1666290908_s.jpg"));
+            assertThat(actual1.getFullPicture().toString(), is("https://fbcdn-photos-g-a.akamaihd.net/hphotos-ak-frc3/1185014_410000000000002_1666290908_full_picture.jpg"));
             assertThat(actual1.getStatusType(), is("added_photos"));
             assertThat(actual1.getLikes().getCount(), is(1));
             assertThat(actual1.getLikes().get(0).getId(), is("100000300000000"));
@@ -555,6 +559,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual.getUpdatedTime(), is(iso8601DateOf("2013-08-18T12:03:22+0000")));
             assertThat(actual.getId(), is("19292868552_10150189643478553"));
             assertThat(actual.getPicture().toString(), is("https://fbexternal-a.akamaihd.net/app_full_proxy.php?app=9953271133&v=3&size=z&cksum=e15ac22d55f6a9501d3b3ac64c5fb763&src=http%3A%2F%2Fimg.bitpixels.com%2Fgetthumbnail%3Fcode%3D78793%26size%3D120%26url%3Dhttp%3A%2F%2Fdevelopers.facebook.com%2Fblog%2F"));
+            assertThat(actual.getFullPicture().toString(), is("https://fbexternal-a.akamaihd.net/app_full_proxy.php?app=9953271133&v=3&size=z&cksum=e15ac22d55f6a9501d3b3ac64c5fb763&src=http%3A%2F%2Fimg.bitpixels.com%2Fgetthumbnail%3Fcode%3D78793%26size%3D120%26url%3Dhttp%3A%2F%2Fdevelopers.facebook.com%2Fblog%2F&full_picture"));
             assertThat(actual.getStatusType(), is("app_created_story"));
             assertThat(actual.getDescription(), is("\nWe continue to make Platform more secure for users. Earlier this year, we introduced the ability for users to browse Facebook over HTTPS. As a result, we provided \u201cSecure Canvas URL\u201d and \u201cSecure Tab URL\u201d fields in the Developer App for developers to serve their apps through an H"));
             assertThat(actual.getLikes().getCount(), is(8064));
@@ -647,6 +652,51 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(facebook.getEndpointURL(), hasParameter("limit", "3"));
 
             assertThat(actuals.size(), is(3));
+
+            Summary summary = actuals.getSummary();
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.1")
+        public void withoutSummary() throws Exception {
+            facebook.setMockJSON("mock_json/post/comments_without_summary.json");
+            ResponseList<Comment> actuals = facebook.getPostComments("25781101980_10152312644461981");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.1/25781101980_10152312644461981/comments")));
+
+            Summary summary = actuals.getSummary();
+            assertThat(summary, is(nullValue()));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.1")
+        public void withSummary() throws Exception {
+            facebook.setMockJSON("mock_json/post/comments_with_summary.json");
+            ResponseList<Comment> actuals = facebook.getPostComments("25781101980_10152312644461981", new Reading().summary());
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.1/25781101980_10152312644461981/comments")));
+            assertThat(facebook.getEndpointURL(), hasParameter("summary", "true"));
+
+            Summary summary = actuals.getSummary();
+            assertThat(summary, is(notNullValue()));
+            assertThat(summary.getOrder(), is(Summary.SummaryOrder.ranked));
+            assertThat(summary.getTotalCount(), is(37));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.1")
+        public void withSummaryAsStream() throws Exception {
+            facebook.setMockJSON("mock_json/post/comments_with_summary_filter_stream.json");
+            ResponseList<Comment> actuals = facebook.getPostComments("25781101980_10152312644461981", new Reading().summary().filter("stream"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.1/25781101980_10152312644461981/comments")));
+            assertThat(facebook.getEndpointURL(), hasParameter("summary", "true"));
+            assertThat(facebook.getEndpointURL(), hasParameter("filter", "stream"));
+
+            Summary summary = actuals.getSummary();
+            assertThat(summary, is(notNullValue()));
+            assertThat(summary.getOrder(), is(Summary.SummaryOrder.chronological));
+            assertThat(summary.getTotalCount(), is(37));
         }
     }
 
@@ -676,6 +726,20 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(facebook.getEndpointURL(), hasParameter("limit", "5"));
 
             assertThat(actuals.size(), is(5));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.1")
+        public void withSummary() throws Exception {
+            facebook.setMockJSON("mock_json/post/likes_with_summary.json");
+            ResponseList<Like> actuals = facebook.getPostLikes("25781101980_10152312644461981", new Reading().summary());
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.1/25781101980_10152312644461981/likes")));
+            assertThat(facebook.getEndpointURL(), hasParameter("summary", "true"));
+
+            Summary summary = actuals.getSummary();
+            assertThat(summary, is(notNullValue()));
+            assertThat(summary.getTotalCount(), is(2596));
         }
     }
 

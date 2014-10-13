@@ -1,0 +1,10 @@
+language: java
+jdk:
+  - openjdk6
+cache:
+  directories:
+  - $HOME/.m2
+before_script:
+  - echo "debug=false" >> facebook4j-core/src/test/resources/test.properties &&  echo "oauth.appId=1" >> facebook4j-core/src/test/resources/test.properties && echo "oauth.appSecret=1" >> facebook4j-core/src/test/resources/test.properties && echo "oauth.accessToken=access_token" >> facebook4j-core/src/test/resources/test.properties
+after_success:
+  - mvn -pl facebook4j-core clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:cobertura

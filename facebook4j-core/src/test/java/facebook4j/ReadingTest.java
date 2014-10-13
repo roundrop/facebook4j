@@ -227,6 +227,14 @@ public class ReadingTest {
         }
     }
 
+    public static class Summary {
+        @Test
+        public void summary_true() throws Exception {
+            Reading reading = new Reading().summary();
+            assertThat(reading.getQuery(), is("summary=true"));
+        }
+    }
+
     public static class Combination {
         @Test
         public void offset_based() throws Exception {

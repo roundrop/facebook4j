@@ -16,18 +16,19 @@
 
 package facebook4j.internal.json;
 
-import java.util.Date;
-
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 import facebook4j.FacebookException;
 import facebook4j.InboxResponseList;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
+import java.util.Date;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+
 public class InboxResponseListImpl<T> extends ResponseListImpl<T> implements InboxResponseList<T> {
     private static final long serialVersionUID = -392100352680662139L;
     
-    private InboxResponseList.Summary summary;
+    private InboxSummary inboxSummary;
 
     /*package*/InboxResponseListImpl(JSONObject json, T... t) throws FacebookException {
         super(json, t);
@@ -43,32 +44,32 @@ public class InboxResponseListImpl<T> extends ResponseListImpl<T> implements Inb
         try {
             if (!json.isNull("summary")) {
                 JSONObject summaryJSONObject = json.getJSONObject("summary");
-                summary = new SummaryJSONImpl(summaryJSONObject);
+                inboxSummary = new InboxSummaryJSONImpl(summaryJSONObject);
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
     }
 
-    public InboxResponseList.Summary getSummary() {
-        return summary;
+    public InboxSummary getInboxSummary() {
+        return inboxSummary;
     }
     
     @Override
     public String toString() {
-        return "InboxResponseListImpl [summary=" + summary + "]";
+        return "InboxResponseListImpl [summary=" + inboxSummary + "]";
     }
 
 
 
-    private class SummaryJSONImpl implements InboxResponseList.Summary, java.io.Serializable {
+    private class InboxSummaryJSONImpl implements InboxSummary, java.io.Serializable {
         private static final long serialVersionUID = 1988071486977638655L;
 
         private Integer unseenCount;
         private Integer unreadCount;
         private Date updatedTime;
 
-        public SummaryJSONImpl(JSONObject json) throws FacebookException {
+        public InboxSummaryJSONImpl(JSONObject json) throws FacebookException {
             if (!json.isNull("unseen_count")) {
                 unseenCount = getPrimitiveInt("unseen_count", json);
             }

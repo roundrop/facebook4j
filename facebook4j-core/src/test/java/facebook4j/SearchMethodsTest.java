@@ -351,6 +351,27 @@ public class SearchMethodsTest {
             assertThat(actual5.getLocation().getCity(), is("San Francisco"));
             assertThat(actual5.getName(), is("Peets Coffee, Castro Dist."));
         }
+
+        @Test
+        public void categories() throws Exception {
+            facebook.setMockJSON("mock_json/search/places_with_categories.json");
+            GeoLocation geoLocation = new GeoLocation(37.7793, -122.419);
+            int distance = 1000;
+            ResponseList<Place> actuals = facebook.searchPlaces("San Francisco, California", geoLocation, distance);
+
+            Place place1 = actuals.get(0);
+            assertThat(place1.getCategories().size(), is(1));
+            assertThat(place1.getCategories().get(0).getId(), is("224455390913969"));
+            assertThat(place1.getCategories().get(0).getName(), is("City"));
+            Place place3 = actuals.get(2);
+            assertThat(place3.getCategories().size(), is(3));
+            assertThat(place3.getCategories().get(0).getId(), is("115725465228008"));
+            assertThat(place3.getCategories().get(0).getName(), is("Region"));
+            assertThat(place3.getCategories().get(1).getId(), is("407338945943828"));
+            assertThat(place3.getCategories().get(1).getName(), is("River"));
+            assertThat(place3.getCategories().get(2).getId(), is("215492291888288"));
+            assertThat(place3.getCategories().get(2).getName(), is("Ocean"));
+        }
     }
 
     public static class searchCheckins extends MockFacebookTestBase {

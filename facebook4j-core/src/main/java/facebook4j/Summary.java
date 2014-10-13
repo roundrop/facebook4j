@@ -18,25 +18,24 @@ package facebook4j;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.2.0
  */
-public final class Version {
-    private static final String VERSION = "2.2.0";
-    private static final String TITLE = "Facebook4J";
+public interface Summary {
+    SummaryOrder getOrder();
+    Integer getTotalCount();
 
-    private Version() {
-        throw new AssertionError();
-    }
-
-    public static String getVersion() {
-        return VERSION;
-    }
-
-    /**
-     * prints the version string
-     *
-     * @param args will be just ignored.
-     */
-    public static void main(String[] args) {
-        System.out.println(TITLE + " " + VERSION);
+    public enum SummaryOrder {
+        ranked,
+        chronological,
+        ;
+        public static SummaryOrder getInstance(String logic) {
+            for (SummaryOrder so : SummaryOrder.values()) {
+                if (so.toString().equals(logic.toLowerCase())) {
+                    return so;
+                }
+            }
+            //throw new IllegalArgumentException();
+            return null;
+        }
     }
 }

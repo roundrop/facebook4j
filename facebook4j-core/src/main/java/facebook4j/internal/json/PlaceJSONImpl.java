@@ -16,6 +16,7 @@
 
 package facebook4j.internal.json;
 
+import facebook4j.Category;
 import facebook4j.FacebookException;
 import facebook4j.Place;
 import facebook4j.ResponseList;
@@ -25,16 +26,20 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 /*package*/ final class PlaceJSONImpl extends FacebookResponseImpl implements Place, java.io.Serializable {
-    private static final long serialVersionUID = -4977957628922020910L;
+    private static final long serialVersionUID = 859565077681007052L;
 
     private String id;
     private String name;
+    private List<Category> categories;
     private Place.Location location;
 
     /*package*/PlaceJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
@@ -56,6 +61,15 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         try {
             id = getRawString("id", json);
             name = getRawString("name", json);
+            
+            if (isJSONArray("category_list", json)) {
+                JSONArray categoriesJSONArray = json.getJSONArray("category_list");
+                categories = new ArrayList<Category>();
+                for (int i = 0; i < categoriesJSONArray.length(); i++) {
+                    categories.add(new CategoryJSONImpl(categoriesJSONArray.getJSONObject(i)));
+                }
+            }
+            
             if (isJSONObject("location", json)) {
                 JSONObject locationJSONObject = json.getJSONObject("location");
                 location = new PlaceJSONImpl.LocationJSONImpl(locationJSONObject);
@@ -75,6 +89,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return name;
     }
 
+    public List<Category> getCategories() {
+        return categories;
+    }
+    
     public Location getLocation() {
         return location;
     }
@@ -133,8 +151,12 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     @Override
     public String toString() {
-        return "PlaceJSONImpl [id=" + id + ", name=" + name + ", location="
-                + location + "]";
+        return "PlaceJSONImpl{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", categories=" + categories +
+                ", location=" + location +
+                '}';
     }
 
     /*package*/ static final class LocationJSONImpl implements Location, java.io.Serializable {

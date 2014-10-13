@@ -16,11 +16,7 @@
 
 package facebook4j.internal.json;
 
-import facebook4j.Cover;
-import facebook4j.FacebookException;
-import facebook4j.Page;
-import facebook4j.Place;
-import facebook4j.ResponseList;
+import facebook4j.*;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
@@ -34,10 +30,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
- * @since Facebook4J 1.2.0
+ * @since Facebook4J 2.0.0
  */
 /*package*/ final class PageJSONImpl extends FacebookResponseImpl implements Page, java.io.Serializable {
-    private static final long serialVersionUID = 2058194827423191616L;
+    private static final long serialVersionUID = -5784064954222183184L;
 
     private String id;
     private String name;
@@ -58,6 +54,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private String accessToken;
     private Boolean isCommunityPage;
     private Integer wereHereCount;
+    private String about;
+    private String username;
 
     /*package*/PageJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -100,6 +98,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             accessToken = getRawString("access_token", json);
             isCommunityPage = getBoolean("is_community_page", json);
             wereHereCount = getInt("were_here_count", json);
+            about = getRawString("about", json);
+            username = getRawString("username", json);
 
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -178,6 +178,14 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return wereHereCount;
     }
 
+    public String getAbout() {
+        return about;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     /*package*/
     static ResponseList<Page> createPageList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -228,7 +236,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 + ", accessToken=" + accessToken + ", isCommunityPage="
                 + isCommunityPage + ", wereHereCount=" + wereHereCount
                 + ", id=" + id + ", name=" + name + ", category=" + category
-                + ", createdTime=" + createdTime + "]";
+                + ", createdTime=" + createdTime + ", about=" + about + ", username=" + username + "]";
     }
 
 }

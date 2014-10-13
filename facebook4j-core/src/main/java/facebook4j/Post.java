@@ -31,6 +31,7 @@ public interface Post extends FacebookResponse {
     String getMessage();
     List<Tag> getMessageTags();
     URL getPicture();
+    URL getFullPicture();
     URL getLink();
     String getName();
     String getCaption();
