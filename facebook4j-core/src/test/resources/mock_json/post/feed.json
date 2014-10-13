@@ -21,6 +21,7 @@
                 "id": "1234567890123456",
                 "name": "My Name"
             },
+            "full_picture": "https://fbcdn-photos-a-a.akamaihd.net/hphotos-ak-prn2/1098080_570000000000001_1269337662_full_picture.jpg",
             "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yx/r/zzzzzzzz.gif",
             "id": "1234567890123456_500000000000001",
             "likes": {
@@ -81,6 +82,7 @@
                 "id": "1234567890123456",
                 "name": "My Name"
             },
+            "full_picture": "https://fbcdn-photos-h-a.akamaihd.net/hphotos-ak-ash4/1001576_570000000000002_1789951243_full_picture.jpg",
             "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yx/r/yyyyyyyy.gif",
             "id": "1234567890123456_500000000000001",
             "likes": {
@@ -221,6 +223,7 @@
                 "id": "1234567890123456",
                 "name": "My Name"
             },
+            "full_picture": "https://fbexternal-a.akamaihd.net/safe_image.php?d=AQDM5pinjG0DWVBV&w=50&h=50&url=http%3A%2F%2Fwww.harumi-triton.jp%2Fcommon%2Fimages%2Fh1_img_001.gif&crop&fallback=hub_place&prefix=q%full_image",
             "icon": "https://www.facebook.com/images/icons/place.png",
             "id": "1234567890123456_500000000000004",
             "likes": {
@@ -292,6 +295,7 @@
                 "id": "1234567890123456",
                 "name": "My Name"
             },
+            "full_picture": "https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-ash3/644169_573207722741517_740837405_full_picture.jpg",
             "icon": "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yz/r/StEh3RhPvjk.gif",
             "id": "1234567890123456_500000000000005",
             "link": "https://www.facebook.com/photo.php?fbid=573207722741517&set=a.573203529408603.1073741827.1234567890123456&type=1&relevant_count=1",
@@ -353,6 +357,7 @@
                 "id": "100000000000008",
                 "name": "Tag Name1"
             },
+            "full_picture": "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/y5/r/wwwwwwwwww_full_picture.jpg",
             "icon": "https://www.facebook.com/images/icons/place.png",
             "id": "1234567890123456_500000000000006",
             "likes": {
