@@ -30,10 +30,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
- * @since Facebook4J 1.2.0
+ * @since Facebook4J 2.0.0
  */
 /*package*/ final class PageJSONImpl extends FacebookResponseImpl implements Page, java.io.Serializable {
-    private static final long serialVersionUID = 2058194827423191616L;
+    private static final long serialVersionUID = -5784064954222183184L;
 
     private String id;
     private String name;
@@ -178,9 +178,13 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return wereHereCount;
     }
 
-    public String getAbout() { return about; }
+    public String getAbout() {
+        return about;
+    }
 
-    public String getUsername() { return username; }
+    public String getUsername() {
+        return username;
+    }
 
     /*package*/
     static ResponseList<Page> createPageList(HttpResponse res, Configuration conf) throws FacebookException {

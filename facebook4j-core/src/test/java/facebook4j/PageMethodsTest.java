@@ -87,6 +87,15 @@ public class PageMethodsTest {
             assertThat(page.getId(), is("137246726435626"));
             assertThat(page.getName(), is("F4J"));
         }
+
+        @Test
+        public void about_and_username() throws Exception {
+            facebook.setMockJSON("mock_json/page/platform.json");
+            Page actual = facebook.getPage("platform");
+
+            assertThat(actual.getAbout(), is("Build, grow, and monetize your app with Facebook.\nhttps://developers.facebook.com/"));
+            assertThat(actual.getUsername(), is("FacebookDevelopers"));
+        }
     }
 
     public static class getPagePictureURL extends MockFacebookTestBase {
