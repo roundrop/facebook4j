@@ -1,0 +1,481 @@
+{
+    "data": [
+        {
+            "category": "City",
+            "category_list": [{
+                "id": "224455390913969",
+                "name": "City"
+            }],
+            "id": "229189653774471",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.7793,
+                "longitude": -122.4192,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "San Francisco"
+        },
+        {
+            "category": "City",
+            "category_list": [{
+                "id": "224455390913969",
+                "name": "City"
+            }],
+            "id": "114952118516947",
+            "location": {
+                "latitude": 37.775,
+                "longitude": -122.418,
+                "street": "",
+                "zip": ""
+            },
+            "name": "San Francisco, California"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "115725465228008",
+                    "name": "Region"
+                },
+                {
+                    "id": "407338945943828",
+                    "name": "River"
+                },
+                {
+                    "id": "215492291888288",
+                    "name": "Ocean"
+                }
+            ],
+            "id": "248711105146015",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.78291776,
+                "located_in": 108131585873862,
+                "longitude": -122.422128368,
+                "state": "CA",
+                "street": "",
+                "zip": "94102"
+            },
+            "name": "San Francisco Bay, California"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "161422927240513",
+                    "name": "Government Organization"
+                },
+                {
+                    "id": "110121459069433",
+                    "name": "Courthouse"
+                }
+            ],
+            "id": "333073523410131",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.7801098434,
+                "longitude": -122.418666454,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "San Francisco Superior Court of California"
+        },
+        {
+            "category": "Hotel",
+            "category_list": [{
+                "id": "164243073639257",
+                "name": "Hotel"
+            }],
+            "id": "511308512251606",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.7868356531,
+                "longitude": -122.412971334,
+                "state": "CA",
+                "street": "580 Geary St",
+                "zip": "94102"
+            },
+            "name": "Hotel California San Francisco"
+        },
+        {
+            "category": "University",
+            "category_list": [{
+                "id": "108051929285833",
+                "name": "College & University"
+            }],
+            "id": "107974819230515",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.7793,
+                "longitude": -122.4146,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "The Art Institute of California \u2013 San Francisco"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "161811347201528",
+                "name": "Lodging"
+            }],
+            "id": "134195106658989",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.7868384,
+                "longitude": -122.412925927,
+                "state": "CA",
+                "street": "",
+                "zip": "94102"
+            },
+            "name": "Hotel California, Union Square San Francisco"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "161422927240513",
+                "name": "Government Organization"
+            }],
+            "id": "805983529427820",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.781452,
+                "longitude": -122.422576,
+                "state": "CA",
+                "street": "801 Turk St. ",
+                "zip": ""
+            },
+            "name": "State of California -EDD San Francisco Workforce Services"
+        },
+        {
+            "category": "Landmark",
+            "category_list": [{
+                "id": "211155112228091",
+                "name": "Event Venue"
+            }],
+            "id": "143693375642482",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.77681,
+                "longitude": -122.41761,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "Fox Theatre (San Francisco, California)"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "108051929285833",
+                "name": "College & University"
+            }],
+            "id": "233553693327527",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.77341288,
+                "longitude": -122.42455017,
+                "state": "CA",
+                "street": "",
+                "zip": "94102"
+            },
+            "name": "University Of California San Francisco Civic Symphony Center"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "108051929285833",
+                "name": "College & University"
+            }],
+            "id": "100902200056210",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.7868783448,
+                "longitude": -122.413062612,
+                "state": "CA",
+                "street": "",
+                "zip": "94102"
+            },
+            "name": "The Hotel California, San Francisco"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "148932728496725",
+                "name": "Public Places & Attractions"
+            }],
+            "id": "107107622687423",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.78719876344,
+                "longitude": -122.41370354192,
+                "state": "CA",
+                "street": "501 Twin Peaks Blvd",
+                "zip": "94114"
+            },
+            "name": "Twin Peaks (San Francisco, California)"
+        },
+        {
+            "category": "Landmark",
+            "category_list": [{
+                "id": "209889829023118",
+                "name": "Landmark"
+            }],
+            "id": "132354890133946",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.779081,
+                "longitude": -122.414708,
+                "state": "CA",
+                "street": "1192 Market",
+                "zip": ""
+            },
+            "name": "Orpheum Theatre (San Francisco, California)"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "2500",
+                "name": "Local Business"
+            }],
+            "id": "521270727939594",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.78111,
+                "longitude": -122.42083,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "Down Town San Francisco,California"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "124861974254366",
+                "name": "Tours & Sightseeing"
+            }],
+            "id": "452005681504651",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.771051,
+                "longitude": -122.417504,
+                "state": "CA",
+                "street": "1674 Howard Street",
+                "zip": ""
+            },
+            "name": "1674 Howard Street, San Francisco, California, Hoa Kỳ"
+        },
+        {
+            "category": "School",
+            "category_list": [{
+                "id": "365182493518892",
+                "name": "School"
+            }],
+            "id": "582245705227096",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.779497,
+                "longitude": -122.414301,
+                "state": "CA",
+                "street": "1170 Market St",
+                "zip": "94102"
+            },
+            "name": "The Art Institute of California-San Francisco: Housing & Residential Life"
+        },
+        {
+            "category": "School",
+            "category_list": [{
+                "id": "110152272401235",
+                "name": "High School"
+            }],
+            "id": "108485715848574",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.775381,
+                "longitude": -122.421907,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "International High School, San Francisco, California"
+        },
+        {
+            "category": "Book store",
+            "category_list": [{
+                "id": "200600219953504",
+                "name": "Shopping & Retail"
+            }],
+            "id": "134831696690222",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.779503,
+                "longitude": -122.414314,
+                "state": "CA",
+                "street": "1170 Market St",
+                "zip": "94102"
+            },
+            "name": "The Student Store at The Art Institute of California-San Francisco"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "108051929285833",
+                    "name": "College & University"
+                },
+                {
+                    "id": "145118935550090",
+                    "name": "Medical & Health"
+                }
+            ],
+            "id": "194477440586872",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.782863948,
+                "longitude": -122.41443084,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "505 parnassus  University Of California San Francisco"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "272705352802676",
+                "name": "Outdoors"
+            }],
+            "id": "1408058066136488",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.7846010542,
+                "longitude": -122.418803321,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "Civic Center in San Francisco - California 94109"
+        },
+        {
+            "category": "Local business",
+            "category_list": [
+                {
+                    "id": "139460309451166",
+                    "name": "Religious Center"
+                },
+                {
+                    "id": "161422927240513",
+                    "name": "Government Organization"
+                }
+            ],
+            "id": "108417205906763",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.7826300482,
+                "longitude": -122.418492342,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "U.S. District Court, San Francisco, California"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "2500",
+                "name": "Local Business"
+            }],
+            "id": "406459032766981",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.772227,
+                "longitude": -122.422083,
+                "state": "CA",
+                "street": "",
+                "zip": "94103"
+            },
+            "name": "Calle Market en San Francisco California"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "214297118585256",
+                "name": "Consulate & Embassy"
+            }],
+            "id": "181792071874171",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.7780810221,
+                "longitude": -122.412261893,
+                "state": "CA",
+                "street": "1161 Mission Street, Suite 300 ",
+                "zip": "94103"
+            },
+            "name": "Consulado De Venezuela en San Francisco. California"
+        },
+        {
+            "category": "Local business",
+            "category_list": [{
+                "id": "2500",
+                "name": "Local Business"
+            }],
+            "id": "189856681083569",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.773458721,
+                "longitude": -122.418800059,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "Malibu Grand Prix San Francisco California"
+        },
+        {
+            "category": "Shopping/retail",
+            "category_list": [{
+                "id": "200600219953504",
+                "name": "Shopping & Retail"
+            }],
+            "id": "282971785194241",
+            "location": {
+                "city": "San Francisco",
+                "country": "United States",
+                "latitude": 37.775,
+                "longitude": -122.418,
+                "state": "CA",
+                "street": "",
+                "zip": ""
+            },
+            "name": "California One Stop Shopping Center"
+        }
+    ],
+    "paging": {"next": "https://graph.facebook.com/v1.0/search?type=place&center=37.7793,-122.419&distance=1000&access_token=access_token&limit=5000&offset=5000&__after_id=enc_Aex2LNH-TI7dGUOWTJ3aeJAaobgRtua29SJIJtENjOp-sIdSEp_cmc90H8wnMXTZ_zD6KdBrm0yV7S8IjRMbLWC_"}
+}

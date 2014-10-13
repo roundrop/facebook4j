@@ -16,10 +16,9 @@
 
 package facebook4j.internal.json;
 
+import facebook4j.Category;
 import facebook4j.FacebookException;
 import facebook4j.Place;
-import facebook4j.Category;
-import facebook4j.internal.json.CategoryJSONImpl;
 import facebook4j.ResponseList;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
@@ -27,9 +26,10 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
 import java.util.ArrayList;
+import java.util.List;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -39,7 +39,7 @@ import java.util.ArrayList;
 
     private String id;
     private String name;
-    private ArrayList<Category> categories;
+    private List<Category> categories;
     private Place.Location location;
 
     /*package*/PlaceJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
@@ -65,7 +65,6 @@ import java.util.ArrayList;
             if (isJSONArray("category_list", json)) {
                 JSONArray categoriesJSONArray = json.getJSONArray("category_list");
                 categories = new ArrayList<Category>();
-                
                 for (int i = 0; i < categoriesJSONArray.length(); i++) {
                     categories.add(new CategoryJSONImpl(categoriesJSONArray.getJSONObject(i)));
                 }
@@ -90,31 +89,10 @@ import java.util.ArrayList;
         return name;
     }
 
-    public ArrayList<Category> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
     
-    public String getCategoriesToString() {
-        
-        String listString = null;
-        
-        if(categories != null)
-        {
-            listString = "[";
-            
-            for (int i = 0; i < categories.size(); i++) 
-            {
-                Category c = categories.get(i);
-                listString += c;
-                if (i != categories.size() - 1) listString += ", ";
-            }
-            
-            listString += "]";
-        }
-        
-        return listString;
-    }
-
     public Location getLocation() {
         return location;
     }
@@ -173,8 +151,12 @@ import java.util.ArrayList;
 
     @Override
     public String toString() {
-        return "PlaceJSONImpl [id=" + id + ", name=" + name + ", location="
-                + location + ", categories=" + getCategoriesToString() + "]";
+        return "PlaceJSONImpl{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", categories=" + categories +
+                ", location=" + location +
+                '}';
     }
 
     /*package*/ static final class LocationJSONImpl implements Location, java.io.Serializable {
