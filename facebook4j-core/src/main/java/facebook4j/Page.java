@@ -42,4 +42,6 @@ public interface Page {
     Boolean isCommunityPage();
     Integer getWereHereCount();
     Date getCreatedTime();
+    String getAbout();
+    String getUsername();
 }
