@@ -69,8 +69,7 @@ public class BatchRequestsMethodsTest {
             assertThat(user.getLastName(), is("Name"));
             assertThat(user.getLink().toString(), is("https://www.facebook.com/roundrop"));
             assertThat(user.getBirthday(), is("01/23/1975"));
-            assertThat(user.getHometown().getId(), is("186217314746492"));
-            assertThat(user.getHometown().getName(), is("Hiroshima-shi, Hiroshima, Japan"));
+            assertThat(user.getHometown(), is("Hiroshima-shi, Hiroshima, Japan"));
             assertThat(user.getLocation().getId(), is("163173617067956"));
             assertThat(user.getLocation().getName(), is("Yokohama-shi, Kanagawa, Japan"));
             assertThat(user.getBio(), is("Facebook4J: http://facebook4j.org"));
