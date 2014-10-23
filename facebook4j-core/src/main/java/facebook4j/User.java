@@ -46,7 +46,7 @@ public interface User {
     Cover getCover();
     List<User.Education> getEducation();
     String getEmail();
-    IdNameEntity getHometown();
+    String getHometown();
     List<String> getInterestedIn();
     IdNameEntity getLocation();
     String getPolitical();

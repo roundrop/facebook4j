@@ -55,8 +55,7 @@ public class UserMethodsTest extends MockFacebookTestBase {
             assertThat(me.getEmail(), is("roundrop@gmail.com"));
             assertThat(me.getFirstName(), is("Firstname"));
             assertThat(me.getGender(), is("male"));
-            assertThat(me.getHometown().getId(), is("5555"));
-            assertThat(me.getHometown().getName(), is("Hometown Name"));
+            assertThat(me.getHometown(), is("Hometown Name"));
             assertThat(me.getId(), is("6666"));
             assertThat(me.getLastName(), is("Lastname"));
             assertThat(me.getLink().toString(), is("http://www.facebook.com/roundrop"));
@@ -119,8 +118,7 @@ public class UserMethodsTest extends MockFacebookTestBase {
             assertThat(user.getEmail(), is("roundrop@gmail.com"));
             assertThat(user.getFirstName(), is("Firstname"));
             assertThat(user.getGender(), is("male"));
-            assertThat(user.getHometown().getId(), is("5555"));
-            assertThat(user.getHometown().getName(), is("Hometown Name"));
+            assertThat(user.getHometown(), is("Hometown Name"));
             assertThat(user.getId(), is("6666"));
             assertThat(user.getLastName(), is("Lastname"));
             assertThat(user.getLink().toString(), is("http://www.facebook.com/roundrop"));

@@ -71,8 +71,7 @@ public class RawAPIMethodsTest {
             assertThat(me.getEmail(), is("roundrop@gmail.com"));
             assertThat(me.getFirstName(), is("Firstname"));
             assertThat(me.getGender(), is("male"));
-            assertThat(me.getHometown().getId(), is("5555"));
-            assertThat(me.getHometown().getName(), is("Hometown Name"));
+            assertThat(me.getHometown(), is("Hometown Name"));
             assertThat(me.getId(), is("6666"));
             assertThat(me.getLastName(), is("Lastname"));
             assertThat(me.getLink().toString(), is("http://www.facebook.com/roundrop"));

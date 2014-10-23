@@ -66,7 +66,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Cover cover;
     private List<User.Education> education;
     private String email;
-    private IdNameEntity hometown;
+    private String hometown;
     private List<String> interestedIn;
     private IdNameEntity location;
     private String political;
@@ -145,10 +145,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 education = Collections.emptyList();
             }
             email = getRawString("email", json);
-            if (!json.isNull("hometown")) {
-                JSONObject hometownJSON = json.getJSONObject("hometown");
-                hometown = new IdNameEntityJSONImpl(hometownJSON);
-            }
+            hometown = getRawString("hometown", json);
             if (!json.isNull("interestedIn")) {
                 JSONArray interestedInJSONArray = json.getJSONArray("interested_in");
                 final int size = interestedInJSONArray.length();
@@ -300,7 +297,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return email;
     }
 
-    public IdNameEntity getHometown() {
+    public String getHometown() {
         return hometown;
     }
 
