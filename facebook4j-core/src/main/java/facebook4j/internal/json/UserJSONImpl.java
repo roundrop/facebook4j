@@ -146,8 +146,13 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             email = getRawString("email", json);
             if (!json.isNull("hometown")) {
-                JSONObject hometownJSON = json.getJSONObject("hometown");
-                hometown = new IdNameEntityJSONImpl(hometownJSON);
+                String hometownRawString = getRawString("hometown", json);
+                if (hometownRawString.startsWith("{")) {
+                    JSONObject hometownJSON = json.getJSONObject("hometown");
+                    hometown = new IdNameEntityJSONImpl(hometownJSON);
+                } else {
+                    hometown = new IdNameEntityJSONImpl(hometownRawString);
+                }
             }
             if (!json.isNull("interestedIn")) {
                 JSONArray interestedInJSONArray = json.getJSONArray("interested_in");

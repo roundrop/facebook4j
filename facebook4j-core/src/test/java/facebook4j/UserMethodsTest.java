@@ -159,6 +159,15 @@ public class UserMethodsTest extends MockFacebookTestBase {
             assertThat(user.getTimezone(), is(nullValue()));
             assertThat(user.isInstalled(), is(nullValue()));
         }
+
+        @Test
+        public void hometown_string() throws Exception {
+            facebook.setMockJSON("mock_json/user/hometown_string.json");
+            User user = facebook.getUser("CFKArgentina");
+
+            assertThat(user.getHometown().getId(), is(nullValue()));
+            assertThat(user.getHometown().getName(), is("La Plata"));
+        }
     }
 
     public static class getPictureURL extends MockFacebookTestBase {
