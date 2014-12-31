@@ -181,6 +181,20 @@ public class UserMethodsTest extends MockFacebookTestBase {
         }
 
         @Test
+        public void me_width_height() throws Exception {
+            facebook.setMockJSON("mock_json/user/me_picture_width_height.json");
+            URL url = facebook.getPictureURL(720, 540);
+            assertThat(facebook.getEndpointURL(), hasParameter("width", "720"));
+            assertThat(facebook.getEndpointURL(), hasParameter("height", "540"));
+            assertThat(url.toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/1111_22222_333333_a.jpg"));
+            url = facebook.getPictureURL("100001568838021", 720, 540);
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100001568838021/picture")));
+            assertThat(facebook.getEndpointURL(), hasParameter("width", "720"));
+            assertThat(facebook.getEndpointURL(), hasParameter("height", "540"));
+            assertThat(url.toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/1111_22222_333333_a.jpg"));
+        }
+
+        @Test
         public void id() throws Exception {
             facebook.setMockJSON("mock_json/user/me_picture.json");
             URL url = facebook.getPictureURL("22222");
