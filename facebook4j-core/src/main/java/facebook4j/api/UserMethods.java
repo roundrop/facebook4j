@@ -84,6 +84,16 @@ public interface UserMethods {
     URL getPictureURL(PictureSize size) throws FacebookException;
 
     /**
+     * Returns the url of the current user's profile picture.
+     * @param width width of the picture
+     * @param height height of the picture
+     * @return url
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - picture
+     */
+    URL getPictureURL(int width, int height) throws FacebookException;
+
+    /**
      * Returns the url of a user's profile picture.
      * @param userId the ID of a user
      * @return url
@@ -101,7 +111,18 @@ public interface UserMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - picture
      */
     URL getPictureURL(String userId, PictureSize size) throws FacebookException;
-    
+
+    /**
+     * Returns the url of a user's profile picture.
+     * @param userId the ID of a user
+     * @param width width of the picture
+     * @param height height of the picture
+     * @return url
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - picture
+     */
+    URL getPictureURL(String userId, int width, int height) throws FacebookException;
+
     /**
      * Returns the url of the current user's profile picture over a secure connection.
      * @return url

@@ -180,13 +180,20 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return getPictureURL("me", size);
     }
+ 	public URL getPictureURL(int width, int height) throws FacebookException {
+		ensureAuthorizationEnabled();
+		return getPictureURL("me", width, height);
+	}    
     public URL getPictureURL(String userId) throws FacebookException {
         return getPictureURL(userId, null);
     }
     public URL getPictureURL(String userId, PictureSize size) throws FacebookException {
         return _getPictureURL(userId, size);
     }
-
+ 	public URL getPictureURL(String userId, int width, int height) throws FacebookException {
+		return _getPictureURL(userId, width, height);
+	}
+	
     public URL getSSLPictureURL() throws FacebookException {
         ensureAuthorizationEnabled();
         return getSSLPictureURL("me");
@@ -2507,6 +2514,20 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
             throw new FacebookException(urle.getMessage(), urle);
         }
     }
+ 	private URL _getPictureURL(String objectId, int width, int height) throws FacebookException {
+		String url = buildEndpoint(objectId, "picture");
+		HttpResponse res;
+		if (width > 0 && height > 0) {
+			res = get(url, new HttpParameter[] { new HttpParameter("width", Integer.toString(width)), new HttpParameter("height", Integer.toString(height)) });
+		} else {
+			res = get(url);
+		}
+		try {
+			return new URL(res.getResponseHeader("Location"));
+		} catch (MalformedURLException urle) {
+			throw new FacebookException(urle.getMessage(), urle);
+		}
+	}
 
     private URL _getSSLPictureURL(String objectId, PictureSize size) throws FacebookException {
         String url = buildEndpoint(objectId, "picture");
