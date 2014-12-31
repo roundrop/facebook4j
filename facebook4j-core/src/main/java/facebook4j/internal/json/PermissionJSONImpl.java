@@ -16,10 +16,8 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import facebook4j.FacebookException;
@@ -53,20 +51,22 @@ import facebook4j.internal.org.json.JSONObject;
     }
 
     /*package*/
-    static List<Permission> createPermissionArray(HttpResponse res, Configuration conf) throws FacebookException {
+    static List<Permission> createPermissionArray(HttpResponse res, Configuration conf) throws FacebookException {    	
         if (conf.isJSONStoreEnabled()) {
             DataObjectFactoryUtil.clearThreadLocalMap();
         }
         List<Permission> permissions = new ArrayList<Permission>();
         JSONObject json = res.asJSONObject();
         try {
+        	String nameKey = "permission";
+        	String statusKey = "status";
+        	String accessGranted = "granted";
             JSONArray list = json.getJSONArray("data");
             for (int i = 0; i < list.length(); i++) {
                 JSONObject permissionJSONObject = list.getJSONObject(i);
-                Iterator<String> permissionNames = permissionJSONObject.keys();
-                while (permissionNames.hasNext()) {
-                    String permissionName = permissionNames.next();
-                    boolean isGranted = getFlag(permissionName, permissionJSONObject);
+                if(permissionJSONObject.has(nameKey) && permissionJSONObject.has(statusKey)){
+                	String permissionName = permissionJSONObject.getString(nameKey);
+                    boolean isGranted =  accessGranted.equalsIgnoreCase(permissionJSONObject.getString(statusKey));
                     permissions.add(new PermissionJSONImpl(permissionName, isGranted));
                 }
             }
