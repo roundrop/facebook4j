@@ -16,11 +16,6 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import facebook4j.FacebookException;
 import facebook4j.Permission;
@@ -29,6 +24,12 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -53,7 +54,7 @@ import facebook4j.internal.org.json.JSONObject;
     }
 
     /*package*/
-    static List<Permission> createPermissionArray(HttpResponse res, Configuration conf) throws FacebookException {
+    static List<Permission> createPermissionArray(HttpResponse res, Configuration conf) throws FacebookException {    	
         if (conf.isJSONStoreEnabled()) {
             DataObjectFactoryUtil.clearThreadLocalMap();
         }
@@ -63,11 +64,17 @@ import facebook4j.internal.org.json.JSONObject;
             JSONArray list = json.getJSONArray("data");
             for (int i = 0; i < list.length(); i++) {
                 JSONObject permissionJSONObject = list.getJSONObject(i);
-                Iterator<String> permissionNames = permissionJSONObject.keys();
-                while (permissionNames.hasNext()) {
-                    String permissionName = permissionNames.next();
-                    boolean isGranted = getFlag(permissionName, permissionJSONObject);
+                if (permissionJSONObject.has("permission") && permissionJSONObject.has("status")) {
+                    String permissionName = permissionJSONObject.getString("permission");
+                    boolean isGranted =  "granted".equalsIgnoreCase(permissionJSONObject.getString("status"));
                     permissions.add(new PermissionJSONImpl(permissionName, isGranted));
+                } else {
+                    Iterator<String> permissionNames = permissionJSONObject.keys();
+                    while (permissionNames.hasNext()) {
+                        String permissionName = permissionNames.next();
+                        boolean isGranted = getFlag(permissionName, permissionJSONObject);
+                        permissions.add(new PermissionJSONImpl(permissionName, isGranted));
+                    }
                 }
             }
             if (conf.isJSONStoreEnabled()) {
