@@ -33,12 +33,9 @@ public class PermissionMethodsTest {
 
     public static class getPermissions extends MockFacebookTestBase {
 
-        private static final String MOCK_JSON_PERMISSION_ALL_JSON = "mock_json/permission/all_v2.2.json";
-//        private static final String MOCK_JSON_PERMISSION_ALL_JSON = "mock_json/permission/all.json";
-
 		@Test
         public void me() throws Exception {
-            facebook.setMockJSON(MOCK_JSON_PERMISSION_ALL_JSON);
+            facebook.setMockJSON("mock_json/permission/all.json");
             List<Permission> actuals = facebook.getPermissions();
             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
             assertThat(facebook.getEndpointURL(), is(pathOf("/me/permissions")));
@@ -48,7 +45,27 @@ public class PermissionMethodsTest {
 
         @Test
         public void id() throws Exception {
-            facebook.setMockJSON(MOCK_JSON_PERMISSION_ALL_JSON);
+            facebook.setMockJSON("mock_json/permission/all.json");
+            List<Permission> actuals = facebook.getPermissions("1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/permissions")));
+
+            assertThat(actuals.size(), is(80));
+        }
+
+		@Test
+        public void me_v2() throws Exception {
+            facebook.setMockJSON("mock_json/permission/all_v2.2.json");
+            List<Permission> actuals = facebook.getPermissions();
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/permissions")));
+
+            assertThat(actuals.size(), is(80));
+        }
+
+        @Test
+        public void id_v2() throws Exception {
+            facebook.setMockJSON("mock_json/permission/all_v2.2.json");
             List<Permission> actuals = facebook.getPermissions("1234567890123456");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
             assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/permissions")));
