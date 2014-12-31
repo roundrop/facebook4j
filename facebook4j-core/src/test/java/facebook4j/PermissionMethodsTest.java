@@ -17,6 +17,7 @@
 package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
+
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -31,7 +32,8 @@ import static org.junit.Assert.*;
 public class PermissionMethodsTest {
 
     public static class getPermissions extends MockFacebookTestBase {
-        @Test
+
+		@Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/permission/all.json");
             List<Permission> actuals = facebook.getPermissions();
@@ -44,6 +46,26 @@ public class PermissionMethodsTest {
         @Test
         public void id() throws Exception {
             facebook.setMockJSON("mock_json/permission/all.json");
+            List<Permission> actuals = facebook.getPermissions("1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/permissions")));
+
+            assertThat(actuals.size(), is(80));
+        }
+
+		@Test
+        public void me_v2() throws Exception {
+            facebook.setMockJSON("mock_json/permission/all_v2.2.json");
+            List<Permission> actuals = facebook.getPermissions();
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/permissions")));
+
+            assertThat(actuals.size(), is(80));
+        }
+
+        @Test
+        public void id_v2() throws Exception {
+            facebook.setMockJSON("mock_json/permission/all_v2.2.json");
             List<Permission> actuals = facebook.getPermissions("1234567890123456");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
             assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/permissions")));

@@ -50,6 +50,11 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         init(json);
     }
 
+    /*package*/IdNameEntityJSONImpl(String name) {
+        super();
+        this.name = name;
+    }
+
     private void init(JSONObject json) throws FacebookException {
         id = getRawString("id", json);
         name = getRawString("name", json);
