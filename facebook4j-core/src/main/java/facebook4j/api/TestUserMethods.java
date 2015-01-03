@@ -16,10 +16,10 @@
 
 package facebook4j.api;
 
-import java.util.List;
-
 import facebook4j.FacebookException;
 import facebook4j.TestUser;
+
+import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -45,6 +45,19 @@ public interface TestUserMethods {
      * @see <a href="https://developers.facebook.com/docs/test_users/">Test Users - Facebook Developers</a>
      */
     TestUser createTestUser(String appId, String name, String locale, String permissions) throws FacebookException;
+
+    /**
+     * Creates a test user associated with a particular app.
+     * @param appId the ID of the app
+     * @param name test user name
+     * @param locale locale
+     * @param permissions comma-separated list of permissions
+     * @param installed automatically installs the app for the test user once it is created
+     * @return Test User
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/test_users/">Test Users - Facebook Developers</a>
+     */
+    TestUser createTestUser(String appId, String name, String locale, String permissions, boolean installed) throws FacebookException;
 
 
     /**

@@ -2333,16 +2333,25 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
     
     public TestUser createTestUser(String appId, String name, String locale, String permissions) throws FacebookException {
+        return createTestUser(appId, name, locale, permissions, true);
+    }
+    
+    public TestUser createTestUser(String appId, String name, String locale, String permissions, boolean installed) throws FacebookException {
         ensureAuthorizationEnabled();
         String _locale = "en_US";
         if (locale != null) _locale = locale;
-        return factory.createTestUser(post(conf.getRestBaseURL() + appId + "/accounts/test-users" + 
-                    "?installed=true" +
-                    "&name=" + HttpParameter.encode(name) +
-                    "&locale=" + HttpParameter.encode(_locale) +
-                    "&permissions=" + HttpParameter.encode(permissions)));
+        String url = conf.getRestBaseURL() + appId + "/accounts/test-users" +
+                    "?installed=" + Boolean.toString(installed) +
+                    "&locale=" + HttpParameter.encode(_locale);
+        if (name != null) {
+            url += "&name=" + HttpParameter.encode(name);
+        }
+        if (permissions != null) {
+            url += "&permissions=" + HttpParameter.encode(permissions);
+        }
+        return factory.createTestUser(post(url));
     }
-    
+
     public List<TestUser> getTestUsers(String appId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = get(conf.getRestBaseURL() + appId + "/accounts/test-users");
