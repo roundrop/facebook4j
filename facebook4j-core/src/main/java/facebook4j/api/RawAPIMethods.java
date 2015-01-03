@@ -18,6 +18,7 @@ package facebook4j.api;
 
 import facebook4j.FacebookException;
 import facebook4j.RawAPIResponse;
+import facebook4j.internal.http.HttpParameter;
 
 import java.util.Map;
 
@@ -46,6 +47,16 @@ public interface RawAPIMethods {
     RawAPIResponse callGetAPI(String relativeUrl, Map<String, String> parameters) throws FacebookException;
 
     /**
+     * Calls raw Facebook GET API simply.
+     * This method not supports "JSONStore" option because this method returns the json object itself.
+     * @param relativeUrl relativeUrl
+     * @param parameters GET parameters
+     * @return response
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    RawAPIResponse callGetAPI(String relativeUrl, HttpParameter... parameters) throws FacebookException;
+
+    /**
      * Calls raw Facebook POST API simply.
      * This method not supports "JSONStore" option because this method returns the json object itself.
      * @param relativeUrl relativeUrl
@@ -63,6 +74,16 @@ public interface RawAPIMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      */
     RawAPIResponse callPostAPI(String relativeUrl, Map<String, String> parameters) throws FacebookException;
+
+    /**
+     * Calls raw Facebook POST API simply.
+     * This method not supports "JSONStore" option because this method returns the json object itself.
+     * @param relativeUrl relativeUrl
+     * @param parameters POST parameters
+     * @return response
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    RawAPIResponse callPostAPI(String relativeUrl, HttpParameter... parameters) throws FacebookException;
 
     /**
      * Calls raw Facebook DELETE API simply.

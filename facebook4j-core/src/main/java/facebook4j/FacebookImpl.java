@@ -2441,7 +2441,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     /* raw api methods */
     
     public RawAPIResponse callGetAPI(String relativeUrl) throws FacebookException {
-        return callGetAPI(relativeUrl, null);
+        return callGetAPI(relativeUrl, new HashMap<String, String>());
     }
     public RawAPIResponse callGetAPI(String relativeUrl, Map<String, String> parameters) throws FacebookException {
         ensureAuthorizationEnabled();
@@ -2455,9 +2455,21 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         HttpResponse res = get(buildEndpoint(path, parameters));
         return new RawAPIResponseImpl(res);
     }
+    public RawAPIResponse callGetAPI(String relativeUrl, HttpParameter... parameters) throws FacebookException {
+        ensureAuthorizationEnabled();
+
+        String path = relativeUrl;
+        if (relativeUrl.startsWith("/")) {
+            path = relativeUrl.substring(1);
+        }
+
+        // not supports "JSONStore" option because this method returns the json object itself.
+        HttpResponse res = get(buildEndpoint(path), parameters);
+        return new RawAPIResponseImpl(res);
+    }
 
     public RawAPIResponse callPostAPI(String relativeUrl) throws FacebookException {
-        return callPostAPI(relativeUrl, null);
+        return callPostAPI(relativeUrl, new HashMap<String, String>());
     }
     public RawAPIResponse callPostAPI(String relativeUrl, Map<String, String> parameters) throws FacebookException {
         ensureAuthorizationEnabled();
@@ -2475,6 +2487,24 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
                 httpParameters[i++] = new HttpParameter(p, parameters.get(p));
             }
             res = post(buildEndpoint(path), httpParameters);
+        } else {
+            res = post(buildEndpoint(path));
+        }
+
+        // not supports "JSONStore" option because this method returns the json object itself.
+        return new RawAPIResponseImpl(res);
+    }
+    public RawAPIResponse callPostAPI(String relativeUrl, HttpParameter... parameters) throws FacebookException {
+        ensureAuthorizationEnabled();
+
+        String path = relativeUrl;
+        if (relativeUrl.startsWith("/")) {
+            path = relativeUrl.substring(1);
+        }
+
+        HttpResponse res;
+        if (parameters != null && parameters.length > 0) {
+            res = post(buildEndpoint(path), parameters);
         } else {
             res = post(buildEndpoint(path));
         }
