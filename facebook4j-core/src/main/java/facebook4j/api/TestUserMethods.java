@@ -19,7 +19,6 @@ package facebook4j.api;
 import java.util.List;
 
 import facebook4j.FacebookException;
-import facebook4j.ResponseList;
 import facebook4j.TestUser;
 
 /**
@@ -50,7 +49,6 @@ public interface TestUserMethods {
 
     /**
      * Returns test users associated with a particular app.
-     * This method can't manage paging
      * @param appId the ID of the app
      * @return Test Users
      * @throws FacebookException when Facebook service or network is unavailable
@@ -59,18 +57,6 @@ public interface TestUserMethods {
     List<TestUser> getTestUsers(String appId) throws FacebookException;
 
 
-    /**
-     * Returns test users associated with a particular app. 
-     * This method manage paging, call facebook.fetchNext to get next page
-     * @param appId the ID of the app
-     * @param limit number of elements per page (can be null to use default page size)
-     * @return Test Users first page
-     * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/test_users/">Test Users - Facebook Developers</a>
-     */
-    ResponseList<TestUser> getTestUsers(String appId, Integer limit) throws FacebookException;
-    
-    
     /**
      * Deletes the test user.
      * @param testUserId the ID of the test user

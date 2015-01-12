@@ -209,8 +209,6 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     
     TestUser createTestUser(JSONObject json) throws FacebookException;
 
-    ResponseList<TestUser> createTestUserList(HttpResponse res) throws FacebookException;
-    
     ResponseList<JSONObject> createJSONObjectList(HttpResponse res) throws FacebookException;
     ResponseList<JSONObject> createJSONObjectList(JSONObject json) throws FacebookException;
     

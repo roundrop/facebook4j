@@ -2357,12 +2357,6 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
     }
-    
-    public ResponseList<TestUser> getTestUsers(String appId, Integer limit) throws FacebookException {
-       ensureAuthorizationEnabled();
-       HttpResponse res = get(conf.getRestBaseURL() + appId + "/accounts/test-users"+(limit != null? "?limit=" + limit : ""));
-       return factory.createTestUserList(res);
-   }
 
     public boolean deleteTestUser(String testUserId) throws FacebookException {
         ensureAuthorizationEnabled();
