@@ -386,6 +386,10 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return new TestUserJSONImpl(json);
     }
 
+    public ResponseList<TestUser> createTestUserList(HttpResponse res) throws FacebookException {
+       return TestUserJSONImpl.createTestUserList(res, conf);
+   }
+
     public ResponseList<JSONObject> createJSONObjectList(HttpResponse res) throws FacebookException {
         return ResponseListImpl.createJSONObjectList(res, conf);
     }
@@ -564,6 +568,9 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         }
         if (jsonObjectType == Offer.class) {
             return (ResponseList<T>) createOfferList(res);
+        }
+        if (jsonObjectType == TestUser.class) {
+      	  return (ResponseList<T>) createTestUserList(res);
         }
         if (jsonObjectType == JSONObject.class) {
             return (ResponseList<T>) createJSONObjectList(res);
