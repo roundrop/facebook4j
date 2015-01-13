@@ -85,7 +85,7 @@ public class UserMethodsTest extends MockFacebookTestBase {
         @Test
         public void reading() throws Exception {
             facebook.setMockJSON("mock_json/user/me_fields.json");
-            User me = facebook.getMe(new Reading().fields("gender").fields("email"));
+            User me = facebook.getMe(new Reading().fields("gender").fields("email").fields("age_range"));
 
             assertThat(me.getGender(), is("male"));
             assertThat(me.getEmail(), is("roundrop@gmail.com"));
@@ -94,6 +94,10 @@ public class UserMethodsTest extends MockFacebookTestBase {
             assertThat(me.getBirthday(), is(nullValue()));
             assertThat(me.getEducation().size(), is(0));
             assertThat(me.getHometown(), is(nullValue()));
+
+            assertThat(me.getAgeRange().getMin(), is(17L));
+            assertThat(me.getAgeRange().getMax(), is(20L));
+            
         }
     }
 
