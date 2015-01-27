@@ -80,6 +80,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private User.VideoUploadLimits videoUploadLimits;
     private URL website;
     private List<User.Work> work;
+    private User.AgeRange ageRange;
 
     /*package*/UserJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         if (conf.isJSONStoreEnabled()) {
@@ -220,6 +221,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             } else {
                 work = Collections.emptyList();
             }
+            if (!json.isNull("age_range")) {
+               JSONObject ageRangeJSONObject = json.getJSONObject("age_range");
+               ageRange = new AgeRangeJSONImpl(ageRangeJSONObject);
+           }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage() + ":" + json.toString(), jsone);
         }
@@ -361,6 +366,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return work;
     }
 
+    public User.AgeRange getAgeRange() {
+       return ageRange;
+   }
+
     /*package*/
     static ResponseList<User> createUserList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -452,7 +461,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 + relationshipStatus + ", religion=" + religion
                 + ", significantOther=" + significantOther
                 + ", videoUploadLimits=" + videoUploadLimits + ", website="
-                + website + ", work=" + work + "]";
+                + website + ", work=" + work + ", ageRange=" + ageRange + "]";
     }
 
 
@@ -857,4 +866,55 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         }
     }
 
+    private final class AgeRangeJSONImpl implements User.AgeRange, java.io.Serializable {
+       private static final long serialVersionUID = -4890967721976343047L;
+       
+       private final Long min;
+       private final Long max;
+
+       AgeRangeJSONImpl(JSONObject json) throws FacebookException {
+           min = getLong("min", json);
+           max = getLong("max", json);
+       }
+
+       public Long getMin() {
+           return min;
+       }
+
+       public Long getMax() {
+           return max;
+       }
+
+       @Override
+       public int hashCode() {
+           final int prime = 31;
+           int result = 1;
+           result = prime * result + (int) (min ^ (min >>> 32));
+           result = prime * result + (int) (max ^ (max >>> 32));
+           return result;
+       }
+
+       @Override
+       public boolean equals(Object obj) {
+           if (this == obj)
+               return true;
+           if (obj == null)
+               return false;
+           if (getClass() != obj.getClass())
+               return false;
+           AgeRangeJSONImpl other = (AgeRangeJSONImpl) obj;
+           if (min != other.min)
+               return false;
+           if (max != other.max)
+               return false;
+           return true;
+       }
+
+       @Override
+       public String toString() {
+           return "AgeRangeJSONImpl [min=" + min + ", max=" + max
+                   + "]";
+       }
+   }
+    
 }
