@@ -2,5 +2,5 @@
     "gender": "male",
     "email": "roundrop@gmail.com",
     "id": "6666",
-    "age_range":{"min": 17,"max": 20},
+    "age_range":{"min": 17,"max": 20}
 }

@@ -93,9 +93,8 @@ public interface User {
 
  	interface AgeRange {
  		// one value could be null (13-17 / 18-20 / 21 - null)
-		Long getMin();
-		Long getMax();
-		
+        Integer getMin();
+        Integer getMax();
 	}
 
 

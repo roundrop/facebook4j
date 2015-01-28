@@ -869,52 +869,49 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private final class AgeRangeJSONImpl implements User.AgeRange, java.io.Serializable {
        private static final long serialVersionUID = -4890967721976343047L;
        
-       private final Long min;
-       private final Long max;
+       private final Integer min;
+       private final Integer max;
 
        AgeRangeJSONImpl(JSONObject json) throws FacebookException {
-           min = getLong("min", json);
-           max = getLong("max", json);
+           min = getInt("min", json);
+           max = getInt("max", json);
        }
 
-       public Long getMin() {
+       public Integer getMin() {
            return min;
        }
 
-       public Long getMax() {
+       public Integer getMax() {
            return max;
        }
 
-       @Override
-       public int hashCode() {
-           final int prime = 31;
-           int result = 1;
-           result = prime * result + (int) (min ^ (min >>> 32));
-           result = prime * result + (int) (max ^ (max >>> 32));
-           return result;
-       }
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof AgeRangeJSONImpl)) return false;
 
-       @Override
-       public boolean equals(Object obj) {
-           if (this == obj)
-               return true;
-           if (obj == null)
-               return false;
-           if (getClass() != obj.getClass())
-               return false;
-           AgeRangeJSONImpl other = (AgeRangeJSONImpl) obj;
-           if (min != other.min)
-               return false;
-           if (max != other.max)
-               return false;
-           return true;
-       }
+            AgeRangeJSONImpl that = (AgeRangeJSONImpl) o;
 
-       @Override
-       public String toString() {
-           return "AgeRangeJSONImpl [min=" + min + ", max=" + max
-                   + "]";
-       }
-   }
-    
+            if (max != null ? !max.equals(that.max) : that.max != null) return false;
+            if (min != null ? !min.equals(that.min) : that.min != null) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = min != null ? min.hashCode() : 0;
+            result = 31 * result + (max != null ? max.hashCode() : 0);
+            return result;
+        }
+
+        @Override
+        public String toString() {
+            return "AgeRangeJSONImpl{" +
+                    "min=" + min +
+                    ", max=" + max +
+                    '}';
+        }
+    }
+
 }
