@@ -18,8 +18,13 @@ package facebook4j.internal.json;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.getRawString;
 import facebook4j.FacebookException;
+import facebook4j.Interest;
+import facebook4j.ResponseList;
 import facebook4j.TestUser;
+import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
 /**
@@ -45,6 +50,35 @@ import facebook4j.internal.org.json.JSONObject;
         init(json);
     }
 
+    /*package*/
+    static ResponseList<TestUser> createTestUserList(HttpResponse res, Configuration conf) throws FacebookException {
+        try {
+            if (conf.isJSONStoreEnabled()) {
+                DataObjectFactoryUtil.clearThreadLocalMap();
+            }
+            JSONObject json = res.asJSONObject();
+            JSONArray list = json.getJSONArray("data");
+            final int size = list.length();
+            ResponseList<TestUser> testUsers = new ResponseListImpl<TestUser>(size, json);
+            for (int i = 0; i < size; i++) {
+                JSONObject testUserJSONObject = list.getJSONObject(i);
+                TestUser testUser = new TestUserJSONImpl(testUserJSONObject);
+                if (conf.isJSONStoreEnabled()) {
+                    DataObjectFactoryUtil.registerJSONObject(testUser, testUserJSONObject);
+                }
+                testUsers.add(testUser);
+            }
+            if (conf.isJSONStoreEnabled()) {
+                DataObjectFactoryUtil.registerJSONObject(testUsers, list);
+            }
+            return testUsers;
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone);
+        }
+    }
+
+    
+    
     private void init(JSONObject json) throws FacebookException {
         id = getRawString("id", json);
         accessToken = getRawString("access_token", json);
