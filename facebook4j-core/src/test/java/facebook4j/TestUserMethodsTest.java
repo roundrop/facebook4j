@@ -23,7 +23,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import static facebook4j.junit.URLMatchers.*;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -102,22 +102,20 @@ public class TestUserMethodsTest {
             @Test
             public void me() throws Exception {
                 int page = 1;
-                facebook.setMockJSON("mock_json/testUser/page" + page + ".json");
+                facebook.setMockJSON("mock_json/testuser/page" + page + ".json");
 
                 ResponseList<TestUser> testUsersResponseList = facebook.getTestUsers("appId_XXXXXXXXXXXX", 10);
                 while (testUsersResponseList != null && testUsersResponseList.size() > 0) {
                     for (TestUser u : testUsersResponseList) {
-                        assertNotNull(u.getId());
-                        assertNotNull(u.getAccessToken());
+                        assertThat(u.getId(), is(notNullValue()));
+                        assertThat(u.getAccessToken(), is(notNullValue()));
                     }
-                    if (testUsersResponseList != null) {
-                        Paging<TestUser> paging = testUsersResponseList.getPaging();
-                        if (paging != null && paging.getNext() != null) {
-                            facebook.setMockJSON("mock_json/testUser/page" + ++page + ".json");
-                            testUsersResponseList = facebook.fetchNext(paging);
-                        } else {
-                            testUsersResponseList = null;
-                        }
+                    Paging<TestUser> paging = testUsersResponseList.getPaging();
+                    if (paging != null && paging.getNext() != null) {
+                        facebook.setMockJSON("mock_json/testUser/page" + ++page + ".json");
+                        testUsersResponseList = facebook.fetchNext(paging);
+                    } else {
+                        testUsersResponseList = null;
                     }
 
                 }
