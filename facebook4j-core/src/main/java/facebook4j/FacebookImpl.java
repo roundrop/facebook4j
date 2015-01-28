@@ -2370,7 +2370,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     
     public ResponseList<TestUser> getTestUsers(String appId, Integer limit) throws FacebookException {
        ensureAuthorizationEnabled();
-       HttpResponse res = get(conf.getRestBaseURL() + appId + "/accounts/test-users"+(limit != null? "?limit=" + limit : ""));
+       HttpResponse res = get(conf.getRestBaseURL() + appId + "/accounts/test-users" + (limit != null ? "?limit=" + limit : ""));
        return factory.createTestUserList(res);
    }
     
