@@ -60,6 +60,7 @@ public interface User {
     User.VideoUploadLimits getVideoUploadLimits();
     URL getWebsite();
     List<User.Work> getWork();
+    User.AgeRange getAgeRange();
 
     interface Education {
         IdNameEntity getYear();
@@ -89,6 +90,12 @@ public interface User {
         String getEndDate();
 
     }
+
+ 	interface AgeRange {
+ 		// one value could be null (13-17 / 18-20 / 21 - null)
+        Integer getMin();
+        Integer getMax();
+	}
 
 
     String BIRTHDAY_DATE_FORMAT = "MM/dd/yyyy";

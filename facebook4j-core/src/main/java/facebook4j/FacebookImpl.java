@@ -2333,31 +2333,36 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
     
     public TestUser createTestUser(String appId, String name, String locale, String permissions) throws FacebookException {
+        return createTestUser(appId, name, locale, permissions, true);
+    }
+    
+    public TestUser createTestUser(String appId, String name, String locale, String permissions, boolean installed) throws FacebookException {
         ensureAuthorizationEnabled();
         String _locale = "en_US";
         if (locale != null) _locale = locale;
-        return factory.createTestUser(post(conf.getRestBaseURL() + appId + "/accounts/test-users" + 
-                    "?installed=true" +
-                    "&name=" + HttpParameter.encode(name) +
-                    "&locale=" + HttpParameter.encode(_locale) +
-                    "&permissions=" + HttpParameter.encode(permissions)));
-    }
-    
-    public List<TestUser> getTestUsers(String appId) throws FacebookException {
-        ensureAuthorizationEnabled();
-        HttpResponse res = get(conf.getRestBaseURL() + appId + "/accounts/test-users");
-        try {
-            JSONArray data = res.asJSONObject().getJSONArray("data");
-            List<TestUser> testUsers = new ArrayList<TestUser>();
-            for (int i = 0; i < data.length(); i++) {
-                testUsers.add(factory.createTestUser(data.getJSONObject(i)));
-            }
-            return testUsers;
-        } catch (JSONException jsone) {
-            throw new FacebookException(jsone.getMessage(), jsone);
+        String url = conf.getRestBaseURL() + appId + "/accounts/test-users" +
+                    "?installed=" + Boolean.toString(installed) +
+                    "&locale=" + HttpParameter.encode(_locale);
+        if (name != null) {
+            url += "&name=" + HttpParameter.encode(name);
         }
+        if (permissions != null) {
+            url += "&permissions=" + HttpParameter.encode(permissions);
+        }
+        return factory.createTestUser(post(url));
     }
 
+    public ResponseList<TestUser> getTestUsers(String appId) throws FacebookException {
+        return getTestUsers(appId, null);
+    }
+
+    
+    public ResponseList<TestUser> getTestUsers(String appId, Integer limit) throws FacebookException {
+       ensureAuthorizationEnabled();
+       HttpResponse res = get(conf.getRestBaseURL() + appId + "/accounts/test-users" + (limit != null ? "?limit=" + limit : ""));
+       return factory.createTestUserList(res);
+   }
+    
     public boolean deleteTestUser(String testUserId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(conf.getRestBaseURL() + testUserId);
@@ -2432,7 +2437,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     /* raw api methods */
     
     public RawAPIResponse callGetAPI(String relativeUrl) throws FacebookException {
-        return callGetAPI(relativeUrl, null);
+        return callGetAPI(relativeUrl, new HashMap<String, String>());
     }
     public RawAPIResponse callGetAPI(String relativeUrl, Map<String, String> parameters) throws FacebookException {
         ensureAuthorizationEnabled();
@@ -2446,9 +2451,21 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         HttpResponse res = get(buildEndpoint(path, parameters));
         return new RawAPIResponseImpl(res);
     }
+    public RawAPIResponse callGetAPI(String relativeUrl, HttpParameter... parameters) throws FacebookException {
+        ensureAuthorizationEnabled();
+
+        String path = relativeUrl;
+        if (relativeUrl.startsWith("/")) {
+            path = relativeUrl.substring(1);
+        }
+
+        // not supports "JSONStore" option because this method returns the json object itself.
+        HttpResponse res = get(buildEndpoint(path), parameters);
+        return new RawAPIResponseImpl(res);
+    }
 
     public RawAPIResponse callPostAPI(String relativeUrl) throws FacebookException {
-        return callPostAPI(relativeUrl, null);
+        return callPostAPI(relativeUrl, new HashMap<String, String>());
     }
     public RawAPIResponse callPostAPI(String relativeUrl, Map<String, String> parameters) throws FacebookException {
         ensureAuthorizationEnabled();
@@ -2466,6 +2483,24 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
                 httpParameters[i++] = new HttpParameter(p, parameters.get(p));
             }
             res = post(buildEndpoint(path), httpParameters);
+        } else {
+            res = post(buildEndpoint(path));
+        }
+
+        // not supports "JSONStore" option because this method returns the json object itself.
+        return new RawAPIResponseImpl(res);
+    }
+    public RawAPIResponse callPostAPI(String relativeUrl, HttpParameter... parameters) throws FacebookException {
+        ensureAuthorizationEnabled();
+
+        String path = relativeUrl;
+        if (relativeUrl.startsWith("/")) {
+            path = relativeUrl.substring(1);
+        }
+
+        HttpResponse res;
+        if (parameters != null && parameters.length > 0) {
+            res = post(buildEndpoint(path), parameters);
         } else {
             res = post(buildEndpoint(path));
         }

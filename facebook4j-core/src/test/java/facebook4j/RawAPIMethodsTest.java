@@ -16,6 +16,7 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.http.RequestMethod;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONObject;
@@ -129,6 +130,18 @@ public class RawAPIMethodsTest {
             assertThat(facebook.getEndpointURL(), hasParameter("fields", "shares"));
             assertThat(facebook.getEndpointURL(), hasParameter("limit", "5"));
         }
+
+        @Test
+        public void usingHttpParameterObject() throws Exception {
+            facebook.setMockJSON("mock_json/post/shares_count.json");
+            HttpParameter p1 = new HttpParameter("fields", "shares");
+            HttpParameter p2 = new HttpParameter("limit", "5");
+            facebook.callGetAPI("BillGates", p1, p2);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/BillGates")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "shares"));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "5"));
+        }
     }
 
     public static class callPostAPI extends MockFacebookTestBase {
@@ -191,6 +204,23 @@ public class RawAPIMethodsTest {
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/me/feed")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("message", "test message"));
+        }
+
+        @Test
+        public void usingHttpParameterObject() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            HttpParameter p1 = new HttpParameter("message", "test message");
+            RawAPIResponse actual = facebook.callPostAPI("me/feed", p1);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/feed")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "test message"));
+
+            assertThat(actual.isJSONObject(), is(true));
+            assertThat(actual.isJSONArray(), is(false));
+            assertThat(actual.isBoolean(), is(false));
+
+            JSONObject jsonObject = actual.asJSONObject();
+            assertThat(jsonObject.getString("id"), is("137246726435626_185932178233747"));
         }
     }
 
