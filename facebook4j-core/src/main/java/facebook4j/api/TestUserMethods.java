@@ -20,8 +20,6 @@ import facebook4j.FacebookException;
 import facebook4j.ResponseList;
 import facebook4j.TestUser;
 
-import java.util.List;
-
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
@@ -69,8 +67,7 @@ public interface TestUserMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/test_users/">Test Users - Facebook Developers</a>
      */
-    List<TestUser> getTestUsers(String appId) throws FacebookException;
-
+    ResponseList<TestUser> getTestUsers(String appId) throws FacebookException;
 
     /**
      * Returns test users associated with a particular app. 

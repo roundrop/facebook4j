@@ -2352,19 +2352,8 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createTestUser(post(url));
     }
 
-    public List<TestUser> getTestUsers(String appId) throws FacebookException {
-        ensureAuthorizationEnabled();
-        HttpResponse res = get(conf.getRestBaseURL() + appId + "/accounts/test-users");
-        try {
-            JSONArray data = res.asJSONObject().getJSONArray("data");
-            List<TestUser> testUsers = new ArrayList<TestUser>();
-            for (int i = 0; i < data.length(); i++) {
-                testUsers.add(factory.createTestUser(data.getJSONObject(i)));
-            }
-            return testUsers;
-        } catch (JSONException jsone) {
-            throw new FacebookException(jsone.getMessage(), jsone);
-        }
+    public ResponseList<TestUser> getTestUsers(String appId) throws FacebookException {
+        return getTestUsers(appId, null);
     }
 
     

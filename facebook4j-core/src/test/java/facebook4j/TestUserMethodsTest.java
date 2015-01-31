@@ -17,7 +17,6 @@
 package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
-
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -100,7 +99,23 @@ public class TestUserMethodsTest {
 
         public static class getTestUsers extends MockFacebookTestBase {
             @Test
-            public void me() throws Exception {
+            public void appId() throws Exception {
+                facebook.setMockJSON("mock_json/testuser/all.json");
+                ResponseList<TestUser> testUsers = facebook.getTestUsers("appId");
+                assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+                assertThat(facebook.getEndpointURL(), is(pathOf("/appId/accounts/test-users")));
+
+                assertThat(testUsers.size(), is(5));
+                assertThat(testUsers.get(0).getId(), is("1379885932316530"));
+                assertThat(testUsers.get(0).getLoginUrl(), is("https://developers.facebook.com/checkpoint/test-user-login/1379885932316530/"));
+                assertThat(testUsers.get(0).getAccessToken(), is("CAAUs5XD3IK4BAPJnYxLqqKtpZBnNaqNGr4PfcCWuowZC1PWZAmCHsAW4OFhdwnz1B3ZARpCNR4ShuFoGUwZAZCAMquGfRWzvYCzpy0Q3Q6tikMpDhZCoyI3QUfuZCEdSEi8bbK9mFheRgAaWs0H4K0v1YZAKEg2j73QIeFWB3Ea7xRXuWJQUeEHvpSdRWBIAXXZAcZD"));
+                assertThat(testUsers.get(4).getId(), is("1377730512532504"));
+                assertThat(testUsers.get(4).getLoginUrl(), is("https://developers.facebook.com/checkpoint/test-user-login/1377730512532504/"));
+                assertThat(testUsers.get(4).getAccessToken(), is("CAAUs5XD3IK4BABZCZBgNxZAMW90NEYz4cYtkgDCYoJL6rA80LfkLJnl8hFvY7LXQkASJWfTOk9IVkU9R7MWgumkgzCspfoMYaViqrR5VsJ7BWmg6265ANwSelTZAP3EdAc6w12H2ccvSEkkYroQEh9qENhCNy1dkTeJ7GDMLAKN4n2Qp4GyWsZAaZA7t7gCf0ZD"));
+            }
+
+            @Test
+            public void paging() throws Exception {
                 int page = 1;
                 facebook.setMockJSON("mock_json/testuser/page" + page + ".json");
 
