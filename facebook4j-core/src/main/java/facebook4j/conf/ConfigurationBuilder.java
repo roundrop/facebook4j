@@ -16,6 +16,8 @@
 
 package facebook4j.conf;
 
+import facebook4j.Versioning.GraphVersion;
+
 
 
 /**
@@ -214,6 +216,12 @@ public final class ConfigurationBuilder {
         configurationBean.setMBeanEnabled(enabled);
         return this;
     }
+    
+    public ConfigurationBuilder setGraphVersion(GraphVersion value) {
+    	checkNotBuilt();
+    	configurationBean.setGraphVersion(value);
+    	return this;
+	}
 
     public Configuration build() {
         checkNotBuilt();

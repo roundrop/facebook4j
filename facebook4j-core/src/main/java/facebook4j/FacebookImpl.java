@@ -17,6 +17,7 @@
 package facebook4j;
 
 import facebook4j.Question.Option;
+import facebook4j.Versioning.GraphVersion;
 import facebook4j.api.AccountMethods;
 import facebook4j.api.ActivityMethods;
 import facebook4j.api.AlbumMethods;
@@ -52,6 +53,7 @@ import facebook4j.api.UserMethods;
 import facebook4j.api.VideoMethods;
 import facebook4j.auth.Authorization;
 import facebook4j.conf.Configuration;
+import facebook4j.conf.ConfigurationBuilder;
 import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;

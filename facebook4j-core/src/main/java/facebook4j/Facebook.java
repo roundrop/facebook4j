@@ -16,6 +16,7 @@
 
 package facebook4j;
 
+import facebook4j.Versioning.GraphVersion;
 import facebook4j.api.AccountMethods;
 import facebook4j.api.ActivityMethods;
 import facebook4j.api.AlbumMethods;
@@ -255,4 +256,5 @@ public interface Facebook extends java.io.Serializable,
      * @since Facebook4J 2.1.0
      */
     RawAPIMethods rawAPI();
+    
 }
