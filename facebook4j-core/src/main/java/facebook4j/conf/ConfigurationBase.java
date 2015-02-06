@@ -479,6 +479,14 @@ public class ConfigurationBase implements Configuration, Serializable {
         this.appSecretProofCacheSize = appSecretProofCacheSize;
     }
     
+    
+    public String getGraphVersion() {
+    	if(ConfigurationBase.graphVersion == null){
+    		return "/";
+    	}
+        return ConfigurationBase.graphVersion;
+    }
+    
     public void setGraphVersion(GraphVersion value) {
     	Versioning version = new Versioning();
     	version.setVersion(value);

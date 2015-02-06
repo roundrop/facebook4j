@@ -74,7 +74,7 @@ public final class PropertyConfiguration extends ConfigurationBase implements Se
     public static final String OAUTH_AUTHORIZATION_URL = "oauth.authorizationURL";
     public static final String OAUTH_ACCESS_TOKEN_URL = "oauth.accessTokenURL";
 
-    public static final String GRAPH_VERSION = "graphVersion";
+    public static final String GRAPH_VERSION = "versioning.graphVersion";
     public static final String REST_BASE_URL = "restBaseURL";
     public static final String VIDEO_BASE_URL = "videoBaseURL";
 
