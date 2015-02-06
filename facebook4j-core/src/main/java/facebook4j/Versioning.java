@@ -30,7 +30,7 @@ public class Versioning {
 	private String version = "";
 	
 	public enum GraphVersion {
-    	V1_0("v1.0/"), V2_0("v2.0/"), V2_1("v2.1/"), V2_2("v2.2/"), UNVERSIONED("/");
+    	V1_0("v1.0/"), V2_0("v2.0/"), V2_1("v2.1/"), V2_2("v2.2/"), UNVERSIONED("");
     	
     	private String version = "";
     	

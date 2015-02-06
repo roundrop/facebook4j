@@ -57,6 +57,8 @@ public interface Configuration extends HttpClientConfiguration
 
     boolean isMBeanEnabled();
  
+    String getGraphVersion();
+    
     void setGraphVersion(GraphVersion value);
     
 

@@ -482,7 +482,7 @@ public class ConfigurationBase implements Configuration, Serializable {
     
     public String getGraphVersion() {
     	if(ConfigurationBase.graphVersion == null){
-    		return "/";
+    		return "";
     	}
         return ConfigurationBase.graphVersion;
     }

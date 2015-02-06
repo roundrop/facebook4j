@@ -182,9 +182,9 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
     
     public String getGraphVersion(){
     	if(graphVersion == null){
-    		return "/";
+    		return "";
     	}
-    	return graphVersion.replace("/", "");
+    	return graphVersion;
     }
     
     public void setGraphVersion(GraphVersion value) {
