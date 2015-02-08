@@ -18,6 +18,7 @@ package facebook4j;
 
 import facebook4j.internal.http.HttpParameter;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,16 +30,26 @@ public class PhotoUpdate implements java.io.Serializable {
     private static final long serialVersionUID = -2679992754222742305L;
 
     private Media source;
+    private URL url;
     private String message;
     private String place;
     private Boolean noStory;
+    private PrivacyParameter privacy;
 
     public PhotoUpdate(Media source) {
         this.source = source;
     }
 
+    public PhotoUpdate(URL url) {
+        this.url = url;
+    }
+
     public Media getSource() {
         return source;
+    }
+
+    public URL getUrl() {
+        return url;
     }
 
     public String getMessage() {
@@ -80,9 +91,27 @@ public class PhotoUpdate implements java.io.Serializable {
         return this;
     }
 
+    public PrivacyParameter getPrivacy() {
+        return privacy;
+    }
+
+    public void setPrivacy(PrivacyParameter privacy) {
+        this.privacy = privacy;
+    }
+
+    public PhotoUpdate privacy(PrivacyParameter privacy) {
+        setPrivacy(privacy);
+        return this;
+    }
+
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
-        params.add(source.asHttpParameter("source"));
+        if (source != null) {
+            params.add(source.asHttpParameter("source"));
+        }
+        if (url != null) {
+            params.add(new HttpParameter("url", url.toString()));
+        }
         if (message != null) {
             params.add(new HttpParameter("message", message));
         }
@@ -93,6 +122,9 @@ public class PhotoUpdate implements java.io.Serializable {
             if (noStory) {
                 params.add(new HttpParameter("no_story", 1));
             }
+        }
+        if (privacy != null) {
+            params.add(new HttpParameter("privacy", privacy.asJSONString()));
         }
         return params.toArray(new HttpParameter[params.size()]);
     }
@@ -107,7 +139,9 @@ public class PhotoUpdate implements java.io.Serializable {
         if (message != null ? !message.equals(that.message) : that.message != null) return false;
         if (noStory != null ? !noStory.equals(that.noStory) : that.noStory != null) return false;
         if (place != null ? !place.equals(that.place) : that.place != null) return false;
+        if (privacy != null ? !privacy.equals(that.privacy) : that.privacy != null) return false;
         if (source != null ? !source.equals(that.source) : that.source != null) return false;
+        if (url != null ? !url.equals(that.url) : that.url != null) return false;
 
         return true;
     }
@@ -115,9 +149,11 @@ public class PhotoUpdate implements java.io.Serializable {
     @Override
     public int hashCode() {
         int result = source != null ? source.hashCode() : 0;
+        result = 31 * result + (url != null ? url.hashCode() : 0);
         result = 31 * result + (message != null ? message.hashCode() : 0);
         result = 31 * result + (place != null ? place.hashCode() : 0);
         result = 31 * result + (noStory != null ? noStory.hashCode() : 0);
+        result = 31 * result + (privacy != null ? privacy.hashCode() : 0);
         return result;
     }
 
@@ -125,9 +161,11 @@ public class PhotoUpdate implements java.io.Serializable {
     public String toString() {
         return "PhotoUpdate{" +
                 "source=" + source +
+                ", url=" + url +
                 ", message='" + message + '\'' +
                 ", place='" + place + '\'' +
                 ", noStory=" + noStory +
+                ", privacy=" + privacy +
                 '}';
     }
 }

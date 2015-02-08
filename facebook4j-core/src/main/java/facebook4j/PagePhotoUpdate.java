@@ -18,6 +18,7 @@ package facebook4j;
 
 import facebook4j.internal.http.HttpParameter;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,19 +31,29 @@ public class PagePhotoUpdate implements java.io.Serializable {
     private static final long serialVersionUID = -2690799855513822140L;
 
     private Media source;
+    private URL url;
     private String message;
+    private String place;
+    private Boolean noStory;
     private TargetingParameter targeting;
     private FeedTargetingParameter feedTargeting;
     private Boolean published;
     private Integer scheduledPublishTime;
 
     public PagePhotoUpdate(Media source) {
-        super();
         this.source = source;
+    }
+
+    public PagePhotoUpdate(URL url) {
+        this.url = url;
     }
 
     public Media getSource() {
         return source;
+    }
+
+    public URL getUrl() {
+        return url;
     }
 
     public String getMessage() {
@@ -55,6 +66,32 @@ public class PagePhotoUpdate implements java.io.Serializable {
 
     public PagePhotoUpdate message(String message) {
         setMessage(message);
+        return this;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public PagePhotoUpdate place(String place) {
+        setPlace(place);
+        return this;
+    }
+
+    public Boolean getNoStory() {
+        return noStory;
+    }
+
+    public void setNoStory(boolean noStory) {
+        this.noStory = noStory;
+    }
+
+    public PagePhotoUpdate noStory(boolean noStory) {
+        setNoStory(noStory);
         return this;
     }
 
@@ -122,9 +159,22 @@ public class PagePhotoUpdate implements java.io.Serializable {
 
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
-        params.add(new HttpParameter("source", source.getMediaFile()));
+        if (source != null) {
+            params.add(new HttpParameter("source", source.getMediaFile()));
+        }
+        if (url != null) {
+            params.add(new HttpParameter("url", url.toString()));
+        }
         if (message != null) {
             params.add(new HttpParameter("message", message));
+        }
+        if (place != null) {
+            params.add(new HttpParameter("place", place));
+        }
+        if (noStory != null) {
+            if (noStory) {
+                params.add(new HttpParameter("no_story", 1));
+            }
         }
         if (targeting != null) {
             params.add(new HttpParameter("targeting", targeting.asJSONString()));
@@ -151,11 +201,14 @@ public class PagePhotoUpdate implements java.io.Serializable {
         if (feedTargeting != null ? !feedTargeting.equals(that.feedTargeting) : that.feedTargeting != null)
             return false;
         if (message != null ? !message.equals(that.message) : that.message != null) return false;
+        if (noStory != null ? !noStory.equals(that.noStory) : that.noStory != null) return false;
+        if (place != null ? !place.equals(that.place) : that.place != null) return false;
         if (published != null ? !published.equals(that.published) : that.published != null) return false;
         if (scheduledPublishTime != null ? !scheduledPublishTime.equals(that.scheduledPublishTime) : that.scheduledPublishTime != null)
             return false;
         if (source != null ? !source.equals(that.source) : that.source != null) return false;
         if (targeting != null ? !targeting.equals(that.targeting) : that.targeting != null) return false;
+        if (url != null ? !url.equals(that.url) : that.url != null) return false;
 
         return true;
     }
@@ -163,7 +216,10 @@ public class PagePhotoUpdate implements java.io.Serializable {
     @Override
     public int hashCode() {
         int result = source != null ? source.hashCode() : 0;
+        result = 31 * result + (url != null ? url.hashCode() : 0);
         result = 31 * result + (message != null ? message.hashCode() : 0);
+        result = 31 * result + (place != null ? place.hashCode() : 0);
+        result = 31 * result + (noStory != null ? noStory.hashCode() : 0);
         result = 31 * result + (targeting != null ? targeting.hashCode() : 0);
         result = 31 * result + (feedTargeting != null ? feedTargeting.hashCode() : 0);
         result = 31 * result + (published != null ? published.hashCode() : 0);
@@ -175,7 +231,10 @@ public class PagePhotoUpdate implements java.io.Serializable {
     public String toString() {
         return "PagePhotoUpdate{" +
                 "source=" + source +
+                ", url=" + url +
                 ", message='" + message + '\'' +
+                ", place='" + place + '\'' +
+                ", noStory=" + noStory +
                 ", targeting=" + targeting +
                 ", feedTargeting=" + feedTargeting +
                 ", published=" + published +

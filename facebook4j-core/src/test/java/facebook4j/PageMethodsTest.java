@@ -1835,6 +1835,34 @@ public class PageMethodsTest {
 
             assertThat(actual, is("137246726435626_185932178233747"));
         }
+
+        @Test
+        public void url_place_nostory() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            PagePhotoUpdate pagePhotoUpdate = new PagePhotoUpdate(new URL("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yC/r/gfLdB3lVEL5.png")).message("upload photo to the page test.");
+            Set<String> countries = new HashSet<String>();
+            countries.add("US");
+            countries.add("GB");
+            TargetingParameter targeting = new TargetingParameter().countries(countries);
+            pagePhotoUpdate.setTargeting(targeting);
+            FeedTargetingParameter feedTargeting = new FeedTargetingParameter().genders(FeedTargetingParameter.Gender.Male);
+            feedTargeting.setAgeMin(20);
+            feedTargeting.setAgeMax(40);
+            pagePhotoUpdate.setFeedTargeting(feedTargeting);
+            pagePhotoUpdate.setPlace("178106048903380");
+            pagePhotoUpdate.setNoStory(true);
+            String actual = facebook.postPagePhoto("137246726435626", pagePhotoUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/photos")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("url", "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yC/r/gfLdB3lVEL5.png"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "upload photo to the page test."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("targeting", "{\"countries\":[\"US\",\"GB\"]}"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("feed_targeting", "{\"age_min\":20,\"genders\":{\"value\":1},\"age_max\":40}"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("place", "178106048903380"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("no_story", "1"));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
     }
 
     public static class updatePageSetting extends MockFacebookTestBase {

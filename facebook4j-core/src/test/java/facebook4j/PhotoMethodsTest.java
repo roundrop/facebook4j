@@ -17,6 +17,7 @@
 package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.junit.FacebookAPIVersion;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -684,6 +685,27 @@ public class PhotoMethodsTest {
             assertThat(facebook.getHttpParameters(), hasPostParameter("message", "update photo with message"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("place", "178106048903380"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("no_story", "1"));
+
+            assertThat(actual, is("1234567890123456"));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.2")
+        public void privacy() throws Exception {
+            facebook.setMockJSON("mock_json/id_and_post_id.json");
+            PrivacyParameter privacyParameter = new PrivacyBuilder().setValue(PrivacyType.SELF).build();
+            PhotoUpdate photoUpdate = new PhotoUpdate(new URL("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yC/r/gfLdB3lVEL5.png"))
+                    .message("privacy")
+                    .noStory(true)
+                    .privacy(privacyParameter);
+            ;
+            String actual = facebook.postPhoto(photoUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.2/me/photos")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("url", "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yC/r/gfLdB3lVEL5.png"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "privacy"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("no_story", "1"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("privacy", "{\"value\":\"SELF\"}"));
 
             assertThat(actual, is("1234567890123456"));
         }
