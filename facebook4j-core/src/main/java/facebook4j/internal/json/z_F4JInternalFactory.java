@@ -66,6 +66,7 @@ import facebook4j.Subscribedto;
 import facebook4j.Subscriber;
 import facebook4j.Tab;
 import facebook4j.Tag;
+import facebook4j.TaggableFriend;
 import facebook4j.Tagged;
 import facebook4j.Television;
 import facebook4j.TestUser;
@@ -124,6 +125,7 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<FriendRequest> createFriendRequestList(HttpResponse res) throws FacebookException;
     
     ResponseList<Friend> createFriendList(HttpResponse res) throws FacebookException;
+    ResponseList<TaggableFriend> createTaggableFriendList(HttpResponse res) throws FacebookException;
 
     ResponseList<Game> createGameList(HttpResponse res) throws FacebookException;
     
