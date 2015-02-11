@@ -895,6 +895,17 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createFriendList(get(buildEndpoint(userId, "friends", reading)));
     }
+    
+    public ResponseList<TaggableFriend> getTaggableFriends() throws FacebookException {
+		return getTaggableFriends("me", null);
+	}
+	public ResponseList<TaggableFriend> getTaggableFriends(Reading reading) throws FacebookException {
+		return getTaggableFriends("me", reading);
+	}
+	public ResponseList<TaggableFriend> getTaggableFriends(String userId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createTaggableFriendList(get(buildEndpoint(userId, "taggable_friends", reading)));
+    }
 
     public ResponseList<Friend> getMutualFriends(String friendUserId) throws FacebookException {
         return getMutualFriends("me", friendUserId, null);
@@ -970,7 +981,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createFriendList(get(buildEndpoint(userId, "friends/" + friendId, reading)));
     }
-
+    
     /* Favorite Methods */
     
     public ResponseList<Game> getGames() throws FacebookException {
@@ -2903,4 +2914,5 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public RawAPIMethods rawAPI() {
         return this;
     }
+    
 }
