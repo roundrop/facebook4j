@@ -55,6 +55,7 @@ import facebook4j.PageSetting;
 import facebook4j.Permission;
 import facebook4j.Photo;
 import facebook4j.Place;
+import facebook4j.PlaceTag;
 import facebook4j.Poke;
 import facebook4j.Post;
 import facebook4j.Question;
@@ -143,6 +144,7 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<Link> createLinkList(HttpResponse res) throws FacebookException;
     
     ResponseList<Location> createLocationList(HttpResponse res) throws FacebookException;
+    ResponseList<PlaceTag> createPlaceTagList(HttpResponse res) throws FacebookException;
     
     ResponseList<Movie> createMovieList(HttpResponse res) throws FacebookException;
     
