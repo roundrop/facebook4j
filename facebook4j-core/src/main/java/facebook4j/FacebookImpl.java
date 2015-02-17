@@ -1321,6 +1321,23 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createLocationList(get(buildEndpoint(userId, "locations", reading)));
     }
+    
+	public ResponseList<PlaceTag> getTaggedPlaces() throws FacebookException {
+		return getTaggedPlaces("me", null);
+	}
+
+	public ResponseList<PlaceTag> getTaggedPlaces(Reading reading) throws FacebookException {
+		return getTaggedPlaces("me", reading);
+	}
+
+	public ResponseList<PlaceTag> getTaggedPlaces(String userId) throws FacebookException {
+		return getTaggedPlaces(userId, null);
+	}
+
+	public ResponseList<PlaceTag> getTaggedPlaces(String userId, Reading reading) throws FacebookException {
+		ensureAuthorizationEnabled();
+		return factory.createPlaceTagList(get(buildEndpoint(userId, "tagged_places", reading)));
+	}
 
     /* Note Methods */
     

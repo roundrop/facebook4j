@@ -55,6 +55,7 @@ import facebook4j.PageSetting;
 import facebook4j.Permission;
 import facebook4j.Photo;
 import facebook4j.Place;
+import facebook4j.PlaceTag;
 import facebook4j.Poke;
 import facebook4j.Post;
 import facebook4j.Question;
@@ -242,6 +243,10 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
 
     public ResponseList<Location> createLocationList(HttpResponse res) throws FacebookException {
         return LocationJSONImpl.createLocationList(res, conf);
+    }
+    
+    public ResponseList<PlaceTag> createPlaceTagList(HttpResponse res) throws FacebookException {
+        return PlaceTagJSONImpl.createPlaceTagList(res, conf);
     }
 
     public ResponseList<Movie> createMovieList(HttpResponse res) throws FacebookException {

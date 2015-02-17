@@ -16,7 +16,6 @@
 
 package facebook4j;
 
-import facebook4j.Versioning.GraphVersion;
 import facebook4j.api.AccountMethods;
 import facebook4j.api.ActivityMethods;
 import facebook4j.api.AlbumMethods;

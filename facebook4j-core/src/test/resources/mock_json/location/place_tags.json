@@ -1,0 +1,34 @@
+{
+    "data": [
+        {
+            "id": "10100130254301913",
+            "created_time": "2010-02-18T04:51:23+0000",
+            "place": {
+                "id": "112197455462418",
+                "location": {
+                    "latitude": 39.0839,
+                    "longitude": -77.1531
+                },
+                "name": "Rockville, Maryland"
+            }
+        },
+        {
+            "id": "10100132254301912",
+            "created_time": "2010-02-18T04:52:23+0000",
+            "place": {
+                "id": "112197455462418",
+                "location": {
+                    "latitude": 49.0839,
+                    "longitude": -87.1531
+                },
+                "name": "Boston, Massachusetts"
+            }
+        }
+    ],
+    "paging": {
+        "cursors": {
+            "before": "MTAxMDAxMzAyNTQzMDE5MTM=",
+            "after": "MTAxMDAxMzAyNTQzMDE5MTM="
+        }
+    }
+}
