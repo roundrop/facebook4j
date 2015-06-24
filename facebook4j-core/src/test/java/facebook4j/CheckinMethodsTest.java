@@ -445,7 +445,7 @@ public class CheckinMethodsTest {
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/me/checkins")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("place", "100404700021921"));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("coordinates", "{\"longitude\":139.69321689514,\"latitude\":35.675272122419}"));
+            assertThat(facebook.getHttpParameters(), hasPostJsonParameter("coordinates", "{\"longitude\":139.69321689514,\"latitude\":35.675272122419}"));
 
             assertThat(actual, is("1234567890123456"));
         }
@@ -464,7 +464,7 @@ public class CheckinMethodsTest {
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001/checkins")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("place", "100404700021921"));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("coordinates", "{\"longitude\":139.69321689514,\"latitude\":35.675272122419}"));
+            assertThat(facebook.getHttpParameters(), hasPostJsonParameter("coordinates", "{\"longitude\":139.69321689514,\"latitude\":35.675272122419}"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("message", "test message"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://www.facebook.com/"));
 

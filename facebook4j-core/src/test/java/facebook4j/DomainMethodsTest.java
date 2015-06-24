@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
 import java.util.List;
 
 import static facebook4j.junit.URLMatchers.*;
+import java.util.NoSuchElementException;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -66,12 +67,23 @@ public class DomainMethodsTest {
             assertThat(facebook.getEndpointURL(), hasParameter("domains", "www.facebook.com,www.example.com"));
 
             assertThat(actuals.size(), is(2));
-            Domain actual1 = actuals.get(0);
+            System.out.println("actuals: " + actuals);
+            Domain actual1 = findById("345629607804", actuals);
             assertThat(actual1.getId(), is("345629607804"));
             assertThat(actual1.getName(), is("example.com"));
-            Domain actual2 = actuals.get(1);
+            Domain actual2 = findById("369296215699", actuals);
             assertThat(actual2.getId(), is("369296215699"));
             assertThat(actual2.getName(), is("Facebook.com"));
+        }
+        
+        protected Domain findById(String id, Iterable<Domain> domains) {
+            assertNotNull("id", id);
+            for (Domain domain : domains) {
+                if (id.equals(domain.getId())) {
+                    return domain;
+                }
+            }
+            throw new NoSuchElementException("domain with id = " + id);
         }
     }
 
