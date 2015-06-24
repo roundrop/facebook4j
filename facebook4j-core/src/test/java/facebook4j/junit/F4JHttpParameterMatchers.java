@@ -16,6 +16,8 @@
 
 package facebook4j.junit;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import facebook4j.internal.http.HttpParameter;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
@@ -24,6 +26,7 @@ import org.junit.internal.matchers.TypeSafeMatcher;
 
 import java.util.ArrayList;
 import java.util.List;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Matchers for facebook4j.internal.http.HttpParameter.
@@ -51,6 +54,56 @@ public final class F4JHttpParameterMatchers {
 
             public void describeTo(Description desc) {
                 desc.appendValue(name + "=" + value);
+                if (actualParams.size() > 0) {
+                    desc.appendText(" but actual is ");
+                    desc.appendValue(actualParams.get(0));
+                    for (int i = 1; i < actualParams.size(); i++) {
+                        desc.appendText(", ");
+                        desc.appendValue(actualParams.get(i));
+                    }
+                } else {
+                    desc.appendText(" but actual has no '" + name + "' parameter");
+                }
+            }
+        };
+    }
+
+    @Factory
+    public static Matcher<HttpParameter[]> hasPostJsonParameter(final String name, final String expectedJson) {
+        return hasPostJsonParameter(name, expectedJson, new JsonParser());
+    }
+    
+    @Factory
+    public static Matcher<HttpParameter[]> hasPostJsonParameter(final String name, final String expectedJson, JsonParser jsonParser) {
+        JsonElement expectedValue = jsonParser.parse(expectedJson);
+        return hasPostJsonParameter(name, expectedValue, jsonParser);
+    }
+    
+    @Factory
+    public static Matcher<HttpParameter[]> hasPostJsonParameter(final String name, final JsonElement expectedValue, final JsonParser jsonParser) {
+        assertNotNull("expectedValue", expectedValue);
+        return new TypeSafeMatcher<HttpParameter[]>() {
+            private final List<String> actualParams = new ArrayList<String>();
+
+            @Override
+            public boolean matchesSafely(HttpParameter[] actual) {
+                for (HttpParameter param : actual) {
+                    if (param.getName().equals(name)) {
+                        actualParams.add(param.getName() + "=" + param.getValue());
+                        String paramValueStr = param.getValue();
+                        if (paramValueStr != null) {
+                            JsonElement paramValue = jsonParser.parse(paramValueStr);
+                            if (expectedValue.equals(paramValue)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+
+            public void describeTo(Description desc) {
+                desc.appendValue(name + "=" + expectedValue);
                 if (actualParams.size() > 0) {
                     desc.appendText(" but actual is ");
                     desc.appendValue(actualParams.get(0));
