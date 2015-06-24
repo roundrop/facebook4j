@@ -149,6 +149,29 @@ public final class z_F4JInternalParseUtil {
         }
     }
 
+    public static Double getTimeZoneOffset(String name, JSONObject json) {
+        String str2 = getRawString(name, json);
+        if (null == str2 || "".equals(str2) || "null".equals(str2)) {
+            return null;
+        } else {
+            try {
+                return Double.valueOf(str2);
+            } catch (NumberFormatException ignore) {
+                TimeZone timeZone = TimeZone.getTimeZone(str2); // returns GMT if not understood
+                
+                double offset = getTimeZoneOffsetInHours(timeZone);
+                return offset;
+            }
+        }
+    }
+    
+    public static Double getTimeZoneOffsetInHours(TimeZone tz) {
+        long currentTime = System.currentTimeMillis();
+        int offsetInMilliseconds = tz.getOffset(currentTime);
+        int offsetInHours = offsetInMilliseconds / (1000 * 60 * 60);
+        return (double) offsetInHours;
+    }
+    
     public static Boolean getBoolean(String name, JSONObject json) {
         String str = getRawString(name, json);
         if (null == str || "null".equals(str)) {

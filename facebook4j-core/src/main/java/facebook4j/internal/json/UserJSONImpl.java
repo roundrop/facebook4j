@@ -126,7 +126,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             username = getRawString("username", json);
             thirdPartyId = getRawString("third_party_id", json);
             installed = getBoolean("installed", json);
-            timezone = getDouble("timezone", json);
+            timezone = getTimeZoneOffset("timezone", json);
             updatedTime = getISO8601Datetime("updated_time", json);
             verified = getBoolean("verified", json);
             bio = getRawString("bio", json);
