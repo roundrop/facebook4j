@@ -157,6 +157,15 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>disable-jdk8-doclint</id>
+      <activation>
+        <jdk>1.8</jdk>
+      </activation>
+      <properties>
+        <javadoc.additionalparam>-Xdoclint:none</javadoc.additionalparam>
+      </properties>
+    </profile>
   </profiles>
 
   <build>
@@ -220,6 +229,7 @@
               <excludePackageNames>
                 facebook4j.internal.*
               </excludePackageNames>
+              <additionalparam>${javadoc.additionalparam}</additionalparam>
             </configuration>
           </execution>
         </executions>
@@ -270,6 +280,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <javadoc.additionalparam></javadoc.additionalparam>
   </properties>
 
 </project>
