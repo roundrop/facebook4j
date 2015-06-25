@@ -17,6 +17,8 @@
 package facebook4j.conf;
 
 import facebook4j.Version;
+import facebook4j.Versioning;
+import facebook4j.Versioning.GraphVersion;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;
@@ -73,11 +75,11 @@ public class ConfigurationBase implements Configuration, Serializable {
     private boolean jsonStoreEnabled;
 
     private boolean mbeanEnabled;
+    private static String graphVersion;
 
     // hidden portion
     private String clientVersion;
     private String clientURL;
-
     public static final String DALVIK = "facebook4j.dalvik";
     public static final String GAE = "facebook4j.gae";
     
@@ -146,9 +148,11 @@ public class ConfigurationBase implements Configuration, Serializable {
         setOAuthAuthorizationURL(DEFAULT_OAUTH_AUTHORIZATION_URL);
         setOAuthAccessTokenURL(DEFAULT_OAUTH_ACCESS_TOKEN_URL);
 
+        setGraphVersion(GraphVersion.UNVERSIONED);
+        
         setRestBaseURL(DEFAULT_REST_BASE_URL);
         setVideoBaseURL(DEFAULT_VIDEO_BASE_URL);
-
+        
         String isDalvik;
         try {
             isDalvik = System.getProperty(DALVIK, dalvikDetected);
@@ -381,12 +385,13 @@ public class ConfigurationBase implements Configuration, Serializable {
     }
     
     protected final void setRestBaseURL(String restBaseURL) {
-        this.restBaseURL = restBaseURL;
+        this.restBaseURL = restBaseURL + graphVersion;
         fixRestBaseURL();
     }
 
     private void fixRestBaseURL() {
-        if (DEFAULT_REST_BASE_URL.equals(fixURL(false, restBaseURL))) {
+    	String versionRestBasedURL = DEFAULT_REST_BASE_URL + graphVersion;
+        if (versionRestBasedURL.equals(fixURL(false, restBaseURL))) {
             this.restBaseURL = fixURL(useSSL, restBaseURL);
         }
         if (DEFAULT_OAUTH_ACCESS_TOKEN_URL.equals(fixURL(false, oAuthAccessTokenURL))) {
@@ -473,6 +478,24 @@ public class ConfigurationBase implements Configuration, Serializable {
     public void setAppSecretProofCacheSize(int appSecretProofCacheSize) {
         this.appSecretProofCacheSize = appSecretProofCacheSize;
     }
+    
+    
+    public String getGraphVersion() {
+    	if(ConfigurationBase.graphVersion == null){
+    		return "";
+    	}
+        return ConfigurationBase.graphVersion;
+    }
+    
+    public void setGraphVersion(GraphVersion value) {
+    	Versioning version = new Versioning();
+    	version.setVersion(value);
+    	graphVersion = version.getVersion();
+    	if(this.restBaseURL != null){
+    		this.restBaseURL = DEFAULT_REST_BASE_URL + graphVersion;
+    		fixRestBaseURL();
+    	}
+	}
 
     static String fixURL(boolean useSSL, String url) {
         if (null == url) {

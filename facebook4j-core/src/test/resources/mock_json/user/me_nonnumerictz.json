@@ -1,0 +1,73 @@
+{
+    "bio": "biography",
+    "birthday": "01/23/1975",
+    "education": [
+        {
+            "school": {
+                "id": "1111",
+                "name": "High School Name"
+            },
+            "type": "High School",
+            "year": {
+                "id": "2222",
+                "name": "1994"
+            }
+        },
+        {
+            "school": {
+                "id": "3333",
+                "name": "College Name"
+            },
+            "type": "College",
+            "year": {
+                "id": "4444",
+                "name": "1998"
+            }
+        }
+    ],
+    "email": "roundrop@gmail.com",
+    "first_name": "Firstname",
+    "gender": "male",
+    "hometown": {
+        "id": "5555",
+        "name": "Hometown Name"
+    },
+    "id": "6666",
+    "last_name": "Lastname",
+    "link": "http://www.facebook.com/roundrop",
+    "locale": "en_US",
+    "location": {
+        "id": "7777",
+        "name": "Location Name"
+    },
+    "name": "Firstname Lastname",
+    "timezone": "Asia/Tokyo",
+    "updated_time": "2013-05-11T16:08:47+0000",
+    "username": "roundrop",
+    "verified": true,
+    "work": [
+        {
+            "employer": {
+                "id": "11111",
+                "name": "company1"
+            },
+            "location": {
+                "id": "11112",
+                "name": "location1"
+            },
+            "position": {
+                "id": "11113",
+                "name": "position1"
+            },
+            "start_date": "2012-01"
+        },
+        {
+            "employer": {
+                "id": "22221",
+                "name": "company2"
+            },
+            "end_date": "2011-12",
+            "start_date": "2011-09"
+        }
+    ]
+}

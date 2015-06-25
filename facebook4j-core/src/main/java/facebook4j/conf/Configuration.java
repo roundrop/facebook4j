@@ -17,6 +17,7 @@
 package facebook4j.conf;
 
 
+import facebook4j.Versioning.GraphVersion;
 import facebook4j.auth.AuthorizationConfiguration;
 import facebook4j.internal.http.HttpClientConfiguration;
 import facebook4j.internal.http.HttpClientWrapperConfiguration;
@@ -55,5 +56,10 @@ public interface Configuration extends HttpClientConfiguration
     boolean isJSONStoreEnabled();
 
     boolean isMBeanEnabled();
+ 
+    String getGraphVersion();
+    
+    void setGraphVersion(GraphVersion value);
+    
 
 }

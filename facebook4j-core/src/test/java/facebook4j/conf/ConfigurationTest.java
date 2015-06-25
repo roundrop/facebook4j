@@ -17,6 +17,8 @@
 package facebook4j.conf;
 
 import facebook4j.Version;
+import facebook4j.Versioning.GraphVersion;
+
 import org.junit.Test;
 
 import java.io.BufferedWriter;
@@ -177,6 +179,13 @@ public class ConfigurationTest {
         writeFile("./facebook4j.properties", "security.appSecretProofCacheSize=50");
         conf = new PropertyConfiguration();
         assertThat(conf.getAppSecretProofCacheSize(), is(50));
+        
+        conf = new PropertyConfiguration();
+        conf.setGraphVersion(GraphVersion.V2_2);
+        assertThat(conf.getGraphVersion(), is("v2.2/"));
+        writeFile("./facebook4j.properties", "versioning.graphVersion=V2_2");
+        conf = new PropertyConfiguration();
+        assertThat(conf.getGraphVersion(), is("v2.2/"));
 
         deleteFile("./facebook4j.properties");
     }

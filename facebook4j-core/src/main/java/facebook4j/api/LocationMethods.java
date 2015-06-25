@@ -18,6 +18,7 @@ package facebook4j.api;
 
 import facebook4j.FacebookException;
 import facebook4j.Location;
+import facebook4j.PlaceTag;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
 
@@ -60,5 +61,41 @@ public interface LocationMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/">User - Facebook Developers</a> - Connections - locations
      */
     ResponseList<Location> getLocations(String userId, Reading reading) throws FacebookException;
+    
+    /**
+     * Returns a list of tags of this person at a place in a photo, video, post, status or link.
+     * @return a list of Place Tag objects
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/user/tagged_places">User - Facebook Developers</a> - Connections - tagged places
+     */
+    ResponseList<PlaceTag> getTaggedPlaces() throws FacebookException;
+    
+    /**
+     * Returns a list of tags of this person at a place in a photo, video, post, status or link.
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return a list of Place Tag objects
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/user/tagged_places">User - Facebook Developers</a> - Connections - tagged places
+     */
+    ResponseList<PlaceTag> getTaggedPlaces(Reading reading) throws FacebookException;
+    
+    /**
+     * Returns a list of tags of this person at a place in a photo, video, post, status or link.
+     * @param userId the ID of a user
+     * @return a list of Place Tag objects
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/user/tagged_places">User - Facebook Developers</a> - Connections - tagged places
+     */
+    ResponseList<PlaceTag> getTaggedPlaces(String userId) throws FacebookException;
+    
+    /**
+     * Returns a list of tags of this person at a place in a photo, video, post, status or link.
+     * @param userId the ID of a user
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return a list of Place Tag objects
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/user/tagged_places">User - Facebook Developers</a> - Connections - tagged places
+     */
+    ResponseList<PlaceTag> getTaggedPlaces(String userId, Reading reading) throws FacebookException;
 
 }

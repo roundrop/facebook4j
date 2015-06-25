@@ -255,4 +255,5 @@ public interface Facebook extends java.io.Serializable,
      * @since Facebook4J 2.1.0
      */
     RawAPIMethods rawAPI();
+    
 }

@@ -16,6 +16,7 @@
 
 package facebook4j;
 
+import facebook4j.Versioning.GraphVersion;
 import facebook4j.auth.AccessToken;
 import facebook4j.conf.Configuration;
 import facebook4j.junit.FacebookAPIVersion;
@@ -42,6 +43,8 @@ public abstract class MockFacebookTestBase extends FacebookTestBase {
         String appSecret = p.getProperty("oauth.appSecret");
         String accessToken = p.getProperty("oauth.accessToken");
         String appSecretProofEnabled = p.getProperty("security.appSecretProofEnabled");
+        String graphVersion = p.getProperty("versioning.graphVersion");
+        
         if (appId != null && appSecret != null) {
             facebook.setOAuthAppId(appId, appSecret);
             if (accessToken == null) {
@@ -53,6 +56,9 @@ public abstract class MockFacebookTestBase extends FacebookTestBase {
         }
         if (appSecretProofEnabled != null) {
             facebook.setAppSecretProofEnabled(Boolean.valueOf(appSecretProofEnabled));
+        }
+        if (graphVersion != null) {
+            facebook.setGraphVersion(GraphVersion.valueOf(graphVersion));
         }
 
         // @FacebookAPIVersion

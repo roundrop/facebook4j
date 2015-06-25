@@ -228,5 +228,64 @@ public class LocationMethodsTest {
             assertThat(actual6.getCreatedTime(), is(iso8601DateOf("2013-03-19T09:49:04+0000")));
         }
     }
+    
+    public static class getPlaceTags extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+        	 facebook.setMockJSON("mock_json/location/place_tags.json");
+             ResponseList<PlaceTag> actuals = facebook.getTaggedPlaces();
+             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+             assertThat(facebook.getEndpointURL(), is(pathOf("/me/tagged_places")));
+             
+             assertThat(actuals.size(), is(2));
+             PlaceTag actual1 = actuals.get(0);
+             assertThat(actual1.getId(), is("10100130254301913"));
+             assertThat(actual1.getCreatedTime(), is(iso8601DateOf("2010-02-18T04:51:23+0000")));
+             assertThat(actual1.getPlaceTag().getId(), is("112197455462418"));
+             assertThat(actual1.getPlaceTag().getName(), is("Rockville, Maryland"));
+             assertThat(actual1.getPlaceTag().getLocation().getLatitude(), is(39.0839));
+             assertThat(actual1.getPlaceTag().getLocation().getLongitude(), is(-77.1531));
+             assertThat(actual1.getPlaceTag().getLocation().getZip(), is(nullValue()));
+             assertThat(actual1.getPlaceTag().getLocation().getStreet(), is(nullValue()));
+             assertThat(actual1.getPlaceTag().getLocation().getState(), is(nullValue()));
+             assertThat(actual1.getPlaceTag().getLocation().getCountry(), is(nullValue()));
+             assertThat(actual1.getPlaceTag().getLocation().getCity(), is(nullValue()));
+        }
+        
+        @Test
+        public void id() throws Exception {
+        	 facebook.setMockJSON("mock_json/location/place_tags.json");
+             ResponseList<PlaceTag> actuals = facebook.getTaggedPlaces("1234124");
+             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+             assertThat(facebook.getEndpointURL(), is(pathOf("/1234124/tagged_places")));
+             
+             assertThat(actuals.size(), is(2));
+             
+        }
+        
+        @Test
+        public void reading() throws Exception {
+        	 facebook.setMockJSON("mock_json/location/place_tags.json");
+             ResponseList<PlaceTag> actuals = facebook.getTaggedPlaces(new Reading().fields("id"));
+             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+             assertThat(facebook.getEndpointURL(), is(pathOf("/me/tagged_places")));
+             assertThat(facebook.getEndpointURL(), hasParameter("fields", "id"));
+             
+             assertThat(actuals.size(), is(2));
+        }
+        
+        @Test
+        public void id_reading() throws Exception {
+        	 facebook.setMockJSON("mock_json/location/place_tags.json");
+             ResponseList<PlaceTag> actuals = facebook.getTaggedPlaces("1234", new Reading().fields("id"));
+             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+             assertThat(facebook.getEndpointURL(), is(pathOf("/1234/tagged_places")));
+             assertThat(facebook.getEndpointURL(), hasParameter("fields", "id"));
+             
+             assertThat(actuals.size(), is(2));
+        }
+    }
+    
+    
 
 }

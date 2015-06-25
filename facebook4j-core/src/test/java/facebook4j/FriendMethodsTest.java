@@ -109,6 +109,47 @@ public class FriendMethodsTest {
             assertThat(actual3.getPicture().isSilhouette(), is(false));
         }
     }
+    
+    public static class getTaggableFriends extends MockFacebookTestBase {
+        @Test
+        public void me() throws Exception {
+            facebook.setMockJSON("mock_json/friend/taggable_friends.json");
+            ResponseList<TaggableFriend> actuals = facebook.getTaggableFriends();
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/taggable_friends")));
+
+            assertThat(actuals.size(), is(2));
+            TaggableFriend actual1 = actuals.get(0);
+            assertThat(actual1.getToken(), is("AaLml5U5tssCqmaVxDfaID0JWQW_cmloE_iD0UQ1ALz4g-bdAqgY0sqDIsdfastzr-yewJhYuuT7W0Mm-YEEq8n1aG9lAeAfmvA9cq-B9Hg"));
+            assertThat(actual1.getName(), is("Friend One"));
+            TaggableFriend actual5 = actuals.get(1);
+            assertThat(actual5.getToken(), is("AaJ73QgEXPUlrEb6XNob5B6S_Xl2qeCCpj5parsRlvmFkXs7SOq5hPEcIt8Enw37MasfmLxnJ0i1RGRrspiPjhb_KXDQbzKW68Tg"));
+            assertThat(actual5.getName(), is("Friend Two"));
+        }
+
+        @Test
+        public void me_reading() throws Exception {
+            facebook.setMockJSON("mock_json/friend/taggable_friends.json");
+            ResponseList<TaggableFriend> actuals = facebook.getTaggableFriends(new Reading().fields("name").fields("picture.type(large)").limit(2));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/me/taggable_friends")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "name,picture.type(large)"));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "2"));
+
+            assertThat(actuals.size(), is(2));
+            TaggableFriend actual1 = actuals.get(0);
+            assertThat(actual1.getToken(), is("AaLml5U5tssCqmaVxDfaID0JWQW_cmloE_iD0UQ1ALz4g-bdAqgY0sqDIsdfastzr-yewJhYuuT7W0Mm-YEEq8n1aG9lAeAfmvA9cq-B9Hg"));
+            assertThat(actual1.getName(), is("Friend One"));
+            assertThat(actual1.getPicture().getURL().toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p50x50/1532100_61720120769_7344809391293777_n.jpg"));
+            assertThat(actual1.getPicture().isSilhouette(), is(false));
+            TaggableFriend actual3 = actuals.get(1);
+            assertThat(actual3.getToken(), is("AaJ73QgEXPUlrEb6XNob5B6S_Xl2qeCCpj5parsRlvmFkXs7SOq5hPEcIt8Enw37MasfmLxnJ0i1RGRrspiPjhb_KXDQbzKW68Tg"));
+            assertThat(actual3.getName(), is("Friend Two"));
+            assertThat(actual3.getPicture().getURL().toString(), is("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/c51.50.611.119/s50x50/3146305_1015111258096607_1858078876_n.jpg"));
+            assertThat(actual3.getPicture().isSilhouette(), is(false));
+        }
+
+    }
 
     public static class getBelongsFriend extends MockFacebookTestBase {
         @Test

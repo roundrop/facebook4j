@@ -17,6 +17,7 @@
 package facebook4j.auth;
 
 import facebook4j.FacebookException;
+import facebook4j.Versioning.GraphVersion;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -100,6 +101,19 @@ public interface OAuthSupport {
      * @param callbackURL Callback URL
      */
     void setOAuthCallbackURL(String callbackURL);
+    
+    /**
+     * Returns the currently set Graph API used
+     * @return String 
+     */
+    String getGraphVersion();
+
+    /**
+     * 
+     *Sets the Version of Graph API to use
+     * @param GraphVersion enum
+     */
+    void setGraphVersion(GraphVersion graphVersion);
 
 
 }

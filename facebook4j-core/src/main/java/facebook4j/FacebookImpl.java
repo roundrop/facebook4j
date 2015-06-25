@@ -17,6 +17,7 @@
 package facebook4j;
 
 import facebook4j.Question.Option;
+import facebook4j.Versioning.GraphVersion;
 import facebook4j.api.AccountMethods;
 import facebook4j.api.ActivityMethods;
 import facebook4j.api.AlbumMethods;
@@ -52,6 +53,7 @@ import facebook4j.api.UserMethods;
 import facebook4j.api.VideoMethods;
 import facebook4j.auth.Authorization;
 import facebook4j.conf.Configuration;
+import facebook4j.conf.ConfigurationBuilder;
 import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
@@ -893,6 +895,17 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createFriendList(get(buildEndpoint(userId, "friends", reading)));
     }
+    
+    public ResponseList<TaggableFriend> getTaggableFriends() throws FacebookException {
+		return getTaggableFriends("me", null);
+	}
+	public ResponseList<TaggableFriend> getTaggableFriends(Reading reading) throws FacebookException {
+		return getTaggableFriends("me", reading);
+	}
+	public ResponseList<TaggableFriend> getTaggableFriends(String userId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createTaggableFriendList(get(buildEndpoint(userId, "taggable_friends", reading)));
+    }
 
     public ResponseList<Friend> getMutualFriends(String friendUserId) throws FacebookException {
         return getMutualFriends("me", friendUserId, null);
@@ -968,7 +981,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createFriendList(get(buildEndpoint(userId, "friends/" + friendId, reading)));
     }
-
+    
     /* Favorite Methods */
     
     public ResponseList<Game> getGames() throws FacebookException {
@@ -1308,6 +1321,23 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createLocationList(get(buildEndpoint(userId, "locations", reading)));
     }
+    
+	public ResponseList<PlaceTag> getTaggedPlaces() throws FacebookException {
+		return getTaggedPlaces("me", null);
+	}
+
+	public ResponseList<PlaceTag> getTaggedPlaces(Reading reading) throws FacebookException {
+		return getTaggedPlaces("me", reading);
+	}
+
+	public ResponseList<PlaceTag> getTaggedPlaces(String userId) throws FacebookException {
+		return getTaggedPlaces(userId, null);
+	}
+
+	public ResponseList<PlaceTag> getTaggedPlaces(String userId, Reading reading) throws FacebookException {
+		ensureAuthorizationEnabled();
+		return factory.createPlaceTagList(get(buildEndpoint(userId, "tagged_places", reading)));
+	}
 
     /* Note Methods */
     
@@ -2901,4 +2931,5 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public RawAPIMethods rawAPI() {
         return this;
     }
+    
 }

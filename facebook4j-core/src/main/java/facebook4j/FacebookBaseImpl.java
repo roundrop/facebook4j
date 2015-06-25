@@ -16,6 +16,7 @@
 
 package facebook4j;
 
+import facebook4j.Versioning.GraphVersion;
 import facebook4j.auth.AccessToken;
 import facebook4j.auth.Authorization;
 import facebook4j.auth.NullAuthorization;
@@ -274,6 +275,20 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
             throw new IllegalStateException("OAuth app id/secret combination not supplied");
         }
         return (OAuthSupport) auth;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public String getGraphVersion() {
+        return getOAuth().getGraphVersion();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setGraphVersion(GraphVersion graphVersion) {
+        getOAuth().setGraphVersion(graphVersion);
     }
 
     @Override

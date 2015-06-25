@@ -29,6 +29,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import facebook4j.Versioning.GraphVersion;
+
 /**
  * @author Yusuke Yamamoto - yusuke at mac.com
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -72,6 +74,7 @@ public final class PropertyConfiguration extends ConfigurationBase implements Se
     public static final String OAUTH_AUTHORIZATION_URL = "oauth.authorizationURL";
     public static final String OAUTH_ACCESS_TOKEN_URL = "oauth.accessTokenURL";
 
+    public static final String GRAPH_VERSION = "versioning.graphVersion";
     public static final String REST_BASE_URL = "restBaseURL";
     public static final String VIDEO_BASE_URL = "videoBaseURL";
 
@@ -319,6 +322,9 @@ public final class PropertyConfiguration extends ConfigurationBase implements Se
         if (notNull(props, prefix, MBEAN_ENABLED)) {
             setMBeanEnabled(getBoolean(props, prefix, MBEAN_ENABLED));
         }
+        if (notNull(props, prefix, GRAPH_VERSION)) {
+            setGraphVersion(getGraphVersion(props, prefix, GRAPH_VERSION));
+        }
         cacheInstance();
     }
 
@@ -338,6 +344,11 @@ public final class PropertyConfiguration extends ConfigurationBase implements Se
 
     protected String getString(Properties props, String prefix, String name) {
         return props.getProperty(prefix + name);
+    }
+    
+    protected GraphVersion getGraphVersion(Properties props, String prefix, String name) {
+    	String value = props.getProperty(prefix + name);
+    	return GraphVersion.valueOf(value);
     }
 
     // assures equality after deserialization

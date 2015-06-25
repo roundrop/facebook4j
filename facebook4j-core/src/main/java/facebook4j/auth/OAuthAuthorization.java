@@ -17,6 +17,8 @@
 package facebook4j.auth;
 
 import facebook4j.FacebookException;
+import facebook4j.Versioning;
+import facebook4j.Versioning.GraphVersion;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpClientWrapper;
 import facebook4j.internal.http.HttpResponse;
@@ -46,6 +48,7 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
     private AccessToken oauthToken;
     private String permissions;
     private String callbackURL;
+    private String graphVersion;
     private boolean appSecretProofEnabled;
     private transient z_F4JLRUCache<String, String> appSecretProofCache;
 
@@ -159,7 +162,7 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
     public String getOAuthCallbackURL() {
         return callbackURL;
     }
-
+    
     public void setOAuthCallbackURL(String callbackURL) {
         this.callbackURL = callbackURL;
     }
@@ -176,6 +179,20 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
     public void setAppSecretProofEnabled(boolean enabled) {
         this.appSecretProofEnabled = enabled;
     }
+    
+    public String getGraphVersion(){
+    	if(graphVersion == null){
+    		return "";
+    	}
+    	return graphVersion;
+    }
+    
+    public void setGraphVersion(GraphVersion value) {
+    	Versioning version = new Versioning();
+    	version.setVersion(value);
+    	conf.setGraphVersion(value);
+    	this.graphVersion = version.getVersion();
+	}
 
     public boolean isAppSecretProofEnabled() {
         return appSecretProofEnabled;
