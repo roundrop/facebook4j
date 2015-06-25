@@ -16,9 +16,9 @@
 
 package facebook4j.junit;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import facebook4j.internal.http.HttpParameter;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -69,20 +69,21 @@ public final class F4JHttpParameterMatchers {
     }
 
     @Factory
-    public static Matcher<HttpParameter[]> hasPostJsonParameter(final String name, final String expectedJson) {
-        return hasPostJsonParameter(name, expectedJson, new JsonParser());
+    public static Matcher<HttpParameter[]> hasPostJsonParameter(final String name, final String expectedJsonObjectSource) {
+        JSONObject expectedJsonObject;
+        try {
+            expectedJsonObject = new JSONObject(expectedJsonObjectSource);
+        } catch (JSONException ex) {
+            throw new AssertionError("failed to parse object source: " + expectedJsonObjectSource, ex);
+        }
+        return hasPostJsonParameter(name, expectedJsonObject);
     }
     
     @Factory
-    public static Matcher<HttpParameter[]> hasPostJsonParameter(final String name, final String expectedJson, JsonParser jsonParser) {
-        JsonElement expectedValue = jsonParser.parse(expectedJson);
-        return hasPostJsonParameter(name, expectedValue, jsonParser);
-    }
-    
-    @Factory
-    public static Matcher<HttpParameter[]> hasPostJsonParameter(final String name, final JsonElement expectedValue, final JsonParser jsonParser) {
+    public static Matcher<HttpParameter[]> hasPostJsonParameter(final String name, final JSONObject expectedValue) {
         assertNotNull("expectedValue", expectedValue);
         return new TypeSafeMatcher<HttpParameter[]>() {
+            
             private final List<String> actualParams = new ArrayList<String>();
 
             @Override
@@ -92,9 +93,13 @@ public final class F4JHttpParameterMatchers {
                         actualParams.add(param.getName() + "=" + param.getValue());
                         String paramValueStr = param.getValue();
                         if (paramValueStr != null) {
-                            JsonElement paramValue = jsonParser.parse(paramValueStr);
-                            if (expectedValue.equals(paramValue)) {
-                                return true;
+                            JSONObject paramValue;
+                            try {
+                                paramValue = new JSONObject(paramValueStr);
+                                if (equals(expectedValue, paramValue)) {
+                                    return true;
+                                }
+                            } catch (JSONException ignore) {
                             }
                         }
                     }
@@ -102,6 +107,24 @@ public final class F4JHttpParameterMatchers {
                 return false;
             }
 
+            protected boolean equals(JSONObject a, JSONObject b) {
+                // This is not efficient and may not be correct in all cases, but it's good enough for our purposes
+                if (a == b) {
+                    return true;
+                }
+                if (a == null || b == null) {
+                    return false;
+                }
+                String aStr = a.toString();
+                String bStr = b.toString();
+                if (aStr == null || bStr == null) {
+                    // null is returned when there is an error in stringifying, so even if both
+                    // are null, it doesn't imply equality
+                    return false; 
+                }
+                return aStr.equals(bStr);
+            }
+            
             public void describeTo(Description desc) {
                 desc.appendValue(name + "=" + expectedValue);
                 if (actualParams.size() > 0) {

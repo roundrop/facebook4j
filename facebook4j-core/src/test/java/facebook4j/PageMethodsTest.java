@@ -16,13 +16,11 @@
 
 package facebook4j;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
 import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -1848,14 +1846,11 @@ public class PageMethodsTest {
         }
         
         protected Matcher<HttpParameter[]> hasTargetingParameterWithCountries(String...expectedCountryCodes) {
-            final Set<JsonElement> expectedCountriesSet = new HashSet<JsonElement>();
-            for (String country : expectedCountryCodes) {
-                expectedCountriesSet.add(new JsonPrimitive(country));
-            }
+            final Set<String> expectedCountriesSet = new HashSet<String>(Arrays.asList(expectedCountryCodes));
             return new TypeSafeMatcher<HttpParameter[]>(HttpParameter[].class) {
                 
                 private final List<String> actualParams = new ArrayList<String>();
-                private final JsonParser jsonParser = new JsonParser();
+
                 @Override
                 public boolean matchesSafely(HttpParameter[] actual) {
                     for (HttpParameter param : actual) {
@@ -1870,13 +1865,18 @@ public class PageMethodsTest {
                 }
 
                 protected boolean matches(String targetingParamValue) {
-                    JsonObject targetingParamValueObject = (JsonObject) jsonParser.parse(targetingParamValue);
-                    JsonArray actualCountries = targetingParamValueObject.getAsJsonArray("countries");
-                    Set<JsonElement> actualCountriesSet = new HashSet<JsonElement>();
-                    for (JsonElement element : actualCountries) {
-                        actualCountriesSet.add(element);
+                    try {
+                        JSONObject targetingParamValueObject = new JSONObject(targetingParamValue);
+                        JSONArray actualCountriesArray = targetingParamValueObject.getJSONArray("countries");
+                        Set<String> actualCountriesSet = new HashSet<String>();
+                        for (int i = 0; i < actualCountriesArray.length(); i++) {
+                            String country = actualCountriesArray.getString(i);
+                            actualCountriesSet.add(country);
+                        }
+                        return expectedCountriesSet.equals(actualCountriesSet);
+                    } catch (JSONException ignore) {
+                        return false;
                     }
-                    return expectedCountriesSet.equals(actualCountriesSet);
                 }
                 
                 public void describeTo(Description desc) {
