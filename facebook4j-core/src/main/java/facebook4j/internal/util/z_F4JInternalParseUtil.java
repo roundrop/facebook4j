@@ -150,14 +150,19 @@ public final class z_F4JInternalParseUtil {
     }
 
     /**
-     * Parses the value of a field as a timezone offset in hours. A timezone offset is the value
-     * added to UTC time to get the user's local time.
+     * Parses the value of a field as a timezone offset in hours. A timezone 
+     * offset is the value added to UTC time to get the user's local time. 
+     * A date/time reference point must be provided because the offset may 
+     * differ based on the date/time for which it is to be computed, for
+     * example because of daylight savings.
+     * 
      * @param name the name of the member of the given json object that is 
      * the raw string to be parsed
      * @param json the json object
+     * @param datetimeReference the date/time for which the offset is to be computed
      * @return the timezone offset, in hours
      */
-    public static Double getTimeZoneOffset(String name, JSONObject json) {
+    public static Double getTimeZoneOffset(String name, JSONObject json, long datetimeReference) {
         String rawString = getRawString(name, json);
         if (null == rawString || "".equals(rawString) || "null".equals(rawString)) {
             return null;
@@ -166,10 +171,7 @@ public final class z_F4JInternalParseUtil {
                 return Double.valueOf(rawString);
             } catch (NumberFormatException ignore) {
                 TimeZone timeZone = TimeZone.getTimeZone(rawString); // returns GMT if not understood
-                // Using the current time is technically wrong, because the timezone value 
-                // corresponds to the user's last login. But this is the best we can do.
-                long currentTime = System.currentTimeMillis(); 
-                double offset = computeTimeZoneOffsetInHours(timeZone, currentTime);
+                double offset = computeTimeZoneOffsetInHours(timeZone, datetimeReference);
                 return offset;
             }
         }

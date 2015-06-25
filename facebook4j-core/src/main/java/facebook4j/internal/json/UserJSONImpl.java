@@ -126,7 +126,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             username = getRawString("username", json);
             thirdPartyId = getRawString("third_party_id", json);
             installed = getBoolean("installed", json);
-            timezone = getTimeZoneOffset("timezone", json);
+            // Using the current time to compute the timezone offset is technically wrong, because 
+            // the timezone value corresponds to the user's last login, but it's the best we can do
+            long currentTime = System.currentTimeMillis(); 
+            timezone = getTimeZoneOffset("timezone", json, currentTime);
             updatedTime = getISO8601Datetime("updated_time", json);
             verified = getBoolean("verified", json);
             bio = getRawString("bio", json);
