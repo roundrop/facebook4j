@@ -215,6 +215,27 @@ public class z_F4JInternalParseUtilTest {
         }
     }
 
+    public static class getTimeZoneOffset extends FacebookTestBase {
+        
+        private static final long datetimeReference = 1449705600L * 1000L;
+        
+        @Test
+        public void known() throws Exception {
+            JSONObject json = new JSONObject("{\"timezone\": \"Asia/Tokyo\"}");
+            Double actual = z_F4JInternalParseUtil.getTimeZoneOffset("timezone", json, datetimeReference);
+            Double expectedTokyoOffset = 9d;
+            assertEquals(expectedTokyoOffset, actual);
+        }
+        
+        @Test
+        public void unknown() throws Exception {
+            JSONObject json = new JSONObject("{\"timezone\": \"Asia/Wonderland\"}");
+            Double actual = z_F4JInternalParseUtil.getTimeZoneOffset("timezone", json, datetimeReference);
+            Double expectedGmtOffset = 0d;
+            assertEquals(expectedGmtOffset, actual);
+        }
+    }
+
     public static class getStringMap extends FacebookTestBase {
         @Test
         public void size1() throws Exception {
