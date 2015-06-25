@@ -16,7 +16,11 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -35,8 +39,13 @@ import java.util.TimeZone;
 import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
 import static facebook4j.junit.URLMatchers.*;
+import java.util.Arrays;
+import java.util.Iterator;
 import static org.hamcrest.CoreMatchers.*;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import static org.junit.Assert.*;
+import org.junit.internal.matchers.TypeSafeMatcher;
 
 @RunWith(Enclosed.class)
 public class PageMethodsTest {
@@ -1806,8 +1815,8 @@ public class PageMethodsTest {
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/me/photos")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("message", "upload photo to the page test."));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("targeting", "{\"countries\":[\"US\",\"GB\"]}"));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("feed_targeting", "{\"age_min\":20,\"genders\":{\"value\":1},\"age_max\":40}"));
+            assertThat(facebook.getHttpParameters(), hasTargetingParameterWithCountries("US", "GB"));
+            assertThat(facebook.getHttpParameters(), hasPostJsonParameter("feed_targeting", "{\"age_min\":20,\"genders\":{\"value\":1},\"age_max\":40}"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
         }
@@ -1830,10 +1839,60 @@ public class PageMethodsTest {
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/photos")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("message", "upload photo to the page test."));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("targeting", "{\"countries\":[\"US\",\"GB\"]}"));
+            assertThat(facebook.getHttpParameters(), hasTargetingParameterWithCountries("US", "GB"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("feed_targeting", "{\"age_min\":20,\"genders\":{\"value\":1},\"age_max\":40}"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
+        }
+        
+        protected Matcher<HttpParameter[]> hasTargetingParameterWithCountries(String...expectedCountryCodes) {
+            final Set<String> expectedCountriesSet = new HashSet<String>(Arrays.asList(expectedCountryCodes));
+            return new TypeSafeMatcher<HttpParameter[]>(HttpParameter[].class) {
+                
+                private final List<String> actualParams = new ArrayList<String>();
+
+                @Override
+                public boolean matchesSafely(HttpParameter[] actual) {
+                    for (HttpParameter param : actual) {
+                        if (param.getName().equals("targeting")) {
+                            actualParams.add(param.getName() + "=" + param.getValue());
+                            if (matches(param.getValue())) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+
+                protected boolean matches(String targetingParamValue) {
+                    try {
+                        JSONObject targetingParamValueObject = new JSONObject(targetingParamValue);
+                        JSONArray actualCountriesArray = targetingParamValueObject.getJSONArray("countries");
+                        Set<String> actualCountriesSet = new HashSet<String>();
+                        for (int i = 0; i < actualCountriesArray.length(); i++) {
+                            String country = actualCountriesArray.getString(i);
+                            actualCountriesSet.add(country);
+                        }
+                        return expectedCountriesSet.equals(actualCountriesSet);
+                    } catch (JSONException ignore) {
+                        return false;
+                    }
+                }
+                
+                public void describeTo(Description desc) {
+                    desc.appendValue("targeting=" + expectedCountriesSet);
+                    if (actualParams.size() > 0) {
+                        desc.appendText(" but actual is ");
+                        desc.appendValue(actualParams.get(0));
+                        for (int i = 1; i < actualParams.size(); i++) {
+                            desc.appendText(", ");
+                            desc.appendValue(actualParams.get(i));
+                        }
+                    } else {
+                        desc.appendText(" but actual has no '" + name + "' parameter");
+                    }
+                }
+            };
         }
     }
 

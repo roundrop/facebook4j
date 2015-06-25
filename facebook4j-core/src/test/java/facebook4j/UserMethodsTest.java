@@ -83,6 +83,54 @@ public class UserMethodsTest extends MockFacebookTestBase {
         }
 
         @Test
+        public void me_nonNumericTimezone() throws Exception {
+            facebook.setMockJSON("mock_json/user/me_nonnumerictz.json");
+            User me = facebook.getMe();
+
+            assertThat(me.getBio(), is("biography"));
+            assertThat(me.getBirthday(), is("01/23/1975"));
+            assertThat(me.getEducation().size(), is(2));
+            assertThat(me.getEducation().get(0).getSchool().getId(), is("1111"));
+            assertThat(me.getEducation().get(0).getSchool().getName(), is("High School Name"));
+            assertThat(me.getEducation().get(0).getType(), is("High School"));
+            assertThat(me.getEducation().get(0).getYear().getId(), is("2222"));
+            assertThat(me.getEducation().get(0).getYear().getName(), is("1994"));
+            assertThat(me.getEducation().get(1).getSchool().getId(), is("3333"));
+            assertThat(me.getEducation().get(1).getSchool().getName(), is("College Name"));
+            assertThat(me.getEducation().get(1).getType(), is("College"));
+            assertThat(me.getEducation().get(1).getYear().getId(), is("4444"));
+            assertThat(me.getEducation().get(1).getYear().getName(), is("1998"));
+            assertThat(me.getEmail(), is("roundrop@gmail.com"));
+            assertThat(me.getFirstName(), is("Firstname"));
+            assertThat(me.getGender(), is("male"));
+            assertThat(me.getHometown().getId(), is("5555"));
+            assertThat(me.getHometown().getName(), is("Hometown Name"));
+            assertThat(me.getId(), is("6666"));
+            assertThat(me.getLastName(), is("Lastname"));
+            assertThat(me.getLink().toString(), is("http://www.facebook.com/roundrop"));
+            assertThat(me.getLocale(), is(Locale.US));
+            assertThat(me.getLocation().getId(), is("7777"));
+            assertThat(me.getLocation().getName(), is("Location Name"));
+            assertThat(me.getName(), is("Firstname Lastname"));
+            assertThat(me.getTimezone().intValue(), is(9));
+            assertThat(me.getUpdatedTime(), is(iso8601DateOf("2013-05-11T16:08:47+0000")));
+            assertThat(me.getUsername(), is("roundrop"));
+            assertThat(me.isVerified(), is(true));
+            assertThat(me.getWork().size(), is(2));
+            assertThat(me.getWork().get(0).getEmployer().getId(), is("11111"));
+            assertThat(me.getWork().get(0).getEmployer().getName(), is("company1"));
+            assertThat(me.getWork().get(0).getLocation().getId(), is("11112"));
+            assertThat(me.getWork().get(0).getLocation().getName(), is("location1"));
+            assertThat(me.getWork().get(0).getPosition().getId(), is("11113"));
+            assertThat(me.getWork().get(0).getPosition().getName(), is("position1"));
+            assertThat(me.getWork().get(0).getStartDate(), is("2012-01"));
+            assertThat(me.getWork().get(1).getEmployer().getId(), is("22221"));
+            assertThat(me.getWork().get(1).getEmployer().getName(), is("company2"));
+            assertThat(me.getWork().get(1).getEndDate(), is("2011-12"));
+            assertThat(me.getWork().get(1).getStartDate(), is("2011-09"));
+        }
+
+        @Test
         public void reading() throws Exception {
             facebook.setMockJSON("mock_json/user/me_fields.json");
             User me = facebook.getMe(new Reading().fields("gender").fields("email").fields("age_range"));
