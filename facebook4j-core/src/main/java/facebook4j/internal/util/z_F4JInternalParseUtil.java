@@ -149,27 +149,42 @@ public final class z_F4JInternalParseUtil {
         }
     }
 
+    /**
+     * Parses the value of a field as a timezone offset in hours. A timezone offset is the value
+     * added to UTC time to get the user's local time.
+     * @param name the name of the member of the given json object that is 
+     * the raw string to be parsed
+     * @param json the json object
+     * @return the timezone offset, in hours
+     */
     public static Double getTimeZoneOffset(String name, JSONObject json) {
-        String str2 = getRawString(name, json);
-        if (null == str2 || "".equals(str2) || "null".equals(str2)) {
+        String rawString = getRawString(name, json);
+        if (null == rawString || "".equals(rawString) || "null".equals(rawString)) {
             return null;
         } else {
             try {
-                return Double.valueOf(str2);
+                return Double.valueOf(rawString);
             } catch (NumberFormatException ignore) {
-                TimeZone timeZone = TimeZone.getTimeZone(str2); // returns GMT if not understood
-                
-                double offset = getTimeZoneOffsetInHours(timeZone);
+                TimeZone timeZone = TimeZone.getTimeZone(rawString); // returns GMT if not understood
+                // Using the current time is technically wrong, because the timezone value 
+                // corresponds to the user's last login. But this is the best we can do.
+                long currentTime = System.currentTimeMillis(); 
+                double offset = computeTimeZoneOffsetInHours(timeZone, currentTime);
                 return offset;
             }
         }
     }
     
-    public static Double getTimeZoneOffsetInHours(TimeZone tz) {
-        long currentTime = System.currentTimeMillis();
-        int offsetInMilliseconds = tz.getOffset(currentTime);
+    /**
+     * Computes the offset in hours for a given timezone at a given date/time.
+     * @param timeZone the timezone 
+     * @param currentDatetime the date/time 
+     * @return the offset, in hours
+     */
+    public static int computeTimeZoneOffsetInHours(TimeZone timeZone, long currentDatetime) {
+        int offsetInMilliseconds = timeZone.getOffset(currentDatetime);
         int offsetInHours = offsetInMilliseconds / (1000 * 60 * 60);
-        return (double) offsetInHours;
+        return offsetInHours;
     }
     
     public static Boolean getBoolean(String name, JSONObject json) {
