@@ -75,7 +75,7 @@ public final class F4JHttpParameterMatchers {
         try {
             expectedJsonObject = new JSONObject(expectedJsonObjectSource);
         } catch (JSONException ex) {
-            throw new AssertionError("failed to parse object source: " + expectedJsonObjectSource, ex);
+            throw new AssertionError("failed to parse object source: " + expectedJsonObjectSource);
         }
         return hasPostJsonParameter(name, expectedJsonObject);
     }
