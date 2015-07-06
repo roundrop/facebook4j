@@ -171,8 +171,7 @@ public final class z_F4JInternalParseUtil {
                 return Double.valueOf(rawString);
             } catch (NumberFormatException ignore) {
                 TimeZone timeZone = TimeZone.getTimeZone(rawString); // returns GMT if not understood
-                double offset = computeTimeZoneOffsetInHours(timeZone, datetimeReference);
-                return offset;
+                return Integer.valueOf(computeTimeZoneOffsetInHours(timeZone, datetimeReference)).doubleValue();
             }
         }
     }
@@ -185,8 +184,7 @@ public final class z_F4JInternalParseUtil {
      */
     public static int computeTimeZoneOffsetInHours(TimeZone timeZone, long currentDatetime) {
         int offsetInMilliseconds = timeZone.getOffset(currentDatetime);
-        int offsetInHours = offsetInMilliseconds / (1000 * 60 * 60);
-        return offsetInHours;
+        return offsetInMilliseconds / (1000 * 60 * 60);
     }
     
     public static Boolean getBoolean(String name, JSONObject json) {
