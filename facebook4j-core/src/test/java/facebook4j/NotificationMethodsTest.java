@@ -17,6 +17,7 @@
 package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.junit.FacebookAPIVersion;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -334,6 +335,17 @@ public class NotificationMethodsTest {
             boolean actual = facebook.markNotificationAsRead("notif_1234567890123456_80000005");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/notif_1234567890123456_80000005")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void mark_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.markNotificationAsRead("notif_1234567890123456_80000005");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/notif_1234567890123456_80000005")));
 
             assertThat(actual, is(true));
         }

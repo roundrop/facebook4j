@@ -17,6 +17,7 @@
 package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.junit.FacebookAPIVersion;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -320,6 +321,17 @@ public class FriendMethodsTest {
 
             assertThat(actual, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void delete_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.deleteFriendlist("579087298820226");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/579087298820226")));
+
+            assertThat(actual, is(true));
+        }
     }
 
     public static class getFriendlistMembers extends MockFacebookTestBase {
@@ -350,6 +362,17 @@ public class FriendMethodsTest {
 
             assertThat(actual, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void add_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.addFriendlistMember("579096788819277", "1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/579096788819277/members/1234567890123456")));
+
+            assertThat(actual, is(true));
+        }
     }
 
     public static class removeFriendlistMember extends MockFacebookTestBase {
@@ -359,6 +382,17 @@ public class FriendMethodsTest {
             boolean actual = facebook.removeFriendlistMember("579096788819277", "1234567890123456");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
             assertThat(facebook.getEndpointURL(), is(pathOf("/579096788819277/members/1234567890123456")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void add_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.removeFriendlistMember("579096788819277", "1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/579096788819277/members/1234567890123456")));
 
             assertThat(actual, is(true));
         }
