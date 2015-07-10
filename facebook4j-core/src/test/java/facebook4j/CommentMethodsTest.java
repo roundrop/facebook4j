@@ -17,6 +17,7 @@
 package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.junit.FacebookAPIVersion;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -55,6 +56,17 @@ public class CommentMethodsTest {
             boolean actual = facebook.deleteComment("100000000000001_50000001");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
             assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_50000001")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void delete_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.deleteComment("100000000000001_50000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/100000000000001_50000001")));
 
             assertThat(actual, is(true));
         }
@@ -99,6 +111,17 @@ public class CommentMethodsTest {
             boolean actual = facebook.likeComment("100000000000001_90000001");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_90000001/likes")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.likeComment("100000000000001_90000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/100000000000001_90000001/likes")));
 
             assertThat(actual, is(true));
         }

@@ -17,6 +17,7 @@
 package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.junit.FacebookAPIVersion;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -687,6 +688,27 @@ public class PhotoMethodsTest {
 
             assertThat(actual, is("1234567890123456"));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.2")
+        public void privacy() throws Exception {
+            facebook.setMockJSON("mock_json/id_and_post_id.json");
+            PrivacyParameter privacyParameter = new PrivacyBuilder().setValue(PrivacyType.SELF).build();
+            PhotoUpdate photoUpdate = new PhotoUpdate(new URL("https://fbstatic-a.akamaihd.net/rsrc.php/v2/yC/r/gfLdB3lVEL5.png"))
+                    .message("privacy")
+                    .noStory(true)
+                    .privacy(privacyParameter);
+            ;
+            String actual = facebook.postPhoto(photoUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.2/me/photos")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("url", "https://fbstatic-a.akamaihd.net/rsrc.php/v2/yC/r/gfLdB3lVEL5.png"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "privacy"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("no_story", "1"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("privacy", "{\"value\":\"SELF\"}"));
+
+            assertThat(actual, is("1234567890123456"));
+        }
     }
 
     public static class deletePhoto extends MockFacebookTestBase {
@@ -696,6 +718,17 @@ public class PhotoMethodsTest {
             boolean actual = facebook.deletePhoto("583190938409862");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
             assertThat(facebook.getEndpointURL(), is(pathOf("/583190938409862")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void delete_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.deletePhoto("583190938409862");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/583190938409862")));
 
             assertThat(actual, is(true));
         }
@@ -976,11 +1009,35 @@ public class PhotoMethodsTest {
         }
 
         @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.addTagToPhoto("500000000000001", "300000000000004");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/500000000000001/tags")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("to", "300000000000004"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
         public void ids() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
             boolean actual = facebook.addTagToPhoto("500000000000001", Arrays.asList("300000000000005", "300000000000006"));
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/tags")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("tags", "[{\"tag_uid\":\"300000000000005\"},{\"tag_uid\":\"300000000000006\"}]"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void ids_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.addTagToPhoto("500000000000001", Arrays.asList("300000000000005", "300000000000006"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/500000000000001/tags")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("tags", "[{\"tag_uid\":\"300000000000005\"},{\"tag_uid\":\"300000000000006\"}]"));
 
             assertThat(actual, is(true));
@@ -997,6 +1054,26 @@ public class PhotoMethodsTest {
             boolean actual = facebook.addTagToPhoto("500000000000001", tagUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/tags")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("to", "300000000000007"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("tag_text", "tag text"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("x", "57.34375"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("y", "57.916664123535"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void update_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            TagUpdate tagUpdate = new TagUpdate()
+                                        .to("300000000000007")
+                                        .tagText("tag text")
+                                        .x(57.34375)
+                                        .y(57.916664123535);
+            boolean actual = facebook.addTagToPhoto("500000000000001", tagUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/500000000000001/tags")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("to", "300000000000007"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("tag_text", "tag text"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("x", "57.34375"));
@@ -1032,6 +1109,18 @@ public class PhotoMethodsTest {
             boolean actual = facebook.deleteTagOnPhoto("500000000000001", "300000000000007");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
             assertThat(facebook.getEndpointURL(), is(pathOf("/500000000000001/tags")));
+            assertThat(facebook.getEndpointURL(), hasParameter("to", "300000000000007"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.deleteTagOnPhoto("500000000000001", "300000000000007");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/500000000000001/tags")));
             assertThat(facebook.getEndpointURL(), hasParameter("to", "300000000000007"));
 
             assertThat(actual, is(true));

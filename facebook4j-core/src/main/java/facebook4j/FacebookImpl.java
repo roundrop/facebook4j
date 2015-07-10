@@ -269,7 +269,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(userId, "achievements"),
                             new HttpParameter[] {new HttpParameter("achievement", achievementURL.toString())});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     /* Activity Methods */
@@ -529,13 +529,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean editEvent(String eventId, EventUpdate eventUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(eventId), eventUpdate.asHttpParameterArray());
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean deleteEvent(String eventId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(eventId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public String postEventLink(String eventId, URL link) throws FacebookException {
@@ -572,19 +572,19 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean inviteToEvent(String eventId, String userId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(eventId, "invited/" + userId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
     public boolean inviteToEvent(String eventId, String[] userIds) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(eventId, "invited"), new HttpParameter[] {
                                     new HttpParameter("users", z_F4JInternalStringUtil.join(userIds))});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean uninviteFromEvent(String eventId, String userId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(eventId, "invited/" + userId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public ResponseList<RSVPStatus> getRSVPStatusInAttending(String eventId) throws FacebookException {
@@ -599,7 +599,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean rsvpEventAsAttending(String eventId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(eventId, "attending"));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public ResponseList<RSVPStatus> getRSVPStatusInMaybe(String eventId) throws FacebookException {
@@ -614,7 +614,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean rsvpEventAsMaybe(String eventId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(eventId, "maybe"));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public ResponseList<RSVPStatus> getRSVPStatusInDeclined(String eventId) throws FacebookException {
@@ -629,7 +629,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean rsvpEventAsDeclined(String eventId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(eventId, "declined"));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public URL getEventPictureURL(String eventId) throws FacebookException {
@@ -644,13 +644,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(eventId, "picture"),
                                 new HttpParameter[] {source.asHttpParameter("source")});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean deleteEventPicture(String eventId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(eventId, "picture"));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public ResponseList<Photo> getEventPhotos(String eventId) throws FacebookException {
@@ -780,7 +780,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean deletePost(String postId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(postId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public ResponseList<Comment> getPostComments(String postId) throws FacebookException {
@@ -893,6 +893,17 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createFriendList(get(buildEndpoint(userId, "friends", reading)));
     }
+    
+    public ResponseList<TaggableFriend> getTaggableFriends() throws FacebookException {
+		return getTaggableFriends("me", null);
+	}
+	public ResponseList<TaggableFriend> getTaggableFriends(Reading reading) throws FacebookException {
+		return getTaggableFriends("me", reading);
+	}
+	public ResponseList<TaggableFriend> getTaggableFriends(String userId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createTaggableFriendList(get(buildEndpoint(userId, "taggable_friends", reading)));
+    }
 
     public ResponseList<Friend> getMutualFriends(String friendUserId) throws FacebookException {
         return getMutualFriends("me", friendUserId, null);
@@ -923,19 +934,19 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean deleteFriendlist(String friendlistId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(friendlistId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean addFriendlistMember(String friendlistId, String userId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(friendlistId + "/members/" + userId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean removeFriendlistMember(String friendlistId, String userId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(friendlistId + "/members/" + userId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean deleteFriendlistMember(String friendlistId, String userId) throws FacebookException {
@@ -968,7 +979,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createFriendList(get(buildEndpoint(userId, "friends/" + friendId, reading)));
     }
-
+    
     /* Favorite Methods */
     
     public ResponseList<Game> getGames() throws FacebookException {
@@ -1203,7 +1214,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean deleteComment(String commentId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(commentId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public ResponseList<Like> getCommentLikes(String commentId) throws FacebookException {
@@ -1308,6 +1319,23 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createLocationList(get(buildEndpoint(userId, "locations", reading)));
     }
+    
+	public ResponseList<PlaceTag> getTaggedPlaces() throws FacebookException {
+		return getTaggedPlaces("me", null);
+	}
+
+	public ResponseList<PlaceTag> getTaggedPlaces(Reading reading) throws FacebookException {
+		return getTaggedPlaces("me", reading);
+	}
+
+	public ResponseList<PlaceTag> getTaggedPlaces(String userId) throws FacebookException {
+		return getTaggedPlaces(userId, null);
+	}
+
+	public ResponseList<PlaceTag> getTaggedPlaces(String userId, Reading reading) throws FacebookException {
+		ensureAuthorizationEnabled();
+		return factory.createPlaceTagList(get(buildEndpoint(userId, "tagged_places", reading)));
+	}
 
     /* Note Methods */
     
@@ -1417,7 +1445,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean markNotificationAsRead(String notificationId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(notificationId), new HttpParameter[] {new HttpParameter("unread", 0)});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     /* Page Methods */
@@ -1469,7 +1497,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean updatePageBasicAttributes(String pageId, PageUpdate pageUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(pageId), pageUpdate.asHttpParameterArray());
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean updatePageProfilePhoto(URL picture) throws FacebookException {
@@ -1478,7 +1506,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean updatePageProfilePhoto(String pageId, URL picture) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(pageId, "picture"), new HttpParameter[]{new HttpParameter("picture", picture.toString())});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean updatePageProfilePhoto(Media source) throws FacebookException {
@@ -1489,7 +1517,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         List<HttpParameter> httpParams = new ArrayList<HttpParameter>();
         httpParams.add(source.asHttpParameter("source"));
         HttpResponse res = post(buildEndpoint(pageId, "picture"), httpParams.toArray(new HttpParameter[httpParams.size()]));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean updatePageCoverPhoto(PageCoverUpdate pageCoverUpdate) throws FacebookException {
@@ -1498,7 +1526,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean updatePageCoverPhoto(String pageId, PageCoverUpdate pageCoverUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(pageId), pageCoverUpdate.asHttpParameterArray());
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
 
@@ -1517,7 +1545,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean updatePageSetting(String pageId, PageSettingUpdate pageSettingUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(pageId, "settings"), pageSettingUpdate.asHttpParameterArray());
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public String postBackdatingFeed(BackdatingPostUpdate backdatingPostUpdate) throws FacebookException {
@@ -1594,7 +1622,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean deleteMilestone(String milestoneId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(milestoneId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public ResponseList<Admin> getPageAdmins() throws FacebookException {
@@ -1646,7 +1674,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean installTab(String pageId, String appId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(pageId, "tabs"), new HttpParameter[]{new HttpParameter("app_id", appId)});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean updateTab(String tabId, TabUpdate tabUpdate) throws FacebookException {
@@ -1655,7 +1683,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean updateTab(String pageId, String tabId, TabUpdate tabUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(pageId, "tabs/" + tabId), tabUpdate.asHttpParameterArray());
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean deleteTab(String tabId) throws FacebookException {
@@ -1664,13 +1692,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean deleteTab(String pageId, String tabId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(pageId, "tabs/" + tabId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean displayPagePost(String postId, boolean isHidden) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(postId), new HttpParameter[]{new HttpParameter("is_hidden", isHidden)});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public ResponseList<User> getBlocked() throws FacebookException {
@@ -1711,7 +1739,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean unblock(String pageId, String userId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(pageId, "blocked"), new HttpParameter[]{new HttpParameter("uid", userId)});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public ResponseList<Offer> getOffers() throws FacebookException {
@@ -1741,7 +1769,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean deleteOffer(String offerId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(offerId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public Offer getOffer(String offerId) throws FacebookException {
@@ -1780,7 +1808,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean revokePermission(String userId, String permissionName) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(userId, "permissions/" + permissionName));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean deletePermission(String permissionName) throws FacebookException {
@@ -1879,13 +1907,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean addTagToPhoto(String photoId, String toUserId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(photoId, "tags"), new HttpParameter[]{new HttpParameter("to", toUserId)});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
     
     public boolean addTagToPhoto(String photoId, TagUpdate tagUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(photoId, "tags"), tagUpdate.asHttpParameterArray());
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
    }
 
     public boolean addTagToPhoto(String photoId, List<String> toUserIds) throws FacebookException {
@@ -1901,7 +1929,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
             tags.add(map);
         }
         HttpResponse res = post(buildEndpoint(photoId, "tags"), new HttpParameter[]{new HttpParameter("tags", new JSONArray(tags).toString())});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean updateTagOnPhoto(String photoId, TagUpdate tagUpdate) throws FacebookException {
@@ -1911,7 +1939,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean deleteTagOnPhoto(String photoId, String toUserId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(photoId, "tags"), new HttpParameter[]{new HttpParameter("to", toUserId)});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public String postPhoto(Media source) throws FacebookException {
@@ -1931,7 +1959,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     public boolean deletePhoto(String photoId) throws FacebookException {
         HttpResponse res = delete(buildEndpoint(photoId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     /* Poke Methods */
@@ -1991,7 +2019,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean deleteQuestion(String questionId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(questionId));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
    }
 
     public ResponseList<Option> getQuestionOptions(String questionId) throws FacebookException {
@@ -2043,7 +2071,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(userId, "scores"),
                             new HttpParameter[] {new HttpParameter("score", scoreValue)});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean deleteScore() throws FacebookException {
@@ -2052,7 +2080,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean deleteScore(String userId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(userId, "scores"));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     /* Subscribe Methods */
@@ -2366,19 +2394,19 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public boolean deleteTestUser(String testUserId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(conf.getRestBaseURL() + testUserId);
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     public boolean makeFriendTestUser(TestUser testUser1, TestUser testUser2) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(testUser1.getId(), "friends/" + testUser2.getId()),
                                 new HttpParameter[]{new HttpParameter("access_token", testUser1.getAccessToken())});
-        if (!Boolean.valueOf(res.asString().trim())) {
+        if (!parseBoolean(res)) {
             return false;
         }
         res = post(buildEndpoint(testUser2.getId(), "friends/" + testUser1.getId()),
                                 new HttpParameter[]{new HttpParameter("access_token", testUser2.getAccessToken())});
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
     
     /* Paging */
@@ -2594,13 +2622,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     private boolean _like(String objectId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(objectId, "likes"));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     private boolean _unlike(String objectId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(objectId, "likes"));
-        return Boolean.valueOf(res.asString().trim());
+        return parseBoolean(res);
     }
 
     private String _postLink(String objectId, URL link, String message)
@@ -2632,7 +2660,19 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         }
     }
 
-    
+    private boolean parseBoolean(HttpResponse res) throws FacebookException {
+        String s = res.asString().trim();
+        if (!s.startsWith("{")) {
+            return Boolean.valueOf(s);
+        }
+        try {
+            return res.asJSONObject().getBoolean("success");
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone);
+        }
+    }
+
+
     /* http methods */
     
     private HttpResponse get(String url) throws FacebookException {
@@ -2901,4 +2941,5 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public RawAPIMethods rawAPI() {
         return this;
     }
+    
 }

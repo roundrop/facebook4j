@@ -915,6 +915,17 @@ public class PostMethodsTest extends MockFacebookTestBase {
 
             assertThat(actual, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void delete_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.deletePost("500000000000001_1122334455");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/500000000000001_1122334455")));
+
+            assertThat(actual, is(true));
+        }
     }
 
 }

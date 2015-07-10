@@ -193,6 +193,29 @@ public class OAuthTest extends FacebookTestBase {
         assertThat(at.getExpires(), is(nullValue()));
     }
 
+    @Category(RealAPITests.class)
+    @Test
+    public void accessToken_res_v23() throws Exception {
+        System.setProperty("facebook4j.oauth.accessTokenURL", "https://graph.facebook.com/v2.3/oauth/access_token");
+
+        String appId = p.getProperty("oauth.appId");
+        String appSecret = p.getProperty("oauth.appSecret");
+
+        ConfigurationBuilder build = new ConfigurationBuilder();
+        build.setOAuthAppId(appId);
+        build.setOAuthAppSecret(appSecret);
+        Configuration configuration = build.build();
+        HttpClientWrapper http = new HttpClientWrapper(configuration);
+        HttpResponse res = http.get(configuration.getOAuthAccessTokenURL() +
+                "?client_id=" + appId +
+                "&client_secret=" + appSecret +
+                "&grant_type=client_credentials");
+        AccessToken at = new AccessToken(res);
+        assertThat(at.getToken(), is(notNullValue()));
+        assertThat(at.getType(), is(notNullValue()));
+        assertThat(at.getExpires(), is(nullValue()));
+    }
+
     @Test
     public void accessToken_string() throws Exception {
         AccessToken at = new AccessToken("6377362-kW0YV1ymaqEUCSHP29ux169mDeA4kQfhEuqkdvHk", 123456789012345L);

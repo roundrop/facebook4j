@@ -17,6 +17,7 @@
 package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.junit.FacebookAPIVersion;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -227,6 +228,19 @@ public class EventMethodsTest {
             assertThat(facebook.getEndpointURL(), is(pathOf("/138661276338112")));
             assertThat(result, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            Calendar endTime = createCal(2013, 7, 1, 15, 0, 0, TimeZone.getTimeZone("UTC"));
+            EventUpdate eventUpdate = new EventUpdate()
+                                        .endTime(endTime);
+            boolean result = facebook.editEvent("138661276338112", eventUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/138661276338112")));
+            assertThat(result, is(true));
+        }
     }
 
     public static class deleteEvent extends MockFacebookTestBase {
@@ -236,6 +250,16 @@ public class EventMethodsTest {
             boolean result = facebook.deleteEvent("138661276338112");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
             assertThat(facebook.getEndpointURL(), is(pathOf("/138661276338112")));
+            assertThat(result, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean result = facebook.deleteEvent("138661276338112");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/138661276338112")));
             assertThat(result, is(true));
         }
     }
@@ -537,11 +561,34 @@ public class EventMethodsTest {
         }
 
         @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.inviteToEvent("331218348435", "1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/331218348435/invited/1234567890123456")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
         public void ids() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
             boolean actual = facebook.inviteToEvent("331218348435", new String[]{"1234567890123456", "1234567890123457", "1234567890123458"});
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/331218348435/invited")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("users", "1234567890123456,1234567890123457,1234567890123458"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void ids_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.inviteToEvent("331218348435", new String[]{"1234567890123456", "1234567890123457", "1234567890123458"});
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/331218348435/invited")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("users", "1234567890123456,1234567890123457,1234567890123458"));
 
             assertThat(actual, is(true));
@@ -555,6 +602,17 @@ public class EventMethodsTest {
             boolean actual = facebook.uninviteFromEvent("331218348435", "1234567890123456");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
             assertThat(facebook.getEndpointURL(), is(pathOf("/331218348435/invited/1234567890123456")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void uninvite_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.uninviteFromEvent("331218348435", "1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/331218348435/invited/1234567890123456")));
 
             assertThat(actual, is(true));
         }
@@ -572,6 +630,17 @@ public class EventMethodsTest {
         }
 
         @Test
+        @FacebookAPIVersion("v2.3")
+        public void asAttending_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.rsvpEventAsAttending("331218348435");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/331218348435/attending")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
         public void asMaybe() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
             boolean actual = facebook.rsvpEventAsMaybe("331218348435");
@@ -582,11 +651,33 @@ public class EventMethodsTest {
         }
 
         @Test
+        @FacebookAPIVersion("v2.3")
+        public void asMaybe_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.rsvpEventAsMaybe("331218348435");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/331218348435/maybe")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
         public void asDeclined() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
             boolean actual = facebook.rsvpEventAsDeclined("331218348435");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/331218348435/declined")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void asDeclined_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.rsvpEventAsDeclined("331218348435");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/331218348435/declined")));
 
             assertThat(actual, is(true));
         }
@@ -626,6 +717,19 @@ public class EventMethodsTest {
 
             assertThat(actual, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void update_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            File file = new File("src/test/resources/500x500.png");
+            Media source = new Media(file);
+            boolean actual = facebook.updateEventPicture("331218348435", source);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/331218348435/picture")));
+
+            assertThat(actual, is(true));
+        }
     }
 
     public static class deleteEventPicture extends MockFacebookTestBase {
@@ -635,6 +739,17 @@ public class EventMethodsTest {
             boolean actual = facebook.deleteEventPicture("331218348435");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
             assertThat(facebook.getEndpointURL(), is(pathOf("/331218348435/picture")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void delete_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.deleteEventPicture("331218348435");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/331218348435/picture")));
 
             assertThat(actual, is(true));
         }

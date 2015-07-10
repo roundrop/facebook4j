@@ -22,6 +22,7 @@ import facebook4j.FriendRequest;
 import facebook4j.Friendlist;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
+import facebook4j.TaggableFriend;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -306,5 +307,23 @@ public interface FriendMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#mutualfriends">User#mutualfriends - Facebook Developers</a>
      */
     ResponseList<Friend> getMutualFriends(String userId1, String userId2, Reading reading) throws FacebookException;
+    
+    /**
+     * Returns the list of friends of the current user.
+     * @return taggable friend's list
+     * @throws FacebookException when Facebook service or network is unavailable, and when taggable friends feature requires app review
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/user/taggable_friends">User#taggablefriends - Facebook Developers</a>
+     */
+    ResponseList<TaggableFriend> getTaggableFriends() throws FacebookException;
+
+    /**
+     * Returns the list of friends of the current user.
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return taggable friend's list
+     * @throws FacebookException when Facebook service or network is unavailable,and when taggable friends feature requires app review
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/user/taggable_friends">User#taggablefriends - Facebook Developers</a>
+     */
+    ResponseList<TaggableFriend> getTaggableFriends(Reading reading) throws FacebookException;
+
 
 }

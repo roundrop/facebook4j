@@ -17,6 +17,7 @@
 package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.junit.FacebookAPIVersion;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -224,6 +225,17 @@ public class GameMethodsTest {
 
             assertThat(actual, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.deleteAchievement("1234567890123456", new URL("http://fb-client-0.cityville.zynga.com/fbAchievement.php?id=70"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/1234567890123456/achievements")));
+
+            assertThat(actual, is(true));
+        }
     }
 
     public static class getScores extends MockFacebookTestBase {
@@ -340,6 +352,18 @@ public class GameMethodsTest {
 
             assertThat(actual, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.postScore("1234567890123456", 65535);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/1234567890123456/scores")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("score", "65535"));
+
+            assertThat(actual, is(true));
+        }
     }
 
     public static class deleteScore extends MockFacebookTestBase {
@@ -359,6 +383,17 @@ public class GameMethodsTest {
             boolean actual = facebook.deleteScore("1234567890123456");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
             assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/scores")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.deleteScore("1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/1234567890123456/scores")));
 
             assertThat(actual, is(true));
         }

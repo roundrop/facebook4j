@@ -16,14 +16,23 @@
 
 package facebook4j;
 
+import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
+import facebook4j.junit.FacebookAPIVersion;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
+import org.junit.internal.matchers.TypeSafeMatcher;
 import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -422,6 +431,32 @@ public class PageMethodsTest {
 
             assertThat(actual, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            PageUpdate pageUpdate = new PageUpdate()
+                                    .about("Facebook4J: A Java library for the Facebook Graph API.")
+                                    .description("Facebook4J: A Java library for the Facebook Graph API.\n" +
+                                            "This library provides the ease of use like Twitter4J.\n" +
+                                            "Facebook4J is an unofficial library.")
+                                    .generalInfo("Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0.")
+                                    .website("http://facebook4j.org")
+                                    .phone("");
+            boolean actual = facebook.updatePageBasicAttributes("137246726435626", pageUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/137246726435626")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("about", "Facebook4J: A Java library for the Facebook Graph API."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("description", "Facebook4J: A Java library for the Facebook Graph API.\n" +
+                                                                        "This library provides the ease of use like Twitter4J.\n" +
+                                                                        "Facebook4J is an unofficial library."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("general_info", "Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0."));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("website", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("phone", ""));
+
+            assertThat(actual, is(true));
+        }
     }
 
     public static class updatePageProfilePhoto extends MockFacebookTestBase {
@@ -465,6 +500,19 @@ public class PageMethodsTest {
             boolean actual = facebook.updatePageProfilePhoto("137246726435626", source);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/picture")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_media_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            File file = new File("src/test/resources/500x500.png");
+            Media source = new Media(file);
+            boolean actual = facebook.updatePageProfilePhoto("137246726435626", source);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/137246726435626/picture")));
 
             assertThat(actual, is(true));
         }
@@ -927,6 +975,17 @@ public class PageMethodsTest {
 
             assertThat(result, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws FacebookException {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean result = facebook.deleteMilestone("187182304775401");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/187182304775401")));
+
+            assertThat(result, is(true));
+        }
     }
 
     public static class getPageAdmins extends MockFacebookTestBase {
@@ -1312,6 +1371,18 @@ public class PageMethodsTest {
 
             assertThat(actual, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.installTab("137246726435626", "2344061033");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/137246726435626/tabs")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("app_id", "2344061033"));
+
+            assertThat(actual, is(true));
+        }
     }
 
     public static class getBlocked extends MockFacebookTestBase {
@@ -1428,6 +1499,19 @@ public class PageMethodsTest {
             boolean unblock = facebook.unblock("137246726435626", uid);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
             assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/blocked")));
+            assertThat(facebook.getEndpointURL(), hasParameter("uid", uid));
+
+            assertThat(unblock, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            String uid = "1111111111";
+            boolean unblock = facebook.unblock("137246726435626", uid);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/137246726435626/blocked")));
             assertThat(facebook.getEndpointURL(), hasParameter("uid", uid));
 
             assertThat(unblock, is(true));
@@ -1726,6 +1810,17 @@ public class PageMethodsTest {
 
             assertThat(result, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean result = facebook.deleteOffer("1234567890123456");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/1234567890123456")));
+
+            assertThat(result, is(true));
+        }
     }
 
     public static class getOffer extends MockFacebookTestBase {
@@ -1806,8 +1901,8 @@ public class PageMethodsTest {
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/me/photos")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("message", "upload photo to the page test."));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("targeting", "{\"countries\":[\"US\",\"GB\"]}"));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("feed_targeting", "{\"age_min\":20,\"genders\":{\"value\":1},\"age_max\":40}"));
+            assertThat(facebook.getHttpParameters(), hasTargetingParameterWithCountries("US", "GB"));
+            assertThat(facebook.getHttpParameters(), hasPostJsonParameter("feed_targeting", "{\"age_min\":20,\"genders\":{\"value\":1},\"age_max\":40}"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
         }
@@ -1830,10 +1925,60 @@ public class PageMethodsTest {
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/photos")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("message", "upload photo to the page test."));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("targeting", "{\"countries\":[\"US\",\"GB\"]}"));
+            assertThat(facebook.getHttpParameters(), hasTargetingParameterWithCountries("US", "GB"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("feed_targeting", "{\"age_min\":20,\"genders\":{\"value\":1},\"age_max\":40}"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
+        }
+
+        protected Matcher<HttpParameter[]> hasTargetingParameterWithCountries(String... expectedCountryCodes) {
+            final Set<String> expectedCountriesSet = new HashSet<String>(Arrays.asList(expectedCountryCodes));
+            return new TypeSafeMatcher<HttpParameter[]>(HttpParameter[].class) {
+
+                private final List<String> actualParams = new ArrayList<String>();
+
+                @Override
+                public boolean matchesSafely(HttpParameter[] actual) {
+                    for (HttpParameter param : actual) {
+                        if (param.getName().equals("targeting")) {
+                            actualParams.add(param.getName() + "=" + param.getValue());
+                            if (matches(param.getValue())) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+
+                protected boolean matches(String targetingParamValue) {
+                    try {
+                        JSONObject targetingParamValueObject = new JSONObject(targetingParamValue);
+                        JSONArray actualCountriesArray = targetingParamValueObject.getJSONArray("countries");
+                        Set<String> actualCountriesSet = new HashSet<String>();
+                        for (int i = 0; i < actualCountriesArray.length(); i++) {
+                            String country = actualCountriesArray.getString(i);
+                            actualCountriesSet.add(country);
+                        }
+                        return expectedCountriesSet.equals(actualCountriesSet);
+                    } catch (JSONException ignore) {
+                        return false;
+                    }
+                }
+
+                public void describeTo(Description desc) {
+                    desc.appendValue("targeting=" + expectedCountriesSet);
+                    if (actualParams.size() > 0) {
+                        desc.appendText(" but actual is ");
+                        desc.appendValue(actualParams.get(0));
+                        for (int i = 1; i < actualParams.size(); i++) {
+                            desc.appendText(", ");
+                            desc.appendValue(actualParams.get(i));
+                        }
+                    } else {
+                        desc.appendText(" but actual has no '" + name + "' parameter");
+                    }
+                }
+            };
         }
     }
 
@@ -1858,6 +2003,20 @@ public class PageMethodsTest {
             boolean actual = facebook.updatePageSetting("137246726435626", pageSettingUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/settings")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("setting", "USERS_CAN_POST"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("value", "false"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            PageSettingUpdate pageSettingUpdate = new PageSettingUpdate("USERS_CAN_POST", false);
+            boolean actual = facebook.updatePageSetting("137246726435626", pageSettingUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/137246726435626/settings")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("setting", "USERS_CAN_POST"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("value", "false"));
 
@@ -1893,6 +2052,21 @@ public class PageMethodsTest {
 
             assertThat(actual, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            PageCoverUpdate pageCoverUpdate = new PageCoverUpdate("193816910778607").offsetY(20).noFeedStory(true);
+            boolean actual = facebook.updatePageCoverPhoto("137246726435626", pageCoverUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/137246726435626")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("cover", "193816910778607"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("offset_y", "20"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("no_feed_story", "true"));
+
+            assertThat(actual, is(true));
+        }
     }
 
     public static class displayPagePost extends MockFacebookTestBase {
@@ -1908,11 +2082,35 @@ public class PageMethodsTest {
         }
 
         @Test
+        @FacebookAPIVersion("v2.3")
+        public void hide_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.displayPagePost("137246726435626_210759175751047", true);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/137246726435626_210759175751047")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("is_hidden", "true"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
         public void show() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
             boolean actual = facebook.displayPagePost("137246726435626_210759175751047", false);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626_210759175751047")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("is_hidden", "false"));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void show_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.displayPagePost("137246726435626_210759175751047", false);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/137246726435626_210759175751047")));
             assertThat(facebook.getHttpParameters(), hasPostParameter("is_hidden", "false"));
 
             assertThat(actual, is(true));
@@ -1949,6 +2147,22 @@ public class PageMethodsTest {
 
             assertThat(actual, is(true));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            TabUpdate tabUpdate = new TabUpdate()
+                                    .position(4)
+                                    .nonConnectionLandingTab(true);
+            boolean actual = facebook.updateTab("137246726435626", "notes", tabUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/137246726435626/tabs/notes")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("position", "4"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("is_non_connection_landing_tab", "true"));
+
+            assertThat(actual, is(true));
+        }
     }
 
     public static class deleteTab extends MockFacebookTestBase {
@@ -1968,6 +2182,17 @@ public class PageMethodsTest {
             boolean actual = facebook.deleteTab("137246726435626", "notes");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
             assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/tabs/notes")));
+
+            assertThat(actual, is(true));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.3")
+        public void id_v23() throws Exception {
+            facebook.setMockJSON("mock_json/success.json");
+            boolean actual = facebook.deleteTab("137246726435626", "notes");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.DELETE));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.3/137246726435626/tabs/notes")));
 
             assertThat(actual, is(true));
         }

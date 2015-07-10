@@ -55,6 +55,7 @@ import facebook4j.PageSetting;
 import facebook4j.Permission;
 import facebook4j.Photo;
 import facebook4j.Place;
+import facebook4j.PlaceTag;
 import facebook4j.Poke;
 import facebook4j.Post;
 import facebook4j.Question;
@@ -66,6 +67,7 @@ import facebook4j.Subscribedto;
 import facebook4j.Subscriber;
 import facebook4j.Tab;
 import facebook4j.Tag;
+import facebook4j.TaggableFriend;
 import facebook4j.Tagged;
 import facebook4j.Television;
 import facebook4j.TestUser;
@@ -124,6 +126,7 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<FriendRequest> createFriendRequestList(HttpResponse res) throws FacebookException;
     
     ResponseList<Friend> createFriendList(HttpResponse res) throws FacebookException;
+    ResponseList<TaggableFriend> createTaggableFriendList(HttpResponse res) throws FacebookException;
 
     ResponseList<Game> createGameList(HttpResponse res) throws FacebookException;
     
@@ -141,6 +144,7 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<Link> createLinkList(HttpResponse res) throws FacebookException;
     
     ResponseList<Location> createLocationList(HttpResponse res) throws FacebookException;
+    ResponseList<PlaceTag> createPlaceTagList(HttpResponse res) throws FacebookException;
     
     ResponseList<Movie> createMovieList(HttpResponse res) throws FacebookException;
     

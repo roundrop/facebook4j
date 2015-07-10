@@ -149,6 +149,44 @@ public final class z_F4JInternalParseUtil {
         }
     }
 
+    /**
+     * Parses the value of a field as a timezone offset in hours. A timezone 
+     * offset is the value added to UTC time to get the user's local time. 
+     * A date/time reference point must be provided because the offset may 
+     * differ based on the date/time for which it is to be computed, for
+     * example because of daylight savings.
+     * 
+     * @param name the name of the member of the given json object that is 
+     * the raw string to be parsed
+     * @param json the json object
+     * @param datetimeReference the date/time for which the offset is to be computed
+     * @return the timezone offset, in hours
+     */
+    public static Double getTimeZoneOffset(String name, JSONObject json, long datetimeReference) {
+        String rawString = getRawString(name, json);
+        if (null == rawString || "".equals(rawString) || "null".equals(rawString)) {
+            return null;
+        } else {
+            try {
+                return Double.valueOf(rawString);
+            } catch (NumberFormatException ignore) {
+                TimeZone timeZone = TimeZone.getTimeZone(rawString); // returns GMT if not understood
+                return Integer.valueOf(computeTimeZoneOffsetInHours(timeZone, datetimeReference)).doubleValue();
+            }
+        }
+    }
+    
+    /**
+     * Computes the offset in hours for a given timezone at a given date/time.
+     * @param timeZone the timezone 
+     * @param currentDatetime the date/time 
+     * @return the offset, in hours
+     */
+    public static int computeTimeZoneOffsetInHours(TimeZone timeZone, long currentDatetime) {
+        int offsetInMilliseconds = timeZone.getOffset(currentDatetime);
+        return offsetInMilliseconds / (1000 * 60 * 60);
+    }
+    
     public static Boolean getBoolean(String name, JSONObject json) {
         String str = getRawString(name, json);
         if (null == str || "null".equals(str)) {

@@ -18,6 +18,11 @@ package facebook4j.auth;
 
 import facebook4j.FacebookException;
 import facebook4j.internal.http.HttpResponse;
+import facebook4j.internal.org.json.JSONObject;
+
+import java.util.Arrays;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * Represents an access token (with expiration date).
@@ -25,17 +30,35 @@ import facebook4j.internal.http.HttpResponse;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public class AccessToken implements java.io.Serializable {
-    private static final long serialVersionUID = -1373191811934285453L;
 
     private String token;
+    private String type;
     private Long expires;
     String[] responseStr = null;
 
     public AccessToken(HttpResponse res) throws FacebookException {
-        this(res.asString());
+        // see: https://developers.facebook.com/docs/graph-api/using-graph-api/v2.3#apiversiondebug
+        String version = res.getResponseHeader("facebook-api-version");
+        if (Double.parseDouble(version.substring(1)) < 2.3) {
+            parseQueryString(res.asString());
+            return;
+        }
+        JSONObject json = res.asJSONObject();
+        this.token = getRawString("access_token", json);
+        this.type = getRawString("token_type", json);
+        this.expires = getLong("expires_in", json);
     }
 
     public AccessToken(String string) {
+        parseQueryString(string);
+    }
+
+    public AccessToken(String token, Long expires) {
+        this.token = token;
+        this.expires = expires;
+    }
+
+    private void parseQueryString(String string) {
         if (string.contains("access_token=")) {
             this.responseStr = string.split("&");
             this.token = getParameter("access_token");
@@ -48,11 +71,6 @@ public class AccessToken implements java.io.Serializable {
         }
     }
 
-    public AccessToken(String token, Long expires) {
-        this.token = token;
-        this.expires = expires;
-    }
-    
     public String getParameter(String parameter) {
         String value = null;
         for (String str : responseStr) {
@@ -68,44 +86,38 @@ public class AccessToken implements java.io.Serializable {
         return token;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public Long getExpires() {
         return expires;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        AccessToken other = (AccessToken) obj;
-        if (expires == null) {
-            if (other.expires != null)
-                return false;
-        } else if (!expires.equals(other.expires))
-            return false;
-        if (token == null) {
-            if (other.token != null)
-                return false;
-        } else if (!token.equals(other.token))
-            return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AccessToken)) return false;
+
+        AccessToken that = (AccessToken) o;
+
+        if (token != null ? !token.equals(that.token) : that.token != null) return false;
+
         return true;
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((expires == null) ? 0 : expires.hashCode());
-        result = prime * result + ((token == null) ? 0 : token.hashCode());
-        return result;
+        return token != null ? token.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return "AccessToken [token=" + token + ", expires=" + expires + "]";
+        return "AccessToken{" +
+                "token='" + token + '\'' +
+                ", type='" + type + '\'' +
+                ", expires=" + expires +
+                ", responseStr=" + Arrays.toString(responseStr) +
+                '}';
     }
-
 }
