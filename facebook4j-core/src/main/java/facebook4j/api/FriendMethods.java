@@ -325,5 +325,23 @@ public interface FriendMethods {
      */
     ResponseList<TaggableFriend> getTaggableFriends(Reading reading) throws FacebookException;
 
+    /**
+     * Returns the list of friends of the current user.
+     * @param userId the ID of a user
+     * @return taggable friend's list
+     * @throws FacebookException when Facebook service or network is unavailable, and when taggable friends feature requires app review
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/user/taggable_friends">User#taggablefriends - Facebook Developers</a>
+     */
+    ResponseList<TaggableFriend> getTaggableFriends(String userId) throws FacebookException;
+
+    /**
+     * Returns the list of friends of the current user.
+     * @param userId the ID of a user
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return taggable friend's list
+     * @throws FacebookException when Facebook service or network is unavailable,and when taggable friends feature requires app review
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/user/taggable_friends">User#taggablefriends - Facebook Developers</a>
+     */
+    ResponseList<TaggableFriend> getTaggableFriends(String userId, Reading reading) throws FacebookException;
 
 }

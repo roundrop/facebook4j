@@ -897,10 +897,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<TaggableFriend> getTaggableFriends() throws FacebookException {
 		return getTaggableFriends("me", null);
 	}
-	public ResponseList<TaggableFriend> getTaggableFriends(Reading reading) throws FacebookException {
+    public ResponseList<TaggableFriend> getTaggableFriends(Reading reading) throws FacebookException {
 		return getTaggableFriends("me", reading);
 	}
-	public ResponseList<TaggableFriend> getTaggableFriends(String userId, Reading reading) throws FacebookException {
+    public ResponseList<TaggableFriend> getTaggableFriends(String userId) throws FacebookException {
+        return getTaggableFriends(userId, null);
+    }
+    public ResponseList<TaggableFriend> getTaggableFriends(String userId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
         return factory.createTaggableFriendList(get(buildEndpoint(userId, "taggable_friends", reading)));
     }
