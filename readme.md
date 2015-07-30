@@ -333,6 +333,7 @@ page1 = facebook.fetchPrevious(paging2);
 see: [http://facebook4j.org](http://facebook4j.org)
 
 ## License
+## Just having a mooch
 Facebook4J is released under Apache License 2.0.
 
 Facebook4J includes software from Twitter4J to handle HTTP request/response and greatly internal logic. You can see the license term at [http://twitter4j.org/en/index.html#license](http://twitter4j.org/en/index.html#license)
