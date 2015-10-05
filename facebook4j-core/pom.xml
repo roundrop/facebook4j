@@ -15,51 +15,38 @@
     </license>
   </licenses>
   <scm>
-    <url>https://github.com/roundrop/facebook4j</url>
-    <connection>scm:git:git://github.com/roundrop/facebook4j.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/roundrop/facebook4j.git</developerConnection>
+    <url>https://github.com/robsoncassol/facebook4j</url>
+    <connection>scm:git:git://github.com/robsoncassol/facebook4j.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/robsoncassol/facebook4j.git</developerConnection>
   </scm>
   <developers>
     <developer>
-      <id>roundrop</id>
-      <name>Ryuji</name>
-      <email>roundrop@gmail.com</email>
+      <id>robsoncassol</id>
+      <name>Robson</name>
+      <email>robsoncassol@gmail.com</email>
       <url>http://blog.roundrop.jp/</url>
       <roles>
         <role>lead</role>
         <role>architect</role>
         <role>developer</role>
       </roles>
-      <timezone>+9</timezone>
+      <timezone>-3</timezone>
     </developer>
   </developers>
-  <issueManagement>
-    <system>Jira</system>
-    <url>https://roundrop.atlassian.net/browse/FFJ</url>
-  </issueManagement>
-  <mailingLists>
-    <mailingList>
-      <name>Facebook4J</name>
-      <subscribe>facebook4j+subscribe@googlegroups.com</subscribe>
-      <unsubscribe>facebook4j+unsubscribe@googlegroups.com</unsubscribe>
-      <post>facebook4j@googlegroups.com</post>
-      <archive>http://groups.google.com/group/facebook4j</archive>
-    </mailingList>
-  </mailingLists>
   <distributionManagement>
-    <repository>
-      <id>sonatype-nexus-staging</id>
-      <name>Nexus Release Repository</name>
-      <uniqueVersion>false</uniqueVersion>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-    <snapshotRepository>
-      <id>sonatype-nexus-snapshots</id>
-      <name>Nexus Snapshots Repository</name>
-      <uniqueVersion>false</uniqueVersion>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    </snapshotRepository>
-  </distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>Gauge - Nexus Releases Repository</name>
+			<url>http://ci.perceptool.com.br:8080/nexus/content/repositories/releases</url>
+			<layout>default</layout>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Gauge - Nexus Snapshots Repository</name>
+			<url>http://ci.perceptool.com.br:8080/nexus/content/repositories/snapshots</url>
+			<layout>default</layout>
+		</snapshotRepository>
+	</distributionManagement>
 
   <dependencies>
     <dependency>
