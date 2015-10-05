@@ -16,6 +16,7 @@
 
 package facebook4j.internal.json;
 
+import facebook4j.City;
 import facebook4j.FacebookException;
 import facebook4j.Targeting;
 import facebook4j.internal.org.json.JSONArray;
@@ -32,7 +33,7 @@ public class TargetingJSONImpl implements Targeting, java.io.Serializable {
     private static final long serialVersionUID = 87174149234341549L;
 
     private List<String> countries;
-    private List<String> cities;
+    private List<City> cities;
     private List<String> regions;
     private List<String> locales;
 
@@ -49,12 +50,12 @@ public class TargetingJSONImpl implements Targeting, java.io.Serializable {
             }
             if (!json.isNull("cities")) {
                 JSONArray citiesJSONArray = json.getJSONArray("cities");
-                cities = new ArrayList<String>(citiesJSONArray.length());
+                cities = new ArrayList<City>(citiesJSONArray.length());
                 for (int i = 0; i < citiesJSONArray.length(); i++) {
-                    cities.add((String) citiesJSONArray.get(i));
+                    cities.add(new CityJSONImpl((JSONObject) citiesJSONArray.get(i)));
                 }
             } else {
-                cities = new ArrayList<String>(0);
+                cities = new ArrayList<City>(0);
             }
             if (!json.isNull("regions")) {
                 JSONArray regionsJSONArray = json.getJSONArray("regions");
@@ -83,7 +84,7 @@ public class TargetingJSONImpl implements Targeting, java.io.Serializable {
         return countries;
     }
 
-    public List<String> getCities() {
+    public List<City> getCities() {
         return cities;
     }
 

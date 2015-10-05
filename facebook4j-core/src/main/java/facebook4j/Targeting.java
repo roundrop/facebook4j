@@ -24,7 +24,7 @@ import java.util.List;
  */
 public interface Targeting {
     List<String> getCountries();
-    List<String> getCities();
+    List<City> getCities();
     List<String> getRegions();
     List<String> getLocales();
 }
