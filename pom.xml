@@ -25,7 +25,6 @@
 			<id>robsoncassol</id>
 			<name>Robson</name>
 			<email>robsoncassol@gmail.com</email>
-			<url>http://blog.roundrop.jp/</url>
 			<roles>
 				<role>lead</role>
 				<role>architect</role>
@@ -57,24 +56,6 @@
 					<value>true</value>
 				</property>
 			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.1</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
 		</profile>
 	</profiles>
 	<modules>
