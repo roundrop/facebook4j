@@ -175,6 +175,14 @@ public class Reading implements java.io.Serializable {
         parameterMap.put("summary", "true");
         return this;
     }
+    
+    public Reading published(Boolean b) {
+        if (parameterMap.containsKey("is_published")) {
+            throw new IllegalStateException("'is_published' already sets");
+        }
+        parameterMap.put("is_published", b.toString());
+        return this;
+    }
 
     public Reading filter(String filterName) {
         if (filterName == null) {
