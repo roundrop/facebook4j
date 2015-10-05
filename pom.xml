@@ -47,17 +47,6 @@
 			<layout>default</layout>
 		</snapshotRepository>
 	</distributionManagement>
-	<profiles>
-		<profile>
-			<id>release-sign-artifacts</id>
-			<activation>
-				<property>
-					<name>performRelease</name>
-					<value>true</value>
-				</property>
-			</activation>
-		</profile>
-	</profiles>
 	<modules>
 		<module>facebook4j-core</module>
 	</modules>
