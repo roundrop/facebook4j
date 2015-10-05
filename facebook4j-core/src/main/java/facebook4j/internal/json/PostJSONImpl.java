@@ -74,7 +74,6 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private Place place;
     private String statusType;
     private String story;
-    private Map<String, Tag[]> storyTags;
     private List<IdNameEntity> withTags;
     private PagableList<Comment> comments;
     private String objectId;
@@ -204,24 +203,6 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             }
             statusType = getRawString("status_type", json);
             story = getRawString("story", json);
-            if (!json.isNull("story_tags")) {
-                JSONObject storyTagsJSONObject = json.getJSONObject("story_tags");
-                storyTags = new HashMap<String, Tag[]>();
-                @SuppressWarnings("unchecked")
-                Iterator<String> keys = storyTagsJSONObject.keys();
-                while (keys.hasNext()) {
-                    String key = (String) keys.next();
-                    JSONArray storyTagsJSONArray = storyTagsJSONObject.getJSONArray(key);
-                    Tag[] tags = new Tag[storyTagsJSONArray.length()];
-                    for (int i = 0; i < storyTagsJSONArray.length(); i++) {
-                        JSONObject tag = storyTagsJSONArray.getJSONObject(i);
-                        tags[i] = new TagJSONImpl(tag);
-                    }
-                    storyTags.put(key, tags);
-                }
-            } else {
-                storyTags = Collections.emptyMap();
-            }
             if (!json.isNull("with_tags")) {
                 JSONArray withTagsJSONArray = json.getJSONObject("with_tags").getJSONArray("data");
                 withTags = new ArrayList<IdNameEntity>();
@@ -357,10 +338,6 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return story;
     }
 
-    public Map<String, Tag[]> getStoryTags() {
-        return storyTags;
-    }
-
     public List<IdNameEntity> getWithTags() {
         return withTags;
     }
@@ -477,7 +454,6 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 ", place=" + place +
                 ", statusType='" + statusType + '\'' +
                 ", story='" + story + '\'' +
-                ", storyTags=" + storyTags +
                 ", withTags=" + withTags +
                 ", comments=" + comments +
                 ", objectId='" + objectId + '\'' +

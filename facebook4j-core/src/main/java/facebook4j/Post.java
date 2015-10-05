@@ -47,7 +47,6 @@ public interface Post extends FacebookResponse {
     Place getPlace();
     String getStatusType();
     String getStory();
-    Map<String, Tag[]> getStoryTags();
     List<IdNameEntity> getWithTags();
     PagableList<Comment> getComments();
     String getObjectId();
