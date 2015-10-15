@@ -32,6 +32,20 @@ import java.util.Map;
  */
 public class Reading implements java.io.Serializable {
     private static final long serialVersionUID = -8052261582496495423L;
+    
+    public enum Order {
+		CHRONOLOGICAL("chronological"),
+    	REVERSE_CHRONOLOGICAL("reverse_chronological");
+    	
+    	private String value;
+
+		private Order(String value){
+			this.value = value;
+		}
+		public String getValue(){
+			return value;
+		};
+    }
 
     private Map<String, String> parameterMap = new LinkedHashMap<String, String>();
     
@@ -174,6 +188,14 @@ public class Reading implements java.io.Serializable {
         }
         parameterMap.put("summary", "true");
         return this;
+    }
+
+    public Reading order(Order order) {
+    	if (parameterMap.containsKey("order")) {
+    		throw new IllegalStateException("'order' already sets");
+    	}
+    	parameterMap.put("order", order.getValue());
+    	return this;
     }
     
     public Reading published(Boolean b) {

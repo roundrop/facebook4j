@@ -16,6 +16,20 @@
 
 package facebook4j;
 
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getBoolean;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getRawString;
+
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
 import facebook4j.Question.Option;
 import facebook4j.api.AccountMethods;
 import facebook4j.api.ActivityMethods;
@@ -58,19 +72,6 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 import facebook4j.internal.util.z_F4JInternalStringUtil;
-
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * A java representation of the <a href="https://developers.facebook.com/docs/reference/api/">Facebook Graph API</a><br>
