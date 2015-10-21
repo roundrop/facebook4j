@@ -54,25 +54,6 @@ public class PermissionMethodsTest {
             assertThat(actuals.size(), is(80));
         }
 
-		@Test
-        public void me_v2() throws Exception {
-            facebook.setMockJSON("mock_json/permission/all_v2.2.json");
-            List<Permission> actuals = facebook.getPermissions();
-            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
-            assertThat(facebook.getEndpointURL(), is(pathOf("/me/permissions")));
-
-            assertThat(actuals.size(), is(80));
-        }
-
-        @Test
-        public void id_v2() throws Exception {
-            facebook.setMockJSON("mock_json/permission/all_v2.2.json");
-            List<Permission> actuals = facebook.getPermissions("1234567890123456");
-            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
-            assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/permissions")));
-
-            assertThat(actuals.size(), is(80));
-        }
     }
 
     public static class revokePermission extends MockFacebookTestBase {
