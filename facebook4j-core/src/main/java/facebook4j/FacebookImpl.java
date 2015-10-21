@@ -1805,6 +1805,16 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createPermissions(get(buildEndpoint(userId, "permissions")));
     }
 
+    public boolean revokeAllPermissions() throws FacebookException {
+        return revokeAllPermissions("me");
+    }
+
+    public boolean revokeAllPermissions(String userId) throws FacebookException {
+        ensureAuthorizationEnabled();
+        HttpResponse res = delete(buildEndpoint(userId, "permissions"));
+        return parseBoolean(res);
+    }
+
     public boolean revokePermission(String permissionName) throws FacebookException {
         return revokePermission("me", permissionName);
     }
@@ -1812,6 +1822,14 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(userId, "permissions/" + permissionName));
         return parseBoolean(res);
+    }
+
+    public boolean deleteAllPermissions() throws FacebookException {
+        return revokeAllPermissions();
+    }
+
+    public boolean deleteAllPermissions(String userId) throws FacebookException {
+        return revokeAllPermissions(userId);
     }
 
     public boolean deletePermission(String permissionName) throws FacebookException {
