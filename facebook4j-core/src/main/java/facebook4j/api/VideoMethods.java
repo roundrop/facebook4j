@@ -16,9 +16,16 @@
 
 package facebook4j.api;
 
-import java.net.URL;
+import facebook4j.Comment;
+import facebook4j.CommentUpdate;
+import facebook4j.FacebookException;
+import facebook4j.Like;
+import facebook4j.Reading;
+import facebook4j.ResponseList;
+import facebook4j.Video;
+import facebook4j.VideoUpdate;
 
-import facebook4j.*;
+import java.net.URL;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -172,6 +179,16 @@ public interface VideoMethods {
      */
     String commentVideo(String videoId, String message) throws FacebookException;
     
+    /**
+     * Comments on the video.
+     * @param videoId the ID of the video
+     * @param commentUpdate comment content
+     * @return The new comment ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/video/#comments">Video#comments - Facebook Developers</a>
+     */
+    String commentVideo(String videoId, CommentUpdate commentUpdate) throws FacebookException;
+
 
     /**
      * Returns url of the image which represents the content of a video.

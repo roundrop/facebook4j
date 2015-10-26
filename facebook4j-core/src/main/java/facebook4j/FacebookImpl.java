@@ -367,6 +367,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return _comment(albumId, message);
     }
 
+    public String commentAlbum(String albumId, CommentUpdate commentUpdate) throws FacebookException {
+        return _comment(albumId, commentUpdate);
+    }
+
     public ResponseList<Like> getAlbumLikes(String albumId) throws FacebookException {
         return getAlbumLikes(albumId, null);
     }
@@ -795,7 +799,11 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return _comment(postId, message);
     }
-    
+
+    public String commentPost(String postId, CommentUpdate commentUpdate) throws FacebookException {
+        return _comment(postId, commentUpdate);
+    }
+
     public ResponseList<Like> getPostLikes(String postId) throws FacebookException {
         return getPostLikes(postId, null);
     }
@@ -1271,6 +1279,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public String commentLink(String linkId, String message) throws FacebookException {
         ensureAuthorizationEnabled();
         return _comment(linkId, message);
+    }
+
+    public String commentLink(String linkId, CommentUpdate commentUpdate) throws FacebookException {
+        return _comment(linkId, commentUpdate);
     }
 
     public ResponseList<Like> getLinkLikes(String linkId) throws FacebookException {
@@ -1890,6 +1902,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return _comment(photoId, message);
     }
 
+    public String commentPhoto(String photoId, CommentUpdate commentUpdate) throws FacebookException {
+        return _comment(photoId, commentUpdate);
+    }
+
     public ResponseList<Like> getPhotoLikes(String photoId) throws FacebookException {
         return getPhotoLikes(photoId, null);
     }
@@ -2195,6 +2211,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public String commentVideo(String videoId, String message) throws FacebookException {
         ensureAuthorizationEnabled();
         return _comment(videoId, message);
+    }
+
+    public String commentVideo(String videoId, CommentUpdate commentUpdate) throws FacebookException {
+        return _comment(videoId, commentUpdate);
     }
 
     public URL getVideoCover(String videoId) throws FacebookException {
@@ -2638,6 +2658,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
+    }
+
+    private String _comment(String objectId, CommentUpdate commentUpdate) throws FacebookException {
+        ensureAuthorizationEnabled();
+        JSONObject json = post(buildEndpoint(objectId, "comments"), commentUpdate.asHttpParameterArray())
+                .asJSONObject();
+        return getRawString("id", json);
     }
 
     private boolean _like(String objectId) throws FacebookException {

@@ -17,6 +17,7 @@
 package facebook4j.api;
 
 import facebook4j.Comment;
+import facebook4j.CommentUpdate;
 import facebook4j.FacebookException;
 import facebook4j.Like;
 import facebook4j.Link;
@@ -109,6 +110,16 @@ public interface LinkMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/link/#comments">Link#comments - Facebook Developers</a>
      */
     String commentLink(String linkId, String message) throws FacebookException;
+
+    /**
+     * Comments on the link.
+     * @param linkId the ID of the link
+     * @param commentUpdate comment content
+     * @return The new comment ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/link/#comments">Link#comments - Facebook Developers</a>
+     */
+    String commentLink(String linkId, CommentUpdate commentUpdate) throws FacebookException;
 
 
     /**

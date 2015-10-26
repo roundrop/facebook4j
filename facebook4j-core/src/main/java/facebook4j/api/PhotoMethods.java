@@ -17,6 +17,7 @@
 package facebook4j.api;
 
 import facebook4j.Comment;
+import facebook4j.CommentUpdate;
 import facebook4j.FacebookException;
 import facebook4j.Like;
 import facebook4j.Media;
@@ -209,6 +210,16 @@ public interface PhotoMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#comments">Photo#comments - Facebook Developers</a>
      */
     String commentPhoto(String photoId, String message) throws FacebookException;
+
+    /**
+     * Comments on the photo.
+     * @param photoId the ID of the photo
+     * @param commentUpdate comment content
+     * @return The new comment ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#comments">Photo#comments - Facebook Developers</a>
+     */
+    String commentPhoto(String photoId, CommentUpdate commentUpdate) throws FacebookException;
 
 
     /**
