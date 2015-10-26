@@ -44,6 +44,23 @@ public interface PermissionMethods {
 
 
     /**
+     * Revokes all permissions from the current application.
+     * @return true if revoke is succressful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
+     */
+    boolean revokeAllPermissions() throws FacebookException;
+
+    /**
+     * Revokes all permissions from the current application.
+     * @param userId the ID of a user
+     * @return true if revoke is succressful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
+     */
+    boolean revokeAllPermissions(String userId) throws FacebookException;
+
+    /**
      * Revokes a specific permission from the current application.
      * @param permissionName permission name
      * @return true if revoke is succressful
@@ -62,6 +79,23 @@ public interface PermissionMethods {
      */
     boolean revokePermission(String userId, String permissionName) throws FacebookException;
     
+    /**
+     * This method is an alias of: {@link facebook4j.api.PermissionMethods#revokeAllPermissions()} .
+     * @return true if revoke is succressful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
+     */
+    boolean deleteAllPermissions() throws FacebookException;
+
+    /**
+     * This method is an alias of: {@link facebook4j.api.PermissionMethods#revokeAllPermissions()} .
+     * @param userId the ID of a user
+     * @return true if revoke is succressful
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#permissions">User#permissions - Facebook Developers</a>
+     */
+    boolean deleteAllPermissions(String userId) throws FacebookException;
+
     /**
      * This method is an alias of: {@link facebook4j.api.PermissionMethods#revokePermission(String)} .
      * @param permissionName permission name

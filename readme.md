@@ -2,7 +2,7 @@
 Facebook4J is a Facebook Graph API binding library for the Java language licensed under Apache License 2.0.
 
 ## Version
-2.3.0
+2.3.1
 
 ## Install
 
