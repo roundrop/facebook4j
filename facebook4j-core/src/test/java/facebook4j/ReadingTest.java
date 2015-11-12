@@ -235,6 +235,58 @@ public class ReadingTest {
         }
     }
 
+    public static class Order {
+        @Test
+        public void chronological() throws Exception {
+            Reading reading = new Reading().order(Ordering.CHRONOLOGICAL);
+            assertThat(reading.getQuery(), is("order=chronological"));
+        }
+        @Test
+        public void reverseChronological() throws Exception {
+            Reading reading = new Reading().order(Ordering.REVERSE_CHRONOLOGICAL);
+            assertThat(reading.getQuery(), is("order=reverse_chronological"));
+        }
+    }
+
+    public static class IncludeHidden {
+        @Test
+        public void true_() throws Exception {
+            Reading reading = new Reading().includeHidden(true);
+            assertThat(reading.getQuery(), is("include_hidden=true"));
+        }
+        @Test
+        public void false_() throws Exception {
+            Reading reading = new Reading().includeHidden(false);
+            assertThat(reading.getQuery(), is("include_hidden=false"));
+        }
+    }
+
+    public static class ShowExpired {
+        @Test
+        public void true_() throws Exception {
+            Reading reading = new Reading().showExpired(true);
+            assertThat(reading.getQuery(), is("show_expired=true"));
+        }
+        @Test
+        public void false_() throws Exception {
+            Reading reading = new Reading().showExpired(false);
+            assertThat(reading.getQuery(), is("show_expired=false"));
+        }
+    }
+
+    public static class AddParameter {
+        @Test
+        public void string() throws Exception {
+            Reading reading = new Reading().addParameter("name", "value");
+            assertThat(reading.getQuery(), is("name=value"));
+        }
+        @Test
+        public void object() throws Exception {
+            Reading reading = new Reading().addParameter("foo", PrivacyType.EVERYONE);
+            assertThat(reading.getQuery(), is("foo=EVERYONE"));
+        }
+    }
+
     public static class Combination {
         @Test
         public void offset_based() throws Exception {
