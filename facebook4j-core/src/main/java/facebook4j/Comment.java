@@ -17,6 +17,7 @@
 package facebook4j;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -25,8 +26,35 @@ public interface Comment extends FacebookResponse {
     String getId();
     Category getFrom();
     String getMessage();
+    List<Tag> getMessageTags();
+    Boolean canComment();
     Boolean canRemove();
+    Boolean canHide();
+    Boolean canLike();
     Date getCreatedTime();
     Integer getLikeCount();
+    Integer getCommentCount();
     Boolean isUserLikes();
+
+    Attachment getAttachment();
+
+    Comment getParent();
+
+    interface Attachment {
+        String getDescription();
+        AttachmentMedia getMedia();
+        AttachmentTarget getTarget();
+        String getTitle();
+        String getType();
+        String getUrl();
+
+        interface AttachmentMedia {
+            Image getImage();
+        }
+
+        interface AttachmentTarget {
+            String getId();
+            String getUrl();
+        }
+    }
 }

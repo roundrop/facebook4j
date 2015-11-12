@@ -17,30 +17,12 @@
 package facebook4j;
 
 import java.net.URL;
-import java.util.Date;
-import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface Photo extends FacebookResponse {
-    String getId();
-    Category getFrom();
-    PagableList<Tag> getTags();
-    String getName();
-    URL getIcon();
-    URL getPicture();
-    URL getSource();
+public interface Image {
     Integer getHeight();
     Integer getWidth();
-    List<Image> getImages();
-    URL getLink();
-    Place getPlace();
-    Date getCreatedTime();
-    Date getUpdatedTime();
-    Integer getPosition();
-    PagableList<Comment> getComments();
-    PagableList<Like> getLikes();
-    Category getAlbum();
-
+    URL getSource();
 }

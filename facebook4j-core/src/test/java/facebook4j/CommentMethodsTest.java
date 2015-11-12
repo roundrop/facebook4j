@@ -47,6 +47,88 @@ public class CommentMethodsTest {
             assertThat(actual.canRemove(), is(false));
             assertThat(actual.getCreatedTime(), is(iso8601DateOf("2013-08-07T04:08:42+0000")));
         }
+
+        @Test
+        public void moreFields() throws Exception {
+            facebook.setMockJSON("mock_json/comment/more_fields.json");
+            Comment actual = facebook.getComment("100000000000001_50000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_50000001")));
+
+            assertThat(actual.canComment(), is(true));
+            assertThat(actual.canHide(), is(false));
+            assertThat(actual.canLike(), is(true));
+            assertThat(actual.getMessageTags(), is(notNullValue()));
+            assertThat(actual.getMessageTags().size(), is(1));
+            assertThat(actual.getMessageTags().get(0).getId(), is("1111111111111111"));
+            assertThat(actual.getMessageTags().get(0).getLength(), is(15));
+            assertThat(actual.getMessageTags().get(0).getName(), is("Ryuji Yamashita"));
+            assertThat(actual.getMessageTags().get(0).getOffset(), is(0));
+            assertThat(actual.getMessageTags().get(0).getType(), is("user"));
+            assertThat(actual.getCommentCount(), is(1));
+        }
+
+        @Test
+        public void reply() throws Exception {
+            facebook.setMockJSON("mock_json/comment/reply.json");
+            Comment actual = facebook.getComment("100000000000001_50000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_50000001")));
+
+            assertThat(actual.getParent(), is(notNullValue()));
+            assertThat(actual.getParent().getId(), is("773931769335777_1020021014726850"));
+            assertThat(actual.getParent().getMessage(), is("test"));
+            assertThat(actual.getParent().getFrom().getId(), is("100001568838021"));
+            assertThat(actual.getParent().getFrom().getName(), is("Ryuji Yamashita"));
+        }
+
+        @Test
+        public void attachment_image() throws Exception {
+            facebook.setMockJSON("mock_json/comment/with_attachment_image.json");
+            Comment actual = facebook.getComment("100000000000001_50000001", new Reading().fields("attachment"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_50000001")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "attachment"));
+
+            assertThat(actual.getAttachment(), is(notNullValue()));
+            Comment.Attachment attachment = actual.getAttachment();
+            assertThat(attachment.getDescription(), is(nullValue()));
+            assertThat(attachment.getMedia(), is(notNullValue()));
+            assertThat(attachment.getMedia().getImage(), is(notNullValue()));
+            assertThat(attachment.getMedia().getImage().getHeight(), is(415));
+            assertThat(attachment.getMedia().getImage().getWidth(), is(720));
+            assertThat(attachment.getMedia().getImage().getSource().toString(), is("https://scontent.xx.fbcdn.net/hphotos-xtp1/v/t1.0-9/s720x720/12122769_1020022801393338_4909706565847005933_n.jpg?oh=03c45d24967cad9e0961590187f097ae&oe=56C2EAE7"));
+            assertThat(attachment.getTarget(), is(notNullValue()));
+            assertThat(attachment.getTarget().getId(), is("1020022801393338"));
+            assertThat(attachment.getTarget().getUrl(), is("https://www.facebook.com/photo.php?fbid=1020022801393338&set=p.1020022801393338&type=3"));
+            assertThat(attachment.getTitle(), is(nullValue()));
+            assertThat(attachment.getType(), is("photo"));
+            assertThat(attachment.getUrl(), is("https://www.facebook.com/photo.php?fbid=1020022801393338&set=p.1020022801393338&type=3"));
+        }
+
+        @Test
+        public void attachment_link() throws Exception {
+            facebook.setMockJSON("mock_json/comment/with_attachment_link.json");
+            Comment actual = facebook.getComment("100000000000001_50000001", new Reading().fields("attachment"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_50000001")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "attachment"));
+
+            assertThat(actual.getAttachment(), is(notNullValue()));
+            Comment.Attachment attachment = actual.getAttachment();
+            assertThat(attachment.getDescription(), is("GoogleDoodle"));
+            assertThat(attachment.getMedia(), is(notNullValue()));
+            assertThat(attachment.getMedia().getImage(), is(notNullValue()));
+            assertThat(attachment.getMedia().getImage().getHeight(), is(230));
+            assertThat(attachment.getMedia().getImage().getWidth(), is(230));
+            assertThat(attachment.getMedia().getImage().getSource().toString(), is("https://external.xx.fbcdn.net/safe_image.php?d=AQDIW-14fE-a1cwy&w=720&h=720&url=http%3A%2F%2Fwww.google.com%2Flogos%2Fdoodles%2F2015%2Fhedy-lamarrs-101st-birthday-5679746450980864.3-thp.png&cfs=1"));
+            assertThat(attachment.getTarget(), is(notNullValue()));
+            assertThat(attachment.getTarget().getId(), is(nullValue()));
+            assertThat(attachment.getTarget().getUrl(), is("http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.google.co.jp%2F&h=KAQHrD88-&s=1&enc=AZNU4JqjNy5HJT4ATtYCutTMGWjv3RS2hjwAoeViE0UfGJ2n8FjyPB95XKmkq2UM1kupwqYvJNypXkpCHj1UbbVFCtTOWcCYUk6uM9LxMgQTwQ"));
+            assertThat(attachment.getTitle(), is("Google"));
+            assertThat(attachment.getType(), is("share"));
+            assertThat(attachment.getUrl(), is("http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.google.co.jp%2F&h=KAQHrD88-&s=1&enc=AZNU4JqjNy5HJT4ATtYCutTMGWjv3RS2hjwAoeViE0UfGJ2n8FjyPB95XKmkq2UM1kupwqYvJNypXkpCHj1UbbVFCtTOWcCYUk6uM9LxMgQTwQ"));
+        }
     }
 
     public static class deleteComment extends MockFacebookTestBase {

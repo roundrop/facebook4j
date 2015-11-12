@@ -19,6 +19,7 @@ package facebook4j.internal.json;
 import facebook4j.Category;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
+import facebook4j.Image;
 import facebook4j.Like;
 import facebook4j.PagableList;
 import facebook4j.Photo;
@@ -43,7 +44,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 /*package*/ final class PhotoJSONImpl extends FacebookResponseImpl implements Photo, java.io.Serializable {
-    private static final long serialVersionUID = -6530726368840036344L;
+    private static final long serialVersionUID = 831715533023012050L;
 
     private String id;
     private Category from;
@@ -54,7 +55,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private URL source;
     private Integer height;
     private Integer width;
-    private List<Photo.Image> images;
+    private List<Image> images;
     private URL link;
     private Place place;
     private Date createdTime;
@@ -109,11 +110,11 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 width = getPrimitiveInt("width", json);
             }
             if (!json.isNull("images")) {
-                images = new ArrayList<Photo.Image>();
+                images = new ArrayList<Image>();
                 JSONArray imagesJSONArray = json.getJSONArray("images");
                 for (int i = 0; i < imagesJSONArray.length(); i++) {
-                    JSONObject image = imagesJSONArray.getJSONObject(i);
-                    images.add(new PhotoJSONImpl.ImageJSONImpl(image));
+                    JSONObject imageJSONObject = imagesJSONArray.getJSONObject(i);
+                    images.add(new ImageJSONImpl(imageJSONObject));
                 }
             } else {
                 images = Collections.emptyList();
@@ -204,7 +205,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return width;
     }
 
-    public List<Photo.Image> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
@@ -316,85 +317,4 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 '}';
     }
 
-    private final class ImageJSONImpl implements Photo.Image, java.io.Serializable {
-        private static final long serialVersionUID = 5512851070213770944L;
-
-        private Integer height;
-        private Integer width;
-        private URL source;
-
-        /*package*/ImageJSONImpl(JSONObject json) {
-            if (!json.isNull("height")) {
-                height = getPrimitiveInt("height", json);
-            }
-            if (!json.isNull("width")) {
-                width = getPrimitiveInt("width", json);
-            }
-            source = getURL("source", json);
-        }
-
-        public Integer getHeight() {
-            return height;
-        }
-
-        public Integer getWidth() {
-            return width;
-        }
-
-        public URL getSource() {
-            return source;
-        }
-
-        @Override
-        public int hashCode() {
-            final int prime = 31;
-            int result = 1;
-            result = prime * result + getOuterType().hashCode();
-            result = prime * result
-                    + ((height == null) ? 0 : height.hashCode());
-            result = prime * result
-                    + ((source == null) ? 0 : source.hashCode());
-            result = prime * result + ((width == null) ? 0 : width.hashCode());
-            return result;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj)
-                return true;
-            if (obj == null)
-                return false;
-            if (getClass() != obj.getClass())
-                return false;
-            ImageJSONImpl other = (ImageJSONImpl) obj;
-            if (!getOuterType().equals(other.getOuterType()))
-                return false;
-            if (height == null) {
-                if (other.height != null)
-                    return false;
-            } else if (!height.equals(other.height))
-                return false;
-            if (source == null) {
-                if (other.source != null)
-                    return false;
-            } else if (!source.equals(other.source))
-                return false;
-            if (width == null) {
-                if (other.width != null)
-                    return false;
-            } else if (!width.equals(other.width))
-                return false;
-            return true;
-        }
-
-        @Override
-        public String toString() {
-            return "ImageJSONImpl [height=" + height + ", width=" + width
-                    + ", source=" + source + "]";
-        }
-
-        private PhotoJSONImpl getOuterType() {
-            return PhotoJSONImpl.this;
-        }
-    }
 }

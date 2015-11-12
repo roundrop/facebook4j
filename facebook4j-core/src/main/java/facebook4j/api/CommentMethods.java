@@ -36,6 +36,16 @@ public interface CommentMethods {
     Comment getComment(String commentId) throws FacebookException;
 
     /**
+     * Returns a single comment.
+     * @param commentId the ID of a comment
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return comment
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/Comment/">Comment - Facebook Developers</a>
+     */
+    Comment getComment(String commentId, Reading reading) throws FacebookException;
+
+    /**
      * Deletes the comment.
      * @param commentId the ID of a comment
      * @return true if delete is successful

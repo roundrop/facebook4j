@@ -1220,8 +1220,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     /* Comment Methods */
 
     public Comment getComment(String commentId) throws FacebookException {
-        return factory.createComment(get(buildEndpoint(commentId)));
+        return getComment(commentId, null);
     }
+
+    public Comment getComment(String commentId, Reading reading) throws FacebookException {
+        return factory.createComment(get(buildEndpoint(commentId, reading)));
+    }
+
     public boolean deleteComment(String commentId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(buildEndpoint(commentId));
