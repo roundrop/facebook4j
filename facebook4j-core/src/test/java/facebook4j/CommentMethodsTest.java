@@ -131,6 +131,41 @@ public class CommentMethodsTest {
         }
     }
 
+    public static class getCommentReplies extends MockFacebookTestBase {
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/comment/replies.json");
+            ResponseList<Comment> actual = facebook.getCommentReplies("100000000000001_50000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_50000001/comments")));
+
+            assertThat(actual.size(), is(1));
+            assertThat(actual.get(0).getId(), is("100000000000001_50000001"));
+            assertThat(actual.get(0).canRemove(), is(true));
+            assertThat(actual.get(0).getFrom().getId(), is("100001568838021"));
+            assertThat(actual.get(0).getFrom().getName(), is("Ryuji Yamashita"));
+            assertThat(actual.get(0).getLikeCount(), is(0));
+            assertThat(actual.get(0).getMessage(), is("reply"));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/comment/replies.json");
+            ResponseList<Comment> actual = facebook.getCommentReplies("100000000000001_50000001", new Reading().limit(1));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_50000001/comments")));
+            assertThat(facebook.getEndpointURL(), hasParameter("limit", "1"));
+
+            assertThat(actual.size(), is(1));
+            assertThat(actual.get(0).getId(), is("100000000000001_50000001"));
+            assertThat(actual.get(0).canRemove(), is(true));
+            assertThat(actual.get(0).getFrom().getId(), is("100001568838021"));
+            assertThat(actual.get(0).getFrom().getName(), is("Ryuji Yamashita"));
+            assertThat(actual.get(0).getLikeCount(), is(0));
+            assertThat(actual.get(0).getMessage(), is("reply"));
+        }
+    }
+
     public static class deleteComment extends MockFacebookTestBase {
         @Test
         public void delete() throws Exception {
