@@ -187,6 +187,35 @@ public class Reading implements java.io.Serializable {
         return this;
     }
 
+    public Reading order(Ordering ordering) {
+        if (parameterMap.containsKey("order")) {
+            throw new IllegalStateException("'order' already sets");
+        }
+        parameterMap.put("order", ordering.toString().toLowerCase());
+        return this;
+    }
+
+    public Reading includeHidden(boolean includeHidden) {
+        if (parameterMap.containsKey("include_hidden")) {
+            throw new IllegalStateException("'includeHidden' already sets");
+        }
+        parameterMap.put("include_hidden", Boolean.toString(includeHidden));
+        return this;
+    }
+
+    public Reading showExpired(boolean showExpired) {
+        if (parameterMap.containsKey("show_expired")) {
+            throw new IllegalStateException("'showExpired' already sets");
+        }
+        parameterMap.put("show_expired", Boolean.toString(showExpired));
+        return this;
+    }
+
+    public Reading addParameter(String name, Object value) {
+        parameterMap.put(name, value.toString());
+        return this;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
