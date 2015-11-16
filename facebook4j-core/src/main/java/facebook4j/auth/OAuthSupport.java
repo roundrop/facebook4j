@@ -102,4 +102,13 @@ public interface OAuthSupport {
     void setOAuthCallbackURL(String callbackURL);
 
 
+    /**
+     * Extends long-lived token from the short-lived token of this App.
+     * @param accessToken Short-lived access token
+     * @return Long-lived access token
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     * @see <a href="https://developers.facebook.com/docs/facebook-login/access-tokens/expiration-and-extension">Expiration and Extension of Access Tokens - Facebook Login</a>
+     */
+    AccessToken extendAccessToken(String accessToken) throws FacebookException;
+
 }
