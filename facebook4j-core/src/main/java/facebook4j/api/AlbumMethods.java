@@ -19,6 +19,7 @@ package facebook4j.api;
 import facebook4j.Album;
 import facebook4j.AlbumUpdate;
 import facebook4j.Comment;
+import facebook4j.CommentUpdate;
 import facebook4j.FacebookException;
 import facebook4j.Like;
 import facebook4j.Media;
@@ -178,6 +179,16 @@ public interface AlbumMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/album/#comments">Album#comments - Facebook Developers</a>
      */
     String commentAlbum(String albumId, String message) throws FacebookException;
+
+    /**
+     * Comments on the album.
+     * @param albumId the ID of a album
+     * @param commentUpdate comment content
+     * @return The new comment ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/album/#comments">Album#comments - Facebook Developers</a>
+     */
+    String commentAlbum(String albumId, CommentUpdate commentUpdate) throws FacebookException;
 
 
     /**

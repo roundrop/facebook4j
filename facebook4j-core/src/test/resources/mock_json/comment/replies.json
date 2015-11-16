@@ -1,0 +1,18 @@
+{
+    "data": [{
+        "can_remove": true,
+        "created_time": "2015-10-26T11:13:13+0000",
+        "from": {
+            "id": "100001568838021",
+            "name": "Ryuji Yamashita"
+        },
+        "id": "100000000000001_50000001",
+        "like_count": 0,
+        "message": "reply",
+        "user_likes": false
+    }],
+    "paging": {"cursors": {
+        "after": "WTI5dGJXVnVkRjlqZAFhKemIzSTZANVEF5TURBMU56TTRORGN5TXpJeE16b3hORFExT0RVM09Ua3oZD",
+        "before": "WTI5dGJXVnVkRjlqZAFhKemIzSTZANVEF5TURBMU56TTRORGN5TXpJeE16b3hORFExT0RVM09Ua3oZD"
+    }}
+}
