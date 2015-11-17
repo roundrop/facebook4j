@@ -52,6 +52,8 @@ public interface Configuration extends HttpClientConfiguration
 
     String getOAuthAccessTokenURL();
 
+    String getOAuthDeviceTokenURL();
+
     boolean isJSONStoreEnabled();
 
     boolean isMBeanEnabled();

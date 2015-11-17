@@ -80,6 +80,24 @@ public interface OAuthSupport {
      * @see <a href="https://developers.facebook.com/docs/authentication/server-side/">Server-Side Authentication</a>
      */
     AccessToken getOAuthAppAccessToken() throws FacebookException;
+
+    /**
+     * Returns a generated device code.
+     *
+     * @return Device code
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     * @see <a href="https://developers.facebook.com/docs/facebook-login/for-devices">Facebook Login for Devices</a>
+     */
+    DeviceCode getOAuthDeviceCode() throws FacebookException;
+
+    /**
+     * Returns a Device Access Token.
+     *
+     * @return Device Acceess Token
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     * @see <a href="https://developers.facebook.com/docs/facebook-login/for-devices">Facebook Login for Devices</a>
+     */
+    AccessToken getOAuthDeviceToken(DeviceCode deviceCode) throws FacebookException;
     
     /**
      * Sets the access token
