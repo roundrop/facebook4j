@@ -16,9 +16,14 @@
 
 package facebook4j.auth;
 
+import facebook4j.Facebook;
+import facebook4j.FacebookFactory;
+import facebook4j.FacebookTestBase;
 import facebook4j.conf.Configuration;
 import facebook4j.conf.ConfigurationBuilder;
+import facebook4j.junit.category.RealAPITests;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -27,6 +32,21 @@ import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
 public class OAuthAuthorizationTest {
+
+    public static class TokenExpirationExtention extends FacebookTestBase {
+        @Test
+        @Category(RealAPITests.class)
+        public void shortToLong() throws Exception {
+            Facebook facebook = FacebookFactory.getSingleton();
+            String oAuthAppId = p.getProperty("oauth.appId");
+            String oAuthAppSecret = p.getProperty("oauth.appSecret");
+            facebook.setOAuthAppId(oAuthAppId, oAuthAppSecret);
+
+            String shortLivedToken = "your-short-lived-token";
+            AccessToken extendedToken = facebook.extendTokenExpiration(shortLivedToken);
+            assertThat(extendedToken.getToken(), is(not(shortLivedToken)));
+        }
+    }
 
     public static class AppSecretProof {
         @Test
