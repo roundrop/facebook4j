@@ -286,6 +286,14 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
         return extendTokenExpiration(getOAuth().getOAuthAccessToken().getToken());
     }
 
+    public AccessToken getOAuthAccessTokenInfo(String accessToken) throws FacebookException {
+        return getOAuth().getOAuthAccessTokenInfo(accessToken);
+    }
+
+    public AccessToken getOAuthAccessTokenInfo() throws FacebookException {
+        return getOAuth().getOAuthAccessTokenInfo();
+    }
+
     private OAuthSupport getOAuth() {
         if (!(auth instanceof OAuthSupport)) {
             throw new IllegalStateException("OAuth app id/secret combination not supplied");

@@ -163,6 +163,10 @@ public class ConfigurationTest {
         conf = new PropertyConfiguration();
         assertThat(conf.getOAuthCallbackURL(), is("http://localhost:8080/callback"));
 
+        writeFile("./facebook4j.properties", "oauth.accessTokenInfoURL=https://graph.facebook.com/oauth/access_token_info2");
+        conf = new PropertyConfiguration();
+        assertThat(conf.getOAuthAccessTokenInfoURL(), is("https://graph.facebook.com/oauth/access_token_info2"));
+
         writeFile("./facebook4j.properties", "oauth.deviceTokenURL=https://graph.facebook.com/oauth/deviceA");
         conf = new PropertyConfiguration();
         assertThat(conf.getOAuthDeviceTokenURL(), is("https://graph.facebook.com/oauth/deviceA"));

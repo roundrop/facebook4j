@@ -129,4 +129,18 @@ public interface OAuthSupport {
      */
     AccessToken extendTokenExpiration(String shortLivedToken) throws FacebookException;
 
+    /**
+     * Returns the access token information.
+     * @param accessToken access token
+     * @return access token information
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     */
+    AccessToken getOAuthAccessTokenInfo(String accessToken) throws FacebookException;
+
+    /**
+     * Returns the access token information.
+     * @return access token information
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     */
+    AccessToken getOAuthAccessTokenInfo() throws FacebookException;
 }

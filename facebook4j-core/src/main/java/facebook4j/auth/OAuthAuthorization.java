@@ -224,6 +224,25 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
                 "&fb_exchange_token=" + shortLivedToken;
     }
 
+    public AccessToken getOAuthAccessTokenInfo(String accessToken) throws FacebookException {
+        String url = getAccessTokenInfoURL(accessToken);
+        HttpResponse response = http.get(url);
+        if (response.getStatusCode() != 200) {
+            throw new FacebookException("authorization failed.");
+        }
+        return new AccessToken(response);
+    }
+
+    public AccessToken getOAuthAccessTokenInfo() throws FacebookException {
+        return getOAuthAccessTokenInfo(this.oauthToken.getToken());
+    }
+
+    protected String getAccessTokenInfoURL(String accessToken) {
+        return conf.getOAuthAccessTokenInfoURL() +
+                "?client_id=" + this.appId +
+                "&access_token=" + accessToken;
+    }
+
 
     public void setAppSecretProofEnabled(boolean enabled) {
         this.appSecretProofEnabled = enabled;
