@@ -173,22 +173,22 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
         this.permissions = permissions;
     }
 
-    public AccessToken extendAccessToken(String accessToken) throws FacebookException {
-        String url = getExtendAccessTokenURL(this.appId, this.appSecret, accessToken);
+    public AccessToken extendTokenExpiration(String shortLivedToken) throws FacebookException {
+        String url = getExtendTokenURL(shortLivedToken);
         HttpResponse response = http.get(url);
         if (response.getStatusCode() != 200) {
-            throw new FacebookException("access token extention failed.");
+            throw new FacebookException("token expiration extention failed.");
         }
         this.oauthToken = new AccessToken(response);
         return this.oauthToken;
     }
 
-    protected String getExtendAccessTokenURL(String appId, String appSecret, String accessToken) {
+    protected String getExtendTokenURL(String shortLivedToken) {
         return conf.getOAuthAccessTokenURL() +
                 "?grant_type=fb_exchange_token" +
-                "&client_id=" + appId +
-                "&client_secret=" + appSecret +
-                "&fb_exchange_token=" + accessToken;
+                "&client_id=" + this.appId +
+                "&client_secret=" + this.appSecret +
+                "&fb_exchange_token=" + shortLivedToken;
     }
 
 
