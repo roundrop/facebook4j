@@ -52,6 +52,8 @@ public interface Configuration extends HttpClientConfiguration
 
     String getOAuthAccessTokenURL();
 
+    String getOAuthAccessTokenInfoURL();
+
     String getOAuthDeviceTokenURL();
 
     boolean isJSONStoreEnabled();

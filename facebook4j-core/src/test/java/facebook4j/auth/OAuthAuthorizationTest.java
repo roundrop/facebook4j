@@ -48,6 +48,23 @@ public class OAuthAuthorizationTest {
         }
     }
 
+    public static class AccessTokenInfo extends FacebookTestBase {
+        @Test
+        @Category(RealAPITests.class)
+        public void string() throws Exception {
+            Facebook facebook = FacebookFactory.getSingleton();
+            String oAuthAppId = p.getProperty("oauth.appId");
+            String oAuthAppSecret = p.getProperty("oauth.appSecret");
+            facebook.setOAuthAppId(oAuthAppId, oAuthAppSecret);
+
+            String accessToken = "your-access-token";
+            AccessToken accessTokenInfo = facebook.getOAuthAccessTokenInfo(accessToken);
+            assertThat(accessTokenInfo.getToken(), is(accessToken));
+            assertThat(accessTokenInfo.getExpires(), is(notNullValue()));
+            assertThat(accessTokenInfo.getType(), is(notNullValue()));
+        }
+    }
+
     public static class AppSecretProof {
         @Test
         public void defaultCacheSize() throws Exception {
