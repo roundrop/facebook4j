@@ -147,6 +147,39 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
                 "&grant_type=client_credentials";
     }
 
+    public DeviceCode getOAuthDeviceCode() throws FacebookException {
+        String url = getDeviceCodeURL();
+        HttpResponse response = http.get(url);
+        if (response.getStatusCode() != 200) {
+            throw new FacebookException("generate a device code failed");
+        }
+        return new DeviceCode(response);
+    }
+
+    private String getDeviceCodeURL() {
+        return conf.getOAuthDeviceTokenURL() +
+                "?type=device_code" +
+                "&client_id=" + this.appId +
+                "&scope=" + this.permissions;
+    }
+
+    public AccessToken getOAuthDeviceToken(DeviceCode deviceCode) throws FacebookException {
+        String url = getDeviceTokenURL(deviceCode.getCode());
+        HttpResponse response = http.get(url);
+        if (response.getStatusCode() != 200) {
+            throw new FacebookException("authorization failed.");
+        }
+        this.oauthToken = new AccessToken(response);
+        return this.oauthToken;
+    }
+
+    private String getDeviceTokenURL(String deviceCode) {
+        return conf.getOAuthDeviceTokenURL() +
+                "?type=device_token" +
+                "&client_id=" + this.appId +
+                "&code=" + deviceCode;
+    }
+
     public void setOAuthAccessToken(AccessToken accessToken) {
         this.oauthToken = accessToken;
     }

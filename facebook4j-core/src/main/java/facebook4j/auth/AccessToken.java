@@ -39,7 +39,7 @@ public class AccessToken implements java.io.Serializable {
     public AccessToken(HttpResponse res) throws FacebookException {
         // see: https://developers.facebook.com/docs/graph-api/using-graph-api/v2.3#apiversiondebug
         String version = res.getResponseHeader("facebook-api-version");
-        if (Double.parseDouble(version.substring(1)) < 2.3) {
+        if (Double.parseDouble(version.substring(1)) < 2.3 && !res.asString().startsWith("{")) {
             parseQueryString(res.asString());
             return;
         }

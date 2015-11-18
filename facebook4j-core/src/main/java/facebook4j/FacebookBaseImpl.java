@@ -18,6 +18,7 @@ package facebook4j;
 
 import facebook4j.auth.AccessToken;
 import facebook4j.auth.Authorization;
+import facebook4j.auth.DeviceCode;
 import facebook4j.auth.NullAuthorization;
 import facebook4j.auth.OAuthAuthorization;
 import facebook4j.auth.OAuthSupport;
@@ -245,6 +246,14 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
      */
     public AccessToken getOAuthAppAccessToken() throws FacebookException {
         return getOAuth().getOAuthAppAccessToken();
+    }
+
+    synchronized public DeviceCode getOAuthDeviceCode() throws FacebookException {
+        return getOAuth().getOAuthDeviceCode();
+    }
+
+    synchronized public AccessToken getOAuthDeviceToken(DeviceCode deviceCode) throws FacebookException {
+        return getOAuth().getOAuthDeviceToken(deviceCode);
     }
     
     /**
