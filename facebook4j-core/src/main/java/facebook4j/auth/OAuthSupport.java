@@ -111,4 +111,12 @@ public interface OAuthSupport {
      */
     AccessToken extendTokenExpiration(String shortLivedToken) throws FacebookException;
 
+    /**
+     * Extends this instance's short-lived-token expiration.
+     * @return extended access token
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     * @see <a href="https://developers.facebook.com/docs/facebook-login/access-tokens/expiration-and-extension">Expiration and Extension of Access Tokens - Facebook Login</a>
+     */
+    AccessToken extendTokenExpiration() throws FacebookException;
+
 }
