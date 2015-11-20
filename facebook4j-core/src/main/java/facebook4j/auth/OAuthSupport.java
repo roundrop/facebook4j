@@ -41,6 +41,16 @@ public interface OAuthSupport {
 
     String getOAuthAuthorizationURL(String callbackURL);
     String getOAuthAuthorizationURL(String callbackURL, String state);
+    String getOAuthAuthorizationURL(String callbackURL, AuthOption authOption);
+
+    /**
+     * Returns the URL that asks the person to re-authenticate unconditionally.
+     * @param callbackURL callback url
+     * @param nonce a completely arbitrary alphanumeric code that your app generates. see: <a href="https://developers.facebook.com/docs/facebook-login/reauthentication#nonce">The auth_nonce parameter</a>
+     * @return the url for re-authenticate
+     * @see <a href="https://developers.facebook.com/docs/facebook-login/reauthentication">Re-authentication - Facebook Login</a>
+     */
+    String getOAuthReAuthenticationURL(String callbackURL, String nonce);
 
     /**
      * Returns an access token associated with this instance.

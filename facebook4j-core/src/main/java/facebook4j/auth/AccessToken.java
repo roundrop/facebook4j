@@ -30,10 +30,13 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 public class AccessToken implements java.io.Serializable {
+    private static final long serialVersionUID = -569157870319118047L;
 
     private String token;
     private String type;
     private Long expires;
+    private AuthType authType;
+    private String authNonce;
     String[] responseStr = null;
 
     public AccessToken(HttpResponse res) throws FacebookException {
@@ -47,6 +50,8 @@ public class AccessToken implements java.io.Serializable {
         this.token = getRawString("access_token", json);
         this.type = getRawString("token_type", json);
         this.expires = getLong("expires_in", json);
+        this.authType = AuthType.of(getRawString("auth_type", json));
+        this.authNonce = getRawString("auth_nonce", json);
     }
 
     public AccessToken(String string) {
@@ -94,6 +99,10 @@ public class AccessToken implements java.io.Serializable {
         return expires;
     }
 
+    public String getAuthNonce() {
+        return authNonce;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -117,6 +126,8 @@ public class AccessToken implements java.io.Serializable {
                 "token='" + token + '\'' +
                 ", type='" + type + '\'' +
                 ", expires=" + expires +
+                ", authType=" + authType +
+                ", authNonce=" + authNonce +
                 ", responseStr=" + Arrays.toString(responseStr) +
                 '}';
     }
