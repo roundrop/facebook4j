@@ -20,6 +20,7 @@ import facebook4j.FacebookException;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpClientWrapper;
 import facebook4j.internal.http.HttpResponse;
+import facebook4j.internal.logging.Logger;
 import facebook4j.internal.util.z_F4JLRUCache;
 
 import javax.crypto.Mac;
@@ -35,6 +36,8 @@ import java.security.NoSuchAlgorithmException;
  */
 public class OAuthAuthorization implements Authorization, OAuthSupport, Security, java.io.Serializable {
     private static final long serialVersionUID = 2548925849295080874L;
+
+    private static final Logger logger = Logger.getLogger(OAuthAuthorization.class);
 
     public static final String HMAC_SHA_256 = "HmacSHA256";
 
@@ -85,21 +88,33 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
     // implementation for OAuthSupport interface
 
     public String getOAuthAuthorizationURL(String callbackURL) {
-        return getOAuthAuthorizationURL(callbackURL, null);
+        return getOAuthAuthorizationURL(callbackURL, new NullAuthOption());
     }
-    
+
     public String getOAuthAuthorizationURL(String callbackURL, String state) {
+        return getOAuthAuthorizationURL(callbackURL, new DialogAuthOption().state(state));
+    }
+
+    public String getOAuthAuthorizationURL(String callbackURL, AuthOption authOption) {
         this.callbackURL = callbackURL;
         String url = conf.getOAuthAuthorizationURL() +
-                        "?client_id=" + this.appId + 
-                        "&redirect_uri=" + callbackURL;
+                "?client_id=" + this.appId +
+                "&redirect_uri=" + callbackURL;
         if (this.permissions != null) {
             url += "&scope=" + this.permissions;
         }
-        if (state != null) {
-            url += "&state=" + state;
+        if (authOption != null) {
+            url += authOption.getQuery("&");
         }
         return url;
+    }
+
+    public String getOAuthReAuthenticationURL(String callbackURL, String nonce) {
+        if (nonce == null) {
+            logger.warn("strongly encourage to use 'nonce' parameter, especially when requesting reauthenticate.");
+        }
+        return getOAuthAuthorizationURL(callbackURL,
+                new DialogAuthOption().authType(AuthType.REAUTHENTICATE).authNonce(nonce));
     }
 
     public AccessToken getOAuthAccessToken(String oauthCode) throws FacebookException {
