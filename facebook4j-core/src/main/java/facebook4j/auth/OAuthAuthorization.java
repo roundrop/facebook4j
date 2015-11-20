@@ -231,6 +231,10 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
         return this.oauthToken;
     }
 
+    public AccessToken extendTokenExpiration() throws FacebookException {
+        return extendTokenExpiration(this.oauthToken.getToken());
+    }
+
     protected String getExtendTokenURL(String shortLivedToken) {
         return conf.getOAuthAccessTokenURL() +
                 "?grant_type=fb_exchange_token" +
