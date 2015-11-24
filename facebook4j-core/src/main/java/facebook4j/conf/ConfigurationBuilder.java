@@ -179,6 +179,12 @@ public final class ConfigurationBuilder {
         return this;
     }
 
+    public ConfigurationBuilder setOAuthDeviceTokenURL(String oAuthDeviceTokenURL) {
+        checkNotBuilt();
+        configurationBean.setOAuthDeviceTokenURL(oAuthDeviceTokenURL);
+        return this;
+    }
+
     public ConfigurationBuilder setRestBaseURL(String restBaseURL) {
         checkNotBuilt();
         configurationBean.setRestBaseURL(restBaseURL);

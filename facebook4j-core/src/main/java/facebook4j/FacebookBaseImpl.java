@@ -17,7 +17,10 @@
 package facebook4j;
 
 import facebook4j.auth.AccessToken;
+import facebook4j.auth.AuthOption;
 import facebook4j.auth.Authorization;
+import facebook4j.auth.DeviceCode;
+import facebook4j.auth.NullAuthOption;
 import facebook4j.auth.NullAuthorization;
 import facebook4j.auth.OAuthAuthorization;
 import facebook4j.auth.OAuthSupport;
@@ -209,7 +212,7 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
      * {@inheritDoc}
      */
     public String getOAuthAuthorizationURL(String callbackURL) {
-        return getOAuthAuthorizationURL(callbackURL, null);
+        return getOAuthAuthorizationURL(callbackURL, new NullAuthOption());
     }
     
     /**
@@ -217,6 +220,14 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
      */
     public String getOAuthAuthorizationURL(String callbackURL, String state) {
         return getOAuth().getOAuthAuthorizationURL(callbackURL, state);
+    }
+
+    public String getOAuthAuthorizationURL(String callbackURL, AuthOption authOption) {
+        return getOAuth().getOAuthAuthorizationURL(callbackURL, authOption);
+    }
+
+    public String getOAuthReAuthenticationURL(String callbackURL, String nonce) {
+        return getOAuth().getOAuthReAuthenticationURL(callbackURL, nonce);
     }
 
     /**
@@ -246,6 +257,14 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
     public AccessToken getOAuthAppAccessToken() throws FacebookException {
         return getOAuth().getOAuthAppAccessToken();
     }
+
+    synchronized public DeviceCode getOAuthDeviceCode() throws FacebookException {
+        return getOAuth().getOAuthDeviceCode();
+    }
+
+    synchronized public AccessToken getOAuthDeviceToken(DeviceCode deviceCode) throws FacebookException {
+        return getOAuth().getOAuthDeviceToken(deviceCode);
+    }
     
     /**
      * {@inheritDoc}
@@ -267,6 +286,22 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
      */
     public void setOAuthCallbackURL(String callbackURL) {
         getOAuth().setOAuthCallbackURL(callbackURL);
+    }
+
+    public AccessToken extendTokenExpiration(String shortLivedToken) throws FacebookException {
+        return getOAuth().extendTokenExpiration(shortLivedToken);
+    }
+
+    public AccessToken extendTokenExpiration() throws FacebookException {
+        return extendTokenExpiration();
+    }
+
+    public AccessToken getOAuthAccessTokenInfo(String accessToken) throws FacebookException {
+        return getOAuth().getOAuthAccessTokenInfo(accessToken);
+    }
+
+    public AccessToken getOAuthAccessTokenInfo() throws FacebookException {
+        return getOAuth().getOAuthAccessTokenInfo();
     }
 
     private OAuthSupport getOAuth() {

@@ -14,29 +14,14 @@
  * limitations under the License.
  */
 
-package facebook4j;
+package facebook4j.auth;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.4.0
  */
-public final class Version {
-    private static final String VERSION = "2.4.0";
-    private static final String TITLE = "Facebook4J";
-
-    private Version() {
-        throw new AssertionError();
-    }
-
-    public static String getVersion() {
-        return VERSION;
-    }
-
-    /**
-     * prints the version string
-     *
-     * @param args will be just ignored.
-     */
-    public static void main(String[] args) {
-        System.out.println(TITLE + " " + VERSION);
+public class NullAuthOption implements AuthOption {
+    public String getQuery(String prefix) {
+        return "";
     }
 }

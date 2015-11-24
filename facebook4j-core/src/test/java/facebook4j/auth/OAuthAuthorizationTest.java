@@ -16,9 +16,15 @@
 
 package facebook4j.auth;
 
+import facebook4j.Facebook;
+import facebook4j.FacebookFactory;
+import facebook4j.FacebookTestBase;
 import facebook4j.conf.Configuration;
 import facebook4j.conf.ConfigurationBuilder;
+import facebook4j.junit.category.RealAPITests;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -27,6 +33,171 @@ import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
 public class OAuthAuthorizationTest {
+
+    public static class AuthorizationURL {
+        private Facebook facebook;
+
+        @Before
+        public void setup() {
+            facebook = new FacebookFactory().getInstance();
+            facebook.setOAuthAppId("app_id", "app_secret");
+        }
+
+        @Test
+        public void callbackURL() throws Exception {
+            String callbackURL = "http://facebook4j.org/callback/";
+            String url = facebook.getOAuthAuthorizationURL(callbackURL);
+            assertThat(url,
+                    is("https://www.facebook.com/dialog/oauth" +
+                            "?client_id=app_id" +
+                            "&redirect_uri=http://facebook4j.org/callback/")
+            );
+        }
+
+        @Test
+        public void scope() throws Exception {
+            facebook.setOAuthPermissions("p1,p2,p3");
+
+            String callbackURL = "http://facebook4j.org/callback/";
+            String url = facebook.getOAuthAuthorizationURL(callbackURL);
+            assertThat(url,
+                    is("https://www.facebook.com/dialog/oauth" +
+                    "?client_id=app_id" +
+                    "&redirect_uri=http://facebook4j.org/callback/" +
+                    "&scope=p1,p2,p3")
+            );
+        }
+
+        @Test
+        public void state() throws Exception {
+            String callbackURL = "http://facebook4j.org/callback/";
+            String state = "awesome";
+            String url = facebook.getOAuthAuthorizationURL(callbackURL, state);
+            assertThat(url,
+                    is("https://www.facebook.com/dialog/oauth" +
+                            "?client_id=app_id" +
+                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&state=awesome")
+            );
+
+            url = facebook.getOAuthAuthorizationURL(callbackURL, new DialogAuthOption().state(state));
+            assertThat(url,
+                    is("https://www.facebook.com/dialog/oauth" +
+                            "?client_id=app_id" +
+                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&state=awesome")
+            );
+        }
+
+        @Test
+        public void display() throws Exception {
+            String callbackURL = "http://facebook4j.org/callback/";
+            DialogAuthOption authOption = new DialogAuthOption().display(Display.POPUP);
+            String url = facebook.getOAuthAuthorizationURL(callbackURL, authOption);
+            assertThat(url,
+                    is("https://www.facebook.com/dialog/oauth" +
+                            "?client_id=app_id" +
+                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&display=popup")
+            );
+        }
+
+        @Test
+        public void rerequest() throws Exception {
+            String callbackURL = "http://facebook4j.org/callback/";
+            DialogAuthOption authOption = new DialogAuthOption().authType(AuthType.REREQUEST);
+            String url = facebook.getOAuthAuthorizationURL(callbackURL, authOption);
+            assertThat(url,
+                    is("https://www.facebook.com/dialog/oauth" +
+                            "?client_id=app_id" +
+                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&auth_type=rerequest")
+            );
+        }
+
+        @Test
+        public void reauthenticate() throws Exception {
+            String callbackURL = "http://facebook4j.org/callback/";
+            DialogAuthOption authOption = new DialogAuthOption()
+                    .authType(AuthType.REAUTHENTICATE)
+                    .authNonce("random_auth_nonce");
+            String url = facebook.getOAuthAuthorizationURL(callbackURL, authOption);
+            assertThat(url,
+                    is("https://www.facebook.com/dialog/oauth" +
+                            "?client_id=app_id" +
+                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&auth_type=reauthenticate&auth_nonce=random_auth_nonce")
+            );
+        }
+
+        @Test
+        public void reauthenticate_https() throws Exception {
+            String callbackURL = "http://facebook4j.org/callback/";
+            DialogAuthOption authOption = new DialogAuthOption()
+                    .authType(AuthType.HTTPS);
+            String url = facebook.getOAuthAuthorizationURL(callbackURL, authOption);
+            assertThat(url,
+                    is("https://www.facebook.com/dialog/oauth" +
+                            "?client_id=app_id" +
+                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&auth_type=https")
+            );
+        }
+    }
+
+    public static class ReAuthenticationURL {
+        private Facebook facebook;
+
+        @Before
+        public void setup() {
+            facebook = new FacebookFactory().getInstance();
+            facebook.setOAuthAppId("app_id", "app_secret");
+        }
+
+        @Test
+        public void reauthenticate() throws Exception {
+            String callbackURL = "http://facebook4j.org/callback/";
+            String url = facebook.getOAuthReAuthenticationURL(callbackURL, "random_auth_nonce");
+            assertThat(url,
+                    is("https://www.facebook.com/dialog/oauth" +
+                            "?client_id=app_id" +
+                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&auth_type=reauthenticate&auth_nonce=random_auth_nonce")
+            );
+        }
+    }
+
+    public static class TokenExpirationExtention extends FacebookTestBase {
+        @Test
+        @Category(RealAPITests.class)
+        public void shortToLong() throws Exception {
+            Facebook facebook = FacebookFactory.getSingleton();
+            String oAuthAppId = p.getProperty("oauth.appId");
+            String oAuthAppSecret = p.getProperty("oauth.appSecret");
+            facebook.setOAuthAppId(oAuthAppId, oAuthAppSecret);
+
+            String shortLivedToken = "your-short-lived-token";
+            AccessToken extendedToken = facebook.extendTokenExpiration(shortLivedToken);
+            assertThat(extendedToken.getToken(), is(not(shortLivedToken)));
+        }
+    }
+
+    public static class AccessTokenInfo extends FacebookTestBase {
+        @Test
+        @Category(RealAPITests.class)
+        public void string() throws Exception {
+            Facebook facebook = FacebookFactory.getSingleton();
+            String oAuthAppId = p.getProperty("oauth.appId");
+            String oAuthAppSecret = p.getProperty("oauth.appSecret");
+            facebook.setOAuthAppId(oAuthAppId, oAuthAppSecret);
+
+            String accessToken = "your-access-token";
+            AccessToken accessTokenInfo = facebook.getOAuthAccessTokenInfo(accessToken);
+            assertThat(accessTokenInfo.getToken(), is(accessToken));
+            assertThat(accessTokenInfo.getExpires(), is(notNullValue()));
+            assertThat(accessTokenInfo.getType(), is(notNullValue()));
+        }
+    }
 
     public static class AppSecretProof {
         @Test

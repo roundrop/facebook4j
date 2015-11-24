@@ -16,6 +16,7 @@
 
 package facebook4j.auth;
 
+import facebook4j.Facebook;
 import facebook4j.FacebookException;
 
 /**
@@ -41,6 +42,16 @@ public interface OAuthSupport {
 
     String getOAuthAuthorizationURL(String callbackURL);
     String getOAuthAuthorizationURL(String callbackURL, String state);
+    String getOAuthAuthorizationURL(String callbackURL, AuthOption authOption);
+
+    /**
+     * Returns the URL that asks the person to re-authenticate unconditionally.
+     * @param callbackURL callback url
+     * @param nonce a completely arbitrary alphanumeric code that your app generates. see: <a href="https://developers.facebook.com/docs/facebook-login/reauthentication#nonce">The auth_nonce parameter</a>
+     * @return the url for re-authenticate
+     * @see <a href="https://developers.facebook.com/docs/facebook-login/reauthentication">Re-authentication - Facebook Login</a>
+     */
+    String getOAuthReAuthenticationURL(String callbackURL, String nonce);
 
     /**
      * Returns an access token associated with this instance.
@@ -80,6 +91,24 @@ public interface OAuthSupport {
      * @see <a href="https://developers.facebook.com/docs/authentication/server-side/">Server-Side Authentication</a>
      */
     AccessToken getOAuthAppAccessToken() throws FacebookException;
+
+    /**
+     * Returns a generated device code.
+     *
+     * @return Device code
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     * @see <a href="https://developers.facebook.com/docs/facebook-login/for-devices">Facebook Login for Devices</a>
+     */
+    DeviceCode getOAuthDeviceCode() throws FacebookException;
+
+    /**
+     * Returns a Device Access Token.
+     *
+     * @return Device Acceess Token
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     * @see <a href="https://developers.facebook.com/docs/facebook-login/for-devices">Facebook Login for Devices</a>
+     */
+    AccessToken getOAuthDeviceToken(DeviceCode deviceCode) throws FacebookException;
     
     /**
      * Sets the access token
@@ -102,4 +131,35 @@ public interface OAuthSupport {
     void setOAuthCallbackURL(String callbackURL);
 
 
+    /**
+     * Extends the short-lived-token expiration.
+     * @param shortLivedToken access token
+     * @return extended access token
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     * @see <a href="https://developers.facebook.com/docs/facebook-login/access-tokens/expiration-and-extension">Expiration and Extension of Access Tokens - Facebook Login</a>
+     */
+    AccessToken extendTokenExpiration(String shortLivedToken) throws FacebookException;
+
+    /**
+     * Extends this instance's short-lived-token expiration.
+     * @return extended access token
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     * @see <a href="https://developers.facebook.com/docs/facebook-login/access-tokens/expiration-and-extension">Expiration and Extension of Access Tokens - Facebook Login</a>
+     */
+    AccessToken extendTokenExpiration() throws FacebookException;
+
+    /**
+     * Returns the access token information.
+     * @param accessToken access token
+     * @return access token information
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     */
+    AccessToken getOAuthAccessTokenInfo(String accessToken) throws FacebookException;
+
+    /**
+     * Returns the access token information.
+     * @return access token information
+     * @throws FacebookException when Facebook service or network is unavailable, or the user has not authorized
+     */
+    AccessToken getOAuthAccessTokenInfo() throws FacebookException;
 }

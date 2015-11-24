@@ -20,6 +20,7 @@ import facebook4j.FacebookException;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpClientWrapper;
 import facebook4j.internal.http.HttpResponse;
+import facebook4j.internal.logging.Logger;
 import facebook4j.internal.util.z_F4JLRUCache;
 
 import javax.crypto.Mac;
@@ -35,6 +36,8 @@ import java.security.NoSuchAlgorithmException;
  */
 public class OAuthAuthorization implements Authorization, OAuthSupport, Security, java.io.Serializable {
     private static final long serialVersionUID = 2548925849295080874L;
+
+    private static final Logger logger = Logger.getLogger(OAuthAuthorization.class);
 
     public static final String HMAC_SHA_256 = "HmacSHA256";
 
@@ -85,21 +88,33 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
     // implementation for OAuthSupport interface
 
     public String getOAuthAuthorizationURL(String callbackURL) {
-        return getOAuthAuthorizationURL(callbackURL, null);
+        return getOAuthAuthorizationURL(callbackURL, new NullAuthOption());
     }
-    
+
     public String getOAuthAuthorizationURL(String callbackURL, String state) {
+        return getOAuthAuthorizationURL(callbackURL, new DialogAuthOption().state(state));
+    }
+
+    public String getOAuthAuthorizationURL(String callbackURL, AuthOption authOption) {
         this.callbackURL = callbackURL;
         String url = conf.getOAuthAuthorizationURL() +
-                        "?client_id=" + this.appId + 
-                        "&redirect_uri=" + callbackURL;
+                "?client_id=" + this.appId +
+                "&redirect_uri=" + callbackURL;
         if (this.permissions != null) {
             url += "&scope=" + this.permissions;
         }
-        if (state != null) {
-            url += "&state=" + state;
+        if (authOption != null) {
+            url += authOption.getQuery("&");
         }
         return url;
+    }
+
+    public String getOAuthReAuthenticationURL(String callbackURL, String nonce) {
+        if (nonce == null) {
+            logger.warn("strongly encourage to use 'nonce' parameter, especially when requesting reauthenticate.");
+        }
+        return getOAuthAuthorizationURL(callbackURL,
+                new DialogAuthOption().authType(AuthType.REAUTHENTICATE).authNonce(nonce));
     }
 
     public AccessToken getOAuthAccessToken(String oauthCode) throws FacebookException {
@@ -129,7 +144,7 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
         ensureTokenIsAvailable();
         return this.oauthToken;
     }
-    
+
     public AccessToken getOAuthAppAccessToken() throws FacebookException {
         String url = getAppAccessTokenURL();
         HttpResponse response = http.get(url);
@@ -145,6 +160,39 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
                 "?client_id=" + this.appId + 
                 "&client_secret=" + this.appSecret + 
                 "&grant_type=client_credentials";
+    }
+
+    public DeviceCode getOAuthDeviceCode() throws FacebookException {
+        String url = getDeviceCodeURL();
+        HttpResponse response = http.get(url);
+        if (response.getStatusCode() != 200) {
+            throw new FacebookException("generate a device code failed");
+        }
+        return new DeviceCode(response);
+    }
+
+    private String getDeviceCodeURL() {
+        return conf.getOAuthDeviceTokenURL() +
+                "?type=device_code" +
+                "&client_id=" + this.appId +
+                "&scope=" + this.permissions;
+    }
+
+    public AccessToken getOAuthDeviceToken(DeviceCode deviceCode) throws FacebookException {
+        String url = getDeviceTokenURL(deviceCode.getCode());
+        HttpResponse response = http.get(url);
+        if (response.getStatusCode() != 200) {
+            throw new FacebookException("authorization failed.");
+        }
+        this.oauthToken = new AccessToken(response);
+        return this.oauthToken;
+    }
+
+    private String getDeviceTokenURL(String deviceCode) {
+        return conf.getOAuthDeviceTokenURL() +
+                "?type=device_token" +
+                "&client_id=" + this.appId +
+                "&code=" + deviceCode;
     }
 
     public void setOAuthAccessToken(AccessToken accessToken) {
@@ -172,6 +220,48 @@ public class OAuthAuthorization implements Authorization, OAuthSupport, Security
     public void setOAuthPermissions(String permissions) {
         this.permissions = permissions;
     }
+
+    public AccessToken extendTokenExpiration(String shortLivedToken) throws FacebookException {
+        String url = getExtendTokenURL(shortLivedToken);
+        HttpResponse response = http.get(url);
+        if (response.getStatusCode() != 200) {
+            throw new FacebookException("token expiration extention failed.");
+        }
+        this.oauthToken = new AccessToken(response);
+        return this.oauthToken;
+    }
+
+    public AccessToken extendTokenExpiration() throws FacebookException {
+        return extendTokenExpiration(this.oauthToken.getToken());
+    }
+
+    protected String getExtendTokenURL(String shortLivedToken) {
+        return conf.getOAuthAccessTokenURL() +
+                "?grant_type=fb_exchange_token" +
+                "&client_id=" + this.appId +
+                "&client_secret=" + this.appSecret +
+                "&fb_exchange_token=" + shortLivedToken;
+    }
+
+    public AccessToken getOAuthAccessTokenInfo(String accessToken) throws FacebookException {
+        String url = getAccessTokenInfoURL(accessToken);
+        HttpResponse response = http.get(url);
+        if (response.getStatusCode() != 200) {
+            throw new FacebookException("authorization failed.");
+        }
+        return new AccessToken(response);
+    }
+
+    public AccessToken getOAuthAccessTokenInfo() throws FacebookException {
+        return getOAuthAccessTokenInfo(this.oauthToken.getToken());
+    }
+
+    protected String getAccessTokenInfoURL(String accessToken) {
+        return conf.getOAuthAccessTokenInfoURL() +
+                "?client_id=" + this.appId +
+                "&access_token=" + accessToken;
+    }
+
 
     public void setAppSecretProofEnabled(boolean enabled) {
         this.appSecretProofEnabled = enabled;

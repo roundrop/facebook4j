@@ -37,7 +37,7 @@ import java.util.Set;
  * </ul>
  */
 public final class PropertyConfiguration extends ConfigurationBase implements Serializable {
-    private static final long serialVersionUID = -8731831360470825131L;
+    private static final long serialVersionUID = -6424033561218975631L;
 
     public static final String DEBUG = "debug";
     public static final String HTTP_USER_AGENT = "http.userAgent";
@@ -71,6 +71,8 @@ public final class PropertyConfiguration extends ConfigurationBase implements Se
 
     public static final String OAUTH_AUTHORIZATION_URL = "oauth.authorizationURL";
     public static final String OAUTH_ACCESS_TOKEN_URL = "oauth.accessTokenURL";
+    public static final String OAUTH_ACCESS_TOKEN_INFO_URL = "oauth.accessTokenInfoURL";
+    public static final String OAUTH_DEVICE_TOKEN_URL = "oauth.deviceTokenURL";
 
     public static final String REST_BASE_URL = "restBaseURL";
     public static final String VIDEO_BASE_URL = "videoBaseURL";
@@ -303,6 +305,14 @@ public final class PropertyConfiguration extends ConfigurationBase implements Se
 
         if (notNull(props, prefix, OAUTH_ACCESS_TOKEN_URL)) {
             setOAuthAccessTokenURL(getString(props, prefix, OAUTH_ACCESS_TOKEN_URL));
+        }
+
+        if (notNull(props, prefix, OAUTH_ACCESS_TOKEN_INFO_URL)) {
+            setOAuthAccessTokenInfoURL(getString(props, prefix, OAUTH_ACCESS_TOKEN_INFO_URL));
+        }
+
+        if (notNull(props, prefix, OAUTH_DEVICE_TOKEN_URL)) {
+            setOAuthDeviceTokenURL(getString(props, prefix, OAUTH_DEVICE_TOKEN_URL));
         }
 
         if (notNull(props, prefix, REST_BASE_URL)) {

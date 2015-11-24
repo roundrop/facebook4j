@@ -14,29 +14,24 @@
  * limitations under the License.
  */
 
-package facebook4j;
+package facebook4j.auth;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.4.0
  */
-public final class Version {
-    private static final String VERSION = "2.4.0";
-    private static final String TITLE = "Facebook4J";
+public enum AuthType {
+    HTTPS,
+    REAUTHENTICATE,
+    REREQUEST,
+    ;
 
-    private Version() {
-        throw new AssertionError();
-    }
-
-    public static String getVersion() {
-        return VERSION;
-    }
-
-    /**
-     * prints the version string
-     *
-     * @param args will be just ignored.
-     */
-    public static void main(String[] args) {
-        System.out.println(TITLE + " " + VERSION);
+    public static AuthType of(String value) {
+        for (AuthType t : AuthType.values()) {
+            if (t.toString().equals(value.toUpperCase())) {
+                return t;
+            }
+        }
+        return null;
     }
 }

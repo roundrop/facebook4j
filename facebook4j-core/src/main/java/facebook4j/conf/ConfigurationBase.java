@@ -35,7 +35,7 @@ import java.util.Map;
  * </ul>
  */
 public class ConfigurationBase implements Configuration, Serializable {
-    private static final long serialVersionUID = 8054231468069930668L;
+    private static final long serialVersionUID = -4618524490519309627L;
 
     private boolean debug;
     private String userAgent;
@@ -66,6 +66,8 @@ public class ConfigurationBase implements Configuration, Serializable {
 
     private String oAuthAuthorizationURL;
     private String oAuthAccessTokenURL;
+    private String oAuthAccessTokenInfoURL;
+    private String oAuthDeviceTokenURL;
 
     private String restBaseURL;
     private String videoBaseURL;
@@ -83,6 +85,8 @@ public class ConfigurationBase implements Configuration, Serializable {
     
     private static final String DEFAULT_OAUTH_AUTHORIZATION_URL = "http://www.facebook.com/dialog/oauth";
     private static final String DEFAULT_OAUTH_ACCESS_TOKEN_URL = "http://graph.facebook.com/oauth/access_token";
+    private static final String DEFAULT_OAUTH_ACCESS_TOKEN_INFO_URL = "http://graph.facebook.com/oauth/access_token_info";
+    private static final String DEFAULT_OAUTH_DEVICE_TOKEN_URL = "http://graph.facebook.com/oauth/device";
 
     private static final String DEFAULT_REST_BASE_URL = "http://graph.facebook.com/";
     private static final String DEFAULT_VIDEO_BASE_URL = "http://graph-video.facebook.com/";
@@ -145,6 +149,8 @@ public class ConfigurationBase implements Configuration, Serializable {
 
         setOAuthAuthorizationURL(DEFAULT_OAUTH_AUTHORIZATION_URL);
         setOAuthAccessTokenURL(DEFAULT_OAUTH_ACCESS_TOKEN_URL);
+        setOAuthAccessTokenInfoURL(DEFAULT_OAUTH_ACCESS_TOKEN_INFO_URL);
+        setOAuthDeviceTokenURL(DEFAULT_OAUTH_DEVICE_TOKEN_URL);
 
         setRestBaseURL(DEFAULT_REST_BASE_URL);
         setVideoBaseURL(DEFAULT_VIDEO_BASE_URL);
@@ -392,6 +398,12 @@ public class ConfigurationBase implements Configuration, Serializable {
         if (DEFAULT_OAUTH_ACCESS_TOKEN_URL.equals(fixURL(false, oAuthAccessTokenURL))) {
             this.oAuthAccessTokenURL = fixURL(useSSL, oAuthAccessTokenURL);
         }
+        if (DEFAULT_OAUTH_ACCESS_TOKEN_INFO_URL.equals(fixURL(false, oAuthAccessTokenInfoURL))) {
+            this.oAuthAccessTokenInfoURL = fixURL(useSSL, oAuthAccessTokenInfoURL);
+        }
+        if (DEFAULT_OAUTH_DEVICE_TOKEN_URL.equals(fixURL(false, oAuthDeviceTokenURL))) {
+            this.oAuthDeviceTokenURL = fixURL(useSSL, oAuthDeviceTokenURL);
+        }
         if (DEFAULT_OAUTH_AUTHORIZATION_URL.equals(fixURL(false, oAuthAuthorizationURL))) {
             this.oAuthAuthorizationURL = fixURL(useSSL, oAuthAuthorizationURL);
         }
@@ -423,6 +435,24 @@ public class ConfigurationBase implements Configuration, Serializable {
 
     protected final void setOAuthAccessTokenURL(String oAuthAccessTokenURL) {
         this.oAuthAccessTokenURL = oAuthAccessTokenURL;
+        fixRestBaseURL();
+    }
+
+    public String getOAuthAccessTokenInfoURL() {
+        return oAuthAccessTokenInfoURL;
+    }
+
+    protected final void setOAuthAccessTokenInfoURL(String oAuthAccessTokenInfoURL) {
+        this.oAuthAccessTokenInfoURL = oAuthAccessTokenInfoURL;
+        fixRestBaseURL();
+    }
+
+    public String getOAuthDeviceTokenURL() {
+        return oAuthDeviceTokenURL;
+    }
+
+    protected final void setOAuthDeviceTokenURL(String oAuthDeviceTokenURL) {
+        this.oAuthDeviceTokenURL = oAuthDeviceTokenURL;
         fixRestBaseURL();
     }
 
@@ -517,6 +547,8 @@ public class ConfigurationBase implements Configuration, Serializable {
         result = 31 * result + appSecretProofCacheSize;
         result = 31 * result + (oAuthAuthorizationURL != null ? oAuthAuthorizationURL.hashCode() : 0);
         result = 31 * result + (oAuthAccessTokenURL != null ? oAuthAccessTokenURL.hashCode() : 0);
+        result = 31 * result + (oAuthAccessTokenInfoURL != null ? oAuthAccessTokenInfoURL.hashCode() : 0);
+        result = 31 * result + (oAuthDeviceTokenURL != null ? oAuthDeviceTokenURL.hashCode() : 0);
         result = 31 * result + (restBaseURL != null ? restBaseURL.hashCode() : 0);
         result = 31 * result + (videoBaseURL != null ? videoBaseURL.hashCode() : 0);
         result = 31 * result + (jsonStoreEnabled ? 1 : 0);
@@ -564,6 +596,10 @@ public class ConfigurationBase implements Configuration, Serializable {
         if (oAuthAccessToken != null ? !oAuthAccessToken.equals(that.oAuthAccessToken) : that.oAuthAccessToken != null)
             return false;
         if (oAuthAccessTokenURL != null ? !oAuthAccessTokenURL.equals(that.oAuthAccessTokenURL) : that.oAuthAccessTokenURL != null)
+            return false;
+        if (oAuthAccessTokenInfoURL != null ? !oAuthAccessTokenInfoURL.equals(that.oAuthAccessTokenInfoURL) : that.oAuthAccessTokenInfoURL != null)
+            return false;
+        if (oAuthDeviceTokenURL != null ? !oAuthDeviceTokenURL.equals(that.oAuthDeviceTokenURL) : that.oAuthDeviceTokenURL != null)
             return false;
         if (oAuthAppId != null ? !oAuthAppId.equals(that.oAuthAppId) : that.oAuthAppId != null) return false;
         if (oAuthAppSecret != null ? !oAuthAppSecret.equals(that.oAuthAppSecret) : that.oAuthAppSecret != null)
@@ -614,6 +650,8 @@ public class ConfigurationBase implements Configuration, Serializable {
                 ", appSecretProofCacheSize=" + appSecretProofCacheSize +
                 ", oAuthAuthorizationURL='" + oAuthAuthorizationURL + '\'' +
                 ", oAuthAccessTokenURL='" + oAuthAccessTokenURL + '\'' +
+                ", oAuthAccessTokenInfoURL='" + oAuthAccessTokenInfoURL + '\'' +
+                ", oAuthDeviceTokenURL='" + oAuthDeviceTokenURL + '\'' +
                 ", restBaseURL='" + restBaseURL + '\'' +
                 ", videoBaseURL='" + videoBaseURL + '\'' +
                 ", jsonStoreEnabled=" + jsonStoreEnabled +

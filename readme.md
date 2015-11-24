@@ -2,7 +2,7 @@
 Facebook4J is a Facebook Graph API binding library for the Java language licensed under Apache License 2.0.
 
 ## Version
-2.3.2
+2.4.0
 
 ## Install
 
@@ -59,6 +59,20 @@ You can get Page Access Token as below:
 ResponseList<Account> accounts = facebook.getAccounts();
 Account yourPageAccount = accounts.get(0);  // if index 0 is your page account.
 String pageAccessToken = yourPageAccount.getAccessToken();
+```
+
+### Getting Device Access Token
+With Facebook Login for Devices people can easily and safely log into your apps and services with their Facebook account on devices with limited input or display capabilities.
+(See Facebook's Documentation: [Facebook Login for Devices](https://developers.facebook.com/docs/facebook-login/for-devices) )
+An example implementation is available at [https://github.com/roundrop/facebook4j-oauth-example](https://github.com/roundrop/facebook4j-oauth-example) .
+
+### Extending expiration of an Access Token
+(See Facebook's Documentation: [Expiration and Extension of Access Tokens](https://developers.facebook.com/docs/facebook-login/access-tokens/expiration-and-extension) )
+You can extend Access Token's expiration as below:
+
+```java
+String shortLivedToken = "your-short-lived-token";
+AccessToken extendedToken = facebook.extendTokenExpiration(shortLivedToken);
 ```
 
 - - -
