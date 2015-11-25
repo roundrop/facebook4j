@@ -180,6 +180,23 @@ public class OAuthAuthorizationTest {
             AccessToken extendedToken = facebook.extendTokenExpiration(shortLivedToken);
             assertThat(extendedToken.getToken(), is(not(shortLivedToken)));
         }
+
+        @Test
+        @Category(RealAPITests.class)
+        public void instanceToken() throws Exception {
+            ConfigurationBuilder build = new ConfigurationBuilder();
+            String oAuthAccessToken = p.getProperty("oauth.accessToken");
+            String oAuthAppId = p.getProperty("oauth.appId");
+            String oAuthAppSecret = p.getProperty("oauth.appSecret");
+            build.setOAuthAccessToken(oAuthAccessToken);
+            build.setOAuthAppId(oAuthAppId);
+            build.setOAuthAppSecret(oAuthAppSecret);
+            OAuthAuthorization auth = new OAuthAuthorization(build.build());
+            Facebook facebook = new FacebookFactory().getInstance(auth);
+
+            AccessToken extendedToken = facebook.extendTokenExpiration();
+            assertThat(extendedToken.getToken(), is(not(oAuthAccessToken)));
+        }
     }
 
     public static class AccessTokenInfo extends FacebookTestBase {
