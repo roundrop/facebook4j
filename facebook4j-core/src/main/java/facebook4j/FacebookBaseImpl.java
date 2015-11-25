@@ -293,7 +293,7 @@ abstract class FacebookBaseImpl implements Serializable, OAuthSupport {
     }
 
     public AccessToken extendTokenExpiration() throws FacebookException {
-        return extendTokenExpiration();
+        return extendTokenExpiration(getOAuthAccessToken().getToken());
     }
 
     public AccessToken getOAuthAccessTokenInfo(String accessToken) throws FacebookException {
