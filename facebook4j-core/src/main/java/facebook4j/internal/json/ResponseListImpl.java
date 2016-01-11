@@ -30,8 +30,6 @@ import facebook4j.internal.org.json.JSONObject;
  */
 /*package*/ class ResponseListImpl<T> extends PagableListImpl<T> implements ResponseList<T> {
 
-    private Summary summary;
-
     /*package*/ResponseListImpl(JSONObject json, T... t) throws FacebookException {
         super(json, t);
         init(json);
@@ -43,13 +41,6 @@ import facebook4j.internal.org.json.JSONObject;
     }
 
     private void init(JSONObject json) throws FacebookException {
-        if (!json.isNull("summary")) {
-            try {
-                summary = new SummaryJSONImpl(json.getJSONObject("summary"));
-            } catch (JSONException jsone) {
-                throw new FacebookException(jsone.getMessage(), jsone);
-            }
-        }
     }
 
     /*package*/
@@ -84,9 +75,5 @@ import facebook4j.internal.org.json.JSONObject;
         } catch (JSONException jsone) {
             throw new FacebookException(jsone);
         }
-    }
-
-    public Summary getSummary() {
-        return summary;
     }
 }
