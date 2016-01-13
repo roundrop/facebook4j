@@ -1,10 +1,5 @@
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.getRawString;
-import static facebook4j.internal.util.z_F4JInternalParseUtil.isJSONObject;
-
-import java.util.Date;
-
 import facebook4j.FacebookException;
 import facebook4j.Place;
 import facebook4j.PlaceTag;
@@ -14,6 +9,8 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.util.Date;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 

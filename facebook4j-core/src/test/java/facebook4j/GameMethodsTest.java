@@ -24,7 +24,7 @@ import org.junit.runner.RunWith;
 
 import java.net.URL;
 
-import static facebook4j.junit.F4JHttpParameterMatchers.hasPostParameter;
+import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
 import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;

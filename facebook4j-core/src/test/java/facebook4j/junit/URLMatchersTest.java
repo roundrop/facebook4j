@@ -6,8 +6,7 @@ import org.junit.runner.RunWith;
 
 import java.net.URL;
 
-import static facebook4j.junit.URLMatchers.hasParameter;
-import static facebook4j.junit.URLMatchers.pathOf;
+import static facebook4j.junit.URLMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 

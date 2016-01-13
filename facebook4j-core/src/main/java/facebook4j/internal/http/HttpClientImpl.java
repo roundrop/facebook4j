@@ -37,7 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static facebook4j.internal.http.RequestMethod.POST;
+import static facebook4j.internal.http.RequestMethod.*;
 
 /**
  * @author Yusuke Yamamoto - yusuke at mac.com
