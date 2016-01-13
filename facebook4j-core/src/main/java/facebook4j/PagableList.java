@@ -24,4 +24,5 @@ import java.util.List;
 public interface PagableList<T> extends List<T> {
     Integer getCount();
     Paging<T> getPaging();
+    Summary getSummary();
 }

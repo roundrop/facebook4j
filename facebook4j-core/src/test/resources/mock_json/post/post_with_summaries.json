@@ -1,0 +1,76 @@
+{
+    "actions": [
+        {
+            "link": "https://www.facebook.com/19292868552/posts/10150189643478553",
+            "name": "Comment"
+        },
+        {
+            "link": "https://www.facebook.com/19292868552/posts/10150189643478553",
+            "name": "Like"
+        },
+        {
+            "link": "http://networkedblogs.com/hGWk3?a=share",
+            "name": "Share"
+        }
+    ],
+    "application": {
+        "id": "9953271133",
+        "name": "NetworkedBlogs",
+        "namespace": "blognetworks"
+    },
+    "created_time": "2011-05-10T18:35:38+0000",
+    "description": "\nWe continue to make Platform more secure for users. Earlier this year, we introduced the ability for users to browse Facebook over HTTPS. As a result, we provided \u201cSecure Canvas URL\u201d and \u201cSecure Tab URL\u201d fields in the Developer App for developers to serve their apps through an H",
+    "from": {
+        "category": "Product/service",
+        "id": "19292868552",
+        "name": "Facebook Developers"
+    },
+    "full_picture": "https://fbexternal-a.akamaihd.net/app_full_proxy.php?app=9953271133&v=3&size=z&cksum=e15ac22d55f6a9501d3b3ac64c5fb763&src=http%3A%2F%2Fimg.bitpixels.com%2Fgetthumbnail%3Fcode%3D78793%26size%3D120%26url%3Dhttp%3A%2F%2Fdevelopers.facebook.com%2Fblog%2F&full_picture",
+    "icon": "https://fbcdn-photos-g-a.akamaihd.net/hphotos-ak-prn1/851582_10151414659411134_455889750_n.gif",
+    "id": "19292868552_10150189643478553",
+    "likes": {
+        "count": 8064,
+        "data": [
+            {
+                "id": "100000670927963",
+                "name": "Xiaoguang Wang"
+            },
+            {
+                "id": "1011399360",
+                "name": "Samuel Silva"
+            },
+            {
+                "id": "100002285148138",
+                "name": "Yo Yo Chen"
+            },
+            {
+                "id": "100002741111992",
+                "name": "Tony Tang"
+            }
+        ],
+        "summary": {
+            "total_count": 7882,
+            "can_like": true,
+            "has_liked": false
+        }
+    },
+    "link": "http://developers.facebook.com/blog/post/497",
+    "name": "Developer Roadmap Update: Moving to OAuth 2.0 + HTTPS",
+    "picture": "https://fbexternal-a.akamaihd.net/app_full_proxy.php?app=9953271133&v=3&size=z&cksum=e15ac22d55f6a9501d3b3ac64c5fb763&src=http%3A%2F%2Fimg.bitpixels.com%2Fgetthumbnail%3Fcode%3D78793%26size%3D120%26url%3Dhttp%3A%2F%2Fdevelopers.facebook.com%2Fblog%2F",
+    "privacy": {"value": ""},
+    "properties": [
+        {
+            "href": "http://apps.facebook.com/blognetworks/blog/official_facebook_developer_blog",
+            "name": "source",
+            "text": "Official Facebook Developer Blog"
+        },
+        {
+            "href": "http://developers.facebook.com/blog/post/497",
+            "name": "link",
+            "text": "Full Article..."
+        }
+    ],
+    "status_type": "app_created_story",
+    "type": "link",
+    "updated_time": "2013-08-18T12:03:22+0000"
+}

@@ -585,6 +585,59 @@ public class PostMethodsTest extends MockFacebookTestBase {
         }
 
         @Test
+        public void idWithSummaries() throws Exception {
+            facebook.setMockJSON("mock_json/post/post_with_summaries.json");
+            Post actual = facebook.getPost("19292868552_10150189643478553");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/19292868552_10150189643478553")));
+
+            assertThat(actual.getIcon().toString(), is("https://fbcdn-photos-g-a.akamaihd.net/hphotos-ak-prn1/851582_10151414659411134_455889750_n.gif"));
+            assertThat(actual.getApplication().getId(), is("9953271133"));
+            assertThat(actual.getApplication().getName(), is("NetworkedBlogs"));
+            assertThat(actual.getApplication().getNamespace(), is("blognetworks"));
+            assertThat(actual.getLink().toString(), is("http://developers.facebook.com/blog/post/497"));
+            assertThat(actual.getPrivacy().getValue(), is(PrivacyType.EMPTY));
+            assertThat(actual.getFrom().getId(), is("19292868552"));
+            assertThat(actual.getFrom().getCategory(), is("Product/service"));
+            assertThat(actual.getFrom().getName(), is("Facebook Developers"));
+            assertThat(actual.getProperties().size(), is(2));
+            assertThat(actual.getProperties().get(0).getText(), is("Official Facebook Developer Blog"));
+            assertThat(actual.getProperties().get(0).getName(), is("source"));
+            assertThat(actual.getProperties().get(0).getHref(), is("http://apps.facebook.com/blognetworks/blog/official_facebook_developer_blog"));
+            assertThat(actual.getProperties().get(1).getText(), is("Full Article..."));
+            assertThat(actual.getProperties().get(1).getName(), is("link"));
+            assertThat(actual.getProperties().get(1).getHref(), is("http://developers.facebook.com/blog/post/497"));
+            assertThat(actual.getType(), is("link"));
+            assertThat(actual.getUpdatedTime(), is(iso8601DateOf("2013-08-18T12:03:22+0000")));
+            assertThat(actual.getId(), is("19292868552_10150189643478553"));
+            assertThat(actual.getPicture().toString(), is("https://fbexternal-a.akamaihd.net/app_full_proxy.php?app=9953271133&v=3&size=z&cksum=e15ac22d55f6a9501d3b3ac64c5fb763&src=http%3A%2F%2Fimg.bitpixels.com%2Fgetthumbnail%3Fcode%3D78793%26size%3D120%26url%3Dhttp%3A%2F%2Fdevelopers.facebook.com%2Fblog%2F"));
+            assertThat(actual.getFullPicture().toString(), is("https://fbexternal-a.akamaihd.net/app_full_proxy.php?app=9953271133&v=3&size=z&cksum=e15ac22d55f6a9501d3b3ac64c5fb763&src=http%3A%2F%2Fimg.bitpixels.com%2Fgetthumbnail%3Fcode%3D78793%26size%3D120%26url%3Dhttp%3A%2F%2Fdevelopers.facebook.com%2Fblog%2F&full_picture"));
+            assertThat(actual.getStatusType(), is("app_created_story"));
+            assertThat(actual.getDescription(), is("\nWe continue to make Platform more secure for users. Earlier this year, we introduced the ability for users to browse Facebook over HTTPS. As a result, we provided \u201cSecure Canvas URL\u201d and \u201cSecure Tab URL\u201d fields in the Developer App for developers to serve their apps through an H"));
+            assertThat(actual.getLikes().getCount(), is(8064));
+            assertThat(actual.getLikes().get(0).getId(), is("100000670927963"));
+            assertThat(actual.getLikes().get(0).getName(), is("Xiaoguang Wang"));
+            assertThat(actual.getLikes().get(1).getId(), is("1011399360"));
+            assertThat(actual.getLikes().get(1).getName(), is("Samuel Silva"));
+            assertThat(actual.getLikes().get(2).getId(), is("100002285148138"));
+            assertThat(actual.getLikes().get(2).getName(), is("Yo Yo Chen"));
+            assertThat(actual.getLikes().get(3).getId(), is("100002741111992"));
+            assertThat(actual.getLikes().get(3).getName(), is("Tony Tang"));
+            assertThat(actual.getLikes().getSummary(), is(notNullValue()));
+            assertThat(actual.getLikes().getSummary().getTotalCount(), is(7882));
+            assertThat(actual.getName(), is("Developer Roadmap Update: Moving to OAuth 2.0 + HTTPS"));
+            assertThat(actual.getCreatedTime(), is(iso8601DateOf("2011-05-10T18:35:38+0000")));
+            assertThat(actual.getActions().size(), is(3));
+            assertThat(actual.getActions().get(0).getName(), is("Comment"));
+            assertThat(actual.getActions().get(0).getLink().toString(), is("https://www.facebook.com/19292868552/posts/10150189643478553"));
+            assertThat(actual.getActions().get(1).getName(), is("Like"));
+            assertThat(actual.getActions().get(1).getLink().toString(), is("https://www.facebook.com/19292868552/posts/10150189643478553"));
+            assertThat(actual.getActions().get(2).getName(), is("Share"));
+            assertThat(actual.getActions().get(2).getLink().toString(), is("http://networkedblogs.com/hGWk3?a=share"));
+            assertThat(actual.getScheduledPublishTime(), is(nullValue()));
+        }
+
+        @Test
         public void reading() throws Exception {
             facebook.setMockJSON("mock_json/post/post_picture.json");
             Post actual = facebook.getPost("19292868552_10150189643478553", new Reading().fields("picture"));

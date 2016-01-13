@@ -114,7 +114,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 if (!commentsJSONObject.isNull("data")) {
                     JSONArray list = commentsJSONObject.getJSONArray("data");
                     final int size = list.length();
-                    comments = new PagableListImpl<Comment>(size, json.getJSONObject("comments"));
+                    comments = new PagableListImpl<Comment>(size, commentsJSONObject);
                     for (int i = 0; i < size; i++) {
                         CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
                         comments.add(comment);

@@ -16,15 +16,16 @@
 
 package facebook4j.internal.json;
 
-import facebook4j.FacebookException;
-import facebook4j.PagableList;
-import facebook4j.Paging;
-import facebook4j.internal.org.json.JSONException;
-import facebook4j.internal.org.json.JSONObject;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getInt;
 
 import java.util.ArrayList;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+import facebook4j.FacebookException;
+import facebook4j.PagableList;
+import facebook4j.Paging;
+import facebook4j.Summary;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -34,6 +35,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     private Integer count;
     private Paging<T> paging;
+    private Summary summary;
 
     /*package*/PagableListImpl() {
         super();
@@ -60,10 +62,19 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         if (!json.isNull("count")) {
             count = getInt("count", json);
         }
+        
         try {
             if (!json.isNull("paging")) {
                 JSONObject pagingJSONObject = json.getJSONObject("paging");
                 paging = new PagingJSONImpl<T>(pagingJSONObject, jsonObjectType);
+            }
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone.getMessage(), jsone);
+        }
+        
+        try {
+            if (!json.isNull("summary")) {
+                summary = new SummaryJSONImpl(json.getJSONObject("summary"));
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -77,12 +88,17 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     public Paging<T> getPaging() {
         return paging;
     }
+    
+    public Summary getSummary() {
+        return summary;
+    }
 
     @Override
     public String toString() {
         return "PagableListImpl{" +
                 "count=" + count +
                 ", paging=" + paging +
+                ", summary=" + summary +
                 ", " + super.toString() +
                 '}';
     }
