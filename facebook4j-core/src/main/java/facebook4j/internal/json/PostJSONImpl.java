@@ -16,6 +16,19 @@
 
 package facebook4j.internal.json;
 
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getBoolean;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getISO8601Datetime;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getInt;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getRawString;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getURL;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
 import facebook4j.Application;
 import facebook4j.Category;
 import facebook4j.Comment;
@@ -34,17 +47,6 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com

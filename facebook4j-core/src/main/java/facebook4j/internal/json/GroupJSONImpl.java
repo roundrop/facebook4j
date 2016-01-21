@@ -20,6 +20,7 @@ import facebook4j.FacebookException;
 import facebook4j.Group;
 import facebook4j.GroupPrivacyType;
 import facebook4j.IdNameEntity;
+import facebook4j.Picture;
 import facebook4j.ResponseList;
 import facebook4j.Venue;
 import facebook4j.conf.Configuration;
@@ -52,6 +53,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Date updatedTime;
     private String email;
     private Venue venue;
+    private Picture picture;
 
     /*package*/GroupJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -89,6 +91,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             email = getRawString("email", json);
             if (!json.isNull("venue")) {
                 venue = new VenueJSONImpl(json.getJSONObject("venue"));
+            }
+            if (!json.isNull("picture")) {
+            	picture = new PictureJSONImpl(json.getJSONObject("picture"));
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -207,4 +212,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 ", venue=" + venue +
                 '}';
     }
+	public Picture getPicture() {
+		return picture;
+	}
 }

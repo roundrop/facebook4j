@@ -3,7 +3,6 @@ package facebook4j.internal.json;
 import static facebook4j.internal.util.z_F4JInternalParseUtil.getRawString;
 import static facebook4j.internal.util.z_F4JInternalParseUtil.getURL;
 import facebook4j.FacebookException;
-import facebook4j.Friend;
 import facebook4j.Picture;
 import facebook4j.ResponseList;
 import facebook4j.TaggableFriend;

@@ -36,4 +36,5 @@ public interface Group extends FacebookResponse {
     Date getUpdatedTime();
     String getEmail();
     Venue getVenue();
+    Picture getPicture();
 }
