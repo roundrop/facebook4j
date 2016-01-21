@@ -172,37 +172,6 @@
         <version>2.1.2</version>
       </plugin>
       <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>javadoc-jar</id>
-            <phase>package</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <configuration>
-              <excludePackageNames>
-                facebook4j.internal.*
-              </excludePackageNames>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration>
-          <charset>UTF-8</charset>
-          <show>public</show>
-          <locale>en_US</locale>
-        </configuration>
-        <version>2.7</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <configuration>
-          <encoding>UTF-8</encoding>
-        </configuration>
-        <version>2.4.3</version>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.15</version>
