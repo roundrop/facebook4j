@@ -19,10 +19,21 @@
  */
 package facebook4j.internal.json;
 
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getBoolean;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getISO8601Datetime;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getRawString;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getTimeZone;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getURI;
+
+import java.net.URI;
+import java.util.Date;
+import java.util.TimeZone;
+
 import facebook4j.Category;
 import facebook4j.Event;
 import facebook4j.EventPrivacyType;
 import facebook4j.FacebookException;
+import facebook4j.Picture;
 import facebook4j.ResponseList;
 import facebook4j.Venue;
 import facebook4j.conf.Configuration;
@@ -30,12 +41,6 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
-
-import java.net.URI;
-import java.util.Date;
-import java.util.TimeZone;
-
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -57,6 +62,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private String rsvpStatus;
     private URI ticketURI;
     private TimeZone timezone;
+	private Picture picture;
     
     /*package*/EventJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -95,6 +101,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             rsvpStatus = getRawString("rsvp_status", json);
             ticketURI = getURI("ticket_uri", json);
             timezone = getTimeZone("timezone", json);
+            if (!json.isNull("picture")) {
+                JSONObject pictureJSONObject = json.getJSONObject("picture");
+                picture = new PictureJSONImpl(pictureJSONObject);
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone);
         }
@@ -156,6 +166,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return timezone;
     }
 
+    public Picture getPicture() {
+    	return picture;
+    }
+    
     /*package*/
     static ResponseList<Event> createEventList(HttpResponse res, Configuration conf) throws FacebookException {
         try {

@@ -38,4 +38,5 @@ public interface Event extends FacebookResponse {
     String getRsvpStatus();
     URI getTicketURI();
     TimeZone getTimezone();
+    Picture getPicture();
 }

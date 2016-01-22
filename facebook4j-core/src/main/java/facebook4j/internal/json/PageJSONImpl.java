@@ -88,7 +88,11 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             phone = getRawString("phone", json);
             checkins = getInt("checkins", json);
-            picture = getURL("picture", json);
+//            picture = getURL("picture", json);
+            if (!json.isNull("picture")) {
+                JSONObject pictureJSONObject = json.getJSONObject("picture");
+                picture = new PictureJSONImpl(pictureJSONObject).getURL();
+            }
             if (!json.isNull("cover")) {
                 JSONObject coverJSONObject = json.getJSONObject("cover");
                 cover = new CoverJSONImpl(coverJSONObject);
