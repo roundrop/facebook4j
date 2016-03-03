@@ -579,6 +579,9 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         if (jsonObjectType == Offer.class) {
             return (ResponseList<T>) createOfferList(res);
         }
+        if (jsonObjectType == TaggableFriend.class) {
+            return (ResponseList<T>) createTaggableFriendList(res);
+        }
         if (jsonObjectType == TestUser.class) {
       	  return (ResponseList<T>) createTestUserList(res);
         }
