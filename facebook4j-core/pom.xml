@@ -65,13 +65,13 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.10</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.5.8</version>
+      <version>1.7.18</version>
       <scope>provided</scope>
       <optional>true</optional>
     </dependency>
@@ -85,7 +85,7 @@
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
-      <version>1.2.9</version>
+      <version>1.2.17</version>
       <scope>provided</scope>
       <optional>true</optional>
     </dependency>
@@ -105,7 +105,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.1</version>
+            <version>1.6</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -132,7 +132,7 @@
             <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>cobertura-maven-plugin</artifactId>
-              <version>2.5.2</version>
+              <version>2.7</version>
               <configuration>
                 <formats>
                   <format>xml</format>
@@ -165,7 +165,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.1</version>
+        <version>2.5.3</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -175,7 +175,7 @@
           <source>1.5</source>
           <target>1.5</target>
         </configuration>
-        <version>2.3.2</version>
+        <version>3.5.1</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -192,7 +192,7 @@
             </manifest>
           </archive>
         </configuration>
-        <version>2.3.1</version>
+        <version>2.6</version>
       </plugin>
 
       <plugin>
@@ -205,7 +205,7 @@
             </goals>
           </execution>
         </executions>
-        <version>2.1.2</version>
+        <version>3.0.0</version>
       </plugin>
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -228,7 +228,7 @@
           <show>public</show>
           <locale>en_US</locale>
         </configuration>
-        <version>2.7</version>
+        <version>2.10.3</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -236,12 +236,12 @@
         <configuration>
           <encoding>UTF-8</encoding>
         </configuration>
-        <version>2.4.3</version>
+        <version>2.7</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.15</version>
+        <version>2.19.1</version>
         <configuration>
           <excludedGroups>facebook4j.junit.category.RealAPITests</excludedGroups>
         </configuration>
@@ -251,12 +251,12 @@
       <plugin>
         <groupId>org.eluder.coveralls</groupId>
         <artifactId>coveralls-maven-plugin</artifactId>
-        <version>2.2.0</version>
+        <version>4.1.0</version>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>cobertura-maven-plugin</artifactId>
-        <version>2.6</version>
+        <version>2.7</version>
         <configuration>
           <format>xml</format>
           <maxmem>256m</maxmem>

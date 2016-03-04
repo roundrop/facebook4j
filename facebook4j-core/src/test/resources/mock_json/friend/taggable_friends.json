@@ -25,6 +25,7 @@
     "cursors": {
       "before": "QWFJZFkyOU1xVDJTT0Y2SXQ3WHE5S2W1ZNW5sNTd6cnRFOGxQSVk1eWVtbEtfWUtCdy1nWERCUVJ4VFJycHdCYWJLd2xkVlVLaDRhbWVZTlR1SzNvWkZCTHRndklVR2tLT2kwbEdwMFBBNi1OZ2c=", 
       "after": "QWFJemlqQ2FXTFZhd0hqVFZ6UTd5bm5HVWDU2eWx0ZjBUQTNfVzRuSnB0TEtjVlNlUmRuUEpXVnBOckNvYkE2ekpkQ20zbjVCb1Y5V1liUGtMYUpXVXV4NnVfWmRrNjZJUmNFblYzWC1ObGwxaGc="
-    }
+    },
+    "next": "https://graph.facebook.com/v2.5/1234567890123456/taggable_friends?access_token=access_token"
   }
 }
