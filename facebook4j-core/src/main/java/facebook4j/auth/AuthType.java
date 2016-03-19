@@ -27,6 +27,9 @@ public enum AuthType {
     ;
 
     public static AuthType of(String value) {
+        if (value == null) {
+            return null;
+        }
         for (AuthType t : AuthType.values()) {
             if (t.toString().equals(value.toUpperCase())) {
                 return t;
