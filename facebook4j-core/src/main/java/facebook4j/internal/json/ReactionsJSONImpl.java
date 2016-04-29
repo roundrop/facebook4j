@@ -42,6 +42,10 @@ public class ReactionsJSONImpl extends FacebookResponseImpl implements Reaction,
                 DataObjectFactoryUtil.clearThreadLocalMap();
             }
             JSONObject json = res.asJSONObject();
+            
+            if (json.has("reactions"))
+            	json = json.getJSONObject("reactions");
+            
             JSONArray list = json.getJSONArray("data");
             final int size = list.length();
             ResponseList<Reaction> reactions = new ResponseListImpl<Reaction>(size, json);

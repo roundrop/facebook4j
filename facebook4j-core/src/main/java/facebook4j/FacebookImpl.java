@@ -2872,8 +2872,20 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     /* Reactions Methods */
     
+    private ResponseList<Reaction> _getReactions(String objectId) throws FacebookException {
+		return factory.createReactionList(get(buildEndpoint(objectId, "reactions")));
+	}
+    
 	public ResponseList<Reaction> getPostReactions(String postId) throws FacebookException {
-		return factory.createReactionList(get(buildEndpoint(postId, "reactions")));
+		return _getReactions(postId);
+	}
+	
+	public ResponseList<Reaction> getAlbumReactions(String albumId) throws FacebookException {
+		return _getReactions(albumId);
+	}
+
+	public ResponseList<Reaction> getPhotoReactions(String photoId) throws FacebookException {
+		return _getReactions(photoId);
 	}
     
     /* narrow down API methods */
@@ -3009,5 +3021,5 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public RawAPIMethods rawAPI() {
         return this;
     }
-    
+
 }
