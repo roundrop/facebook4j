@@ -26,6 +26,7 @@ import facebook4j.PagableList;
 import facebook4j.Place;
 import facebook4j.Post;
 import facebook4j.Privacy;
+import facebook4j.Reaction;
 import facebook4j.ResponseList;
 import facebook4j.Tag;
 import facebook4j.Targeting;
@@ -84,6 +85,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private Boolean isPublished;
     private Integer scheduledPublishTime;
     private Targeting targeting;
+    private PagableList<Reaction> reactions;
 
     /*package*/PostJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -263,6 +265,22 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             scheduledPublishTime = getInt("scheduled_publish_time", json);
             if (!json.isNull("targeting")) {
                 targeting = new TargetingJSONImpl(json.getJSONObject("targeting"));
+            }
+            if (!json.isNull("reactions")) {
+                JSONObject reactionsJSONObject = json.getJSONObject("reactions");
+                if (!reactionsJSONObject.isNull("data")) {
+                    JSONArray list = reactionsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    reactions = new PagableListImpl<Reaction>(size, reactionsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        ReactionsJSONImpl reaction = new ReactionsJSONImpl(list.getJSONObject(i));
+                        reactions.add(reaction);
+                    }
+                } else {
+                	reactions = new PagableListImpl<Reaction>(1, reactionsJSONObject);
+                }
+            } else {
+            	reactions = new PagableListImpl<Reaction>(0);
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -548,5 +566,9 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         }
 
     }
+    
+    public PagableList<Reaction> getReactions() {
+		return reactions;
+	}
 
 }
