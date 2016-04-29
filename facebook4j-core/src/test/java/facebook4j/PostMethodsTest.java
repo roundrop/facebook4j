@@ -1030,5 +1030,20 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual, is(true));
         }
     }
+    
+    public static class postReactions extends MockFacebookTestBase {
+        @Test
+        @FacebookAPIVersion("v2.6")
+        public void reactions_v26() throws Exception {
+            facebook.setMockJSON("mock_json/post/post_reactions.json");
+            Post actual = facebook.getPost("19292868552_10153627866518553", new Reading().fields("reactions"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "reactions"));
+
+            assertThat(actual.getId(), is("19292868552_10153627866518553"));
+            assertThat(actual.getReactions().size(), is(100));
+        }
+    }
+
 
 }

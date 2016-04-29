@@ -2870,6 +2870,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return false;
     }
 
+    /* Reactions Methods */
+    
+	public ResponseList<Reaction> getPostReactions(String postId) throws FacebookException {
+		return factory.createReactionList(get(buildEndpoint(postId, "reactions")));
+	}
+    
     /* narrow down API methods */
 
     public UserMethods users() {

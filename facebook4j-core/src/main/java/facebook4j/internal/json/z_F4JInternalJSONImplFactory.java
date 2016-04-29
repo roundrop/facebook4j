@@ -61,6 +61,7 @@ import facebook4j.Post;
 import facebook4j.Question;
 import facebook4j.QuestionVotes;
 import facebook4j.RSVPStatus;
+import facebook4j.Reaction;
 import facebook4j.ResponseList;
 import facebook4j.Score;
 import facebook4j.Subscribedto;
@@ -406,6 +407,14 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     
     public ResponseList<JSONObject> createJSONObjectList(JSONObject json) throws FacebookException {
         return ResponseListImpl.createJSONObjectList(json);
+    }
+    
+    public Reaction createReaction(HttpResponse res) throws FacebookException {
+        return new ReactionsJSONImpl(res, conf);
+    }
+    
+    public ResponseList<Reaction> createReactionList(HttpResponse res) throws FacebookException {
+        return ReactionsJSONImpl.createReactionsList(res, conf);
     }
     
     @Override
