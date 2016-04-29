@@ -24,6 +24,7 @@ import facebook4j.Like;
 import facebook4j.PagableList;
 import facebook4j.Photo;
 import facebook4j.Place;
+import facebook4j.Reaction;
 import facebook4j.ResponseList;
 import facebook4j.Tag;
 import facebook4j.conf.Configuration;
@@ -64,7 +65,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private PagableList<Comment> comments;
     private PagableList<Like> likes;
     private Category album;
-
+    private PagableList<Reaction> reactions;
+    
     /*package*/PhotoJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
         JSONObject json = res.asJSONObject();
@@ -164,6 +166,22 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             if (!json.isNull("album")) {
                 album = new CategoryJSONImpl(json.getJSONObject("album"));
             }
+            if (!json.isNull("reactions")) {
+                JSONObject reactionsJSONObject = json.getJSONObject("reactions");
+                if (!reactionsJSONObject.isNull("data")) {
+                    JSONArray list = reactionsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    reactions = new PagableListImpl<Reaction>(size, reactionsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        ReactionsJSONImpl reaction = new ReactionsJSONImpl(list.getJSONObject(i));
+                        reactions.add(reaction);
+                    }
+                } else {
+                	reactions = new PagableListImpl<Reaction>(1, reactionsJSONObject);
+                }
+            } else {
+            	reactions = new PagableListImpl<Reaction>(0);
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
@@ -241,6 +259,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return album;
     }
 
+    public PagableList<Reaction> getReactions() {
+		return reactions;
+	}
+    
     /*package*/
     static ResponseList<Photo> createPhotoList(HttpResponse res, Configuration conf) throws FacebookException {
         try {

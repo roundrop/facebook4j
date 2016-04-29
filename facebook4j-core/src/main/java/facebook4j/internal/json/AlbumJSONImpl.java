@@ -51,6 +51,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     
     private PagableList<Like> likes;
     private PagableList<Comment> comments;
+    private PagableList<Reaction> reactions;
 
     /*package*/AlbumJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -123,6 +124,23 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             } else {
                 comments = new PagableListImpl<Comment>(0);
             }
+            
+            if (!json.isNull("reactions")) {
+                JSONObject reactionsJSONObject = json.getJSONObject("reactions");
+                if (!reactionsJSONObject.isNull("data")) {
+                    JSONArray list = reactionsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    reactions = new PagableListImpl<Reaction>(size, reactionsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        ReactionsJSONImpl reaction = new ReactionsJSONImpl(list.getJSONObject(i));
+                        reactions.add(reaction);
+                    }
+                } else {
+                	reactions = new PagableListImpl<Reaction>(1, reactionsJSONObject);
+                }
+            } else {
+            	reactions = new PagableListImpl<Reaction>(0);
+            }
 
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -193,6 +211,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return comments;
     }
 
+    public PagableList<Reaction> getReactions() {
+		return reactions;
+	}
+    
     /*package*/
     static ResponseList<Album> createAlbumList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -266,4 +288,5 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                  ", comments=" + comments +
                  '}';
      }
+
  }
