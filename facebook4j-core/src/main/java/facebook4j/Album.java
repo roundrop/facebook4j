@@ -18,7 +18,6 @@ package facebook4j;
 
 import java.net.URL;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -41,5 +40,6 @@ public interface Album extends FacebookResponse {
     
     PagableList<Like> getLikes();
     PagableList<Comment> getComments();
+    PagableList<Reaction> getReactions();
 
 }

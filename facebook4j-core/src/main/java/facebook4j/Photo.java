@@ -42,5 +42,6 @@ public interface Photo extends FacebookResponse {
     PagableList<Comment> getComments();
     PagableList<Like> getLikes();
     Category getAlbum();
+    PagableList<Reaction> getReactions();
 
 }
