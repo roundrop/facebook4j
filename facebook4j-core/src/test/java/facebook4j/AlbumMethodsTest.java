@@ -17,6 +17,8 @@
 package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
+import facebook4j.junit.FacebookAPIVersion;
+
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -645,6 +647,20 @@ public class AlbumMethodsTest {
             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
 
             assertThat(actual.toString(), is("https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-ash3/644169_573207722741517_740837405_a.jpg"));
+        }
+    }
+    
+    public static class albumReactions extends MockFacebookTestBase {
+        @Test
+        @FacebookAPIVersion("v2.6")
+        public void reactions_v26() throws Exception {
+        	facebook.setMockJSON("mock_json/album/reactions.json");
+            
+            ResponseList<Reaction> reactions = facebook.getAlbumReactions("10154076568048485");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.6/10154076568048485/reactions")));
+            
+            assertThat(reactions.size(), is(25));
         }
     }
 

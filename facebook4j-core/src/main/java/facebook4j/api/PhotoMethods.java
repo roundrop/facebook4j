@@ -342,11 +342,11 @@ public interface PhotoMethods {
     boolean deleteTagOnPhoto(String photoId, String toUserId) throws FacebookException;
 
     /**
-     * Returns the reactions on a post.
-     * @param postId the ID of the post
+     * Returns the reactions on a photo.
+     * @param photoId the ID of the photo
      * @return reactions
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a https://developers.facebook.com/docs/graph-api/reference/post/reactions">Reactions - Facebook Developers</a>
      */
-    ResponseList<Reaction> getPostReactions(String postId) throws FacebookException;
+    ResponseList<Reaction> getPhotoReactions(String photoId) throws FacebookException;
 }

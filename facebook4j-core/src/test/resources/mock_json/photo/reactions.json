@@ -1,0 +1,139 @@
+{
+  "reactions": {
+    "data": [
+      {
+        "id": "670693319666398",
+        "name": "Dominika Nguyen Ngoc",
+        "type": "LIKE"
+      },
+      {
+        "id": "741216659307378",
+        "name": "Yali Shani",
+        "type": "LIKE"
+      },
+      {
+        "id": "10202223327917346",
+        "name": "Mirko Moruzzi",
+        "type": "LIKE"
+      },
+      {
+        "id": "1387278218253472",
+        "name": "Mayte Gonzalez",
+        "type": "LOVE"
+      },
+      {
+        "id": "573461792795700",
+        "name": "Rene Pineda",
+        "type": "LIKE"
+      },
+      {
+        "id": "158520331212840",
+        "name": "Lucio Araújo",
+        "type": "LIKE"
+      },
+      {
+        "id": "221190468272227",
+        "name": "Alessio Desiati",
+        "type": "LIKE"
+      },
+      {
+        "id": "136609190021649",
+        "name": "Peaceful Pritam",
+        "type": "LIKE"
+      },
+      {
+        "id": "1707694656173969",
+        "name": "Nishu Tomar",
+        "type": "LIKE"
+      },
+      {
+        "id": "10152053392478404",
+        "name": "Kenny Kraly Jr",
+        "type": "LIKE"
+      },
+      {
+        "id": "333376220153745",
+        "name": "Fernando Revollar",
+        "type": "LOVE"
+      },
+      {
+        "id": "10152214531421854",
+        "name": "Juan Diego Sorzano Trillos",
+        "type": "LIKE"
+      },
+      {
+        "id": "760838027282815",
+        "name": "Blas Navarrete Araujo",
+        "type": "LIKE"
+      },
+      {
+        "id": "151575981884572",
+        "name": "عبدالرحيم بن شكرى الطحاوى",
+        "type": "LIKE"
+      },
+      {
+        "id": "1670657049866482",
+        "name": "Otávio Freitas",
+        "type": "HAHA"
+      },
+      {
+        "id": "852565151426130",
+        "name": "Clara Coapstick",
+        "type": "LIKE"
+      },
+      {
+        "id": "133156363692880",
+        "name": "Julio Rodriguez",
+        "type": "LIKE"
+      },
+      {
+        "id": "824346284295111",
+        "name": "Ravi Sharma",
+        "type": "LIKE"
+      },
+      {
+        "id": "1536654616597744",
+        "name": "Clayon Gayle",
+        "type": "LIKE"
+      },
+      {
+        "id": "1489455144658947",
+        "name": "Thái Trần",
+        "type": "LIKE"
+      },
+      {
+        "id": "621504421268573",
+        "name": "Rodrigo Gonzalez Moran",
+        "type": "LIKE"
+      },
+      {
+        "id": "107613559633863",
+        "name": "Rafał Koleśnik",
+        "type": "LIKE"
+      },
+      {
+        "id": "627486817335271",
+        "name": "Tony Rayo de Jalisco",
+        "type": "LIKE"
+      },
+      {
+        "id": "1409862852619938",
+        "name": "Kata Sroka-Talewicz",
+        "type": "LIKE"
+      },
+      {
+        "id": "761350120591983",
+        "name": "Rahul Ganga",
+        "type": "LIKE"
+      }
+    ],
+    "paging": {
+      "cursors": {
+        "before": "TVRBd01EQXhOemN5TURrME9UTXpPakUwTmpFNU5UVTRNemc2TWpVME1EazJNVFl4TXc9PQZDZD",
+        "after": "TVRBd01EQXhOVEV3TURVM01EY3pPakUwTmpFNU5EZA3dPRFE2TWpVME1EazJNVFl4TXc9PQZDZD"
+      },
+      "next": "https://graph.facebook.com/v2.6/10154129451953485/reactions?access_token=EAACEdEose0cBAA9r7iUThgRaYEXVno5eI2Nm7QWtMhDT0N3BlY3wTE3AHhJfldQ3lP5Y2DwENHq4k053oLFdA15wiXmn9QMTZAZCfszTUlMC3XnzKs6aNeQyLDCZBllOXlL8ZBrMusjObeKwuJmHXyO12lKvyZB6m1werLKwXcwZDZD&pretty=0&limit=25&after=TVRBd01EQXhOVEV3TURVM01EY3pPakUwTmpFNU5EZA3dPRFE2TWpVME1EazJNVFl4TXc9PQZDZD"
+    }
+  },
+  "id": "10154129451953485"
+}
