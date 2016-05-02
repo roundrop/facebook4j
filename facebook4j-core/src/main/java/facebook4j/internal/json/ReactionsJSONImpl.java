@@ -13,26 +13,25 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
-public class ReactionsJSONImpl extends FacebookResponseImpl implements Reaction, Serializable{
+public class ReactionsJSONImpl extends CategoryJSONImpl implements Reaction, Serializable{
+
 
 	private static final long serialVersionUID = 4813956293820850547L;
 
-	private String id;
-	private String name;
 	private String type;
 	
 	ReactionsJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
-		JSONObject json = res.asJSONObject();
+		super(res, conf);
+		init(res.asJSONObject());
+	}
+	
+	ReactionsJSONImpl(JSONObject json) throws FacebookException {
+		super(json);
 		init(json);
 	}
 	
-	ReactionsJSONImpl(JSONObject reactionJSONObject) throws FacebookException {
-		init(reactionJSONObject);
-	}
 
 	private void init(JSONObject json) throws FacebookException {
-        id = getRawString("id", json);
-		name = getRawString("name", json);
 		type = getRawString("type", json);
     }
 

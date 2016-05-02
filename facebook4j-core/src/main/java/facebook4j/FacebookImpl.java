@@ -16,6 +16,20 @@
 
 package facebook4j;
 
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getBoolean;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getRawString;
+
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
 import facebook4j.Question.Option;
 import facebook4j.api.AccountMethods;
 import facebook4j.api.ActivityMethods;
@@ -58,19 +72,6 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 import facebook4j.internal.util.z_F4JInternalStringUtil;
-
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * A java representation of the <a href="https://developers.facebook.com/docs/reference/api/">Facebook Graph API</a><br>
@@ -2872,22 +2873,46 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     /* Reactions Methods */
     
-    private ResponseList<Reaction> _getReactions(String objectId) throws FacebookException {
-		return factory.createReactionList(get(buildEndpoint(objectId, "reactions")));
+    private ResponseList<Reaction> _getReactions(String objectId, Reading reading) throws FacebookException {
+		return factory.createReactionList(get(buildEndpoint(objectId, "reactions", reading)));
+	}
+    
+    public ResponseList<Reaction> getAlbumReactions(String albumId) throws FacebookException {
+    	return _getReactions(albumId, null);
+    }
+
+    public ResponseList<Reaction> getAlbumReactions(String albumId, Reading reading) throws FacebookException {
+    	ensureAuthorizationEnabled();
+        return _getReactions(albumId, reading);
+	}
+    
+	public ResponseList<Reaction> getPhotoReactions(String photoId) throws FacebookException {
+		return _getReactions(photoId, null);
+	}
+	
+	public ResponseList<Reaction> getPhotoReactions(String photoId, Reading reading) throws FacebookException {
+		ensureAuthorizationEnabled();
+		return _getReactions(photoId, reading);
 	}
     
 	public ResponseList<Reaction> getPostReactions(String postId) throws FacebookException {
-		return _getReactions(postId);
+		return _getReactions(postId, null);
 	}
 	
-	public ResponseList<Reaction> getAlbumReactions(String albumId) throws FacebookException {
-		return _getReactions(albumId);
+	public ResponseList<Reaction> getPostReactions(String postId, Reading reading) throws FacebookException {
+		ensureAuthorizationEnabled();
+		return _getReactions(postId, reading);
 	}
 
-	public ResponseList<Reaction> getPhotoReactions(String photoId) throws FacebookException {
-		return _getReactions(photoId);
+	public ResponseList<Reaction> getVideoReactions(String videoId) throws FacebookException {
+		return _getReactions(videoId, null);
 	}
-    
+
+	public ResponseList<Reaction> getVideoReactions(String videoId, Reading reading) throws FacebookException {
+		ensureAuthorizationEnabled();
+		return _getReactions(videoId, reading);
+	}
+	
     /* narrow down API methods */
 
     public UserMethods users() {

@@ -395,5 +395,15 @@ public interface PostMethods {
      * @see <a https://developers.facebook.com/docs/graph-api/reference/post/reactions">Reactions - Facebook Developers</a>
      */
     ResponseList<Reaction> getPostReactions(String postId) throws FacebookException;
+    
+    /**
+     * Returns the reactions on a post.
+     * @param postId the ID of a post
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a> see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return reactions
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a https://developers.facebook.com/docs/graph-api/reference/post/reactions">Reactions - Facebook Developers</a>
+     */
+    ResponseList<Reaction> getPostReactions(String postId, Reading reading) throws FacebookException;
 
 }

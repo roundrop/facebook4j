@@ -20,6 +20,7 @@ import facebook4j.Comment;
 import facebook4j.CommentUpdate;
 import facebook4j.FacebookException;
 import facebook4j.Like;
+import facebook4j.Reaction;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
 import facebook4j.Video;
@@ -199,4 +200,22 @@ public interface VideoMethods {
      */
     URL getVideoCover(String videoId) throws FacebookException;
     
+    /**
+     * Returns all of the reactions on a video.
+     * @param videoId the ID of a video
+     * @return reactions
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a https://developers.facebook.com/docs/graph-api/reference/post/reactions">Reactions - Facebook Developers</a>
+     */
+    ResponseList<Reaction> getVideoReactions(String videoId) throws FacebookException;
+
+    /**
+     * Returns all of the reactions on a video.
+     * @param videoId the ID of a video
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a> see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return reactions
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a https://developers.facebook.com/docs/graph-api/reference/post/reactions">Reactions - Facebook Developers</a>
+     */
+    ResponseList<Reaction> getVideoReactions(String videoId, Reading reading) throws FacebookException;
 }

@@ -349,4 +349,14 @@ public interface PhotoMethods {
      * @see <a https://developers.facebook.com/docs/graph-api/reference/post/reactions">Reactions - Facebook Developers</a>
      */
     ResponseList<Reaction> getPhotoReactions(String photoId) throws FacebookException;
+    
+    /**
+     * Returns the reactions on a photo.
+     * @param photoId the ID of a photo
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a> see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return reactions
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a https://developers.facebook.com/docs/graph-api/reference/post/reactions">Reactions - Facebook Developers</a>
+     */
+    ResponseList<Reaction> getPhotoReactions(String photoId, Reading reading) throws FacebookException;
 }
