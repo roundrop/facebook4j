@@ -1,8 +1,7 @@
 package facebook4j;
 
-public interface Reaction extends FacebookResponse{
-	String getId();
-	String getName();
+public interface Reaction extends Category{
+
 	String getType();
 
 }

@@ -246,4 +246,14 @@ public interface AlbumMethods {
      * @see <a https://developers.facebook.com/docs/graph-api/reference/post/reactions">Reactions - Facebook Developers</a>
      */
     ResponseList<Reaction> getAlbumReactions(String albumId) throws FacebookException;
+    
+    /**
+     * Returns the reactions on the album.
+     * @param albumId the ID of a album
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a> see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return reactions
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a https://developers.facebook.com/docs/graph-api/reference/post/reactions">Reactions - Facebook Developers</a>
+     */
+    ResponseList<Reaction> getAlbumReactions(String albumId, Reading reading) throws FacebookException;
 }
