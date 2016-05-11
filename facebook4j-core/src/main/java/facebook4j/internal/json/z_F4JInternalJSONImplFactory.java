@@ -597,6 +597,9 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         if (jsonObjectType == JSONObject.class) {
             return (ResponseList<T>) createJSONObjectList(res);
         }
+        if (jsonObjectType == Reaction.class) {
+        	return (ResponseList<T>) createReactionList(res);
+        }
         throw new FacebookException("The json object type: '" + jsonObjectType + "' is unrecognized.");
     }
 
