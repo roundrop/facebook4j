@@ -61,6 +61,7 @@ import facebook4j.Post;
 import facebook4j.Question;
 import facebook4j.QuestionVotes;
 import facebook4j.RSVPStatus;
+import facebook4j.Reaction;
 import facebook4j.ResponseList;
 import facebook4j.Score;
 import facebook4j.Subscribedto;
@@ -220,4 +221,5 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     
     <T> ResponseList<T> createResponseList(HttpResponse res, Class<T> jsonObjectType) throws FacebookException;
 
+    ResponseList<Reaction> createReactionList(HttpResponse res) throws FacebookException;
 }

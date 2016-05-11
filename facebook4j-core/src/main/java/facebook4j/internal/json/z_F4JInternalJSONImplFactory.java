@@ -61,6 +61,7 @@ import facebook4j.Post;
 import facebook4j.Question;
 import facebook4j.QuestionVotes;
 import facebook4j.RSVPStatus;
+import facebook4j.Reaction;
 import facebook4j.ResponseList;
 import facebook4j.Score;
 import facebook4j.Subscribedto;
@@ -408,6 +409,14 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return ResponseListImpl.createJSONObjectList(json);
     }
     
+    public Reaction createReaction(HttpResponse res) throws FacebookException {
+        return new ReactionsJSONImpl(res, conf);
+    }
+    
+    public ResponseList<Reaction> createReactionList(HttpResponse res) throws FacebookException {
+        return ReactionsJSONImpl.createReactionsList(res, conf);
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -587,6 +596,9 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         }
         if (jsonObjectType == JSONObject.class) {
             return (ResponseList<T>) createJSONObjectList(res);
+        }
+        if (jsonObjectType == Reaction.class) {
+        	return (ResponseList<T>) createReactionList(res);
         }
         throw new FacebookException("The json object type: '" + jsonObjectType + "' is unrecognized.");
     }

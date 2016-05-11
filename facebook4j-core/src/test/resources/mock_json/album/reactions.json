@@ -1,0 +1,139 @@
+{
+  "reactions": {
+    "data": [
+      {
+        "id": "417302995115965",
+        "name": "Mohammed Asif DS",
+        "type": "LIKE"
+      },
+      {
+        "id": "10152366458541455",
+        "name": "Odeveca Carlos",
+        "type": "LIKE"
+      },
+      {
+        "id": "174935986213027",
+        "name": "Bismi Lah",
+        "type": "LIKE"
+      },
+      {
+        "id": "412882762245462",
+        "name": "Rajeev Mishra",
+        "type": "LOVE"
+      },
+      {
+        "id": "200932376929721",
+        "name": "Oliwia Chudzinska",
+        "type": "LIKE"
+      },
+      {
+        "id": "729296693823349",
+        "name": "Mdc Coria Pereira",
+        "type": "LIKE"
+      },
+      {
+        "id": "1413730792265232",
+        "name": "Johan Lopez Rodz",
+        "type": "LIKE"
+      },
+      {
+        "id": "1543508715911380",
+        "name": "Nicholas Wehring",
+        "type": "LIKE"
+      },
+      {
+        "id": "613182685441244",
+        "name": "Sourav Ghosh",
+        "type": "LIKE"
+      },
+      {
+        "id": "703179119752590",
+        "name": "Sven Vormehr",
+        "type": "LIKE"
+      },
+      {
+        "id": "1064744603596725",
+        "name": "Dyegho Birts Santtos",
+        "type": "LIKE"
+      },
+      {
+        "id": "10205144435876243",
+        "name": "Mark Lee",
+        "type": "LIKE"
+      },
+      {
+        "id": "114093438932832",
+        "name": "Joan Jiménez",
+        "type": "LIKE"
+      },
+      {
+        "id": "648393831908918",
+        "name": "Игорь Ломакин",
+        "type": "LIKE"
+      },
+      {
+        "id": "214555258879117",
+        "name": "Jhou Bueno",
+        "type": "LIKE"
+      },
+      {
+        "id": "586172691550660",
+        "name": "Fred Bernal",
+        "type": "LIKE"
+      },
+      {
+        "id": "841141102590125",
+        "name": "Ardi Maruli",
+        "type": "LIKE"
+      },
+      {
+        "id": "10204138870930323",
+        "name": "Thierry De Reyck",
+        "type": "LIKE"
+      },
+      {
+        "id": "159481834432613",
+        "name": "Ethan Schoefer",
+        "type": "LIKE"
+      },
+      {
+        "id": "695493937205497",
+        "name": "Karthik Gowda",
+        "type": "LIKE"
+      },
+      {
+        "id": "557535044407433",
+        "name": "Jurrell Hightower",
+        "type": "LIKE"
+      },
+      {
+        "id": "750728554982125",
+        "name": "Stephanie Crumpler",
+        "type": "LIKE"
+      },
+      {
+        "id": "337071519776097",
+        "name": "Sarah Bellem",
+        "type": "LIKE"
+      },
+      {
+        "id": "227781414086972",
+        "name": "Enrique Esteban Moreno Coronado",
+        "type": "LIKE"
+      },
+      {
+        "id": "513759015499125",
+        "name": "Suleman Mahmood",
+        "type": "LIKE"
+      }
+    ],
+    "paging": {
+      "cursors": {
+        "before": "TVRBd01EQTFNRGc0TURReE9EZAzJPakUwTmpFeU5qRTNNRGM2TWpVME1EazJNVFl4TXc9PQZDZD",
+        "after": "TVRBd01EQTFPVFV3T1RJeE1EQTNPakUwTmpBek1qRTBNRFU2TWpVME1EazJNVFl4TXc9PQZDZD"
+      },
+      "next": "https://graph.facebook.com/v2.6/10154076568048485/reactions?access_token=EAACEdEose0cBAA9r7iUThgRaYEXVno5eI2Nm7QWtMhDT0N3BlY3wTE3AHhJfldQ3lP5Y2DwENHq4k053oLFdA15wiXmn9QMTZAZCfszTUlMC3XnzKs6aNeQyLDCZBllOXlL8ZBrMusjObeKwuJmHXyO12lKvyZB6m1werLKwXcwZDZD&pretty=0&limit=25&after=TVRBd01EQTFPVFV3T1RJeE1EQTNPakUwTmpBek1qRTBNRFU2TWpVME1EazJNVFl4TXc9PQZDZD"
+    }
+  },
+  "id": "10154076568048485"
+}

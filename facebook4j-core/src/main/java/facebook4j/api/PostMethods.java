@@ -16,16 +16,17 @@
 
 package facebook4j.api;
 
+import java.net.URL;
+
 import facebook4j.Comment;
 import facebook4j.CommentUpdate;
 import facebook4j.FacebookException;
 import facebook4j.Like;
 import facebook4j.Post;
 import facebook4j.PostUpdate;
+import facebook4j.Reaction;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
-
-import java.net.URL;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -385,5 +386,24 @@ public interface PostMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/post/">Post - Facebook Developers</a>
      */
     boolean deletePost(String postId) throws FacebookException;
+    
+    /**
+     * Returns the reactions on a post.
+     * @param postId the ID of the post
+     * @return reactions
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a https://developers.facebook.com/docs/graph-api/reference/post/reactions">Reactions - Facebook Developers</a>
+     */
+    ResponseList<Reaction> getPostReactions(String postId) throws FacebookException;
+    
+    /**
+     * Returns the reactions on a post.
+     * @param postId the ID of a post
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a> see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return reactions
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a https://developers.facebook.com/docs/graph-api/reference/post/reactions">Reactions - Facebook Developers</a>
+     */
+    ResponseList<Reaction> getPostReactions(String postId, Reading reading) throws FacebookException;
 
 }
