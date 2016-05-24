@@ -1,7 +1,7 @@
 package facebook4j;
 
-public interface Reaction extends Category{
+public interface Reaction extends IdNameEntity {
 
-	String getType();
+    ReactionType getType();
 
 }

@@ -410,11 +410,11 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     }
     
     public Reaction createReaction(HttpResponse res) throws FacebookException {
-        return new ReactionsJSONImpl(res, conf);
+        return new ReactionJSONImpl(res, conf);
     }
     
     public ResponseList<Reaction> createReactionList(HttpResponse res) throws FacebookException {
-        return ReactionsJSONImpl.createReactionsList(res, conf);
+        return ReactionJSONImpl.createReactionsList(res, conf);
     }
     
     @Override
@@ -591,14 +591,14 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         if (jsonObjectType == TaggableFriend.class) {
             return (ResponseList<T>) createTaggableFriendList(res);
         }
+        if (jsonObjectType == Reaction.class) {
+            return (ResponseList<T>) createReactionList(res);
+        }
         if (jsonObjectType == TestUser.class) {
       	  return (ResponseList<T>) createTestUserList(res);
         }
         if (jsonObjectType == JSONObject.class) {
             return (ResponseList<T>) createJSONObjectList(res);
-        }
-        if (jsonObjectType == Reaction.class) {
-        	return (ResponseList<T>) createReactionList(res);
         }
         throw new FacebookException("The json object type: '" + jsonObjectType + "' is unrecognized.");
     }

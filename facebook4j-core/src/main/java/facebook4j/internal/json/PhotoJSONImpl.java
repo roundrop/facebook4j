@@ -173,7 +173,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                     final int size = list.length();
                     reactions = new PagableListImpl<Reaction>(size, reactionsJSONObject);
                     for (int i = 0; i < size; i++) {
-                        ReactionsJSONImpl reaction = new ReactionsJSONImpl(list.getJSONObject(i));
+                        ReactionJSONImpl reaction = new ReactionJSONImpl(list.getJSONObject(i));
                         reactions.add(reaction);
                     }
                 } else {

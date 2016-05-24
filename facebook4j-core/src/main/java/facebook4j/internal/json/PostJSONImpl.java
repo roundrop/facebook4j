@@ -273,7 +273,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                     final int size = list.length();
                     reactions = new PagableListImpl<Reaction>(size, reactionsJSONObject);
                     for (int i = 0; i < size; i++) {
-                        ReactionsJSONImpl reaction = new ReactionsJSONImpl(list.getJSONObject(i));
+                        ReactionJSONImpl reaction = new ReactionJSONImpl(list.getJSONObject(i));
                         reactions.add(reaction);
                     }
                 } else {
