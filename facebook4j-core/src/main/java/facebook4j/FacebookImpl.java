@@ -812,6 +812,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createLikeList(get(buildEndpoint(postId, "likes", reading)));
     }
 
+	public ResponseList<Post> getPostShares(String postId) throws FacebookException {
+		return getPostShares(postId, null);
+	}
+
+	public ResponseList<Post> getPostShares(String postId, Reading reading) throws FacebookException {
+		ensureAuthorizationEnabled();
+		return factory.createPostList(get(buildEndpoint(postId, "sharedposts", reading)));
+	}
+    
     public boolean likePost(String postId) throws FacebookException {
         ensureAuthorizationEnabled();
         return _like(postId);
