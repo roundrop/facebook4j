@@ -31,7 +31,7 @@ public abstract class FacebookTestBase {
 
     @Before
     public void setUp() throws Exception {
-        InputStream is = FacebookTestBase.class.getResourceAsStream("/test.properties-template");
+        InputStream is = FacebookTestBase.class.getResourceAsStream("/test.properties");
         p = new Properties();
         p.load(is);
         is.close();
