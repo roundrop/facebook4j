@@ -240,5 +240,16 @@ public interface SearchMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      */
     ResponseList<JSONObject> search(String query, Reading reading) throws FacebookException;
+    
+    /**
+     * Searches all public objects of given type.
+     * @param query the search condition
+     * @param object type
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return objects
+     * @throws FacebookException when Facebook service or network is unavailable
+     */
+    ResponseList<JSONObject> search(String query, String type, Reading reading) throws FacebookException;
+
 
 }
