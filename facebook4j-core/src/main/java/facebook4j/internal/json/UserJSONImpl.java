@@ -29,12 +29,7 @@ import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
@@ -81,6 +76,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private URL website;
     private List<User.Work> work;
     private User.AgeRange ageRange;
+    private Metadata metadata;
 
     /*package*/UserJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         if (conf.isJSONStoreEnabled()) {
@@ -126,9 +122,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             username = getRawString("username", json);
             thirdPartyId = getRawString("third_party_id", json);
             installed = getBoolean("installed", json);
-            // Using the current time to compute the timezone offset is technically wrong, because 
+            // Using the current time to compute the timezone offset is technically wrong, because
             // the timezone value corresponds to the user's last login, but it's the best we can do
-            long currentTime = System.currentTimeMillis(); 
+            long currentTime = System.currentTimeMillis();
             timezone = getTimeZoneOffset("timezone", json, currentTime);
             updatedTime = getISO8601Datetime("updated_time", json);
             verified = getBoolean("verified", json);
@@ -228,6 +224,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                JSONObject ageRangeJSONObject = json.getJSONObject("age_range");
                ageRange = new AgeRangeJSONImpl(ageRangeJSONObject);
            }
+            if (!json.isNull("metadata")){
+                JSONObject metadataJSONObject = json.getJSONObject("metadata");
+                metadata = new MetadataImpl(metadataJSONObject);
+            }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage() + ":" + json.toString(), jsone);
         }
@@ -372,6 +372,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     public User.AgeRange getAgeRange() {
        return ageRange;
    }
+
+    public Metadata getMetadata() {
+        return metadata;
+    }
 
     /*package*/
     static ResponseList<User> createUserList(HttpResponse res, Configuration conf) throws FacebookException {
@@ -871,7 +875,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     private final class AgeRangeJSONImpl implements User.AgeRange, java.io.Serializable {
        private static final long serialVersionUID = -4890967721976343047L;
-       
+
        private final Integer min;
        private final Integer max;
 
@@ -917,4 +921,140 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         }
     }
 
+    private class MetadataImpl implements Metadata{
+
+        List<MetadataField> fields = new ArrayList<MetadataField>();
+        String type;
+        Map<String,String> connections = new HashMap<String, String>();
+
+        public MetadataImpl(JSONObject json) throws FacebookException{
+            try{
+                if (!json.isNull("fields")){
+                    JSONArray fieldsJSONArray = json.getJSONArray("fields");
+                    for (int i=0; i<fieldsJSONArray.length(); i++){
+                        JSONObject fieldJSONObject = fieldsJSONArray.getJSONObject(i);
+                        fields.add(new MetadataFieldImpl(fieldJSONObject));
+                    }
+                }
+                if (!json.isNull("type")){
+                    type = json.getString("type");
+                }
+                if (!json.isNull("connections")){
+                    JSONObject connectionsJSONObject = json.getJSONObject("connections");
+                    @SuppressWarnings("unchecked")
+                    Iterator<String> fieldNamesIterator = connectionsJSONObject.keys();
+                    while (fieldNamesIterator.hasNext()){
+                        String key = fieldNamesIterator.next();
+                        String value = connectionsJSONObject.getString(key);
+                        connections.put(key, value);
+                    }
+                }
+            }catch (JSONException e){
+                throw new FacebookException(e);
+            }
+        }
+
+        public List<MetadataField> getFields() {
+            return fields;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public Map<String, String> getConnections() {
+            return connections;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            MetadataImpl metadata = (MetadataImpl) o;
+
+            if (fields != null ? !fields.equals(metadata.fields) : metadata.fields != null) return false;
+            if (type != null ? !type.equals(metadata.type) : metadata.type != null) return false;
+            return connections != null ? connections.equals(metadata.connections) : metadata.connections == null;
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = fields != null ? fields.hashCode() : 0;
+            result = 31 * result + (type != null ? type.hashCode() : 0);
+            result = 31 * result + (connections != null ? connections.hashCode() : 0);
+            return result;
+        }
+
+        @Override
+        public String toString() {
+            return "MetadataImpl{" +
+                    "fields=" + fields +
+                    ", type='" + type + '\'' +
+                    ", connections=" + connections +
+                    '}';
+        }
+    }
+
+    private class MetadataFieldImpl implements MetadataField{
+
+        private String name;
+        private String description;
+        private String type;
+
+        public MetadataFieldImpl(JSONObject json) throws FacebookException {
+            try{
+                this.name = json.getString("name");
+                this.description = json.getString("description");
+                if (!json.isNull("type")){
+                    this.type = json.getString("type");
+                }
+            }catch (JSONException e){
+                throw new FacebookException(e);
+            }
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            MetadataFieldImpl that = (MetadataFieldImpl) o;
+
+            if (name != null ? !name.equals(that.name) : that.name != null) return false;
+            if (description != null ? !description.equals(that.description) : that.description != null) return false;
+            return type != null ? type.equals(that.type) : that.type == null;
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = name != null ? name.hashCode() : 0;
+            result = 31 * result + (description != null ? description.hashCode() : 0);
+            result = 31 * result + (type != null ? type.hashCode() : 0);
+            return result;
+        }
+
+        @Override
+        public String toString() {
+            return "MetadataFieldImpl{" +
+                    "name='" + name + '\'' +
+                    ", description='" + description + '\'' +
+                    ", type='" + type + '\'' +
+                    '}';
+        }
+    }
 }

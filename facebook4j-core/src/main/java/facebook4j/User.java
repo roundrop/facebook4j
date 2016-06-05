@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 
 /**
@@ -61,6 +62,7 @@ public interface User {
     URL getWebsite();
     List<User.Work> getWork();
     User.AgeRange getAgeRange();
+    Metadata getMetadata();
 
     interface Education {
         IdNameEntity getYear();
@@ -97,6 +99,17 @@ public interface User {
         Integer getMax();
 	}
 
+    interface Metadata {
+        List<MetadataField> getFields();
+        String getType();
+        Map<String,String> getConnections();
+    }
+
+    interface MetadataField {
+        String getName();
+        String getDescription();
+        String getType();
+    }
 
     String BIRTHDAY_DATE_FORMAT = "MM/dd/yyyy";
 

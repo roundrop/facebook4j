@@ -69,5 +69,34 @@
             "end_date": "2011-12",
             "start_date": "2011-09"
         }
-    ]
+    ],
+    "metadata": {
+        "fields": [
+            {
+                "name": "id",
+                "description": "Page ID. No access token is required to access this field",
+                "type": "numeric string"
+            },
+            {
+                "name": "about",
+                "description": "Information about the Page",
+                "type": "string"
+            },
+            {
+                "name": "access_token",
+                "description": "The access token you can use to act as the Page. Only visible to Page Admins",
+                "type": "string"
+            }
+        ],
+        "type": "page",
+        "connections": {
+            "albums": "https://graph.facebook.com/v2.6/4/albums?access_token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&pretty=0",
+            "feed": "https://graph.facebook.com/v2.6/4/feed?access_token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&pretty=0",
+            "global_brand_children": "https://graph.facebook.com/v2.6/4/global_brand_children?access_token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&pretty=0",
+            "insights": "https://graph.facebook.com/v2.6/4/insights?access_token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&pretty=0",
+            "instagram_accounts": "https://graph.facebook.com/v2.6/4/instagram_accounts?access_token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&pretty=0",
+            "instant_articles": "https://graph.facebook.com/v2.6/4/instant_articles?access_token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&pretty=0",
+            "locations": "https://graph.facebook.com/v2.6/4/locations?access_token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&pretty=0"
+        }
+    }
 }
