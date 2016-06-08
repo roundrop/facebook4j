@@ -1,0 +1,948 @@
+{
+  "data": [
+    {
+      "created_time": "2016-04-25T02:30:07+0000",
+      "story": "Ali Tomlinson shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Ali Tomlinson",
+        "id": "188925184835149"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "mobile_status_update",
+      "story_tags": {
+        "0": [
+          {
+            "id": "188925184835149",
+            "name": "Ali Tomlinson",
+            "type": "user",
+            "offset": 0,
+            "length": 13
+          }
+        ],
+        "21": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 21,
+            "length": 10
+          }
+        ],
+        "34": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 34,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2016-04-25T02:30:07+0000",
+      "id": "188925184835149_172970369763964"
+    },
+    {
+      "created_time": "2015-12-01T01:40:09+0000",
+      "story": "Angélica Sales Bianco shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Like",
+          "link": "https://www.facebook.com/angelica.bianco.58/posts/1131529910193031"
+        },
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Angélica Sales Bianco",
+        "id": "1033864833292873"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "mobile_status_update",
+      "story_tags": {
+        "0": [
+          {
+            "id": "1033864833292873",
+            "name": "Angélica Sales Bianco",
+            "type": "user",
+            "offset": 0,
+            "length": 21
+          }
+        ],
+        "29": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 29,
+            "length": 10
+          }
+        ],
+        "42": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 42,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2015-12-01T01:40:09+0000",
+      "id": "1033864833292873_1131529910193031"
+    },
+    {
+      "created_time": "2015-08-17T18:10:11+0000",
+      "story": "Temo Tomaradze Aarrcchhiitteecctt თტ shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Like",
+          "link": "https://www.facebook.com/permalink.php?story_fbid=1149823135046528&id=549530791742435"
+        },
+        {
+          "name": "Comment",
+          "link": "https://www.facebook.com/permalink.php?story_fbid=1149823135046528&id=549530791742435"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Temo Tomaradze Aarrcchhiitteecctt თტ",
+        "category": "Designer",
+        "id": "549530791742435"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "shared_story",
+      "story_tags": {
+        "0": [
+          {
+            "id": "549530791742435",
+            "name": "Temo Tomaradze Aarrcchhiitteecctt თტ",
+            "type": "page",
+            "offset": 0,
+            "length": 36
+          }
+        ],
+        "44": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 44,
+            "length": 10
+          }
+        ],
+        "57": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 57,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2015-08-17T18:10:11+0000",
+      "id": "549530791742435_1149823135046528"
+    },
+    {
+      "created_time": "2015-03-06T05:43:50+0000",
+      "message": "marx69 audiovisual",
+      "story": "Xavier Castillo Renova shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Xavier Castillo Renova",
+        "id": "1520148638235660"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "shared_story",
+      "story_tags": {
+        "0": [
+          {
+            "id": "1520148638235660",
+            "name": "Xavier Castillo Renova",
+            "type": "user",
+            "offset": 0,
+            "length": 22
+          }
+        ],
+        "30": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 30,
+            "length": 10
+          }
+        ],
+        "43": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 43,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2015-03-06T05:43:50+0000",
+      "id": "1520148638235660_1548596955390828"
+    },
+    {
+      "created_time": "2015-01-11T13:28:17+0000",
+      "story": "Vadivel Mayil shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Vadivel Mayil",
+        "id": "952404328190242"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "shared_story",
+      "story_tags": {
+        "0": [
+          {
+            "id": "952404328190242",
+            "name": "Vadivel Mayil",
+            "type": "user",
+            "offset": 0,
+            "length": 13
+          }
+        ],
+        "21": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 21,
+            "length": 10
+          }
+        ],
+        "34": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 34,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2015-01-11T13:28:17+0000",
+      "id": "952404328190242_712125132218164"
+    },
+    {
+      "created_time": "2014-11-29T17:09:58+0000",
+      "story": "Mamunuzzaman Mithu shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Mamunuzzaman Mithu",
+        "id": "636450769819704"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "shared_story",
+      "story_tags": {
+        "0": [
+          {
+            "id": "636450769819704",
+            "name": "Mamunuzzaman Mithu",
+            "type": "user",
+            "offset": 0,
+            "length": 18
+          }
+        ],
+        "26": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 26,
+            "length": 10
+          }
+        ],
+        "39": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 39,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2014-11-29T17:09:58+0000",
+      "id": "636450769819704_573141669483948"
+    },
+    {
+      "created_time": "2014-10-14T10:18:39+0000",
+      "story": "Bench Bench shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Like",
+          "link": "https://www.facebook.com/pogpart/posts/1708786376012512"
+        },
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Bench Bench",
+        "id": "1813753805515768"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "likes": {
+        "data": [
+          {
+            "id": "615459975289354",
+            "name": "Jeferson Igdao"
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "before": "NjE1NDU5OTc1Mjg5MzU0",
+            "after": "NjE1NDU5OTc1Mjg5MzU0"
+          }
+        }
+      },
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "shared_story",
+      "story_tags": {
+        "0": [
+          {
+            "id": "1813753805515768",
+            "name": "Bench Bench",
+            "type": "user",
+            "offset": 0,
+            "length": 11
+          }
+        ],
+        "19": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 19,
+            "length": 10
+          }
+        ],
+        "32": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 32,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2014-10-14T10:18:39+0000",
+      "id": "1813753805515768_1708786376012512"
+    },
+    {
+      "created_time": "2014-10-07T12:58:47+0000",
+      "message": "plez share",
+      "story": "Udayraj Sawant shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Like",
+          "link": "https://www.facebook.com/udayraj.sawant007/posts/578527528920004"
+        },
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Udayraj Sawant",
+        "id": "601142406658516"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "likes": {
+        "data": [
+          {
+            "id": "1474255656171467",
+            "name": "Sanjeevani Pawar"
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "before": "MTQ3NDI1NTY1NjE3MTQ2NwZDZD",
+            "after": "MTQ3NDI1NTY1NjE3MTQ2NwZDZD"
+          }
+        }
+      },
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "shared_story",
+      "story_tags": {
+        "0": [
+          {
+            "id": "601142406658516",
+            "name": "Udayraj Sawant",
+            "type": "user",
+            "offset": 0,
+            "length": 14
+          }
+        ],
+        "22": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 22,
+            "length": 10
+          }
+        ],
+        "35": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 35,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2014-10-07T12:58:47+0000",
+      "id": "601142406658516_578527528920004"
+    },
+    {
+      "created_time": "2014-09-28T17:29:11+0000",
+      "story": "Lurdes Marques shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Lurdes Marques",
+        "id": "704739719580382"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "likes": {
+        "data": [
+          {
+            "id": "832827446748321",
+            "name": "Leonice Alves"
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "before": "ODMyODI3NDQ2NzQ4MzIx",
+            "after": "ODMyODI3NDQ2NzQ4MzIx"
+          }
+        }
+      },
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "shared_story",
+      "story_tags": {
+        "0": [
+          {
+            "id": "704739719580382",
+            "name": "Lurdes Marques",
+            "type": "user",
+            "offset": 0,
+            "length": 14
+          }
+        ],
+        "22": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 22,
+            "length": 10
+          }
+        ],
+        "35": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 35,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2014-09-28T17:29:11+0000",
+      "id": "704739719580382_720789197975434"
+    },
+    {
+      "created_time": "2014-09-03T12:10:54+0000",
+      "story": "అయినంపుడి శ్రీనివాస్ రావు shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "అయినంపుడి శ్రీనివాస్ రావు",
+        "id": "661395453968838"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "likes": {
+        "data": [
+          {
+            "id": "661395453968838",
+            "name": "అయినంపుడి శ్రీనివాస్ రావు"
+          },
+          {
+            "id": "466785113446257",
+            "name": "Vinay Kumar Anumala"
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "before": "NjYxMzk1NDUzOTY4ODM4",
+            "after": "NDY2Nzg1MTEzNDQ2MjU3"
+          }
+        }
+      },
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "shared_story",
+      "story_tags": {
+        "0": [
+          {
+            "id": "661395453968838",
+            "name": "అయినంపుడి శ్రీనివాస్ రావు",
+            "type": "user",
+            "offset": 0,
+            "length": 25
+          }
+        ],
+        "33": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 33,
+            "length": 10
+          }
+        ],
+        "46": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 46,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2014-09-03T12:10:54+0000",
+      "id": "661395453968838_592160417559009"
+    },
+    {
+      "created_time": "2014-08-28T08:49:27+0000",
+      "story": "Mostafa Shojaei shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Mostafa Shojaei",
+        "id": "566096876852404"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "shared_story",
+      "story_tags": {
+        "0": [
+          {
+            "id": "566096876852404",
+            "name": "Mostafa Shojaei",
+            "type": "user",
+            "offset": 0,
+            "length": 15
+          }
+        ],
+        "23": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 23,
+            "length": 10
+          }
+        ],
+        "36": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 36,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2014-08-28T08:49:27+0000",
+      "id": "566096876852404_542284872566938"
+    },
+    {
+      "created_time": "2014-08-16T11:51:53+0000",
+      "story": "Arif Ahmed Chaudhari shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Like",
+          "link": "https://www.facebook.com/arifahmedchaudharii/posts/807416235970091"
+        },
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Arif Ahmed Chaudhari",
+        "id": "824063957638652"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "shared_story",
+      "story_tags": {
+        "0": [
+          {
+            "id": "824063957638652",
+            "name": "Arif Ahmed Chaudhari",
+            "type": "user",
+            "offset": 0,
+            "length": 20
+          }
+        ],
+        "28": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 28,
+            "length": 10
+          }
+        ],
+        "41": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 41,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2014-08-16T11:51:53+0000",
+      "id": "824063957638652_807416235970091"
+    },
+    {
+      "created_time": "2014-08-16T11:38:16+0000",
+      "story": "Shuja Quraishi shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Shuja Quraishi",
+        "id": "998236886894411"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "shared_story",
+      "story_tags": {
+        "0": [
+          {
+            "id": "998236886894411",
+            "name": "Shuja Quraishi",
+            "type": "user",
+            "offset": 0,
+            "length": 14
+          }
+        ],
+        "22": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 22,
+            "length": 10
+          }
+        ],
+        "35": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 35,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2014-08-16T11:38:16+0000",
+      "id": "998236886894411_784881481563287"
+    },
+    {
+      "created_time": "2014-07-22T04:05:10+0000",
+      "story": "Ghayoor Ahmed Khan shared Bill Gates's video.",
+      "actions": [
+        {
+          "name": "Add Friend",
+          "link": "https://www.facebook.com/ajax/add_friend/action.php"
+        }
+      ],
+      "description": "Why teach Big History? Imagine exploring 13.7 billion years of history - from the Big Bang to modernity, in one cohesive story. The Big History Project is now available to all #teachers worldwide - completely free, open, and online: http://b-gat.es/13EytUl",
+      "from": {
+        "name": "Ghayoor Ahmed Khan",
+        "id": "888921507900731"
+      },
+      "is_hidden": false,
+      "is_expired": false,
+      "link": "https://www.facebook.com/BillGates/videos/10201168076257947/",
+      "name": "Bill Gates",
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/1096647_10201168079858037_10201168076257947_25616_668_b.jpg?oh=5997d599f800aceab1b51bcf2c29e65a&oe=5799F712",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "description": "",
+        "friends": "",
+        "value": ""
+      },
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/753400_10201168079418026_191740150_n.mp4?efg=eyJybHIiOjU1OSwicmxhIjo3NTksInZlbmNvZGVfdGFnIjoibGVnYWN5X3NkIn0%3D&rl=559&vabr=311&oh=3dd2f02f8a6d38ac7ffcb8cd97d4c4b1&oe=5746A31C",
+      "status_type": "shared_story",
+      "story_tags": {
+        "0": [
+          {
+            "id": "888921507900731",
+            "name": "Ghayoor Ahmed Khan",
+            "type": "user",
+            "offset": 0,
+            "length": 18
+          }
+        ],
+        "26": [
+          {
+            "id": "216311481960",
+            "name": "Bill Gates",
+            "type": "page",
+            "offset": 26,
+            "length": 10
+          }
+        ],
+        "39": [
+          {
+            "id": "10201168076257947",
+            "name": "",
+            "offset": 39,
+            "length": 5
+          }
+        ]
+      },
+      "subscribed": false,
+      "type": "video",
+      "updated_time": "2014-07-22T04:05:10+0000",
+      "id": "888921507900731_542916382501247"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "MTcyOTcwMzY5NzYzOTY0OjkZD",
+      "after": "NTQyOTE2MzgyNTAxMjQ3OjkZD"
+    },
+    "next": "https://graph.facebook.com/v2.1/216311481960_10201168076257947/sharedposts?access_token=EAACEdEose0cBAIgK9RM2w9Ljz8h05ZCSZBMHNkMxxF88PAIGc43RrH8iON9ZCOskzZB2TpMyRgkZBvYGyVzsgZA5txrkWKjJwVzZCN94TAVIfs89JZBFdahPrxnh6RMZBFZCHvuObfzMM3TRZBBdNr7UpNvQHw7MJlZBuSMDVD3BJZBcbMQZDZD&pretty=0&limit=25&after=NTQyOTE2MzgyNTAxMjQ3OjkZD"
+  }
+}
