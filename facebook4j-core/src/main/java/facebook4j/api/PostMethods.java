@@ -276,6 +276,25 @@ public interface PostMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/post/#likes">Post#likes - Facebook Developers</a>
      */
     ResponseList<Like> getPostLikes(String postId, Reading reading) throws FacebookException;
+    
+    /**
+     * Returns the post shares.
+     * @param postId the ID of a post
+     * @return shares
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/object/sharedposts">- Facebook Developers</a>
+     */
+    ResponseList<Post> getPostShares(String postId) throws FacebookException;
+
+    /**
+     * Returns the post shares.
+     * @param postId the ID of a post
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a> see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return shares
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/object/sharedposts">- Facebook Developers</a>
+     */
+    ResponseList<Post> getPostShares(String postId, Reading reading) throws FacebookException;
 
     /**
      * Likes the post.
