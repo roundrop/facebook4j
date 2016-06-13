@@ -1,0 +1,14 @@
+{
+    "data": [{
+        "created_time": "2016-05-31T13:26:30+0000",
+        "id": "958622217524832_1032148203505566",
+        "type": "photo"
+    }],
+    "paging": {
+        "cursors": {
+            "after": "MTM3MjY4NjgwNjA3ODQ2MA==",
+            "before": "OTczMDE5Nzk5NDg1NTgx"
+        },
+        "next": "https://graph.facebook.com/v2.0/10152660298856961/sharedposts?fields=type&access_token=access_token"
+    }
+}

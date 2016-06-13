@@ -1,0 +1,26 @@
+{
+    "data": [
+        {
+            "created_time": "2016-06-13T23:42:02+0000",
+            "id": "101840300335_10154119268640336",
+            "type": "video"
+        },
+        {
+            "created_time": "2016-06-13T21:11:22+0000",
+            "id": "159714707395224_1206094132757271",
+            "type": "video"
+        },
+        {
+            "created_time": "2016-06-13T10:27:50+0000",
+            "id": "616479315176263_637428366414691",
+            "type": "video"
+        }
+    ],
+    "paging": {
+        "cursors": {
+            "after": "MjA0MDE1MjI4OTU0MzIzMw==",
+            "before": "MTAxNTQxMTkyNjg2NDAzMzY="
+        },
+        "next": "https://graph.facebook.com/v2.0/10153645784876961/sharedposts?fields=type&access_token=access_token&limit=25&after=MjA0MDE1MjI4OTU0MzIzMw%3D%3D"
+    }
+}

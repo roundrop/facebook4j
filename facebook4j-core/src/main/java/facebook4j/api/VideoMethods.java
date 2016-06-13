@@ -20,6 +20,7 @@ import facebook4j.Comment;
 import facebook4j.CommentUpdate;
 import facebook4j.FacebookException;
 import facebook4j.Like;
+import facebook4j.Post;
 import facebook4j.Reaction;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
@@ -131,6 +132,25 @@ public interface VideoMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/video/#likes">Video#likes - Facebook Developers</a>
      */
     ResponseList<Like> getVideoLikes(String videoId, Reading reading) throws FacebookException;
+
+    /**
+     * Returns the posts in which this video is shared.
+     * @param videoId the ID of a video
+     * @return videos
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/video/sharedposts">Video Sharedposts - Facebook Developers</a>
+     */
+    ResponseList<Post> getVideoSharedposts(String videoId) throws FacebookException;
+
+    /**
+     * Returns the posts in which this video is shared.
+     * @param videoId the ID of a video
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a> see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return videos
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/video/sharedposts">Video Sharedposts - Facebook Developers</a>
+     */
+    ResponseList<Post> getVideoSharedposts(String videoId, Reading reading) throws FacebookException;
 
     /**
      * Likes the video.

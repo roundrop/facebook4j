@@ -16,8 +16,6 @@
 
 package facebook4j.api;
 
-import java.net.URL;
-
 import facebook4j.Comment;
 import facebook4j.CommentUpdate;
 import facebook4j.FacebookException;
@@ -27,6 +25,8 @@ import facebook4j.PostUpdate;
 import facebook4j.Reaction;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
+
+import java.net.URL;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -278,23 +278,23 @@ public interface PostMethods {
     ResponseList<Like> getPostLikes(String postId, Reading reading) throws FacebookException;
     
     /**
-     * Returns the post shares.
+     * Returns the posts in which this post is shared.
      * @param postId the ID of a post
-     * @return shares
+     * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/object/sharedposts">- Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/object/sharedposts">sharedposts - Facebook Developers</a>
      */
-    ResponseList<Post> getPostShares(String postId) throws FacebookException;
+    ResponseList<Post> getSharedPosts(String postId) throws FacebookException;
 
     /**
-     * Returns the post shares.
+     * Returns the posts in which this post is shared.
      * @param postId the ID of a post
      * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a> see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
-     * @return shares
+     * @return posts
      * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/object/sharedposts">- Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/object/sharedposts">sharedposts - Facebook Developers</a>
      */
-    ResponseList<Post> getPostShares(String postId, Reading reading) throws FacebookException;
+    ResponseList<Post> getSharedPosts(String postId, Reading reading) throws FacebookException;
 
     /**
      * Likes the post.

@@ -858,6 +858,34 @@ public class PhotoMethodsTest {
         }
     }
 
+    public static class getPhotoSharedposts extends MockFacebookTestBase {
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/photo/sharedposts.json");
+            ResponseList<Post> actuals = facebook.getPhotoSharedposts("10152660298856961");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10152660298856961/sharedposts")));
+
+            assertThat(actuals.size(), is(1));
+            Post actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("958622217524832_1032148203505566"));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/photo/sharedposts_type_field_only.json");
+            ResponseList<Post> actuals = facebook.getSharedPosts("10152660298856961", new Reading().fields("type"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10152660298856961/sharedposts")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "type"));
+
+            assertThat(actuals.size(), is(1));
+            assertThat(actuals.get(0).getType(), is("photo"));
+        }
+
+    }
+
     public static class commentPhoto extends MockFacebookTestBase {
         @Test
         public void comment() throws Exception {

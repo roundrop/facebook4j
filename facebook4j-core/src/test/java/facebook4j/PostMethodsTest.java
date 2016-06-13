@@ -797,12 +797,12 @@ public class PostMethodsTest extends MockFacebookTestBase {
         }
     }
     
-    public static class getPostShares extends MockFacebookTestBase {
+    public static class getSharedPosts extends MockFacebookTestBase {
     	
         @Test
         public void id() throws Exception {
             facebook.setMockJSON("mock_json/post/shares.json");
-            ResponseList<Post> actuals = facebook.getPostShares("216311481960_10201168076257947");
+            ResponseList<Post> actuals = facebook.getSharedPosts("216311481960_10201168076257947");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
             assertThat(facebook.getEndpointURL(), is(pathOf("/216311481960_10201168076257947/sharedposts")));
 
@@ -814,7 +814,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
         @Test
         public void reading() throws Exception {
             facebook.setMockJSON("mock_json/post/shares_last5.json");
-            ResponseList<Post> actuals = facebook.getPostShares("216311481960_10201168076257947", new Reading().limit(5));
+            ResponseList<Post> actuals = facebook.getSharedPosts("216311481960_10201168076257947", new Reading().limit(5));
             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
             assertThat(facebook.getEndpointURL(), is(pathOf("/216311481960_10201168076257947/sharedposts")));
             assertThat(facebook.getEndpointURL(), hasParameter("limit", "5"));

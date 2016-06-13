@@ -812,13 +812,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createLikeList(get(buildEndpoint(postId, "likes", reading)));
     }
 
-	public ResponseList<Post> getPostShares(String postId) throws FacebookException {
-		return getPostShares(postId, null);
+	public ResponseList<Post> getSharedPosts(String postId) throws FacebookException {
+		return getSharedPosts(postId, null);
 	}
 
-	public ResponseList<Post> getPostShares(String postId, Reading reading) throws FacebookException {
+	public ResponseList<Post> getSharedPosts(String postId, Reading reading) throws FacebookException {
 		ensureAuthorizationEnabled();
-		return factory.createPostList(get(buildEndpoint(postId, "sharedposts", reading)));
+        return _getSharedPosts(postId, reading);
 	}
     
     public boolean likePost(String postId) throws FacebookException {
@@ -1920,6 +1920,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return _getComments(photoId, reading);
     }
 
+    public ResponseList<Post> getPhotoSharedposts(String photoId) throws FacebookException {
+        return getPhotoSharedposts(photoId, null);
+    }
+
+    public ResponseList<Post> getPhotoSharedposts(String photoId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return _getSharedPosts(photoId, reading);
+    }
+
     public String commentPhoto(String photoId, String message) throws FacebookException {
         ensureAuthorizationEnabled();
         return _comment(photoId, message);
@@ -2212,6 +2221,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<Like> getVideoLikes(String videoId, Reading reading) throws FacebookException {
         ensureAuthorizationEnabled();
         return _getLikes(videoId, reading);
+    }
+
+    public ResponseList<Post> getVideoSharedposts(String videoId) throws FacebookException {
+        return getVideoSharedposts(videoId, null);
+    }
+
+    public ResponseList<Post> getVideoSharedposts(String videoId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return _getSharedPosts(videoId, reading);
     }
 
     public boolean likeVideo(String videoId) throws FacebookException {
@@ -2711,6 +2729,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         } catch (MalformedURLException urle) {
             throw new FacebookException(urle.getMessage(), urle);
         }
+    }
+
+    private ResponseList<Post> _getSharedPosts(String objectId, Reading reading) throws FacebookException {
+        return factory.createPostList(get(buildEndpoint(objectId, "sharedposts", reading)));
     }
 
     private String _comment(String objectId, String message) throws FacebookException {

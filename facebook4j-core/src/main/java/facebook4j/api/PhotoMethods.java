@@ -23,6 +23,7 @@ import facebook4j.Like;
 import facebook4j.Media;
 import facebook4j.Photo;
 import facebook4j.PhotoUpdate;
+import facebook4j.Post;
 import facebook4j.Reaction;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
@@ -201,6 +202,25 @@ public interface PhotoMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/photo/#comments">Photo#comments - Facebook Developers</a>
      */
     ResponseList<Comment> getPhotoComments(String photoId, Reading reading) throws FacebookException;
+
+    /**
+     * Returns the posts in which this photo is shared.
+     * @param photoId the ID of a photo
+     * @return photos
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/photo/sharedposts">Photo Sharedposts - Facebook Developers</a>
+     */
+    ResponseList<Post> getPhotoSharedposts(String photoId) throws FacebookException;
+
+    /**
+     * Returns the posts in which this photo is shared.
+     * @param photoId the ID of a photo
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a> see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return photos
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/photo/sharedposts">Photo Sharedposts - Facebook Developers</a>
+     */
+    ResponseList<Post> getPhotoSharedposts(String photoId, Reading reading) throws FacebookException;
 
     /**
      * Comments on the photo.

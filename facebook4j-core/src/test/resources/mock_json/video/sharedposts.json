@@ -1,0 +1,199 @@
+{
+    "data": [
+        {
+            "actions": [
+                {
+                    "link": "https://www.facebook.com/101840300335/posts/10154119268640336",
+                    "name": "Comment"
+                },
+                {
+                    "link": "https://www.facebook.com/101840300335/posts/10154119268640336",
+                    "name": "Like"
+                }
+            ],
+            "created_time": "2016-06-13T23:42:02+0000",
+            "description": "In Burkina Faso, there are probably more than 3 times as many chickens as people. Watch this short video to learn why.",
+            "from": {
+                "category": "Non-Profit Organization",
+                "id": "101840300335",
+                "name": "GALVmed"
+            },
+            "id": "101840300335_10154119268640336",
+            "is_expired": false,
+            "is_hidden": false,
+            "likes": {
+                "data": [{
+                    "id": "1068858246526170",
+                    "name": "Saimoni Msambazi"
+                }],
+                "paging": {"cursors": {
+                    "after": "MTA2ODg1ODI0NjUyNjE3MAZDZD",
+                    "before": "MTA2ODg1ODI0NjUyNjE3MAZDZD"
+                }}
+            },
+            "link": "https://www.facebook.com/BillGates/videos/10153645784876961/",
+            "message": "\"Just a single chicken makes a difference.\" Are you a poultry keeper? If so, do you agree?",
+            "name": "Bill Gates",
+            "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/13432675_10153645797371961_472536582_n.jpg?oh=620cb41080e728a07afdfd4d0bb2b506&oe=580BAB97",
+            "privacy": {
+                "allow": "",
+                "deny": "",
+                "description": "",
+                "friends": "",
+                "value": ""
+            },
+            "source": "https://video.xx.fbcdn.net/v/t42.1790-2/13415040_1777602722474455_246968295_n.mp4?efg=eyJybHIiOjQzMywicmxhIjo1MTIsInZlbmNvZGVfdGFnIjoic3ZlX3NkIn0%3D&rl=433&vabr=241&oh=ac1f7aac85a2391ea35d9daa0b41041d&oe=576154CF",
+            "status_type": "shared_story",
+            "story": "GALVmed shared Bill Gates's video.",
+            "story_tags": {
+                "0": [{
+                    "id": "101840300335",
+                    "length": 7,
+                    "name": "GALVmed",
+                    "offset": 0,
+                    "type": "page"
+                }],
+                "15": [{
+                    "id": "216311481960",
+                    "length": 10,
+                    "name": "Bill Gates",
+                    "offset": 15,
+                    "type": "page"
+                }],
+                "28": [{
+                    "id": "10153645784876961",
+                    "length": 5,
+                    "name": "",
+                    "offset": 28
+                }]
+            },
+            "type": "video",
+            "updated_time": "2016-06-13T23:42:02+0000"
+        },
+        {
+            "actions": [
+                {
+                    "link": "https://www.facebook.com/159714707395224/posts/1206094132757271",
+                    "name": "Comment"
+                },
+                {
+                    "link": "https://www.facebook.com/159714707395224/posts/1206094132757271",
+                    "name": "Like"
+                }
+            ],
+            "created_time": "2016-06-13T21:11:22+0000",
+            "description": "In Burkina Faso, there are probably more than 3 times as many chickens as people. Watch this short video to learn why.",
+            "from": {
+                "category": "Community Organization",
+                "id": "159714707395224",
+                "name": "Mom's Club"
+            },
+            "id": "159714707395224_1206094132757271",
+            "is_expired": false,
+            "is_hidden": false,
+            "link": "https://www.facebook.com/BillGates/videos/10153645784876961/",
+            "name": "Bill Gates",
+            "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/13432675_10153645797371961_472536582_n.jpg?oh=620cb41080e728a07afdfd4d0bb2b506&oe=580BAB97",
+            "privacy": {
+                "allow": "",
+                "deny": "",
+                "description": "",
+                "friends": "",
+                "value": ""
+            },
+            "source": "https://video.xx.fbcdn.net/v/t42.1790-2/13415040_1777602722474455_246968295_n.mp4?efg=eyJybHIiOjQzMywicmxhIjo1MTIsInZlbmNvZGVfdGFnIjoic3ZlX3NkIn0%3D&rl=433&vabr=241&oh=ac1f7aac85a2391ea35d9daa0b41041d&oe=576154CF",
+            "status_type": "shared_story",
+            "story": "Mom's Club shared Bill Gates's video.",
+            "story_tags": {
+                "0": [{
+                    "id": "159714707395224",
+                    "length": 10,
+                    "name": "Mom's Club",
+                    "offset": 0,
+                    "type": "page"
+                }],
+                "18": [{
+                    "id": "216311481960",
+                    "length": 10,
+                    "name": "Bill Gates",
+                    "offset": 18,
+                    "type": "page"
+                }],
+                "31": [{
+                    "id": "10153645784876961",
+                    "length": 5,
+                    "name": "",
+                    "offset": 31
+                }]
+            },
+            "type": "video",
+            "updated_time": "2016-06-13T21:11:22+0000"
+        },
+        {
+            "actions": [
+                {
+                    "link": "https://www.facebook.com/616479315176263/posts/637428366414691",
+                    "name": "Comment"
+                },
+                {
+                    "link": "https://www.facebook.com/616479315176263/posts/637428366414691",
+                    "name": "Like"
+                }
+            ],
+            "created_time": "2016-06-13T10:27:50+0000",
+            "description": "In Burkina Faso, there are probably more than 3 times as many chickens as people. Watch this short video to learn why.",
+            "from": {
+                "category": "Other",
+                "id": "616479315176263",
+                "name": "ICC International Consulting Cooperation"
+            },
+            "id": "616479315176263_637428366414691",
+            "is_expired": false,
+            "is_hidden": false,
+            "link": "https://www.facebook.com/BillGates/videos/10153645784876961/",
+            "name": "Bill Gates",
+            "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/13432675_10153645797371961_472536582_n.jpg?oh=620cb41080e728a07afdfd4d0bb2b506&oe=580BAB97",
+            "privacy": {
+                "allow": "",
+                "deny": "",
+                "description": "",
+                "friends": "",
+                "value": ""
+            },
+            "source": "https://video.xx.fbcdn.net/v/t42.1790-2/13415040_1777602722474455_246968295_n.mp4?efg=eyJybHIiOjQzMywicmxhIjo1MTIsInZlbmNvZGVfdGFnIjoic3ZlX3NkIn0%3D&rl=433&vabr=241&oh=ac1f7aac85a2391ea35d9daa0b41041d&oe=576154CF",
+            "status_type": "shared_story",
+            "story": "ICC International Consulting Cooperation shared Bill Gates's video.",
+            "story_tags": {
+                "0": [{
+                    "id": "616479315176263",
+                    "length": 40,
+                    "name": "ICC International Consulting Cooperation",
+                    "offset": 0,
+                    "type": "page"
+                }],
+                "48": [{
+                    "id": "216311481960",
+                    "length": 10,
+                    "name": "Bill Gates",
+                    "offset": 48,
+                    "type": "page"
+                }],
+                "61": [{
+                    "id": "10153645784876961",
+                    "length": 5,
+                    "name": "",
+                    "offset": 61
+                }]
+            },
+            "type": "video",
+            "updated_time": "2016-06-13T10:27:50+0000"
+        }
+    ],
+    "paging": {
+        "cursors": {
+            "after": "MjA0MDE1MjI4OTU0MzIzMw==",
+            "before": "MTAxNTQxMTkyNjg2NDAzMzY="
+        },
+        "next": "https://graph.facebook.com/v2.0/10153645784876961/sharedposts?access_token=access_token&limit=25&after=MjA0MDE1MjI4OTU0MzIzMw%3D%3D"
+    }
+}

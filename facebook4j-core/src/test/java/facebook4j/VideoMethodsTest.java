@@ -601,4 +601,32 @@ public class VideoMethodsTest extends MockFacebookTestBase {
         }
     }
 
+    public static class getVideoSharedposts extends MockFacebookTestBase {
+
+        @Test
+        public void id() throws Exception {
+            facebook.setMockJSON("mock_json/video/sharedposts.json");
+            ResponseList<Post> actuals = facebook.getVideoSharedposts("10153645784876961");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10153645784876961/sharedposts")));
+
+            assertThat(actuals.size(), is(3));
+            Post actual1 = actuals.get(0);
+            assertThat(actual1.getId(), is("101840300335_10154119268640336"));
+        }
+
+        @Test
+        public void reading() throws Exception {
+            facebook.setMockJSON("mock_json/video/sharedposts_type_field_only.json");
+            ResponseList<Post> actuals = facebook.getSharedPosts("10153645784876961", new Reading().fields("type"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/10153645784876961/sharedposts")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "type"));
+
+            assertThat(actuals.size(), is(3));
+            assertThat(actuals.get(0).getType(), is("video"));
+        }
+
+    }
+
 }
