@@ -2360,7 +2360,11 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     public ResponseList<JSONObject> search(String query, Reading reading) throws FacebookException {
-        String url = buildSearchEndpoint(query, null, reading);
+        return search(query, null, reading);
+    }
+    
+    public ResponseList<JSONObject> search(String query, String type, Reading reading) throws FacebookException {
+        String url = buildSearchEndpoint(query, type, reading);
         return factory.createJSONObjectList(get(url));
     }
 
