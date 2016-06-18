@@ -1,0 +1,100 @@
+{
+    "data": [
+        {
+            "id": "151676848220295",
+            "name": "Education"
+        },
+        {
+            "id": "161516070564222",
+            "name": "Financial Services"
+        },
+        {
+            "id": "165679780146824",
+            "name": "Food & Restaurant"
+        },
+        {
+            "id": "161811347201528",
+            "name": "Lodging"
+        },
+        {
+            "id": "145118935550090",
+            "name": "Medical & Health"
+        },
+        {
+            "id": "144982405562750",
+            "name": "Pet Service"
+        },
+        {
+            "id": "148932728496725",
+            "name": "Public Places & Attractions"
+        },
+        {
+            "id": "139460309451166",
+            "name": "Religious Center"
+        },
+        {
+            "id": "192049437499122",
+            "name": "Residence"
+        },
+        {
+            "id": "273819889375819",
+            "name": "Restaurant"
+        },
+        {
+            "id": "139225689474222",
+            "name": "Spa, Beauty & Personal Care"
+        },
+        {
+            "id": "133436743388217",
+            "name": "Arts & Entertainment"
+        },
+        {
+            "id": "180410821995109",
+            "name": "Automotive"
+        },
+        {
+            "id": "187133811318958",
+            "name": "Business Services"
+        },
+        {
+            "id": "188662441155211",
+            "name": "Community & Government"
+        },
+        {
+            "id": "193705277324704",
+            "name": "Event Planning"
+        },
+        {
+            "id": "150108431712141",
+            "name": "Food & Grocery"
+        },
+        {
+            "id": "108427109235243",
+            "name": "Home Improvement"
+        },
+        {
+            "id": "129417183848258",
+            "name": "Just For Fun"
+        },
+        {
+            "id": "176831012360626",
+            "name": "Professional Services"
+        },
+        {
+            "id": "198327773511962",
+            "name": "Real Estate"
+        },
+        {
+            "id": "200600219953504",
+            "name": "Shopping & Retail"
+        }
+    ],
+    "paging": {
+        "cursors": {
+            "after": "MjAwNjAwMjE5OTUzNTA0",
+            "before": "MTUxNjc2ODQ4MjIwMjk1"
+        },
+        "next": "https://graph.facebook.com/v2.6/search?access_token=access_token&topic_filter=all&type=placetopic&limit=25&after=MjAwNjAwMjE5OTUzNTA0"
+    },
+    "summary": {"topics_version": 2}
+}

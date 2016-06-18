@@ -18,6 +18,7 @@ package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
 import facebook4j.internal.org.json.JSONObject;
+import facebook4j.junit.FacebookAPIVersion;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -585,6 +586,20 @@ public class SearchMethodsTest {
             assertThat(actuals.get(3).getString("type"), is("status"));
             assertThat(actuals.get(4).getString("type"), is("status"));
             assertThat(actuals.get(5).getString("type"), is("photo"));
+        }
+
+        @Test
+        @FacebookAPIVersion("v2.6")
+        public void type() throws Exception {
+            facebook.setMockJSON("mock_json/search/placetopic_all.json");
+            ResponseList<JSONObject> actuals = facebook.search("awesome", "placetopic", new Reading().addParameter("topic_filter", "all"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/v2.6/search")));
+            assertThat(facebook.getEndpointURL(), hasParameter("q", "awesome"));
+            assertThat(facebook.getEndpointURL(), hasParameter("type", "placetopic"));
+            assertThat(facebook.getEndpointURL(), hasParameter("topic_filter", "all"));
+
+            assertThat(actuals.size(), is(22));
         }
     }
 
