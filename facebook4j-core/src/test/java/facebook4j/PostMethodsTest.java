@@ -585,6 +585,17 @@ public class PostMethodsTest extends MockFacebookTestBase {
         }
 
         @Test
+        public void idWithParent() throws Exception {
+            facebook.setMockJSON("mock_json/post/post_with_parent.json");
+            Post actual = facebook.getPost("158798184134250_1348514785162578");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/158798184134250_1348514785162578")));
+
+            assertThat(actual.getId(), is("158798184134250_1348514785162578"));
+            assertThat(actual.getParentId(), is("12546364967_10154962152799968"));
+        }
+
+        @Test
         public void idWithSummaries() throws Exception {
             facebook.setMockJSON("mock_json/post/post_with_summaries.json");
             Post actual = facebook.getPost("19292868552_10150189643478553");
