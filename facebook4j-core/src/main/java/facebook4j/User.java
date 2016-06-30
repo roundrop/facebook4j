@@ -25,7 +25,7 @@ import java.util.Locale;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public interface User {
+public interface User extends FacebookResponse {
     String getId();
     String getName();
     String getFirstName();

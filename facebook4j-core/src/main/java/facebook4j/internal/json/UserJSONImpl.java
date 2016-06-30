@@ -43,8 +43,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
  *
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ class UserJSONImpl implements User, Comparable<User>, java.io.Serializable {
-    private static final long serialVersionUID = 3839339196757459703L;
+/*package*/ class UserJSONImpl extends FacebookResponseImpl implements User, Comparable<User>, java.io.Serializable {
+    private static final long serialVersionUID = 4973575756610859126L;
 
     private String id;
     private String name;
@@ -83,6 +83,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private User.AgeRange ageRange;
 
     /*package*/UserJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+        super(res);
         if (conf.isJSONStoreEnabled()) {
             DataObjectFactoryUtil.clearThreadLocalMap();
         }
