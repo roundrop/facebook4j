@@ -30,6 +30,11 @@ public interface Page {
     String getCategory();
     Boolean isPublished();
     Boolean canPost();
+
+    /**
+     * Number of pages this page likes.
+     * @return
+     */
     Integer getLikes();
     Place.Location getLocation();
     String getPhone();
@@ -37,10 +42,22 @@ public interface Page {
     URL getPicture();
     Cover getCover();
     String getWebsite();
+
+    /**
+     * Company overview about this page.
+     * @return
+     */
+    String getCompanyOverview();
     Integer getTalkingAboutCount();
     String getAccessToken();
     Boolean isCommunityPage();
     Integer getWereHereCount();
+
+    /**
+     * Number of people who like this page.
+     * @return
+     */
+    Integer getFanCount();
     Date getCreatedTime();
     String getAbout();
     String getUsername();

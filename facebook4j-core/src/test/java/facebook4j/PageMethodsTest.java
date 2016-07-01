@@ -105,6 +105,16 @@ public class PageMethodsTest {
             assertThat(actual.getAbout(), is("Build, grow, and monetize your app with Facebook.\nhttps://developers.facebook.com/"));
             assertThat(actual.getUsername(), is("FacebookDevelopers"));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.6")
+        public void company_overview_and_fan_count() throws Exception {
+            facebook.setMockJSON("mock_json/page/company_overview_and_fan_count.json");
+            Page actual = facebook.getPage("Panasonic", new Reading().fields("company_overview", "fan_count"));
+
+            assertThat(actual.getCompanyOverview(), is("International Panasonic Facebook Pages:\n\nAsia - www.Facebook.com/PanasonicAsia"));
+            assertThat(actual.getFanCount(), is(333883));
+        }
     }
 
     public static class getPagePictureURL extends MockFacebookTestBase {

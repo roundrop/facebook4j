@@ -50,10 +50,12 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private URL picture;
     private Cover cover;
     private String website;
+    private String companyOverview;
     private Integer talkingAboutCount;
     private String accessToken;
     private Boolean isCommunityPage;
     private Integer wereHereCount;
+    private Integer fanCount;
     private String about;
     private String username;
 
@@ -94,10 +96,12 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 cover = new CoverJSONImpl(coverJSONObject);
             }
             website = getRawString("website", json);
+            companyOverview = getRawString("company_overview", json);
             talkingAboutCount = getInt("talking_about_count", json);
             accessToken = getRawString("access_token", json);
             isCommunityPage = getBoolean("is_community_page", json);
             wereHereCount = getInt("were_here_count", json);
+            fanCount = getInt("fan_count", json);
             about = getRawString("about", json);
             username = getRawString("username", json);
 
@@ -162,6 +166,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return website;
     }
 
+    public String getCompanyOverview() {
+        return companyOverview;
+    }
+
     public Integer getTalkingAboutCount() {
         return talkingAboutCount;
     }
@@ -176,6 +184,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     public Integer getWereHereCount() {
         return wereHereCount;
+    }
+
+    public Integer getFanCount() {
+        return fanCount;
     }
 
     public String getAbout() {
@@ -231,10 +243,11 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return "PageJSONImpl [link=" + link + ", isPublished=" + isPublished
                 + ", canPost=" + canPost + ", likes=" + likes + ", location="
                 + location + ", phone=" + phone + ", checkins=" + checkins
-                + ", picture=" + picture + ", cover=" + cover + ", website="
-                + website + ", talkingAboutCount=" + talkingAboutCount
+                + ", picture=" + picture + ", cover=" + cover + ", website=" + website
+                + ", companyOverview=" + companyOverview + ", talkingAboutCount=" + talkingAboutCount
                 + ", accessToken=" + accessToken + ", isCommunityPage="
                 + isCommunityPage + ", wereHereCount=" + wereHereCount
+                + ", fanCount=" + fanCount
                 + ", id=" + id + ", name=" + name + ", category=" + category
                 + ", createdTime=" + createdTime + ", about=" + about + ", username=" + username + "]";
     }
