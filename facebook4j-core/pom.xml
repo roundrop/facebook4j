@@ -158,6 +158,16 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <!-- javadoc 8 workaround: http://stackoverflow.com/a/34591533/122441 -->
+      <id>disable-java8-doclint</id>
+      <activation>
+        <jdk>[1.8,)</jdk>
+      </activation>
+      <properties>
+        <additionalparam>-Xdoclint:none</additionalparam>
+      </properties>
+    </profile>
   </profiles>
 
   <build>
@@ -229,7 +239,7 @@
           <show>public</show>
           <locale>en_US</locale>
         </configuration>
-        <version>2.10.3</version>
+        <version>2.10.4</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
