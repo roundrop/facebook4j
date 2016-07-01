@@ -51,6 +51,7 @@ public interface Post extends FacebookResponse {
     List<IdNameEntity> getWithTags();
     PagableList<Comment> getComments();
     String getObjectId();
+    String getParentId();
     Application getApplication();
     Date getCreatedTime();
     Date getUpdatedTime();
