@@ -229,6 +229,15 @@ public class UserMethodsTest extends MockFacebookTestBase {
             assertThat(user.getHometown().getId(), is(nullValue()));
             assertThat(user.getHometown().getName(), is("La Plata"));
         }
+
+        @Test
+        public void withMetadata() throws Exception {
+            facebook.setMockJSON("mock_json/user/metadata.json");
+            User user = facebook.getUser("BillGates", new Reading().metadata());
+
+            assertThat(user.getMetadata(), is(notNullValue()));
+            assertThat(user.getMetadata().getType(), is("page"));
+        }
     }
 
     public static class getPictureURL extends MockFacebookTestBase {

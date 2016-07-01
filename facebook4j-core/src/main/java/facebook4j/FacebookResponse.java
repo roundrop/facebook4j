@@ -36,7 +36,19 @@ public interface FacebookResponse {
      * @see <a href="https://developers.facebook.com/docs/reference/api/#Introspection">Graph API#Introspection - Facebook Developers</a>
      */
     interface Metadata {
+        Metadata.Fields getFields();
+        String getType();
         Metadata.Connections getConnections();
+
+        interface Fields {
+            List<Field> getFields();
+
+            interface Field {
+                String getName();
+                String getDescription();
+                String getType();
+            }
+        }
         
         interface Connections {
             URL getURL(String connectionName);
