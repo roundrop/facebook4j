@@ -47,7 +47,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Place.Location location;
     private String phone;
     private Integer checkins;
-    private URL picture;
+    private Picture picture;
     private Cover cover;
     private String website;
     private String companyOverview;
@@ -90,7 +90,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
             phone = getRawString("phone", json);
             checkins = getInt("checkins", json);
-            picture = getURL("picture", json);
+            if (!json.isNull("picture")) {
+                JSONObject pictureJSONObject = json.getJSONObject("picture");
+                picture = new PictureJSONImpl(pictureJSONObject);
+            }
             if (!json.isNull("cover")) {
                 JSONObject coverJSONObject = json.getJSONObject("cover");
                 cover = new CoverJSONImpl(coverJSONObject);
@@ -155,6 +158,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
 
     public URL getPicture() {
+        return picture.getURL();
+    }
+    
+    public Picture getPagePicture() {
         return picture;
     }
 
