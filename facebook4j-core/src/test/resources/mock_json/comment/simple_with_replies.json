@@ -1,0 +1,25 @@
+{
+    "can_remove": false,
+    "created_time": "2013-08-07T04:08:42+0000",
+    "from": {
+        "id": "1234567890123456",
+        "name": "Name Name1"
+    },
+    "id": "100000000000001_50000001",
+    "like_count": 1,
+    "message": "Enjoy!!",
+    "user_likes": false,
+    "comments": {
+	    "data": [
+	      {
+	        "created_time": "2013-09-27T14:16:41+0000",
+	        "from": {
+	          "name": "Name Name2",
+	          "id": "0123456789012345"
+	        },
+	        "message": "Thank you!",
+	        "id": "100000000000001_50000002"
+	      }
+	    ]
+    }
+}

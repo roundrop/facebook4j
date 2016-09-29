@@ -1,0 +1,32 @@
+{
+  "senders": {
+    "data": [
+      {
+        "name": "Name Name1",
+        "email": "34567890123456789@facebook.com",
+        "id": "34567890123456789"
+      },
+      {
+        "name": "Name Name",
+        "email": "45678901234567890@facebook.com",
+        "id": "45678901234567890"
+      }
+    ]
+  },
+  "message_count": 1,
+  "updated_time": "2013-09-27T12:10:35+0000",
+  "id": "t_mid.1234567890123:abcdef1234567890ab",
+  "messages": {
+    "data": [
+      {
+        "message": "Message 1",
+        "from": {
+          "name": "Name Name1",
+          "id": "3456789012345"
+        },
+        "created_time": "2013-09-27T12:10:35+0000",
+        "id": "m_mid.2345678901234:abcdef1234567890ab"
+      }
+    ]
+  }
+}

@@ -12,6 +12,7 @@
     "can_comment": true,
     "can_hide": false,
     "can_like": true,
+    "is_hidden": false,
     "message_tags": [
       {
         "id": "1111111111111111",

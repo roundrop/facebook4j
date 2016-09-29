@@ -18,7 +18,6 @@ package facebook4j.internal.json;
 
 import facebook4j.FacebookException;
 import facebook4j.ResponseList;
-import facebook4j.Summary;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
