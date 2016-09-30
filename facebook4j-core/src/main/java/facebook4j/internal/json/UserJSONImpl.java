@@ -76,6 +76,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private String quotes;
     private String relationshipStatus;
     private String religion;
+    private String tokenForBusiness;
     private IdNameEntity significantOther;
     private User.VideoUploadLimits videoUploadLimits;
     private URL website;
@@ -103,6 +104,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         try {
             id = getRawString("id", json);
             name = getRawString("name", json);
+            tokenForBusiness = getRawString("token_for_business", json);
             firstName = getRawString("first_name", json);
             middleName = getRawString("middle_name", json);
             lastName = getRawString("last_name", json);
@@ -354,6 +356,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return religion;
     }
 
+    public String getTokenForBusiness() {
+        return tokenForBusiness;
+    }
+
     public IdNameEntity getSignificantOther() {
         return significantOther;
     }
@@ -463,11 +469,11 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 + ", favoriteTeams=" + favoriteTeams + ", picture=" + picture
                 + ", quotes=" + quotes + ", relationshipStatus="
                 + relationshipStatus + ", religion=" + religion
+                + ", tokenForBusiness=" + tokenForBusiness
                 + ", significantOther=" + significantOther
                 + ", videoUploadLimits=" + videoUploadLimits + ", website="
                 + website + ", work=" + work + ", ageRange=" + ageRange + "]";
     }
-
 
 
     private final class EducationJSONImpl implements User.Education, java.io.Serializable {

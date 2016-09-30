@@ -53,6 +53,7 @@ public class UserMethodsTest extends MockFacebookTestBase {
             assertThat(me.getEducation().get(1).getYear().getId(), is("4444"));
             assertThat(me.getEducation().get(1).getYear().getName(), is("1998"));
             assertThat(me.getEmail(), is("roundrop@gmail.com"));
+            assertThat(me.getTokenForBusiness(), is("Abb5ew2lsjN9FA70"));
             assertThat(me.getFirstName(), is("Firstname"));
             assertThat(me.getGender(), is("male"));
             assertThat(me.getHometown().getId(), is("5555"));
