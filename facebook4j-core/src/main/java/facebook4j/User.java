@@ -43,6 +43,7 @@ public interface User extends FacebookResponse {
     Boolean isVerified();
     String getBio();
     String getBirthday();
+    String getTokenForBusiness();
     Cover getCover();
     List<User.Education> getEducation();
     String getEmail();
