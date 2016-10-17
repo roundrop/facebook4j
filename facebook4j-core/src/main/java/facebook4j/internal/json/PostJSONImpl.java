@@ -673,27 +673,17 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof AttachmentJSONImpl)) return false;
+            if (o == null || getClass() != o.getClass()) return false;
 
             AttachmentJSONImpl that = (AttachmentJSONImpl) o;
 
-            if (id != null ? !id.equals(that.id) : that.id != null) return false;
-            if (title != null ? !title.equals(that.title) : that.title != null) return false;
-            if (type != null ? !type.equals(that.type) : that.type != null) return false;
-            if (url != null ? !url.equals(that.url) : that.url != null) return false;
-            if (subattachments != null ? !subattachments.equals(that.subattachments) : that.subattachments != null) return false;
+            return !(id != null ? !id.equals(that.id) : that.id != null);
 
-            return true;
         }
 
         @Override
         public int hashCode() {
-            int result = id != null ? id.hashCode() : 0;
-            result = 31 * result + (title != null ? title.hashCode() : 0);
-            result = 31 * result + (type != null ? type.hashCode() : 0);
-            result = 31 * result + (url != null ? url.hashCode() : 0);
-            result = 31 * result + (subattachments != null ? subattachments.hashCode() : 0);
-            return result;
+            return id != null ? id.hashCode() : 0;
         }
 
         @Override
