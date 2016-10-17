@@ -316,27 +316,17 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof AttachmentJSONImpl)) return false;
+            if (o == null || getClass() != o.getClass()) return false;
 
             AttachmentJSONImpl that = (AttachmentJSONImpl) o;
 
-            if (id != null ? !id.equals(that.id) : that.id != null) return false;
-            if (name != null ? !name.equals(that.name) : that.name != null) return false;
-            if (mime_type != null ? !mime_type.equals(that.mime_type) : that.mime_type != null) return false;
-            if (url != null ? !url.equals(that.url) : that.url != null) return false;
-            if (preview_url != null ? !preview_url.equals(that.preview_url) : that.preview_url != null) return false;
+            return !(id != null ? !id.equals(that.id) : that.id != null);
 
-            return true;
         }
 
         @Override
         public int hashCode() {
-            int result = id != null ? id.hashCode() : 0;
-            result = 31 * result + (name != null ? name.hashCode() : 0);
-            result = 31 * result + (mime_type != null ? mime_type.hashCode() : 0);
-            result = 31 * result + (url != null ? url.hashCode() : 0);
-            result = 31 * result + (preview_url != null ? preview_url.hashCode() : 0);
-            return result;
+            return id != null ? id.hashCode() : 0;
         }
 
         @Override
