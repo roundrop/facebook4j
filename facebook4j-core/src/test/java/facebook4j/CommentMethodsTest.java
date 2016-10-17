@@ -58,6 +58,7 @@ public class CommentMethodsTest {
             assertThat(actual.canComment(), is(true));
             assertThat(actual.canHide(), is(false));
             assertThat(actual.canLike(), is(true));
+            assertThat(actual.isHidden(), is(false));
             assertThat(actual.getMessageTags(), is(notNullValue()));
             assertThat(actual.getMessageTags().size(), is(1));
             assertThat(actual.getMessageTags().get(0).getId(), is("1111111111111111"));
@@ -66,6 +67,26 @@ public class CommentMethodsTest {
             assertThat(actual.getMessageTags().get(0).getOffset(), is(0));
             assertThat(actual.getMessageTags().get(0).getType(), is("user"));
             assertThat(actual.getCommentCount(), is(1));
+        }
+
+        @Test
+        public void simpleWithReplies() throws Exception {
+            facebook.setMockJSON("mock_json/comment/simple_with_replies.json");
+            Comment actual = facebook.getComment("100000000000001_50000001");
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/100000000000001_50000001")));
+
+            assertThat(actual.getMessage(), is("Enjoy!!"));
+            assertThat(actual.getId(), is("100000000000001_50000001"));
+
+            PagableList<Comment> replyComments = actual.getComments();
+            assertThat(replyComments.size(), is(1));
+            Comment replyComment = replyComments.get(0);
+            assertThat(replyComment.getMessage(), is("Thank you!"));
+            assertThat(replyComment.getId(), is("100000000000001_50000002"));
+            assertThat(replyComment.getCreatedTime(), is(iso8601DateOf("2013-09-27T14:16:41+0000")));
+            assertThat(replyComment.getFrom().getId(), is("0123456789012345"));
+            assertThat(replyComment.getFrom().getName(), is("Name Name2"));
         }
 
         @Test
@@ -261,12 +282,12 @@ public class CommentMethodsTest {
     public void get() throws Exception {
         ResponseList<Album> albums = facebook1.getAlbums();
         ResponseList<Comment> albumComments = facebook1.getAlbumComments(albums.get(0).getId());
-        
+
         for (Comment comment : albumComments) {
             Comment actual = facebook1.getComment(comment.getId());
             assertThat(actual.getMessage(), is(comment.getMessage()));
         }
-        
+
     }
 
     @Test
@@ -274,7 +295,7 @@ public class CommentMethodsTest {
         ResponseList<Album> albums = facebook1.getAlbums();
         String albumId = albums.get(0).getId();
         String commentId = facebook1.commentAlbum(albumId, "Comment on an Album");
-        
+
         boolean deleteResult = facebook1.deleteComment(commentId);
         assertThat(deleteResult, is(true));
     }
@@ -284,16 +305,16 @@ public class CommentMethodsTest {
         ResponseList<Album> albums = facebook1.getAlbums();
         String albumId = albums.get(0).getId();
         String commentId = facebook1.commentAlbum(albumId, "Comment on an Album");
-        
+
         boolean likeResult = facebook1.likeComment(commentId);
         assertThat(likeResult, is(true));
 
         ResponseList<Like> commentLikes = facebook1.getCommentLikes(commentId);
         assertThat(commentLikes.size(), is(1));
-        
+
         boolean unlikeResult = facebook1.unlikeComment(commentId);
         assertThat(unlikeResult, is(true));
-        
+
         commentLikes = facebook1.getCommentLikes(commentId);
         assertThat(commentLikes.size(), is(0));
 

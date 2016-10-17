@@ -16,7 +16,6 @@
 
 package facebook4j.auth;
 
-import facebook4j.Facebook;
 import facebook4j.FacebookException;
 
 /**
@@ -109,7 +108,7 @@ public interface OAuthSupport {
      * @see <a href="https://developers.facebook.com/docs/facebook-login/for-devices">Facebook Login for Devices</a>
      */
     AccessToken getOAuthDeviceToken(DeviceCode deviceCode) throws FacebookException;
-    
+
     /**
      * Sets the access token
      *

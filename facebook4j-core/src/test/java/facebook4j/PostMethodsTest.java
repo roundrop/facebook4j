@@ -559,6 +559,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual.getType(), is("link"));
             assertThat(actual.getUpdatedTime(), is(iso8601DateOf("2013-08-18T12:03:22+0000")));
             assertThat(actual.getId(), is("19292868552_10150189643478553"));
+            assertThat(actual.isHidden(), is(false));
             assertThat(actual.getPicture().toString(), is("https://fbexternal-a.akamaihd.net/app_full_proxy.php?app=9953271133&v=3&size=z&cksum=e15ac22d55f6a9501d3b3ac64c5fb763&src=http%3A%2F%2Fimg.bitpixels.com%2Fgetthumbnail%3Fcode%3D78793%26size%3D120%26url%3Dhttp%3A%2F%2Fdevelopers.facebook.com%2Fblog%2F"));
             assertThat(actual.getFullPicture().toString(), is("https://fbexternal-a.akamaihd.net/app_full_proxy.php?app=9953271133&v=3&size=z&cksum=e15ac22d55f6a9501d3b3ac64c5fb763&src=http%3A%2F%2Fimg.bitpixels.com%2Fgetthumbnail%3Fcode%3D78793%26size%3D120%26url%3Dhttp%3A%2F%2Fdevelopers.facebook.com%2Fblog%2F&full_picture"));
             assertThat(actual.getStatusType(), is("app_created_story"));
@@ -807,9 +808,9 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(summary.getTotalCount(), is(2596));
         }
     }
-    
+
     public static class getSharedPosts extends MockFacebookTestBase {
-    	
+
         @Test
         public void id() throws Exception {
             facebook.setMockJSON("mock_json/post/shares.json");
@@ -1068,7 +1069,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual, is(true));
         }
     }
-    
+
     public static class postReactions extends MockFacebookTestBase {
         @Test
         @FacebookAPIVersion("v2.6")

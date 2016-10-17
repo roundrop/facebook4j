@@ -35,10 +35,13 @@ public interface Comment extends FacebookResponse {
     Integer getLikeCount();
     Integer getCommentCount();
     Boolean isUserLikes();
+    Boolean isHidden();
 
     Attachment getAttachment();
 
     Comment getParent();
+
+    PagableList<Comment> getComments();
 
     interface Attachment {
         String getDescription();
