@@ -654,7 +654,7 @@ public class AlbumMethodsTest {
         @Test
         @FacebookAPIVersion("v2.6")
         public void reactions_v26() throws Exception {
-        	facebook.setMockJSON("mock_json/album/reactions.json");
+            facebook.setMockJSON("mock_json/album/reactions.json");
             
             ResponseList<Reaction> reactions = facebook.getAlbumReactions("10154076568048485");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));

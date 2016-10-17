@@ -177,10 +177,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                         reactions.add(reaction);
                     }
                 } else {
-                	reactions = new PagableListImpl<Reaction>(1, reactionsJSONObject);
+                    reactions = new PagableListImpl<Reaction>(1, reactionsJSONObject);
                 }
             } else {
-            	reactions = new PagableListImpl<Reaction>(0);
+                reactions = new PagableListImpl<Reaction>(0);
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -260,8 +260,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
 
     public PagableList<Reaction> getReactions() {
-		return reactions;
-	}
+        return reactions;
+    }
     
     /*package*/
     static ResponseList<Photo> createPhotoList(HttpResponse res, Configuration conf) throws FacebookException {

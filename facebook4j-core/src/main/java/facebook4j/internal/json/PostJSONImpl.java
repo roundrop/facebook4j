@@ -254,15 +254,15 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 comments = new PagableListImpl<Comment>(0);
             }
             if (!json.isNull("attachments")) {
-            	JSONArray attachmentsJSONArray = json.getJSONObject("attachments").getJSONArray("data");
+                JSONArray attachmentsJSONArray = json.getJSONObject("attachments").getJSONArray("data");
                 final int size = attachmentsJSONArray.length();
                 attachments = new ArrayList<Attachment>(size);
                 for (int i = 0; i < attachmentsJSONArray.length(); i++) {
-                	JSONObject attachmentJsonObject = attachmentsJSONArray.getJSONObject(i);
-                   	attachments.add(new AttachmentJSONImpl(attachmentJsonObject));
+                    JSONObject attachmentJsonObject = attachmentsJSONArray.getJSONObject(i);
+                       attachments.add(new AttachmentJSONImpl(attachmentJsonObject));
                 }
             } else {
-            	attachments = Collections.emptyList();
+                attachments = Collections.emptyList();
             }
             if (!json.isNull("object_id")) {
                 objectId = getRawString("object_id", json);
@@ -280,7 +280,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 isPublished = getBoolean("is_published", json);
             }
             if (!json.isNull("is_hidden")) {
-            	isHidden = getBoolean("is_hidden", json);
+                isHidden = getBoolean("is_hidden", json);
             }
             scheduledPublishTime = getInt("scheduled_publish_time", json);
             if (!json.isNull("targeting")) {
@@ -297,10 +297,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                         reactions.add(reaction);
                     }
                 } else {
-                	reactions = new PagableListImpl<Reaction>(1, reactionsJSONObject);
+                    reactions = new PagableListImpl<Reaction>(1, reactionsJSONObject);
                 }
             } else {
-            	reactions = new PagableListImpl<Reaction>(0);
+                reactions = new PagableListImpl<Reaction>(0);
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -436,7 +436,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     }
 
     public Boolean isHidden() {
-    	return isHidden;
+        return isHidden;
     }
 
     public Date getScheduledPublishTime() {
@@ -602,9 +602,9 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     }
 
     private final class AttachmentJSONImpl implements Post.Attachment, java.io.Serializable {
-		private static final long serialVersionUID = 8479952805957989278L;
+        private static final long serialVersionUID = 8479952805957989278L;
 
-		private String id;
+        private String id;
         private String title;
         private String type;
         private String url;
@@ -612,38 +612,38 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
 
         AttachmentJSONImpl(JSONObject json) throws FacebookException {
             try {
-            	if (!json.isNull("target")) {
-            		JSONObject targetJSONObject = json.getJSONObject("target");
-            		id = getRawString("id", targetJSONObject);
-            	}
-            	if (!json.isNull("media")) {
-            		JSONObject mediaJSONObject = json.getJSONObject("media");
-            		JSONObject mediaJson = null;
-            		if (!mediaJSONObject.isNull("video")) {
-            			mediaJson = mediaJSONObject.getJSONObject("video");
-            		}
-            		else if (!mediaJSONObject.isNull("image")) {
-            			mediaJson = mediaJSONObject.getJSONObject("image");
-            		}
-            		if(mediaJson!=null){
-            			url = getRawString("src", mediaJson);
-            		}
-            		else{
-            			url = getRawString("file_url", mediaJSONObject);
-            		}
-            	}
+                if (!json.isNull("target")) {
+                    JSONObject targetJSONObject = json.getJSONObject("target");
+                    id = getRawString("id", targetJSONObject);
+                }
+                if (!json.isNull("media")) {
+                    JSONObject mediaJSONObject = json.getJSONObject("media");
+                    JSONObject mediaJson = null;
+                    if (!mediaJSONObject.isNull("video")) {
+                        mediaJson = mediaJSONObject.getJSONObject("video");
+                    }
+                    else if (!mediaJSONObject.isNull("image")) {
+                        mediaJson = mediaJSONObject.getJSONObject("image");
+                    }
+                    if(mediaJson!=null){
+                        url = getRawString("src", mediaJson);
+                    }
+                    else{
+                        url = getRawString("file_url", mediaJSONObject);
+                    }
+                }
                 title = getRawString("title", json);
                 type = getRawString("type", json);
                 if (!json.isNull("subattachments")) {
-                	JSONArray attachmentsJSONArray = json.getJSONObject("subattachments").getJSONArray("data");
+                    JSONArray attachmentsJSONArray = json.getJSONObject("subattachments").getJSONArray("data");
                     final int size = attachmentsJSONArray.length();
                     subattachments = new ArrayList<Attachment>(size);
                     for (int i = 0; i < attachmentsJSONArray.length(); i++) {
-                    	JSONObject attachmentJsonObject = attachmentsJSONArray.getJSONObject(i);
-                    	subattachments.add(new AttachmentJSONImpl(attachmentJsonObject));
+                        JSONObject attachmentJsonObject = attachmentsJSONArray.getJSONObject(i);
+                        subattachments.add(new AttachmentJSONImpl(attachmentJsonObject));
                     }
                 } else {
-                	subattachments = Collections.emptyList();
+                    subattachments = Collections.emptyList();
                 }
             } catch (JSONException jsone) {
                 throw new FacebookException(jsone.getMessage(), jsone);
@@ -651,7 +651,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         }
 
         public String getId() {
-        	return id;
+            return id;
         }
 
         public String getTitle() {
@@ -667,8 +667,8 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         }
 
         public List<Attachment> getSubattachments() {
-			return subattachments;
-		}
+            return subattachments;
+        }
 
         @Override
         public boolean equals(Object o) {
@@ -689,7 +689,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         @Override
         public String toString() {
             return "AttachmentJSONImpl{" +
-            		", id='" + id + '\'' +
+                    ", id='" + id + '\'' +
                     ", title='" + title + '\'' +
                     ", type='" + type + '\'' +
                     ", url='" + url + '\'' +
@@ -699,7 +699,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     }
 
     public PagableList<Reaction> getReactions() {
-		return reactions;
-	}
+        return reactions;
+    }
 
 }

@@ -73,15 +73,15 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 JSONArray toJSONArray = toJSONObject.getJSONArray("data");
                 senders = new ArrayList<IdNameEntity>();
                 for (int i = 0; i < toJSONArray.length(); i++) {
-                	senders.add(new IdNameEntityJSONImpl(toJSONArray.getJSONObject(i)));
+                    senders.add(new IdNameEntityJSONImpl(toJSONArray.getJSONObject(i)));
                 }
             } else {
-            	senders = Collections.emptyList();
+                senders = Collections.emptyList();
             }
             conversation = getRawString("snippet", json);
             updatedTime = getISO8601Datetime("updated_time", json);
 
-			if (!json.isNull("messages")) {
+            if (!json.isNull("messages")) {
                 JSONObject messagesJSONObject = json.getJSONObject("messages");
                 if (!messagesJSONObject.isNull("data")) {
                     JSONArray list = messagesJSONObject.getJSONArray("data");
@@ -93,9 +93,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                     }
                 }
                 else {
-                	messages = new PagableListImpl<Message>(1, messagesJSONObject);
+                    messages = new PagableListImpl<Message>(1, messagesJSONObject);
                 }
-			}
+            }
             if (!json.isNull("unread_count")) {
                 unread_count = getPrimitiveInt("unread_count", json);
             }

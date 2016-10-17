@@ -105,20 +105,20 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 comments = new PagableListImpl<Comment>(0);
             }
             if (!json.isNull("attachments")) {
-            	JSONObject attachmentsJSONObject = json.getJSONObject("attachments");
-            	if (!attachmentsJSONObject.isNull("data")) {
-            		JSONArray list = attachmentsJSONObject.getJSONArray("data");
-            		final int size = list.length();
-            		attachments = new PagableListImpl<Attachment>(size, attachmentsJSONObject);
-            		for (int i = 0; i < size; i++) {
-            			AttachmentJSONImpl attachment = new AttachmentJSONImpl(list.getJSONObject(i));
-            			attachments.add(attachment);
-            		}
-            	} else {
-            		attachments = new PagableListImpl<Attachment>(1, attachmentsJSONObject);
-            	}
+                JSONObject attachmentsJSONObject = json.getJSONObject("attachments");
+                if (!attachmentsJSONObject.isNull("data")) {
+                    JSONArray list = attachmentsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    attachments = new PagableListImpl<Attachment>(size, attachmentsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        AttachmentJSONImpl attachment = new AttachmentJSONImpl(list.getJSONObject(i));
+                        attachments.add(attachment);
+                    }
+                } else {
+                    attachments = new PagableListImpl<Attachment>(1, attachmentsJSONObject);
+                }
             } else {
-            	attachments = new PagableListImpl<Attachment>(0);
+                attachments = new PagableListImpl<Attachment>(0);
             }
             if (!json.isNull("unread")) {
                 unread = getPrimitiveInt("unread", json);
@@ -141,7 +141,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return to;
     }
     public PagableList<Attachment> getAttachments() {
-    	return attachments;
+        return attachments;
     }
     public String getMessage() {
         return message;
@@ -259,9 +259,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
 
     private final class AttachmentJSONImpl implements Message.Attachment, java.io.Serializable {
-		private static final long serialVersionUID = 2383005779931406513L;
+        private static final long serialVersionUID = 2383005779931406513L;
 
-		private String id;
+        private String id;
         private String name;
         private String mime_type;
         private String url;
@@ -269,22 +269,22 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
         AttachmentJSONImpl(JSONObject json) throws FacebookException {
             try {
-            	id = getRawString("id", json);
-            	JSONObject mediaJson = null;
+                id = getRawString("id", json);
+                JSONObject mediaJson = null;
                 if (!json.isNull("video_data")) {
-                	mediaJson = json.getJSONObject("video_data");
+                    mediaJson = json.getJSONObject("video_data");
 
                 }
                 else if (!json.isNull("image_data")) {
-                	mediaJson = json.getJSONObject("image_data");
+                    mediaJson = json.getJSONObject("image_data");
 
                 }
                 if(mediaJson!=null){
-	                url = getRawString("url", mediaJson);
-	                preview_url = getRawString("preview_url", mediaJson);
+                    url = getRawString("url", mediaJson);
+                    preview_url = getRawString("preview_url", mediaJson);
                 }
                 else{
-                	url = getRawString("file_url", json);
+                    url = getRawString("file_url", json);
                 }
                 name = getRawString("name", json);
                 mime_type = getRawString("mime_type", json);
@@ -294,7 +294,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         }
 
         public String getId() {
-        	return id;
+            return id;
         }
 
         public String getName() {
@@ -310,7 +310,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         }
 
         public String getPreviewUrl() {
-        	return preview_url;
+            return preview_url;
         }
 
         @Override
@@ -332,7 +332,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         @Override
         public String toString() {
             return "AttachmentJSONImpl{" +
-            		", id='" + id + '\'' +
+                    ", id='" + id + '\'' +
                     ", name='" + name + '\'' +
                     ", mime_type='" + mime_type + '\'' +
                     ", url='" + url + '\'' +

@@ -229,7 +229,7 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     }
 
     public InboxResponseList<Conversation> createConversationList(HttpResponse res) throws FacebookException {
-    	return ConversationJSONImpl.createInboxConversationList(res, conf);
+        return ConversationJSONImpl.createInboxConversationList(res, conf);
     }
 
     public Conversation createConversation(HttpResponse res) throws FacebookException {
@@ -541,7 +541,7 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
             return (ResponseList<T>) createConversationList(res);
         }
         if (jsonObjectType == Message.class) {
-        	return (ResponseList<T>) createMessageList(res);
+            return (ResponseList<T>) createMessageList(res);
         }
         if (jsonObjectType == Note.class) {
             return (ResponseList<T>) createNoteList(res);
@@ -607,7 +607,7 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
             return (ResponseList<T>) createReactionList(res);
         }
         if (jsonObjectType == TestUser.class) {
-      	  return (ResponseList<T>) createTestUserList(res);
+            return (ResponseList<T>) createTestUserList(res);
         }
         if (jsonObjectType == JSONObject.class) {
             return (ResponseList<T>) createJSONObjectList(res);

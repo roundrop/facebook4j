@@ -15,27 +15,27 @@ import java.io.Serializable;
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 public class ReactionJSONImpl extends CategoryJSONImpl implements Reaction, Serializable{
-	private static final long serialVersionUID = 4813956293820850547L;
+    private static final long serialVersionUID = 4813956293820850547L;
 
-	private ReactionType type;
-	
-	ReactionJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
-		super(res, conf);
-		init(res.asJSONObject());
-	}
-	
-	ReactionJSONImpl(JSONObject json) throws FacebookException {
-		super(json);
-		init(json);
-	}
-	
+    private ReactionType type;
 
-	private void init(JSONObject json) throws FacebookException {
-		type = ReactionType.of(getRawString("type", json));
+    ReactionJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+        super(res, conf);
+        init(res.asJSONObject());
     }
 
-	public static ResponseList<Reaction> createReactionsList(HttpResponse res, Configuration conf) throws FacebookException {
-		try {
+    ReactionJSONImpl(JSONObject json) throws FacebookException {
+        super(json);
+        init(json);
+    }
+
+
+    private void init(JSONObject json) throws FacebookException {
+        type = ReactionType.of(getRawString("type", json));
+    }
+
+    public static ResponseList<Reaction> createReactionsList(HttpResponse res, Configuration conf) throws FacebookException {
+        try {
             if (conf.isJSONStoreEnabled()) {
                 DataObjectFactoryUtil.clearThreadLocalMap();
             }
@@ -63,20 +63,20 @@ public class ReactionJSONImpl extends CategoryJSONImpl implements Reaction, Seri
         } catch (JSONException jsone) {
             throw new FacebookException(jsone);
         } catch (FacebookException e) {
-        	throw new FacebookException(e.getMessage());
-		}
-	}
+            throw new FacebookException(e.getMessage());
+        }
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public ReactionType getType() {
-		return type;
-	}
+    public ReactionType getType() {
+        return type;
+    }
 
 }

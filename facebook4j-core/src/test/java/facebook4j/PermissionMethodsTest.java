@@ -33,7 +33,7 @@ public class PermissionMethodsTest {
 
     public static class getPermissions extends MockFacebookTestBase {
 
-		@Test
+        @Test
         public void me() throws Exception {
             facebook.setMockJSON("mock_json/permission/all.json");
             List<Permission> actuals = facebook.getPermissions();

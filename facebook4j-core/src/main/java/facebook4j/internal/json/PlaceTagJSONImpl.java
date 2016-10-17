@@ -15,16 +15,16 @@ import java.util.Date;
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 public class PlaceTagJSONImpl extends FacebookResponseImpl implements PlaceTag, java.io.Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2432739417789258923L;
-	private String id;
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2432739417789258923L;
+    private String id;
     private Date createdTime;
-	private Place place;
-	
-	 /*package*/PlaceTagJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+    private Place place;
+
+     /*package*/PlaceTagJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
         JSONObject json = res.asJSONObject();
         init(json);
@@ -53,20 +53,20 @@ public class PlaceTagJSONImpl extends FacebookResponseImpl implements PlaceTag, 
         }
     }
 
-	
-	public String getId() {
-		return id;
-	}
 
-	public Date getCreatedTime() {
-		return createdTime;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public Place getPlaceTag() {
-		return place;
-	}
-	
-	/*package*/
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    public Place getPlaceTag() {
+        return place;
+    }
+
+    /*package*/
     static ResponseList<PlaceTag> createPlaceTagList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
             if (conf.isJSONStoreEnabled()) {
@@ -92,39 +92,39 @@ public class PlaceTagJSONImpl extends FacebookResponseImpl implements PlaceTag, 
             throw new FacebookException(jsone);
         }
     }
-	
-	 @Override
-	    public int hashCode() {
-	        final int prime = 31;
-	        int result = 1;
-	        result = prime * result + ((id == null) ? 0 : id.hashCode());
-	        return result;
-	    }
 
-	    @Override
-	    public boolean equals(Object obj) {
-	        if (this == obj)
-	            return true;
-	        if (obj == null)
-	            return false;
-	        if (getClass() != obj.getClass())
-	            return false;
-	        PlaceTagJSONImpl other = (PlaceTagJSONImpl) obj;
-	        if (id == null) {
-	            if (other.id != null)
-	                return false;
-	        } else if (!id.equals(other.id))
-	            return false;
-	        return true;
-	    }
+     @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ((id == null) ? 0 : id.hashCode());
+            return result;
+        }
 
-	    @Override
-	    public String toString() {
-	        return "PlaceTagJSONImpl{" +
-	                "id='" + id + '\'' +
-	                ", created_time='" + createdTime + '\'' +
-	                ", place=" + place +
-	                '}';
-	    }
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            PlaceTagJSONImpl other = (PlaceTagJSONImpl) obj;
+            if (id == null) {
+                if (other.id != null)
+                    return false;
+            } else if (!id.equals(other.id))
+                return false;
+            return true;
+        }
+
+        @Override
+        public String toString() {
+            return "PlaceTagJSONImpl{" +
+                    "id='" + id + '\'' +
+                    ", created_time='" + createdTime + '\'' +
+                    ", place=" + place +
+                    '}';
+        }
 
 }
