@@ -16,39 +16,7 @@
 
 package facebook4j;
 
-import facebook4j.api.AccountMethods;
-import facebook4j.api.ActivityMethods;
-import facebook4j.api.AlbumMethods;
-import facebook4j.api.BatchRequestsMethods;
-import facebook4j.api.CheckinMethods;
-import facebook4j.api.CommentMethods;
-import facebook4j.api.DomainMethods;
-import facebook4j.api.EventMethods;
-import facebook4j.api.FQLMethods;
-import facebook4j.api.FamilyMethods;
-import facebook4j.api.FavoriteMethods;
-import facebook4j.api.FriendMethods;
-import facebook4j.api.GameMethods;
-import facebook4j.api.GroupMethods;
-import facebook4j.api.InsightMethods;
-import facebook4j.api.LikeMethods;
-import facebook4j.api.LinkMethods;
-import facebook4j.api.LocationMethods;
-import facebook4j.api.MessageMethods;
-import facebook4j.api.NoteMethods;
-import facebook4j.api.NotificationMethods;
-import facebook4j.api.PageMethods;
-import facebook4j.api.PermissionMethods;
-import facebook4j.api.PhotoMethods;
-import facebook4j.api.PokeMethods;
-import facebook4j.api.PostMethods;
-import facebook4j.api.QuestionMethods;
-import facebook4j.api.RawAPIMethods;
-import facebook4j.api.SearchMethods;
-import facebook4j.api.SubscribeMethods;
-import facebook4j.api.TestUserMethods;
-import facebook4j.api.UserMethods;
-import facebook4j.api.VideoMethods;
+import facebook4j.api.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -150,6 +118,11 @@ public class NarrowDownAPIMethodsTest {
     @Test
     public void messages() throws Exception {
         assertThat(facebook.messages(), instanceOf(MessageMethods.class));
+    }
+
+    @Test
+    public void conversations() throws Exception {
+        assertThat(facebook.conversations(), instanceOf(ConversationMethods.class));
     }
 
     @Test
