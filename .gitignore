@@ -7,4 +7,5 @@ target/
 *.iml
 *.ipr
 *.iws
+.java-version
 test.properties
