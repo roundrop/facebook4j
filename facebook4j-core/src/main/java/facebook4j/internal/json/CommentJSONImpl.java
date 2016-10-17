@@ -20,6 +20,7 @@ import facebook4j.Category;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
 import facebook4j.Image;
+import facebook4j.PagableList;
 import facebook4j.ResponseList;
 import facebook4j.Tag;
 import facebook4j.conf.Configuration;
@@ -53,9 +54,11 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Integer likeCount;
     private Integer commentCount;
     private Boolean isUserLikes;
+    private Boolean isHidden;
     private Attachment attachment;
     private Comment parent;
-    
+    private PagableList<Comment> comments;
+
     /*package*/CommentJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
         JSONObject json = res.asJSONObject();
@@ -99,11 +102,28 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             likeCount = getInt("like_count", json);
             commentCount = getInt("comment_count", json);
             isUserLikes = getBoolean("user_likes", json);
+            isHidden = getBoolean("is_hidden", json);
             if (!json.isNull("attachment")) {
                 attachment = new AttachmentJSONImpl(json.getJSONObject("attachment"));
             }
             if (!json.isNull("parent")) {
                 parent = new CommentJSONImpl(json.getJSONObject("parent"));
+            }
+            if (!json.isNull("comments")) {
+                JSONObject commentsJSONObject = json.getJSONObject("comments");
+                if (!commentsJSONObject.isNull("data")) {
+                    JSONArray list = commentsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    comments = new PagableListImpl<Comment>(size, commentsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        CommentJSONImpl comment = new CommentJSONImpl(list.getJSONObject(i));
+                        comments.add(comment);
+                    }
+                } else {
+                    comments = new PagableListImpl<Comment>(1, commentsJSONObject);
+                }
+            } else {
+                comments = new PagableListImpl<Comment>(0);
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -158,12 +178,20 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return isUserLikes;
     }
 
+    public Boolean isHidden() {
+    	return isHidden;
+    }
+
     public Attachment getAttachment() {
         return attachment;
     }
 
     public Comment getParent() {
         return parent;
+    }
+
+    public PagableList<Comment> getComments() {
+        return comments;
     }
 
     /*package*/
@@ -233,8 +261,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 ", likeCount=" + likeCount +
                 ", commentCount=" + commentCount +
                 ", isUserLikes=" + isUserLikes +
+                ", isHidden=" + isHidden +
                 ", attachment=" + attachment +
                 ", parent=" + parent +
+                ", comments=" + comments +
                 '}';
     }
 

@@ -22,6 +22,7 @@ import facebook4j.api.AlbumMethods;
 import facebook4j.api.BatchRequestsMethods;
 import facebook4j.api.CheckinMethods;
 import facebook4j.api.CommentMethods;
+import facebook4j.api.ConversationMethods;
 import facebook4j.api.DomainMethods;
 import facebook4j.api.EventMethods;
 import facebook4j.api.FQLMethods;
@@ -74,6 +75,7 @@ public interface Facebook extends java.io.Serializable,
     LinkMethods,
     LocationMethods,
     MessageMethods,
+    ConversationMethods,
     NoteMethods,
     NotificationMethods,
     PageMethods,

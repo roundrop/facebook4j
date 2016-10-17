@@ -23,6 +23,7 @@ import facebook4j.api.AlbumMethods;
 import facebook4j.api.BatchRequestsMethods;
 import facebook4j.api.CheckinMethods;
 import facebook4j.api.CommentMethods;
+import facebook4j.api.ConversationMethods;
 import facebook4j.api.DomainMethods;
 import facebook4j.api.EventMethods;
 import facebook4j.api.FQLMethods;
@@ -127,7 +128,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         }
         return url.toString();
     }
-    
+
     private String buildVideoEndpoint(String id, String connection) {
         return buildVideoEndpoint(id, connection, null);
     }
@@ -153,7 +154,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* User Methods */
-    
+
     public User getMe() throws FacebookException {
         return getMe(null);
     }
@@ -162,7 +163,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         User user = factory.createUser(get(buildEndpoint("me", reading)));
         return user;
     }
-    
+
     public User getUser(String userId) throws FacebookException {
         return getUser(userId, null);
     }
@@ -171,7 +172,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         User user = factory.createUser(get(buildEndpoint(userId, reading)));
         return user;
     }
-    
+
     public URL getPictureURL() throws FacebookException {
         ensureAuthorizationEnabled();
         return getPictureURL("me");
@@ -183,7 +184,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
  	public URL getPictureURL(int width, int height) throws FacebookException {
 		ensureAuthorizationEnabled();
 		return getPictureURL("me", width, height);
-	}    
+	}
     public URL getPictureURL(String userId) throws FacebookException {
         return getPictureURL(userId, null);
     }
@@ -193,7 +194,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
  	public URL getPictureURL(String userId, int width, int height) throws FacebookException {
 		return _getPictureURL(userId, width, height);
 	}
-	
+
     public URL getSSLPictureURL() throws FacebookException {
         ensureAuthorizationEnabled();
         return getSSLPictureURL("me");
@@ -214,7 +215,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createUserArray(get(conf.getRestBaseURL(), new HttpParameter[] {
                                         new HttpParameter("ids", z_F4JInternalStringUtil.join(ids))}));
     }
-    
+
     /* Account Methods */
 
     public ResponseList<Account> getAccounts() throws FacebookException {
@@ -232,7 +233,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Achievement Methods */
-    
+
     public ResponseList<Achievement> getAchievements() throws FacebookException {
         return getAchievements("me", null);
     }
@@ -273,7 +274,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Activity Methods */
-    
+
     public ResponseList<Activity> getActivities() throws FacebookException {
         return getActivities("me", null);
     }
@@ -289,7 +290,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Album Methods */
-    
+
     public ResponseList<Album> getAlbums() throws FacebookException {
         return getAlbums("me", null);
     }
@@ -311,7 +312,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createAlbum(get(buildEndpoint(albumId, reading)));
     }
-    
+
     public String createAlbum(AlbumUpdate albumUpdate) throws FacebookException {
         return createAlbum("me", albumUpdate);
     }
@@ -353,7 +354,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
     }
-    
+
     public ResponseList<Comment> getAlbumComments(String albumId) throws FacebookException {
         return getAlbumComments(albumId, null);
     }
@@ -399,7 +400,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Book Methods */
-    
+
     public ResponseList<Book> getBooks() throws FacebookException {
         return getBooks("me", null);
     }
@@ -415,7 +416,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Checkin Methods */
-    
+
     public ResponseList<Checkin> getCheckins() throws FacebookException {
         return getCheckins("me", null);
     }
@@ -477,7 +478,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Domain Methods */
-    
+
     public Domain getDomain(String domainId) throws FacebookException {
         return factory.createDomain(get(buildEndpoint(domainId)));
     }
@@ -492,7 +493,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Event Methods */
-    
+
     public ResponseList<Event> getEvents() throws FacebookException {
         return getEvents("me", null);
     }
@@ -706,7 +707,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Family Methods */
-    
+
     public ResponseList<Family> getFamily() throws FacebookException {
         return getFamily("me", null);
     }
@@ -722,7 +723,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Post Methods */
-    
+
     public ResponseList<Post> getFeed() throws FacebookException {
         return getFeed("me", null);
     }
@@ -795,6 +796,11 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return _getComments(postId, reading);
     }
 
+    public String answerConversation(String conversationId, String message) throws FacebookException {
+    	ensureAuthorizationEnabled();
+    	return _answer(conversationId, message);
+    }
+
     public String commentPost(String postId, String message) throws FacebookException {
         ensureAuthorizationEnabled();
         return _comment(postId, message);
@@ -820,7 +826,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 		ensureAuthorizationEnabled();
         return _getSharedPosts(postId, reading);
 	}
-    
+
     public boolean likePost(String postId) throws FacebookException {
         ensureAuthorizationEnabled();
         return _like(postId);
@@ -834,7 +840,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createInsightList(get(buildEndpoint(postId, "insights")));
     }
-    
+
     public String postFeed(PostUpdate postUpdate) throws FacebookException {
         return postFeed("me", postUpdate);
     }
@@ -910,7 +916,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createFriendList(get(buildEndpoint(userId, "friends", reading)));
     }
-    
+
     public ResponseList<TaggableFriend> getTaggableFriends() throws FacebookException {
 		return getTaggableFriends("me", null);
 	}
@@ -999,9 +1005,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createFriendList(get(buildEndpoint(userId, "friends/" + friendId, reading)));
     }
-    
+
     /* Favorite Methods */
-    
+
     public ResponseList<Game> getGames() throws FacebookException {
         return getGames("me", null);
     }
@@ -1073,7 +1079,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Group Methods */
-    
+
     public ResponseList<Group> getGroups() throws FacebookException {
         return getGroups("me", null);
     }
@@ -1159,7 +1165,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Message Methods */
-    
+
     public InboxResponseList<Message> getInbox() throws FacebookException {
         return getInbox("me", null);
     }
@@ -1210,8 +1216,35 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createMessage(get(buildEndpoint(messageId, reading)));
     }
 
+    /* Conversation Methods */
+
+    public InboxResponseList<Conversation> getConversations() throws FacebookException {
+        return getConversations("me", null);
+    }
+    public InboxResponseList<Conversation> getConversations(Reading reading) throws FacebookException {
+        return getConversations("me", reading);
+    }
+    public InboxResponseList<Conversation> getConversations(String pageId) throws FacebookException {
+        return getConversations(pageId, null);
+    }
+
+    public InboxResponseList<Conversation> getConversations(String pageId, Reading reading) throws FacebookException {
+    	ensureAuthorizationEnabled();
+    	return factory.createConversationList(get(buildEndpoint(pageId, "conversations", reading)));
+    }
+
+    public Conversation getConversation(String conversationId) throws FacebookException {
+        return getConversation(conversationId, null);
+    }
+    public Conversation getConversation(String conversationId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createConversation(get(buildEndpoint(conversationId, reading)));
+    }
+
+
+
     /* Like Methods */
-    
+
     public ResponseList<Like> getUserLikes() throws FacebookException {
         return _getLikes("me", null);
     }
@@ -1268,7 +1301,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Link Methods */
-    
+
     public ResponseList<Link> getLinks() throws FacebookException {
         return getLinks("me", null);
     }
@@ -1343,7 +1376,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Location Methods */
-    
+
     public ResponseList<Location> getLocations() throws FacebookException {
         return getLocations("me", null);
     }
@@ -1357,7 +1390,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createLocationList(get(buildEndpoint(userId, "locations", reading)));
     }
-    
+
 	public ResponseList<PlaceTag> getTaggedPlaces() throws FacebookException {
 		return getTaggedPlaces("me", null);
 	}
@@ -1376,7 +1409,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 	}
 
     /* Note Methods */
-    
+
     public ResponseList<Note> getNotes() throws FacebookException {
         return getNotes("me", null);
     }
@@ -1406,7 +1439,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
     }
-    
+
     public Note getNote(String noteId) throws FacebookException {
         return getNote(noteId, null);
     }
@@ -1446,7 +1479,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Notification Methods */
-    
+
     public ResponseList<Notification> getNotifications() throws FacebookException {
         return getNotifications("me", null);
     }
@@ -1978,7 +2011,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         HttpResponse res = post(buildEndpoint(photoId, "tags"), new HttpParameter[]{new HttpParameter("to", toUserId)});
         return parseBoolean(res);
     }
-    
+
     public boolean addTagToPhoto(String photoId, TagUpdate tagUpdate) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = post(buildEndpoint(photoId, "tags"), tagUpdate.asHttpParameterArray());
@@ -2032,7 +2065,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Poke Methods */
-    
+
     public ResponseList<Poke> getPokes() throws FacebookException {
         return getPokes("me", null);
     }
@@ -2048,7 +2081,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Question Methods */
-    
+
     public ResponseList<Question> getQuestions() throws FacebookException {
         return getQuestions("me", null);
     }
@@ -2118,7 +2151,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Game Methods */
-    
+
     public ResponseList<Score> getScores() throws FacebookException {
         return getScores("me", null);
     }
@@ -2153,7 +2186,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Subscribe Methods */
-    
+
     public ResponseList<Subscribedto> getSubscribedto() throws FacebookException {
         return getSubscribedto("me", null);
     }
@@ -2183,7 +2216,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Video Methods */
-    
+
     public ResponseList<Video> getVideos() throws FacebookException {
         return getVideos("me", null);
     }
@@ -2262,9 +2295,9 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return _getPictureURL(videoId, null);
     }
-    
+
     /* Insight Methods */
-    
+
     public ResponseList<Insight> getInsights(String objectId, String metric) throws FacebookException {
         return getInsights(objectId, metric, null);
     }
@@ -2274,7 +2307,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* Search Methods */
-    
+
     public ResponseList<Post> searchPosts(String query) throws FacebookException {
         return searchPosts(query, null);
     }
@@ -2362,7 +2395,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     public ResponseList<JSONObject> search(String query, Reading reading) throws FacebookException {
         return search(query, null, reading);
     }
-    
+
     public ResponseList<JSONObject> search(String query, String type, Reading reading) throws FacebookException {
         String url = buildSearchEndpoint(query, type, reading);
         return factory.createJSONObjectList(get(url));
@@ -2416,7 +2449,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* FQL Methods */
-    
+
     public JSONArray executeFQL(String query) throws FacebookException {
         return executeFQL(query, null);
     }
@@ -2477,17 +2510,17 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         }
         return "{" + z_F4JInternalStringUtil.join((String[]) jsons.toArray(new String[jsons.size()])) + "}";
     }
-    
+
     /* Test User Methods */
 
     public TestUser createTestUser(String appId) throws FacebookException {
         return createTestUser(appId, null, null, null);
     }
-    
+
     public TestUser createTestUser(String appId, String name, String locale, String permissions) throws FacebookException {
         return createTestUser(appId, name, locale, permissions, true);
     }
-    
+
     public TestUser createTestUser(String appId, String name, String locale, String permissions, boolean installed) throws FacebookException {
         ensureAuthorizationEnabled();
         String _locale = "en_US";
@@ -2508,13 +2541,13 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return getTestUsers(appId, null);
     }
 
-    
+
     public ResponseList<TestUser> getTestUsers(String appId, Integer limit) throws FacebookException {
        ensureAuthorizationEnabled();
        HttpResponse res = get(conf.getRestBaseURL() + appId + "/accounts/test-users" + (limit != null ? "?limit=" + limit : ""));
        return factory.createTestUserList(res);
    }
-    
+
     public boolean deleteTestUser(String testUserId) throws FacebookException {
         ensureAuthorizationEnabled();
         HttpResponse res = delete(conf.getRestBaseURL() + testUserId);
@@ -2532,7 +2565,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
                                 new HttpParameter[]{new HttpParameter("access_token", testUser2.getAccessToken())});
         return parseBoolean(res);
     }
-    
+
     /* Paging */
 
     @SuppressWarnings("unchecked")
@@ -2584,10 +2617,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         }
         return result;
     }
-    
+
 
     /* raw api methods */
-    
+
     public RawAPIResponse callGetAPI(String relativeUrl) throws FacebookException {
         return callGetAPI(relativeUrl, new HashMap<String, String>());
     }
@@ -2678,7 +2711,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     /* common methods */
-    
+
     private ResponseList<Comment> _getComments(String objectId, Reading reading) throws FacebookException {
         return factory.createCommentList(get(buildEndpoint(objectId, "comments", reading)));
     }
@@ -2737,6 +2770,18 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     private ResponseList<Post> _getSharedPosts(String objectId, Reading reading) throws FacebookException {
         return factory.createPostList(get(buildEndpoint(objectId, "sharedposts", reading)));
+    }
+
+    private String _answer(String objectId, String message) throws FacebookException {
+    	ensureAuthorizationEnabled();
+    	JSONObject json = post(buildEndpoint(objectId, "messages"),
+    			new HttpParameter[]{new HttpParameter("message", message)})
+    			.asJSONObject();
+    	try {
+    		return json.getString("id");
+    	} catch (JSONException jsone) {
+    		throw new FacebookException(jsone.getMessage(), jsone);
+    	}
     }
 
     private String _comment(String objectId, String message) throws FacebookException {
@@ -2813,7 +2858,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
 
     /* http methods */
-    
+
     private HttpResponse get(String url) throws FacebookException {
         if (!conf.isMBeanEnabled()) {
             return http.get(url, auth);
@@ -2932,12 +2977,12 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
             return response;
         }
     }
-    
+
 
     private boolean isOk(HttpResponse response) {
         return response != null && response.getStatusCode() < 300;
     }
-    
+
     private boolean containsAccessToken(HttpParameter[] parameters) throws FacebookException {
         for (int i = 0; i < parameters.length; i++) {
             if (parameters[i].getName().equals("access_token")) {
@@ -3015,6 +3060,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     public MessageMethods messages() {
         return this;
+    }
+
+    public ConversationMethods conversations() {
+    	return this;
     }
 
     public NoteMethods notes() {

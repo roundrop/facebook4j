@@ -16,15 +16,15 @@
 
 package facebook4j;
 
-/**
- * @author Ryuji Yamashita - roundrop at gmail.com
- */
-public enum PictureSize {
-    square,
-    small,
-    normal,
-    large,
-    thumbnail,
-    album,
-    ;
+import java.util.Date;
+import java.util.List;
+
+public interface Conversation extends FacebookResponse {
+    String getId();
+    String getConversation();
+    List<IdNameEntity> getSenders();
+    Date getUpdatedTime();
+    PagableList<Message> getMessages();
+    Integer getUnreadCount();
+    Integer getMessageCount();
 }

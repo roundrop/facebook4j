@@ -25,6 +25,7 @@ import facebook4j.Application;
 import facebook4j.Book;
 import facebook4j.Checkin;
 import facebook4j.Comment;
+import facebook4j.Conversation;
 import facebook4j.Domain;
 import facebook4j.Event;
 import facebook4j.FacebookException;
@@ -93,11 +94,11 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<IdNameEntity> createIdNameEntityList(HttpResponse res) throws FacebookException;
 
     ResponseList<Account> createAccountList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Achievement> createAchievementList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Activity> createActivityList(HttpResponse res) throws FacebookException;
-    
+
     Album createAlbum(HttpResponse res) throws FacebookException;
     ResponseList<Album> createAlbumList(HttpResponse res) throws FacebookException;
 
@@ -105,55 +106,59 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
 
     Checkin createCheckin(HttpResponse res) throws FacebookException;
     ResponseList<Checkin> createCheckinList(HttpResponse res) throws FacebookException;
-    
+
     Comment createComment(HttpResponse res) throws FacebookException;
     ResponseList<Comment> createCommentList(HttpResponse res) throws FacebookException;
-    
+
     Domain createDomain(HttpResponse res) throws FacebookException;
     List<Domain> createDomainArray(HttpResponse res) throws FacebookException;
 
     Event createEvent(HttpResponse res) throws FacebookException;
     ResponseList<Event> createEventList(HttpResponse res) throws FacebookException;
     ResponseList<RSVPStatus> createRSVPStatusList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Family> createFamilyList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Post> createPostList(HttpResponse res) throws FacebookException;
     Post createPost(HttpResponse res) throws FacebookException;
-    
+
     Friendlist createFriendlist(HttpResponse res) throws FacebookException;
     ResponseList<Friendlist> createFriendlistList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<FriendRequest> createFriendRequestList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Friend> createFriendList(HttpResponse res) throws FacebookException;
     ResponseList<TaggableFriend> createTaggableFriendList(HttpResponse res) throws FacebookException;
 
     ResponseList<Game> createGameList(HttpResponse res) throws FacebookException;
-    
+
     Group createGroup(HttpResponse res) throws FacebookException;
     ResponseList<Group> createGroupList(HttpResponse res) throws FacebookException;
 
     ResponseList<GroupDoc> createGroupDocList(HttpResponse res) throws FacebookException;
     InboxResponseList<Message> createInboxList(HttpResponse res) throws FacebookException;
-    
+
+    InboxResponseList<Conversation> createConversationList(HttpResponse res) throws FacebookException;
+
+    Conversation createConversation(HttpResponse res) throws FacebookException;
+
     ResponseList<Interest> createInterestList(HttpResponse res) throws FacebookException;
 
     ResponseList<Like> createLikeList(HttpResponse res) throws FacebookException;
-    
+
     Link createLink(HttpResponse res) throws FacebookException;
     ResponseList<Link> createLinkList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Location> createLocationList(HttpResponse res) throws FacebookException;
     ResponseList<PlaceTag> createPlaceTagList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Movie> createMovieList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Music> createMusicList(HttpResponse res) throws FacebookException;
-    
+
     Note createNote(HttpResponse res) throws FacebookException;
     ResponseList<Note> createNoteList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Notification> createNotificationList(HttpResponse res) throws FacebookException;
 
     Page createPage(HttpResponse res) throws FacebookException;
@@ -163,11 +168,11 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
 
     Message createMessage(HttpResponse res) throws FacebookException;
     ResponseList<Message> createMessageList(HttpResponse res) throws FacebookException;
-    
+
     List<Permission> createPermissions(HttpResponse res) throws FacebookException;
 
     ResponseList<Place> createPlaceList(HttpResponse res) throws FacebookException;
-    
+
     Photo createPhoto(HttpResponse res) throws FacebookException;
     ResponseList<Photo> createPhotoList(HttpResponse res) throws FacebookException;
 
@@ -177,20 +182,20 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<Question> createQuestionList(HttpResponse res) throws FacebookException;
     ResponseList<Question.Option> createQuestionOptionList(HttpResponse res) throws FacebookException;
     ResponseList<QuestionVotes> createQuestionVotesList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Score> createScoreList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Subscribedto> createSubscribedtoList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Subscriber> createSubscriberList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Television> createTelevisionList(HttpResponse res) throws FacebookException;
-    
+
     Video createVideo(HttpResponse res) throws FacebookException;
     ResponseList<Video> createVideoList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<Tag> createTagList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<GroupMember> createGroupMemberList(HttpResponse res) throws FacebookException;
 
     ResponseList<Insight> createInsightList(HttpResponse res) throws FacebookException;
@@ -208,17 +213,17 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
 
 
     Application createApplication(HttpResponse res) throws FacebookException;
-    
-    
+
+
     TestUser createTestUser(HttpResponse res) throws FacebookException;
-    
+
     TestUser createTestUser(JSONObject json) throws FacebookException;
 
     ResponseList<TestUser> createTestUserList(HttpResponse res) throws FacebookException;
-    
+
     ResponseList<JSONObject> createJSONObjectList(HttpResponse res) throws FacebookException;
     ResponseList<JSONObject> createJSONObjectList(JSONObject json) throws FacebookException;
-    
+
     <T> ResponseList<T> createResponseList(HttpResponse res, Class<T> jsonObjectType) throws FacebookException;
 
     ResponseList<Reaction> createReactionList(HttpResponse res) throws FacebookException;

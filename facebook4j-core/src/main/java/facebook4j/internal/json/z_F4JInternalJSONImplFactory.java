@@ -25,6 +25,7 @@ import facebook4j.Application;
 import facebook4j.Book;
 import facebook4j.Checkin;
 import facebook4j.Comment;
+import facebook4j.Conversation;
 import facebook4j.Domain;
 import facebook4j.Event;
 import facebook4j.FacebookException;
@@ -99,11 +100,11 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     public User createUser(JSONObject json) throws FacebookException {
         return new UserJSONImpl(json);
     }
-    
+
     public ResponseList<User> createUserList(HttpResponse res) throws FacebookException {
         return UserJSONImpl.createUserList(res, conf);
     }
-    
+
     public List<User> createUserArray(HttpResponse res) throws FacebookException {
         return UserJSONImpl.createUserArray(res, conf);
     }
@@ -146,7 +147,7 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     public ResponseList<Checkin> createCheckinList(HttpResponse res) throws FacebookException {
         return CheckinJSONImpl.createCheckinList(res, conf);
     }
-    
+
     public Comment createComment(HttpResponse res) throws FacebookException {
         return new CommentJSONImpl(res, conf);
     }
@@ -186,7 +187,7 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     public ResponseList<Post> createPostList(HttpResponse res) throws FacebookException {
         return PostJSONImpl.createPostList(res, conf);
     }
-    
+
     public Friendlist createFriendlist(HttpResponse res) throws FacebookException {
         return new FriendlistJSONImpl(res, conf);
     }
@@ -194,7 +195,7 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     public ResponseList<Friendlist> createFriendlistList(HttpResponse res) throws FacebookException {
         return FriendlistJSONImpl.createFriendlistList(res, conf);
     }
-    
+
     public ResponseList<FriendRequest> createFriendRequestList(HttpResponse res) throws FacebookException {
         return FriendRequestJSONImpl.createFriendRequestList(res, conf);
     }
@@ -202,7 +203,7 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     public ResponseList<Friend> createFriendList(HttpResponse res) throws FacebookException {
         return FriendJSONImpl.createFriendList(res, conf);
     }
-    
+
     public ResponseList<TaggableFriend> createTaggableFriendList(HttpResponse res) throws FacebookException {
         return TaggableFriendJSONImpl.createTaggableFriendList(res, conf);
     }
@@ -227,6 +228,14 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return MessageJSONImpl.createInboxMessageList(res, conf);
     }
 
+    public InboxResponseList<Conversation> createConversationList(HttpResponse res) throws FacebookException {
+    	return ConversationJSONImpl.createInboxConversationList(res, conf);
+    }
+
+    public Conversation createConversation(HttpResponse res) throws FacebookException {
+        return new ConversationJSONImpl(res, conf);
+    }
+
     public ResponseList<Interest> createInterestList(HttpResponse res) throws FacebookException {
         return InterestJSONImpl.createInterestList(res, conf);
     }
@@ -245,7 +254,7 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     public ResponseList<Location> createLocationList(HttpResponse res) throws FacebookException {
         return LocationJSONImpl.createLocationList(res, conf);
     }
-    
+
     public ResponseList<PlaceTag> createPlaceTagList(HttpResponse res) throws FacebookException {
         return PlaceTagJSONImpl.createPlaceTagList(res, conf);
     }
@@ -315,11 +324,11 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     public ResponseList<Question> createQuestionList(HttpResponse res) throws FacebookException {
         return QuestionJSONImpl.createQuestionList(res, conf);
     }
-    
+
     public ResponseList<Question.Option> createQuestionOptionList(HttpResponse res) throws FacebookException {
         return QuestionJSONImpl.createOptionList(res, conf);
     }
-    
+
     public ResponseList<QuestionVotes> createQuestionVotesList(HttpResponse res) throws FacebookException {
         return QuestionVotesJSONImpl.createQuestionVotesList(res, conf);
     }
@@ -348,7 +357,7 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     public Video createVideo(HttpResponse res) throws FacebookException {
         return new VideoJSONImpl(res, conf);
     }
-    
+
     public ResponseList<Video> createVideoList(HttpResponse res) throws FacebookException {
         return VideoJSONImpl.createVideoList(res, conf);
     }
@@ -404,29 +413,29 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
     public ResponseList<JSONObject> createJSONObjectList(HttpResponse res) throws FacebookException {
         return ResponseListImpl.createJSONObjectList(res, conf);
     }
-    
+
     public ResponseList<JSONObject> createJSONObjectList(JSONObject json) throws FacebookException {
         return ResponseListImpl.createJSONObjectList(json);
     }
-    
+
     public Reaction createReaction(HttpResponse res) throws FacebookException {
         return new ReactionJSONImpl(res, conf);
     }
-    
+
     public ResponseList<Reaction> createReactionList(HttpResponse res) throws FacebookException {
         return ReactionJSONImpl.createReactionsList(res, conf);
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof z_F4JInternalJSONImplFactory)) return false;
-    
+
         z_F4JInternalJSONImplFactory that = (z_F4JInternalJSONImplFactory) o;
-    
+
         if (conf != null ? !conf.equals(that.conf) : that.conf != null)
             return false;
-    
+
         return true;
     }
 
@@ -528,8 +537,11 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         if (jsonObjectType == Location.class) {
             return (ResponseList<T>) createLocationList(res);
         }
+        if (jsonObjectType == Conversation.class) {
+            return (ResponseList<T>) createConversationList(res);
+        }
         if (jsonObjectType == Message.class) {
-            return (ResponseList<T>) createMessageList(res);
+        	return (ResponseList<T>) createMessageList(res);
         }
         if (jsonObjectType == Note.class) {
             return (ResponseList<T>) createNoteList(res);

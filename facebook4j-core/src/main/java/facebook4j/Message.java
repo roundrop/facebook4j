@@ -19,14 +19,24 @@ package facebook4j;
 import java.util.Date;
 import java.util.List;
 
+
 public interface Message extends FacebookResponse {
     String getId();
     IdNameEntity getFrom();
     List<IdNameEntity> getTo();
+    List<Attachment> getAttachments();
     String getMessage();
     Date getCreatedTime();
     Date getUpdatedTime();
     PagableList<Comment> getComments();
     Integer getUnread();
     Integer getUnseen();
+
+    interface Attachment {
+    	String getId();
+        String getName();
+        String getMimeType();
+        String getUrl();
+        String getPreviewUrl();
+    }
 }
