@@ -20,8 +20,8 @@ package facebook4j;
  * @since Facebook4J 2.3.0
  */
 public interface TaggableFriend {
-	
-	String getToken();
-	String getName();
-	Picture getPicture();
+
+    String getToken();
+    String getName();
+    Picture getPicture();
 }

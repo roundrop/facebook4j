@@ -14,13 +14,13 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 
 final class TaggableFriendJSONImpl extends FacebookResponseImpl implements TaggableFriend, java.io.Serializable  {
-	private static final long serialVersionUID = 181026591648082420L;
-	
-	private String token;
-	private String name;
-	private Picture picture;
-	
-	/* package */TaggableFriendJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
+    private static final long serialVersionUID = 181026591648082420L;
+
+    private String token;
+    private String name;
+    private Picture picture;
+
+    /* package */TaggableFriendJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
         JSONObject json = res.asJSONObject();
         init(json);
@@ -29,18 +29,18 @@ final class TaggableFriendJSONImpl extends FacebookResponseImpl implements Tagga
             DataObjectFactoryUtil.registerJSONObject(this, json);
         }
     }
-	
-	/* package */TaggableFriendJSONImpl(JSONObject json) throws FacebookException {
+
+    /* package */TaggableFriendJSONImpl(JSONObject json) throws FacebookException {
         super();
         init(json);
     }
 
 
-	private void init(JSONObject json) throws FacebookException {
+    private void init(JSONObject json) throws FacebookException {
         try {
-        	token = getRawString("id", json);
-        	name = getRawString("name", json);
-        	 if (!json.isNull("picture")) {
+            token = getRawString("id", json);
+            name = getRawString("name", json);
+             if (!json.isNull("picture")) {
                  String pictureRawString = getRawString("picture", json);
                  if (pictureRawString.startsWith("{")) {
                      JSONObject pictureJSONObject = json.getJSONObject("picture");
@@ -53,22 +53,22 @@ final class TaggableFriendJSONImpl extends FacebookResponseImpl implements Tagga
             throw new FacebookException(jsone);
         }
     }
-	
-	public String getToken() {
-		return token;
-	}
 
-	public String getName() {
-		return name;
-	}
+    public String getToken() {
+        return token;
+    }
 
-	public Picture getPicture() {
-		return picture;
-	}
-	
-	 /*package*/
+    public String getName() {
+        return name;
+    }
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+     /*package*/
     static ResponseList<TaggableFriend> createTaggableFriendList(HttpResponse res, Configuration conf)
-    		throws FacebookException {
+            throws FacebookException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 DataObjectFactoryUtil.clearThreadLocalMap();
@@ -93,15 +93,15 @@ final class TaggableFriendJSONImpl extends FacebookResponseImpl implements Tagga
             throw new FacebookException(jsone);
         }
     }
-	
-	@Override
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof TaggableFriendJSONImpl)) return false;
         return obj instanceof TaggableFriend && ((TaggableFriend) obj).getToken().equals(this.token);
-	}
-	
-	@Override
+    }
+
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;

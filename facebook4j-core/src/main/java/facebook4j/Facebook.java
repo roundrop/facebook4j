@@ -179,6 +179,11 @@ public interface Facebook extends java.io.Serializable,
     MessageMethods messages();
 
     /**
+     * @return Facebook4J 2.4.8
+     */
+    ConversationMethods conversations();
+
+    /**
      * @since Facebook4J 2.0.5
      */
     NoteMethods notes();

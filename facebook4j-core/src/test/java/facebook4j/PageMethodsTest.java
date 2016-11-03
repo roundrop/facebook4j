@@ -115,6 +115,16 @@ public class PageMethodsTest {
             assertThat(actual.getCompanyOverview(), is("International Panasonic Facebook Pages:\n\nAsia - www.Facebook.com/PanasonicAsia"));
             assertThat(actual.getFanCount(), is(333883));
         }
+
+        @Test
+        @FacebookAPIVersion("v2.1")
+        public void pr101() throws Exception {
+            facebook.setMockJSON("mock_json/page/eclipse.json");
+            Page actual = facebook.getPage("eclipse", new Reading().fields("cover", "picture"));
+
+            assertThat(actual.getCover().getId(), is("383818738305213"));
+            assertThat(actual.getPicture().toString(), is("https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/547126_383818641638556_2000440510_n.jpg?oh=b14a3683ba8331770c24f7bfadae00f2&oe=58A20A25"));
+        }
     }
 
     public static class getPagePictureURL extends MockFacebookTestBase {

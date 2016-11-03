@@ -33,7 +33,7 @@ public interface Message extends FacebookResponse {
     Integer getUnseen();
 
     interface Attachment {
-    	String getId();
+        String getId();
         String getName();
         String getMimeType();
         String getUrl();

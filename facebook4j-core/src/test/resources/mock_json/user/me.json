@@ -28,6 +28,7 @@
     "email": "roundrop@gmail.com",
     "first_name": "Firstname",
     "gender": "male",
+    "token_for_business": "Abb5ew2lsjN9FA70",
     "hometown": {
         "id": "5555",
         "name": "Hometown Name"

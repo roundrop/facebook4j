@@ -1208,7 +1208,7 @@ public class PhotoMethodsTest {
         @Test
         @FacebookAPIVersion("v2.6")
         public void reactions_v26() throws Exception {
-        	facebook.setMockJSON("mock_json/photo/reactions.json");
+            facebook.setMockJSON("mock_json/photo/reactions.json");
             
             ResponseList<Reaction> reactions = facebook.getPhotoReactions("10154129451953485");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));

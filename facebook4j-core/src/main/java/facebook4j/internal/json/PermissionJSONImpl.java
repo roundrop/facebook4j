@@ -51,7 +51,7 @@ import java.util.List;
     }
 
     /*package*/
-    static List<Permission> createPermissionArray(HttpResponse res, Configuration conf) throws FacebookException {    	
+    static List<Permission> createPermissionArray(HttpResponse res, Configuration conf) throws FacebookException {
         if (conf.isJSONStoreEnabled()) {
             DataObjectFactoryUtil.clearThreadLocalMap();
         }

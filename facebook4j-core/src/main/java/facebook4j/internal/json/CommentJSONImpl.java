@@ -179,7 +179,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
 
     public Boolean isHidden() {
-    	return isHidden;
+        return isHidden;
     }
 
     public Attachment getAttachment() {

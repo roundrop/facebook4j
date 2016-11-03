@@ -181,19 +181,19 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return getPictureURL("me", size);
     }
- 	public URL getPictureURL(int width, int height) throws FacebookException {
-		ensureAuthorizationEnabled();
-		return getPictureURL("me", width, height);
-	}
+    public URL getPictureURL(int width, int height) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return getPictureURL("me", width, height);
+    }
     public URL getPictureURL(String userId) throws FacebookException {
         return getPictureURL(userId, null);
     }
     public URL getPictureURL(String userId, PictureSize size) throws FacebookException {
         return _getPictureURL(userId, size);
     }
- 	public URL getPictureURL(String userId, int width, int height) throws FacebookException {
-		return _getPictureURL(userId, width, height);
-	}
+     public URL getPictureURL(String userId, int width, int height) throws FacebookException {
+        return _getPictureURL(userId, width, height);
+    }
 
     public URL getSSLPictureURL() throws FacebookException {
         ensureAuthorizationEnabled();
@@ -797,8 +797,8 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     public String answerConversation(String conversationId, String message) throws FacebookException {
-    	ensureAuthorizationEnabled();
-    	return _answer(conversationId, message);
+        ensureAuthorizationEnabled();
+        return _answer(conversationId, message);
     }
 
     public String commentPost(String postId, String message) throws FacebookException {
@@ -818,14 +818,14 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createLikeList(get(buildEndpoint(postId, "likes", reading)));
     }
 
-	public ResponseList<Post> getSharedPosts(String postId) throws FacebookException {
-		return getSharedPosts(postId, null);
-	}
+    public ResponseList<Post> getSharedPosts(String postId) throws FacebookException {
+        return getSharedPosts(postId, null);
+    }
 
-	public ResponseList<Post> getSharedPosts(String postId, Reading reading) throws FacebookException {
-		ensureAuthorizationEnabled();
+    public ResponseList<Post> getSharedPosts(String postId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
         return _getSharedPosts(postId, reading);
-	}
+    }
 
     public boolean likePost(String postId) throws FacebookException {
         ensureAuthorizationEnabled();
@@ -918,11 +918,11 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     public ResponseList<TaggableFriend> getTaggableFriends() throws FacebookException {
-		return getTaggableFriends("me", null);
-	}
+        return getTaggableFriends("me", null);
+    }
     public ResponseList<TaggableFriend> getTaggableFriends(Reading reading) throws FacebookException {
-		return getTaggableFriends("me", reading);
-	}
+        return getTaggableFriends("me", reading);
+    }
     public ResponseList<TaggableFriend> getTaggableFriends(String userId) throws FacebookException {
         return getTaggableFriends(userId, null);
     }
@@ -1229,8 +1229,8 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     public InboxResponseList<Conversation> getConversations(String pageId, Reading reading) throws FacebookException {
-    	ensureAuthorizationEnabled();
-    	return factory.createConversationList(get(buildEndpoint(pageId, "conversations", reading)));
+        ensureAuthorizationEnabled();
+        return factory.createConversationList(get(buildEndpoint(pageId, "conversations", reading)));
     }
 
     public Conversation getConversation(String conversationId) throws FacebookException {
@@ -1391,22 +1391,22 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createLocationList(get(buildEndpoint(userId, "locations", reading)));
     }
 
-	public ResponseList<PlaceTag> getTaggedPlaces() throws FacebookException {
-		return getTaggedPlaces("me", null);
-	}
+    public ResponseList<PlaceTag> getTaggedPlaces() throws FacebookException {
+        return getTaggedPlaces("me", null);
+    }
 
-	public ResponseList<PlaceTag> getTaggedPlaces(Reading reading) throws FacebookException {
-		return getTaggedPlaces("me", reading);
-	}
+    public ResponseList<PlaceTag> getTaggedPlaces(Reading reading) throws FacebookException {
+        return getTaggedPlaces("me", reading);
+    }
 
-	public ResponseList<PlaceTag> getTaggedPlaces(String userId) throws FacebookException {
-		return getTaggedPlaces(userId, null);
-	}
+    public ResponseList<PlaceTag> getTaggedPlaces(String userId) throws FacebookException {
+        return getTaggedPlaces(userId, null);
+    }
 
-	public ResponseList<PlaceTag> getTaggedPlaces(String userId, Reading reading) throws FacebookException {
-		ensureAuthorizationEnabled();
-		return factory.createPlaceTagList(get(buildEndpoint(userId, "tagged_places", reading)));
-	}
+    public ResponseList<PlaceTag> getTaggedPlaces(String userId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createPlaceTagList(get(buildEndpoint(userId, "tagged_places", reading)));
+    }
 
     /* Note Methods */
 
@@ -2738,20 +2738,20 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
             throw new FacebookException(urle.getMessage(), urle);
         }
     }
- 	private URL _getPictureURL(String objectId, int width, int height) throws FacebookException {
-		String url = buildEndpoint(objectId, "picture");
-		HttpResponse res;
-		if (width > 0 && height > 0) {
-			res = get(url, new HttpParameter[] { new HttpParameter("width", Integer.toString(width)), new HttpParameter("height", Integer.toString(height)) });
-		} else {
-			res = get(url);
-		}
-		try {
-			return new URL(res.getResponseHeader("Location"));
-		} catch (MalformedURLException urle) {
-			throw new FacebookException(urle.getMessage(), urle);
-		}
-	}
+     private URL _getPictureURL(String objectId, int width, int height) throws FacebookException {
+        String url = buildEndpoint(objectId, "picture");
+        HttpResponse res;
+        if (width > 0 && height > 0) {
+            res = get(url, new HttpParameter[] { new HttpParameter("width", Integer.toString(width)), new HttpParameter("height", Integer.toString(height)) });
+        } else {
+            res = get(url);
+        }
+        try {
+            return new URL(res.getResponseHeader("Location"));
+        } catch (MalformedURLException urle) {
+            throw new FacebookException(urle.getMessage(), urle);
+        }
+    }
 
     private URL _getSSLPictureURL(String objectId, PictureSize size) throws FacebookException {
         String url = buildEndpoint(objectId, "picture");
@@ -2773,15 +2773,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     private String _answer(String objectId, String message) throws FacebookException {
-    	ensureAuthorizationEnabled();
-    	JSONObject json = post(buildEndpoint(objectId, "messages"),
-    			new HttpParameter[]{new HttpParameter("message", message)})
-    			.asJSONObject();
-    	try {
-    		return json.getString("id");
-    	} catch (JSONException jsone) {
-    		throw new FacebookException(jsone.getMessage(), jsone);
-    	}
+        ensureAuthorizationEnabled();
+        JSONObject json = post(buildEndpoint(objectId, "messages"),
+                new HttpParameter[]{new HttpParameter("message", message)})
+                .asJSONObject();
+        try {
+            return json.getString("id");
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone.getMessage(), jsone);
+        }
     }
 
     private String _comment(String objectId, String message) throws FacebookException {
@@ -3063,7 +3063,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
     }
 
     public ConversationMethods conversations() {
-    	return this;
+        return this;
     }
 
     public NoteMethods notes() {

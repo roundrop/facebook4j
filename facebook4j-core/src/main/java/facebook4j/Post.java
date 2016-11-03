@@ -74,7 +74,7 @@ public interface Post extends FacebookResponse {
     }
 
     interface Attachment {
-    	String getId();
+        String getId();
         String getTitle();
         String getType();
         String getUrl();

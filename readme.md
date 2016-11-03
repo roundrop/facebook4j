@@ -2,7 +2,7 @@
 Facebook4J is a Facebook Graph API binding library for the Java language licensed under Apache License 2.0.
 
 ## Version
-2.4.6
+2.4.8
 
 ## Install
 
@@ -174,7 +174,7 @@ ResponseList<Group> results = facebook.searchGroups("programming");
 ResponseList<Place> results = facebook.searchPlaces("coffee");
 
 // You can narrow your search to a specific location and distance
-GeoLocation center = new GeoLocation(37.76, -122.427);
+GeoLocation center = new GeoLocation(37.76, -122.4.8);
 int distance = 1000;
 ResponseList<Place> searchPlaces("coffee", center, distance);
 ```
@@ -190,7 +190,7 @@ ResponseList<Checkin> results = facebook.searchCheckins();
 
 ```java
 // To search for objects near a geographical location
-GeoLocation center = new GeoLocation(37.76, -122.427);
+GeoLocation center = new GeoLocation(37.76, -122.4.8);
 int distance = 1000;
 ResponseList<Location> searchLocations(center, distance);
 

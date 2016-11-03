@@ -232,7 +232,7 @@ public class LocationMethodsTest {
     public static class getPlaceTags extends MockFacebookTestBase {
         @Test
         public void me() throws Exception {
-        	 facebook.setMockJSON("mock_json/location/place_tags.json");
+             facebook.setMockJSON("mock_json/location/place_tags.json");
              ResponseList<PlaceTag> actuals = facebook.getTaggedPlaces();
              assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
              assertThat(facebook.getEndpointURL(), is(pathOf("/me/tagged_places")));
@@ -254,7 +254,7 @@ public class LocationMethodsTest {
         
         @Test
         public void id() throws Exception {
-        	 facebook.setMockJSON("mock_json/location/place_tags.json");
+             facebook.setMockJSON("mock_json/location/place_tags.json");
              ResponseList<PlaceTag> actuals = facebook.getTaggedPlaces("1234124");
              assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
              assertThat(facebook.getEndpointURL(), is(pathOf("/1234124/tagged_places")));
@@ -265,7 +265,7 @@ public class LocationMethodsTest {
         
         @Test
         public void reading() throws Exception {
-        	 facebook.setMockJSON("mock_json/location/place_tags.json");
+             facebook.setMockJSON("mock_json/location/place_tags.json");
              ResponseList<PlaceTag> actuals = facebook.getTaggedPlaces(new Reading().fields("id"));
              assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
              assertThat(facebook.getEndpointURL(), is(pathOf("/me/tagged_places")));
@@ -276,7 +276,7 @@ public class LocationMethodsTest {
         
         @Test
         public void id_reading() throws Exception {
-        	 facebook.setMockJSON("mock_json/location/place_tags.json");
+             facebook.setMockJSON("mock_json/location/place_tags.json");
              ResponseList<PlaceTag> actuals = facebook.getTaggedPlaces("1234", new Reading().fields("id"));
              assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
              assertThat(facebook.getEndpointURL(), is(pathOf("/1234/tagged_places")));
