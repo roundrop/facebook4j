@@ -33,6 +33,8 @@ public class PhotoUpdate implements java.io.Serializable {
     private URL url;
     private String message;
     private String place;
+    private TargetingParameter targeting;
+    private FeedTargetingParameter feedTargeting;
     private Boolean noStory;
     private PrivacyParameter privacy;
 
@@ -78,6 +80,32 @@ public class PhotoUpdate implements java.io.Serializable {
         return this;
     }
 
+    public TargetingParameter getTargeting() {
+        return targeting;
+    }
+
+    public void setTargeting(TargetingParameter targeting) {
+        this.targeting = targeting;
+    }
+
+    public PhotoUpdate targeting(TargetingParameter targetingParameter) {
+        setTargeting(targetingParameter);
+        return this;
+    }
+
+    public FeedTargetingParameter getFeedTargeting() {
+        return feedTargeting;
+    }
+
+    public void setFeedTargeting(FeedTargetingParameter feedTargeting) {
+        this.feedTargeting = feedTargeting;
+    }
+
+    public PhotoUpdate feedTargeting(FeedTargetingParameter feedTargeting) {
+        setFeedTargeting(feedTargeting);
+        return this;
+    }
+
     public Boolean getNoStory() {
         return noStory;
     }
@@ -118,6 +146,12 @@ public class PhotoUpdate implements java.io.Serializable {
         if (place != null) {
             params.add(new HttpParameter("place", place));
         }
+        if (targeting != null) {
+            params.add(new HttpParameter("targeting", targeting.asJSONString()));
+        }
+        if (feedTargeting != null) {
+            params.add(new HttpParameter("feed_targeting", feedTargeting.asJSONString()));
+        }
         if (noStory != null) {
             if (noStory) {
                 params.add(new HttpParameter("no_story", 1));
@@ -136,8 +170,10 @@ public class PhotoUpdate implements java.io.Serializable {
 
         PhotoUpdate that = (PhotoUpdate) o;
 
+        if (feedTargeting != null ? !feedTargeting.equals(that.feedTargeting) : that.feedTargeting != null) return false;
         if (message != null ? !message.equals(that.message) : that.message != null) return false;
         if (noStory != null ? !noStory.equals(that.noStory) : that.noStory != null) return false;
+        if (targeting != null ? !targeting.equals(that.targeting) : that.targeting != null) return false;
         if (place != null ? !place.equals(that.place) : that.place != null) return false;
         if (privacy != null ? !privacy.equals(that.privacy) : that.privacy != null) return false;
         if (source != null ? !source.equals(that.source) : that.source != null) return false;
@@ -152,6 +188,8 @@ public class PhotoUpdate implements java.io.Serializable {
         result = 31 * result + (url != null ? url.hashCode() : 0);
         result = 31 * result + (message != null ? message.hashCode() : 0);
         result = 31 * result + (place != null ? place.hashCode() : 0);
+        result = 31 * result + (targeting != null ? targeting.hashCode() : 0);
+        result = 31 * result + (feedTargeting != null ? feedTargeting.hashCode() : 0);
         result = 31 * result + (noStory != null ? noStory.hashCode() : 0);
         result = 31 * result + (privacy != null ? privacy.hashCode() : 0);
         return result;

@@ -37,13 +37,14 @@ public class PostUpdate implements java.io.Serializable {
     private String caption;
     private String description;
     private List<PostAction> actions;
-    
+
     private String place;
     private String tags;
     private PrivacyParameter privacy;
     private String objectAttachment;
 
     private TargetingParameter targeting;
+    private FeedTargetingParameter feedTargeting;
 
     private Boolean published;
     private Integer scheduledPublishTime;
@@ -55,7 +56,7 @@ public class PostUpdate implements java.io.Serializable {
     public PostUpdate(URL link) {
         this.link = link;
     }
-    
+
     public String getMessage() {
         return message;
     }
@@ -63,7 +64,7 @@ public class PostUpdate implements java.io.Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
     public PostUpdate message(String message) {
         setMessage(message);
         return this;
@@ -76,7 +77,7 @@ public class PostUpdate implements java.io.Serializable {
     public void setLink(URL link) {
         this.link = link;
     }
-    
+
     public PostUpdate link(URL link) {
         setLink(link);
         return this;
@@ -89,7 +90,7 @@ public class PostUpdate implements java.io.Serializable {
     public void setPicture(URL picture) {
         this.picture = picture;
     }
-    
+
     public PostUpdate picture(URL picture) {
         setPicture(picture);
         return this;
@@ -102,7 +103,7 @@ public class PostUpdate implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public PostUpdate name(String name) {
         setName(name);
         return this;
@@ -115,7 +116,7 @@ public class PostUpdate implements java.io.Serializable {
     public void setCaption(String caption) {
         this.caption = caption;
     }
-    
+
     public PostUpdate caption(String caption) {
         setCaption(caption);
         return this;
@@ -128,7 +129,7 @@ public class PostUpdate implements java.io.Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public PostUpdate description(String description) {
         setDescription(description);
         return this;
@@ -141,7 +142,7 @@ public class PostUpdate implements java.io.Serializable {
     public void setActions(List<PostAction> actions) {
         this.actions = actions;
     }
-    
+
     public PostUpdate actions(List<PostAction> actions) {
         setActions(actions);
         return this;
@@ -154,7 +155,7 @@ public class PostUpdate implements java.io.Serializable {
     public void setPlace(String place) {
         this.place = place;
     }
-    
+
     public PostUpdate place(String place) {
         setPlace(place);
         return this;
@@ -167,7 +168,7 @@ public class PostUpdate implements java.io.Serializable {
     public void setTags(String tags) {
         this.tags = tags;
     }
-    
+
     public PostUpdate tags(String tags) {
         setTags(tags);
         return this;
@@ -180,7 +181,7 @@ public class PostUpdate implements java.io.Serializable {
     public void setPrivacy(PrivacyParameter privacy) {
         this.privacy = privacy;
     }
-    
+
     public PostUpdate privacy(PrivacyParameter privacy) {
         setPrivacy(privacy);
         return this;
@@ -193,7 +194,7 @@ public class PostUpdate implements java.io.Serializable {
     public void setObjectAttachment(String objectAttachment) {
         this.objectAttachment = objectAttachment;
     }
-    
+
     public PostUpdate objectAttachment(String objectAttachment) {
         setObjectAttachment(objectAttachment);
         return this;
@@ -209,6 +210,19 @@ public class PostUpdate implements java.io.Serializable {
 
     public PostUpdate targeting(TargetingParameter targetingParameter) {
         setTargeting(targetingParameter);
+        return this;
+    }
+
+    public FeedTargetingParameter getFeedTargeting() {
+        return feedTargeting;
+    }
+
+    public void setFeedTargeting(FeedTargetingParameter feedTargeting) {
+        this.feedTargeting = feedTargeting;
+    }
+
+    public PostUpdate feedTargeting(FeedTargetingParameter feedTargeting) {
+        setFeedTargeting(feedTargeting);
         return this;
     }
 
@@ -287,6 +301,9 @@ public class PostUpdate implements java.io.Serializable {
         if (targeting != null) {
             params.add(new HttpParameter("targeting", targeting.asJSONString()));
         }
+        if (feedTargeting != null) {
+            params.add(new HttpParameter("feed_targeting", feedTargeting.asJSONString()));
+        }
         if (published != null) {
             params.add(new HttpParameter("published", published));
         }
@@ -303,6 +320,7 @@ public class PostUpdate implements java.io.Serializable {
 
         PostUpdate that = (PostUpdate) o;
 
+        if (feedTargeting != null ? !feedTargeting.equals(that.feedTargeting) : that.feedTargeting != null) return false;
         if (actions != null ? !actions.equals(that.actions) : that.actions != null) return false;
         if (caption != null ? !caption.equals(that.caption) : that.caption != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
@@ -337,6 +355,7 @@ public class PostUpdate implements java.io.Serializable {
         result = 31 * result + (privacy != null ? privacy.hashCode() : 0);
         result = 31 * result + (objectAttachment != null ? objectAttachment.hashCode() : 0);
         result = 31 * result + (targeting != null ? targeting.hashCode() : 0);
+        result = 31 * result + (feedTargeting != null ? feedTargeting.hashCode() : 0);
         result = 31 * result + (published != null ? published.hashCode() : 0);
         result = 31 * result + (scheduledPublishTime != null ? scheduledPublishTime.hashCode() : 0);
         return result;
@@ -357,6 +376,7 @@ public class PostUpdate implements java.io.Serializable {
                 ", privacy=" + privacy +
                 ", objectAttachment='" + objectAttachment + '\'' +
                 ", targeting=" + targeting +
+                ", feedTargeting=" + feedTargeting +
                 ", published=" + published +
                 ", scheduledPublishTime=" + scheduledPublishTime +
                 '}';

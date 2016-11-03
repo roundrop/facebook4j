@@ -31,6 +31,8 @@ public class VideoUpdate implements java.io.Serializable {
     private Media source;
     private String title;
     private String description;
+    private TargetingParameter targeting;
+    private FeedTargetingParameter feedTargeting;
     private Boolean published;
     private Integer scheduledPublishTime;
 
@@ -66,6 +68,32 @@ public class VideoUpdate implements java.io.Serializable {
 
     public VideoUpdate description(String description) {
         setDescription(description);
+        return this;
+    }
+
+    public TargetingParameter getTargeting() {
+        return targeting;
+    }
+
+    public void setTargeting(TargetingParameter targeting) {
+        this.targeting = targeting;
+    }
+
+    public VideoUpdate targeting(TargetingParameter targetingParameter) {
+        setTargeting(targetingParameter);
+        return this;
+    }
+
+    public FeedTargetingParameter getFeedTargeting() {
+        return feedTargeting;
+    }
+
+    public void setFeedTargeting(FeedTargetingParameter feedTargeting) {
+        this.feedTargeting = feedTargeting;
+    }
+
+    public VideoUpdate feedTargeting(FeedTargetingParameter feedTargeting) {
+        setFeedTargeting(feedTargeting);
         return this;
     }
 
@@ -114,6 +142,12 @@ public class VideoUpdate implements java.io.Serializable {
         if (description != null) {
             params.add(new HttpParameter("description", description));
         }
+        if (targeting != null) {
+            params.add(new HttpParameter("targeting", targeting.asJSONString()));
+        }
+        if (feedTargeting != null) {
+            params.add(new HttpParameter("feed_targeting", feedTargeting.asJSONString()));
+        }
         if (published != null) {
             params.add(new HttpParameter("published", published));
         }
@@ -130,10 +164,12 @@ public class VideoUpdate implements java.io.Serializable {
 
         VideoUpdate that = (VideoUpdate) o;
 
+        if (feedTargeting != null ? !feedTargeting.equals(that.feedTargeting) : that.feedTargeting != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (published != null ? !published.equals(that.published) : that.published != null) return false;
         if (scheduledPublishTime != null ? !scheduledPublishTime.equals(that.scheduledPublishTime) : that.scheduledPublishTime != null)
             return false;
+        if (targeting != null ? !targeting.equals(that.targeting) : that.targeting != null) return false;
         if (source != null ? !source.equals(that.source) : that.source != null) return false;
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
 
@@ -145,6 +181,8 @@ public class VideoUpdate implements java.io.Serializable {
         int result = source != null ? source.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (targeting != null ? targeting.hashCode() : 0);
+        result = 31 * result + (feedTargeting != null ? feedTargeting.hashCode() : 0);
         result = 31 * result + (published != null ? published.hashCode() : 0);
         result = 31 * result + (scheduledPublishTime != null ? scheduledPublishTime.hashCode() : 0);
         return result;
@@ -156,6 +194,8 @@ public class VideoUpdate implements java.io.Serializable {
                 "source=" + source +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", targeting=" + targeting +
+                ", feedTargeting=" + feedTargeting +
                 ", published=" + published +
                 ", scheduledPublishTime=" + scheduledPublishTime +
                 '}';
