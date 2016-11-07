@@ -20,6 +20,7 @@ import facebook4j.internal.http.HttpParameter;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +38,8 @@ public class PhotoUpdate implements java.io.Serializable {
     private FeedTargetingParameter feedTargeting;
     private Boolean noStory;
     private PrivacyParameter privacy;
+    private Boolean published;
+    private Integer scheduledPublishTime;
 
     public PhotoUpdate(Media source) {
         this.source = source;
@@ -132,6 +135,48 @@ public class PhotoUpdate implements java.io.Serializable {
         return this;
     }
 
+    public Boolean getPublished() {
+        return published;
+    }
+
+    public void setPublished(Boolean published) {
+        this.published = published;
+    }
+
+    public PhotoUpdate published(boolean published) {
+        setPublished(published);
+        return this;
+    }
+
+    public Integer getScheduledPublishTime() {
+        return scheduledPublishTime;
+    }
+
+    public void setScheduledPublishTime(Integer scheduledPublishTime) {
+        this.scheduledPublishTime = scheduledPublishTime;
+    }
+
+    public void setScheduledPublishTime(Date scheduledPublishTime) {
+    	if(scheduledPublishTime==null){
+    		setScheduledPublishTime((Integer)null);
+    	}
+    	else{
+    		long time = scheduledPublishTime.getTime() / 1000L;
+    		setScheduledPublishTime(Long.valueOf(time).intValue());
+    	}
+    }
+
+    public PhotoUpdate scheduledPublishTime(Integer scheduledPublishTime) {
+        setScheduledPublishTime(scheduledPublishTime);
+        return this;
+    }
+
+    public PhotoUpdate scheduledPublishTime(Date scheduledPublishTime) {
+    	setScheduledPublishTime(scheduledPublishTime);
+        return this;
+    }
+
+
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         if (source != null) {
@@ -160,6 +205,12 @@ public class PhotoUpdate implements java.io.Serializable {
         if (privacy != null) {
             params.add(new HttpParameter("privacy", privacy.asJSONString()));
         }
+        if (published != null) {
+            params.add(new HttpParameter("published", published));
+        }
+        if (scheduledPublishTime != null) {
+            params.add(new HttpParameter("scheduled_publish_time", scheduledPublishTime));
+        }
         return params.toArray(new HttpParameter[params.size()]);
     }
 
@@ -176,6 +227,9 @@ public class PhotoUpdate implements java.io.Serializable {
         if (targeting != null ? !targeting.equals(that.targeting) : that.targeting != null) return false;
         if (place != null ? !place.equals(that.place) : that.place != null) return false;
         if (privacy != null ? !privacy.equals(that.privacy) : that.privacy != null) return false;
+        if (published != null ? !published.equals(that.published) : that.published != null) return false;
+        if (scheduledPublishTime != null ? !scheduledPublishTime.equals(that.scheduledPublishTime) : that.scheduledPublishTime != null)
+            return false;
         if (source != null ? !source.equals(that.source) : that.source != null) return false;
         if (url != null ? !url.equals(that.url) : that.url != null) return false;
 
@@ -192,6 +246,8 @@ public class PhotoUpdate implements java.io.Serializable {
         result = 31 * result + (feedTargeting != null ? feedTargeting.hashCode() : 0);
         result = 31 * result + (noStory != null ? noStory.hashCode() : 0);
         result = 31 * result + (privacy != null ? privacy.hashCode() : 0);
+        result = 31 * result + (published != null ? published.hashCode() : 0);
+        result = 31 * result + (scheduledPublishTime != null ? scheduledPublishTime.hashCode() : 0);
         return result;
     }
 
@@ -204,6 +260,8 @@ public class PhotoUpdate implements java.io.Serializable {
                 ", place='" + place + '\'' +
                 ", noStory=" + noStory +
                 ", privacy=" + privacy +
+                ", published=" + published +
+                ", scheduledPublishTime=" + scheduledPublishTime +
                 '}';
     }
 }

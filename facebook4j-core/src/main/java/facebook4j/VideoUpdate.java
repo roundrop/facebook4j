@@ -119,8 +119,13 @@ public class VideoUpdate implements java.io.Serializable {
     }
 
     public void setScheduledPublishTime(Date scheduledPublishTime) {
-        long time = scheduledPublishTime.getTime() / 1000L;
-        setScheduledPublishTime(Long.valueOf(time).intValue());
+    	if(scheduledPublishTime==null){
+    		setScheduledPublishTime((Integer)null);
+    	}
+    	else{
+    		long time = scheduledPublishTime.getTime() / 1000L;
+    		setScheduledPublishTime(Long.valueOf(time).intValue());
+    	}
     }
 
     public VideoUpdate scheduledPublishTime(Integer scheduledPublishTime) {
@@ -129,8 +134,8 @@ public class VideoUpdate implements java.io.Serializable {
     }
 
     public VideoUpdate scheduledPublishTime(Date scheduledPublishTime) {
-        long time = scheduledPublishTime.getTime() / 1000L;
-        return scheduledPublishTime(Long.valueOf(time).intValue());
+    	setScheduledPublishTime(scheduledPublishTime);
+        return this;
     }
 
     /*package*/ HttpParameter[] asHttpParameterArray() {
