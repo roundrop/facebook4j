@@ -33,13 +33,15 @@ public abstract class FacebookTestBase {
     public void setUp() throws Exception {
         InputStream is = FacebookTestBase.class.getResourceAsStream("/test.properties");
         p = new Properties();
-        p.load(is);
-        is.close();
+        if (is != null) {
+            p.load(is);
+            is.close();
+        }
 
-        System.setProperty("facebook4j.debug", p.getProperty("debug") == null ? "true" : p.getProperty("debug"));
-        System.setProperty("facebook4j.loggerFactory", p.getProperty("loggerFactory") == null ? "facebook4j.internal.logging.StdOutLoggerFactory" : p.getProperty("loggerFactory"));
-        System.setProperty("facebook4j.http.prettyDebug", p.getProperty("http.prettyDebug") == null ? "true" : p.getProperty("http.prettyDebug"));
-        System.setProperty("facebook4j.jsonStoreEnabled", p.getProperty("jsonStoreEnabled") == null ? "true" : p.getProperty("jsonStoreEnabled"));
+        System.setProperty("facebook4j.debug", p.getProperty("debug", "true"));
+        System.setProperty("facebook4j.loggerFactory", p.getProperty("loggerFactory", "facebook4j.internal.logging.StdOutLoggerFactory"));
+        System.setProperty("facebook4j.http.prettyDebug", p.getProperty("http.prettyDebug", "true"));
+        System.setProperty("facebook4j.jsonStoreEnabled", p.getProperty("jsonStoreEnabled", "true"));
     }
 
     protected Facebook createFacebook() {
