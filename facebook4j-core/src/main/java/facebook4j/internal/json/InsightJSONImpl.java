@@ -46,7 +46,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private List<Insight.Value> values;
     private String title;
     private String description;
-    
+
     /*package*/InsightJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
         JSONObject json = res.asJSONObject();
@@ -94,7 +94,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     public String getDescription() {
         return description;
     }
-    
+
     /*package*/
     static ResponseList<Insight> createInsightList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -185,7 +185,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
             ValueEntryJSONImpl(JSONObject json) throws FacebookException {
                 String valueRawString = getRawString("value", json);
-                if (valueRawString.startsWith("{")) {
+                if (valueRawString != null && valueRawString.startsWith("{")) {
                     value = getLongMap("value", json);
                 } else {
                     value = new HashMap<String, Long>();
@@ -225,5 +225,5 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             throw new FacebookException(jsone);
         }
     }
-    
+
 }
