@@ -34,6 +34,14 @@ public interface FriendMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#friends">User#friends - Facebook Developers</a>
      */
+    int getFriendsCount() throws FacebookException;
+    
+    /**
+     * Returns the current user's friends.
+     * @return friends
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/user/#friends">User#friends - Facebook Developers</a>
+     */
     ResponseList<Friend> getFriends() throws FacebookException;
 
     /**

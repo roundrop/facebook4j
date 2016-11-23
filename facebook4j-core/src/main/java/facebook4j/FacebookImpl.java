@@ -55,6 +55,7 @@ import facebook4j.auth.Authorization;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.http.HttpResponse;
+import facebook4j.internal.json.*;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
@@ -902,7 +903,23 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         ensureAuthorizationEnabled();
         return factory.createFriendRequestList(get(buildEndpoint(userId, "friendrequests", reading)));
     }
-
+    public int getFriendsCount() throws FacebookException {
+        HttpResponse res = get(buildEndpoint("me", "friends", null));
+        // just need to parse and get count
+        // thats why not using factory
+        try {
+            JSONObject json = res.asJSONObject();
+            JSONObject summary = json.getJSONObject("summary");
+            Object ob = summary.get("total_count");
+            if(ob instanceof Number) {
+                return (Integer) ob;
+            } else {
+                throw new FacebookException("Response problem!");
+            }
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone);
+        }
+    }
     public ResponseList<Friend> getFriends() throws FacebookException {
         return getFriends("me", null);
     }
