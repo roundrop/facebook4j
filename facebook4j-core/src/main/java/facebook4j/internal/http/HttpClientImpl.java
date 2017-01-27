@@ -112,6 +112,7 @@ public class HttpClientImpl extends HttpClientBase implements HttpClient, HttpRe
                             con.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
                             boundary = "--" + boundary;
                             con.setDoOutput(true);
+                            con.setChunkedStreamingMode(0);
                             os = con.getOutputStream();
                             DataOutputStream out = new DataOutputStream(os);
                             for (HttpParameter param : req.getParameters()) {
