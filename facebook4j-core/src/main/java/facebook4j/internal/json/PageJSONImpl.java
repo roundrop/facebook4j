@@ -58,6 +58,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Integer fanCount;
     private String about;
     private String username;
+    private String mission;
 
     /*package*/PageJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -107,6 +108,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             fanCount = getInt("fan_count", json);
             about = getRawString("about", json);
             username = getRawString("username", json);
+            mission = getRawString("mission", json);
 
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -205,6 +207,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return username;
     }
 
+    public String getMission() {
+        return mission;
+    }
+
     /*package*/
     static ResponseList<Page> createPageList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -256,7 +262,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 + isCommunityPage + ", wereHereCount=" + wereHereCount
                 + ", fanCount=" + fanCount
                 + ", id=" + id + ", name=" + name + ", category=" + category
-                + ", createdTime=" + createdTime + ", about=" + about + ", username=" + username + "]";
+                + ", createdTime=" + createdTime + ", about=" + about
+                + ", username=" + username + ", mission=" + mission + "]";
     }
 
 }
