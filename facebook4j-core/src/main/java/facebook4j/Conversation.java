@@ -22,6 +22,7 @@ import java.util.List;
 public interface Conversation extends FacebookResponse {
     String getId();
     String getConversation();
+    String getLink();
     List<IdNameEntity> getSenders();
     Date getUpdatedTime();
     PagableList<Message> getMessages();

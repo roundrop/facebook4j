@@ -31,6 +31,8 @@ public interface Page {
     String getCategory();
     Boolean isPublished();
     Boolean canPost();
+    String getBusinessManagerId();
+
 
     /**
      * Number of pages this page likes.

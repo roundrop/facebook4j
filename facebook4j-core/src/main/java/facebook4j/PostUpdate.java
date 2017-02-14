@@ -18,9 +18,11 @@ package facebook4j;
 
 import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class PostUpdate implements java.io.Serializable {
     private String caption;
     private String description;
     private List<PostAction> actions;
+    private List<String> photoIds;
 
     private String place;
     private String tags;
@@ -146,6 +149,19 @@ public class PostUpdate implements java.io.Serializable {
     public PostUpdate actions(List<PostAction> actions) {
         setActions(actions);
         return this;
+    }
+
+    public List<String> getPhotoIds() {
+    	return photoIds;
+    }
+
+    public void setPhotoIds(List<String> photoIds) {
+    	this.photoIds = photoIds;
+    }
+
+    public PostUpdate photoIds(List<String> photoIds) {
+    	setPhotoIds(photoIds);
+    	return this;
     }
 
     public String getPlace() {
@@ -290,6 +306,12 @@ public class PostUpdate implements java.io.Serializable {
         if (actions != null && actions.size() != 0) {
             JSONArray jsonArray = new JSONArray(actions);
             params.add(new HttpParameter("actions", jsonArray.toString()));
+        }
+        if (photoIds != null) {
+        	for (int i = 0; i < photoIds.size(); i++) {
+        		JSONObject jsonObject = new JSONObject(Collections.singletonMap("media_fbid", photoIds.get(i)));
+        		params.add(new HttpParameter("attached_media["+i+"]", jsonObject.toString()));
+			}
         }
         if (place != null) {
             params.add(new HttpParameter("place", place));

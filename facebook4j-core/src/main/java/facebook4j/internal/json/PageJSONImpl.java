@@ -46,6 +46,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private URL link;
     private Boolean isPublished;
     private Boolean canPost;
+    private String businessManagerId;
     private Integer likes;
     private Place.Location location;
     private String phone;
@@ -88,6 +89,12 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             link = getURL("link", json);
             isPublished = getBoolean("is_published", json);
             canPost = getBoolean("can_post", json);
+            if (!json.isNull("business")) {
+            	JSONObject businessJSONObject = json.getJSONObject("business");
+            	if (!businessJSONObject.isNull("id")) {
+            		businessManagerId = getRawString("id", businessJSONObject);
+            	}
+            }
             likes = getInt("likes", json);
             if (!json.isNull("location")) {
                 JSONObject locationJSONObject = json.getJSONObject("location");
@@ -155,6 +162,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     public Boolean canPost() {
         return canPost;
+    }
+
+    public String getBusinessManagerId() {
+    	return businessManagerId;
     }
 
     public Integer getLikes() {
@@ -272,15 +283,17 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     @Override
     public String toString() {
         return "PageJSONImpl [link=" + link + ", isPublished=" + isPublished
-                + ", canPost=" + canPost + ", likes=" + likes + ", location="
-                + location + ", phone=" + phone + ", checkins=" + checkins
-                + ", picture=" + picture + ", cover=" + cover + ", website=" + website + ", contactAddress=" + contactAddress+ ", emails=" + emails
-                + ", companyOverview=" + companyOverview + ", talkingAboutCount=" + talkingAboutCount
-                + ", accessToken=" + accessToken + ", isCommunityPage="
-                + isCommunityPage + ", wereHereCount=" + wereHereCount
-                + ", fanCount=" + fanCount
+                + ", canPost=" + canPost + ", businessManagerId=" + businessManagerId
+                + ", likes=" + likes + ", location=" + location + ", phone=" + phone
+                + ", checkins=" + checkins + ", picture=" + picture + ", cover="
+                + cover + ", website=" + website + ", contactAddress=" + contactAddress
+                + ", emails=" + emails + ", companyOverview=" + companyOverview
+                + ", talkingAboutCount=" + talkingAboutCount + ", accessToken="
+                + accessToken + ", isCommunityPage=" + isCommunityPage
+                + ", wereHereCount=" + wereHereCount + ", fanCount=" + fanCount
                 + ", id=" + id + ", name=" + name + ", category=" + category
-                + ", createdTime=" + createdTime + ", about=" + about + ", username=" + username + "]";
+                + ", createdTime=" + createdTime + ", about=" + about + ", username="
+                + username + "]";
     }
 
 }
