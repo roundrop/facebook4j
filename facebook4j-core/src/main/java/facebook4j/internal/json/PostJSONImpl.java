@@ -443,7 +443,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         if (scheduledPublishTime == null) {
             return null;
         }
-        return new Date(scheduledPublishTime * 1000);
+        return new Date(scheduledPublishTime * 1000L);
     }
 
     public Targeting getTargeting() {
