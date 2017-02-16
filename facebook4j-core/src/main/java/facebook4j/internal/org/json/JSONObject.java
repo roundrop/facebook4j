@@ -31,7 +31,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.Enumeration;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
@@ -153,7 +153,7 @@ public class JSONObject {
      * Construct an empty JSONObject.
      */
     public JSONObject() {
-        this.map = new HashMap();
+        this.map = new LinkedHashMap();
     }
 
 
@@ -244,7 +244,7 @@ public class JSONObject {
      * @throws JSONException
      */
     public JSONObject(Map map) {
-        this.map = new HashMap();
+        this.map = new LinkedHashMap();
         if (map != null) {
             Iterator i = map.entrySet().iterator();
             while (i.hasNext()) {
