@@ -61,7 +61,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         try {
             id = getRawString("id", json);
             name = getRawString("name", json);
-            
+
             if (isJSONArray("category_list", json)) {
                 JSONArray categoriesJSONArray = json.getJSONArray("category_list");
                 categories = new ArrayList<Category>();
@@ -69,7 +69,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                     categories.add(new CategoryJSONImpl(categoriesJSONArray.getJSONObject(i)));
                 }
             }
-            
+
             if (isJSONObject("location", json)) {
                 JSONObject locationJSONObject = json.getJSONObject("location");
                 location = new PlaceJSONImpl.LocationJSONImpl(locationJSONObject);
@@ -92,7 +92,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     public List<Category> getCategories() {
         return categories;
     }
-    
+
     public Location getLocation() {
         return location;
     }
@@ -166,6 +166,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         private String city;
         private String state;
         private String country;
+        private String countryCode;
         private String zip;
         private Double latitude;
         private Double longitude;
@@ -176,6 +177,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             city = getRawString("city", json);
             state = getRawString("state", json);
             country = getRawString("country", json);
+            countryCode = getRawString("country_code", json);
             zip = getRawString("zip", json);
             latitude = getDouble("latitude", json);
             longitude = getDouble("longitude", json);
@@ -195,6 +197,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         }
         public String getCountry() {
             return country;
+        }
+        public String getCountryCode() {
+        	return countryCode;
         }
         public String getZip() {
             return zip;
@@ -218,6 +223,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
             if (city != null ? !city.equals(that.city) : that.city != null) return false;
             if (country != null ? !country.equals(that.country) : that.country != null) return false;
+            if (countryCode != null ? !countryCode.equals(that.countryCode) : that.countryCode != null) return false;
             if (latitude != null ? !latitude.equals(that.latitude) : that.latitude != null) return false;
             if (longitude != null ? !longitude.equals(that.longitude) : that.longitude != null) return false;
             if (state != null ? !state.equals(that.state) : that.state != null) return false;
@@ -234,6 +240,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             result = 31 * result + (city != null ? city.hashCode() : 0);
             result = 31 * result + (state != null ? state.hashCode() : 0);
             result = 31 * result + (country != null ? country.hashCode() : 0);
+            result = 31 * result + (countryCode != null ? countryCode.hashCode() : 0);
             result = 31 * result + (zip != null ? zip.hashCode() : 0);
             result = 31 * result + (latitude != null ? latitude.hashCode() : 0);
             result = 31 * result + (longitude != null ? longitude.hashCode() : 0);
@@ -248,6 +255,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                     ", city='" + city + '\'' +
                     ", state='" + state + '\'' +
                     ", country='" + country + '\'' +
+                    ", countryCode='" + countryCode + '\'' +
                     ", zip='" + zip + '\'' +
                     ", latitude=" + latitude +
                     ", longitude=" + longitude +

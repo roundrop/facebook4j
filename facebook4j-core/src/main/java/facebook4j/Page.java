@@ -18,6 +18,7 @@ package facebook4j;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -30,6 +31,8 @@ public interface Page {
     String getCategory();
     Boolean isPublished();
     Boolean canPost();
+    String getBusinessManagerId();
+
 
     /**
      * Number of pages this page likes.
@@ -40,8 +43,11 @@ public interface Page {
     String getPhone();
     Integer getCheckins();
     URL getPicture();
+    Picture getPagePicture();
     Cover getCover();
     String getWebsite();
+    String getContactAddress();
+    List<String> getEmails();
 
     /**
      * Company overview about this page.

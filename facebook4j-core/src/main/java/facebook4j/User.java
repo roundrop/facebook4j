@@ -21,6 +21,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import facebook4j.Place.Location;
+
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -50,6 +52,7 @@ public interface User extends FacebookResponse {
     IdNameEntity getHometown();
     List<String> getInterestedIn();
     IdNameEntity getLocation();
+    Place getPlaceLocation();
     String getPolitical();
     List<IdNameEntity> getFavoriteAthletes();
     List<IdNameEntity> getFavoriteTeams();
@@ -100,5 +103,8 @@ public interface User extends FacebookResponse {
 
 
     String BIRTHDAY_DATE_FORMAT = "MM/dd/yyyy";
+
+
+
 
 }

@@ -20,6 +20,7 @@ import facebook4j.Cover;
 import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
 import facebook4j.Picture;
+import facebook4j.Place;
 import facebook4j.ResponseList;
 import facebook4j.User;
 import facebook4j.conf.Configuration;
@@ -69,6 +70,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private IdNameEntity hometown;
     private List<String> interestedIn;
     private IdNameEntity location;
+    private Place placeLocation;
     private String political;
     private List<IdNameEntity> favoriteAthletes;
     private List<IdNameEntity> favoriteTeams;
@@ -129,9 +131,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             username = getRawString("username", json);
             thirdPartyId = getRawString("third_party_id", json);
             installed = getBoolean("installed", json);
-            // Using the current time to compute the timezone offset is technically wrong, because 
+            // Using the current time to compute the timezone offset is technically wrong, because
             // the timezone value corresponds to the user's last login, but it's the best we can do
-            long currentTime = System.currentTimeMillis(); 
+            long currentTime = System.currentTimeMillis();
             timezone = getTimeZoneOffset("timezone", json, currentTime);
             updatedTime = getISO8601Datetime("updated_time", json);
             verified = getBoolean("verified", json);
@@ -174,6 +176,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             if (!json.isNull("location")) {
                 JSONObject locationJSON = json.getJSONObject("location");
                 location = new IdNameEntityJSONImpl(locationJSON);
+                if(!locationJSON.isNull("location")){
+                	placeLocation = new PlaceJSONImpl(locationJSON);
+                }
             }
             political = getRawString("political", json);
             if (!json.isNull("favorite_athletes")) {
@@ -328,6 +333,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return location;
     }
 
+    public Place getPlaceLocation() {
+    	return placeLocation;
+    }
+
     public String getPolitical() {
         return political;
     }
@@ -464,12 +473,12 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 + verified + ", bio=" + bio + ", birthday=" + birthday
                 + ", cover=" + cover + ", education=" + education + ", email="
                 + email + ", hometown=" + hometown + ", interestedIn="
-                + interestedIn + ", location=" + location + ", political="
-                + political + ", favoriteAthletes=" + favoriteAthletes
-                + ", favoriteTeams=" + favoriteTeams + ", picture=" + picture
-                + ", quotes=" + quotes + ", relationshipStatus="
-                + relationshipStatus + ", religion=" + religion
-                + ", tokenForBusiness=" + tokenForBusiness
+                + interestedIn + ", location=" + location + ", placeLocation="
+                + placeLocation + ", political=" + political
+                + ", favoriteAthletes=" + favoriteAthletes + ", favoriteTeams="
+                + favoriteTeams + ", picture=" + picture + ", quotes=" + quotes
+                + ", relationshipStatus=" + relationshipStatus + ", religion="
+                + religion + ", tokenForBusiness=" + tokenForBusiness
                 + ", significantOther=" + significantOther
                 + ", videoUploadLimits=" + videoUploadLimits + ", website="
                 + website + ", work=" + work + ", ageRange=" + ageRange + "]";
@@ -640,7 +649,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         private List<IdNameEntity> with;
         private String description;
 
-        
+
         EducationClassJSONImpl(JSONObject json) throws FacebookException {
             try {
                 if (!json.isNull("with")) {
@@ -715,7 +724,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     private final class VideoUploadLimitsJSONImpl implements User.VideoUploadLimits, java.io.Serializable {
         private static final long serialVersionUID = -4890967721976343047L;
-        
+
         private final long length;
         private final long size;
 
@@ -772,7 +781,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         private IdNameEntity position;
         private String startDate;
         private String endDate;
-        
+
 
         WorkJSONImpl(JSONObject json) throws FacebookException {
             try {
@@ -878,7 +887,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     private final class AgeRangeJSONImpl implements User.AgeRange, java.io.Serializable {
        private static final long serialVersionUID = -4890967721976343047L;
-       
+
        private final Integer min;
        private final Integer max;
 

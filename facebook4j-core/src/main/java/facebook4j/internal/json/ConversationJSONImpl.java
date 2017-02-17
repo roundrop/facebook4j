@@ -43,6 +43,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private static final long serialVersionUID = -2666008917993827020L;
 
     private String id;
+    private String link;
     private List<IdNameEntity> senders;
     private String conversation;
     private Date updatedTime;
@@ -68,6 +69,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private void init(JSONObject json) throws FacebookException {
         try {
             id = getRawString("id", json);
+            link = getRawString("link", json);
             if (!json.isNull("senders")) {
                 JSONObject toJSONObject = json.getJSONObject("senders");
                 JSONArray toJSONArray = toJSONObject.getJSONArray("data");
@@ -115,6 +117,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
     public String getConversation() {
         return conversation;
+    }
+    public String getLink() {
+    	return link;
     }
     public Date getUpdatedTime() {
         return updatedTime;
@@ -215,6 +220,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     public String toString() {
         return "MessageJSONImpl{" +
                 "id='" + id + '\'' +
+                "link='" + link + '\'' +
                 ", senders=" + senders +
                 ", conversation='" + conversation + '\'' +
                 ", updatedTime=" + updatedTime +

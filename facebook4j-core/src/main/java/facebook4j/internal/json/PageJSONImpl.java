@@ -24,7 +24,10 @@ import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
@@ -43,6 +46,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private URL link;
     private Boolean isPublished;
     private Boolean canPost;
+    private String businessManagerId;
     private Integer likes;
     private Place.Location location;
     private String phone;
@@ -50,6 +54,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Picture picture;
     private Cover cover;
     private String website;
+    private String contactAddress;
+    private List<String> emails;
     private String companyOverview;
     private Integer talkingAboutCount;
     private String accessToken;
@@ -83,6 +89,12 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             link = getURL("link", json);
             isPublished = getBoolean("is_published", json);
             canPost = getBoolean("can_post", json);
+            if (!json.isNull("business")) {
+            	JSONObject businessJSONObject = json.getJSONObject("business");
+            	if (!businessJSONObject.isNull("id")) {
+            		businessManagerId = getRawString("id", businessJSONObject);
+            	}
+            }
             likes = getInt("likes", json);
             if (!json.isNull("location")) {
                 JSONObject locationJSONObject = json.getJSONObject("location");
@@ -99,6 +111,17 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 cover = new CoverJSONImpl(coverJSONObject);
             }
             website = getRawString("website", json);
+            contactAddress = getRawString("contact_address", json);
+            if (!json.isNull("emails")) {
+                JSONArray permsJSONArray = json.getJSONArray("emails");
+                final int size = permsJSONArray.length();
+                emails = new ArrayList<String>(size);
+                for (int i = 0; i < size; i++) {
+                	emails.add((String) permsJSONArray.get(i));
+                }
+            } else {
+            	emails = Collections.emptyList();
+            }
             companyOverview = getRawString("company_overview", json);
             talkingAboutCount = getInt("talking_about_count", json);
             accessToken = getRawString("access_token", json);
@@ -141,6 +164,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return canPost;
     }
 
+    public String getBusinessManagerId() {
+    	return businessManagerId;
+    }
+
     public Integer getLikes() {
         return likes;
     }
@@ -160,7 +187,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     public URL getPicture() {
         return picture.getURL();
     }
-    
+
     public Picture getPagePicture() {
         return picture;
     }
@@ -173,6 +200,14 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return website;
     }
 
+    public String getContactAddress() {
+    	return contactAddress;
+    }
+
+    public List<String> getEmails() {
+    	return emails;
+    }
+
     public String getCompanyOverview() {
         return companyOverview;
     }
@@ -180,7 +215,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     public Integer getTalkingAboutCount() {
         return talkingAboutCount;
     }
-    
+
     public String getAccessToken() {
         return accessToken;
     }
@@ -248,15 +283,17 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     @Override
     public String toString() {
         return "PageJSONImpl [link=" + link + ", isPublished=" + isPublished
-                + ", canPost=" + canPost + ", likes=" + likes + ", location="
-                + location + ", phone=" + phone + ", checkins=" + checkins
-                + ", picture=" + picture + ", cover=" + cover + ", website=" + website
-                + ", companyOverview=" + companyOverview + ", talkingAboutCount=" + talkingAboutCount
-                + ", accessToken=" + accessToken + ", isCommunityPage="
-                + isCommunityPage + ", wereHereCount=" + wereHereCount
-                + ", fanCount=" + fanCount
+                + ", canPost=" + canPost + ", businessManagerId=" + businessManagerId
+                + ", likes=" + likes + ", location=" + location + ", phone=" + phone
+                + ", checkins=" + checkins + ", picture=" + picture + ", cover="
+                + cover + ", website=" + website + ", contactAddress=" + contactAddress
+                + ", emails=" + emails + ", companyOverview=" + companyOverview
+                + ", talkingAboutCount=" + talkingAboutCount + ", accessToken="
+                + accessToken + ", isCommunityPage=" + isCommunityPage
+                + ", wereHereCount=" + wereHereCount + ", fanCount=" + fanCount
                 + ", id=" + id + ", name=" + name + ", category=" + category
-                + ", createdTime=" + createdTime + ", about=" + about + ", username=" + username + "]";
+                + ", createdTime=" + createdTime + ", about=" + about + ", username="
+                + username + "]";
     }
 
 }

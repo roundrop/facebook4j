@@ -20,6 +20,7 @@ import facebook4j.internal.http.HttpParameter;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,8 +34,12 @@ public class PhotoUpdate implements java.io.Serializable {
     private URL url;
     private String message;
     private String place;
+    private TargetingParameter targeting;
+    private FeedTargetingParameter feedTargeting;
     private Boolean noStory;
     private PrivacyParameter privacy;
+    private Boolean published;
+    private Integer scheduledPublishTime;
 
     public PhotoUpdate(Media source) {
         this.source = source;
@@ -78,6 +83,32 @@ public class PhotoUpdate implements java.io.Serializable {
         return this;
     }
 
+    public TargetingParameter getTargeting() {
+        return targeting;
+    }
+
+    public void setTargeting(TargetingParameter targeting) {
+        this.targeting = targeting;
+    }
+
+    public PhotoUpdate targeting(TargetingParameter targetingParameter) {
+        setTargeting(targetingParameter);
+        return this;
+    }
+
+    public FeedTargetingParameter getFeedTargeting() {
+        return feedTargeting;
+    }
+
+    public void setFeedTargeting(FeedTargetingParameter feedTargeting) {
+        this.feedTargeting = feedTargeting;
+    }
+
+    public PhotoUpdate feedTargeting(FeedTargetingParameter feedTargeting) {
+        setFeedTargeting(feedTargeting);
+        return this;
+    }
+
     public Boolean getNoStory() {
         return noStory;
     }
@@ -104,6 +135,48 @@ public class PhotoUpdate implements java.io.Serializable {
         return this;
     }
 
+    public Boolean getPublished() {
+        return published;
+    }
+
+    public void setPublished(Boolean published) {
+        this.published = published;
+    }
+
+    public PhotoUpdate published(boolean published) {
+        setPublished(published);
+        return this;
+    }
+
+    public Integer getScheduledPublishTime() {
+        return scheduledPublishTime;
+    }
+
+    public void setScheduledPublishTime(Integer scheduledPublishTime) {
+        this.scheduledPublishTime = scheduledPublishTime;
+    }
+
+    public void setScheduledPublishTime(Date scheduledPublishTime) {
+    	if(scheduledPublishTime==null){
+    		setScheduledPublishTime((Integer)null);
+    	}
+    	else{
+    		long time = scheduledPublishTime.getTime() / 1000L;
+    		setScheduledPublishTime(Long.valueOf(time).intValue());
+    	}
+    }
+
+    public PhotoUpdate scheduledPublishTime(Integer scheduledPublishTime) {
+        setScheduledPublishTime(scheduledPublishTime);
+        return this;
+    }
+
+    public PhotoUpdate scheduledPublishTime(Date scheduledPublishTime) {
+    	setScheduledPublishTime(scheduledPublishTime);
+        return this;
+    }
+
+
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         if (source != null) {
@@ -118,6 +191,12 @@ public class PhotoUpdate implements java.io.Serializable {
         if (place != null) {
             params.add(new HttpParameter("place", place));
         }
+        if (targeting != null) {
+            params.add(new HttpParameter("targeting", targeting.asJSONString()));
+        }
+        if (feedTargeting != null) {
+            params.add(new HttpParameter("feed_targeting", feedTargeting.asJSONString()));
+        }
         if (noStory != null) {
             if (noStory) {
                 params.add(new HttpParameter("no_story", 1));
@@ -125,6 +204,12 @@ public class PhotoUpdate implements java.io.Serializable {
         }
         if (privacy != null) {
             params.add(new HttpParameter("privacy", privacy.asJSONString()));
+        }
+        if (published != null) {
+            params.add(new HttpParameter("published", published));
+        }
+        if (scheduledPublishTime != null) {
+            params.add(new HttpParameter("scheduled_publish_time", scheduledPublishTime));
         }
         return params.toArray(new HttpParameter[params.size()]);
     }
@@ -136,10 +221,15 @@ public class PhotoUpdate implements java.io.Serializable {
 
         PhotoUpdate that = (PhotoUpdate) o;
 
+        if (feedTargeting != null ? !feedTargeting.equals(that.feedTargeting) : that.feedTargeting != null) return false;
         if (message != null ? !message.equals(that.message) : that.message != null) return false;
         if (noStory != null ? !noStory.equals(that.noStory) : that.noStory != null) return false;
+        if (targeting != null ? !targeting.equals(that.targeting) : that.targeting != null) return false;
         if (place != null ? !place.equals(that.place) : that.place != null) return false;
         if (privacy != null ? !privacy.equals(that.privacy) : that.privacy != null) return false;
+        if (published != null ? !published.equals(that.published) : that.published != null) return false;
+        if (scheduledPublishTime != null ? !scheduledPublishTime.equals(that.scheduledPublishTime) : that.scheduledPublishTime != null)
+            return false;
         if (source != null ? !source.equals(that.source) : that.source != null) return false;
         if (url != null ? !url.equals(that.url) : that.url != null) return false;
 
@@ -152,8 +242,12 @@ public class PhotoUpdate implements java.io.Serializable {
         result = 31 * result + (url != null ? url.hashCode() : 0);
         result = 31 * result + (message != null ? message.hashCode() : 0);
         result = 31 * result + (place != null ? place.hashCode() : 0);
+        result = 31 * result + (targeting != null ? targeting.hashCode() : 0);
+        result = 31 * result + (feedTargeting != null ? feedTargeting.hashCode() : 0);
         result = 31 * result + (noStory != null ? noStory.hashCode() : 0);
         result = 31 * result + (privacy != null ? privacy.hashCode() : 0);
+        result = 31 * result + (published != null ? published.hashCode() : 0);
+        result = 31 * result + (scheduledPublishTime != null ? scheduledPublishTime.hashCode() : 0);
         return result;
     }
 
@@ -166,6 +260,8 @@ public class PhotoUpdate implements java.io.Serializable {
                 ", place='" + place + '\'' +
                 ", noStory=" + noStory +
                 ", privacy=" + privacy +
+                ", published=" + published +
+                ", scheduledPublishTime=" + scheduledPublishTime +
                 '}';
     }
 }

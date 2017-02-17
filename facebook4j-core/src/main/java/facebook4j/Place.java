@@ -26,12 +26,13 @@ public interface Place extends FacebookResponse {
     String getName();
     List<Category> getCategories();
     Place.Location getLocation();
-    
+
     interface Location {
         String getStreet();
         String getCity();
         String getState();
         String getCountry();
+        String getCountryCode();
         String getZip();
         Double getLatitude();
         Double getLongitude();
