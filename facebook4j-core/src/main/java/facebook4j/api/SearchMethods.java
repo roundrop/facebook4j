@@ -16,6 +16,8 @@
 
 package facebook4j.api;
 
+import java.util.Collection;
+
 import facebook4j.*;
 import facebook4j.internal.org.json.JSONObject;
 
@@ -203,6 +205,10 @@ public interface SearchMethods {
      */
     ResponseList<Location> searchLocations(String placeId, Reading reading) throws FacebookException;
 
+    ResponseList<JSONObject> searchLocations(Reading reading, String q, String countryIso, String... locationTypes) throws FacebookException;
+
+    ResponseList<JSONObject> searchLocations(Collection<Long> locationKeys, String... locationTypes) throws FacebookException;
+
     /**
      * Searches pages.
      * @param query the search condition
@@ -240,7 +246,7 @@ public interface SearchMethods {
      * @throws FacebookException when Facebook service or network is unavailable
      */
     ResponseList<JSONObject> search(String query, Reading reading) throws FacebookException;
-    
+
     /**
      * Searches all public objects of given type.
      * @param query the search condition

@@ -255,6 +255,10 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return LocationJSONImpl.createLocationList(res, conf);
     }
 
+    public ResponseList<JSONObject> createLocationMetaList(HttpResponse res) throws FacebookException {
+    	return LocationJSONImpl.createLocationMetaList(res, conf);
+    }
+
     public ResponseList<PlaceTag> createPlaceTagList(HttpResponse res) throws FacebookException {
         return PlaceTagJSONImpl.createPlaceTagList(res, conf);
     }

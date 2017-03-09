@@ -150,6 +150,7 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
     ResponseList<Link> createLinkList(HttpResponse res) throws FacebookException;
 
     ResponseList<Location> createLocationList(HttpResponse res) throws FacebookException;
+    ResponseList<JSONObject> createLocationMetaList(HttpResponse res) throws FacebookException;
     ResponseList<PlaceTag> createPlaceTagList(HttpResponse res) throws FacebookException;
 
     ResponseList<Movie> createMovieList(HttpResponse res) throws FacebookException;

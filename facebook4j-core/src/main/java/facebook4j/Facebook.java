@@ -16,6 +16,8 @@
 
 package facebook4j;
 
+import java.util.Collection;
+
 import facebook4j.api.AccountMethods;
 import facebook4j.api.ActivityMethods;
 import facebook4j.api.AlbumMethods;

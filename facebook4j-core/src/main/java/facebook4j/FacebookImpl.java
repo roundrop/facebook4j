@@ -65,6 +65,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -2386,6 +2387,37 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         String url = buildSearchEndpoint(null, "location", reading)
                         + "&place=" + placeId;
         return factory.createLocationList(get(url));
+    }
+
+    public ResponseList<JSONObject> searchLocations(Reading reading, String q, String countryIso, String... locationTypes) throws FacebookException {
+    	StringBuilder url = new StringBuilder(buildSearchEndpoint(q, "adgeolocation", reading));
+        if(countryIso!=null && countryIso.length()>0){
+        	url.append("&country_code=").append(countryIso);
+        }
+		if(locationTypes!=null && locationTypes.length>0){
+    		url.append("&location_types=[");
+	    	for (String locationType : locationTypes) {
+	    		url.append('\'').append(locationType).append("',");
+			}
+	    	url.setLength(url.length()-1); // remove last separator
+	    	url.append(']');
+		}
+    	return factory.createJSONObjectList(get(url.toString()));
+    }
+
+    public ResponseList<JSONObject> searchLocations(Collection<Long> locationKeys, String... locationTypes) throws FacebookException {
+    	StringBuilder url = new StringBuilder()
+                .append(buildEndpoint("search"))
+                .append("?type=adgeolocationmeta");
+    	for (String type : locationTypes) {
+			url.append('&').append(type).append("=[");
+			for (Long key : locationKeys) {
+				url.append('\'').append(key).append("',");
+			}
+			url.setLength(url.length()-1); // remove last separator
+			url.append(']');
+		}
+    	return factory.createLocationMetaList(get(url.toString()));
     }
 
     public ResponseList<JSONObject> search(String query) throws FacebookException {

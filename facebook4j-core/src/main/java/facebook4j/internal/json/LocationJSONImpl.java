@@ -151,6 +151,37 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         }
     }
 
+    /*package*/
+    static ResponseList<JSONObject> createLocationMetaList(HttpResponse res, Configuration conf) throws FacebookException {
+    	try {
+    		if (conf.isJSONStoreEnabled()) {
+    			DataObjectFactoryUtil.clearThreadLocalMap();
+    		}
+    		JSONObject json = res.asJSONObject();
+    		JSONObject typesJSONObject = json.getJSONObject("data");
+    		String[] types = JSONObject.getNames(typesJSONObject);
+    		final int size = types.length;
+    		ResponseList<JSONObject> locationMetas = new ResponseListImpl<JSONObject>(size, json);
+    		for (int i = 0; i < size; i++) {
+    			JSONObject typeJSONObject = typesJSONObject.getJSONObject(types[i]);
+    			String[] keys = JSONObject.getNames(typeJSONObject);
+    			if(keys==null){
+    				continue;
+    			}
+    			for (String key : keys) {
+					JSONObject metaData = typeJSONObject.getJSONObject(key);
+					locationMetas.add(metaData);
+				}
+    		}
+    		if (conf.isJSONStoreEnabled()) {
+    			DataObjectFactoryUtil.registerJSONObject(locationMetas, typesJSONObject);
+    		}
+    		return locationMetas;
+    	} catch (JSONException jsone) {
+    		throw new FacebookException(jsone);
+    	}
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
