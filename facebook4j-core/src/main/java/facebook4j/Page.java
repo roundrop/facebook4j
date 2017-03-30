@@ -61,4 +61,5 @@ public interface Page {
     Date getCreatedTime();
     String getAbout();
     String getUsername();
+    String getMission();
 }
