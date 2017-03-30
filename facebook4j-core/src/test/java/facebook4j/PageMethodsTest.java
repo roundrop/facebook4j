@@ -125,6 +125,15 @@ public class PageMethodsTest {
             assertThat(actual.getCover().getId(), is("383818738305213"));
             assertThat(actual.getPicture().toString(), is("https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/547126_383818641638556_2000440510_n.jpg?oh=b14a3683ba8331770c24f7bfadae00f2&oe=58A20A25"));
         }
+
+        @Test
+        public void mission() throws Exception {
+            facebook.setMockJSON("mock_json/page/mission.json");
+            Page actual = facebook.getPage("softbank", new Reading().fields("company_overview", "mission"));
+
+            assertThat(actual.getCompanyOverview(), is("ソフトバンクグループは、インターネットを事業基盤として成長を続けてきました。現在では、「移動体通信事業」「ブロードバンド・インフラ事業」「固定通信事業」「インターネット・カルチャー事業」など、情報産業の中でさまざまな事業を展開しています。"));
+            assertThat(actual.getMission(), is("情報革命で人々を幸せに\n\nソフトバンクグループは、創業以来一貫して、情報革命を通じた人類と社会への貢献を推進してきました。\n\n人々にとって幸せとは何か。\n\n「愛し愛されること」「日々生きていること」「自己実現」「笑顔」、多くの答えがあると思いますが、幸せとは、感動することと同義であると考えます。ソフトバンクグループが、何のために事業をしているのか、何を成したいのかといえば、一人でも多くの人に喜び、感動を伝えたい、ということに尽きます。我々の創業以来の志が、この理念に凝縮されているのです。\n\nコンピュータのパフォーマンスが飛躍的に増大し、超知性のコンピュータすら使いこなせる、今後人類が迎えるそうした情報のビッグバン「情報革命」の無限のパワーを、人々の幸福のために正しく発展させていくこと。今後もこの志を原動力に、ソフトバンクグループは成長を続けてまいります。"));
+        }
     }
 
     public static class getPagePictureURL extends MockFacebookTestBase {
