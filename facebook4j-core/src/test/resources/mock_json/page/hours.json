@@ -1,0 +1,33 @@
+{
+    "hours": {
+        "fri_1_close": "15:00",
+        "fri_1_open": "11:30",
+        "fri_2_close": "22:00",
+        "fri_2_open": "17:00",
+        "mon_1_close": "15:00",
+        "mon_1_open": "11:30",
+        "mon_2_close": "22:00",
+        "mon_2_open": "17:00",
+        "sat_1_close": "15:00",
+        "sat_1_open": "11:30",
+        "sat_2_close": "22:00",
+        "sat_2_open": "17:00",
+        "sun_1_close": "15:00",
+        "sun_1_open": "11:30",
+        "sun_2_close": "22:00",
+        "sun_2_open": "17:00",
+        "thu_1_close": "15:00",
+        "thu_1_open": "11:30",
+        "thu_2_close": "22:00",
+        "thu_2_open": "17:00",
+        "tue_1_close": "15:00",
+        "tue_1_open": "11:30",
+        "tue_2_close": "22:00",
+        "tue_2_open": "17:00",
+        "wed_1_close": "15:00",
+        "wed_1_open": "11:30",
+        "wed_2_close": "22:00",
+        "wed_2_open": "17:00"
+    },
+    "id": "214470098607468"
+}

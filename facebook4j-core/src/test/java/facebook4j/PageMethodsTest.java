@@ -31,15 +31,7 @@ import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TimeZone;
+import java.util.*;
 
 import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
@@ -133,6 +125,16 @@ public class PageMethodsTest {
 
             assertThat(actual.getCompanyOverview(), is("ソフトバンクグループは、インターネットを事業基盤として成長を続けてきました。現在では、「移動体通信事業」「ブロードバンド・インフラ事業」「固定通信事業」「インターネット・カルチャー事業」など、情報産業の中でさまざまな事業を展開しています。"));
             assertThat(actual.getMission(), is("情報革命で人々を幸せに\n\nソフトバンクグループは、創業以来一貫して、情報革命を通じた人類と社会への貢献を推進してきました。\n\n人々にとって幸せとは何か。\n\n「愛し愛されること」「日々生きていること」「自己実現」「笑顔」、多くの答えがあると思いますが、幸せとは、感動することと同義であると考えます。ソフトバンクグループが、何のために事業をしているのか、何を成したいのかといえば、一人でも多くの人に喜び、感動を伝えたい、ということに尽きます。我々の創業以来の志が、この理念に凝縮されているのです。\n\nコンピュータのパフォーマンスが飛躍的に増大し、超知性のコンピュータすら使いこなせる、今後人類が迎えるそうした情報のビッグバン「情報革命」の無限のパワーを、人々の幸福のために正しく発展させていくこと。今後もこの志を原動力に、ソフトバンクグループは成長を続けてまいります。"));
+        }
+
+        @Test
+        public void hours() throws Exception {
+            facebook.setMockJSON("mock_json/page/hours.json");
+            Page actual = facebook.getPage("gion.endo", new Reading().fields("hours"));
+
+            assertThat(actual.getId(), is("214470098607468"));
+            assertThat(actual.getHours().size(), is(28));
+            assertThat(actual.getHours().get("sat_2_close"), is("22:00"));
         }
     }
 
