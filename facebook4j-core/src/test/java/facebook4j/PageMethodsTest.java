@@ -1950,56 +1950,6 @@ public class PageMethodsTest {
 
             assertThat(actual, is("137246726435626_185932178233747"));
         }
-
-        protected Matcher<HttpParameter[]> hasTargetingParameterWithCountries(String... expectedCountryCodes) {
-            final Set<String> expectedCountriesSet = new HashSet<String>(Arrays.asList(expectedCountryCodes));
-            return new TypeSafeMatcher<HttpParameter[]>(HttpParameter[].class) {
-
-                private final List<String> actualParams = new ArrayList<String>();
-
-                @Override
-                public boolean matchesSafely(HttpParameter[] actual) {
-                    for (HttpParameter param : actual) {
-                        if (param.getName().equals("targeting")) {
-                            actualParams.add(param.getName() + "=" + param.getValue());
-                            if (matches(param.getValue())) {
-                                return true;
-                            }
-                        }
-                    }
-                    return false;
-                }
-
-                protected boolean matches(String targetingParamValue) {
-                    try {
-                        JSONObject targetingParamValueObject = new JSONObject(targetingParamValue);
-                        JSONArray actualCountriesArray = targetingParamValueObject.getJSONArray("countries");
-                        Set<String> actualCountriesSet = new HashSet<String>();
-                        for (int i = 0; i < actualCountriesArray.length(); i++) {
-                            String country = actualCountriesArray.getString(i);
-                            actualCountriesSet.add(country);
-                        }
-                        return expectedCountriesSet.equals(actualCountriesSet);
-                    } catch (JSONException ignore) {
-                        return false;
-                    }
-                }
-
-                public void describeTo(Description desc) {
-                    desc.appendValue("targeting=" + expectedCountriesSet);
-                    if (actualParams.size() > 0) {
-                        desc.appendText(" but actual is ");
-                        desc.appendValue(actualParams.get(0));
-                        for (int i = 1; i < actualParams.size(); i++) {
-                            desc.appendText(", ");
-                            desc.appendValue(actualParams.get(i));
-                        }
-                    } else {
-                        desc.appendText(" but actual has no '" + name + "' parameter");
-                    }
-                }
-            };
-        }
     }
 
     public static class updatePageSetting extends MockFacebookTestBase {

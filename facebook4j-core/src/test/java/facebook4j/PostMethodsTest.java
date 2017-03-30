@@ -24,6 +24,8 @@ import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
 
 import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
@@ -962,6 +964,23 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(facebook.getHttpParameters(), hasPostParameter("name", "Facebook4J - A Java library for the Facebook Graph API"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("caption", "facebook4j.org"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("description", "Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library."));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+
+        @Test
+        public void pagePostUpdate() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            PagePostUpdate pagePostUpdate = new PagePostUpdate("test message");
+            FeedTargetingParameter feedTargeting = new FeedTargetingParameter().genders(FeedTargetingParameter.Gender.Male);
+            feedTargeting.setAgeMin(20);
+            feedTargeting.setAgeMax(40);
+            pagePostUpdate.setFeedTargeting(feedTargeting);
+            String actual = facebook.postFeed("eclipse", pagePostUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/eclipse/feed")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "test message"));
+            assertThat(facebook.getHttpParameters(), hasPostJsonParameter("feed_targeting", "{\"age_min\":20,\"genders\":{\"value\":1},\"age_max\":40}"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
         }
