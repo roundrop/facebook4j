@@ -53,6 +53,7 @@ public interface Post extends FacebookResponse {
     List<Attachment> getAttachments();
     String getObjectId();
     String getParentId();
+    URL getPermalinkUrl();
     Application getApplication();
     Date getCreatedTime();
     Date getUpdatedTime();

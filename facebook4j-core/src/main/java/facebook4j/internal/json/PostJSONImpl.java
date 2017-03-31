@@ -89,6 +89,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private Targeting targeting;
     private PagableList<Reaction> reactions;
     private String parentId;
+    private URL permalinkUrl;
 
     /*package*/PostJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -270,6 +271,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             if(!json.isNull("parent_id")) {
                 parentId = getRawString("parent_id", json);
             }
+            permalinkUrl = getURL("permalink_url", json);
             if (!json.isNull("application")) {
                 JSONObject applicationJSONObject = json.getJSONObject("application");
                 application = new ApplicationJSONImpl(applicationJSONObject);
@@ -417,6 +419,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
 
     public String getParentId() {
         return parentId;
+    }
+
+    public URL getPermalinkUrl() {
+        return permalinkUrl;
     }
 
     public Application getApplication() {
