@@ -23,6 +23,8 @@ import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
 
 import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
@@ -369,9 +371,21 @@ public class VideoMethodsTest extends MockFacebookTestBase {
             facebook.setMockJSON("mock_json/post_id.json");
             String pageId = "137246726435626";
             File videoFile = new File("src/test/resources/test.mov");
-            String videoId = facebook.postVideo(pageId, new VideoUpdate(new Media(videoFile)));
+            PageVideoUpdate pageVideoUpdate = new PageVideoUpdate(new Media(videoFile));
+            Set<String> countries = new HashSet<String>();
+            countries.add("US");
+            countries.add("GB");
+            TargetingParameter targeting = new TargetingParameter().countries(countries);
+            pageVideoUpdate.setTargeting(targeting);
+            FeedTargetingParameter feedTargeting = new FeedTargetingParameter().genders(FeedTargetingParameter.Gender.Male);
+            feedTargeting.setAgeMin(20);
+            feedTargeting.setAgeMax(40);
+            pageVideoUpdate.setFeedTargeting(feedTargeting);
+            String videoId = facebook.postVideo(pageId, pageVideoUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/videos")));
+            assertThat(facebook.getHttpParameters(), hasTargetingParameterWithCountries("US", "GB"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("feed_targeting", "{\"age_min\":20,\"genders\":{\"value\":1},\"age_max\":40}"));
 
             assertThat(videoId, is("137246726435626_185932178233747"));
         }

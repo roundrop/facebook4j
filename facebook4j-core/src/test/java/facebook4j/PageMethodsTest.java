@@ -31,15 +31,7 @@ import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TimeZone;
+import java.util.*;
 
 import static facebook4j.junit.F4JHttpParameterMatchers.*;
 import static facebook4j.junit.ISO8601DateMatchers.*;
@@ -124,6 +116,25 @@ public class PageMethodsTest {
 
             assertThat(actual.getCover().getId(), is("383818738305213"));
             assertThat(actual.getPicture().toString(), is("https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/547126_383818641638556_2000440510_n.jpg?oh=b14a3683ba8331770c24f7bfadae00f2&oe=58A20A25"));
+        }
+
+        @Test
+        public void mission() throws Exception {
+            facebook.setMockJSON("mock_json/page/mission.json");
+            Page actual = facebook.getPage("softbank", new Reading().fields("company_overview", "mission"));
+
+            assertThat(actual.getCompanyOverview(), is("ソフトバンクグループは、インターネットを事業基盤として成長を続けてきました。現在では、「移動体通信事業」「ブロードバンド・インフラ事業」「固定通信事業」「インターネット・カルチャー事業」など、情報産業の中でさまざまな事業を展開しています。"));
+            assertThat(actual.getMission(), is("情報革命で人々を幸せに\n\nソフトバンクグループは、創業以来一貫して、情報革命を通じた人類と社会への貢献を推進してきました。\n\n人々にとって幸せとは何か。\n\n「愛し愛されること」「日々生きていること」「自己実現」「笑顔」、多くの答えがあると思いますが、幸せとは、感動することと同義であると考えます。ソフトバンクグループが、何のために事業をしているのか、何を成したいのかといえば、一人でも多くの人に喜び、感動を伝えたい、ということに尽きます。我々の創業以来の志が、この理念に凝縮されているのです。\n\nコンピュータのパフォーマンスが飛躍的に増大し、超知性のコンピュータすら使いこなせる、今後人類が迎えるそうした情報のビッグバン「情報革命」の無限のパワーを、人々の幸福のために正しく発展させていくこと。今後もこの志を原動力に、ソフトバンクグループは成長を続けてまいります。"));
+        }
+
+        @Test
+        public void hours() throws Exception {
+            facebook.setMockJSON("mock_json/page/hours.json");
+            Page actual = facebook.getPage("gion.endo", new Reading().fields("hours"));
+
+            assertThat(actual.getId(), is("214470098607468"));
+            assertThat(actual.getHours().size(), is(28));
+            assertThat(actual.getHours().get("sat_2_close"), is("22:00"));
         }
     }
 
@@ -1949,56 +1960,6 @@ public class PageMethodsTest {
             assertThat(facebook.getHttpParameters(), hasPostParameter("feed_targeting", "{\"age_min\":20,\"genders\":{\"value\":1},\"age_max\":40}"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
-        }
-
-        protected Matcher<HttpParameter[]> hasTargetingParameterWithCountries(String... expectedCountryCodes) {
-            final Set<String> expectedCountriesSet = new HashSet<String>(Arrays.asList(expectedCountryCodes));
-            return new TypeSafeMatcher<HttpParameter[]>(HttpParameter[].class) {
-
-                private final List<String> actualParams = new ArrayList<String>();
-
-                @Override
-                public boolean matchesSafely(HttpParameter[] actual) {
-                    for (HttpParameter param : actual) {
-                        if (param.getName().equals("targeting")) {
-                            actualParams.add(param.getName() + "=" + param.getValue());
-                            if (matches(param.getValue())) {
-                                return true;
-                            }
-                        }
-                    }
-                    return false;
-                }
-
-                protected boolean matches(String targetingParamValue) {
-                    try {
-                        JSONObject targetingParamValueObject = new JSONObject(targetingParamValue);
-                        JSONArray actualCountriesArray = targetingParamValueObject.getJSONArray("countries");
-                        Set<String> actualCountriesSet = new HashSet<String>();
-                        for (int i = 0; i < actualCountriesArray.length(); i++) {
-                            String country = actualCountriesArray.getString(i);
-                            actualCountriesSet.add(country);
-                        }
-                        return expectedCountriesSet.equals(actualCountriesSet);
-                    } catch (JSONException ignore) {
-                        return false;
-                    }
-                }
-
-                public void describeTo(Description desc) {
-                    desc.appendValue("targeting=" + expectedCountriesSet);
-                    if (actualParams.size() > 0) {
-                        desc.appendText(" but actual is ");
-                        desc.appendValue(actualParams.get(0));
-                        for (int i = 1; i < actualParams.size(); i++) {
-                            desc.appendText(", ");
-                            desc.appendValue(actualParams.get(i));
-                        }
-                    } else {
-                        desc.appendText(" but actual has no '" + name + "' parameter");
-                    }
-                }
-            };
         }
     }
 

@@ -37,7 +37,8 @@ public interface Album extends FacebookResponse {
     Date getUpdatedTime();
     Boolean canUpload();
     Place getPlace();
-    
+    Picture getPicture();
+
     PagableList<Like> getLikes();
     PagableList<Comment> getComments();
     PagableList<Reaction> getReactions();

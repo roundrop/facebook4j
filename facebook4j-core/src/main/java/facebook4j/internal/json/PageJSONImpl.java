@@ -25,6 +25,7 @@ import facebook4j.internal.org.json.JSONObject;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.Map;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
@@ -58,6 +59,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Integer fanCount;
     private String about;
     private String username;
+    private String mission;
+    private Map<String,String> hours;
 
     /*package*/PageJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -107,6 +110,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             fanCount = getInt("fan_count", json);
             about = getRawString("about", json);
             username = getRawString("username", json);
+            mission = getRawString("mission", json);
+            hours = getStringMap("hours", json);
 
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -205,6 +210,14 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return username;
     }
 
+    public String getMission() {
+        return mission;
+    }
+
+    public Map<String,String> getHours() {
+        return hours;
+    }
+
     /*package*/
     static ResponseList<Page> createPageList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -256,7 +269,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 + isCommunityPage + ", wereHereCount=" + wereHereCount
                 + ", fanCount=" + fanCount
                 + ", id=" + id + ", name=" + name + ", category=" + category
-                + ", createdTime=" + createdTime + ", about=" + about + ", username=" + username + "]";
+                + ", createdTime=" + createdTime + ", about=" + about
+                + ", username=" + username + ", mission=" + mission
+                + ", hours=" + hours +"]";
     }
 
 }

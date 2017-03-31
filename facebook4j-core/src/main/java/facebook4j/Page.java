@@ -18,6 +18,7 @@ package facebook4j;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -61,4 +62,7 @@ public interface Page {
     Date getCreatedTime();
     String getAbout();
     String getUsername();
+    String getMission();
+    Map<String,String> getHours();
+
 }
