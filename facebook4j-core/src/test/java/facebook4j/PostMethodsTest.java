@@ -670,6 +670,13 @@ public class PostMethodsTest extends MockFacebookTestBase {
             Post post = facebook.getPost("1111_2222");
             assertThat(post.getStatusType(), is("approved_friend"));
         }
+
+        @Test
+        public void permalink_url() throws Exception {
+            facebook.setMockJSON("mock_json/post/permalink_url.json");
+            Post post = facebook.getPost("144105014310_10155533674019311", new Reading().fields("permalink_url"));
+            assertThat(post.getPermalinkUrl().toString(), is("https://www.facebook.com/Panasonic/posts/10155533674019311"));
+        }
     }
 
     public static class getPostComments extends MockFacebookTestBase {
