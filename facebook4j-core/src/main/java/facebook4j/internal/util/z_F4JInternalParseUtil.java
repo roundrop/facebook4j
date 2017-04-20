@@ -30,8 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -271,7 +271,7 @@ public final class z_F4JInternalParseUtil {
         }
         try {
             JSONObject jsonObject = json.getJSONObject(name);
-            HashMap<String, String> result = new HashMap<String, String>();
+            LinkedHashMap<String, String> result = new LinkedHashMap<String, String>();
             @SuppressWarnings("unchecked")
             Iterator<String> keys = jsonObject.keys();
             while (keys.hasNext()) {
@@ -290,7 +290,7 @@ public final class z_F4JInternalParseUtil {
         }
         try {
             JSONObject jsonObject = json.getJSONObject(name);
-            HashMap<String, Long> result = new HashMap<String, Long>();
+            LinkedHashMap<String, Long> result = new LinkedHashMap<String, Long>();
             @SuppressWarnings("unchecked")
             Iterator<String> keys = jsonObject.keys();
             while (keys.hasNext()) {
@@ -309,7 +309,7 @@ public final class z_F4JInternalParseUtil {
         }
         try {
             JSONObject jsonObject = json.getJSONObject(name);
-            HashMap<String, Boolean> result = new HashMap<String, Boolean>();
+            LinkedHashMap<String, Boolean> result = new LinkedHashMap<String, Boolean>();
             @SuppressWarnings("unchecked")
             Iterator<String> keys = jsonObject.keys();
             while (keys.hasNext()) {
