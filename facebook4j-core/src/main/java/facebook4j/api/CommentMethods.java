@@ -17,6 +17,7 @@
 package facebook4j.api;
 
 import facebook4j.Comment;
+import facebook4j.CommentUpdate;
 import facebook4j.FacebookException;
 import facebook4j.Like;
 import facebook4j.Reading;
@@ -72,7 +73,7 @@ public interface CommentMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/Comment/">Comment - Facebook Developers</a>
      */
     boolean deleteComment(String commentId) throws FacebookException;
-    
+
 
     /**
      * Returns the likes on a comment.
@@ -110,5 +111,15 @@ public interface CommentMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/Comment/#likes">Comment#likes - Facebook Developers</a>
      */
     boolean unlikeComment(String commentId) throws FacebookException;
+
+    /**
+     * Sends private message to the author of a comment.
+     * @param commentId the ID of the comment
+     * @param message
+     * @return The new message ID
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a https://developers.facebook.com/docs/graph-api/reference/v2.7/object/private_replies">Comment#privateReplies - Facebook Developers</a>
+     */
+    String privateMessageReplyOnComment(String commentId, String message) throws FacebookException;
 
 }

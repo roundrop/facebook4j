@@ -811,6 +811,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return _comment(postId, commentUpdate);
     }
 
+    public String privateMessageReplyOnComment(String commentId, String message) throws FacebookException {
+        return _privateReply(commentId, message);
+    }
+
     public ResponseList<Like> getPostLikes(String postId) throws FacebookException {
         return getPostLikes(postId, null);
     }
@@ -2833,6 +2837,18 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         JSONObject json = post(buildEndpoint(objectId, "comments"), commentUpdate.asHttpParameterArray())
                 .asJSONObject();
         return getRawString("id", json);
+    }
+
+    private String _privateReply(String objectId, String message) throws FacebookException {
+        ensureAuthorizationEnabled();
+        JSONObject json = post(buildEndpoint(objectId, "private_replies"),
+                                new HttpParameter[]{new HttpParameter("message", message)})
+                          .asJSONObject();
+        try {
+            return json.getString("id");
+        } catch (JSONException jsone) {
+            throw new FacebookException(jsone.getMessage(), jsone);
+        }
     }
 
     private boolean _like(String objectId) throws FacebookException {
