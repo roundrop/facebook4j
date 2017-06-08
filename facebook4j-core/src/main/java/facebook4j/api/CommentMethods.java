@@ -18,6 +18,7 @@ package facebook4j.api;
 
 import facebook4j.Comment;
 import facebook4j.CommentUpdate;
+import facebook4j.Conversation;
 import facebook4j.FacebookException;
 import facebook4j.Like;
 import facebook4j.Reading;
@@ -118,8 +119,17 @@ public interface CommentMethods {
      * @param message
      * @return The new message ID
      * @throws FacebookException when Facebook service or network is unavailable
-     * @see <a https://developers.facebook.com/docs/graph-api/reference/v2.7/object/private_replies">Comment#privateReplies - Facebook Developers</a>
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/object/private_replies">Comment#privateReplies - Facebook Developers</a>
      */
     String privateMessageReplyOnComment(String commentId, String message) throws FacebookException;
+
+    /**
+     * For comments with private replies, gets conversation between the Page and author of the comment (Page viewers only).
+     * @param commentId the ID of a comment
+     * @return Conversation
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/reference/api/Comment/">Comment#privateReplyConversation - Facebook Developers</a>
+     */
+    Conversation getCommentPrivateReplyConversation(String commentId) throws FacebookException;
 
 }

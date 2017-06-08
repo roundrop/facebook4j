@@ -66,8 +66,13 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         init(json);
     }
 
-    private void init(JSONObject json) throws FacebookException {
+    private void init(JSONObject jsonInit) throws FacebookException {
         try {
+        	JSONObject json = jsonInit.optJSONObject("private_reply_conversation");
+        	if (json == null) {
+        		json = jsonInit;
+        	}
+
             id = getRawString("id", json);
             link = getRawString("link", json);
             if (!json.isNull("senders")) {

@@ -815,6 +815,10 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return _privateReply(commentId, message);
     }
 
+    public Conversation getCommentPrivateReplyConversation(String commentId) throws FacebookException {
+    	return _commentPrivateReplyConversation(commentId);
+    }
+
     public ResponseList<Like> getPostLikes(String postId) throws FacebookException {
         return getPostLikes(postId, null);
     }
@@ -2849,6 +2853,11 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
+    }
+
+    private Conversation _commentPrivateReplyConversation(String commentId) throws FacebookException {
+    	ensureAuthorizationEnabled();
+    	return factory.createConversation(get(buildEndpoint(commentId, new Reading().fields("private_reply_conversation"))));
     }
 
     private boolean _like(String objectId) throws FacebookException {
