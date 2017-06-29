@@ -83,6 +83,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private Application application;
     private Date createdTime;
     private Date updatedTime;
+    private Date taggedTime;
     private Boolean isPublished;
     private Boolean isHidden;
     private Integer scheduledPublishTime;
@@ -276,6 +277,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             }
             createdTime = getISO8601Datetime("created_time", json);
             updatedTime = getISO8601Datetime("updated_time", json);
+            taggedTime = getISO8601Datetime("tagged_time", json);
             if (!json.isNull("is_published")) {
                 isPublished = getBoolean("is_published", json);
             }
@@ -431,6 +433,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return updatedTime;
     }
 
+    public Date getTaggedTime() {
+    	return taggedTime;
+    }
+
     public Boolean isPublished() {
         return isPublished;
     }
@@ -535,6 +541,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 ", application=" + application +
                 ", createdTime=" + createdTime +
                 ", updatedTime=" + updatedTime +
+                ", taggedTime=" + taggedTime +
                 ", isPublished=" + isPublished +
                 ", isHidden=" + isHidden +
                 ", scheduledPublishTime=" + scheduledPublishTime +

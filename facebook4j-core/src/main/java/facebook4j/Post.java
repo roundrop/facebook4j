@@ -56,6 +56,7 @@ public interface Post extends FacebookResponse {
     Application getApplication();
     Date getCreatedTime();
     Date getUpdatedTime();
+    Date getTaggedTime();
     Boolean isPublished();
     Boolean isHidden();
     Date getScheduledPublishTime();
