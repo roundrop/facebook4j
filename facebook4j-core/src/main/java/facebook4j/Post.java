@@ -27,6 +27,7 @@ import java.util.Map;
 public interface Post extends FacebookResponse {
     String getId();
     Category getFrom();
+    IdNameEntity getTarget();
     List<IdNameEntity> getTo();
     String getMessage();
     List<Tag> getMessageTags();

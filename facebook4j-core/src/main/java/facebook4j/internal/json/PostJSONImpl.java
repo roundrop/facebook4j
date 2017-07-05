@@ -56,6 +56,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private String id;
     private Category from;
     private List<IdNameEntity> to;
+    private IdNameEntity target;
     private String message;
     private List<Tag> messageTags;
     private URL picture;
@@ -112,6 +113,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             if (!json.isNull("from")) {
                 JSONObject fromJSONObject = json.getJSONObject("from");
                 from = new CategoryJSONImpl(fromJSONObject);
+            }
+            if (!json.isNull("target")) {
+                JSONObject targetJSONObject = json.getJSONObject("target");
+                target = new IdNameEntityJSONImpl(targetJSONObject);
             }
             if (!json.isNull("to")) {
                 JSONArray toJSONArray = json.getJSONObject("to").getJSONArray("data");
@@ -317,6 +322,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return from;
     }
 
+    public IdNameEntity getTarget() {
+    	return target;
+    }
+
     public List<IdNameEntity> getTo() {
         return to;
     }
@@ -513,6 +522,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return "PostJSONImpl{" +
                 "id='" + id + '\'' +
                 ", from=" + from +
+                ", target=" + target +
                 ", to=" + to +
                 ", message='" + message + '\'' +
                 ", messageTags=" + messageTags +
