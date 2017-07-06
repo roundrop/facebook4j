@@ -30,6 +30,7 @@ public enum ReactionType {
     SAD,
     ANGRY,
     THANKFUL,
+    PRIDE,
     ;
     
     public static ReactionType of(String reactionTypeString) {
