@@ -21,6 +21,7 @@ import facebook4j.Comment;
 import facebook4j.FacebookException;
 import facebook4j.Image;
 import facebook4j.PagableList;
+import facebook4j.Reaction;
 import facebook4j.ResponseList;
 import facebook4j.Tag;
 import facebook4j.conf.Configuration;
@@ -58,6 +59,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Attachment attachment;
     private Comment parent;
     private PagableList<Comment> comments;
+    private PagableList<Reaction> reactions;
 
     /*package*/CommentJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -124,6 +126,22 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 }
             } else {
                 comments = new PagableListImpl<Comment>(0);
+            }
+            if (!json.isNull("reactions")) {
+                JSONObject reactionsJSONObject = json.getJSONObject("reactions");
+                if (!reactionsJSONObject.isNull("data")) {
+                    JSONArray list = reactionsJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    reactions = new PagableListImpl<Reaction>(size, reactionsJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        ReactionJSONImpl reaction = new ReactionJSONImpl(list.getJSONObject(i));
+                        reactions.add(reaction);
+                    }
+                } else {
+                    reactions = new PagableListImpl<Reaction>(1, reactionsJSONObject);
+                }
+            } else {
+                reactions = new PagableListImpl<Reaction>(0);
             }
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
@@ -445,5 +463,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                         '}';
             }
         }
+    }
+
+    public PagableList<Reaction> getReactions() {
+        return reactions;
     }
 }

@@ -36,6 +36,7 @@ public interface Comment extends FacebookResponse {
     Integer getCommentCount();
     Boolean isUserLikes();
     Boolean isHidden();
+    PagableList<Reaction> getReactions();
 
     Attachment getAttachment();
 

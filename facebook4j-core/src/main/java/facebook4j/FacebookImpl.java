@@ -2479,6 +2479,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return _getReactions(postId, reading);
     }
 
+    public ResponseList<Reaction> getCommentReactions(String commentId) throws FacebookException {
+        return _getReactions(commentId, null);
+    }
+
+    public ResponseList<Reaction> getCommentReactions(String commentId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return _getReactions(commentId, reading);
+    }
+
     public ResponseList<Reaction> getVideoReactions(String videoId) throws FacebookException {
         return _getReactions(videoId, null);
     }
