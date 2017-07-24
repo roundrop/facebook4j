@@ -142,6 +142,8 @@ public interface z_F4JInternalFactory extends java.io.Serializable {
 
     Conversation createConversation(HttpResponse res) throws FacebookException;
 
+    Conversation createCommentPrivateReplyConversation(HttpResponse res) throws FacebookException;
+
     ResponseList<Interest> createInterestList(HttpResponse res) throws FacebookException;
 
     ResponseList<Like> createLikeList(HttpResponse res) throws FacebookException;

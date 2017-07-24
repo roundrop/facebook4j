@@ -2866,7 +2866,7 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
 
     private Conversation _commentPrivateReplyConversation(String commentId) throws FacebookException {
     	ensureAuthorizationEnabled();
-    	return factory.createConversation(get(buildEndpoint(commentId, new Reading().fields("private_reply_conversation"))));
+    	return factory.createCommentPrivateReplyConversation(get(buildEndpoint(commentId, new Reading().fields("private_reply_conversation"))));
     }
 
     private boolean _like(String objectId) throws FacebookException {

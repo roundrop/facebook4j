@@ -66,13 +66,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         init(json);
     }
 
-    private void init(JSONObject jsonInit) throws FacebookException {
+    private void init(JSONObject json) throws FacebookException {
         try {
-        	JSONObject json = jsonInit.optJSONObject("private_reply_conversation");
-        	if (json == null) {
-        		json = jsonInit;
-        	}
-
             id = getRawString("id", json);
             link = getRawString("link", json);
             if (!json.isNull("senders")) {
@@ -196,6 +191,22 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         }
     }
 
+    /*package*/
+    static Conversation createCommentPrivateReplyConversation(HttpResponse res, Configuration conf) throws FacebookException {
+        if (conf.isJSONStoreEnabled()) {
+            DataObjectFactoryUtil.clearThreadLocalMap();
+        }
+        JSONObject json = res.asJSONObject().optJSONObject("private_reply_conversation");
+        if (json == null) {
+            return null;
+        }
+        Conversation conversation = new ConversationJSONImpl(json);
+        if (conf.isJSONStoreEnabled()) {
+            DataObjectFactoryUtil.registerJSONObject(conversation, json);
+        }
+        return conversation;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -234,4 +245,5 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 ", message_count=" + message_count +
                 '}';
     }
+
 }

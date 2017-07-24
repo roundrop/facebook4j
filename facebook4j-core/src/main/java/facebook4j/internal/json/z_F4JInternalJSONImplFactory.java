@@ -236,6 +236,10 @@ public class z_F4JInternalJSONImplFactory implements z_F4JInternalFactory {
         return new ConversationJSONImpl(res, conf);
     }
 
+	public Conversation createCommentPrivateReplyConversation(HttpResponse res) throws FacebookException {
+		return ConversationJSONImpl.createCommentPrivateReplyConversation(res, conf);
+	}
+
     public ResponseList<Interest> createInterestList(HttpResponse res) throws FacebookException {
         return InterestJSONImpl.createInterestList(res, conf);
     }
