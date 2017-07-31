@@ -1,95 +1,49 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.facebook4j</groupId>
-  <artifactId>facebook4j</artifactId>
-  <version>2.3.2-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>facebook4j</name>
-  <description>A Java library for the Facebook Graph API</description>
-  <url>http://facebook4j.org/</url>
-  <licenses>
-    <license>
-      <name>Apache License 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <scm>
-    <url>https://github.com/roundrop/facebook4j</url>
-    <connection>scm:git:git://github.com/roundrop/facebook4j.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/roundrop/facebook4j.git</developerConnection>
-  </scm>
-  <developers>
-    <developer>
-      <id>roundrop</id>
-      <name>Ryuji</name>
-      <email>roundrop@gmail.com</email>
-      <url>http://blog.roundrop.jp/</url>
-      <roles>
-        <role>lead</role>
-        <role>architect</role>
-        <role>developer</role>
-      </roles>
-      <timezone>+9</timezone>
-    </developer>
-  </developers>
-  <issueManagement>
-    <system>Jira</system>
-    <url>https://roundrop.atlassian.net/browse/FFJ</url>
-  </issueManagement>
-  <mailingLists>
-    <mailingList>
-      <name>Facebook4J</name>
-      <subscribe>facebook4j+subscribe@googlegroups.com</subscribe>
-      <unsubscribe>facebook4j+unsubscribe@googlegroups.com</unsubscribe>
-      <post>facebook4j@googlegroups.com</post>
-      <archive>http://groups.google.com/group/facebook4j</archive>
-    </mailingList>
-  </mailingLists>
-  <distributionManagement>
-    <repository>
-      <id>sonatype-nexus-staging</id>
-      <name>Nexus Release Repository</name>
-      <uniqueVersion>false</uniqueVersion>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-    <snapshotRepository>
-      <id>sonatype-nexus-snapshots</id>
-      <name>Nexus Snapshots Repository</name>
-      <uniqueVersion>false</uniqueVersion>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    </snapshotRepository>
-  </distributionManagement>
-  <profiles>
-    <profile>
-      <id>release-sign-artifacts</id>
-      <activation>
-        <property>
-          <name>performRelease</name>
-          <value>true</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.1</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-  <modules>
-    <module>facebook4j-core</module>
-  </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.facebook4j</groupId>
+	<artifactId>facebook4j</artifactId>
+	<version>2.3.2-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>facebook4j</name>
+	<description>A Java library for the Facebook Graph API</description>
+	<url>http://facebook4j.org/</url>
+	<licenses>
+		<license>
+			<name>Apache License 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/felipeAndrade0918/facebook4j</url>
+  <connection>scm:git:git://github.com/felipeAndrade0918/facebook4j.git</connection>
+  <developerConnection>scm:git:ssh://git@github.com/felipeAndrade0918/facebook4j.git</developerConnection>
+	</scm>
+	<developers>
+		<developer>
+			<id>roundrop</id>
+			<name>Felipe Andrade</name>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>Gauge - Nexus Releases Repository</name>
+			<url>http://ci.perceptool.com.br:8080/nexus/content/repositories/releases</url>
+			<layout>default</layout>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Gauge - Nexus Snapshots Repository</name>
+			<url>http://ci.perceptool.com.br:8080/nexus/content/repositories/snapshots</url>
+			<layout>default</layout>
+		</snapshotRepository>
+	</distributionManagement>
+	<modules>
+		<module>facebook4j-core</module>
+	</modules>
 </project>
