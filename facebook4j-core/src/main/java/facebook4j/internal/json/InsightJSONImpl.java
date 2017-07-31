@@ -16,14 +16,10 @@
 
 package facebook4j.internal.json;
 
-import facebook4j.FacebookException;
-import facebook4j.Insight;
-import facebook4j.ResponseList;
-import facebook4j.conf.Configuration;
-import facebook4j.internal.http.HttpResponse;
-import facebook4j.internal.org.json.JSONArray;
-import facebook4j.internal.org.json.JSONException;
-import facebook4j.internal.org.json.JSONObject;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getISO8601Datetime;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getLong;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getLongMap;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getRawString;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +28,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+import facebook4j.FacebookException;
+import facebook4j.Insight;
+import facebook4j.ResponseList;
+import facebook4j.conf.Configuration;
+import facebook4j.internal.http.HttpResponse;
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -185,7 +188,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
             ValueEntryJSONImpl(JSONObject json) throws FacebookException {
                 String valueRawString = getRawString("value", json);
-                if (valueRawString.startsWith("{")) {
+                if (valueRawString == null) {
+                	value = null;
+                } else if (valueRawString.startsWith("{")) {
                     value = getLongMap("value", json);
                 } else {
                     value = new HashMap<String, Long>();
