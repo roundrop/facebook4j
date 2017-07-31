@@ -223,7 +223,10 @@ import facebook4j.internal.org.json.JSONObject;
             List<Insight.Value> values = new ArrayList<Insight.Value>(size);
             for (int i = 0; i < size; i++) {
                 Insight.Value value = new ValueJSONImpl(list.getJSONObject(i));
-                values.add(value);
+                
+                if (value != null) {
+                	values.add(value);
+                }
             }
             return values;
         } catch (JSONException jsone) {
