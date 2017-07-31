@@ -189,7 +189,7 @@ import facebook4j.internal.org.json.JSONObject;
             ValueEntryJSONImpl(JSONObject json) throws FacebookException {
                 String valueRawString = getRawString("value", json);
                 if (valueRawString == null) {
-                	value = null;
+                	value = new HashMap<String, Long>();
                 } else if (valueRawString.startsWith("{")) {
                     value = getLongMap("value", json);
                 } else {
