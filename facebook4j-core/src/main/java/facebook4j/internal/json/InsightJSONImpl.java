@@ -114,7 +114,10 @@ import facebook4j.internal.org.json.JSONObject;
                 if (conf.isJSONStoreEnabled()) {
                     DataObjectFactoryUtil.registerJSONObject(insight, insightJSONObject);
                 }
-                insights.add(insight);
+                
+                if (!insight.getValues().isEmpty()) {
+                	insights.add(insight);
+                }
             }
             if (conf.isJSONStoreEnabled()) {
                 DataObjectFactoryUtil.registerJSONObject(insights, list);
@@ -189,7 +192,7 @@ import facebook4j.internal.org.json.JSONObject;
             ValueEntryJSONImpl(JSONObject json) throws FacebookException {
                 String valueRawString = getRawString("value", json);
                 if (valueRawString == null) {
-                	value = new HashMap<String, Long>();
+                	value = null;
                 } else if (valueRawString.startsWith("{")) {
                     value = getLongMap("value", json);
                 } else {
