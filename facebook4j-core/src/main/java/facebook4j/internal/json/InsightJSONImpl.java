@@ -16,14 +16,10 @@
 
 package facebook4j.internal.json;
 
-import facebook4j.FacebookException;
-import facebook4j.Insight;
-import facebook4j.ResponseList;
-import facebook4j.conf.Configuration;
-import facebook4j.internal.http.HttpResponse;
-import facebook4j.internal.org.json.JSONArray;
-import facebook4j.internal.org.json.JSONException;
-import facebook4j.internal.org.json.JSONObject;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getISO8601Datetime;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getLong;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getLongMap;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getRawString;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +28,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+import facebook4j.FacebookException;
+import facebook4j.Insight;
+import facebook4j.ResponseList;
+import facebook4j.conf.Configuration;
+import facebook4j.internal.http.HttpResponse;
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -108,11 +111,14 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             for (int i = 0; i < size; i++) {
                 JSONObject insightJSONObject = list.getJSONObject(i);
                 Insight insight = new InsightJSONImpl(insightJSONObject);
+                
                 if (conf.isJSONStoreEnabled()) {
                     DataObjectFactoryUtil.registerJSONObject(insight, insightJSONObject);
                 }
+                
                 insights.add(insight);
             }
+            
             if (conf.isJSONStoreEnabled()) {
                 DataObjectFactoryUtil.registerJSONObject(insights, list);
             }
@@ -168,6 +174,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         }
 
         public Value.Entry getValue() {
+        	if (value.get() == null) {
+        		return null;
+        	}
+        	
             return value;
         }
 
@@ -185,7 +195,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
             ValueEntryJSONImpl(JSONObject json) throws FacebookException {
                 String valueRawString = getRawString("value", json);
-                if (valueRawString.startsWith("{")) {
+                if (valueRawString == null) {
+                	value = null;
+                } else if (valueRawString.startsWith("{")) {
                     value = getLongMap("value", json);
                 } else {
                     value = new HashMap<String, Long>();
@@ -194,18 +206,34 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             }
 
             public Long get() {
+            	if (value == null) {
+            		return null;
+            	}
+            	
                 return value.values().iterator().next();
             }
 
             public Long get(String key) {
+            	if (value == null) {
+            		return null;
+            	}
+            	
                 return value.get(key);
             }
 
             public Iterator<String> keys() {
+            	if (value == null) {
+            		return null;
+            	}
+            	
                 return value.keySet().iterator();
             }
 
             public int size() {
+            	if (value == null) {
+            		return 0;
+            	}
+            	
                 return value.size();
             }
         }
@@ -218,6 +246,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             List<Insight.Value> values = new ArrayList<Insight.Value>(size);
             for (int i = 0; i < size; i++) {
                 Insight.Value value = new ValueJSONImpl(list.getJSONObject(i));
+                
                 values.add(value);
             }
             return values;
