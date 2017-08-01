@@ -199,14 +199,26 @@ import facebook4j.internal.org.json.JSONObject;
             }
 
             public Long get() {
+            	if (value == null) {
+            		return null;
+            	}
+            	
                 return value.values().iterator().next();
             }
 
             public Long get(String key) {
+            	if (value == null) {
+            		return null;
+            	}
+            	
                 return value.get(key);
             }
 
             public Iterator<String> keys() {
+            	if (value == null) {
+            		return null;
+            	}
+            	
                 return value.keySet().iterator();
             }
 
@@ -224,9 +236,7 @@ import facebook4j.internal.org.json.JSONObject;
             for (int i = 0; i < size; i++) {
                 Insight.Value value = new ValueJSONImpl(list.getJSONObject(i));
                 
-                if (value.getValue() != null) {
-                	values.add(value);
-                }
+                values.add(value);
             }
             return values;
         } catch (JSONException jsone) {
