@@ -114,11 +114,8 @@ import facebook4j.internal.org.json.JSONObject;
                 if (conf.isJSONStoreEnabled()) {
                     DataObjectFactoryUtil.registerJSONObject(insight, insightJSONObject);
                 }
-                
-                if (!insight.getValues().isEmpty()) {
-                	insights.add(insight);
-                }
             }
+            
             if (conf.isJSONStoreEnabled()) {
                 DataObjectFactoryUtil.registerJSONObject(insights, list);
             }
@@ -227,7 +224,7 @@ import facebook4j.internal.org.json.JSONObject;
             for (int i = 0; i < size; i++) {
                 Insight.Value value = new ValueJSONImpl(list.getJSONObject(i));
                 
-                if (value != null) {
+                if (value.getValue() != null) {
                 	values.add(value);
                 }
             }
