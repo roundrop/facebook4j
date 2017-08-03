@@ -223,6 +223,10 @@ import facebook4j.internal.org.json.JSONObject;
             }
 
             public int size() {
+            	if (value == null) {
+            		return 0;
+            	}
+            	
                 return value.size();
             }
         }
