@@ -111,9 +111,12 @@ import facebook4j.internal.org.json.JSONObject;
             for (int i = 0; i < size; i++) {
                 JSONObject insightJSONObject = list.getJSONObject(i);
                 Insight insight = new InsightJSONImpl(insightJSONObject);
+                
                 if (conf.isJSONStoreEnabled()) {
                     DataObjectFactoryUtil.registerJSONObject(insight, insightJSONObject);
                 }
+                
+                insights.add(insight);
             }
             
             if (conf.isJSONStoreEnabled()) {
