@@ -174,6 +174,10 @@ import facebook4j.internal.org.json.JSONObject;
         }
 
         public Value.Entry getValue() {
+        	if (value.get() == null) {
+        		return null;
+        	}
+        	
             return value;
         }
 
