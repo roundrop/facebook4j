@@ -171,6 +171,16 @@
 				</configuration>
 				<version>3.5.1</version>
 			</plugin>
+			
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<goals>deploy</goals>
+					<autoversionsubmodules>true</autoversionsubmodules>
+				</configuration>
+			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
