@@ -163,7 +163,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
 
     public URL getPicture() {
-        return picture.getURL();
+        return picture == null ? null : picture.getURL();
     }
     
     public Picture getPagePicture() {

@@ -1,4 +1,8 @@
 language: java
+addons:
+  apt:
+    packages:
+      - openjdk-6-jdk
 jdk:
   - openjdk6
 cache:
@@ -7,4 +11,4 @@ cache:
 before_script:
   - echo "debug=false" >> facebook4j-core/src/test/resources/test.properties &&  echo "oauth.appId=1" >> facebook4j-core/src/test/resources/test.properties && echo "oauth.appSecret=1" >> facebook4j-core/src/test/resources/test.properties && echo "oauth.accessToken=access_token" >> facebook4j-core/src/test/resources/test.properties
 after_success:
-  - mvn -pl facebook4j-core clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:cobertura
+  - ./mvnw -pl facebook4j-core clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:cobertura
