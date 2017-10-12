@@ -14,7 +14,9 @@
     "id": "19292868552",
     "is_community_page": false,
     "is_published": true,
-    "likes": 3270042,
+    "likes": {
+        "data": []
+    },
     "link": "https://www.facebook.com/FacebookDevelopers",
     "name": "Facebook Developers",
     "parking": {

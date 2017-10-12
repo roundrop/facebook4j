@@ -16,17 +16,10 @@
 
 package facebook4j;
 
-import facebook4j.internal.http.HttpParameter;
 import facebook4j.internal.http.RequestMethod;
-import facebook4j.internal.org.json.JSONArray;
-import facebook4j.internal.org.json.JSONException;
-import facebook4j.internal.org.json.JSONObject;
 import facebook4j.junit.FacebookAPIVersion;
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
-import org.junit.internal.matchers.TypeSafeMatcher;
 import org.junit.runner.RunWith;
 
 import java.io.File;
@@ -90,6 +83,16 @@ public class PageMethodsTest {
         }
 
         @Test
+        public void likes() throws Exception {
+            facebook.setMockJSON("mock_json/page/likes.json");
+            ResponseList<Like> likes = facebook.getPageLikes("10150146071791729");
+
+            assertThat(likes.size(), is(2));
+            assertThat(likes.get(0).getName(), is("Iveta Frybertova"));
+            assertThat(likes.get(1).getName(), is("Adel Youssef Youssef"));
+        }
+
+        @Test
         public void about_and_username() throws Exception {
             facebook.setMockJSON("mock_json/page/platform.json");
             Page actual = facebook.getPage("platform");
@@ -136,6 +139,7 @@ public class PageMethodsTest {
             assertThat(actual.getHours().size(), is(28));
             assertThat(actual.getHours().get("sat_2_close"), is("22:00"));
         }
+        
     }
 
     public static class getPagePictureURL extends MockFacebookTestBase {
