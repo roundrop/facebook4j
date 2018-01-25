@@ -31,12 +31,6 @@ public interface Page {
     String getCategory();
     Boolean isPublished();
     Boolean canPost();
-
-    /**
-     * Number of pages this page likes.
-     * @return
-     */
-    Integer getLikes();
     Place.Location getLocation();
     String getPhone();
     Integer getCheckins();
@@ -64,5 +58,7 @@ public interface Page {
     String getUsername();
     String getMission();
     Map<String,String> getHours();
+
+    PagableList<Like> getLikes();
 
 }
