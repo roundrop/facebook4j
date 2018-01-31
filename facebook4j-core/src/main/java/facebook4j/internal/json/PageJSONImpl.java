@@ -44,7 +44,6 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private URL link;
     private Boolean isPublished;
     private Boolean canPost;
-    private Integer likes;
     private Place.Location location;
     private String phone;
     private Integer checkins;
@@ -62,6 +61,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private String mission;
     private Map<String,String> hours;
 
+    private PagableList<Like> likes;
+    
     /*package*/PageJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
         JSONObject json = res.asJSONObject();
@@ -86,7 +87,24 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             link = getURL("link", json);
             isPublished = getBoolean("is_published", json);
             canPost = getBoolean("can_post", json);
-            likes = getInt("likes", json);
+
+            if (!json.isNull("likes")) {
+                JSONObject likesJSONObject = json.getJSONObject("likes");
+                if (!likesJSONObject.isNull("data")) {
+                    JSONArray list = likesJSONObject.getJSONArray("data");
+                    final int size = list.length();
+                    likes = new PagableListImpl<Like>(size, likesJSONObject);
+                    for (int i = 0; i < size; i++) {
+                        LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
+                        likes.add(like);
+                    }
+                } else {
+                    likes = new PagableListImpl<Like>(1, likesJSONObject);
+                }
+            } else {
+                likes = new PagableListImpl<Like>(0);
+            }
+            
             if (!json.isNull("location")) {
                 JSONObject locationJSONObject = json.getJSONObject("location");
                 location = new PlaceJSONImpl.LocationJSONImpl(locationJSONObject);
@@ -146,7 +164,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return canPost;
     }
 
-    public Integer getLikes() {
+    public PagableList<Like> getLikes() {
         return likes;
     }
 
@@ -163,7 +181,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
 
     public URL getPicture() {
-        return picture.getURL();
+        return picture == null ? null : picture.getURL();
     }
     
     public Picture getPagePicture() {
