@@ -1,0 +1,41 @@
+{
+    "data": [
+        {
+            "description": "Daily: The number of people your Page reached broken down by how many times people saw any content about your Page. (Unique Users)",
+            "id": "137246726435626/insights/page_impressions_frequency_distribution/day",
+            "name": "page_impressions_frequency_distribution",
+            "period": "day",
+            "title": "Daily Total Frequency Distribution",
+            "values": [
+                {"end_time": "2018-04-21T07:00:00+0000"},
+                {"end_time": "2018-04-22T07:00:00+0000"}
+            ]
+        },
+        {
+            "description": "Weekly: The number of people your Page reached broken down by how many times people saw any content about your Page. (Unique Users)",
+            "id": "137246726435626/insights/page_impressions_frequency_distribution/week",
+            "name": "page_impressions_frequency_distribution",
+            "period": "week",
+            "title": "Weekly Total Frequency Distribution",
+            "values": [
+                {"end_time": "2018-04-21T07:00:00+0000"},
+                {"end_time": "2018-04-22T07:00:00+0000"}
+            ]
+        },
+        {
+            "description": "28 Days: The number of people your Page reached broken down by how many times people saw any content about your Page. (Unique Users)",
+            "id": "137246726435626/insights/page_impressions_frequency_distribution/days_28",
+            "name": "page_impressions_frequency_distribution",
+            "period": "days_28",
+            "title": "28 Days Total Frequency Distribution",
+            "values": [
+                {"end_time": "2018-04-21T07:00:00+0000"},
+                {"end_time": "2018-04-22T07:00:00+0000"}
+            ]
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/v2.6/137246726435626/insights?access_token=access_token&metric=page_impressions_frequency_distribution&since=1524380400&until=1524553200",
+        "previous": "https://graph.facebook.com/v2.6/137246726435626/insights?access_token=access_token&metric=page_impressions_frequency_distribution&since=1524034800&until=1524207600"
+    }
+}

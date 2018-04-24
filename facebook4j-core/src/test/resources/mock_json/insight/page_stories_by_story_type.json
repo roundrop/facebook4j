@@ -1,0 +1,119 @@
+{
+    "data": [
+        {
+            "description": "Daily: The number of stories about your Page by story type. (Total Count)",
+            "id": "137246726435626/insights/page_stories_by_story_type/day",
+            "name": "page_stories_by_story_type",
+            "period": "day",
+            "title": "Daily Page Stories By Story Type",
+            "values": [
+                {
+                    "end_time": "2018-04-21T07:00:00+0000",
+                    "value": {
+                        "checkin": 0,
+                        "coupon": 0,
+                        "event": 0,
+                        "fan": 0,
+                        "mention": 0,
+                        "other": 0,
+                        "page post": 0,
+                        "question": 0,
+                        "user post": 1
+                    }
+                },
+                {
+                    "end_time": "2018-04-22T07:00:00+0000",
+                    "value": {
+                        "checkin": 0,
+                        "coupon": 0,
+                        "event": 0,
+                        "fan": 0,
+                        "mention": 0,
+                        "other": 0,
+                        "page post": 0,
+                        "question": 0,
+                        "user post": 0
+                    }
+                }
+            ]
+        },
+        {
+            "description": "Weekly: The number of stories about your Page by story type. (Total Count)",
+            "id": "137246726435626/insights/page_stories_by_story_type/week",
+            "name": "page_stories_by_story_type",
+            "period": "week",
+            "title": "Weekly Page Stories By Story Type",
+            "values": [
+                {
+                    "end_time": "2018-04-21T07:00:00+0000",
+                    "value": {
+                        "checkin": 0,
+                        "coupon": 0,
+                        "event": 0,
+                        "fan": 0,
+                        "mention": 0,
+                        "other": 0,
+                        "page post": 0,
+                        "question": 0,
+                        "user post": 0
+                    }
+                },
+                {
+                    "end_time": "2018-04-22T07:00:00+0000",
+                    "value": {
+                        "checkin": 0,
+                        "coupon": 0,
+                        "event": 0,
+                        "fan": 0,
+                        "mention": 0,
+                        "other": 0,
+                        "page post": 0,
+                        "question": 0,
+                        "user post": 0
+                    }
+                }
+            ]
+        },
+        {
+            "description": "28 Days: The number of stories about your Page by story type. (Total Count)",
+            "id": "137246726435626/insights/page_stories_by_story_type/days_28",
+            "name": "page_stories_by_story_type",
+            "period": "days_28",
+            "title": "28 Days Page Stories By Story Type",
+            "values": [
+                {
+                    "end_time": "2018-04-21T07:00:00+0000",
+                    "value": {
+                        "checkin": 0,
+                        "coupon": 0,
+                        "event": 0,
+                        "fan": 0,
+                        "mention": 0,
+                        "other": 0,
+                        "page post": 0,
+                        "question": 0,
+                        "user post": 0
+                    }
+                },
+                {
+                    "end_time": "2018-04-22T07:00:00+0000",
+                    "value": {
+                        "checkin": 0,
+                        "coupon": 0,
+                        "event": 0,
+                        "fan": 0,
+                        "mention": 0,
+                        "other": 0,
+                        "page post": 0,
+                        "question": 0,
+                        "user post": 0
+                    }
+                }
+            ]
+        }
+    ],
+    "paging": {
+        "next": "https://graph.facebook.com/v2.6/137246726435626/insights?access_token=access_token&metric=page_stories_by_story_type&since=1524380400&until=1524553200",
+        "previous": "https://graph.facebook.com/v2.6/137246726435626/insights?access_token=access_token&metric=page_stories_by_story_type&since=1524034800&until=1524207600"
+    }
+}
