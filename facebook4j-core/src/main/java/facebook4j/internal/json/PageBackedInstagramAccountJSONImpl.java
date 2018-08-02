@@ -66,4 +66,11 @@ final class PageBackedInstagramAccountJSONImpl extends FacebookResponseImpl impl
 		return mediaCount;
 	}
 
+	@Override
+	public String toString() {
+		return "PageBackedInstagramAccountJSONImpl [id=" + id + ", profilePic=" + profilePic + ", username=" + username
+				+ ", followCount=" + followCount + ", followedByCount=" + followedByCount + ", mediaCount=" + mediaCount
+				+ "]";
+	}
+	
 }
