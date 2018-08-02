@@ -60,5 +60,6 @@ public interface Page {
     Map<String,String> getHours();
 
     PagableList<Like> getLikes();
+    PagableList<PageBackedInstagramAccount> getPageBackedInstagramAccounts();
 
 }

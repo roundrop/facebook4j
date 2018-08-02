@@ -28,20 +28,15 @@ import java.util.Date;
 import java.util.Map;
 
 import facebook4j.Cover;
-import facebook4j.Facebook;
 import facebook4j.FacebookException;
-import facebook4j.FacebookFactory;
 import facebook4j.Like;
 import facebook4j.PagableList;
 import facebook4j.Page;
 import facebook4j.PageBackedInstagramAccount;
 import facebook4j.Picture;
 import facebook4j.Place;
-import facebook4j.Reading;
 import facebook4j.ResponseList;
-import facebook4j.auth.AccessToken;
 import facebook4j.conf.Configuration;
-import facebook4j.conf.ConfigurationBuilder;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
@@ -142,7 +137,7 @@ import facebook4j.internal.org.json.JSONObject;
             throw new FacebookException(jsone.getMessage(), jsone);
         }
     }
-
+    
 	private void populatePageBackedInstagramAccounts(JSONObject json) throws JSONException, FacebookException {
 		if (!json.isNull("page_backed_instagram_accounts")) {
 			JSONObject pageBackedInstagramAccountJSONObject = json.getJSONObject("page_backed_instagram_accounts");
@@ -213,6 +208,10 @@ import facebook4j.internal.org.json.JSONObject;
 
     public PagableList<Like> getLikes() {
         return likes;
+    }
+    
+    public PagableList<PageBackedInstagramAccount> getPageBackedInstagramAccounts() {
+    	return pageBackedInstagramAccounts;
     }
 
     public Place.Location getLocation() {
