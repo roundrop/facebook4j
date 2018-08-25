@@ -185,22 +185,22 @@ public class z_F4JInternalParseUtilTest {
     public static class getURL extends FacebookTestBase {
         @Test
         public void url() throws Exception {
-            JSONObject json = new JSONObject("{\"url\": \"http://facebook4j.org\"}");
+            JSONObject json = new JSONObject("{\"url\": \"https://facebook4j.github.io\"}");
             URL actual = z_F4JInternalParseUtil.getURL("url", json);
             assertThat(actual, is(notNullValue()));
             assertThat(actual, instanceOf(URL.class));
-            assertThat(actual.toString(), is("http://facebook4j.org"));
+            assertThat(actual.toString(), is("https://facebook4j.github.io"));
         }
     }
 
     public static class getURI extends FacebookTestBase {
         @Test
         public void uri() throws Exception {
-            JSONObject json = new JSONObject("{\"uri\": \"http://facebook4j.org\"}");
+            JSONObject json = new JSONObject("{\"uri\": \"https://facebook4j.github.io\"}");
             URI actual = z_F4JInternalParseUtil.getURI("uri", json);
             assertThat(actual, is(notNullValue()));
             assertThat(actual, instanceOf(URI.class));
-            assertThat(actual.toString(), is("http://facebook4j.org"));
+            assertThat(actual.toString(), is("https://facebook4j.github.io"));
         }
     }
 

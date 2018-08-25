@@ -247,7 +247,7 @@ public class PageMethodsTest {
             assertThat(actual7.getApplication().getName(), is("Graph API Explorer"));
             assertThat(actual7.getTargeting().getCountries().get(0), is("US"));
             assertThat(actual7.getTargeting().getCountries().get(1), is("GB"));
-            assertThat(actual7.getLink().toString(), is("http://facebook4j.org/"));
+            assertThat(actual7.getLink().toString(), is("https://facebook4j.github.io/"));
             assertThat(actual7.getPrivacy().getNetworks().size(), is(0));
             assertThat(actual7.getPrivacy().getFriends(), is(PrivacyType.EMPTY));
             assertThat(actual7.getPrivacy().getAllow().size(), is(0));
@@ -361,7 +361,7 @@ public class PageMethodsTest {
             assertThat(actual7.getApplication().getName(), is("Graph API Explorer"));
             assertThat(actual7.getTargeting().getCountries().get(0), is("US"));
             assertThat(actual7.getTargeting().getCountries().get(1), is("GB"));
-            assertThat(actual7.getLink().toString(), is("http://facebook4j.org/"));
+            assertThat(actual7.getLink().toString(), is("https://facebook4j.github.io/"));
             assertThat(actual7.getPrivacy().getNetworks().size(), is(0));
             assertThat(actual7.getPrivacy().getFriends(), is(PrivacyType.EMPTY));
             assertThat(actual7.getPrivacy().getAllow().size(), is(0));
@@ -426,7 +426,7 @@ public class PageMethodsTest {
                                             "This library provides the ease of use like Twitter4J.\n" +
                                             "Facebook4J is an unofficial library.")
                                     .generalInfo("Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0.")
-                                    .website("http://facebook4j.org")
+                                    .website("https://facebook4j.github.io")
                                     .phone("");
             boolean actual = facebook.updatePageBasicAttributes(pageUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
@@ -436,7 +436,7 @@ public class PageMethodsTest {
                                                                         "This library provides the ease of use like Twitter4J.\n" +
                                                                         "Facebook4J is an unofficial library."));
             assertThat(facebook.getHttpParameters(), hasPostParameter("general_info", "Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0."));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("website", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("website", "https://facebook4j.github.io"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("phone", ""));
 
             assertThat(actual, is(true));
@@ -451,7 +451,7 @@ public class PageMethodsTest {
                                             "This library provides the ease of use like Twitter4J.\n" +
                                             "Facebook4J is an unofficial library.")
                                     .generalInfo("Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0.")
-                                    .website("http://facebook4j.org")
+                                    .website("https://facebook4j.github.io")
                                     .phone("");
             boolean actual = facebook.updatePageBasicAttributes("137246726435626", pageUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
@@ -461,7 +461,7 @@ public class PageMethodsTest {
                                                                         "This library provides the ease of use like Twitter4J.\n" +
                                                                         "Facebook4J is an unofficial library."));
             assertThat(facebook.getHttpParameters(), hasPostParameter("general_info", "Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0."));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("website", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("website", "https://facebook4j.github.io"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("phone", ""));
 
             assertThat(actual, is(true));
@@ -477,7 +477,7 @@ public class PageMethodsTest {
                                             "This library provides the ease of use like Twitter4J.\n" +
                                             "Facebook4J is an unofficial library.")
                                     .generalInfo("Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0.")
-                                    .website("http://facebook4j.org")
+                                    .website("https://facebook4j.github.io")
                                     .phone("");
             boolean actual = facebook.updatePageBasicAttributes("137246726435626", pageUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
@@ -487,7 +487,7 @@ public class PageMethodsTest {
                                                                         "This library provides the ease of use like Twitter4J.\n" +
                                                                         "Facebook4J is an unofficial library."));
             assertThat(facebook.getHttpParameters(), hasPostParameter("general_info", "Facebook4J is an unofficial Java library for the Facebook Graph API which is released under the Apache License 2.0."));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("website", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("website", "https://facebook4j.github.io"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("phone", ""));
 
             assertThat(actual, is(true));
@@ -498,7 +498,7 @@ public class PageMethodsTest {
         @Test
         public void me_url() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
-            boolean actual = facebook.updatePageProfilePhoto(new URL("http://facebook4j.org/images/ogp.png"));
+            boolean actual = facebook.updatePageProfilePhoto(new URL("https://facebook4j.github.io/images/ogp.png"));
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/me/picture")));
 
@@ -508,7 +508,7 @@ public class PageMethodsTest {
         @Test
         public void id_url() throws Exception {
             facebook.setMockJSON("mock_json/true.json");
-            boolean actual = facebook.updatePageProfilePhoto("137246726435626", new URL("http://facebook4j.org/images/ogp.png"));
+            boolean actual = facebook.updatePageProfilePhoto("137246726435626", new URL("https://facebook4j.github.io/images/ogp.png"));
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/137246726435626/picture")));
 
@@ -1572,10 +1572,10 @@ public class PageMethodsTest {
             assertThat(offer.getCreatedTime(), is(iso8601DateOf("2013-06-27T19:00:00+0000")));
             assertThat(offer.getExpirationTime(), is(iso8601DateOf("2014-03-31T12:30:00+0000")));
             assertThat(offer.getTerms(), is("The description of the terms under which the offer can be claimed"));
-            assertThat(offer.getImageURL().toString(), is("http://facebook4j.org/image.png"));
+            assertThat(offer.getImageURL().toString(), is("https://facebook4j.github.io/image.png"));
             assertThat(offer.getClaimLimit(), is(300));
             assertThat(offer.getCouponType(), is("online_only"));
-            assertThat(offer.getRedemptionLink().toString(), is("http://facebook4j.org/redemption"));
+            assertThat(offer.getRedemptionLink().toString(), is("https://facebook4j.github.io/redemption"));
             assertThat(offer.getRedemptionCode(), is("998877"));
             assertThat(offer.isPublished(), is(true));
             assertThat(offer.getScheduledPublishTime(), is(1372331021));
@@ -1601,10 +1601,10 @@ public class PageMethodsTest {
             assertThat(offer.getCreatedTime(), is(iso8601DateOf("2013-06-27T19:00:00+0000")));
             assertThat(offer.getExpirationTime(), is(iso8601DateOf("2014-03-31T12:30:00+0000")));
             assertThat(offer.getTerms(), is("The description of the terms under which the offer can be claimed"));
-            assertThat(offer.getImageURL().toString(), is("http://facebook4j.org/image.png"));
+            assertThat(offer.getImageURL().toString(), is("https://facebook4j.github.io/image.png"));
             assertThat(offer.getClaimLimit(), is(300));
             assertThat(offer.getCouponType(), is("online_only"));
-            assertThat(offer.getRedemptionLink().toString(), is("http://facebook4j.org/redemption"));
+            assertThat(offer.getRedemptionLink().toString(), is("https://facebook4j.github.io/redemption"));
             assertThat(offer.getRedemptionCode(), is("998877"));
             assertThat(offer.isPublished(), is(true));
             assertThat(offer.getScheduledPublishTime(), is(1372331021));
@@ -1629,10 +1629,10 @@ public class PageMethodsTest {
             assertThat(offer.getCreatedTime(), is(iso8601DateOf("2013-06-27T19:00:00+0000")));
             assertThat(offer.getExpirationTime(), is(iso8601DateOf("2014-03-31T12:30:00+0000")));
             assertThat(offer.getTerms(), is("The description of the terms under which the offer can be claimed"));
-            assertThat(offer.getImageURL().toString(), is("http://facebook4j.org/image.png"));
+            assertThat(offer.getImageURL().toString(), is("https://facebook4j.github.io/image.png"));
             assertThat(offer.getClaimLimit(), is(300));
             assertThat(offer.getCouponType(), is("online_only"));
-            assertThat(offer.getRedemptionLink().toString(), is("http://facebook4j.org/redemption"));
+            assertThat(offer.getRedemptionLink().toString(), is("https://facebook4j.github.io/redemption"));
             assertThat(offer.getRedemptionCode(), is("998877"));
             assertThat(offer.isPublished(), is(true));
             assertThat(offer.getScheduledPublishTime(), is(1372331021));
@@ -1658,10 +1658,10 @@ public class PageMethodsTest {
             assertThat(offer.getCreatedTime(), is(iso8601DateOf("2013-06-27T19:00:00+0000")));
             assertThat(offer.getExpirationTime(), is(iso8601DateOf("2014-03-31T12:30:00+0000")));
             assertThat(offer.getTerms(), is("The description of the terms under which the offer can be claimed"));
-            assertThat(offer.getImageURL().toString(), is("http://facebook4j.org/image.png"));
+            assertThat(offer.getImageURL().toString(), is("https://facebook4j.github.io/image.png"));
             assertThat(offer.getClaimLimit(), is(300));
             assertThat(offer.getCouponType(), is("online_only"));
-            assertThat(offer.getRedemptionLink().toString(), is("http://facebook4j.org/redemption"));
+            assertThat(offer.getRedemptionLink().toString(), is("https://facebook4j.github.io/redemption"));
             assertThat(offer.getRedemptionCode(), is("998877"));
             assertThat(offer.isPublished(), is(true));
             assertThat(offer.getScheduledPublishTime(), is(1372331021));
@@ -1731,12 +1731,12 @@ public class PageMethodsTest {
                                       .title("title")
                                       .expirationTime(createCal(2013, 6, 27, 19, 0, 0))
                                       .terms("terms")
-                                      .imageURL(new URL("http://facebook4j.org/image_url"))
+                                      .imageURL(new URL("https://facebook4j.github.io/image_url"))
                                       .claimLimit(300)
                                       .couponType("online_only")
                                       .qrcode("qrcode")
                                       .barcode("barcode")
-                                      .redemptionLink(new URL("http://facebook4j.org/redemption_link"))
+                                      .redemptionLink(new URL("https://facebook4j.github.io/redemption_link"))
                                       .redemptionCode("redemption_code")
                                       .isPublished(true)
                                       .scheduledPublishTime(1372331021)
@@ -1747,12 +1747,12 @@ public class PageMethodsTest {
             assertThat(facebook.getHttpParameters(), hasPostParameter("title", "title"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("expiration_time", "2013-06-27T19:00:00+0000"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("terms", "terms"));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("image_url", "http://facebook4j.org/image_url"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("image_url", "https://facebook4j.github.io/image_url"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("claim_limit", "300"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("coupon_type", "online_only"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("qrcode", "qrcode"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("barcode", "barcode"));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_link", "http://facebook4j.org/redemption_link"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_link", "https://facebook4j.github.io/redemption_link"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_code", "redemption_code"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("published", "true"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("scheduled_publish_time", "1372331021"));
@@ -1768,12 +1768,12 @@ public class PageMethodsTest {
                                       .title("title")
                                       .expirationTime(createCal(2013, 6, 27, 19, 0, 0))
                                       .terms("terms")
-                                      .imageURL(new URL("http://facebook4j.org/image_url"))
+                                      .imageURL(new URL("https://facebook4j.github.io/image_url"))
                                       .claimLimit(300)
                                       .couponType("online_only")
                                       .qrcode("qrcode")
                                       .barcode("barcode")
-                                      .redemptionLink(new URL("http://facebook4j.org/redemption_link"))
+                                      .redemptionLink(new URL("https://facebook4j.github.io/redemption_link"))
                                       .redemptionCode("redemption_code")
                                       .isPublished(true)
                                       .scheduledPublishTime(1372331021)
@@ -1784,12 +1784,12 @@ public class PageMethodsTest {
             assertThat(facebook.getHttpParameters(), hasPostParameter("title", "title"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("expiration_time", "2013-06-27T19:00:00+0000"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("terms", "terms"));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("image_url", "http://facebook4j.org/image_url"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("image_url", "https://facebook4j.github.io/image_url"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("claim_limit", "300"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("coupon_type", "online_only"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("qrcode", "qrcode"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("barcode", "barcode"));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_link", "http://facebook4j.org/redemption_link"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_link", "https://facebook4j.github.io/redemption_link"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_code", "redemption_code"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("published", "true"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("scheduled_publish_time", "1372331021"));
@@ -1810,7 +1810,7 @@ public class PageMethodsTest {
                                       .couponType("online_only")
                                       .qrcode("qrcode")
                                       .barcode("barcode")
-                                      .redemptionLink(new URL("http://facebook4j.org/redemption_link"))
+                                      .redemptionLink(new URL("https://facebook4j.github.io/redemption_link"))
                                       .redemptionCode("redemption_code")
                                       .isPublished(true)
                                       .scheduledPublishTime(new Date(1372331021000L))
@@ -1825,7 +1825,7 @@ public class PageMethodsTest {
             assertThat(facebook.getHttpParameters(), hasPostParameter("coupon_type", "online_only"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("qrcode", "qrcode"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("barcode", "barcode"));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_link", "http://facebook4j.org/redemption_link"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_link", "https://facebook4j.github.io/redemption_link"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("redemption_code", "redemption_code"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("published", "true"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("scheduled_publish_time", "1372331021"));
@@ -1876,10 +1876,10 @@ public class PageMethodsTest {
             assertThat(actual.getFrom().getCategory(), is("Page Category"));
             assertThat(actual.getFrom().getName(), is("Page Name"));
             assertThat(actual.getExpirationTime(), is(iso8601DateOf("2014-03-31T12:30:00+0000")));
-            assertThat(actual.getRedemptionLink().toString(), is("http://facebook4j.org/redemption"));
+            assertThat(actual.getRedemptionLink().toString(), is("https://facebook4j.github.io/redemption"));
             assertThat(actual.getId(), is("11111111"));
             assertThat(actual.getTitle(), is("The title of the Offer"));
-            assertThat(actual.getImageURL().toString(), is("http://facebook4j.org/image.png"));
+            assertThat(actual.getImageURL().toString(), is("https://facebook4j.github.io/image.png"));
             assertThat(actual.getCreatedTime(), is(iso8601DateOf("2013-06-27T19:00:00+0000")));
             assertThat(actual.isPublished(), is(true));
         }

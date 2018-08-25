@@ -16,7 +16,7 @@ Facebook4J is a Facebook Graph API binding library for the Java language license
 
 ## Code Examples
 
-Please see [http://facebook4j.org/en/code-examples.html](http://facebook4j.org/en/code-examples.html) for complete documentation.
+Please see [https://facebook4j.github.io/en/code-examples.html](https://facebook4j.github.io/en/code-examples.html) for complete documentation.
 
 ### Getting Facebook Instance
 At first it is necessary to acquire Facebook instance to use Facebook4J.  
@@ -27,7 +27,7 @@ Facebook facebook = new FacebookFactory().getInstance();
 ```
 
 If App ID / App Secret / access token / access permission are listed in facebook4j.properties then, they are set in Facebook instance given back.  
-See [Configuration | Facebook4J - A Java library for the Facebook Graph API](http://facebook4j.org/en/configuration.html) for the detail.  
+See [Configuration | Facebook4J - A Java library for the Facebook Graph API](https://facebook4j.github.io/en/configuration.html) for the detail.  
 When they are not listed, it is setable later as follows:
 
 ```java
@@ -90,8 +90,8 @@ facebook.postStatusMessage("Hello World from Facebook4J.");
 You can publish a link via Facebook.postFeed() method.
 
 ```java
-PostUpdate post = new PostUpdate(new URL("http://facebook4j.org"))
-                    .picture(new URL("http://facebook4j.org/images/hero.png"))
+PostUpdate post = new PostUpdate(new URL("https://facebook4j.github.io"))
+                    .picture(new URL("https://facebook4j.github.io/images/hero.png"))
                     .name("Facebook4J - A Java library for the Facebook Graph API")
                     .caption("facebook4j.org")
                     .description("Facebook4J is a Java library for the Facebook Graph API.");
@@ -101,8 +101,8 @@ facebook.postFeed(post);
 Facebook.postLink() method is simple way to post.
 
 ```java
-facebook.postLink(new URL("http://facebook4j.org"));
-facebook.postLink(new URL("http://facebook4j.org"), "A Java library for the Facebook Graph API");
+facebook.postLink(new URL("https://facebook4j.github.io"));
+facebook.postLink(new URL("https://facebook4j.github.io"), "A Java library for the Facebook Graph API");
 ```
 
 - - -
@@ -344,7 +344,7 @@ page1 = facebook.fetchPrevious(paging2);
 ```
 
 ## Official Web Site
-see: [http://facebook4j.org](http://facebook4j.org)
+see: [https://facebook4j.github.io](https://facebook4j.github.io)
 
 ## License
 Facebook4J is released under Apache License 2.0.

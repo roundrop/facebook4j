@@ -17,7 +17,7 @@ public class URLMatchersTest {
 
         @Test
         public void url() throws Exception {
-            URL url = new URL("http://facebook4j.org/foo/bar");
+            URL url = new URL("https://facebook4j.github.io/foo/bar");
             assertThat(url, is(pathOf("/foo/bar")));
 
             assertThat(url, is(not(pathOf("/foo/bar/"))));
@@ -38,7 +38,7 @@ public class URLMatchersTest {
 
         @Test
         public void url() throws Exception {
-            URL url = new URL("http://facebook4j.org/foo/bar?p1=v1&p2=v2");
+            URL url = new URL("https://facebook4j.github.io/foo/bar?p1=v1&p2=v2");
             assertThat(url, hasParameter("p1", "v1"));
             assertThat(url, hasParameter("p2", "v2"));
 

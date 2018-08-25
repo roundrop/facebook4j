@@ -73,7 +73,7 @@ public class BatchRequestsMethodsTest {
             assertThat(user.getHometown().getName(), is("Hiroshima-shi, Hiroshima, Japan"));
             assertThat(user.getLocation().getId(), is("163173617067956"));
             assertThat(user.getLocation().getName(), is("Yokohama-shi, Kanagawa, Japan"));
-            assertThat(user.getBio(), is("Facebook4J: http://facebook4j.org"));
+            assertThat(user.getBio(), is("Facebook4J: https://facebook4j.github.io"));
             assertThat(user.getWork().size(), is(2));
             assertThat(user.getWork().get(0).getEmployer().getId(), is("20000000000000001"));
             assertThat(user.getWork().get(0).getEmployer().getName(), is("company1"));

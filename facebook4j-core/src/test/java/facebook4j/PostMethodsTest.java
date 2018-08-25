@@ -946,11 +946,11 @@ public class PostMethodsTest extends MockFacebookTestBase {
         @Test
         public void id_onlyURL() throws Exception {
             facebook.setMockJSON("mock_json/post_id.json");
-            PostUpdate postUpdate = new PostUpdate(new URL("http://facebook4j.org"));
+            PostUpdate postUpdate = new PostUpdate(new URL("https://facebook4j.github.io"));
             String actual = facebook.postFeed("21212121212121", postUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/21212121212121/feed")));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "https://facebook4j.github.io"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
         }
@@ -958,16 +958,16 @@ public class PostMethodsTest extends MockFacebookTestBase {
         @Test
         public void share() throws Exception {
             facebook.setMockJSON("mock_json/post_id.json");
-            PostUpdate postUpdate = new PostUpdate(new URL("http://facebook4j.org"))
-                    .picture(new URL("http://facebook4j.org/images/hero.png"))
+            PostUpdate postUpdate = new PostUpdate(new URL("https://facebook4j.github.io"))
+                    .picture(new URL("https://facebook4j.github.io/images/hero.png"))
                     .name("Facebook4J - A Java library for the Facebook Graph API")
                     .caption("facebook4j.org")
                     .description("Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library.");
             String actual = facebook.postFeed(postUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/me/feed")));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://facebook4j.org"));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("picture", "http://facebook4j.org/images/hero.png"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "https://facebook4j.github.io"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("picture", "https://facebook4j.github.io/images/hero.png"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("name", "Facebook4J - A Java library for the Facebook Graph API"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("caption", "facebook4j.org"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("description", "Facebook4J is a Java library for the Facebook Graph API. This library provides the ease of use like Twitter4J. Facebook4J is an unofficial library."));
@@ -998,10 +998,10 @@ public class PostMethodsTest extends MockFacebookTestBase {
         @Test
         public void me_onlyLink() throws Exception {
             facebook.setMockJSON("mock_json/post_id.json");
-            String actual = facebook.postLink(new URL("http://facebook4j.org"));
+            String actual = facebook.postLink(new URL("https://facebook4j.github.io"));
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/me/feed")));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "https://facebook4j.github.io"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
         }
@@ -1009,10 +1009,10 @@ public class PostMethodsTest extends MockFacebookTestBase {
         @Test
         public void me_withMessage() throws Exception {
             facebook.setMockJSON("mock_json/post_id.json");
-            String actual = facebook.postLink(new URL("http://facebook4j.org"), "The best Facebook API wrapper!");
+            String actual = facebook.postLink(new URL("https://facebook4j.github.io"), "The best Facebook API wrapper!");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/me/feed")));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "https://facebook4j.github.io"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("message", "The best Facebook API wrapper!"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
@@ -1021,10 +1021,10 @@ public class PostMethodsTest extends MockFacebookTestBase {
         @Test
         public void id_onlyLink() throws Exception {
             facebook.setMockJSON("mock_json/post_id.json");
-            String actual = facebook.postLink("21212121212121", new URL("http://facebook4j.org"));
+            String actual = facebook.postLink("21212121212121", new URL("https://facebook4j.github.io"));
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/21212121212121/feed")));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "https://facebook4j.github.io"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
         }
@@ -1032,10 +1032,10 @@ public class PostMethodsTest extends MockFacebookTestBase {
         @Test
         public void id_withMessage() throws Exception {
             facebook.setMockJSON("mock_json/post_id.json");
-            String actual = facebook.postLink("21212121212121", new URL("http://facebook4j.org"), "The best Facebook API wrapper!");
+            String actual = facebook.postLink("21212121212121", new URL("https://facebook4j.github.io"), "The best Facebook API wrapper!");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/21212121212121/feed")));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "https://facebook4j.github.io"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("message", "The best Facebook API wrapper!"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
