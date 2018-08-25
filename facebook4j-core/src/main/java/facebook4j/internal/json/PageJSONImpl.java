@@ -16,31 +16,18 @@
 
 package facebook4j.internal.json;
 
-import static facebook4j.internal.util.z_F4JInternalParseUtil.getBoolean;
-import static facebook4j.internal.util.z_F4JInternalParseUtil.getISO8601Datetime;
-import static facebook4j.internal.util.z_F4JInternalParseUtil.getInt;
-import static facebook4j.internal.util.z_F4JInternalParseUtil.getRawString;
-import static facebook4j.internal.util.z_F4JInternalParseUtil.getStringMap;
-import static facebook4j.internal.util.z_F4JInternalParseUtil.getURL;
-
-import java.net.URL;
-import java.util.Date;
-import java.util.Map;
-
-import facebook4j.Cover;
-import facebook4j.FacebookException;
-import facebook4j.Like;
-import facebook4j.PagableList;
-import facebook4j.Page;
-import facebook4j.PageBackedInstagramAccount;
-import facebook4j.Picture;
-import facebook4j.Place;
-import facebook4j.ResponseList;
+import facebook4j.*;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
+
+import java.net.URL;
+import java.util.Date;
+import java.util.Map;
+
+import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -72,12 +59,12 @@ import facebook4j.internal.org.json.JSONObject;
     private String about;
     private String username;
     private String mission;
-    private Map<String,String> hours;
+    private Map<String, String> hours;
 
     private PagableList<Like> likes;
-    
+
     private PagableList<PageBackedInstagramAccount> pageBackedInstagramAccounts;
-    
+
     /*package*/PageJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
         JSONObject json = res.asJSONObject();
@@ -92,7 +79,7 @@ import facebook4j.internal.org.json.JSONObject;
         super();
         init(json);
     }
-    
+
     private void init(JSONObject json) throws FacebookException {
         id = getRawString("id", json);
         name = getRawString("name", json);
@@ -102,11 +89,11 @@ import facebook4j.internal.org.json.JSONObject;
             link = getURL("link", json);
             isPublished = getBoolean("is_published", json);
             canPost = getBoolean("can_post", json);
-            
+
             populatePageBackedInstagramAccounts(json);
-            
+
             populateLikes(json);
-            
+
             if (!json.isNull("location")) {
                 JSONObject locationJSONObject = json.getJSONObject("location");
                 location = new PlaceJSONImpl.LocationJSONImpl(locationJSONObject);
@@ -137,50 +124,51 @@ import facebook4j.internal.org.json.JSONObject;
             throw new FacebookException(jsone.getMessage(), jsone);
         }
     }
-    
-	private void populatePageBackedInstagramAccounts(JSONObject json) throws JSONException, FacebookException {
-		if (!json.isNull("page_backed_instagram_accounts")) {
-			JSONObject pageBackedInstagramAccountJSONObject = json.getJSONObject("page_backed_instagram_accounts");
-			
-			if (!pageBackedInstagramAccountJSONObject.isNull("data")) {
-				JSONArray list = pageBackedInstagramAccountJSONObject.getJSONArray("data");
-		        final int size = list.length();
-		        pageBackedInstagramAccounts = new PagableListImpl<PageBackedInstagramAccount>(size, pageBackedInstagramAccountJSONObject);
-		        
-		        for (int i = 0; i < size; i++) {
-		        	PageBackedInstagramAccount pageBackedInstagramAccount = new PageBackedInstagramAccountJSONImpl(list.getJSONObject(i));
-		        	pageBackedInstagramAccounts.add(pageBackedInstagramAccount);
-		        }
-			} else {
-				pageBackedInstagramAccounts = new PagableListImpl<PageBackedInstagramAccount>(1, pageBackedInstagramAccountJSONObject);
-		    }
-		} else {
-			pageBackedInstagramAccounts = new PagableListImpl<PageBackedInstagramAccount>(0);
-		}
-	}
 
-	private void populateLikes(JSONObject json) throws JSONException, FacebookException {
-		if (!json.isNull("likes")) {
-		    JSONObject likesJSONObject = json.getJSONObject("likes");
-		    if (!likesJSONObject.isNull("data")) {
-		        JSONArray list = likesJSONObject.getJSONArray("data");
-		        final int size = list.length();
-		        likes = new PagableListImpl<Like>(size, likesJSONObject);
-		        for (int i = 0; i < size; i++) {
-		            LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
-		            likes.add(like);
-		        }
-		    } else {
-		        likes = new PagableListImpl<Like>(1, likesJSONObject);
-		    }
-		} else {
-		    likes = new PagableListImpl<Like>(0);
-		}
-	}
+    private void populatePageBackedInstagramAccounts(JSONObject json) throws JSONException, FacebookException {
+        if (!json.isNull("page_backed_instagram_accounts")) {
+            JSONObject pageBackedInstagramAccountJSONObject = json.getJSONObject("page_backed_instagram_accounts");
+
+            if (!pageBackedInstagramAccountJSONObject.isNull("data")) {
+                JSONArray list = pageBackedInstagramAccountJSONObject.getJSONArray("data");
+                final int size = list.length();
+                pageBackedInstagramAccounts = new PagableListImpl<PageBackedInstagramAccount>(size, pageBackedInstagramAccountJSONObject);
+
+                for (int i = 0; i < size; i++) {
+                    PageBackedInstagramAccount pageBackedInstagramAccount = new PageBackedInstagramAccountJSONImpl(list.getJSONObject(i));
+                    pageBackedInstagramAccounts.add(pageBackedInstagramAccount);
+                }
+            } else {
+                pageBackedInstagramAccounts = new PagableListImpl<PageBackedInstagramAccount>(1, pageBackedInstagramAccountJSONObject);
+            }
+        } else {
+            pageBackedInstagramAccounts = new PagableListImpl<PageBackedInstagramAccount>(0);
+        }
+    }
+
+    private void populateLikes(JSONObject json) throws JSONException, FacebookException {
+        if (!json.isNull("likes")) {
+            JSONObject likesJSONObject = json.getJSONObject("likes");
+            if (!likesJSONObject.isNull("data")) {
+                JSONArray list = likesJSONObject.getJSONArray("data");
+                final int size = list.length();
+                likes = new PagableListImpl<Like>(size, likesJSONObject);
+                for (int i = 0; i < size; i++) {
+                    LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
+                    likes.add(like);
+                }
+            } else {
+                likes = new PagableListImpl<Like>(1, likesJSONObject);
+            }
+        } else {
+            likes = new PagableListImpl<Like>(0);
+        }
+    }
 
     public String getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
@@ -209,9 +197,9 @@ import facebook4j.internal.org.json.JSONObject;
     public PagableList<Like> getLikes() {
         return likes;
     }
-    
+
     public PagableList<PageBackedInstagramAccount> getPageBackedInstagramAccounts() {
-    	return pageBackedInstagramAccounts;
+        return pageBackedInstagramAccounts;
     }
 
     public Place.Location getLocation() {
@@ -229,7 +217,7 @@ import facebook4j.internal.org.json.JSONObject;
     public URL getPicture() {
         return picture == null ? null : picture.getURL();
     }
-    
+
     public Picture getPagePicture() {
         return picture;
     }
@@ -249,7 +237,7 @@ import facebook4j.internal.org.json.JSONObject;
     public Integer getTalkingAboutCount() {
         return talkingAboutCount;
     }
-    
+
     public String getAccessToken() {
         return accessToken;
     }
@@ -278,7 +266,7 @@ import facebook4j.internal.org.json.JSONObject;
         return mission;
     }
 
-    public Map<String,String> getHours() {
+    public Map<String, String> getHours() {
         return hours;
     }
 
@@ -324,18 +312,32 @@ import facebook4j.internal.org.json.JSONObject;
 
     @Override
     public String toString() {
-        return "PageJSONImpl [link=" + link + ", isPublished=" + isPublished
-                + ", canPost=" + canPost + ", likes=" + likes + ", location="
-                + location + ", phone=" + phone + ", checkins=" + checkins
-                + ", picture=" + picture + ", cover=" + cover + ", website=" + website
-                + ", companyOverview=" + companyOverview + ", talkingAboutCount=" + talkingAboutCount
-                + ", accessToken=" + accessToken + ", isCommunityPage="
-                + isCommunityPage + ", wereHereCount=" + wereHereCount
-                + ", fanCount=" + fanCount
-                + ", id=" + id + ", name=" + name + ", category=" + category
-                + ", createdTime=" + createdTime + ", about=" + about
-                + ", username=" + username + ", mission=" + mission
-                + ", hours=" + hours +"]";
+        return "PageJSONImpl{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", createdTime=" + createdTime +
+                ", link=" + link +
+                ", isPublished=" + isPublished +
+                ", canPost=" + canPost +
+                ", location=" + location +
+                ", phone='" + phone + '\'' +
+                ", checkins=" + checkins +
+                ", picture=" + picture +
+                ", cover=" + cover +
+                ", website='" + website + '\'' +
+                ", companyOverview='" + companyOverview + '\'' +
+                ", talkingAboutCount=" + talkingAboutCount +
+                ", accessToken='" + accessToken + '\'' +
+                ", isCommunityPage=" + isCommunityPage +
+                ", wereHereCount=" + wereHereCount +
+                ", fanCount=" + fanCount +
+                ", about='" + about + '\'' +
+                ", username='" + username + '\'' +
+                ", mission='" + mission + '\'' +
+                ", hours=" + hours +
+                ", likes=" + likes +
+                ", pageBackedInstagramAccounts=" + pageBackedInstagramAccounts +
+                '}';
     }
-
 }

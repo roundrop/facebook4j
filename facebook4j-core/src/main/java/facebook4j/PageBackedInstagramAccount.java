@@ -6,7 +6,7 @@ package facebook4j;
  */
 public interface PageBackedInstagramAccount {
 
-	String getId();
+    String getId();
     String getProfilePic();
     String getUsername();
     
