@@ -170,7 +170,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 		return sticker;
 	}
 
-	/*package*/
+    /*package*/
     static ResponseList<Message> createMessageList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
             if (conf.isJSONStoreEnabled()) {
