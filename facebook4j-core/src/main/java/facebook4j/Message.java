@@ -31,6 +31,7 @@ public interface Message extends FacebookResponse {
     PagableList<Comment> getComments();
     Integer getUnread();
     Integer getUnseen();
+    String getSticker();
 
     interface Attachment {
         String getId();
