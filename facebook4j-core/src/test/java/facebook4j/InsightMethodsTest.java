@@ -69,4 +69,31 @@ public class InsightMethodsTest extends MockFacebookTestBase {
         assertThat(paging.getNext().toString(), is("https://graph.facebook.com/2439131959/insights/application_active_users?since=1370670538&until=1370929738"));
     }
 
+    @Test
+    public void noValue() throws Exception {
+        facebook.setMockJSON("mock_json/insight/page_impressions_frequency_distribution.json");
+        ResponseList<Insight> insights = facebook.getInsights("137246726435626", "page_impressions_frequency_distribution");
+
+        assertThat(insights.size(), is(3));
+
+        Insight insight1 = insights.get(0);
+        assertThat(insight1.getName(), is("page_impressions_frequency_distribution"));
+        assertThat(insight1.getValues().size(), is(2));
+        assertThat(insight1.getValues().get(0).getValue(), is(nullValue()));
+        assertThat(insight1.getValues().get(0).getEndTime(), is(notNullValue()));
+    }
+
+    @Test
+    public void valueIsMap() throws Exception {
+        facebook.setMockJSON("mock_json/insight/page_stories_by_story_type.json");
+        ResponseList<Insight> insights = facebook.getInsights("137246726435626", "page_stories_by_story_type");
+
+        assertThat(insights.size(), is(3));
+
+        Insight insight1 = insights.get(0);
+        assertThat(insight1.getValues().size(), is(2));
+        assertThat(insight1.getValues().get(0).getValue().get("checkin"), is(0L));
+        assertThat(insight1.getValues().get(0).getValue().get("user post"), is(1L));
+    }
+
 }

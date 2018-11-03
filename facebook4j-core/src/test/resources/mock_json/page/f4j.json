@@ -10,7 +10,9 @@
     "id": "137246726435626",
     "is_community_page": false,
     "is_published": false,
-    "likes": 0,
+    "likes": {
+        "data": []
+    },
     "link": "http://www.facebook.com/pages/F4J/137246726435626",
     "name": "F4J",
     "new_like_count": 0,
@@ -22,6 +24,6 @@
     "unread_message_count": 0,
     "unread_notif_count": 0,
     "unseen_message_count": 0,
-    "website": "http://facebook4j.org",
+    "website": "https://facebook4j.github.io",
     "were_here_count": 0
 }

@@ -25,6 +25,7 @@ import facebook4j.internal.org.json.JSONObject;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.Map;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
@@ -43,7 +44,6 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private URL link;
     private Boolean isPublished;
     private Boolean canPost;
-    private Integer likes;
     private Place.Location location;
     private String phone;
     private Integer checkins;
@@ -58,6 +58,12 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Integer fanCount;
     private String about;
     private String username;
+    private String mission;
+    private Map<String, String> hours;
+
+    private PagableList<Like> likes;
+
+    private PagableList<PageBackedInstagramAccount> pageBackedInstagramAccounts;
 
     /*package*/PageJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -83,7 +89,11 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             link = getURL("link", json);
             isPublished = getBoolean("is_published", json);
             canPost = getBoolean("can_post", json);
-            likes = getInt("likes", json);
+
+            populatePageBackedInstagramAccounts(json);
+
+            populateLikes(json);
+
             if (!json.isNull("location")) {
                 JSONObject locationJSONObject = json.getJSONObject("location");
                 location = new PlaceJSONImpl.LocationJSONImpl(locationJSONObject);
@@ -107,15 +117,58 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             fanCount = getInt("fan_count", json);
             about = getRawString("about", json);
             username = getRawString("username", json);
+            mission = getRawString("mission", json);
+            hours = getStringMap("hours", json);
 
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
     }
 
+    private void populatePageBackedInstagramAccounts(JSONObject json) throws JSONException, FacebookException {
+        if (!json.isNull("page_backed_instagram_accounts")) {
+            JSONObject pageBackedInstagramAccountJSONObject = json.getJSONObject("page_backed_instagram_accounts");
+
+            if (!pageBackedInstagramAccountJSONObject.isNull("data")) {
+                JSONArray list = pageBackedInstagramAccountJSONObject.getJSONArray("data");
+                final int size = list.length();
+                pageBackedInstagramAccounts = new PagableListImpl<PageBackedInstagramAccount>(size, pageBackedInstagramAccountJSONObject);
+
+                for (int i = 0; i < size; i++) {
+                    PageBackedInstagramAccount pageBackedInstagramAccount = new PageBackedInstagramAccountJSONImpl(list.getJSONObject(i));
+                    pageBackedInstagramAccounts.add(pageBackedInstagramAccount);
+                }
+            } else {
+                pageBackedInstagramAccounts = new PagableListImpl<PageBackedInstagramAccount>(1, pageBackedInstagramAccountJSONObject);
+            }
+        } else {
+            pageBackedInstagramAccounts = new PagableListImpl<PageBackedInstagramAccount>(0);
+        }
+    }
+
+    private void populateLikes(JSONObject json) throws JSONException, FacebookException {
+        if (!json.isNull("likes")) {
+            JSONObject likesJSONObject = json.getJSONObject("likes");
+            if (!likesJSONObject.isNull("data")) {
+                JSONArray list = likesJSONObject.getJSONArray("data");
+                final int size = list.length();
+                likes = new PagableListImpl<Like>(size, likesJSONObject);
+                for (int i = 0; i < size; i++) {
+                    LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
+                    likes.add(like);
+                }
+            } else {
+                likes = new PagableListImpl<Like>(1, likesJSONObject);
+            }
+        } else {
+            likes = new PagableListImpl<Like>(0);
+        }
+    }
+
     public String getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
@@ -141,8 +194,12 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return canPost;
     }
 
-    public Integer getLikes() {
+    public PagableList<Like> getLikes() {
         return likes;
+    }
+
+    public PagableList<PageBackedInstagramAccount> getPageBackedInstagramAccounts() {
+        return pageBackedInstagramAccounts;
     }
 
     public Place.Location getLocation() {
@@ -158,9 +215,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
 
     public URL getPicture() {
-        return picture.getURL();
+        return picture == null ? null : picture.getURL();
     }
-    
+
     public Picture getPagePicture() {
         return picture;
     }
@@ -180,7 +237,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     public Integer getTalkingAboutCount() {
         return talkingAboutCount;
     }
-    
+
     public String getAccessToken() {
         return accessToken;
     }
@@ -203,6 +260,14 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     public String getUsername() {
         return username;
+    }
+
+    public String getMission() {
+        return mission;
+    }
+
+    public Map<String, String> getHours() {
+        return hours;
     }
 
     /*package*/
@@ -247,16 +312,32 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     @Override
     public String toString() {
-        return "PageJSONImpl [link=" + link + ", isPublished=" + isPublished
-                + ", canPost=" + canPost + ", likes=" + likes + ", location="
-                + location + ", phone=" + phone + ", checkins=" + checkins
-                + ", picture=" + picture + ", cover=" + cover + ", website=" + website
-                + ", companyOverview=" + companyOverview + ", talkingAboutCount=" + talkingAboutCount
-                + ", accessToken=" + accessToken + ", isCommunityPage="
-                + isCommunityPage + ", wereHereCount=" + wereHereCount
-                + ", fanCount=" + fanCount
-                + ", id=" + id + ", name=" + name + ", category=" + category
-                + ", createdTime=" + createdTime + ", about=" + about + ", username=" + username + "]";
+        return "PageJSONImpl{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", createdTime=" + createdTime +
+                ", link=" + link +
+                ", isPublished=" + isPublished +
+                ", canPost=" + canPost +
+                ", location=" + location +
+                ", phone='" + phone + '\'' +
+                ", checkins=" + checkins +
+                ", picture=" + picture +
+                ", cover=" + cover +
+                ", website='" + website + '\'' +
+                ", companyOverview='" + companyOverview + '\'' +
+                ", talkingAboutCount=" + talkingAboutCount +
+                ", accessToken='" + accessToken + '\'' +
+                ", isCommunityPage=" + isCommunityPage +
+                ", wereHereCount=" + wereHereCount +
+                ", fanCount=" + fanCount +
+                ", about='" + about + '\'' +
+                ", username='" + username + '\'' +
+                ", mission='" + mission + '\'' +
+                ", hours=" + hours +
+                ", likes=" + likes +
+                ", pageBackedInstagramAccounts=" + pageBackedInstagramAccounts +
+                '}';
     }
-
 }

@@ -1535,6 +1535,15 @@ class FacebookImpl extends FacebookBaseImpl implements Facebook {
         return factory.createPage(res);
     }
 
+    public ResponseList<Like> getPageLikes(String pageId) throws FacebookException {
+        return getPageLikes(pageId, null);
+    }
+
+    public ResponseList<Like> getPageLikes(String pageId, Reading reading) throws FacebookException {
+        ensureAuthorizationEnabled();
+        return factory.createLikeList(get(buildEndpoint(pageId, "likes", reading)));
+    }
+
     public URL getPagePictureURL() throws FacebookException {
         return getPagePictureURL("me", null);
     }

@@ -16,6 +16,13 @@
 
 package facebook4j.internal.json;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import facebook4j.FacebookException;
 import facebook4j.Insight;
 import facebook4j.ResponseList;
@@ -24,13 +31,6 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
@@ -46,7 +46,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private List<Insight.Value> values;
     private String title;
     private String description;
-    
+
     /*package*/InsightJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
         JSONObject json = res.asJSONObject();
@@ -94,7 +94,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     public String getDescription() {
         return description;
     }
-    
+
     /*package*/
     static ResponseList<Insight> createInsightList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -108,11 +108,14 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             for (int i = 0; i < size; i++) {
                 JSONObject insightJSONObject = list.getJSONObject(i);
                 Insight insight = new InsightJSONImpl(insightJSONObject);
+
                 if (conf.isJSONStoreEnabled()) {
                     DataObjectFactoryUtil.registerJSONObject(insight, insightJSONObject);
                 }
+
                 insights.add(insight);
             }
+
             if (conf.isJSONStoreEnabled()) {
                 DataObjectFactoryUtil.registerJSONObject(insights, list);
             }
@@ -155,7 +158,6 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
 
 
-
     private final class ValueJSONImpl implements Insight.Value, java.io.Serializable {
         private static final long serialVersionUID = 764579592511865193L;
 
@@ -163,7 +165,11 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         private Date endTime;
 
         ValueJSONImpl(JSONObject json) throws FacebookException {
-            value = new ValueEntryJSONImpl(json);
+            if (null == getRawString("value", json)) {
+                value = null;
+            } else {
+                value = new ValueEntryJSONImpl(json);
+            }
             endTime = getISO8601Datetime("end_time", json);
         }
 
@@ -218,6 +224,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             List<Insight.Value> values = new ArrayList<Insight.Value>(size);
             for (int i = 0; i < size; i++) {
                 Insight.Value value = new ValueJSONImpl(list.getJSONObject(i));
+
                 values.add(value);
             }
             return values;
@@ -225,5 +232,5 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             throw new FacebookException(jsone);
         }
     }
-    
+
 }

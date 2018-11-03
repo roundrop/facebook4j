@@ -45,12 +45,12 @@ public class OAuthAuthorizationTest {
 
         @Test
         public void callbackURL() throws Exception {
-            String callbackURL = "http://facebook4j.org/callback/";
+            String callbackURL = "https://facebook4j.github.io/callback/";
             String url = facebook.getOAuthAuthorizationURL(callbackURL);
             assertThat(url,
                     is("https://www.facebook.com/dialog/oauth" +
                             "?client_id=app_id" +
-                            "&redirect_uri=http://facebook4j.org/callback/")
+                            "&redirect_uri=https://facebook4j.github.io/callback/")
             );
         }
 
@@ -58,25 +58,25 @@ public class OAuthAuthorizationTest {
         public void scope() throws Exception {
             facebook.setOAuthPermissions("p1,p2,p3");
 
-            String callbackURL = "http://facebook4j.org/callback/";
+            String callbackURL = "https://facebook4j.github.io/callback/";
             String url = facebook.getOAuthAuthorizationURL(callbackURL);
             assertThat(url,
                     is("https://www.facebook.com/dialog/oauth" +
                     "?client_id=app_id" +
-                    "&redirect_uri=http://facebook4j.org/callback/" +
+                    "&redirect_uri=https://facebook4j.github.io/callback/" +
                     "&scope=p1,p2,p3")
             );
         }
 
         @Test
         public void state() throws Exception {
-            String callbackURL = "http://facebook4j.org/callback/";
+            String callbackURL = "https://facebook4j.github.io/callback/";
             String state = "awesome";
             String url = facebook.getOAuthAuthorizationURL(callbackURL, state);
             assertThat(url,
                     is("https://www.facebook.com/dialog/oauth" +
                             "?client_id=app_id" +
-                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&redirect_uri=https://facebook4j.github.io/callback/" +
                             "&state=awesome")
             );
 
@@ -84,40 +84,40 @@ public class OAuthAuthorizationTest {
             assertThat(url,
                     is("https://www.facebook.com/dialog/oauth" +
                             "?client_id=app_id" +
-                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&redirect_uri=https://facebook4j.github.io/callback/" +
                             "&state=awesome")
             );
         }
 
         @Test
         public void display() throws Exception {
-            String callbackURL = "http://facebook4j.org/callback/";
+            String callbackURL = "https://facebook4j.github.io/callback/";
             DialogAuthOption authOption = new DialogAuthOption().display(Display.POPUP);
             String url = facebook.getOAuthAuthorizationURL(callbackURL, authOption);
             assertThat(url,
                     is("https://www.facebook.com/dialog/oauth" +
                             "?client_id=app_id" +
-                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&redirect_uri=https://facebook4j.github.io/callback/" +
                             "&display=popup")
             );
         }
 
         @Test
         public void rerequest() throws Exception {
-            String callbackURL = "http://facebook4j.org/callback/";
+            String callbackURL = "https://facebook4j.github.io/callback/";
             DialogAuthOption authOption = new DialogAuthOption().authType(AuthType.REREQUEST);
             String url = facebook.getOAuthAuthorizationURL(callbackURL, authOption);
             assertThat(url,
                     is("https://www.facebook.com/dialog/oauth" +
                             "?client_id=app_id" +
-                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&redirect_uri=https://facebook4j.github.io/callback/" +
                             "&auth_type=rerequest")
             );
         }
 
         @Test
         public void reauthenticate() throws Exception {
-            String callbackURL = "http://facebook4j.org/callback/";
+            String callbackURL = "https://facebook4j.github.io/callback/";
             DialogAuthOption authOption = new DialogAuthOption()
                     .authType(AuthType.REAUTHENTICATE)
                     .authNonce("random_auth_nonce");
@@ -125,21 +125,21 @@ public class OAuthAuthorizationTest {
             assertThat(url,
                     is("https://www.facebook.com/dialog/oauth" +
                             "?client_id=app_id" +
-                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&redirect_uri=https://facebook4j.github.io/callback/" +
                             "&auth_type=reauthenticate&auth_nonce=random_auth_nonce")
             );
         }
 
         @Test
         public void reauthenticate_https() throws Exception {
-            String callbackURL = "http://facebook4j.org/callback/";
+            String callbackURL = "https://facebook4j.github.io/callback/";
             DialogAuthOption authOption = new DialogAuthOption()
                     .authType(AuthType.HTTPS);
             String url = facebook.getOAuthAuthorizationURL(callbackURL, authOption);
             assertThat(url,
                     is("https://www.facebook.com/dialog/oauth" +
                             "?client_id=app_id" +
-                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&redirect_uri=https://facebook4j.github.io/callback/" +
                             "&auth_type=https")
             );
         }
@@ -156,12 +156,12 @@ public class OAuthAuthorizationTest {
 
         @Test
         public void reauthenticate() throws Exception {
-            String callbackURL = "http://facebook4j.org/callback/";
+            String callbackURL = "https://facebook4j.github.io/callback/";
             String url = facebook.getOAuthReAuthenticationURL(callbackURL, "random_auth_nonce");
             assertThat(url,
                     is("https://www.facebook.com/dialog/oauth" +
                             "?client_id=app_id" +
-                            "&redirect_uri=http://facebook4j.org/callback/" +
+                            "&redirect_uri=https://facebook4j.github.io/callback/" +
                             "&auth_type=reauthenticate&auth_nonce=random_auth_nonce")
             );
         }

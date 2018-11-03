@@ -198,7 +198,7 @@ public class EventMethodsTest {
                                         .description("Test description")
                                         .location("Gran Tokyo South Tower")
                                         .locationId("154470644580235")
-                                        .ticketURI(new URI("http://facebook4j.org"))
+                                        .ticketURI(new URI("https://facebook4j.github.io"))
                                         .noFeedStory(true);
             String eventId = facebook.createEvent(eventUpdate);
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
@@ -209,7 +209,7 @@ public class EventMethodsTest {
             assertThat(facebook.getHttpParameters(), hasPostParameter("description", "Test description"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("location", "Gran Tokyo South Tower"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("location_id", "154470644580235"));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("ticket_uri", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("ticket_uri", "https://facebook4j.github.io"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("no_feed_story", "true"));
 
             assertThat(eventId, is("1234567890123456"));
@@ -333,10 +333,10 @@ public class EventMethodsTest {
         @Test
         public void withoutMessage() throws Exception {
             facebook.setMockJSON("mock_json/post_id.json");
-            String actual = facebook.postEventLink("1234567890123456", new URL("http://facebook4j.org"));
+            String actual = facebook.postEventLink("1234567890123456", new URL("https://facebook4j.github.io"));
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/feed")));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "https://facebook4j.github.io"));
 
             assertThat(actual, is("137246726435626_185932178233747"));
         }
@@ -344,10 +344,10 @@ public class EventMethodsTest {
         @Test
         public void withMessage() throws Exception {
             facebook.setMockJSON("mock_json/post_id.json");
-            String actual = facebook.postEventLink("1234567890123456", new URL("http://facebook4j.org"), "unit test.");
+            String actual = facebook.postEventLink("1234567890123456", new URL("https://facebook4j.github.io"), "unit test.");
             assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
             assertThat(facebook.getEndpointURL(), is(pathOf("/1234567890123456/feed")));
-            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "http://facebook4j.org"));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("link", "https://facebook4j.github.io"));
             assertThat(facebook.getHttpParameters(), hasPostParameter("message", "unit test."));
 
             assertThat(actual, is("137246726435626_185932178233747"));

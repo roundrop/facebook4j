@@ -52,6 +52,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private PagableList<Comment> comments;
     private Integer unread;
     private Integer unseen;
+    private String sticker;
 
     /*package*/MessageJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -85,6 +86,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             } else {
                 to = Collections.emptyList();
             }
+            
+            sticker = getRawString("sticker", json);
             message = getRawString("message", json);
             createdTime = getISO8601Datetime("created_time", json);
             updatedTime = getISO8601Datetime("updated_time", json);
@@ -162,6 +165,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     public Integer getUnseen() {
         return unseen;
     }
+    
+    public String getSticker() {
+		return sticker;
+	}
 
     /*package*/
     static ResponseList<Message> createMessageList(HttpResponse res, Configuration conf) throws FacebookException {

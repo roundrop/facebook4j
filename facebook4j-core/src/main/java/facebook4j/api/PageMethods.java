@@ -20,6 +20,7 @@ import facebook4j.Admin;
 import facebook4j.BackdatingPostUpdate;
 import facebook4j.FacebookException;
 import facebook4j.Insight;
+import facebook4j.Like;
 import facebook4j.Media;
 import facebook4j.Milestone;
 import facebook4j.MilestoneUpdate;
@@ -794,5 +795,23 @@ public interface PageMethods {
      * @see <a href="https://developers.facebook.com/docs/reference/api/user/#likes">User#likes - Facebook Developers</a>
      */
     Page getLikedPage(String userId, String pageId, Reading reading) throws FacebookException;
-    
+
+    /**
+     * Returns likes made by the page.
+     * @param pageId the ID of a page
+     * @return likes
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/page/likes">Page Likes - Facebook Developers</a>
+     */
+    ResponseList<Like> getPageLikes(String pageId) throws FacebookException;
+
+    /**
+     * Returns likes made by the page.
+     * @param pageId the ID of a page
+     * @param reading optional reading parameters. see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a> see <a href="https://developers.facebook.com/docs/reference/api/#reading">Graph API#reading - Facebook Developers</a>
+     * @return likes
+     * @throws FacebookException when Facebook service or network is unavailable
+     * @see <a href="https://developers.facebook.com/docs/graph-api/reference/page/likes">Page Likes - Facebook Developers</a>
+     */
+    ResponseList<Like> getPageLikes(String pageId, Reading reading) throws FacebookException;
 }

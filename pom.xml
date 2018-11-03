@@ -6,7 +6,7 @@
   <packaging>pom</packaging>
   <name>facebook4j</name>
   <description>A Java library for the Facebook Graph API</description>
-  <url>http://facebook4j.org/</url>
+  <url>https://facebook4j.github.io/</url>
   <licenses>
     <license>
       <name>Apache License 2.0</name>

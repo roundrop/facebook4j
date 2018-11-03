@@ -251,6 +251,19 @@ public class AlbumMethodsTest {
             Album withLocation = albums.get(23);
             assertThat(withLocation.getLocation(), is("Paris, France"));
         }
+
+        @Test
+        public void withPicture() throws Exception {
+            facebook.setMockJSON("mock_json/album/page_picture.json");
+            String pageId = "eclipse";
+            ResponseList<Album> albums = facebook.getAlbums(pageId, new Reading().fields("picture{url}"));
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.GET));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/eclipse/albums")));
+            assertThat(facebook.getEndpointURL(), hasParameter("fields", "picture{url}"));
+
+            assertThat(albums.get(0).getPicture().getURL().toString(), is("https://scontent.xx.fbcdn.net/v/t1.0-0/s180x540/72971_563871533633265_1735045691_n.jpg?oh=fe352f46567e2df4eae7dc76f8ad7812&oe=596B72F1"));
+            assertThat(albums.get(2).getPicture().getURL().toString(), is("https://scontent.xx.fbcdn.net/v/t1.0-0/s180x540/547126_383818641638556_2000440510_n.jpg?oh=55e6692fadc3966980fc885afb511fbe&oe=5966F853"));
+        }
     }
 
     public static class getAlbum extends MockFacebookTestBase {

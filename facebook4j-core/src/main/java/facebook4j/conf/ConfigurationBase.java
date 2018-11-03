@@ -140,8 +140,8 @@ public class ConfigurationBase implements Configuration, Serializable {
         setAppSecretProofEnabled(false);
         setAppSecretProofCacheSize(10);
         setClientVersion(Version.getVersion());
-        setClientURL("http://facebook4j.org/en/facebook4j-" + Version.getVersion() + ".xml");
-        setUserAgent("facebook4j http://facebook4j.org/ /" + Version.getVersion());
+        setClientURL("https://facebook4j.github.io/en/facebook4j-" + Version.getVersion() + ".xml");
+        setUserAgent("facebook4j https://facebook4j.github.io/ /" + Version.getVersion());
 
         setJSONStoreEnabled(false);
 

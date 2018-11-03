@@ -51,7 +51,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
 final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.Serializable {
-    private static final long serialVersionUID = 9221631714701171423L;
+    private static final long serialVersionUID = 9003714776647753272L;
 
     private String id;
     private Category from;
@@ -89,6 +89,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private Targeting targeting;
     private PagableList<Reaction> reactions;
     private String parentId;
+    private URL permalinkUrl;
 
     /*package*/PostJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -270,6 +271,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             if(!json.isNull("parent_id")) {
                 parentId = getRawString("parent_id", json);
             }
+            permalinkUrl = getURL("permalink_url", json);
             if (!json.isNull("application")) {
                 JSONObject applicationJSONObject = json.getJSONObject("application");
                 application = new ApplicationJSONImpl(applicationJSONObject);
@@ -419,6 +421,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
         return parentId;
     }
 
+    public URL getPermalinkUrl() {
+        return permalinkUrl;
+    }
+
     public Application getApplication() {
         return application;
     }
@@ -539,6 +545,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
                 ", isHidden=" + isHidden +
                 ", scheduledPublishTime=" + scheduledPublishTime +
                 ", targeting=" + targeting +
+                ", permalinkUrl=" + permalinkUrl +
                 '}';
     }
 

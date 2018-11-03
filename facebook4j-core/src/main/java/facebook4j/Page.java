@@ -18,6 +18,7 @@ package facebook4j;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -30,12 +31,6 @@ public interface Page {
     String getCategory();
     Boolean isPublished();
     Boolean canPost();
-
-    /**
-     * Number of pages this page likes.
-     * @return
-     */
-    Integer getLikes();
     Place.Location getLocation();
     String getPhone();
     Integer getCheckins();
@@ -61,4 +56,10 @@ public interface Page {
     Date getCreatedTime();
     String getAbout();
     String getUsername();
+    String getMission();
+    Map<String,String> getHours();
+
+    PagableList<Like> getLikes();
+    PagableList<PageBackedInstagramAccount> getPageBackedInstagramAccounts();
+
 }

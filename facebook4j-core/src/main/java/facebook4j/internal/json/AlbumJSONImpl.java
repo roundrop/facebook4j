@@ -48,7 +48,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private Date updatedTime;
     private Boolean canUpload;
     private Place place;
-    
+    private Picture picture;
+
     private PagableList<Like> likes;
     private PagableList<Comment> comments;
     private PagableList<Reaction> reactions;
@@ -90,7 +91,14 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                 JSONObject placeJSONObject = json.getJSONObject("place");
                 place = new PlaceJSONImpl(placeJSONObject);
             }
-            
+
+            if (!json.isNull("picture")) {
+                JSONObject pictureJSONObject = json.getJSONObject("picture");
+                if (!pictureJSONObject.isNull("data")) {
+                    picture = new PictureJSONImpl(pictureJSONObject);
+                }
+            }
+
             if (!json.isNull("likes")) {
                 JSONObject likesJSONObject = json.getJSONObject("likes");
                 if (!likesJSONObject.isNull("data")) {
@@ -124,7 +132,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             } else {
                 comments = new PagableListImpl<Comment>(0);
             }
-            
+
             if (!json.isNull("reactions")) {
                 JSONObject reactionsJSONObject = json.getJSONObject("reactions");
                 if (!reactionsJSONObject.isNull("data")) {
@@ -203,6 +211,10 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         return place;
     }
 
+    public Picture getPicture() {
+        return picture;
+    }
+
     public PagableList<Like> getLikes() {
         return likes;
     }
@@ -214,7 +226,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     public PagableList<Reaction> getReactions() {
         return reactions;
     }
-    
+
     /*package*/
     static ResponseList<Album> createAlbumList(HttpResponse res, Configuration conf) throws FacebookException {
         try {
@@ -284,6 +296,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                  ", updatedTime=" + updatedTime +
                  ", canUpload=" + canUpload +
                  ", place=" + place +
+                 ", picture=" + picture +
                  ", likes=" + likes +
                  ", comments=" + comments +
                  '}';

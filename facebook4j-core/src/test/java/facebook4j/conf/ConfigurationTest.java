@@ -71,7 +71,7 @@ public class ConfigurationTest {
 
         System.getProperties().remove("facebook4j.clientURL");
         conf = new PropertyConfiguration();
-        assertThat(conf.getClientURL(), is("http://facebook4j.org/en/facebook4j-" + Version.getVersion() + ".xml"));
+        assertThat(conf.getClientURL(), is("https://facebook4j.github.io/en/facebook4j-" + Version.getVersion() + ".xml"));
         conf.setClientURL(test);
         assertThat(conf.getClientURL(), is(test));
         System.setProperty("facebook4j.clientURL", override);
@@ -83,7 +83,7 @@ public class ConfigurationTest {
 
         System.getProperties().remove("facebook4j.http.userAgent");
         conf = new PropertyConfiguration();
-        assertThat(conf.getUserAgent(), is("facebook4j http://facebook4j.org/ /" + Version.getVersion()));
+        assertThat(conf.getUserAgent(), is("facebook4j https://facebook4j.github.io/ /" + Version.getVersion()));
         conf.setUserAgent(test);
         assertThat(conf.getUserAgent(), is(test));
         System.setProperty("facebook4j.http.userAgent", override);
