@@ -16,6 +16,7 @@
 
 package facebook4j;
 
+import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
 import java.util.Collection;
@@ -140,14 +141,14 @@ public class TargetingParameter implements java.io.Serializable {
 
     private JSONObject json = null;
 
-    public JSONObject asJSONObject() {
+    public JSONObject asJSONObject() throws JSONException {
         if (json == null) {
-            json = new JSONObject(this);
+            json = new JSONObject().put("geo_locations", new JSONObject(this));
         }
         return json;
     }
 
-    public String asJSONString() {
+    public String asJSONString() throws JSONException {
         return asJSONObject().toString();
     }
 
