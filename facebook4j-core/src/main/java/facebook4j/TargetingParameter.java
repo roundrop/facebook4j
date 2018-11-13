@@ -33,17 +33,6 @@ public class TargetingParameter implements java.io.Serializable {
     private Set<TargetingGeoLocation> cities;
     private Set<TargetingGeoLocation> regions;
     private Set<String> locales;
-
-    public class TargetingGeoLocation {
-    	private String key;
-    	
-    	public TargetingGeoLocation(String key) {
-    		this.key = key;
-    	}
-        public String key() {
-        	return key;
-        }
-    }
     
     public TargetingParameter() {
     }

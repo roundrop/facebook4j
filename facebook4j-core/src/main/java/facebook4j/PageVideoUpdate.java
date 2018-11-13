@@ -72,9 +72,13 @@ public class PageVideoUpdate extends VideoUpdate {
 				new FacebookException(e.getMessage(), e);
 			}
         }
-        if (feedTargeting != null) {
-            params.add(new HttpParameter("feed_targeting", feedTargeting.asJSONString()));
-        }
+		if (feedTargeting != null) {
+			try {
+				params.add(new HttpParameter("feed_targeting", feedTargeting.asJSONString()));
+			} catch (Exception e) {
+				new FacebookException(e.getMessage(), e);
+			}
+		}
 		return params.toArray(new HttpParameter[params.size()]);
 	}
 

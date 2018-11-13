@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.facebook4j</groupId>
   <artifactId>facebook4j-core</artifactId>
-  <version>2.4.13-dk8996-3</version>
+  <version>2.4.13-dk8996-6</version>
   <packaging>jar</packaging>
   <name>facebook4j-core</name>
   <description>A Java library for the Facebook Graph API</description>
