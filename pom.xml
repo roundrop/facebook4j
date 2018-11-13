@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.facebook4j</groupId>
   <artifactId>facebook4j</artifactId>
-  <version>2.4.13-dk8996-6</version>
+  <version>2.3.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>facebook4j</name>
   <description>A Java library for the Facebook Graph API</description>
@@ -48,9 +48,17 @@
   </mailingLists>
   <distributionManagement>
     <repository>
-        <id>internal</id>
-        <url>file://${project.build.directory}/mvn-repo</url>
+      <id>sonatype-nexus-staging</id>
+      <name>Nexus Release Repository</name>
+      <uniqueVersion>false</uniqueVersion>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
+    <snapshotRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <name>Nexus Snapshots Repository</name>
+      <uniqueVersion>false</uniqueVersion>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+    </snapshotRepository>
   </distributionManagement>
   <profiles>
     <profile>
