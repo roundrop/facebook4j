@@ -992,6 +992,26 @@ public class PostMethodsTest extends MockFacebookTestBase {
             assertThat(actual, is("137246726435626_185932178233747"));
         }
 
+        @Test
+        public void feedTargetingParameter() throws Exception {
+            facebook.setMockJSON("mock_json/post_id.json");
+            PagePostUpdate pagePostUpdate = new PagePostUpdate("test message");
+            FeedTargetingParameter feedTargeting = new FeedTargetingParameter().genders(FeedTargetingParameter.Gender.Male);
+            Set<String> countries = new HashSet<String>();
+            countries.add("US");
+            countries.add("GB");
+            TargetingParameter targeting = new TargetingParameter().countries(countries);
+            feedTargeting.setGeoLocations(targeting);
+            pagePostUpdate.setFeedTargeting(feedTargeting);
+            String actual = facebook.postFeed("eclipse", pagePostUpdate);
+            assertThat(facebook.getHttpMethod(), is(RequestMethod.POST));
+            assertThat(facebook.getEndpointURL(), is(pathOf("/eclipse/feed")));
+            assertThat(facebook.getHttpParameters(), hasPostParameter("message", "test message"));
+            assertThat(facebook.getHttpParameters(), hasPostJsonParameter("feed_targeting", "{\"genders\":{\"value\":1},\"geo_locations\":{\"countries\":[\"US\",\"GB\"]}}"));
+
+            assertThat(actual, is("137246726435626_185932178233747"));
+        }
+
     }
 
     public static class postLink extends MockFacebookTestBase {

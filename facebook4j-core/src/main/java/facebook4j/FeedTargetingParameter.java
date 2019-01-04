@@ -38,6 +38,7 @@ public class FeedTargetingParameter extends TargetingParameter implements java.i
     private Set<IdNameEntity> collegeNetworks;
     private Set<String> collegeMajors;
     private Set<Integer> collegeYears;
+    private TargetingParameter geoLocations;
 
     public FeedTargetingParameter() {
     }
@@ -80,6 +81,10 @@ public class FeedTargetingParameter extends TargetingParameter implements java.i
 
     public void setCollegeYears(Set<Integer> collegeYears) {
         this.collegeYears = collegeYears;
+    }
+
+    public void setGeoLocations(TargetingParameter geoLocations) {
+        this.geoLocations = geoLocations;
     }
 
     public FeedTargetingParameter genders(Gender genders) {
@@ -132,6 +137,11 @@ public class FeedTargetingParameter extends TargetingParameter implements java.i
         return this;
     }
 
+    public FeedTargetingParameter geoLocations(TargetingParameter geoLocations) {
+        setGeoLocations(geoLocations);
+        return this;
+    }
+
     /* getters for asJSONObject() */
 
     public Gender getGenders() {
@@ -174,26 +184,15 @@ public class FeedTargetingParameter extends TargetingParameter implements java.i
         return collegeYears;
     }
 
+    public TargetingParameter getGeo_locations() {
+        return geoLocations;
+    }
 
     private JSONObject json = null;
 
     public JSONObject asJSONObject() throws JSONException {
         if (json == null) {
-			String[] feedTargetingNames = new String[] { "genders", "age_max", "age_min", "relationship_statuses", "interested_in",
-					"education_statuses", "work_networks", "college_networks", "college_majors", "college_years" };
-			
-			String[] targetingNames = new String[] { "countries", "cities", "regions", "locales"};
-			
-			json = new JSONObject(new JSONObject(this), feedTargetingNames);
-			System.out.println("JSONObject!" + json.toString());
-			
-			JSONObject jsonSuperclass = new JSONObject(new JSONObject(this), targetingNames);
-			
-			if(jsonSuperclass.length() > 0) {
-				json.put("geo_locations", new JSONObject(new JSONObject(this), targetingNames));
-				System.out.println("JSONObject2!" + json.toString());
-			}
-
+            json = new JSONObject(this);
         }
         return json;
     }

@@ -16,14 +16,17 @@
 
 package facebook4j;
 
+/**
+ * @since Facebook4J 2.4.13
+ */
 public class TargetingGeoLocation {
-	private String key;
+    private String key;
 
-	public TargetingGeoLocation(String key) {
-		this.key = key;
-	}
+    public TargetingGeoLocation(String key) {
+        this.key = key;
+    }
 
-	public String getKey() {
-		return key;
-	}
+    public String getKey() {
+        return key;
+    }
 }
