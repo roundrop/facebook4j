@@ -16,6 +16,7 @@
 
 package facebook4j;
 
+import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
 import java.util.Set;
@@ -176,14 +177,28 @@ public class FeedTargetingParameter extends TargetingParameter implements java.i
 
     private JSONObject json = null;
 
-    public JSONObject asJSONObject() {
+    public JSONObject asJSONObject() throws JSONException {
         if (json == null) {
-            json = new JSONObject(this);
+			String[] feedTargetingNames = new String[] { "genders", "age_max", "age_min", "relationship_statuses", "interested_in",
+					"education_statuses", "work_networks", "college_networks", "college_majors", "college_years" };
+			
+			String[] targetingNames = new String[] { "countries", "cities", "regions", "locales"};
+			
+			json = new JSONObject(new JSONObject(this), feedTargetingNames);
+			System.out.println("JSONObject!" + json.toString());
+			
+			JSONObject jsonSuperclass = new JSONObject(new JSONObject(this), targetingNames);
+			
+			if(jsonSuperclass.length() > 0) {
+				json.put("geo_locations", new JSONObject(new JSONObject(this), targetingNames));
+				System.out.println("JSONObject2!" + json.toString());
+			}
+
         }
         return json;
     }
 
-    public String asJSONString() {
+    public String asJSONString() throws JSONException {
         return asJSONObject().toString();
     }
 

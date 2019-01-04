@@ -30,13 +30,27 @@ public class PagePostUpdate extends PostUpdate {
     private static final long serialVersionUID = 549559699324208520L;
 
     private FeedTargetingParameter feedTargeting;
-
+    private TargetingParameter targeting;
+    
     public PagePostUpdate(String message) {
     	super(message);
     }
 
     public PagePostUpdate(URL link) {
         super(link);
+    }
+    
+    public TargetingParameter getTargeting() {
+        return targeting;
+    }
+    
+     public void setTargeting(TargetingParameter targeting) {
+        this.targeting = targeting;
+    }
+     
+     public PagePostUpdate targeting(TargetingParameter targetingParameter) {
+        setTargeting(targetingParameter);
+        return this;
     }
     
     public FeedTargetingParameter getFeedTargeting() {
@@ -54,9 +68,13 @@ public class PagePostUpdate extends PostUpdate {
 
     /*package*/ HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>(Arrays.asList(super.asHttpParameterArray()));
-        if (feedTargeting != null) {
-            params.add(new HttpParameter("feed_targeting", feedTargeting.asJSONString()));
-        }
+		if (feedTargeting != null) {
+			try {
+				params.add(new HttpParameter("feed_targeting", feedTargeting.asJSONString()));
+			} catch (Exception e) {
+				new FacebookException(e.getMessage(), e);
+			}
+		}
         return params.toArray(new HttpParameter[params.size()]);
     }
 
@@ -67,7 +85,8 @@ public class PagePostUpdate extends PostUpdate {
         if (!super.equals(o)) return false;
 
         PagePostUpdate that = (PagePostUpdate) o;
-
+        
+        if (targeting != null ? !targeting.equals(that.targeting) : that.targeting != null) return false;
         return feedTargeting != null ? feedTargeting.equals(that.feedTargeting) : that.feedTargeting == null;
 
     }
@@ -76,6 +95,7 @@ public class PagePostUpdate extends PostUpdate {
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + (feedTargeting != null ? feedTargeting.hashCode() : 0);
+        result = 31 * result + (targeting != null ? targeting.hashCode() : 0);
         return result;
     }
 
@@ -83,6 +103,7 @@ public class PagePostUpdate extends PostUpdate {
     public String toString() {
         return "PagePostUpdate{" +
                 "feedTargeting=" + feedTargeting +
+                ", targeting=" + targeting +
                 "} " + super.toString();
     }
 }

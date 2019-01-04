@@ -89,7 +89,7 @@ public abstract class FacebookTestBase {
             protected boolean matches(String targetingParamValue) {
                 try {
                     JSONObject targetingParamValueObject = new JSONObject(targetingParamValue);
-                    JSONArray actualCountriesArray = targetingParamValueObject.getJSONArray("countries");
+                    JSONArray actualCountriesArray = targetingParamValueObject.getJSONObject("geo_locations").getJSONArray("countries");
                     Set<String> actualCountriesSet = new HashSet<String>();
                     for (int i = 0; i < actualCountriesArray.length(); i++) {
                         String country = actualCountriesArray.getString(i);
@@ -102,7 +102,7 @@ public abstract class FacebookTestBase {
             }
 
             public void describeTo(Description desc) {
-                desc.appendValue("targeting=" + expectedCountriesSet);
+                desc.appendValue("targeting={geo_locations:" + expectedCountriesSet+"}");
                 if (actualParams.size() > 0) {
                     desc.appendText(" but actual is ");
                     desc.appendValue(actualParams.get(0));
@@ -111,7 +111,7 @@ public abstract class FacebookTestBase {
                         desc.appendValue(actualParams.get(i));
                     }
                 } else {
-                    desc.appendText(" but actual has no 'targeting' parameter");
+                    desc.appendText(" but actual has no 'geo_locations' parameter");
                 }
             }
         };
