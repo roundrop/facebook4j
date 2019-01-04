@@ -16,6 +16,21 @@
 
 package facebook4j.internal.json;
 
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getBoolean;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getISO8601Datetime;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getInt;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getRawString;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getURL;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import facebook4j.Application;
 import facebook4j.Category;
 import facebook4j.Comment;
@@ -35,17 +50,6 @@ import facebook4j.internal.http.HttpResponse;
 import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
@@ -90,6 +94,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private PagableList<Reaction> reactions;
     private String parentId;
     private URL permalinkUrl;
+    private String promotableId;
 
     /*package*/PostJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
         super(res);
@@ -267,6 +272,9 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             }
             if (!json.isNull("object_id")) {
                 objectId = getRawString("object_id", json);
+            }
+            if (!json.isNull("promotable_id")) {
+            	promotableId = getRawString("promotable_id", json);
             }
             if(!json.isNull("parent_id")) {
                 parentId = getRawString("parent_id", json);
@@ -708,5 +716,9 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     public PagableList<Reaction> getReactions() {
         return reactions;
     }
+
+	public String getPromotableId() {
+		return promotableId;
+	}
 
 }
