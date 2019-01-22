@@ -128,8 +128,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             		final int size = list.length();
             		shares = new PagableListImpl<Share>(size, sharesJSONObject);
             		for (int i = 0; i < size; i++) {
-            			ShareJSONImpl attachment = new ShareJSONImpl(list.getJSONObject(i));
-            			shares.add(attachment);
+            			ShareJSONImpl share = new ShareJSONImpl(list.getJSONObject(i));
+            			shares.add(share);
             		}
             	} else {
             		shares = new PagableListImpl<Share>(1, sharesJSONObject);
@@ -371,7 +371,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     	ShareJSONImpl(JSONObject json) throws FacebookException {
     			id = getRawString("id", json);
-    			name = getRawString("id", json);
+    			name = getRawString("name", json);
     			description = getRawString("description", json);
     			link = getRawString("link", json);
     	}
@@ -397,7 +397,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     		if (this == o) return true;
     		if (o == null || getClass() != o.getClass()) return false;
 
-    		AttachmentJSONImpl that = (AttachmentJSONImpl) o;
+    		ShareJSONImpl that = (ShareJSONImpl) o;
 
     		return !(id != null ? !id.equals(that.id) : that.id != null);
 
@@ -410,7 +410,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     	@Override
     	public String toString() {
-    		return "AttachmentJSONImpl{" +
+    		return "ShareJSONImpl{" +
     				", id='" + id + '\'' +
     				", name='" + name + '\'' +
     				", description='" + description + '\'' +
