@@ -25,6 +25,7 @@ public interface Message extends FacebookResponse {
     IdNameEntity getFrom();
     List<IdNameEntity> getTo();
     List<Attachment> getAttachments();
+    List<Share> getShares();
     String getMessage();
     Date getCreatedTime();
     Date getUpdatedTime();
@@ -38,5 +39,12 @@ public interface Message extends FacebookResponse {
         String getMimeType();
         String getUrl();
         String getPreviewUrl();
+    }
+
+    interface Share {
+    	String getId();
+    	String getName();
+    	String getDescription();
+    	String getLink();
     }
 }

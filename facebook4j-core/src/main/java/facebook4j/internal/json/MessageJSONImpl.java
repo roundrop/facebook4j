@@ -46,6 +46,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private IdNameEntity from;
     private List<IdNameEntity> to;
     private PagableList<Attachment> attachments;
+    private PagableList<Share> shares;
     private String message;
     private Date createdTime;
     private Date updatedTime;
@@ -120,6 +121,22 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             } else {
                 attachments = new PagableListImpl<Attachment>(0);
             }
+            if (!json.isNull("shares")) {
+            	JSONObject sharesJSONObject = json.getJSONObject("shares");
+            	if (!sharesJSONObject.isNull("data")) {
+            		JSONArray list = sharesJSONObject.getJSONArray("data");
+            		final int size = list.length();
+            		shares = new PagableListImpl<Share>(size, sharesJSONObject);
+            		for (int i = 0; i < size; i++) {
+            			ShareJSONImpl attachment = new ShareJSONImpl(list.getJSONObject(i));
+            			shares.add(attachment);
+            		}
+            	} else {
+            		shares = new PagableListImpl<Share>(1, sharesJSONObject);
+            	}
+            } else {
+            	shares = new PagableListImpl<Share>(0);
+            }
             if (!json.isNull("unread")) {
                 unread = getPrimitiveInt("unread", json);
             }
@@ -142,6 +159,9 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     }
     public PagableList<Attachment> getAttachments() {
         return attachments;
+    }
+    public PagableList<Share> getShares() {
+    	return shares;
     }
     public String getMessage() {
         return message;
@@ -339,5 +359,63 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
                     ", preview_url='" + preview_url + '\'' +
                     '}';
         }
+    }
+
+    private final class ShareJSONImpl implements Message.Share, java.io.Serializable {
+		private static final long serialVersionUID = 1240694613500498720L;
+
+		private String id;
+    	private String name;
+    	private String description;
+    	private String link;
+
+    	ShareJSONImpl(JSONObject json) throws FacebookException {
+    			id = getRawString("id", json);
+    			name = getRawString("id", json);
+    			description = getRawString("description", json);
+    			link = getRawString("link", json);
+    	}
+
+    	public String getId() {
+    		return id;
+    	}
+
+    	public String getName() {
+    		return name;
+    	}
+
+    	public String getLink() {
+    		return link;
+    	}
+
+    	public String getDescription() {
+    		return description;
+    	}
+
+    	@Override
+    	public boolean equals(Object o) {
+    		if (this == o) return true;
+    		if (o == null || getClass() != o.getClass()) return false;
+
+    		AttachmentJSONImpl that = (AttachmentJSONImpl) o;
+
+    		return !(id != null ? !id.equals(that.id) : that.id != null);
+
+    	}
+
+    	@Override
+    	public int hashCode() {
+    		return id != null ? id.hashCode() : 0;
+    	}
+
+    	@Override
+    	public String toString() {
+    		return "AttachmentJSONImpl{" +
+    				", id='" + id + '\'' +
+    				", name='" + name + '\'' +
+    				", description='" + description + '\'' +
+    				", link='" + link + '\'' +
+    				'}';
+    	}
     }
 }
