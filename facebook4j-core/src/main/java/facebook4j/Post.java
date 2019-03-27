@@ -63,6 +63,7 @@ public interface Post extends FacebookResponse {
     Date getScheduledPublishTime();
     Targeting getTargeting();
     PagableList<Reaction> getReactions();
+    Date getBackdatedTime();
 
     interface Action {
         String getName();
