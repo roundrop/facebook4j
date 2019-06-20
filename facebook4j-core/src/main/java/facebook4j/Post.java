@@ -62,6 +62,7 @@ public interface Post extends FacebookResponse {
     Date getScheduledPublishTime();
     Targeting getTargeting();
     PagableList<Reaction> getReactions();
+    String getPromotableId();
 
     interface Action {
         String getName();

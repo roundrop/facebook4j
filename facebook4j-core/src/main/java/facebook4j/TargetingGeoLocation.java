@@ -17,26 +17,16 @@
 package facebook4j;
 
 /**
- * @author Ryuji Yamashita - roundrop at gmail.com
+ * @since Facebook4J 2.4.13
  */
-public final class Version {
-    private static final String VERSION = "2.4.13";
-    private static final String TITLE = "Facebook4J";
+public class TargetingGeoLocation {
+    private String key;
 
-    private Version() {
-        throw new AssertionError();
+    public TargetingGeoLocation(String key) {
+        this.key = key;
     }
 
-    public static String getVersion() {
-        return VERSION;
-    }
-
-    /**
-     * prints the version string
-     *
-     * @param args will be just ignored.
-     */
-    public static void main(String[] args) {
-        System.out.println(TITLE + " " + VERSION);
+    public String getKey() {
+        return key;
     }
 }
