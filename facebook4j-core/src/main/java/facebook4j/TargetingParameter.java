@@ -21,11 +21,11 @@ import facebook4j.internal.org.json.JSONObject;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
-import java.util.Locale;
 import java.util.Set;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
+ * @author Dimitry Kudryavtsev - dimitry at mentful.com
  * @since Facebook4J 2.0.0
  */
 public class TargetingParameter implements java.io.Serializable {
@@ -49,10 +49,10 @@ public class TargetingParameter implements java.io.Serializable {
         this.regions = regions;
     }
 
-    public void setLocales(Set<Locale> locales) {
+    public void setLocales(Set<String> locales) {
         this.locales = new LinkedHashSet<String>();
-        for (Locale locale : locales) {
-            this.locales.add(locale.toString());
+        for (String locale : locales) {
+            this.locales.add(locale);
         }
     }
 
@@ -104,21 +104,21 @@ public class TargetingParameter implements java.io.Serializable {
         return this;
     }
 
-    public TargetingParameter locales(Collection<Locale> locales) {
+    public TargetingParameter locales(Collection<String> locales) {
         if (this.locales == null) {
             this.locales = new LinkedHashSet<String>();
         }
-        for (Locale locale : locales) {
-            this.locales.add(locale.toString());
+        for (String locale : locales) {
+            this.locales.add(locale);
         }
         return this;
     }
 
-    public TargetingParameter locale(Locale locale) {
+    public TargetingParameter locale(String locale) {
         if (locales == null) {
             locales = new LinkedHashSet<String>();
         }
-        locales.add(locale.toString());
+        locales.add(locale);
         return this;
     }
 
