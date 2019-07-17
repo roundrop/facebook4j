@@ -380,14 +380,16 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         private final class AttachmentMediaJSONImpl implements AttachmentMedia, java.io.Serializable {
             private static final long serialVersionUID = -4030126370782822645L;
 
-            private final Image image;
+            private Image image;
 
             AttachmentMediaJSONImpl(JSONObject json) throws FacebookException {
-                try {
-                    image = new ImageJSONImpl(json.getJSONObject("image"));
-                } catch (JSONException jsone) {
-                    throw new FacebookException(jsone.getMessage(), jsone);
-                }
+            	if(!json.isNull("image")) {
+            		try {
+                    	image = new ImageJSONImpl(json.getJSONObject("image"));
+                	} catch (JSONException jsone) {
+                    	throw new FacebookException(jsone.getMessage(), jsone);
+                	}
+            	}
             }
 
             public Image getImage() {
