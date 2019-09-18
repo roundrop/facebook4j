@@ -91,6 +91,7 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
     private Targeting targeting;
     private PagableList<Reaction> reactions;
     private String parentId;
+    private String promotableId;
     private Date backdatedTime;
 
     /*package*/PostJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
@@ -276,6 +277,9 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
             }
             if(!json.isNull("parent_id")) {
                 parentId = getRawString("parent_id", json);
+            }
+            if(!json.isNull("promotable_id")) {
+            	promotableId = getRawString("promotable_id", json);
             }
             if (!json.isNull("application")) {
                 JSONObject applicationJSONObject = json.getJSONObject("application");
@@ -725,6 +729,10 @@ final class PostJSONImpl extends FacebookResponseImpl implements Post, java.io.S
 
     public Date getBackdatedTime() {
 		return backdatedTime;
+	}
+
+	public String getPromotableId() {
+		return promotableId;
 	}
 
 }
