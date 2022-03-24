@@ -29,7 +29,7 @@ import java.util.List;
  * @author Ryuji Yamashita - roundrop at gmail.com
  * @since Facebook4J 2.0.0
  */
-public class OfferUpdate implements java.io.Serializable {
+public class OfferUpdate implements java.io.Serializable,HttpParameterArray {
     private static final long serialVersionUID = -6990777853567019761L;
 
     private String title;
@@ -250,7 +250,7 @@ public class OfferUpdate implements java.io.Serializable {
         return this;
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/ public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         params.add(new HttpParameter("title", title));
         params.add(new HttpParameter("expiration_time", z_F4JInternalStringUtil.formatISO8601Datetime(expirationTime)));

@@ -22,7 +22,7 @@ import java.util.List;
 
 import facebook4j.internal.http.HttpParameter;
 
-public final class CheckinUpdate implements java.io.Serializable {
+public final class CheckinUpdate implements java.io.Serializable,HttpParameterArray {
     private static final long serialVersionUID = -6053752054448309622L;
 
     private final String place;
@@ -107,7 +107,7 @@ public final class CheckinUpdate implements java.io.Serializable {
         return coordinates;
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/ public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         params.add(new HttpParameter("place", place));
         params.add(new HttpParameter("coordinates", coordinates.asJSONString()));

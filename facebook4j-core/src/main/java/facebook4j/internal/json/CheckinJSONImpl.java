@@ -16,15 +16,12 @@
 
 package facebook4j.internal.json;
 
-import facebook4j.Application;
 import facebook4j.Checkin;
 import facebook4j.Comment;
 import facebook4j.FacebookException;
 import facebook4j.GeoLocation;
-import facebook4j.IdNameEntity;
 import facebook4j.Like;
 import facebook4j.PagableList;
-import facebook4j.Place;
 import facebook4j.ResponseList;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
@@ -32,22 +29,14 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 
-import java.util.Date;
-
-import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
+import static facebook4j.internal.util.z_F4JInternalParseUtil.getRawString;
 
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-/*package*/ final class CheckinJSONImpl extends FacebookResponseImpl implements Checkin, java.io.Serializable {
+/*package*/ final class CheckinJSONImpl extends AbstractTravelJSONImpl implements Checkin, java.io.Serializable {
     private static final long serialVersionUID = 2502877498804174869L;
-    
-    private String id;
-    private IdNameEntity from;
-    private PagableList<IdNameEntity> tags;
-    private Place place;
-    private Application application;
-    private Date createdTime;
+
     private PagableList<Like> likes;
     private String message;
     private PagableList<Comment> comments;
@@ -55,7 +44,7 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
     private GeoLocation coordinates;
 
     /*package*/CheckinJSONImpl(HttpResponse res, Configuration conf) throws FacebookException {
-        super(res);
+        super(res,conf);
         JSONObject json = res.asJSONObject();
         init(json);
         if (conf.isJSONStoreEnabled()) {
@@ -71,48 +60,8 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
 
     private void init(JSONObject json) throws FacebookException {
         try {
-            id = getRawString("id", json);
-            if (!json.isNull("from")) {
-                JSONObject fromJSONObject = json.getJSONObject("from");
-                from = new IdNameEntityJSONImpl(fromJSONObject);
-            }
-            if (!json.isNull("tags")) {
-                JSONObject tagsJSONObject = json.getJSONObject("tags");
-                JSONArray list = tagsJSONObject.getJSONArray("data");
-                final int size = list.length();
-                tags = new PagableListImpl<IdNameEntity>(size, tagsJSONObject);
-                for (int i = 0; i < size; i++) {
-                    IdNameEntityJSONImpl tag = new IdNameEntityJSONImpl(list.getJSONObject(i));
-                    tags.add(tag);
-                }
-            } else {
-                tags = new PagableListImpl<IdNameEntity>(0);
-            }
-            if (!json.isNull("place")) {
-                JSONObject placeJSONObject = json.getJSONObject("place");
-                place = new PlaceJSONImpl(placeJSONObject);
-            }
-            if (!json.isNull("application")) {
-                JSONObject applicationJSONObject = json.getJSONObject("application");
-                application = new ApplicationJSONImpl(applicationJSONObject);
-            }
-            createdTime = getISO8601Datetime("created_time", json);
-            if (!json.isNull("likes")) {
-                JSONObject likesJSONObject = json.getJSONObject("likes");
-                if (!likesJSONObject.isNull("data")) {
-                    JSONArray list = likesJSONObject.getJSONArray("data");
-                    final int size = list.length();
-                    likes = new PagableListImpl<Like>(size, likesJSONObject);
-                    for (int i = 0; i < size; i++) {
-                        LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
-                        likes.add(like);
-                    }
-                } else {
-                    likes = new PagableListImpl<Like>(1, likesJSONObject);
-                }
-            } else {
-                likes = new PagableListImpl<Like>(0);
-            }
+            initTravelBaseJson(json);
+            likes = LikeJSONImpl.convertJsonToLikeList(json);
             message = getRawString("message", json);
             if (!json.isNull("comments")) {
                 JSONObject commentsJSONObject = json.getJSONObject("comments");
@@ -139,30 +88,6 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage(), jsone);
         }
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public IdNameEntity getFrom() {
-        return from;
-    }
-    
-    public PagableList<IdNameEntity> getTags() {
-        return tags;
-    }
-
-    public Place getPlace() {
-        return place;
-    }
-
-    public Application getApplication() {
-        return application;
-    }
-
-    public Date getCreatedTime() {
-        return createdTime;
     }
 
     public PagableList<Like> getLikes() {
