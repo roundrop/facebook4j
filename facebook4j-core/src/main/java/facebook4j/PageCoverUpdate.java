@@ -25,7 +25,7 @@ import java.util.List;
  * @author Ryuji Yamashita - roundrop at gmail.com
  * @since Facebook4J 2.0.0
  */
-public class PageCoverUpdate implements java.io.Serializable {
+public class PageCoverUpdate implements java.io.Serializable,HttpParameterArray{
     private static final long serialVersionUID = -2169356652157356642L;
 
     private final String photoId;
@@ -66,7 +66,7 @@ public class PageCoverUpdate implements java.io.Serializable {
         return this;
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/ public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         params.add(new HttpParameter("cover", photoId));
         if (offsetY != null) {

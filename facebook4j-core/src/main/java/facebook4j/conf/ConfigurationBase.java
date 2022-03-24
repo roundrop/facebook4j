@@ -566,58 +566,58 @@ public class ConfigurationBase implements Configuration, Serializable {
         if (this == o) return true;
         if (!(o instanceof ConfigurationBase)) return false;
 
-        ConfigurationBase that = (ConfigurationBase) o;
+        ConfigurationBase object_to_be_compared = (ConfigurationBase) o;
 
-        if (IS_DALVIK != that.IS_DALVIK) return false;
-        if (IS_GAE != that.IS_GAE) return false;
-        if (debug != that.debug) return false;
-        if (defaultMaxPerRoute != that.defaultMaxPerRoute) return false;
-        if (gzipEnabled != that.gzipEnabled) return false;
-        if (httpConnectionTimeout != that.httpConnectionTimeout) return false;
-        if (httpProxyPort != that.httpProxyPort) return false;
-        if (httpReadTimeout != that.httpReadTimeout) return false;
-        if (httpRetryCount != that.httpRetryCount) return false;
-        if (httpRetryIntervalSeconds != that.httpRetryIntervalSeconds) return false;
-        if (httpStreamingReadTimeout != that.httpStreamingReadTimeout) return false;
-        if (jsonStoreEnabled != that.jsonStoreEnabled) return false;
-        if (maxTotalConnections != that.maxTotalConnections) return false;
-        if (mbeanEnabled != that.mbeanEnabled) return false;
-        if (prettyDebug != that.prettyDebug) return false;
-        if (useSSL != that.useSSL) return false;
-        if (clientURL != null ? !clientURL.equals(that.clientURL) : that.clientURL != null) return false;
-        if (clientVersion != null ? !clientVersion.equals(that.clientVersion) : that.clientVersion != null)
+        if (IS_DALVIK != object_to_be_compared.IS_DALVIK) return false;
+        if (IS_GAE != object_to_be_compared.IS_GAE) return false;
+        if (debug != object_to_be_compared.debug) return false;
+        if (defaultMaxPerRoute != object_to_be_compared.defaultMaxPerRoute) return false;
+        if (gzipEnabled != object_to_be_compared.gzipEnabled) return false;
+        if (httpConnectionTimeout != object_to_be_compared.httpConnectionTimeout) return false;
+        if (httpProxyPort != object_to_be_compared.httpProxyPort) return false;
+        if (httpReadTimeout != object_to_be_compared.httpReadTimeout) return false;
+        if (httpRetryCount != object_to_be_compared.httpRetryCount) return false;
+        if (httpRetryIntervalSeconds != object_to_be_compared.httpRetryIntervalSeconds) return false;
+        if (httpStreamingReadTimeout != object_to_be_compared.httpStreamingReadTimeout) return false;
+        if (jsonStoreEnabled != object_to_be_compared.jsonStoreEnabled) return false;
+        if (maxTotalConnections != object_to_be_compared.maxTotalConnections) return false;
+        if (mbeanEnabled != object_to_be_compared.mbeanEnabled) return false;
+        if (prettyDebug != object_to_be_compared.prettyDebug) return false;
+        if (useSSL != object_to_be_compared.useSSL) return false;
+        if (clientURL != null ? !clientURL.equals(object_to_be_compared.clientURL) : object_to_be_compared.clientURL != null) return false;
+        if (clientVersion != null ? !clientVersion.equals(object_to_be_compared.clientVersion) : object_to_be_compared.clientVersion != null)
             return false;
-        if (httpProxyHost != null ? !httpProxyHost.equals(that.httpProxyHost) : that.httpProxyHost != null)
+        if (httpProxyHost != null ? !httpProxyHost.equals(object_to_be_compared.httpProxyHost) : object_to_be_compared.httpProxyHost != null)
             return false;
-        if (httpProxyPassword != null ? !httpProxyPassword.equals(that.httpProxyPassword) : that.httpProxyPassword != null)
+        if (httpProxyPassword != null ? !httpProxyPassword.equals(object_to_be_compared.httpProxyPassword) : object_to_be_compared.httpProxyPassword != null)
             return false;
-        if (httpProxyUser != null ? !httpProxyUser.equals(that.httpProxyUser) : that.httpProxyUser != null)
+        if (httpProxyUser != null ? !httpProxyUser.equals(object_to_be_compared.httpProxyUser) : object_to_be_compared.httpProxyUser != null)
             return false;
-        if (oAuthAccessToken != null ? !oAuthAccessToken.equals(that.oAuthAccessToken) : that.oAuthAccessToken != null)
+        if (oAuthAccessToken != null ? !oAuthAccessToken.equals(object_to_be_compared.oAuthAccessToken) : object_to_be_compared.oAuthAccessToken != null)
             return false;
-        if (oAuthAccessTokenURL != null ? !oAuthAccessTokenURL.equals(that.oAuthAccessTokenURL) : that.oAuthAccessTokenURL != null)
+        if (oAuthAccessTokenURL != null ? !oAuthAccessTokenURL.equals(object_to_be_compared.oAuthAccessTokenURL) : object_to_be_compared.oAuthAccessTokenURL != null)
             return false;
-        if (oAuthAccessTokenInfoURL != null ? !oAuthAccessTokenInfoURL.equals(that.oAuthAccessTokenInfoURL) : that.oAuthAccessTokenInfoURL != null)
+        if (oAuthAccessTokenInfoURL != null ? !oAuthAccessTokenInfoURL.equals(object_to_be_compared.oAuthAccessTokenInfoURL) : object_to_be_compared.oAuthAccessTokenInfoURL != null)
             return false;
-        if (oAuthDeviceTokenURL != null ? !oAuthDeviceTokenURL.equals(that.oAuthDeviceTokenURL) : that.oAuthDeviceTokenURL != null)
+        if (oAuthDeviceTokenURL != null ? !oAuthDeviceTokenURL.equals(object_to_be_compared.oAuthDeviceTokenURL) : object_to_be_compared.oAuthDeviceTokenURL != null)
             return false;
-        if (oAuthAppId != null ? !oAuthAppId.equals(that.oAuthAppId) : that.oAuthAppId != null) return false;
-        if (oAuthAppSecret != null ? !oAuthAppSecret.equals(that.oAuthAppSecret) : that.oAuthAppSecret != null)
+        if (oAuthAppId != null ? !oAuthAppId.equals(object_to_be_compared.oAuthAppId) : object_to_be_compared.oAuthAppId != null) return false;
+        if (oAuthAppSecret != null ? !oAuthAppSecret.equals(object_to_be_compared.oAuthAppSecret) : object_to_be_compared.oAuthAppSecret != null)
             return false;
-        if (oAuthAuthorizationURL != null ? !oAuthAuthorizationURL.equals(that.oAuthAuthorizationURL) : that.oAuthAuthorizationURL != null)
+        if (oAuthAuthorizationURL != null ? !oAuthAuthorizationURL.equals(object_to_be_compared.oAuthAuthorizationURL) : object_to_be_compared.oAuthAuthorizationURL != null)
             return false;
-        if (oAuthCallbackURL != null ? !oAuthCallbackURL.equals(that.oAuthCallbackURL) : that.oAuthCallbackURL != null)
+        if (oAuthCallbackURL != null ? !oAuthCallbackURL.equals(object_to_be_compared.oAuthCallbackURL) : object_to_be_compared.oAuthCallbackURL != null)
             return false;
-        if (appSecretProofEnabled != that.appSecretProofEnabled)
+        if (appSecretProofEnabled != object_to_be_compared.appSecretProofEnabled)
             return false;
-        if (appSecretProofCacheSize != that.appSecretProofCacheSize) return false;
-        if (oAuthPermissions != null ? !oAuthPermissions.equals(that.oAuthPermissions) : that.oAuthPermissions != null)
+        if (appSecretProofCacheSize != object_to_be_compared.appSecretProofCacheSize) return false;
+        if (oAuthPermissions != null ? !oAuthPermissions.equals(object_to_be_compared.oAuthPermissions) : object_to_be_compared.oAuthPermissions != null)
             return false;
-        if (requestHeaders != null ? !requestHeaders.equals(that.requestHeaders) : that.requestHeaders != null)
+        if (requestHeaders != null ? !requestHeaders.equals(object_to_be_compared.requestHeaders) : object_to_be_compared.requestHeaders != null)
             return false;
-        if (restBaseURL != null ? !restBaseURL.equals(that.restBaseURL) : that.restBaseURL != null) return false;
-        if (userAgent != null ? !userAgent.equals(that.userAgent) : that.userAgent != null) return false;
-        if (videoBaseURL != null ? !videoBaseURL.equals(that.videoBaseURL) : that.videoBaseURL != null) return false;
+        if (restBaseURL != null ? !restBaseURL.equals(object_to_be_compared.restBaseURL) : object_to_be_compared.restBaseURL != null) return false;
+        if (userAgent != null ? !userAgent.equals(object_to_be_compared.userAgent) : object_to_be_compared.userAgent != null) return false;
+        if (videoBaseURL != null ? !videoBaseURL.equals(object_to_be_compared.videoBaseURL) : object_to_be_compared.videoBaseURL != null) return false;
 
         return true;
     }

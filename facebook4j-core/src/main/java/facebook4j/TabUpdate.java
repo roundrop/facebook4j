@@ -26,7 +26,7 @@ import java.util.List;
  * @author Ryuji Yamashita - roundrop at gmail.com
  * @since Facebook4J 2.0.0
  */
-public class TabUpdate implements java.io.Serializable {
+public class TabUpdate implements java.io.Serializable ,HttpParameterArray{
     private static final long serialVersionUID = 7358979543362576699L;
 
     private Integer position;
@@ -95,7 +95,7 @@ public class TabUpdate implements java.io.Serializable {
         return this;
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/ public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         if (position != null) {
             params.add(new HttpParameter("position", position));

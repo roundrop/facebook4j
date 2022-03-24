@@ -27,7 +27,7 @@ import java.util.List;
  * @author Ryuji Yamashita - roundrop at gmail.com
  * @since Facebook4J 2.0.0
  */
-public final class MilestoneUpdate implements java.io.Serializable {
+public final class MilestoneUpdate implements java.io.Serializable,HttpParameterArray {
     private static final long serialVersionUID = 7488064115483210172L;
 
     private final String title;
@@ -52,7 +52,7 @@ public final class MilestoneUpdate implements java.io.Serializable {
         return startTime;
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/ public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         params.add(new HttpParameter("title", title));
         params.add(new HttpParameter("description", description));
