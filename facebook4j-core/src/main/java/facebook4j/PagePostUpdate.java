@@ -17,7 +17,6 @@
 package facebook4j;
 
 import facebook4j.internal.http.HttpParameter;
-import facebook4j.internal.org.json.JSONArray;
 
 import java.net.URL;
 import java.util.*;
@@ -66,7 +65,8 @@ public class PagePostUpdate extends PostUpdate {
         return this;
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/
+    public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>(Arrays.asList(super.asHttpParameterArray()));
         if (feedTargeting != null) {
             try {

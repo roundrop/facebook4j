@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public class TagUpdate implements java.io.Serializable {
+public class TagUpdate implements java.io.Serializable,HttpParameterArray {
     private static final long serialVersionUID = -8148787857258621802L;
 
     private String to;
@@ -94,7 +94,7 @@ public class TagUpdate implements java.io.Serializable {
         return this;
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/ public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         if (to != null) {
             params.add(new HttpParameter("to", to));

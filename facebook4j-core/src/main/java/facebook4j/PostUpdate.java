@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public class PostUpdate implements java.io.Serializable {
+public class PostUpdate implements java.io.Serializable,HttpParameterArray {
     private static final long serialVersionUID = 7540889634334208530L;
 
     private String message;
@@ -248,7 +248,8 @@ public class PostUpdate implements java.io.Serializable {
         return scheduledPublishTime(Long.valueOf(time).intValue());
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/
+    public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         if (message != null) {
             params.add(new HttpParameter("message", message));

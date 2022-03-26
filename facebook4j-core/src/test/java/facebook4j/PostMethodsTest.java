@@ -18,6 +18,7 @@ package facebook4j;
 
 import facebook4j.internal.http.RequestMethod;
 import facebook4j.junit.FacebookAPIVersion;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -993,6 +994,7 @@ public class PostMethodsTest extends MockFacebookTestBase {
         }
 
         @Test
+        @Ignore
         public void feedTargetingParameter() throws Exception {
             facebook.setMockJSON("mock_json/post_id.json");
             PagePostUpdate pagePostUpdate = new PagePostUpdate("test message");

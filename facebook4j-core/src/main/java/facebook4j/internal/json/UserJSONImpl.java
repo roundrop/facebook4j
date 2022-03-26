@@ -109,22 +109,6 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             middleName = getRawString("middle_name", json);
             lastName = getRawString("last_name", json);
             gender = getRawString("gender", json);
-            if (!json.isNull("locale")) {
-                String[] _locale = getRawString("locale", json).split("_");
-                String language = _locale[0];
-                String country = _locale[1];
-                locale = new Locale(language, country);
-            }
-            if (!json.isNull("languages")) {
-                JSONArray languagesJSONArray = json.getJSONArray("languages");
-                final int size = languagesJSONArray.length();
-                languages = new ArrayList<IdNameEntity>(size);
-                for (int i = 0; i < size; i++) {
-                    languages.add(new IdNameEntityJSONImpl(languagesJSONArray.getJSONObject(i)));
-                }
-            } else {
-                languages = Collections.emptyList();
-            }
             link = getURL("link", json);
             username = getRawString("username", json);
             thirdPartyId = getRawString("third_party_id", json);
@@ -137,104 +121,137 @@ import static facebook4j.internal.util.z_F4JInternalParseUtil.*;
             verified = getBoolean("verified", json);
             bio = getRawString("bio", json);
             birthday = getRawString("birthday", json);
-            if (!json.isNull("cover")) {
-                JSONObject coverJSON = json.getJSONObject("cover");
-                cover = new CoverJSONImpl(coverJSON);
-            }
-            if (!json.isNull("education")) {
-                JSONArray educationJSONArray = json.getJSONArray("education");
-                final int size = educationJSONArray.length();
-                education = new ArrayList<User.Education>(size);
-                for (int i = 0; i < size; i++) {
-                    education.add(new EducationJSONImpl(educationJSONArray.getJSONObject(i)));
-                }
-            } else {
-                education = Collections.emptyList();
-            }
             email = getRawString("email", json);
-            if (!json.isNull("hometown")) {
-                String hometownRawString = getRawString("hometown", json);
-                if (hometownRawString.startsWith("{")) {
-                    JSONObject hometownJSON = json.getJSONObject("hometown");
-                    hometown = new IdNameEntityJSONImpl(hometownJSON);
-                } else {
-                    hometown = new IdNameEntityJSONImpl(hometownRawString);
-                }
-            }
-            if (!json.isNull("interestedIn")) {
-                JSONArray interestedInJSONArray = json.getJSONArray("interested_in");
-                final int size = interestedInJSONArray.length();
-                interestedIn = new ArrayList<String>(size);
-                for (int i = 0; i < size; i++) {
-                    interestedIn.add(interestedInJSONArray.getString(i));
-                }
-            } else {
-                interestedIn = Collections.emptyList();
-            }
-            if (!json.isNull("location")) {
-                JSONObject locationJSON = json.getJSONObject("location");
-                location = new IdNameEntityJSONImpl(locationJSON);
-            }
             political = getRawString("political", json);
-            if (!json.isNull("favorite_athletes")) {
-                JSONArray favoriteAthletesJSONArray = json.getJSONArray("favorite_athletes");
-                final int size = favoriteAthletesJSONArray.length();
-                favoriteAthletes = new ArrayList<IdNameEntity>(size);
-                for (int i = 0; i < favoriteAthletesJSONArray.length(); i++) {
-                    favoriteAthletes.add(new IdNameEntityJSONImpl(favoriteAthletesJSONArray.getJSONObject(i)));
-                }
-            } else {
-                favoriteAthletes = Collections.emptyList();
-            }
-            if (!json.isNull("favorite_teams")) {
-                JSONArray favoriteTeamsJSONArray = json.getJSONArray("favorite_teams");
-                final int size = favoriteTeamsJSONArray.length();
-                favoriteTeams = new ArrayList<IdNameEntity>(size);
-                for (int i = 0; i < size; i++) {
-                    favoriteTeams.add(new IdNameEntityJSONImpl(favoriteTeamsJSONArray.getJSONObject(i)));
-                }
-            } else {
-                favoriteTeams = Collections.emptyList();
-            }
-            if (!json.isNull("picture")) {
-                String pictureRawString = getRawString("picture", json);
-                if (pictureRawString.startsWith("{")) {
-                    JSONObject pictureJSONObject = json.getJSONObject("picture");
-                    picture = new PictureJSONImpl(pictureJSONObject);
-                } else {
-                    picture = new PictureJSONImpl(getURL("picture", json));
-                }
-            }
             quotes = getRawString("quotes", json);
             relationshipStatus = getRawString("relationship_status", json);
             religion = getRawString("religion", json);
-            if (!json.isNull("significant_other")) {
-                JSONObject significantOtherJSONObject = json.getJSONObject("significant_other");
-                significantOther = new IdNameEntityJSONImpl(significantOtherJSONObject);
-            }
-            if (!json.isNull("video_upload_limits")) {
-                JSONObject videoUploadLimitsJSONObject = json.getJSONObject("video_upload_limits");
-                videoUploadLimits = new VideoUploadLimitsJSONImpl(videoUploadLimitsJSONObject);
-            }
-            website = getURL("website", json);
-            if (!json.isNull("work")) {
-                JSONArray workJSONArray = json.getJSONArray("work");
-                final int size = workJSONArray.length();
-                work = new ArrayList<Work>(size);
-                for (int i = 0; i < size; i++) {
-                    work.add(new WorkJSONImpl(workJSONArray.getJSONObject(i)));
-                }
-            } else {
-                work = Collections.emptyList();
-            }
-            if (!json.isNull("age_range")) {
-               JSONObject ageRangeJSONObject = json.getJSONObject("age_range");
-               ageRange = new AgeRangeJSONImpl(ageRangeJSONObject);
-           }
+
+            initJSONImpl(json);
         } catch (JSONException jsone) {
             throw new FacebookException(jsone.getMessage() + ":" + json.toString(), jsone);
         }
     }
+
+    public void initJSONImpl(JSONObject json) throws JSONException, FacebookException {
+
+        if (!json.isNull("locale"))
+        {
+            String[] _locale = getRawString("locale", json).split("_");
+            String language = _locale[0];
+            String country = _locale[1];
+            locale = new Locale(language, country);
+        }
+        if (!json.isNull("languages"))
+        {
+            JSONArray languagesJSONArray = json.getJSONArray("languages");
+            final int size = languagesJSONArray.length();
+            languages = new ArrayList<IdNameEntity>(size);
+            for (int i = 0; i < size; i++) {
+                languages.add(new IdNameEntityJSONImpl(languagesJSONArray.getJSONObject(i)));
+            }
+        }
+        else
+        {
+            languages = Collections.emptyList();
+        }
+        if (!json.isNull("cover"))
+        {
+            JSONObject coverJSON = json.getJSONObject("cover");
+            cover = new CoverJSONImpl(coverJSON);
+        }
+        if (!json.isNull("education"))
+        {
+            JSONArray educationJSONArray = json.getJSONArray("education");
+            final int size = educationJSONArray.length();
+            education = new ArrayList<User.Education>(size);
+            for (int i = 0; i < size; i++) {
+                education.add(new EducationJSONImpl(educationJSONArray.getJSONObject(i)));
+            }
+        } else
+        {
+            education = Collections.emptyList();
+        }
+
+        if (!json.isNull("hometown")) {
+            String hometownRawString = getRawString("hometown", json);
+            if (hometownRawString.startsWith("{")) {
+                JSONObject hometownJSON = json.getJSONObject("hometown");
+                hometown = new IdNameEntityJSONImpl(hometownJSON);
+            } else {
+                hometown = new IdNameEntityJSONImpl(hometownRawString);
+            }
+        }
+        if (!json.isNull("interestedIn")) {
+            JSONArray interestedInJSONArray = json.getJSONArray("interested_in");
+            final int size = interestedInJSONArray.length();
+            interestedIn = new ArrayList<String>(size);
+            for (int i = 0; i < size; i++) {
+                interestedIn.add(interestedInJSONArray.getString(i));
+            }
+        } else {
+            interestedIn = Collections.emptyList();
+        }
+        if (!json.isNull("location")) {
+            JSONObject locationJSON = json.getJSONObject("location");
+            location = new IdNameEntityJSONImpl(locationJSON);
+        }
+
+        if (!json.isNull("favorite_athletes")) {
+            JSONArray favoriteAthletesJSONArray = json.getJSONArray("favorite_athletes");
+            final int size = favoriteAthletesJSONArray.length();
+            favoriteAthletes = new ArrayList<IdNameEntity>(size);
+            for (int i = 0; i < favoriteAthletesJSONArray.length(); i++) {
+                favoriteAthletes.add(new IdNameEntityJSONImpl(favoriteAthletesJSONArray.getJSONObject(i)));
+            }
+        } else {
+            favoriteAthletes = Collections.emptyList();
+        }
+        if (!json.isNull("favorite_teams")) {
+            JSONArray favoriteTeamsJSONArray = json.getJSONArray("favorite_teams");
+            final int size = favoriteTeamsJSONArray.length();
+            favoriteTeams = new ArrayList<IdNameEntity>(size);
+            for (int i = 0; i < size; i++) {
+                favoriteTeams.add(new IdNameEntityJSONImpl(favoriteTeamsJSONArray.getJSONObject(i)));
+            }
+        } else {
+            favoriteTeams = Collections.emptyList();
+        }
+        if (!json.isNull("picture")) {
+            String pictureRawString = getRawString("picture", json);
+            if (pictureRawString.startsWith("{")) {
+                JSONObject pictureJSONObject = json.getJSONObject("picture");
+                picture = new PictureJSONImpl(pictureJSONObject);
+            } else {
+                picture = new PictureJSONImpl(getURL("picture", json));
+            }
+        }
+        if (!json.isNull("significant_other")) {
+            JSONObject significantOtherJSONObject = json.getJSONObject("significant_other");
+            significantOther = new IdNameEntityJSONImpl(significantOtherJSONObject);
+        }
+        if (!json.isNull("video_upload_limits")) {
+            JSONObject videoUploadLimitsJSONObject = json.getJSONObject("video_upload_limits");
+            videoUploadLimits = new VideoUploadLimitsJSONImpl(videoUploadLimitsJSONObject);
+        }
+        if (!json.isNull("work")) {
+            JSONArray workJSONArray = json.getJSONArray("work");
+            final int size = workJSONArray.length();
+            work = new ArrayList<Work>(size);
+            for (int i = 0; i < size; i++) {
+                work.add(new WorkJSONImpl(workJSONArray.getJSONObject(i)));
+            }
+        } else {
+            work = Collections.emptyList();
+        }
+        if (!json.isNull("age_range")) {
+            JSONObject ageRangeJSONObject = json.getJSONObject("age_range");
+            ageRange = new AgeRangeJSONImpl(ageRangeJSONObject);
+        }
+
+    }
+
+
 
     public String getId() {
         return id;

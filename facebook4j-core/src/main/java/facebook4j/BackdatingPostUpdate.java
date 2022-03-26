@@ -79,7 +79,7 @@ public class BackdatingPostUpdate extends PostUpdate {
     }
 
     @Override
-    HttpParameter[] asHttpParameterArray() {
+    public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>(Arrays.asList(super.asHttpParameterArray()));
         if (backdatedTime != null) {
             params.add(new HttpParameter("backdated_time", backdatedTime));
