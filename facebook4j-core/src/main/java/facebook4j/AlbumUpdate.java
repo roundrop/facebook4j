@@ -24,7 +24,7 @@ import facebook4j.internal.http.HttpParameter;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public final class AlbumUpdate implements java.io.Serializable {
+public final class AlbumUpdate implements java.io.Serializable,HttpParameterArray {
     private static final long serialVersionUID = 4089671461658360414L;
 
     private final String name;
@@ -81,7 +81,7 @@ public final class AlbumUpdate implements java.io.Serializable {
         return name;
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/ public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         params.add(new HttpParameter("name", name));
         if (message != null) {

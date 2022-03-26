@@ -20,7 +20,6 @@ import facebook4j.internal.http.HttpParameter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,7 +62,8 @@ public class PageVideoUpdate extends VideoUpdate {
         return this;
     }
 
-	/* package */HttpParameter[] asHttpParameterArray() {
+	/* package */
+	public HttpParameter[] asHttpParameterArray() {
 		List<HttpParameter> params = new ArrayList<HttpParameter>(Arrays.asList(super.asHttpParameterArray()));
         if (targeting != null) {
 			try {
@@ -112,3 +112,15 @@ public class PageVideoUpdate extends VideoUpdate {
 				"} " + super.toString();
 	}
 }
+
+
+
+
+/*
+*
+* public void initJSONImpl(JSONObject json) throws JSONException, FacebookException {
+
+*
+*
+*
+* */

@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * @author Ryuji Yamashita - roundrop at gmail.com
  */
-public class EventUpdate implements java.io.Serializable {
+public class EventUpdate implements java.io.Serializable,HttpParameterArray {
     private static final long serialVersionUID = -6106165246149864606L;
 
     private String name;
@@ -173,7 +173,7 @@ public class EventUpdate implements java.io.Serializable {
         return this;
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/ public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         if (name != null) {
             params.add(new HttpParameter("name", name));

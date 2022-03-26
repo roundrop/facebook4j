@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * @since Facebook4J 2.1.0
  */
-public class BatchRequests<T extends BatchRequest> extends ArrayList<T> {
+public class BatchRequests<T extends BatchRequest> extends ArrayList<T> implements HttpParameterArray {
     private static final long serialVersionUID = -9123525320485721265L;
 
     private Boolean includeHeaders;
@@ -38,7 +38,7 @@ public class BatchRequests<T extends BatchRequest> extends ArrayList<T> {
         this.includeHeaders = includeHeaders;
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
 
         if (includeHeaders != null) {

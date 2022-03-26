@@ -27,7 +27,7 @@ import java.util.List;
  * @author Ryuji Yamashita - roundrop at gmail.com
  * @since Facebook4J 2.0.0
  */
-public class PagePhotoUpdate implements java.io.Serializable {
+public class PagePhotoUpdate implements java.io.Serializable, HttpParameterArray{
     private static final long serialVersionUID = -2690799855513822140L;
 
     private Media source;
@@ -157,7 +157,7 @@ public class PagePhotoUpdate implements java.io.Serializable {
         return scheduledPublishTime(Long.valueOf(time).intValue());
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         if (source != null) {
             params.add(new HttpParameter("source", source.getMediaFile()));

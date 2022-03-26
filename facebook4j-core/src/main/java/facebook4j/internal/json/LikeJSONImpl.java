@@ -18,6 +18,7 @@ package facebook4j.internal.json;
 
 import facebook4j.FacebookException;
 import facebook4j.Like;
+import facebook4j.PagableList;
 import facebook4j.ResponseList;
 import facebook4j.conf.Configuration;
 import facebook4j.internal.http.HttpResponse;
@@ -70,6 +71,28 @@ import facebook4j.internal.org.json.JSONObject;
     public String toString() {
         return "LikeJSONImpl [id=" + id + ", name=" + name + ", category="
                 + category + ", createdTime=" + createdTime + "]";
+    }
+
+    public static PagableList<Like> convertJsonToLikeList(JSONObject json) throws FacebookException, JSONException {
+        PagableList<Like> likes;
+        if (!json.isNull("likes")) {
+            JSONObject likesJSONObject = json.getJSONObject("likes");
+            if (!likesJSONObject.isNull("data")) {
+                JSONArray list = likesJSONObject.getJSONArray("data");
+                final int size = list.length();
+                likes = new PagableListImpl<Like>(size, likesJSONObject);
+                for (int i = 0; i < size; i++) {
+                    LikeJSONImpl like = new LikeJSONImpl(list.getJSONObject(i));
+                    likes.add(like);
+                }
+            } else {
+                likes = new PagableListImpl<Like>(1, likesJSONObject);
+            }
+        } else {
+            likes = new PagableListImpl<Like>(0);
+        }
+
+        return likes;
     }
 
 }

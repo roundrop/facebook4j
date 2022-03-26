@@ -25,7 +25,7 @@ import java.util.List;
  * @author Ryuji Yamashita - roundrop at gmail.com
  * @since Facebook4J 2.0.0
  */
-public class PageSettingUpdate implements java.io.Serializable {
+public class PageSettingUpdate implements java.io.Serializable,HttpParameterArray {
     private static final long serialVersionUID = -4906471942303848646L;
 
     private String setting;
@@ -66,7 +66,7 @@ public class PageSettingUpdate implements java.io.Serializable {
         return this;
     }
 
-    /*package*/ HttpParameter[] asHttpParameterArray() {
+    /*package*/ public HttpParameter[] asHttpParameterArray() {
         List<HttpParameter> params = new ArrayList<HttpParameter>();
         params.add(new HttpParameter("setting", setting));
         params.add(new HttpParameter("value", value));
